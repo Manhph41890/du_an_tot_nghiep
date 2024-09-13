@@ -164,13 +164,10 @@
                     <div class="collapse" id="danhmuc">
                         <ul class="nav-second-level">
                             <li>
-                                <a class='tp-link' href=''>Thêm</a>
+                                <a class='tp-link' href='{{ route('danhmucs.create') }}'>Thêm</a>
                             </li>
                             <li>
-                                <a class='tp-link' href=''>Danh sách</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href=''>Sửa</a>
+                                <a class='tp-link' href='{{ route('danhmucs.index') }}'>Danh sách</a>
                             </li>
                         </ul>
                     </div>

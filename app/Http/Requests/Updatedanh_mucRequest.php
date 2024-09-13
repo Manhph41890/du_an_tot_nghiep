@@ -11,7 +11,7 @@ class Updatedanh_mucRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,26 @@ class Updatedanh_mucRequest extends FormRequest
     {
         return [
             //
+            'ten_danh_muc' => 'required|max:255',
+            'anh_danh_muc' => 'image|mimes:jpg,png,jpeg,gif,webp',
+            'is_active' => 'boolean|nullable',
+        ];
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function messages(): array
+    {
+        return [
+            //
+            'ten_danh_muc.required' => 'Tên danh mục là bắt buộc ',
+            'ten_danh_muc.max' => 'Tên danh mục không được vượt quá 255 ký tự ',
+
+            'anh_danh_muc.image' => 'Hình ảnh không hợp lệ',
+            'anh_danh_muc.mimes' => 'Hình ảnh phải là một trong các định dạng: jpg, png, jpeg, gif,webp',
         ];
     }
 }

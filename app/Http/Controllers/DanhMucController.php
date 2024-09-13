@@ -26,7 +26,8 @@ class DanhMucController extends Controller
     public function create()
     {
         //
-        return view('admin.danhmuc.create');
+        $title = "Thêm mới danh mục";
+        return view('admin.danhmuc.create', compact('title'));
     }
 
     /**

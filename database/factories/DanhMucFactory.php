@@ -17,7 +17,9 @@ class DanhMucFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'ten_danh_muc' => fake()->name,
+            'anh_danh_muc' => fake()->imageUrl(640, 480),
+            'is_active' => fake()->word(),
         ];
     }
 }

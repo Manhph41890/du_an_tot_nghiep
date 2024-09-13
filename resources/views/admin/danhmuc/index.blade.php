@@ -1,9 +1,5 @@
 @extends('admin.layout')
 
-@section('title')
-    {{-- {{ $title }} --}}
-@endsection
-
 @section('css')
 @endsection
 
@@ -14,11 +10,11 @@
         <div class="content">
 
             <!-- Start Content-->
-            <div class="container-xxl">
+            <div class="container">
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Quản lý danh mục </h4>
+                        <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4>
                     </div>
                 </div>
 
@@ -35,14 +31,16 @@
                                 <div class="table-responsive">
 
                                     <!-- Hiển thị thông báo thành công -->
-                                    {{-- @if (session('success'))
-                                    <div class="alert alert-success alert-dismissable fade show " role="alert">
-                                        {{ session('success') }}
-                                        <button type="button" class="btn-close justify-content-center"
-                                            data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                @endif --}}
+                                    @if (session('success'))
+                                        <div class="alert alert-success alert-dismissable fade show " role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close justify-content-center"
+                                                data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    @endif
+
                                     <table class="table table-striped mb-0">
+
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -52,17 +50,23 @@
                                                 <th scope="col">Hành Động </th>
                                             </tr>
                                         </thead>
+
                                         <tbody>
                                             @foreach ($danhmucs as $index => $item)
                                                 <tr>
                                                     <th scope="row">{{ $index + 1 }}</th>
                                                     <td>
-                                                        <img src="{{ Storage::url($item->anh_danh_muc) }}" width="100px"
-                                                            alt="">
+                                                        @if ($item->anh_danh_muc)
+                                                            <img src="{{ asset('/storage/' . $item->anh_danh_muc) }}"
+                                                                width="50px">
+                                                        @else
+                                                            <img src="" alt="Không có ảnh" width="50px">
+                                                        @endif
                                                     </td>
                                                     <td>{{ $item->ten_danh_muc }}</td>
-                                                    <td class="{{ $item->is_active ? 'text-success' : 'text-danger' }}">
-                                                        {{ $item->is_active ? 'Hiển Thị' : 'Ẩn' }}
+                                                    <td
+                                                        class="{{ $item->is_active == 0 ? 'text-success' : 'text-danger' }}">
+                                                        {{ $item->is_active == 0 ? 'Hiển Thị' : 'Ẩn' }}
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('danhmucs.edit', $item->id) }}"><i
@@ -81,10 +85,13 @@
                                                 </tr>
                                             @endforeach
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>
+
                             {{ $danhmucs->links() }}
+
                         </div>
 
                     </div>

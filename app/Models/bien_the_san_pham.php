@@ -11,4 +11,10 @@ class bien_the_san_pham extends Model
 
     protected $fillable =
     ['san_pham_id', 'size_san_pham_id', 'color_san_pham_id', 'so_luong', 'anh_bien_the'];
+
+
+    public function sanPham()
+    {
+        return $this->belongsTo(san_pham::class);
+    }
 }

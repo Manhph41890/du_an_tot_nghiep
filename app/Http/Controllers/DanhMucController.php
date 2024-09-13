@@ -14,6 +14,9 @@ class DanhMucController extends Controller
     public function index()
     {
         //
+        $danhmucs = danh_muc::query()->latest('id')->paginate(5);
+        $title = "Danh sách danh mục";
+        return view('admin.danhmuc.index', compact('danhmucs'));
     }
 
     /**
@@ -22,6 +25,7 @@ class DanhMucController extends Controller
     public function create()
     {
         //
+        return view('admin.danhmuc.create');
     }
 
     /**
@@ -46,6 +50,7 @@ class DanhMucController extends Controller
     public function edit(danh_muc $danh_muc)
     {
         //
+        return view('admin.danhmuc.edit');
     }
 
     /**

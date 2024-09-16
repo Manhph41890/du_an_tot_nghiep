@@ -89,11 +89,7 @@ class DanhMucController extends Controller
                 $filepath = $danhMuc->anh_danh_muc;
             }
             $param['anh_danh_muc'] = $filepath;
-            if ($param['is_active']) {
-                $param['is_active'] = $request->input('is_active');
-            } else {
-                $param['is_active'] = $danhMuc->is_active;
-            }
+            $param['is_active'] = $request->input('is_active', $danhMuc->is_active);
 
             // dd($param);
             $danhMuc->update($param);

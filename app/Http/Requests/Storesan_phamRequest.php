@@ -32,7 +32,9 @@ class Storesan_phamRequest extends FormRequest
             'is_active' => [Rule::in([0, 1])],
             'color_san_pham' => 'required|max:255',
             'size_san_pham' => 'required|max:255',
-            'anh_bien_the' => 'required|image',
+
+            'bien_the_san_phams.*.anh_bien_the' => 'image',
+
 
         ];
     }

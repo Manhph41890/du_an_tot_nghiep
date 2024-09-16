@@ -17,14 +17,15 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Sản phẩm</h5>
-                            </div><!-- end card header -->
+                        <form action="{{ route('sanphams.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Sản phẩm</h5>
+                                </div><!-- end card header -->
 
-                            <div class="card-body">
-                                <form action="{{ route('sanphams.store') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
+                                <div class="card-body">
+
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="mb-3">
@@ -126,15 +127,67 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
-                                        <div class="d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Biến Thể</h5>
+                                </div><!-- end card header -->
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="color_san_pham" class="form-label">Màu sắc</label>
+                                                <input type="text" id="color_san_pham" name="color_san_pham"
+                                                    class="form-control @error('color_san_pham') is-invalid @enderror"
+                                                    value="{{ old('color_san_pham') }}">
+                                                @error('color_san_pham')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="size_san_pham" class="form-label">Size sản phẩm</label>
+                                                <input type="text" id="size_san_pham" name="size_san_pham"
+                                                    class="form-control @error('size_san_pham') is-invalid @enderror"
+                                                    value="{{ old('size_san_pham') }}">
+                                                @error('size_san_pham')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="anh_bien_the" class="form-label">Hình ảnh </label>
+                                                <input type="file" id="anh_san_pham" name="anh_bien_the"
+                                                    class="form-control @error('anh_bien_the') is-invalid @enderror">
+                                                @error('anh_bien_the')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                                <div class="mt-2">
+                                                    <img id="imagePreview" src="#" alt="Hình ảnh"
+                                                        style="display: none;width:200px;">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
 
-                        </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
 

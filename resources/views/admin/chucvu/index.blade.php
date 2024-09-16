@@ -24,7 +24,7 @@
 
                         <div class="card-header d-flex justify-content-between">
                             <div>
-                                <a href="{{ route('danhmucs.create') }}" class="btn btn-success">Thêm Danh Mục</a>
+                                <a href="{{ route('chucvus.create') }}" class="btn btn-success">Thêm Chức Vụ</a>
                             </div>
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
@@ -45,34 +45,22 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Hình ảnh</th>
-                                                <th scope="col">Tên danh mục</th>
-                                                <th scope="col">Trạng Thái </th>
+                                                <th scope="col">Tên chức vụ</th>
+                                                <th scope="col">Mô tả chức vụ</th>
                                                 <th scope="col">Hành Động </th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            @foreach ($danhmucs as $index => $item)
+                                            @foreach ($chucvus as $index => $item)
                                                 <tr>
                                                     <th scope="row">{{ $index + 1 }}</th>
+                                                    <td>{{ $item->ten_chuc_vu }}</td>
+                                                    <td>{{ $item->mo_ta_chuc_vu }}</td>
                                                     <td>
-                                                        @if ($item->anh_danh_muc)
-                                                            <img src="{{ asset('/storage/' . $item->anh_danh_muc) }}"
-                                                                width="50px">
-                                                        @else
-                                                            <img src="" alt="Không có ảnh" width="50px">
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $item->ten_danh_muc }}</td>
-                                                    <td
-                                                        class="{{ $item->is_active == 0 ? 'text-success' : 'text-danger' }}">
-                                                        {{ $item->is_active == 0 ? 'Hiển Thị' : 'Ẩn' }}
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('danhmucs.edit', $item->id) }}"><i
+                                                        <a href="{{ route('chucvus.edit', $item->id) }}"><i
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
-                                                        <form action="{{ route('danhmucs.destroy', $item->id) }}"
+                                                        <form action="{{ route('chucvus.destroy', $item->id) }}"
                                                             method="POST" style="display:inline;"
                                                             onsubmit="return confirm ('Bạn có muốn xóa danh mục sản phẩm này không ?') ">
                                                             @csrf
@@ -94,7 +82,7 @@
 
                         </div>
 
-                        {{ $danhmucs->links() }}
+                        {{ $chucvus->links() }}
                     </div>
 
                 </div>

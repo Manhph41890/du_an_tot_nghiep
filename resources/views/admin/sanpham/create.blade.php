@@ -17,6 +17,23 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
+                        @if ($errors->any())
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header align-items-center d-flex">
+                                            <div class="alert alert-danger" style="width: 100%;">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <form action="{{ route('sanphams.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card">
@@ -45,6 +62,20 @@
                                                     class="form-control @error('gia_goc') is-invalid @enderror"
                                                     value="{{ old('gia_goc') }}">
                                                 @error('gia_goc')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="danh_muc_id" class="form-label">Danh mục</label>
+                                                <select type="text" class="form-select" name="danh_muc_id"
+                                                    id="danh_muc_id">
+                                                    @foreach ($danh_mucs as $id => $ten_danh_muc)
+                                                        <option value="{{ $id }}">{{ $ten_danh_muc }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('danh_muc_id')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -107,19 +138,18 @@
                                             <div class="col-sm-10 mb-3 d-flex gap-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="is_active"
-                                                        id="trang_thai_show" value="0"
-                                                        {{ old('is_active') == 0 ? 'checked' : '' }}>
-                                                    <label class="form-check-label text-success" for="trang_thai_show">Hiển
-                                                        thị</label>
+                                                        id="trang_thai_show" value="1"
+                                                        {{ old('is_active') == 1 ? 'checked' : '' }}>
+                                                    <label class="form-check-label text-success"
+                                                        for="trang_thai_show">Hiển thị</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="is_active"
-                                                        value="1" id="trang_thai_hide"
-                                                        {{ old('is_active') == 1 ? 'checked' : '' }}>
+                                                        id="trang_thai_hide" value="0"
+                                                        {{ old('is_active') == 0 ? 'checked' : '' }}>
                                                     <label class="form-check-label text-danger"
                                                         for="trang_thai_hide">Ẩn</label>
                                                 </div>
-
                                                 @error('is_active')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -127,6 +157,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
 

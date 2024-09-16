@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\SanPhamController;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,4 @@ Route::get('/', function () {
 
 Route::resource('/danhmucs', DanhMucController::class);
 Route::resource('/sanphams', SanPhamController::class);
+Route::resource('/chucvus', ChucVuController::class);

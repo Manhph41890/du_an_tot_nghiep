@@ -15,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('admin.home');
+});
+
 Route::resource('/danhmucs', DanhMucController::class);
 Route::resource('/sanphams', SanPhamController::class);

@@ -11,7 +11,7 @@ class Storekhuyen_maiRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,15 @@ class Storekhuyen_maiRequest extends FormRequest
     {
         return [
             //
+            'ten_khuyen_mai' => 'required|string|max:255',
+            
+                      // Giá trị khuyến mãi tùy chỉnh
+            'gia_tri_khuyen_mai' => 'required|numeric|min:0', 
+                      // Số lượng mã tùy chỉnh
+            'so_luong_ma' => 'required|integer|min:1', 
+            'ngay_bat_dau' => 'required|date',
+            'ngay_ket_thuc' => 'required|date|after:ngay_bat_dau',
+            'is_active' => 'required|boolean',
         ];
     }
 }

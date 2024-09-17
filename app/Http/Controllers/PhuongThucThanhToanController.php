@@ -68,8 +68,14 @@ class PhuongThucThanhToanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan)
+    public function destroy(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan, $id)
     {
-        //
+        $phuong_thuc_thanh_toan = $phuong_thuc_thanh_toan::findOrFail($id);
+        if ($phuong_thuc_thanh_toan) {
+            $phuong_thuc_thanh_toan->delete();
+            return redirect()->route('phuongthucthanhtoans.index')->with('success', 'Xóa phương thức thanh toán thành công');
+        } else {
+            return redirect()->back()->with('success', 'Không tồn tại người dùng');
+        }
     }
 }

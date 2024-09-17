@@ -23,7 +23,8 @@ class PhuongThucThanhToanController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Thêm mới PT Thanh toán";
+        return view('admin.phuongthucthanhtoan.create', compact('title'));
     }
 
     /**
@@ -37,11 +38,7 @@ class PhuongThucThanhToanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan)
-    {
-        //
-    }
-
+   
     /**
      * Show the form for editing the specified resource.
      */

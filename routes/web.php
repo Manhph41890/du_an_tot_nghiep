@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\DanhMucController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('admin.home');
+});
 Route::resource('/danhmucs', DanhMucController::class);
+Route::resource('/chucvus', ChucVuController::class);

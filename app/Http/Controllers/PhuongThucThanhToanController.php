@@ -32,7 +32,9 @@ class PhuongThucThanhToanController extends Controller
      */
     public function store(Storephuong_thuc_thanh_toanRequest $request)
     {
-        //
+        phuong_thuc_thanh_toan::create($request->all());
+        
+        return redirect()->route('phuongthucthanhtoans.index')->with('success', 'Thêm phương thức thanh toán thành công');
     }
 
     /**

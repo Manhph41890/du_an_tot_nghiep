@@ -35,8 +35,8 @@
                                                     value="{{ old('kieu_thanh_toan') }}">
                                                     
                                                     <option selected>Chọn phương thức thanh toán</option>
-                                                    <option value="1">Thanh toán khi nhận hàng</option>
-                                                    <option value="2">Thanh toán Online</option>
+                                                    <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
+                                                    <option value="Thanh toán online">Thanh toán online</option>
                                                 </select>
                                                 @error('kieu_thanh_toan')
                                                     <div class="invalid-feedback">

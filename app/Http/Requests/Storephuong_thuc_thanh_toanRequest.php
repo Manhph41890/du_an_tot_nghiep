@@ -25,6 +25,11 @@ class Storephuong_thuc_thanh_toanRequest extends FormRequest
             'kieu_thanh_toan' => 'required|in:Thanh toán khi nhận hàng,Thanh toán online',
         ];
     }
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
     public function messages(): array
     {
         return [

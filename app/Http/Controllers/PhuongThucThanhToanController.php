@@ -44,9 +44,11 @@ class PhuongThucThanhToanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan)
+    public function edit(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan , $id)
     {
-        //
+        $title = "Cập nhật phương thức thanh toán";
+        $phuong_thuc_thanh_toan = phuong_thuc_thanh_toan::query()->findOrFail($id);
+        return view('admin.phuongthucthanhtoan.edit', compact('title', 'phuong_thuc_thanh_toan'));
     }
 
     /**

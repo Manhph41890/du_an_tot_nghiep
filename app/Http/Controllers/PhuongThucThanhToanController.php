@@ -54,9 +54,15 @@ class PhuongThucThanhToanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatephuong_thuc_thanh_toanRequest $request, phuong_thuc_thanh_toan $phuong_thuc_thanh_toan)
+    public function update(Updatephuong_thuc_thanh_toanRequest $request, phuong_thuc_thanh_toan $phuong_thuc_thanh_toan, $id)
     {
-        //
+        if ($request->isMethod('PUT')) {
+            $param = $request->except('_token', '_method');
+            $phuong_thuc_thanh_toan = phuong_thuc_thanh_toan::findOrFail($id);
+            $phuong_thuc_thanh_toan->update($param);
+        }
+
+        return redirect()->route('phuongthucthanhtoans.index')->with('success', 'Cập nhật phương thức thanh toán thành công');
     }
 
     /**

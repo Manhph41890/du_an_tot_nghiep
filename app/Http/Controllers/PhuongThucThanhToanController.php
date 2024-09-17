@@ -13,7 +13,9 @@ class PhuongThucThanhToanController extends Controller
      */
     public function index()
     {
-        //
+        $phuongthucthanhtoans = phuong_thuc_thanh_toan::query()->latest('id')->paginate(5);
+        $title = "Phương thức thanh toán";
+        return view('admin.phuongthucthanhtoan.index', compact('phuongthucthanhtoans', 'title'));
     }
 
     /**

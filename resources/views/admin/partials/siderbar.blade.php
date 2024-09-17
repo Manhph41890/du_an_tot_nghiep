@@ -190,6 +190,24 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="#phuongthucthanhtoan" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> PT thanh toán </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="phuongthucthanhtoan">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class='tp-link' href='{{ route('phuongthucthanhtoans.index') }}'>Danh sách</a>
+                            </li>
+                            <li>
+                                <a class='tp-link' href='{{ route('phuongthucthanhtoans.create') }}'>Thêm</a>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                </li>
 
                 <li class="menu-title mt-2">General</li>
 

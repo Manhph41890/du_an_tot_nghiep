@@ -68,7 +68,7 @@
 
                                                     <td>
                                                         @if ($item->anh_san_pham)
-                                                            <img src="{{ asset('/storage/' . $item->anh_danh_muc) }}"
+                                                            <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
                                                                 width="50px">
                                                         @else
                                                             <img src="" alt="Không có ảnh" width="50px">
@@ -89,7 +89,7 @@
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
                                                         <form action="{{ route('sanphams.destroy', $item->id) }}"
                                                             method="POST" style="display:inline;"
-                                                            onsubmit="return confirm ('Bạn có muốn xóa danh mục sản phẩm này không ?') ">
+                                                            onsubmit="return confirm ('Bạn có muốn xóa sản phẩm này không ?') ">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" style="border: none; background: none;">

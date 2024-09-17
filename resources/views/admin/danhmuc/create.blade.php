@@ -12,7 +12,7 @@
             <div class="container-xxl">
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Quản lý danh mục </h4>
+                        <h4 class="fs-18 fw-semibold m-0"> {{ $title }} </h4>
                     </div>
                 </div>
                 <div class="row">
@@ -56,7 +56,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="mb-3">
                                             <label for="trang_thai" class="form-label">Trạng thái</label>
                                             <div class="col-sm-10 mb-3 d-flex gap-2">

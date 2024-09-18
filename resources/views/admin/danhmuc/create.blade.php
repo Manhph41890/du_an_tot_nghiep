@@ -84,8 +84,10 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                            <button type="submit" class="btn btn-success">Thêm mới</button>
                                         </div>
+
+
                                     </div>
                                 </form>
                             </div>

@@ -16,7 +16,7 @@
             <div class="container-xxl">
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0"> Tạo mã khuyến mãi </h4>
+                        <h4 class="fs-18 fw-semibold m-0"> {{ $title }} </h4>
                     </div>
                 </div>
                 <div class="row">
@@ -31,27 +31,27 @@
 
                                     @csrf
                                     @method('PUT')
-                                    <div class="form-group">
+                                    <div class="form-group  mb-3">
                                         <label for="ten_khuyen_mai">Tên Khuyến Mãi</label>
                                         <input type="text" name="ten_khuyen_mai" class="form-control" value="{{ old('ten_khuyen_mai', $khuyenmais->ten_khuyen_mai)}}" required>
                                     </div>
                                 
-                                    <div class="form-group">
+                                    <div class="form-group  mb-3">
                                         <label for="gia_tri_khuyen_mai">Giá Trị Khuyến Mãi:</label>
                                         <input type="number" name="gia_tri_khuyen_mai" class="form-control" value="{{old('gia_tri_khuyen_mai',$khuyenmais->gia_tri_khuyen_mai)}}" required>
                                     </div>
                                 
-                                    <div class="form-group">
+                                    <div class="form-group  mb-3">
                                         <label for="so_luong_ma">Số Lần Sử Dụng:</label>
                                         <input type="number" name="so_luong_ma" class="form-control"  value="{{old('so_luong_ma',$khuyenmais->so_luong_ma)}}" required>
                                     </div>
                                 
-                                    <div class="form-group">
+                                    <div class="form-group  mb-3">
                                         <label for="ngay_bat_dau">Ngày Bắt Đầu:</label>
                                         <input type="date" name="ngay_bat_dau" class="form-control" value="{{old('ngay_bat_dau',$khuyenmais->ngay_bat_dau)}}" required>
                                     </div>
                                 
-                                    <div class="form-group">
+                                    <div class="form-group  mb-3">
                                         <label for="ngay_ket_thuc">Ngày Kết Thúc:</label>
                                         <input type="date" name="ngay_ket_thuc" class="form-control" value="{{old('ngay_ket_thuc',$khuyenmais->ngay_ket_thuc)}}" required>
                                     </div>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                     
-                                    <button type="submit" class="btn btn-primary">Tạo Khuyến Mãi</button>
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
                                 </form>
                                 
                             </div>

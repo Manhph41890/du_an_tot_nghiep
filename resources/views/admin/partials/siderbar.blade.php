@@ -183,7 +183,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='{{ route('chucvus.create') }}'>Thêm</a>
-                                <a class='tp-link' href='{{ route('danhmucs.index') }}'>Danh sách</a>
+                                <a class='tp-link' href='{{ route('chucvus.index') }}'>Danh sách</a>
                             </li>
                         </ul>
                     </div>

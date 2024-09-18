@@ -15,12 +15,12 @@ class DanhMucSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        // for ($i = 0; $i < 10; $i++) {
             danh_muc::query()->create([
                 'ten_danh_muc' => $faker->name,
                 'anh_danh_muc' => '',
                 'is_active' => rand(0, 1),
             ]);
-        }
+        // }
     }
 }

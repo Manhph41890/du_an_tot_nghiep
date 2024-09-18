@@ -4,6 +4,8 @@ use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Models\phuong_thuc_thanh_toan;
+
+use App\Http\Controllers\KhuyenMaiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +25,5 @@ Route::get('/', function () {
 Route::resource('/danhmucs', DanhMucController::class);
 Route::resource('/chucvus', ChucVuController::class);
 Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
+
+Route::resource('/khuyenmais', KhuyenMaiController::class);

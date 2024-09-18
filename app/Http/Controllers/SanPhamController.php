@@ -48,27 +48,53 @@ class SanPhamController extends Controller
      */
     public function store(Storesan_phamRequest $request)
     {
-        // Lấy dữ liệu đã được xác thực từ request
-        $data_san_phams = $request->except('anh_bien_the', 'bien_the_san_phams');
 
-        // Xử lý ảnh sản phẩm
+        // Lấy dữ liệu đã được xác thực từ request
+        $data_san_phams = $request->except('product_variants');
+
+        // Xử lý ảnh sản phẩm chính
         if ($request->hasFile('anh_san_pham')) {
-            $data_san_phams['anh_san_pham'] = Storage::put('sanphams', $request->file('anh_san_pham'));
+            $file = $request->file('anh_san_pham');
+            if ($file->isValid()) {
+                // Lưu file với tên chính thức
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $path = $file->storeAs('sanphams', $filename, 'public');
+                $data_san_phams['anh_san_pham'] = $path;
+            } else {
+                // Xử lý lỗi nếu file không hợp lệ
+                return back()->withErrors(['anh_san_pham' => 'File không hợp lệ']);
+            }
         }
 
-        // Chuyển đổi biến thể sản phẩm
+        // Lấy biến thể sản phẩm từ request
         $bien_the_san_phamsTmp = $request->input('product_variants', []);
         $bien_the_san_phams = [];
 
-        if (is_array($bien_the_san_phamsTmp)) {
-            foreach ($bien_the_san_phamsTmp as $key => $item) {
-                $tmp = explode('-', $key);
-                $bien_the_san_phams[] = [
-                    'size_san_pham_id' => $tmp[0],
-                    'color_san_pham_id' => $tmp[1],
-                    'anh_bien_the' => isset($item['anh_bien_the']) ? Storage::put('sanphams', $item['anh_bien_the']) : null,
-                ];
+        // Xử lý từng biến thể trong mảng product_variants
+        foreach ($bien_the_san_phamsTmp as $key => $item) {
+            $tmp = explode('-', $key); // Tách size_san_pham_id và color_san_pham_id từ key
+            $anh_bien_the_path = null;
+
+            // Xử lý file ảnh biến thể
+            if (request()->hasFile('product_variants.1-2.anh_bien_the')) {
+                $anh_bien_the_file = request()->file('product_variants.1-2.anh_bien_the');
+                if ($anh_bien_the_file->isValid()) {
+                    $anh_bien_the_path = $anh_bien_the_file->store('sanphams');
+                } else {
+                    dd('File is not valid');
+                }
+            } else {
+                dd('No file uploaded');
             }
+
+
+
+
+            $bien_the_san_phams[] = [
+                'size_san_pham_id' => $tmp[0],
+                'color_san_pham_id' => $tmp[1],
+                'anh_bien_the' => $anh_bien_the_path,
+            ];
         }
 
         try {
@@ -77,18 +103,10 @@ class SanPhamController extends Controller
             // Tạo sản phẩm chính
             $product = san_pham::create($data_san_phams);
 
-            // Xử lý biến thể sản phẩm
+            // Tạo biến thể sản phẩm
             foreach ($bien_the_san_phams as $bien_the) {
-                $bien_the['san_pham_id'] = $product->id;
+                $bien_the['san_pham_id'] = $product->id; // Thêm san_pham_id vào biến thể
                 bien_the_san_pham::create($bien_the);
-            }
-
-            // Xử lý ảnh của sản phẩm
-            if (isset($data_san_phams['anh_san_pham'])) {
-                anh_san_pham::create([
-                    'san_pham_id' => $product->id,
-                    'anh_san_pham' => $data_san_phams['anh_san_pham']
-                ]);
             }
 
             DB::commit();
@@ -96,8 +114,8 @@ class SanPhamController extends Controller
             return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được thêm thành công.');
         } catch (\Exception $exception) {
             DB::rollBack();
-            // Ghi log lỗi
-            Log::error('Lỗi khi thêm sản phẩm: ' . $exception->getMessage());
+            // Ghi log lỗi với thông tin chi tiết
+            Log::error('Lỗi khi thêm sản phẩm: ' . $exception->getMessage() . ' - Line: ' . $exception->getLine() . ' - File: ' . $exception->getFile());
             return back()->withErrors('Đã xảy ra lỗi khi thêm sản phẩm. Vui lòng thử lại.');
         }
     }
@@ -125,38 +143,58 @@ class SanPhamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatesan_phamRequest $request, san_pham $san_pham)
+    public function update(Updatesan_phamRequest $request, $id)
     {
-        $product = san_pham::findOrFail('id');
+        // Lấy sản phẩm từ ID
+        $product = san_pham::findOrFail($id);
 
-        // Xử lý dữ liệu từ request
-        $data_san_phams = $request->except('anh_bien_the', 'product_variants');
+        // Lấy dữ liệu đã được xác thực từ request
+        $data_san_phams = $request->except('product_variants');
 
-        // Xử lý trạng thái
-        $data_san_phams['is_active'] = $request->input('is_active', 0); // Mặc định là 0 nếu không có giá trị
-
-        // Xử lý ảnh sản phẩm
+        // Xử lý ảnh sản phẩm chính
         if ($request->hasFile('anh_san_pham')) {
-            // Xóa ảnh cũ nếu có
-            if ($product->anh_san_pham) {
-                Storage::delete($product->anh_san_pham);
+            $file = $request->file('anh_san_pham');
+            if ($file->isValid()) {
+                // Xóa ảnh cũ nếu có
+                if ($product->anh_san_pham) {
+                    Storage::disk('public')->delete($product->anh_san_pham);
+                }
+                // Lưu file với tên chính thức
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $path = $file->storeAs('sanphams', $filename, 'public');
+                $data_san_phams['anh_san_pham'] = $path;
+            } else {
+                // Xử lý lỗi nếu file không hợp lệ
+                return back()->withErrors(['anh_san_pham' => 'File không hợp lệ']);
             }
-            $data_san_phams['anh_san_pham'] = Storage::put('sanphams', $request->file('anh_san_pham'));
         }
 
-        // Xử lý biến thể sản phẩm
+        // Lấy biến thể sản phẩm từ request
         $bien_the_san_phamsTmp = $request->input('product_variants', []);
         $bien_the_san_phams = [];
 
-        if (is_array($bien_the_san_phamsTmp)) {
-            foreach ($bien_the_san_phamsTmp as $key => $item) {
-                $tmp = explode('-', $key);
-                $bien_the_san_phams[] = [
-                    'size_san_pham_id' => $tmp[0],
-                    'color_san_pham_id' => $tmp[1],
-                    'anh_bien_the' => isset($item['anh_bien_the']) ? Storage::put('sanphams', $item['anh_bien_the']) : null,
-                ];
+        // Xử lý từng biến thể trong mảng product_variants
+        foreach ($bien_the_san_phamsTmp as $key => $item) {
+            $tmp = explode('-', $key); // Tách size_san_pham_id và color_san_pham_id từ key
+            $anh_bien_the_path = null;
+
+            // Xử lý file ảnh biến thể
+            if (isset($item['anh_bien_the'])) {
+                $anh_bien_the_file = $item['anh_bien_the'];
+                if ($anh_bien_the_file instanceof \Illuminate\Http\UploadedFile && $anh_bien_the_file->isValid()) {
+                    // Xóa ảnh cũ nếu có
+                    if (isset($item['old_anh_bien_the']) && $item['old_anh_bien_the']) {
+                        Storage::disk('public')->delete($item['old_anh_bien_the']);
+                    }
+                    $anh_bien_the_path = $anh_bien_the_file->store('sanphams', 'public');
+                }
             }
+
+            $bien_the_san_phams[] = [
+                'size_san_pham_id' => $tmp[0],
+                'color_san_pham_id' => $tmp[1],
+                'anh_bien_the' => $anh_bien_the_path,
+            ];
         }
 
         try {
@@ -165,22 +203,13 @@ class SanPhamController extends Controller
             // Cập nhật sản phẩm chính
             $product->update($data_san_phams);
 
-            // Xóa các biến thể cũ nếu cần
+            // Xóa biến thể sản phẩm cũ
             bien_the_san_pham::where('san_pham_id', $product->id)->delete();
 
-            // Thêm biến thể sản phẩm mới
+            // Tạo biến thể sản phẩm mới
             foreach ($bien_the_san_phams as $bien_the) {
-                $bien_the['san_pham_id'] = $product->id;
+                $bien_the['san_pham_id'] = $product->id; // Thêm san_pham_id vào biến thể
                 bien_the_san_pham::create($bien_the);
-            }
-
-            // Xóa ảnh cũ của sản phẩm nếu có và thêm ảnh mới
-            anh_san_pham::where('san_pham_id', $product->id)->delete();
-            if (isset($data_san_phams['anh_san_pham'])) {
-                anh_san_pham::create([
-                    'san_pham_id' => $product->id,
-                    'anh_san_pham' => $data_san_phams['anh_san_pham']
-                ]);
             }
 
             DB::commit();
@@ -188,7 +217,8 @@ class SanPhamController extends Controller
             return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được cập nhật thành công.');
         } catch (\Exception $exception) {
             DB::rollBack();
-            Log::error('Lỗi khi cập nhật sản phẩm: ' . $exception->getMessage());
+            // Ghi log lỗi với thông tin chi tiết
+            Log::error('Lỗi khi cập nhật sản phẩm: ' . $exception->getMessage() . ' - Line: ' . $exception->getLine() . ' - File: ' . $exception->getFile());
             return back()->withErrors('Đã xảy ra lỗi khi cập nhật sản phẩm. Vui lòng thử lại.');
         }
     }
@@ -196,28 +226,32 @@ class SanPhamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(san_pham $san_pham, $id)
+    public function destroy($id)
     {
         try {
-            // Tìm sản phẩm theo ID
-            $product = $san_pham::findOrFail($id);
+            DB::beginTransaction();
 
-            // Xóa các ảnh liên quan (nếu có)
+            // Lấy sản phẩm từ ID
+            $product = san_pham::findOrFail($id);
+
+            // Xóa ảnh sản phẩm chính nếu có
             if ($product->anh_san_pham) {
-                Storage::delete($product->anh_san_pham);
+                Storage::disk('public')->delete($product->anh_san_pham);
             }
 
-            // Xóa các biến thể của sản phẩm
+            // Xóa tất cả biến thể của sản phẩm
             bien_the_san_pham::where('san_pham_id', $product->id)->delete();
 
-            // Xóa sản phẩm
+            // Xóa sản phẩm chính
             $product->delete();
 
-            // Cung cấp phản hồi thành công
+            DB::commit();
+
             return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được xóa thành công.');
         } catch (\Exception $exception) {
-            // Xử lý lỗi và cung cấp phản hồi lỗi
-            Log::error('Lỗi khi xóa sản phẩm: ' . $exception->getMessage());
+            DB::rollBack();
+            // Ghi log lỗi với thông tin chi tiết
+            Log::error('Lỗi khi xóa sản phẩm: ' . $exception->getMessage() . ' - Line: ' . $exception->getLine() . ' - File: ' . $exception->getFile());
             return back()->withErrors('Đã xảy ra lỗi khi xóa sản phẩm. Vui lòng thử lại.');
         }
     }

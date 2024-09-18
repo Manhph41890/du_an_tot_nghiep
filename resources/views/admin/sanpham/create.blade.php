@@ -172,48 +172,45 @@
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="color_san_pham" class="form-label">Màu sắc</label>
-                                                <input type="text" id="color_san_pham" name="color_san_pham"
-                                                    class="form-control @error('color_san_pham') is-invalid @enderror"
-                                                    value="{{ old('color_san_pham') }}">
-                                                @error('color_san_pham')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                <input type="text" id="color_san_pham"
+                                                    name="product_variants[1-2][color]"
+                                                    class="form-control @error('product_variants.1-2.color') is-invalid @enderror"
+                                                    value="{{ old('product_variants.1-2.color') }}">
+                                                @error('product_variants.1-2.color')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mb-3">
                                                 <label for="size_san_pham" class="form-label">Size sản phẩm</label>
-                                                <input type="text" id="size_san_pham" name="size_san_pham"
-                                                    class="form-control @error('size_san_pham') is-invalid @enderror"
-                                                    value="{{ old('size_san_pham') }}">
-                                                @error('size_san_pham')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                <input type="text" id="size_san_pham"
+                                                    name="product_variants[1-2][size]"
+                                                    class="form-control @error('product_variants.1-2.size') is-invalid @enderror"
+                                                    value="{{ old('product_variants.1-2.size') }}">
+                                                @error('product_variants.1-2.size')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                        </div>
 
+                                        </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label for="anh_bien_the" class="form-label">Hình ảnh </label>
-                                                <input type="file" id="anh_san_pham" name="anh_bien_the"
-                                                    class="form-control @error('anh_bien_the') is-invalid @enderror">
-                                                @error('anh_bien_the')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
+                                                <input type="file" id="anh_bien_the"
+                                                    name="product_variants[1-2][anh_bien_the]"
+                                                    class="form-control @error('product_variants.1-2.anh_bien_the') is-invalid @enderror">
+                                                @error('product_variants.1-2.anh_bien_the')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                                 <div class="mt-2">
-                                                    <img id="imagePreview" src="#" alt="Hình ảnh"
+                                                    <img id="imagePreview" src="#" alt="Hình ảnh biến thể"
                                                         style="display: none;width:200px;">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+
                             <div class="d-flex justify-content-center">
                                 <button type="submit" class="btn btn-primary">Thêm mới</button>
                             </div>
@@ -229,26 +226,13 @@
 
 @section('js')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const fileInput = document.getElementById('anh_danh_muc');
-            const imagePreview = document.getElementById('imagePreview');
-
-            fileInput.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                    };
-
-                    reader.readAsDataURL(file);
-                } else {
-                    imagePreview.src = '#';
-                    imagePreview.style.display = 'none';
-                }
-            });
+        document.getElementById('anh_san_pham').addEventListener('change', function() {
+            const file = this.files[0];
+            const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
+            if (file && !validTypes.includes(file.type)) {
+                alert('Chỉ cho phép tải lên các loại file: jpeg, png, jpg, gif');
+                this.value = ''; // Clear the file input
+            }
         });
     </script>
 @endsection

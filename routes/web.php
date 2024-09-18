@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\DanhMucController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,4 @@ Route::get('/', function () {
 });
 Route::resource('/danhmucs', DanhMucController::class);
 Route::resource('/chucvus', ChucVuController::class);
+Route::get('user', [UserController::class, 'index'])->name('user.index');

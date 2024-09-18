@@ -61,7 +61,7 @@
                                             @foreach ($data as $index => $item)
                                                 <tr>
                                                     <th scope="row">{{ $index + 1 }}</th>
-                                                    <td>{{ $item->danh_muc?->ten_danh_muc }}</td>
+                                                    <td>{{ $item->danh_muc?->ten_danh_muc }}</td>   
                                                     <td>{{ $item->ten_san_pham }}</td>
                                                     <td>{{ $item->gia_goc }}</td>
                                                     <td>{{ $item->gia_km }}</td>

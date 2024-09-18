@@ -22,18 +22,27 @@
                 <div class="col-xl-12">
                     <div class="card">
 
-                        <div class="card-header d-flex justify-content-between">
-                            <div>
-                                <a href="{{ route('chucvus.create') }}" class="btn btn-success">Thêm Chức Vụ</a>
-                            </div>
-                            <!-- Hiển thị thông báo thành công -->
-                            @if (session('success'))
-                                <div class="alert alert-success alert-dismissable fade show " role="alert">
-                                    {{ session('success') }}
-                                    <button type="button" class="btn-close justify-content-center" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
+                        <div class="card-header justify-content-between">
+
+                            <div class="row">
+
+                                <div class="col-3">
+                                    <a href="{{ route('chucvus.create') }}" class="btn btn-success">Thêm Chức Vụ</a>
                                 </div>
-                            @endif
+
+                                <div class="col-9">
+                                    <!-- Hiển thị thông báo thành công -->
+                                    @if (session('success'))
+                                        <div class="alert alert-success d-flex justify-content-between mb-0" role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
+                                </div>
+
+                            </div>
+
                         </div><!-- end card header -->
 
                         <div class="row">

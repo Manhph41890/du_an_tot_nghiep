@@ -28,7 +28,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label for="ten_chuc_vu" class="form-label">Tên chức</label>
+                                                <label for="ten_chuc_vu" class="form-label">Tên chức vụ</label>
                                                 <input type="text" id="ten_chuc_vu" name="ten_chuc_vu"
                                                     class="form-control @error('ten_chuc_vu') is-invalid @enderror"
                                                     value="{{ old('ten_chuc_vu') }}">
@@ -55,8 +55,10 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                            <button type="submit" class="btn btn-success">Thêm mới</button>
                                         </div>
+
+
                                     </div>
                                 </form>
                             </div>

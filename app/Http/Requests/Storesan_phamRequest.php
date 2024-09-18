@@ -35,7 +35,6 @@ class Storesan_phamRequest extends FormRequest
             'product_variants.*.size' => 'required|string',
             'product_variants.*.anh_bien_the' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
 
-
         ];
     }
 }

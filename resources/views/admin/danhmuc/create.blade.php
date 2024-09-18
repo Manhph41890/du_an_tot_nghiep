@@ -57,7 +57,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="mb-3">
                                             <label for="trang_thai" class="form-label">Trạng thái</label>
                                             <div class="col-sm-10 mb-3 d-flex gap-2">

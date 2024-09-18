@@ -11,7 +11,7 @@ class Updatephuong_thuc_thanh_toanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,18 @@ class Updatephuong_thuc_thanh_toanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'kieu_thanh_toan' => 'required|in:Thanh toán khi nhận hàng,Thanh toán online'
+        ];
+    }
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function messages(): array
+    {
+        return [
+            'kieu_thanh_toan.required' => 'Bạn chưa chọn phương thức thanh toán '
         ];
     }
 }

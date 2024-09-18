@@ -10,5 +10,5 @@ class bien_the_san_pham extends Model
     use HasFactory;
 
     protected $fillable =
-    ['san_pham_id', 'size_san_pham_id', 'color_san_pham_id', 'so_luong', 'anh_bien_the'];
+    ['san_pham_id', 'size_san_pham_id', 'color_san_pham_id', 'anh_bien_the'];
 }

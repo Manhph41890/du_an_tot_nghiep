@@ -13,7 +13,9 @@ class PhuongThucThanhToanController extends Controller
      */
     public function index()
     {
-        //
+        $phuongthucthanhtoans = phuong_thuc_thanh_toan::query()->latest('id')->paginate(5);
+        $title = "Phương thức thanh toán";
+        return view('admin.phuongthucthanhtoan.index', compact('phuongthucthanhtoans', 'title'));
     }
 
     /**
@@ -21,7 +23,8 @@ class PhuongThucThanhToanController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Thêm mới PT Thanh toán";
+        return view('admin.phuongthucthanhtoan.create', compact('title'));
     }
 
     /**
@@ -29,38 +32,50 @@ class PhuongThucThanhToanController extends Controller
      */
     public function store(Storephuong_thuc_thanh_toanRequest $request)
     {
-        //
+        phuong_thuc_thanh_toan::create($request->all());
+        
+        return redirect()->route('phuongthucthanhtoans.index')->with('success', 'Thêm phương thức thanh toán thành công');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan)
-    {
-        //
-    }
-
+   
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan)
+    public function edit(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan , $id)
     {
-        //
+        $title = "Cập nhật phương thức thanh toán";
+        $phuong_thuc_thanh_toan = phuong_thuc_thanh_toan::query()->findOrFail($id);
+        return view('admin.phuongthucthanhtoan.edit', compact('title', 'phuong_thuc_thanh_toan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatephuong_thuc_thanh_toanRequest $request, phuong_thuc_thanh_toan $phuong_thuc_thanh_toan)
+    public function update(Updatephuong_thuc_thanh_toanRequest $request, phuong_thuc_thanh_toan $phuong_thuc_thanh_toan, $id)
     {
-        //
+        if ($request->isMethod('PUT')) {
+            $param = $request->except('_token', '_method');
+            $phuong_thuc_thanh_toan = phuong_thuc_thanh_toan::findOrFail($id);
+            $phuong_thuc_thanh_toan->update($param);
+        }
+
+        return redirect()->route('phuongthucthanhtoans.index')->with('success', 'Cập nhật phương thức thanh toán thành công');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan)
+    public function destroy(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan, $id)
     {
-        //
+        $phuong_thuc_thanh_toan = $phuong_thuc_thanh_toan::findOrFail($id);
+        if ($phuong_thuc_thanh_toan) {
+            $phuong_thuc_thanh_toan->delete();
+            return redirect()->route('phuongthucthanhtoans.index')->with('success', 'Xóa phương thức thanh toán thành công');
+        } else {
+            return redirect()->back()->with('success', 'Không tồn tại người dùng');
+        }
     }
 }

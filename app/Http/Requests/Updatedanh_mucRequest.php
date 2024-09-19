@@ -25,6 +25,7 @@ class Updatedanh_mucRequest extends FormRequest
             //
             'ten_danh_muc' => 'required|max:255',
             'anh_danh_muc' => 'image|mimes:jpg,png,jpeg,gif,webp',
+            'is_active' => 'boolean|nullable',
         ];
     }
 

@@ -58,15 +58,8 @@ class SanPhamController extends Controller
      */
     public function create()
     {
-
-        $danh_mucs = danh_muc::query()->pluck('ten_danh_muc', 'id')->all();
-        $colors = color_san_pham::query()->pluck('ten_color', 'id')->all();
-        $sizes = size_san_pham::whereNotNull('ten_size')->whereNotNull('id')->pluck('ten_size', 'id')->all();
-        $title = "Thêm mới sản phẩm";
-
-        return view('admin.sanpham.create', compact('danh_mucs', 'colors', 'sizes', 'title'));
+        //
     }
-
 
     /**
      * Store a newly created resource in storage.

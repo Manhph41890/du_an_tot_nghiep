@@ -24,7 +24,7 @@
 
                         <div class="card-header d-flex justify-content-between">
                             <div>
-                                <a href="{{ route('sanphams.create') }}" class="btn btn-success">Thêm Sản Phẩm</a>
+                                <a href="{{ route('phuongthucthanhtoans.create') }}" class="btn btn-success">Thêm Phương Thức Thanh Toán</a>
                             </div>
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
@@ -44,54 +44,24 @@
 
                                         <thead>
                                             <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Danh Mục</th>
-                                                <th scope="col">Tên Sản Phẩm</th>
-                                                <th scope="col">Giá Gốc</th>
-                                                <th scope="col">Giá Khuyến Mãi</th>
-                                                <th scope="col">Ảnh Sản Phẩm</th>
-                                                <th scope="col">Số Lượng</th>
-                                                <th scope="col">Mô tả sản Phẩm</th>
-                                                <th scope="col">Trạng Thái </th>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Kiểu thanh toán</th>
                                                 <th scope="col">Hành Động </th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            @foreach ($data as $index => $item)
+                                            @foreach ($phuongthucthanhtoans as $index => $item)
                                                 <tr>
                                                     <th scope="row">{{ $index + 1 }}</th>
-                                                    <td>{{ $item->danh_muc?->ten_danh_muc }}</td>
-                                                    <td>{{ $item->ten_san_pham }}</td>
-                                                    <td>{{ $item->gia_goc }}</td>
-                                                    <td>{{ $item->gia_km }}</td>
-
+                                                    <td>{{ $item->kieu_thanh_toan }}</td>
+                                                    
                                                     <td>
-                                                        @if ($item->anh_san_pham)
-                                                            <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
-                                                                width="50px">
-                                                        @else
-                                                            <img src="" alt="Không có ảnh" width="50px">
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $item->so_luong }}</td>
-                                                    <td>{{ $item->ma_ta_san_pham }}</td>
-
-                                                    <td>{!! $item->is_active
-                                                        ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                        : '<span class="badge bg-danger">Ẩn</span>' !!}</td>
-
-
-
-
-                                                    <td>
-                                                        <a href="{{ route('danhmucs.edit', $item->id) }}">
-                                                            <i
-                                                                class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
-                                                        </a>
-                                                        <form action="{{ route('sanphams.destroy', $item->id) }}"
+                                                        <a href="{{ route('phuongthucthanhtoans.edit', $item->id) }}"><i
+                                                                class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                        <form action="{{ route('phuongthucthanhtoans.destroy', $item->id) }}"
                                                             method="POST" style="display:inline;"
-                                                            onsubmit="return confirm('Bạn có muốn xóa sản phẩm này không?')">
+                                                            onsubmit="return confirm ('Bạn có muốn xóa kiểu thanh toán này không ?') ">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" style="border: none; background: none;">
@@ -100,7 +70,6 @@
                                                             </button>
                                                         </form>
                                                     </td>
-
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -112,7 +81,7 @@
 
                         </div>
 
-                        {{ $data->links() }}
+                        {{ $phuongthucthanhtoans->links() }}
                     </div>
 
                 </div>

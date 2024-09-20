@@ -22,18 +22,38 @@
                 <div class="col-xl-12">
                     <div class="card">
 
-                        <div class="card-header d-flex justify-content-between">
-                            <div>
-                                <a href="{{ route('danhmucs.create') }}" class="btn btn-success">Thêm Danh Mục</a>
-                            </div>
-                            <!-- Hiển thị thông báo thành công -->
-                            @if (session('success'))
-                                <div class="alert alert-success alert-dismissable fade show " role="alert">
-                                    {{ session('success') }}
-                                    <button type="button" class="btn-close justify-content-center" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
+                        <div class="card-header justify-content-between">
+
+                            <div class="row">
+
+                                <div class="col-3">
+                                    <form action="{{ route('danhmucs.index') }}" method="POST" id="filter-form">
+                                        @csrf
+                                        @method('GET')
+                                        <select class="form-select" name="search_dm"
+                                            onchange="document.getElementById('filter-form').submit();">
+                                            <option value="">Hiển thị tất cả</option>
+                                            <option value="0" {{ request('search_dm') == '0' ? 'selected' : '' }}>Hiển
+                                                thị</option>
+                                            <option value="1" {{ request('search_dm') == '1' ? 'selected' : '' }}>Ẩn
+                                            </option>
+                                        </select>
+                                    </form>
                                 </div>
-                            @endif
+
+                                <div class="col-9">
+                                    <!-- Hiển thị thông báo thành công -->
+                                    @if (session('success'))
+                                        <div class="alert alert-success d-flex justify-content-between mb-0" role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close"
+                                                data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    @endif
+                                </div>
+
+                            </div>
+
                         </div><!-- end card header -->
 
                         <div class="row">

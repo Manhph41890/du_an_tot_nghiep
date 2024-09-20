@@ -3,23 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Models\danh_muc;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Storedanh_mucRequest;
 use App\Http\Requests\Updatedanh_mucRequest;
-use Illuminate\Support\Facades\Storage;
 
 class DanhMucController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $danhmucs = danh_muc::query()->latest('id')->paginate(5);
+        $query = danh_muc::query();
+    
+        if ($request->has('search_dm')) {
+
+            $is_active = $request->input('search_dm');
+    
+            if ($is_active == '1' || $is_active == '0') {
+
+                $query->where('is_active', $is_active);
+
+            }
+
+        }
+    
+        $danhmucs = $query->latest('id')->paginate(5);
+
         $title = "Danh sách danh mục";
+
         return view('admin.danhmuc.index', compact('danhmucs', 'title'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -27,6 +43,7 @@ class DanhMucController extends Controller
     {
         //
         $title = "Thêm mới danh mục";
+        
         return view('admin.danhmuc.create', compact('title'));
     }
 
@@ -36,7 +53,21 @@ class DanhMucController extends Controller
     public function store(Storedanh_mucRequest $request)
     {
 
+
         //
+        if ($request->isMethod('POST')) {
+            $param = $request->except('_token');
+            if ($request->hasFile('anh_danh_muc')) {
+                $filepath = $request->file('anh_danh_muc')->store('uploads/danhmucs', 'public');
+            } else {
+                $filepath = null;
+            }
+            $param['anh_danh_muc'] = $filepath;
+            $param['is_active'] = $request->input('is_active', 0);
+            danh_muc::create($param);
+        }
+
+        return redirect()->route('danhmucs.index')->with('success', 'Thêm danh mục thành công');
         if ($request->isMethod('POST')) {
             $param = $request->except('_token');
             if ($request->hasFile('anh_danh_muc')) {

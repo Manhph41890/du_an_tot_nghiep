@@ -37,6 +37,7 @@ class AuthController extends Controller
                 'email.unique' => 'Email đã tồn tại',
                 'so_dien_thoai.required' => 'Số điện thoại không được để trong',
                 'so_dien_thoai.max' => 'Số điện thoại không được quá10 ký tự',
+                'so_dien_thoai.unique'=> 'Số điện thoại đã tồn tại',
                 'password.required' => 'Mật khẩu không được bỏ trống',
                 'password.min' => 'Tối thiểu là 8 ký tự',
                 'password.confirmed' => 'Mật khẩu xác nhận không khớp',
@@ -96,7 +97,7 @@ class AuthController extends Controller
         if (Auth::attempt([
             'email' => $request->input('email'),
             'password' => $request->input('password')
-        ])) {
+        ], $request->has('remember'))) {
             $user = Auth::user();
 
             // Phân quyênf cho từng chức vụ của người dùng

@@ -4,48 +4,47 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
     body {
-        font-family: 'Poppins', sans-serif;
-        background: #ececec;
+    font-family: 'Poppins', sans-serif;
+    background: #ececec;
     }
 
     .box-area {
-        width: 930px;
+    width: 930px;
     }
 
     .right-box {
-        padding: 40px 30px 40px 40px;
+    padding: 40px 30px 40px 40px;
     }
 
     ::placeholder {
-        font-size: 16px;
+    font-size: 16px;
     }
 
     .rounded-4 {
-        border-radius: 20px;
+    border-radius: 20px;
     }
 
     .rounded-5 {
-        border-radius: 30px;
+    border-radius: 30px;
     }
 
     @media only screen and (max-width: 768px) {
-        .box-area {
-            margin: 0 10px;
-        }
+    .box-area {
+    margin: 0 10px;
+    }
 
-        .left-box {
-            height: 100px;
-            overflow: hidden;
-        }
+    .left-box {
+    height: 100px;
+    overflow: hidden;
+    }
 
-        .right-box {
-            padding: 20px;
-        }
+    .right-box {
+    padding: 20px;
+    }
     }
 @endsection
 
 @section('content')
-
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -70,14 +69,17 @@
 
                 <div class="col-md-6 right-box">
                     <div class="row align-items-center">
-                        <div class="header-text mb-4 text-center d-flex flex-column justify-content-center align-items-center">
+                        <div
+                            class="header-text mb-4 text-center d-flex flex-column justify-content-center align-items-center">
                             <h2>Đăng Nhập</h2>
                             <p>Chào mừng bạn quay trở lại với chúng tôi</p>
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
-                                name="email" id="email" required placeholder="Email address" value="{{ old('email') }}">
+                            <input type="email"
+                                class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
+                                name="email" id="email" required placeholder="Email address"
+                                value="{{ old('email') }}">
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -85,7 +87,7 @@
 
                         <div class="input-group mb-1">
                             <input type="password" name="password" id="password" required
-                                class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror" 
+                                class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
                                 placeholder="Password" value="{{ old('password') }}">
                             @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -129,8 +131,6 @@
             </div>
         </div>
     </form>
-
-
 @endsection
 
 @section('js')

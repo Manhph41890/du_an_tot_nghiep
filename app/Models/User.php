@@ -33,7 +33,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'mat_khau',
+        'password',
         'remember_token',
     ];
 
@@ -44,7 +44,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'mat_khau' => 'hashed', // Laravel 10 hỗ trợ hashed password casting
+        'password' => 'hashed', // Laravel 10 hỗ trợ hashed password casting
     ];
 
     /**
@@ -54,4 +54,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(chuc_vu::class);
     }
+    public function khuyen_mai()
+{
+    return $this->hasOne(khuyen_mai::class);
+} 
 }

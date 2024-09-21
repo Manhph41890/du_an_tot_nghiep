@@ -43,7 +43,6 @@
 @endsection
 
 @section('content')
-
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -74,7 +73,9 @@
                             <input type="email" id="email" name="email" value="{{ old('email') }}" required
                                 class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
                                 placeholder="Email">
-                           
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="input-group mb-3">
@@ -151,9 +152,6 @@
             </div>
         </div>
     </form>
-
-  
-
 @endsection
 
 @section('js')

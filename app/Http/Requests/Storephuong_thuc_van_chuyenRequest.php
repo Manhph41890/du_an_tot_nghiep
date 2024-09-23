@@ -11,7 +11,7 @@ class Storephuong_thuc_van_chuyenRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class Storephuong_thuc_van_chuyenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'kieu_van_chuyen' => 'required|in:Giao hàng hỏa tốc,Giao hàng thường',
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'kieu_van_chuyen.required' => 'Bạn chưa chọn phương thức vận chuyển',
+            'kieu_van_chuyen.in' => 'Phương thức vận chuyển không hợp lệ'
         ];
     }
 }

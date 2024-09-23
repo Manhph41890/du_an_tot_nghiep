@@ -108,16 +108,6 @@ class SanPhamController extends Controller
             return back()->withErrors('Đã xảy ra lỗi khi thêm sản phẩm. Vui lòng thử lại.');
         }
     }
-
-
-
-
-
-
-
-
-
-
     /**
      * Display the specified resource.
      */

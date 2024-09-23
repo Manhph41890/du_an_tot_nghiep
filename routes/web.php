@@ -55,7 +55,7 @@ Route::resource('/khuyenmais', KhuyenMaiController::class);
 // login
 Route::get('/auth/login', [AuthController::class, 'showFormLogin'])->name('auth.login');
 Route::post('/auth/login', [AuthController::class, 'login']);
-Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 // register
 Route::get('/auth/register', [AuthController::class, 'showFormRegister'])->name('auth.register');

@@ -48,65 +48,55 @@ class SanPhamController extends Controller
      */
     public function store(Storesan_phamRequest $request)
     {
-
-        // Lấy dữ liệu đã được xác thực từ request
-        $data_san_phams = $request->except('product_variants');
-
-        // Xử lý ảnh sản phẩm chính
-        if ($request->hasFile('anh_san_pham')) {
-            $file = $request->file('anh_san_pham');
-            if ($file->isValid()) {
-                // Lưu file với tên chính thức
-                $filename = time() . '-' . $file->getClientOriginalName();
-                $path = $file->storeAs('sanphams', $filename, 'public');
-                $data_san_phams['anh_san_pham'] = $path;
-            } else {
-                // Xử lý lỗi nếu file không hợp lệ
-                return back()->withErrors(['anh_san_pham' => 'File không hợp lệ']);
-            }
-        }
-
-        // Lấy biến thể sản phẩm từ request
-        $bien_the_san_phamsTmp = $request->input('product_variants', []);
-        $bien_the_san_phams = [];
-
-        // Xử lý từng biến thể trong mảng product_variants
-        foreach ($bien_the_san_phamsTmp as $key => $item) {
-            $tmp = explode('-', $key); // Tách size_san_pham_id và color_san_pham_id từ key
-            $anh_bien_the_path = null;
-
-            // Xử lý file ảnh biến thể
-            if (request()->hasFile('product_variants.1-2.anh_bien_the')) {
-                $anh_bien_the_file = request()->file('product_variants.1-2.anh_bien_the');
-                if ($anh_bien_the_file->isValid()) {
-                    $anh_bien_the_path = $anh_bien_the_file->store('sanphams');
-                } else {
-                    dd('File is not valid');
-                }
-            } else {
-                dd('No file uploaded');
-            }
-
-
-
-
-            $bien_the_san_phams[] = [
-                'size_san_pham_id' => $tmp[0],
-                'color_san_pham_id' => $tmp[1],
-                'anh_bien_the' => $anh_bien_the_path,
-            ];
-        }
-
         try {
             DB::beginTransaction();
+
+            // Lấy dữ liệu đã được xác thực từ request
+            $data_san_phams = $request->except('product_variants');
+
+            // Xử lý ảnh sản phẩm chính
+            if ($request->hasFile('anh_san_pham')) {
+                $file = $request->file('anh_san_pham');
+                if ($file->isValid()) {
+                    $filename = time() . '-' . $file->getClientOriginalName();
+                    $path = $file->storeAs('sanphams', $filename, 'public');
+                    $data_san_phams['anh_san_pham'] = $path;
+                } else {
+                    return back()->withErrors(['anh_san_pham' => 'File không hợp lệ']);
+                }
+            }
 
             // Tạo sản phẩm chính
             $product = san_pham::create($data_san_phams);
 
-            // Tạo biến thể sản phẩm
-            foreach ($bien_the_san_phams as $bien_the) {
-                $bien_the['san_pham_id'] = $product->id; // Thêm san_pham_id vào biến thể
-                bien_the_san_pham::create($bien_the);
+            // Lấy biến thể sản phẩm từ request
+            $bien_the_san_phamsTmp = $request->input('product_variants', []);
+            foreach ($bien_the_san_phamsTmp as $key => $item) {
+                $tmp = explode('-', $key); // Tách size_san_pham_id và color_san_pham_id từ key
+                $size_san_pham_id = $tmp[0];
+                $color_san_pham_id = $tmp[1];
+
+
+                // Xử lý file ảnh biến thể
+                $anh_bien_the_path = null;
+                if (request()->hasFile('product_variants.1-2.anh_bien_the')) {
+                    $anh_bien_the_file = request()->file('product_variants.1-2.anh_bien_the');
+                    if ($anh_bien_the_file->isValid()) {
+                        $anh_bien_the_path = $anh_bien_the_file->store('sanphams');
+                    } else {
+                        dd('File is not valid');
+                    }
+                } else {
+                    dd('No file uploaded');
+                }
+
+                // Tạo biến thể sản phẩm
+                bien_the_san_pham::create([
+                    'san_pham_id' => $product->id,
+                    'size_san_pham_id' => $size_san_pham_id,
+                    'color_san_pham_id' => $color_san_pham_id,
+                    'anh_bien_the' => $anh_bien_the_path,
+                ]);
             }
 
             DB::commit();
@@ -114,11 +104,19 @@ class SanPhamController extends Controller
             return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được thêm thành công.');
         } catch (\Exception $exception) {
             DB::rollBack();
-            // Ghi log lỗi với thông tin chi tiết
             Log::error('Lỗi khi thêm sản phẩm: ' . $exception->getMessage() . ' - Line: ' . $exception->getLine() . ' - File: ' . $exception->getFile());
             return back()->withErrors('Đã xảy ra lỗi khi thêm sản phẩm. Vui lòng thử lại.');
         }
     }
+
+
+
+
+
+
+
+
+
 
     /**
      * Display the specified resource.

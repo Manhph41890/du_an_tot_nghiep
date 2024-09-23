@@ -127,7 +127,25 @@
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.create')); ?>'>Thêm</a>
                             </li>
-                        
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> PT vận chuyển </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="phuongthucvanchuyen">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.index')); ?>'>Danh sách</a>
+                            </li>
+                            <li>
+                                <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.create')); ?>'>Thêm</a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>

@@ -2,6 +2,24 @@
 
 All notable changes of the PHPUnit 10.5 release series are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+## [10.5.35] - 2024-09-19
+
+### Changed
+
+* [#5956](https://github.com/sebastianbergmann/phpunit/issues/5956): Deprecation of the `E_STRICT` constant in PHP 8.4
+
+### Fixed
+
+* [#5950](https://github.com/sebastianbergmann/phpunit/pull/5950): TestDox text should not be `trim()`med when it contains `$` character
+* The attribute parser will no longer try to instantiate attribute classes that do not exist
+
+## [10.5.34] - 2024-09-13
+
+### Fixed
+
+* [#5931](https://github.com/sebastianbergmann/phpunit/pull/5931): Reverted addition of `name` property on `<testsuites>` element in JUnit XML logfile
+* [#5946](https://github.com/sebastianbergmann/phpunit/issues/5946): `Callback` throws a `TypeError` when checking a `callable` has variadic parameters
+
 ## [10.5.33] - 2024-09-09
 
 ### Fixed
@@ -304,6 +322,8 @@ All notable changes of the PHPUnit 10.5 release series are documented in this fi
 
 * [#5563](https://github.com/sebastianbergmann/phpunit/issues/5563): `createMockForIntersectionOfInterfaces()` does not automatically register mock object for expectation verification
 
+[10.5.35]: https://github.com/sebastianbergmann/phpunit/compare/10.5.34...10.5.35
+[10.5.34]: https://github.com/sebastianbergmann/phpunit/compare/10.5.33...10.5.34
 [10.5.33]: https://github.com/sebastianbergmann/phpunit/compare/10.5.32...10.5.33
 [10.5.32]: https://github.com/sebastianbergmann/phpunit/compare/10.5.31...10.5.32
 [10.5.31]: https://github.com/sebastianbergmann/phpunit/compare/10.5.30...10.5.31

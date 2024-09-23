@@ -6,6 +6,7 @@ use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Models\phuong_thuc_thanh_toan;
 
 use App\Http\Controllers\KhuyenMaiController;
+use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\SanPhamController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ Route::resource('/danhmucs', DanhMucController::class);
 Route::resource('/sanphams', SanPhamController::class);
 Route::resource('/chucvus', ChucVuController::class);
 Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
+Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
 
 Route::resource('/khuyenmais', KhuyenMaiController::class);
 

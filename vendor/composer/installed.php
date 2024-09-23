@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4d54e452c940a9909296a0b48559993c10c55a10',
+        'reference' => 'aecd5790dd524432ff14013bd70dc5a8136a5958',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -169,199 +169,199 @@
         'illuminate/auth' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/broadcasting' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/bus' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/cache' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/collections' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/conditionable' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/config' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/console' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/container' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/contracts' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/cookie' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/database' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/encryption' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/events' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/filesystem' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/hashing' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/http' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/log' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/macroable' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/mail' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/notifications' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/pagination' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/pipeline' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/process' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/queue' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/redis' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/routing' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/session' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/support' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/testing' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/translation' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/validation' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'illuminate/view' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v10.48.20',
+                0 => 'v10.48.22',
             ),
         ),
         'kodova/hamcrest-php' => array(
@@ -371,9 +371,9 @@
             ),
         ),
         'laravel/framework' => array(
-            'pretty_version' => 'v10.48.20',
-            'version' => '10.48.20.0',
-            'reference' => 'be2be342d4c74db6a8d2bd18469cd6d488ab9c98',
+            'pretty_version' => 'v10.48.22',
+            'version' => '10.48.22.0',
+            'reference' => 'c4ea52bb044faef4a103d7dd81746c01b2ec860e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/framework',
             'aliases' => array(),
@@ -382,7 +382,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4d54e452c940a9909296a0b48559993c10c55a10',
+            'reference' => 'aecd5790dd524432ff14013bd70dc5a8136a5958',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -407,9 +407,9 @@
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
-            'pretty_version' => 'v1.31.3',
-            'version' => '1.31.3.0',
-            'reference' => '0a7e2891a85eba2d448a9ffc6fc5ce367e924bc1',
+            'pretty_version' => 'v1.32.0',
+            'version' => '1.32.0.0',
+            'reference' => '4a7e41d280861ca7e35710cea011a07669b4003b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/sail',
             'aliases' => array(),
@@ -488,9 +488,9 @@
             'dev_requirement' => false,
         ),
         'league/mime-type-detection' => array(
-            'pretty_version' => '1.15.0',
-            'version' => '1.15.0.0',
-            'reference' => 'ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301',
+            'pretty_version' => '1.16.0',
+            'version' => '1.16.0.0',
+            'reference' => '2d6702ff215bf922936ccc1ad31007edc76451b9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../league/mime-type-detection',
             'aliases' => array(),
@@ -557,9 +557,9 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v5.1.0',
-            'version' => '5.1.0.0',
-            'reference' => '683130c2ff8c2739f4822ff7ac5c873ec529abd1',
+            'pretty_version' => 'v5.2.0',
+            'version' => '5.2.0.0',
+            'reference' => '23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
@@ -656,9 +656,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '10.5.33',
-            'version' => '10.5.33.0',
-            'reference' => '4def7a9cda75af9c2bc179ed53a8e41313e7f7cf',
+            'pretty_version' => '10.5.35',
+            'version' => '10.5.35.0',
+            'reference' => '7ac8b4e63f456046dcb4c9787da9382831a1874b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
@@ -766,8 +766,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1008,9 +1008,9 @@
             'dev_requirement' => true,
         ),
         'symfony/console' => array(
-            'pretty_version' => 'v6.4.11',
-            'version' => '6.4.11.0',
-            'reference' => '42686880adaacdad1835ee8fc2a9ec5b7bd63998',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => '72d080eb9edf80e36c19be61f72c98ed8273b765',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/console',
             'aliases' => array(),
@@ -1077,36 +1077,36 @@
             'dev_requirement' => false,
         ),
         'symfony/http-foundation' => array(
-            'pretty_version' => 'v6.4.10',
-            'version' => '6.4.10.0',
-            'reference' => '117f1f20a7ade7bcea28b861fb79160a21a1e37b',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => '133ac043875f59c26c55e79cf074562127cce4d2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/http-foundation',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'symfony/http-kernel' => array(
-            'pretty_version' => 'v6.4.11',
-            'version' => '6.4.11.0',
-            'reference' => '1ba6b89d781cb47448155cc70dd2e0f1b0584c79',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => '96df83d51b5f78804f70c093b97310794fd6257b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/http-kernel',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'symfony/mailer' => array(
-            'pretty_version' => 'v6.4.9',
-            'version' => '6.4.9.0',
-            'reference' => 'e2d56f180f5b8c5e7c0fbea872bb1f529b6d6d45',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => 'b6a25408c569ae2366b3f663a4edad19420a9c26',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/mailer',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'symfony/mime' => array(
-            'pretty_version' => 'v6.4.11',
-            'version' => '6.4.11.0',
-            'reference' => 'dba5d5f6073baf7a3576b580cc4a208b4ca00553',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => 'abe16ee7790b16aa525877419deb0f113953f0e1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/mime',
             'aliases' => array(),
@@ -1185,18 +1185,18 @@
             'dev_requirement' => false,
         ),
         'symfony/process' => array(
-            'pretty_version' => 'v6.4.8',
-            'version' => '6.4.8.0',
-            'reference' => '8d92dd79149f29e89ee0f480254db595f6a6a2c5',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => '3f94e5f13ff58df371a7ead461b6e8068900fbb3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/process',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'symfony/routing' => array(
-            'pretty_version' => 'v6.4.11',
-            'version' => '6.4.11.0',
-            'reference' => '8ee0c24c1bf61c263a26f1b9b6d19e83b1121f2a',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => 'a7c8036bd159486228dc9be3e846a00a0dda9f9f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/routing',
             'aliases' => array(),
@@ -1212,18 +1212,18 @@
             'dev_requirement' => false,
         ),
         'symfony/string' => array(
-            'pretty_version' => 'v6.4.11',
-            'version' => '6.4.11.0',
-            'reference' => '5bc3eb632cf9c8dbfd6529d89be9950d1518883b',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => 'f8a1ccebd0997e16112dfecfd74220b78e5b284b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/string',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'symfony/translation' => array(
-            'pretty_version' => 'v6.4.10',
-            'version' => '6.4.10.0',
-            'reference' => '94041203f8ac200ae9e7c6a18fa6137814ccecc9',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => 'cf8360b8352b086be620fae8342c4d96e391a489',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/translation',
             'aliases' => array(),
@@ -1245,9 +1245,9 @@
             ),
         ),
         'symfony/uid' => array(
-            'pretty_version' => 'v6.4.11',
-            'version' => '6.4.11.0',
-            'reference' => '6a0394ad707de386547223948fac1e0f2805bc0b',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => '2f16054e0a9b194b8ca581d4a64eee3f7d4a9d4d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/uid',
             'aliases' => array(),
@@ -1263,9 +1263,9 @@
             'dev_requirement' => false,
         ),
         'symfony/yaml' => array(
-            'pretty_version' => 'v6.4.11',
-            'version' => '6.4.11.0',
-            'reference' => 'be37e7f13195e05ab84ca5269365591edd240335',
+            'pretty_version' => 'v6.4.12',
+            'version' => '6.4.12.0',
+            'reference' => '762ee56b2649659380e0ef4d592d807bc17b7971',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/yaml',
             'aliases' => array(),

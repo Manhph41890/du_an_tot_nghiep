@@ -62,6 +62,15 @@ Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 // register
 Route::get('/auth/register', [AuthController::class, 'showFormRegister'])->name('auth.register');
 Route::post('/auth/register', [AuthController::class, 'register']);
+ 
+// forgot password
+Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('auth.forgot_password');
+Route::post('forgot-password', [AuthController::class, 'sendResetLink'])->name('auth.email');
+Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('auth.reset_password');
+Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('auth.update_password');
+//mail 
+Route::get('verify-code', [AuthController::class, 'showVerifyCodeForm'])->name('auth.verify_code');
+Route::post('verify-code', [AuthController::class, 'verifyCode'])->name('auth.verifycode');
 
 //pham qu
 Route::middleware(['role:admin'])->group(function () {

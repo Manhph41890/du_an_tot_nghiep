@@ -80,7 +80,7 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $khuyenMai->ten_khuyen_mai }}</td>
                                                     <td>{{ $khuyenMai->ma_khuyen_mai }}</td>
-                                                    <td>{{ $khuyenMai->gia_tri_khuyen_mai }}%</td>
+                                                    <td>{{ $khuyenMai->gia_tri_khuyen_mai }}đ</td>
                                                     <td>{{ $khuyenMai->so_luong_ma }}</td>
                                                     <td>{{ $khuyenMai->ngay_bat_dau }}</td>
                                                     <td>{{ $khuyenMai->ngay_ket_thuc }}</td>

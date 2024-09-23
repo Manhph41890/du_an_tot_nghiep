@@ -102,7 +102,7 @@
                             </div>
 
                             <div class="forgot">
-                                <small><a href="#">Quên mật khẩu?</a></small>
+                                <small><a href="{{route('auth.forgot_password')}}">Quên mật khẩu?</a></small>
                             </div>
                         </div>
 

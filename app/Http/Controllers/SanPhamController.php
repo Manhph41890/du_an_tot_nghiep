@@ -9,7 +9,6 @@ use App\Http\Requests\Updatesan_phamRequest;
 use App\Models\anh_san_pham;
 use App\Models\bien_the_san_pham;
 use App\Models\color_san_pham;
-use App\Models\danh_muc;
 use App\Models\size_san_pham;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;

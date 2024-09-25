@@ -85,7 +85,7 @@
                                                         style="display: none; width: 200px;">
                                                 </div>
                                             </div>
-                                            <div class="mb-3">
+                                            {{-- <div class="mb-3">
                                                 <label for="so_luong" class="form-label">Số lượng</label>
                                                 <input type="number" id="so_luong" name="so_luong"
                                                     class="form-control @error('so_luong') is-invalid @enderror"
@@ -93,7 +93,7 @@
                                                 @error('so_luong')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
-                                            </div>
+                                            </div> --}}
                                             <div class="mb-3">
                                                 <label for="ma_ta_san_pham" class="form-label">Mô tả sản phẩm</label>
                                                 <input type="text" id="ma_ta_san_pham" name="ma_ta_san_pham"
@@ -118,8 +118,7 @@
                                                 <input class="form-check-input" type="radio" name="is_active"
                                                     id="trang_thai_hide" value="0"
                                                     {{ old('is_active') == 0 ? 'checked' : '' }}>
-                                                <label class="form-check-label text-danger"
-                                                    for="trang_thai_hide">Ẩn</label>
+                                                <label class="form-check-label text-danger" for="trang_thai_hide">Ẩn</label>
                                             </div>
                                             @error('is_active')
                                                 <div class="invalid-feedback">{{ $message }}</div>

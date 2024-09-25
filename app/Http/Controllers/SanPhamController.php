@@ -56,13 +56,18 @@ class SanPhamController extends Controller
                 } else {
                     return back()->withErrors(['anh_san_pham' => 'File không hợp lệ']);
                 }
+            } else {
+                // Nếu không có ảnh sản phẩm, set ảnh sản phẩm là null
+                $data_san_phams['anh_san_pham'] = null;
             }
 
             // Tạo sản phẩm chính
             $product = san_pham::create($data_san_phams);
 
-            // Xử lý biến thể sản phẩm
+            // Xử lý biến thể sản phẩm và tính tổng số lượng
             $bien_the_san_phamsTmp = $request->input('product_variants', []);
+            $totalQuantity = 0; // Khởi tạo biến để tính tổng số lượng
+
             if (!empty($bien_the_san_phamsTmp)) {
                 foreach ($bien_the_san_phamsTmp as $key => $item) {
                     $tmp = explode('-', $key);
@@ -85,8 +90,9 @@ class SanPhamController extends Controller
                         }
                     }
 
-                    // Lấy số lượng
+                    // Lấy số lượng biến thể
                     $quantity = $item['so_luong'] ?? 0;
+                    $totalQuantity += $quantity; // Cộng dồn số lượng biến thể
 
                     // Tạo biến thể sản phẩm
                     bien_the_san_pham::create([
@@ -99,6 +105,10 @@ class SanPhamController extends Controller
                 }
             }
 
+            // Cập nhật tổng số lượng sản phẩm chính
+            $product->so_luong = $totalQuantity;
+            $product->save();
+
             DB::commit();
             return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được thêm thành công.');
         } catch (\Exception $exception) {
@@ -107,6 +117,8 @@ class SanPhamController extends Controller
             return back()->withErrors('Đã xảy ra lỗi khi thêm sản phẩm. Vui lòng thử lại.');
         }
     }
+
+
     public function show(san_pham $san_pham, $id)
     {
         //

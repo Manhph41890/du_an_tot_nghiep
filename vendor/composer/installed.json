@@ -25,7 +25,7 @@
             },
             "time": "2023-11-29T23:19:16+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Brick\\Math\\": "src/"
@@ -91,7 +91,7 @@
             },
             "time": "2023-12-11T17:09:12+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Carbon\\Doctrine\\": "src/Carbon/Doctrine/"
@@ -167,7 +167,7 @@
                     "dev-main": "3.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Dflydev\\DotAccessData\\": "src/"
@@ -241,7 +241,7 @@
             },
             "time": "2024-02-18T20:23:39+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Inflector\\": "lib/Doctrine/Inflector"
@@ -334,7 +334,7 @@
             },
             "time": "2024-02-05T11:56:58+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\Lexer\\": "src"
@@ -417,7 +417,7 @@
             },
             "time": "2023-08-10T19:36:49+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Cron\\": "src/Cron/"
@@ -485,7 +485,7 @@
                     "dev-master": "4.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Egulias\\EmailValidator\\": "src"
@@ -560,7 +560,7 @@
             },
             "time": "2024-01-02T13:46:09+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Faker\\": "src/Faker/"
@@ -622,7 +622,7 @@
                     "dev-master": "2.7-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Whoops\\": "src/Whoops/"
@@ -692,7 +692,7 @@
                     "dev-master": "1.2-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Fruitcake\\Cors\\": "src/"
@@ -759,7 +759,7 @@
             },
             "time": "2024-07-20T21:45:45+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "GrahamCampbell\\ResultType\\": "src/"
@@ -847,7 +847,7 @@
                     "forward-command": false
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/functions_include.php"
@@ -959,7 +959,7 @@
                     "forward-command": false
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "GuzzleHttp\\Promise\\": "src/"
@@ -1056,7 +1056,7 @@
                     "forward-command": false
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "GuzzleHttp\\Psr7\\": "src/"
@@ -1166,7 +1166,7 @@
                     "forward-command": false
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "GuzzleHttp\\UriTemplate\\": "src"
@@ -1257,7 +1257,7 @@
                     "dev-master": "2.1-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "hamcrest"
@@ -1279,17 +1279,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.48.20",
-            "version_normalized": "10.48.20.0",
+            "version": "v10.48.22",
+            "version_normalized": "10.48.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "be2be342d4c74db6a8d2bd18469cd6d488ab9c98"
+                "reference": "c4ea52bb044faef4a103d7dd81746c01b2ec860e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/be2be342d4c74db6a8d2bd18469cd6d488ab9c98",
-                "reference": "be2be342d4c74db6a8d2bd18469cd6d488ab9c98",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c4ea52bb044faef4a103d7dd81746c01b2ec860e",
+                "reference": "c4ea52bb044faef4a103d7dd81746c01b2ec860e",
                 "shasum": ""
             },
             "require": {
@@ -1440,14 +1440,14 @@
                 "symfony/postmark-mailer": "Required to enable support for the Postmark mail transport (^6.2).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0)."
             },
-            "time": "2024-08-09T07:55:45+00:00",
+            "time": "2024-09-12T15:00:09+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "10.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/Illuminate/Collections/helpers.php",
@@ -1523,7 +1523,7 @@
                 "builds/pint"
             ],
             "type": "project",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "App\\": "app/",
@@ -1597,7 +1597,7 @@
                     "dev-main": "0.1.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -1619,17 +1619,17 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.31.3",
-            "version_normalized": "1.31.3.0",
+            "version": "v1.32.0",
+            "version_normalized": "1.32.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "0a7e2891a85eba2d448a9ffc6fc5ce367e924bc1"
+                "reference": "4a7e41d280861ca7e35710cea011a07669b4003b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/0a7e2891a85eba2d448a9ffc6fc5ce367e924bc1",
-                "reference": "0a7e2891a85eba2d448a9ffc6fc5ce367e924bc1",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/4a7e41d280861ca7e35710cea011a07669b4003b",
+                "reference": "4a7e41d280861ca7e35710cea011a07669b4003b",
                 "shasum": ""
             },
             "require": {
@@ -1644,7 +1644,7 @@
                 "orchestra/testbench": "^7.0|^8.0|^9.0",
                 "phpstan/phpstan": "^1.10"
             },
-            "time": "2024-09-03T20:05:33+00:00",
+            "time": "2024-09-11T20:14:29+00:00",
             "bin": [
                 "bin/sail"
             ],
@@ -1656,7 +1656,7 @@
                     ]
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Laravel\\Sail\\": "src/"
@@ -1724,7 +1724,7 @@
                     ]
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Laravel\\Sanctum\\": "src/"
@@ -1784,7 +1784,7 @@
                     "dev-master": "1.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Laravel\\SerializableClosure\\": "src/"
@@ -1815,6 +1815,78 @@
                 "source": "https://github.com/laravel/serializable-closure"
             },
             "install-path": "../laravel/serializable-closure"
+        },
+        {
+            "name": "laravel/telescope",
+            "version": "v5.2.2",
+            "version_normalized": "5.2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/telescope.git",
+                "reference": "daaf95dee9fab2dd80f59b5f6611c6c0eff44878"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/daaf95dee9fab2dd80f59b5f6611c6c0eff44878",
+                "reference": "daaf95dee9fab2dd80f59b5f6611c6c0eff44878",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^8.37|^9.0|^10.0|^11.0",
+                "php": "^8.0",
+                "symfony/console": "^5.3|^6.0|^7.0",
+                "symfony/var-dumper": "^5.0|^6.0|^7.0"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "laravel/octane": "^1.4|^2.0|dev-develop",
+                "orchestra/testbench": "^6.40|^7.37|^8.17|^9.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.0|^10.5"
+            },
+            "time": "2024-08-26T12:40:52+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Telescope\\TelescopeServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Telescope\\": "src/",
+                    "Laravel\\Telescope\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "mohamed@laravel.com"
+                }
+            ],
+            "description": "An elegant debug assistant for the Laravel framework.",
+            "keywords": [
+                "debugging",
+                "laravel",
+                "monitoring"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/telescope/issues",
+                "source": "https://github.com/laravel/telescope/tree/v5.2.2"
+            },
+            "install-path": "../laravel/telescope"
         },
         {
             "name": "laravel/tinker",
@@ -1856,7 +1928,7 @@
                     ]
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Laravel\\Tinker\\": "src/"
@@ -1937,7 +2009,7 @@
                     "dev-main": "2.6-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "League\\CommonMark\\": "src"
@@ -2028,7 +2100,7 @@
                     "dev-main": "1.2-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "League\\Config\\": "src"
@@ -2129,7 +2201,7 @@
             },
             "time": "2024-05-22T10:09:12+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "League\\Flysystem\\": "src"
@@ -2188,7 +2260,7 @@
             },
             "time": "2024-05-06T20:05:52+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "League\\Flysystem\\Local\\": ""
@@ -2219,17 +2291,17 @@
         },
         {
             "name": "league/mime-type-detection",
-            "version": "1.15.0",
-            "version_normalized": "1.15.0.0",
+            "version": "1.16.0",
+            "version_normalized": "1.16.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/mime-type-detection.git",
-                "reference": "ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301"
+                "reference": "2d6702ff215bf922936ccc1ad31007edc76451b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301",
-                "reference": "ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301",
+                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/2d6702ff215bf922936ccc1ad31007edc76451b9",
+                "reference": "2d6702ff215bf922936ccc1ad31007edc76451b9",
                 "shasum": ""
             },
             "require": {
@@ -2241,9 +2313,9 @@
                 "phpstan/phpstan": "^0.12.68",
                 "phpunit/phpunit": "^8.5.8 || ^9.3 || ^10.0"
             },
-            "time": "2024-01-28T23:22:08+00:00",
+            "time": "2024-09-21T08:32:55+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "League\\MimeTypeDetection\\": "src"
@@ -2262,7 +2334,7 @@
             "description": "Mime-type detection for Flysystem",
             "support": {
                 "issues": "https://github.com/thephpleague/mime-type-detection/issues",
-                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.15.0"
+                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.16.0"
             },
             "funding": [
                 {
@@ -2305,7 +2377,7 @@
             },
             "time": "2024-05-16T03:13:13+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "library/helpers.php",
@@ -2426,7 +2498,7 @@
                     "dev-main": "3.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Monolog\\": "src/Monolog"
@@ -2496,7 +2568,7 @@
             },
             "time": "2024-06-12T14:39:25+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/DeepCopy/deep_copy.php"
@@ -2590,7 +2662,7 @@
                     ]
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Carbon\\": "src/Carbon/"
@@ -2670,7 +2742,7 @@
                     "dev-master": "1.3-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -2747,7 +2819,7 @@
                     "dev-master": "4.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -2795,17 +2867,17 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.1.0",
-            "version_normalized": "5.1.0.0",
+            "version": "v5.2.0",
+            "version_normalized": "5.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1"
+                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/683130c2ff8c2739f4822ff7ac5c873ec529abd1",
-                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
+                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
                 "shasum": ""
             },
             "require": {
@@ -2818,7 +2890,7 @@
                 "ircmaxell/php-yacc": "^0.0.7",
                 "phpunit/phpunit": "^9.0"
             },
-            "time": "2024-07-01T20:03:41+00:00",
+            "time": "2024-09-15T16:40:33+00:00",
             "bin": [
                 "bin/php-parse"
             ],
@@ -2828,7 +2900,7 @@
                     "dev-master": "5.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "PhpParser\\": "lib/PhpParser"
@@ -2850,7 +2922,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.1.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.2.0"
             },
             "install-path": "../nikic/php-parser"
         },
@@ -2901,7 +2973,7 @@
                     ]
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "./src/Adapters/Phpunit/Autoload.php"
@@ -2994,7 +3066,7 @@
                     ]
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/Functions.php"
@@ -3072,7 +3144,7 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -3132,7 +3204,7 @@
             },
             "time": "2022-02-21T01:04:05+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -3199,7 +3271,7 @@
                     "dev-master": "1.9-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "PhpOption\\": "src/PhpOption/"
@@ -3288,7 +3360,7 @@
                     "dev-main": "10.1.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -3353,7 +3425,7 @@
                     "dev-main": "4.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -3421,7 +3493,7 @@
                     "dev-main": "4.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -3483,7 +3555,7 @@
                     "dev-main": "3.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -3546,7 +3618,7 @@
                     "dev-main": "6.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -3582,17 +3654,17 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.33",
-            "version_normalized": "10.5.33.0",
+            "version": "10.5.35",
+            "version_normalized": "10.5.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "4def7a9cda75af9c2bc179ed53a8e41313e7f7cf"
+                "reference": "7ac8b4e63f456046dcb4c9787da9382831a1874b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4def7a9cda75af9c2bc179ed53a8e41313e7f7cf",
-                "reference": "4def7a9cda75af9c2bc179ed53a8e41313e7f7cf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7ac8b4e63f456046dcb4c9787da9382831a1874b",
+                "reference": "7ac8b4e63f456046dcb4c9787da9382831a1874b",
                 "shasum": ""
             },
             "require": {
@@ -3626,7 +3698,7 @@
             "suggest": {
                 "ext-soap": "To be able to generate mocks based on WSDL files"
             },
-            "time": "2024-09-09T06:06:56+00:00",
+            "time": "2024-09-19T10:52:21+00:00",
             "bin": [
                 "phpunit"
             ],
@@ -3636,7 +3708,7 @@
                     "dev-main": "10.5-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/Framework/Assert/Functions.php"
@@ -3666,7 +3738,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.33"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.35"
             },
             "funding": [
                 {
@@ -3704,7 +3776,7 @@
             },
             "time": "2022-11-25T14:36:26+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Clock\\": "src/"
@@ -3760,7 +3832,7 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Container\\": "src/"
@@ -3816,7 +3888,7 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\EventDispatcher\\": "src/"
@@ -3870,7 +3942,7 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Client\\": "src/"
@@ -3925,7 +3997,7 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Message\\": "src/"
@@ -3982,7 +4054,7 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Message\\": "src/"
@@ -4038,7 +4110,7 @@
                     "dev-master": "3.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Log\\": "src"
@@ -4091,7 +4163,7 @@
                     "dev-master": "3.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\SimpleCache\\": "src/"
@@ -4168,7 +4240,7 @@
                     "forward-command": false
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/functions.php"
@@ -4226,7 +4298,7 @@
             },
             "time": "2019-03-08T08:55:37+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/getallheaders.php"
@@ -4299,7 +4371,7 @@
                     "configFile": "conventional-commits.json"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Ramsey\\Collection\\": "src/"
@@ -4401,7 +4473,7 @@
                     "force-install": true
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/functions.php"
@@ -4464,7 +4536,7 @@
                     "dev-main": "2.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -4524,7 +4596,7 @@
                     "dev-main": "2.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -4583,7 +4655,7 @@
                     "dev-main": "3.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -4645,7 +4717,7 @@
                     "dev-main": "5.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -4722,7 +4794,7 @@
                     "dev-main": "3.2-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -4783,7 +4855,7 @@
                     "dev-main": "5.1-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -4855,7 +4927,7 @@
                     "dev-main": "6.1-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -4921,7 +4993,7 @@
                     "dev-main": "5.1-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -5003,7 +5075,7 @@
                     "dev-main": "6.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -5066,7 +5138,7 @@
                     "dev-main": "2.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -5128,7 +5200,7 @@
                     "dev-main": "5.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -5186,7 +5258,7 @@
                     "dev-main": "3.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -5244,7 +5316,7 @@
                     "dev-main": "5.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -5310,7 +5382,7 @@
                     "dev-main": "4.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -5366,7 +5438,7 @@
                     "dev-main": "4.0-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -5424,7 +5496,7 @@
             },
             "time": "2024-07-22T08:21:24+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Spatie\\Backtrace\\": "src"
@@ -5503,7 +5575,7 @@
             },
             "time": "2024-07-25T11:06:04+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Spatie\\Ignition\\": "legacy/ignition",
@@ -5579,7 +5651,7 @@
                     "dev-main": "1.3.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -5659,7 +5731,7 @@
                     "dev-main": "1.5.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Spatie\\Ignition\\": "src"
@@ -5750,7 +5822,7 @@
                     }
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -5794,17 +5866,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v6.4.11",
-            "version_normalized": "6.4.11.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "42686880adaacdad1835ee8fc2a9ec5b7bd63998"
+                "reference": "72d080eb9edf80e36c19be61f72c98ed8273b765"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/42686880adaacdad1835ee8fc2a9ec5b7bd63998",
-                "reference": "42686880adaacdad1835ee8fc2a9ec5b7bd63998",
+                "url": "https://api.github.com/repos/symfony/console/zipball/72d080eb9edf80e36c19be61f72c98ed8273b765",
+                "reference": "72d080eb9edf80e36c19be61f72c98ed8273b765",
                 "shasum": ""
             },
             "require": {
@@ -5837,9 +5909,9 @@
                 "symfony/stopwatch": "^5.4|^6.0|^7.0",
                 "symfony/var-dumper": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-08-15T22:48:29+00:00",
+            "time": "2024-09-20T08:15:52+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Console\\": ""
@@ -5871,7 +5943,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v6.4.11"
+                "source": "https://github.com/symfony/console/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -5909,7 +5981,7 @@
             },
             "time": "2024-05-31T14:49:08+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\CssSelector\\": ""
@@ -5986,7 +6058,7 @@
                     "url": "https://github.com/symfony/contracts"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "function.php"
@@ -6061,7 +6133,7 @@
                 "Resources/bin/patch-type-declarations"
             ],
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\ErrorHandler\\": ""
@@ -6144,7 +6216,7 @@
             },
             "time": "2024-05-31T14:49:08+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\EventDispatcher\\": ""
@@ -6218,7 +6290,7 @@
                     "url": "https://github.com/symfony/contracts"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\EventDispatcher\\": ""
@@ -6290,7 +6362,7 @@
             },
             "time": "2024-08-13T14:27:37+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Finder\\": ""
@@ -6336,17 +6408,17 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v6.4.10",
-            "version_normalized": "6.4.10.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "117f1f20a7ade7bcea28b861fb79160a21a1e37b"
+                "reference": "133ac043875f59c26c55e79cf074562127cce4d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/117f1f20a7ade7bcea28b861fb79160a21a1e37b",
-                "reference": "117f1f20a7ade7bcea28b861fb79160a21a1e37b",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/133ac043875f59c26c55e79cf074562127cce4d2",
+                "reference": "133ac043875f59c26c55e79cf074562127cce4d2",
                 "shasum": ""
             },
             "require": {
@@ -6368,9 +6440,9 @@
                 "symfony/mime": "^5.4|^6.0|^7.0",
                 "symfony/rate-limiter": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-07-26T12:36:27+00:00",
+            "time": "2024-09-20T08:18:25+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\HttpFoundation\\": ""
@@ -6396,7 +6468,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v6.4.10"
+                "source": "https://github.com/symfony/http-foundation/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -6416,17 +6488,17 @@
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v6.4.11",
-            "version_normalized": "6.4.11.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "1ba6b89d781cb47448155cc70dd2e0f1b0584c79"
+                "reference": "96df83d51b5f78804f70c093b97310794fd6257b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/1ba6b89d781cb47448155cc70dd2e0f1b0584c79",
-                "reference": "1ba6b89d781cb47448155cc70dd2e0f1b0584c79",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/96df83d51b5f78804f70c093b97310794fd6257b",
+                "reference": "96df83d51b5f78804f70c093b97310794fd6257b",
                 "shasum": ""
             },
             "require": {
@@ -6485,9 +6557,9 @@
                 "symfony/var-exporter": "^6.2|^7.0",
                 "twig/twig": "^2.13|^3.0.4"
             },
-            "time": "2024-08-30T16:57:20+00:00",
+            "time": "2024-09-21T06:02:57+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\HttpKernel\\": ""
@@ -6513,7 +6585,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-kernel/tree/v6.4.11"
+                "source": "https://github.com/symfony/http-kernel/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -6533,17 +6605,17 @@
         },
         {
             "name": "symfony/mailer",
-            "version": "v6.4.9",
-            "version_normalized": "6.4.9.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mailer.git",
-                "reference": "e2d56f180f5b8c5e7c0fbea872bb1f529b6d6d45"
+                "reference": "b6a25408c569ae2366b3f663a4edad19420a9c26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mailer/zipball/e2d56f180f5b8c5e7c0fbea872bb1f529b6d6d45",
-                "reference": "e2d56f180f5b8c5e7c0fbea872bb1f529b6d6d45",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/b6a25408c569ae2366b3f663a4edad19420a9c26",
+                "reference": "b6a25408c569ae2366b3f663a4edad19420a9c26",
                 "shasum": ""
             },
             "require": {
@@ -6568,9 +6640,9 @@
                 "symfony/messenger": "^6.2|^7.0",
                 "symfony/twig-bridge": "^6.2|^7.0"
             },
-            "time": "2024-06-28T07:59:05+00:00",
+            "time": "2024-09-08T12:30:05+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Mailer\\": ""
@@ -6596,7 +6668,7 @@
             "description": "Helps sending emails",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/mailer/tree/v6.4.9"
+                "source": "https://github.com/symfony/mailer/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -6616,17 +6688,17 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v6.4.11",
-            "version_normalized": "6.4.11.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "dba5d5f6073baf7a3576b580cc4a208b4ca00553"
+                "reference": "abe16ee7790b16aa525877419deb0f113953f0e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/dba5d5f6073baf7a3576b580cc4a208b4ca00553",
-                "reference": "dba5d5f6073baf7a3576b580cc4a208b4ca00553",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/abe16ee7790b16aa525877419deb0f113953f0e1",
+                "reference": "abe16ee7790b16aa525877419deb0f113953f0e1",
                 "shasum": ""
             },
             "require": {
@@ -6652,9 +6724,9 @@
                 "symfony/property-info": "^5.4|^6.0|^7.0",
                 "symfony/serializer": "^6.4.3|^7.0.3"
             },
-            "time": "2024-08-13T12:15:02+00:00",
+            "time": "2024-09-20T08:18:25+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Mime\\": ""
@@ -6684,7 +6756,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v6.4.11"
+                "source": "https://github.com/symfony/mime/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -6734,7 +6806,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -6813,7 +6885,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -6895,7 +6967,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -6980,7 +7052,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7067,7 +7139,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7144,7 +7216,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7227,7 +7299,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7312,7 +7384,7 @@
                     "url": "https://github.com/symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -7364,25 +7436,25 @@
         },
         {
             "name": "symfony/process",
-            "version": "v6.4.8",
-            "version_normalized": "6.4.8.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "8d92dd79149f29e89ee0f480254db595f6a6a2c5"
+                "reference": "3f94e5f13ff58df371a7ead461b6e8068900fbb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/8d92dd79149f29e89ee0f480254db595f6a6a2c5",
-                "reference": "8d92dd79149f29e89ee0f480254db595f6a6a2c5",
+                "url": "https://api.github.com/repos/symfony/process/zipball/3f94e5f13ff58df371a7ead461b6e8068900fbb3",
+                "reference": "3f94e5f13ff58df371a7ead461b6e8068900fbb3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1"
             },
-            "time": "2024-05-31T14:49:08+00:00",
+            "time": "2024-09-17T12:47:12+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Process\\": ""
@@ -7408,7 +7480,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v6.4.8"
+                "source": "https://github.com/symfony/process/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -7428,17 +7500,17 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v6.4.11",
-            "version_normalized": "6.4.11.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "8ee0c24c1bf61c263a26f1b9b6d19e83b1121f2a"
+                "reference": "a7c8036bd159486228dc9be3e846a00a0dda9f9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/8ee0c24c1bf61c263a26f1b9b6d19e83b1121f2a",
-                "reference": "8ee0c24c1bf61c263a26f1b9b6d19e83b1121f2a",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/a7c8036bd159486228dc9be3e846a00a0dda9f9f",
+                "reference": "a7c8036bd159486228dc9be3e846a00a0dda9f9f",
                 "shasum": ""
             },
             "require": {
@@ -7460,9 +7532,9 @@
                 "symfony/http-foundation": "^5.4|^6.0|^7.0",
                 "symfony/yaml": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-08-29T08:15:38+00:00",
+            "time": "2024-09-20T08:32:26+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Routing\\": ""
@@ -7494,7 +7566,7 @@
                 "url"
             ],
             "support": {
-                "source": "https://github.com/symfony/routing/tree/v6.4.11"
+                "source": "https://github.com/symfony/routing/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -7546,7 +7618,7 @@
                     "url": "https://github.com/symfony/contracts"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\Service\\": ""
@@ -7600,17 +7672,17 @@
         },
         {
             "name": "symfony/string",
-            "version": "v6.4.11",
-            "version_normalized": "6.4.11.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "5bc3eb632cf9c8dbfd6529d89be9950d1518883b"
+                "reference": "f8a1ccebd0997e16112dfecfd74220b78e5b284b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/5bc3eb632cf9c8dbfd6529d89be9950d1518883b",
-                "reference": "5bc3eb632cf9c8dbfd6529d89be9950d1518883b",
+                "url": "https://api.github.com/repos/symfony/string/zipball/f8a1ccebd0997e16112dfecfd74220b78e5b284b",
+                "reference": "f8a1ccebd0997e16112dfecfd74220b78e5b284b",
                 "shasum": ""
             },
             "require": {
@@ -7630,9 +7702,9 @@
                 "symfony/translation-contracts": "^2.5|^3.0",
                 "symfony/var-exporter": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-08-12T09:55:28+00:00",
+            "time": "2024-09-20T08:15:52+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "Resources/functions.php"
@@ -7669,7 +7741,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v6.4.11"
+                "source": "https://github.com/symfony/string/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -7689,17 +7761,17 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v6.4.10",
-            "version_normalized": "6.4.10.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "94041203f8ac200ae9e7c6a18fa6137814ccecc9"
+                "reference": "cf8360b8352b086be620fae8342c4d96e391a489"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/94041203f8ac200ae9e7c6a18fa6137814ccecc9",
-                "reference": "94041203f8ac200ae9e7c6a18fa6137814ccecc9",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/cf8360b8352b086be620fae8342c4d96e391a489",
+                "reference": "cf8360b8352b086be620fae8342c4d96e391a489",
                 "shasum": ""
             },
             "require": {
@@ -7736,9 +7808,9 @@
                 "symfony/service-contracts": "^2.5|^3",
                 "symfony/yaml": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-07-26T12:30:32+00:00",
+            "time": "2024-09-16T06:02:54+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "Resources/functions.php"
@@ -7767,7 +7839,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v6.4.10"
+                "source": "https://github.com/symfony/translation/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -7814,7 +7886,7 @@
                     "url": "https://github.com/symfony/contracts"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\Translation\\": ""
@@ -7868,17 +7940,17 @@
         },
         {
             "name": "symfony/uid",
-            "version": "v6.4.11",
-            "version_normalized": "6.4.11.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/uid.git",
-                "reference": "6a0394ad707de386547223948fac1e0f2805bc0b"
+                "reference": "2f16054e0a9b194b8ca581d4a64eee3f7d4a9d4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/uid/zipball/6a0394ad707de386547223948fac1e0f2805bc0b",
-                "reference": "6a0394ad707de386547223948fac1e0f2805bc0b",
+                "url": "https://api.github.com/repos/symfony/uid/zipball/2f16054e0a9b194b8ca581d4a64eee3f7d4a9d4d",
+                "reference": "2f16054e0a9b194b8ca581d4a64eee3f7d4a9d4d",
                 "shasum": ""
             },
             "require": {
@@ -7888,9 +7960,9 @@
             "require-dev": {
                 "symfony/console": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-08-12T09:55:28+00:00",
+            "time": "2024-09-20T08:32:26+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Uid\\": ""
@@ -7925,7 +7997,7 @@
                 "uuid"
             ],
             "support": {
-                "source": "https://github.com/symfony/uid/tree/v6.4.11"
+                "source": "https://github.com/symfony/uid/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -7980,7 +8052,7 @@
                 "Resources/bin/var-dump-server"
             ],
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "Resources/functions/dump.php"
@@ -8033,17 +8105,17 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v6.4.11",
-            "version_normalized": "6.4.11.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "be37e7f13195e05ab84ca5269365591edd240335"
+                "reference": "762ee56b2649659380e0ef4d592d807bc17b7971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/be37e7f13195e05ab84ca5269365591edd240335",
-                "reference": "be37e7f13195e05ab84ca5269365591edd240335",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/762ee56b2649659380e0ef4d592d807bc17b7971",
+                "reference": "762ee56b2649659380e0ef4d592d807bc17b7971",
                 "shasum": ""
             },
             "require": {
@@ -8057,12 +8129,12 @@
             "require-dev": {
                 "symfony/console": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-08-12T09:55:28+00:00",
+            "time": "2024-09-17T12:47:12+00:00",
             "bin": [
                 "Resources/bin/yaml-lint"
             ],
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Yaml\\": ""
@@ -8088,7 +8160,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v6.4.11"
+                "source": "https://github.com/symfony/yaml/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -8129,7 +8201,7 @@
             },
             "time": "2024-03-03T12:36:25+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/"
@@ -8190,7 +8262,7 @@
                     "dev-master": "2.2.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "TijsVerkoyen\\CssToInlineStyles\\": "src"
@@ -8258,7 +8330,7 @@
                     "dev-master": "5.6-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Dotenv\\": "src/"
@@ -8328,7 +8400,7 @@
             },
             "time": "2022-03-08T17:03:00+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "voku\\": "src/voku/"
@@ -8412,7 +8484,7 @@
                     "dev-master": "1.10-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Webmozart\\Assert\\": "src/"

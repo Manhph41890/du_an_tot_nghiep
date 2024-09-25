@@ -5,17 +5,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DanhMucController;
-
-use App\Http\Controllers\SanPhamController;
-use App\Http\Controllers\KhuyenMaiController;
-use App\Http\Controllers\StaffController;
-
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Models\phuong_thuc_thanh_toan;
 
-
-
-
+use App\Http\Controllers\KhuyenMaiController;
+use App\Http\Controllers\SanPhamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,43 +22,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//check
-// Route::get('/admin', function () {return view('admin.home');})->name('admin.home');
-// Route::get('/khachhang', function () {return view('welcome');})->name('khach_hang.home');
 
-
-
-
-
-
-
-// Route::resource('/auth', AuthController::class);
-
-
-// login
-Route::get('/auth/login', [AuthController::class, 'showFormLogin'])->name('auth.login');
-Route::post('/auth/login', [AuthController::class, 'login']);
-Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
-
-// register
-Route::get('/auth/register', [AuthController::class, 'showFormRegister'])->name('auth.register');
-Route::post('/auth/register', [AuthController::class, 'register']);
-
-//pham qu
-Route::middleware(['role:admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.home');
-    Route::resource('/danhmucs', DanhMucController::class);
-    Route::resource('/sanphams', SanPhamController::class);
-    Route::resource('/chucvus', ChucVuController::class);
-    Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
-    Route::resource('/khuyenmais', KhuyenMaiController::class);
+Route::get('/', function () {
+    return view('admin.home');
 });
 
+Route::resource('/danhmucs', DanhMucController::class);
+Route::resource('/sanphams', SanPhamController::class);
+Route::resource('/chucvus', ChucVuController::class);
+Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
 
-Route::middleware(['role:nhan_vien'])->group(function () {
-    Route::get('/staff', [StaffController::class, 'index'])->name('admin.home');
-});
+Route::resource('/khuyenmais', KhuyenMaiController::class);
 
-Route::middleware(['role:khach_hang'])->group(function () {
-    Route::get('/customer', [CustomerController::class, 'index'])->name('welcome');
-});
+Route::resource('/khuyenmais', KhuyenMaiController::class);

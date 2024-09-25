@@ -4,7 +4,11 @@
 
 namespace Composer\Autoload;
 
+<<<<<<< HEAD
 class ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c
+=======
+class ComposerStaticInita19c826807f71a4d5579f7de4382a77b
+>>>>>>> origin/duc_anh
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -315,8 +319,8 @@ class ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
-            1 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
+            0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
+            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
         ),
         'Spatie\\Ignition\\' => 
         array (
@@ -552,6 +556,7 @@ class ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c
         'App\\Http\\Controllers\\PhuongThucThanhToanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhuongThucThanhToanController.php',
         'App\\Http\\Controllers\\PhuongThucVanChuyenController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhuongThucVanChuyenController.php',
         'App\\Http\\Controllers\\SanPhamController' => __DIR__ . '/../..' . '/app/Http/Controllers/SanPhamController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -6798,9 +6803,15 @@ class ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+<<<<<<< HEAD
             $loader->prefixLengthsPsr4 = ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c::$classMap;
+=======
+            $loader->prefixLengthsPsr4 = ComposerStaticInita19c826807f71a4d5579f7de4382a77b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita19c826807f71a4d5579f7de4382a77b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInita19c826807f71a4d5579f7de4382a77b::$classMap;
+>>>>>>> origin/duc_anh
 
         }, null, ClassLoader::class);
     }

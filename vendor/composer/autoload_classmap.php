@@ -18,6 +18,7 @@ return array(
     'App\\Http\\Controllers\\PhuongThucThanhToanController' => $baseDir . '/app/Http/Controllers/PhuongThucThanhToanController.php',
     'App\\Http\\Controllers\\PhuongThucVanChuyenController' => $baseDir . '/app/Http/Controllers/PhuongThucVanChuyenController.php',
     'App\\Http\\Controllers\\SanPhamController' => $baseDir . '/app/Http/Controllers/SanPhamController.php',
+    'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

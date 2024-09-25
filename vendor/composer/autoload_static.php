@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c
+class ComposerStaticInit0d0270a8f43d78f29ba200459cb5c742
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -552,6 +552,7 @@ class ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c
         'App\\Http\\Controllers\\PhuongThucThanhToanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhuongThucThanhToanController.php',
         'App\\Http\\Controllers\\PhuongThucVanChuyenController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhuongThucVanChuyenController.php',
         'App\\Http\\Controllers\\SanPhamController' => __DIR__ . '/../..' . '/app/Http/Controllers/SanPhamController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -621,6 +622,7 @@ class ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Providers\\TelescopeServiceProvider' => __DIR__ . '/../..' . '/app/Providers/TelescopeServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
@@ -6798,9 +6800,9 @@ class ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit74d1638e5c589cb9b0dbdb0c1b44be6c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0d0270a8f43d78f29ba200459cb5c742::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0d0270a8f43d78f29ba200459cb5c742::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit0d0270a8f43d78f29ba200459cb5c742::$classMap;
 
         }, null, ClassLoader::class);
     }

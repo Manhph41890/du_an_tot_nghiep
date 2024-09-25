@@ -34,19 +34,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::resource('/danhmucs', DanhMucController::class);
-Route::resource('/sanphams', SanPhamController::class);
 
 
-Route::get('/', function () {
-    return view('admin.home');
-});
-
-Route::resource('/danhmucs', DanhMucController::class);
-Route::resource('/sanphams', SanPhamController::class);
-Route::resource('/chucvus', ChucVuController::class);
-Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
-Route::resource('/khuyenmais', KhuyenMaiController::class);
 
 
 // Route::resource('/auth', AuthController::class);
@@ -64,12 +53,17 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 //pham qu
 Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.home');
+    Route::resource('/danhmucs', DanhMucController::class);
+    Route::resource('/sanphams', SanPhamController::class);
+    Route::resource('/chucvus', ChucVuController::class);
+    Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
+    Route::resource('/khuyenmais', KhuyenMaiController::class);
 });
 
 
-// Route::middleware(['role:nhan_vien'])->group(function () {
-//     Route::get('/staff', [StaffController::class, 'index'])->name('admin.home');
-// });
+Route::middleware(['role:nhan_vien'])->group(function () {
+    Route::get('/staff', [StaffController::class, 'index'])->name('admin.home');
+});
 
 Route::middleware(['role:khach_hang'])->group(function () {
     Route::get('/customer', [CustomerController::class, 'index'])->name('welcome');

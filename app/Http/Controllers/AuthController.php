@@ -28,7 +28,6 @@ class AuthController extends Controller
                 'so_dien_thoai' => 'required|string|max:10|unique:users',
                 'password' => 'required|string|min:8|confirmed',
             ],
-
             [
                 'ho_ten.required' => 'Họ tên không được để trống',
                 'ho_ten.max' => 'Họ tên không được quá 255 ký tự',
@@ -108,14 +107,11 @@ class AuthController extends Controller
                     return redirect()->route('admin.home')->with('success', 'Đăng nhập thành công');
                 case 'khach_hang':
                     return redirect()->route('welcome')->with('success', 'Đăng nhập thành công');
-                    // case 'thanh_vien':
-                    //     return redirect()->route('welcome')->with('success', 'Đăng nhập thành công');
                 default:
                     Auth::logout();
                     return redirect()->route('login')->withErrors(['error' => 'Chức vụ không tồn tại']);
             }
         }
-
 
         return redirect()->back()->withErrors([
             'email' => 'Email hoặc mật khẩu không đúng',

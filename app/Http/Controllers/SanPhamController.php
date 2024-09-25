@@ -129,19 +129,25 @@ class SanPhamController extends Controller
     public function edit(san_pham $san_pham, $id)
     {
         // Tìm sản phẩm theo ID
-        $product = san_pham::findOrFail($id);
+        $product = san_pham::with('bien_the_san_phams')->findOrFail($id); // Kéo theo biến thể
+
         $danh_mucs = danh_muc::pluck('ten_danh_muc', 'id');
         $sizes = size_san_pham::pluck('ten_size', 'id')->all(); // Lấy tên size và id
         $colors = color_san_pham::pluck('ten_color', 'id')->all(); // Lấy tên color và id
+
         // Truyền dữ liệu sản phẩm tới view
         return view('admin.sanpham.edit', compact('product', 'danh_mucs', 'sizes', 'colors'));
     }
+
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Updatesan_phamRequest $request, $id)
     {
+        dd($request->all()); // Kiểm tra dữ liệu gửi từ form
+
         DB::beginTransaction();
         try {
             // Tìm sản phẩm cần cập nhật

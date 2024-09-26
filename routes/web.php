@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChucVuController;
+use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\PhuongThucThanhToanController;
@@ -31,3 +32,4 @@ Route::resource('/khuyenmais', KhuyenMaiController::class);
 Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
 Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
 Route::get('user', [UserController::class, 'index'])->name('user.index');
+Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');

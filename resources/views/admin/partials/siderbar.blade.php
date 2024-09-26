@@ -277,6 +277,21 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#danhgia" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> Đánh giá </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="danhgia">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class='tp-link' href='{{ route('danhgia.index') }}'>Danh sách</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title mt-2">General</li>
 
                 <li>

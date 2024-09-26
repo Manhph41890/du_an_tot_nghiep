@@ -31,8 +31,9 @@ class Storesan_phamRequest extends FormRequest
             'anh_san_pham' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
 
             'is_active' => [Rule::in([0, 1])],
-            'product_variants.*.color' => 'required|string',
-            'product_variants.*.size' => 'required|string',
+            'product_variants.*.color' => 'nullable', // Cho phép null
+            'product_variants.*.size' => 'nullable',
+            'product_variants.*.so_luong' => 'nullable',
             'product_variants.*.anh_bien_the' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
 
 

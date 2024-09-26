@@ -13,7 +13,9 @@ class DanhGiaController extends Controller
      */
     public function index()
     {
-        //
+        $params = [];
+        $params['list'] = danh_gia::all();
+        return view('admin.danhgia.index', $params);
     }
 
     /**

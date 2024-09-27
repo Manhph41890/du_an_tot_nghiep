@@ -55,9 +55,8 @@
 
                                         <div class="mb-3">
                                             <label for="user_id" class="form-label">Tác giả</label>
-                                            <select class="form-select" name="user_id" id="user_id" required>
+                                            <select class="form-select" name="user_id" id="user_id">
                                                 @foreach ($user as $id => $ho_ten)
-                                                    <option value="0"></option>
                                                     <option value="{{ $id }}">{{ $ho_ten }}</option>
                                                 @endforeach
                                             </select>

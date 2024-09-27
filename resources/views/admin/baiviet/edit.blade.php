@@ -27,7 +27,7 @@
                             </div><!-- end card header -->
 
                             <div class="card-body">
-                                <form action="{{ route('baiviets.update', $bai_viet->id) }}" method="POST"
+                                <form action="{{ route('baiviets.update', $post->id) }}" method="POST"
                                     enctype="multipart/form-data">
 
                                     @csrf
@@ -39,54 +39,53 @@
 
                                     <div class="form-group mb-3">
                                         <label for="tieu_de_bai_viet">Tiêu đề bài viết</label>
-                                        <input type="text" name="tieu_de_bai_viet"
-                                            value="{{ $bai_viet->tieu_de_bai_viet }}" class="form-control">
+                                        <input type="text" name="tieu_de_bai_viet" value="{{ $post->tieu_de_bai_viet }}"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label for="noi_dung">Nội dung</label>
-                                        <textarea type="text" name="noi_dung" class="form-control">{{ $noi_dung }}</textarea>
+                                        <textarea type="text" name="noi_dung" class="form-control">{{ $post->noi_dung }}</textarea>
 
-                                        {{-- <div class="mb-3">
+                                        <div class="mb-3">
                                             <label for="user_id" class="form-label">Tác giả</label>
                                             <select class="form-select" name="user_id" id="user_id">
                                                 @foreach ($user as $id => $ho_ten)
-                                                    <option value="0"></option>
-                                                    <option value="{{ $bai_viet->id }}">{{ $ho_ten }}</option>
+                                                    <option value="{{ $id }}"
+                                                        {{ $id == $post->user_id ? 'selected' : '' }}>
+                                                        {{ $ho_ten }} </option>
                                                 @endforeach
                                             </select>
-                                        </div> --}}
+                                        </div>
 
                                         <div class="form-group  mb-3">
                                             <label for="ngay_dang">Ngày Đăng:</label>
-                                            <input type="date" name="ngay_dang" value="{{ $bai_viet->ngay_dang }}"
+                                            <input type="date" name="ngay_dang" value="{{ $post->ngay_dang }}"
                                                 class="form-control">
                                         </div>
-                                        {{--
+
                                         <div class="mb-3">
                                             <label for="is_active" class="form-label">Trạng thái</label>
                                             <div class="col-sm-10 mb-3 d-flex gap-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="is_active"
                                                         id="trang_thai_show" value="0"
-                                                        {{ old('is_active', $baiviets->is_active) == '0' ? 'checked' : ' }}>
-                                                    <label class="form-check-label text-success" for="trang_thai_show">Hiển
+                                                        {{ old('is_active', $post->is_active) == '0' ? 'checked' : ' ?>' }}>
+                                                    <label
+                                                        class="form-check-label
+                                                        text-success"
+                                                        for="trang_thai_show">Hiển
                                                         thị</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="is_active"
                                                         id="trang_thai_hide" value="1"
-                                                        {{ old('is_active', $baiviets->is_active) == '1' ? 'checked' : '' }}>
+                                                        {{ old('is_active', $post->is_active) == '1' ? 'checked' : '' }}>
                                                     <label class="form-check-label text-danger"
                                                         for="trang_thai_hide">Ẩn</label>
                                                 </div>
-                                                @error('is_active')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
                                             </div>
-                                        </div> --}}
+                                        </div>
 
                                         <button type="submit" class="btn btn-primary">Cập nhật</button>
                                 </form>

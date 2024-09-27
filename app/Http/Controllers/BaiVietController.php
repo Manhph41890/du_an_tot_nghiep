@@ -66,8 +66,10 @@ class BaiVietController extends Controller
         // dd($request->all());
         DB::beginTransaction();
         try {
+            // Lấy toàn bộ dữ liệu từ form dưới dạng mảng
             $data_bai_viet = $request->all();
 
+            // Xử lý upload file hình ảnh bài viếts
             if ($request->hasFile('anh_bai_viet')) {
                 $file = $request->file('anh_bai_viet');
                 if ($file->isValid()) {
@@ -78,13 +80,17 @@ class BaiVietController extends Controller
                 }
             }
 
-            $baiviet = bai_viet::create($data_bai_viet);
+            // Tạo bản ghi mới trong bảng bai_viet
+            bai_viet::create($data_bai_viet);
+
             DB::commit();
-            return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được thêm thành công.');
+            return redirect()->route('baiviets.index')->with('success', 'Sản phẩm đã được thêm thành công.');
         } catch (\Throwable $th) {
-            //throw $th;
+            DB::rollBack();
+            return back()->with('error', 'Đã xảy ra lỗi khi thêm sản phẩm.');
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -97,11 +103,13 @@ class BaiVietController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(bai_viet $bai_viet)
+    public function edit(bai_viet $bai_viet, $id)
     {
+        //Tim bai viet theo id
+        $post = bai_viet::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
         $title = "Sua mới sản phẩm";
-        return view('admin.baiviet.edit', compact('bai_viet', 'user', 'title'));
+        return view('admin.baiviet.edit', compact('post', 'user', 'title'));
     }
 
     /**

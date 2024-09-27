@@ -11,9 +11,11 @@ class bai_viet extends Model
     protected $fillable =
     [
         'tieu_de_bai_viet',
-        'anh_bai_viet',
+        'noi_dung',
+        'user_id',
         'ngay_dang',
-        'noi_dung'
+        'is_active',
+        'anh_bai_viet'
     ];
 
     public function user()

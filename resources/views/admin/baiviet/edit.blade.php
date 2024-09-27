@@ -35,6 +35,16 @@
                                     <div class="mb-3">
                                         <label for="anh_bai_viet" class="form-label">Hình ảnh bài viết </label>
                                         <input type="file" id="anh_bai_viet" name="anh_bai_viet" class="form-control">
+                                        <div class="mt-2">
+                                            @if ($post->anh_bai_viet)
+                                                <img id="imagePreview" src="{{ asset('storage/' . $post->anh_bai_viet) }}"
+                                                    alt="Hình ảnh" style="width: 200px;">
+                                            @else
+                                                <img id="imagePreview" src="#" alt="Hình ảnh"
+                                                    style="display: none; width: 200px;">
+                                            @endif
+                                        </div>
+
                                     </div>
 
                                     <div class="form-group mb-3">

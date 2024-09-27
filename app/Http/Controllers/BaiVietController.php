@@ -84,10 +84,10 @@ class BaiVietController extends Controller
             bai_viet::create($data_bai_viet);
 
             DB::commit();
-            return redirect()->route('baiviets.index')->with('success', 'Sản phẩm đã được thêm thành công.');
+            return redirect()->route('baiviets.index')->with('success', 'Bai viet đã được thêm thành công.');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Đã xảy ra lỗi khi thêm sản phẩm.');
+            return back()->with('error', 'Đã xảy ra lỗi khi thêm bai viet.');
         }
     }
 
@@ -115,28 +115,36 @@ class BaiVietController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatebai_vietRequest $request, bai_viet $bai_viet)
+    public function update(Updatebai_vietRequest $request, $id)
     {
-        dd($request->all());
-        // try {
-        //     DB::transaction(function () use ($request, $bai_viet) {
-        //         $data_bai_viets = [
-        //             'user_id' => $request->user_id,
-        //             'tieu_de_bai_viet' => $request->tieu_de_bai_viet,
-        //             'noi_dung' => $request->noi_dung,
-        //             'is_active' => $request->is_active,
-        //         ];
-        //         if ($request->hasFile('anh_bai_viet')) {
-        //             $data_bai_viets[] = Storage::put('baiviets', $request->file('anh_bai_viet'));
-        //         }
+        // dd($request->all());
+        DB::beginTransaction();
+        try {
+            $post = bai_viet::findOrFail($id);
 
-        //         $bai_viet->update($data_bai_viets);
+            // Lấy toàn bộ dữ liệu từ form dưới dạng mảng
+            $data_bai_viet = $request->all();
 
-        //         return back()->with('success', 'Thao tac thanh cong');
-        //     });
-        // } catch (\Throwable $th) {
-        //     return back()->with('error', $th->getMessage());
-        // }
+            // Xử lý upload file hình ảnh bài viếts
+            if ($request->hasFile('anh_bai_viet')) {
+                $file = $request->file('anh_bai_viet');
+                if ($file->isValid()) {
+                    $filename = time() . '_' . $file->getClientOriginalName();
+                    $data_bai_viet['anh_bai_viet'] = $file->storeAs('baiviets', $filename, 'public');
+                } else {
+                    return back()->withErrors(['anh_bai_viet' => 'File không hợp lệ']);
+                }
+            }
+
+            // Tạo bản ghi mới trong bảng bai_viet
+            $post->update($data_bai_viet);
+
+            DB::commit();
+            return redirect()->route('baiviets.index')->with('success', 'Bai viet đã được cập nhật thành công.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', 'Đã xảy ra lỗi khi thêm bai viet.');
+        }
     }
 
     /**

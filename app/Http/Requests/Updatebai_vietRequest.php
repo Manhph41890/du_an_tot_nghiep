@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class Updatebai_vietRequest extends FormRequest
 {
@@ -22,10 +23,10 @@ class Updatebai_vietRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|Rule::exists:users,id',
+            'user_id' => 'required|' . Rule::exists('users', 'id'),
             'tieu_de_bai_viet' => 'required|string|max:255',
             'ngay_dang' => 'required|date',
-            'noi_dung' => 'requied|string|max:200',
+            'noi_dung' => 'required|string|max:200',
             'anh_bai_viet' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active' => 'required|boolean',
         ];

@@ -15,4 +15,9 @@ class bai_viet extends Model
         'ngay_dang',
         'noi_dung'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

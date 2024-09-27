@@ -5,15 +5,47 @@ namespace App\Http\Controllers;
 use App\Models\bai_viet;
 use App\Http\Requests\Storebai_vietRequest;
 use App\Http\Requests\Updatebai_vietRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BaiVietController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(request $request)
     {
-        //
+        $user = User::query()->get();
+        $query = bai_viet::query();
+
+        // search theo trạng thái
+        if ($request->has('search_bv')) {
+            $is_active = $request->input('search_bv');
+            if ($is_active == '1' || $is_active == '0') {
+                $query->where('is_active', $is_active);
+            }
+        }
+
+        // search theo tac gia
+        if ($request->has('search_bv_tg')) {
+            $tg = $request->input('search_bv_tg');
+            if ($tg) {
+                $query->where('user_id', $tg);
+            }
+        }
+
+        // search form input
+        if ($request->has('search_bv_td')) {
+            $query->where('tieu_de_bai_viet', 'LIKE', "%{$request->input('search_bv_td')}%");
+        }
+
+        $baiviets = $query->with('user')->latest('id')->paginate(5);
+
+        $title = "Danh sách bài viết";
+
+        return view('admin.baiviet.index', compact('user', 'baiviets', 'title'));
     }
 
     /**
@@ -21,7 +53,9 @@ class BaiVietController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::query()->pluck('ho_ten', 'id')->all();
+        $title = "Thêm mới sản phẩm";
+        return view('admin.baiviet.create', compact('user', 'title'));
     }
 
     /**
@@ -29,7 +63,27 @@ class BaiVietController extends Controller
      */
     public function store(Storebai_vietRequest $request)
     {
-        //
+        // dd($request->all());
+        DB::beginTransaction();
+        try {
+            $data_bai_viet = $request->all();
+
+            if ($request->hasFile('anh_bai_viet')) {
+                $file = $request->file('anh_bai_viet');
+                if ($file->isValid()) {
+                    $filename = time() . '_' . $file->getClientOriginalName();
+                    $data_bai_viet['anh_bai_viet'] = $file->storeAs('baiviets', $filename, 'public');
+                } else {
+                    return back()->withErrors(['anh_bai_viet' => 'File không hợp lệ']);
+                }
+            }
+
+            $baiviet = bai_viet::create($data_bai_viet);
+            DB::commit();
+            return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được thêm thành công.');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -45,7 +99,9 @@ class BaiVietController extends Controller
      */
     public function edit(bai_viet $bai_viet)
     {
-        //
+        $user = User::query()->pluck('ho_ten', 'id')->all();
+        $title = "Sua mới sản phẩm";
+        return view('admin.baiviet.edit', compact('bai_viet', 'user', 'title'));
     }
 
     /**
@@ -53,7 +109,26 @@ class BaiVietController extends Controller
      */
     public function update(Updatebai_vietRequest $request, bai_viet $bai_viet)
     {
-        //
+        dd($request->all());
+        // try {
+        //     DB::transaction(function () use ($request, $bai_viet) {
+        //         $data_bai_viets = [
+        //             'user_id' => $request->user_id,
+        //             'tieu_de_bai_viet' => $request->tieu_de_bai_viet,
+        //             'noi_dung' => $request->noi_dung,
+        //             'is_active' => $request->is_active,
+        //         ];
+        //         if ($request->hasFile('anh_bai_viet')) {
+        //             $data_bai_viets[] = Storage::put('baiviets', $request->file('anh_bai_viet'));
+        //         }
+
+        //         $bai_viet->update($data_bai_viets);
+
+        //         return back()->with('success', 'Thao tac thanh cong');
+        //     });
+        // } catch (\Throwable $th) {
+        //     return back()->with('error', $th->getMessage());
+        // }
     }
 
     /**

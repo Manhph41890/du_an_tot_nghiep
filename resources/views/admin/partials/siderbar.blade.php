@@ -220,7 +220,25 @@
                             <li>
                                 <a class='tp-link' href='{{ route('phuongthucthanhtoans.create') }}'>Thêm</a>
                             </li>
-                        
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> PT vận chuyển </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="phuongthucvanchuyen">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.index') }}'>Danh sách</a>
+                            </li>
+                            <li>
+                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.create') }}'>Thêm</a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>
@@ -239,6 +257,39 @@
                             </li>
                             <li>
                                 <a class='tp-link' href='{{ route('khuyenmais.index') }}'>Danh sách</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#user" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> User </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="user">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class='tp-link' href='{{ route('user.index') }}'>Danh sách</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#baiviet" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> Bài viết </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="baiviet">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class='tp-link' href='{{ route('baiviets.create') }}'>Thêm</a>
+                            </li>
+                            <li>
+                                <a class='tp-link' href='{{ route('baiviets.index') }}'>Danh sách</a>
                             </li>
                         </ul>
                     </div>

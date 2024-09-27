@@ -150,8 +150,24 @@ class BaiVietController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(bai_viet $bai_viet)
+    public function destroy($id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $post = bai_viet::findOrFail($id);
+
+            if ($post->anh_bai_viet) {
+                Storage::disk('public')->delete($post->anh_bai_viet);
+            }
+
+            $post->delete();
+
+            DB::commit();
+            return redirect()->route('baiviets.index')->with('success', 'Bài viết đã được xóa thành công.');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return back()->withErrors('Đã xảy ra loi khi xóa bài viết.');
+        }
     }
 }

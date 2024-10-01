@@ -22,7 +22,7 @@
                 <div class="col-xl-12">
                     <div class="card">
 
-                        <div class="card-header d-flex justify-content-between">
+                        <div class="d-flex justify-content-between">
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissable fade show " role="alert">

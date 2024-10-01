@@ -147,14 +147,17 @@
                                                                 <th>Số Lượng</th>
                                                                 <th>Image</th>
                                                             </tr>
-
                                                             @foreach ($sizes as $sizeID => $sizeName)
                                                                 @foreach ($colors as $colorID => $colorName)
                                                                     @php
                                                                         // Tìm biến thể đã lưu
-                                                                        $variant = $product->bien_the_san_phams
-                                                                            ->firstWhere('size_san_pham_id', $sizeID)
-                                                                            ->firstWhere('color_san_pham_id', $colorID);
+                                                                        $variant = $product->bien_the_san_phams->first(
+                                                                            function ($v) use ($sizeID, $colorID) {
+                                                                                return $v->size_san_pham_id ==
+                                                                                    $sizeID &&
+                                                                                    $v->color_san_pham_id == $colorID;
+                                                                            },
+                                                                        );
                                                                     @endphp
                                                                     <tr class="text-center">
                                                                         <td><b>{{ $sizeName }}</b></td>
@@ -162,7 +165,8 @@
                                                                         <td>
                                                                             <input type="number" class="form-control"
                                                                                 name="product_variants[{{ $sizeID . '-' . $colorID }}][so_luong]"
-                                                                                value="{{ $variant->so_luong ?? 0 }}">
+                                                                                value="{{ $variant->so_luong ?? 0 }}"
+                                                                                min="0">
                                                                         </td>
                                                                         <td>
                                                                             <input type="file" class="form-control"
@@ -182,6 +186,22 @@
                                                                     </tr>
                                                                 @endforeach
                                                             @endforeach
+
+
+                                                            {{-- @foreach ($product->bien_the_san_phams as $variant)
+                                                                <div class="variant">
+                                                                    <select
+                                                                        name="product_variants[{{ $variant->size_san_pham_id }}-{{ $variant->color_san_pham_id }}][so_luong]">
+                                                                        <option value="{{ $variant->so_luong }}">
+                                                                            {{ $variant->so_luong }}</option>
+                                                                    </select>
+                                                                    <input type="file"
+                                                                        name="product_variants[{{ $variant->size_san_pham_id }}-{{ $variant->color_san_pham_id }}][anh_bien_the]">
+                                                                    <img src="{{ asset('storage/' . $variant->anh_bien_the) }}"
+                                                                        alt="Variant Image">
+                                                                </div>
+                                                            @endforeach --}}
+
                                                         </table>
                                                     </div>
                                                 </div>
@@ -204,15 +224,13 @@
 
 @section('script')
     <script>
-        document.getElementById('anh_san_pham').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            const preview = document.getElementById('imagePreview');
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-        });
+        // Preview ảnh sản phẩm chính
+        document.getElementById("anh_san_pham").onchange = function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                document.getElementById("imagePreview").src = URL.createObjectURL(file);
+                document.getElementById("imagePreview").style.display = 'block';
+            }
+        };
     </script>
 @endsection

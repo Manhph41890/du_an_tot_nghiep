@@ -3,6 +3,7 @@
 use App\Http\Controllers\BaiVietController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChucVuController;
+use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\PhuongThucThanhToanController;
@@ -32,3 +33,4 @@ Route::resource('/baiviets', BaiVietController::class);
 Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
 Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
 Route::get('user', [UserController::class, 'index'])->name('user.index');
+Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');

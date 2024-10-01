@@ -11,7 +11,7 @@ class Updatebien_the_san_phamRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**

@@ -43,7 +43,21 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-7">
+                                <div class="col-3">
+                                    <form action="{{ route('khuyenmais.index') }}" method="POST" id="filter-form-km-sl">
+                                        @csrf
+                                        @method('GET')
+                                        <select class="form-select" name="filter-form-km-sl"
+                                            onchange="document.getElementById('filter-form-km-sl').submit();">
+                                            <option value="">Hiển thị tất cả</option>
+                                            <option value="0" {{ request('filter-form-km-sl') == '0' ? 'selected' : '' }}>Hiển
+                                                thị</option>
+                                            <option value="1" {{ request('filter-form-km-sl') == '1' ? 'selected' : '' }}>Ẩn
+                                            </option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="col-4">
                                     <!-- Hiển thị thông báo thành công -->
                                     @if (session('success'))
                                         <div class="alert alert-success alert-dismissable fade show " role="alert">

@@ -105,6 +105,30 @@
                                             </div>
                                         </div>
 
+
+                                        <div class="mb-3">
+                                            <label for="trang_thai" class="form-label">Trạng thái</label>
+                                            <div class="col-sm-10 mb-3 d-flex gap-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="is_active"
+                                                        id="trang_thai_show" value="1"
+                                                        {{ old('is_active') == 0 ? 'checked' : '' }}>
+                                                    <label class="form-check-label text-success"
+                                                        for="trang_thai_show">Hiển thị</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="is_active"
+                                                        id="trang_thai_hide" value="0"
+                                                        {{ old('is_active') == 1 ? 'checked' : '' }}>
+                                                    <label class="form-check-label text-danger"
+                                                        for="trang_thai_hide">Ẩn</label>
+                                                </div>
+                                                @error('is_active')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+
                                         <div class="mb-3 col-12">
                                             <label class="form-label">Trạng thái</label>
                                             <div class="form-check form-check-inline">
@@ -113,6 +137,7 @@
                                                     {{ old('is_active') == 1 ? 'checked' : '' }}>
                                                 <label class="form-check-label text-success" for="trang_thai_show">Hiển
                                                     thị</label>
+
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="is_active"

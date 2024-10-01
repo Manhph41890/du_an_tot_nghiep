@@ -23,8 +23,9 @@ class Storesan_phamRequest extends FormRequest
     public function rules(): array
     {
         return [
+
             'danh_muc_id' => ['required', Rule::exists('danh_mucs', 'id')],
-            'ten_san_pham' => 'required|max:255',
+            'ten_san_pham' => 'required|max:255|unique:san_phams,ten_san_pham',
             'gia_goc' => 'required|min:0',
             'gia_km' => 'required|min:0',
             'ma_ta_san_pham' => 'max:255',
@@ -35,8 +36,6 @@ class Storesan_phamRequest extends FormRequest
             'product_variants.*.size' => 'nullable',
             'product_variants.*.so_luong' => 'nullable',
             'product_variants.*.anh_bien_the' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
-
-
         ];
     }
 }

@@ -22,13 +22,12 @@ class Storedanh_mucRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            'ten_danh_muc' => 'required|max:255',
+            'ten_danh_muc' => 'required|max:255|unique:danh_mucs,ten_danh_muc',
             'anh_danh_muc' => 'required|image|mimes:jpg,png,jpeg,gif,webp',
             'is_active' => 'boolean|required',
-
         ];
     }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -38,14 +37,13 @@ class Storedanh_mucRequest extends FormRequest
     public function messages(): array
     {
         return [
-            //
-            'ten_danh_muc.required' => 'Tên danh mục là bắt buộc ',
-            'ten_danh_muc.max' => 'Tên danh mục không được vượt quá 255 ký tự ',
-
+            'ten_danh_muc.required' => 'Tên danh mục là bắt buộc',
+            'ten_danh_muc.max' => 'Tên danh mục không được vượt quá 255 ký tự',
+            'ten_danh_muc.unique' => 'Tên danh mục này đã tồn tại, vui lòng chọn tên khác',
 
             'anh_danh_muc.required' => 'Hình ảnh không hợp lệ',
             'anh_danh_muc.image' => 'Hình ảnh không hợp lệ',
-            'anh_danh_muc.mimes' => 'Hình ảnh phải là một trong các định dạng: jpg, png, jpeg, gif,webp',
+            'anh_danh_muc.mimes' => 'Hình ảnh phải là một trong các định dạng: jpg, png, jpeg, gif, webp',
         ];
     }
 }

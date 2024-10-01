@@ -2,11 +2,16 @@
 
 use App\Http\Controllers\BaiVietController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\DanhGiaController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DanhMucController;
-use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\PhuongThucThanhToanController;
+use App\Models\phuong_thuc_thanh_toan;
+
+use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\UserController;
@@ -22,7 +27,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('admin.home');
 });
 Route::resource('/danhmucs', DanhMucController::class);
@@ -34,3 +39,11 @@ Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
 Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
 Route::get('user', [UserController::class, 'index'])->name('user.index');
 Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+
+
+
+
+
+Route::get('/', function () {
+    return view('client.home');
+});

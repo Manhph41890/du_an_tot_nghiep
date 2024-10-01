@@ -3,7 +3,11 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => '558a12a05b92327a9a213aa2dde54a52ed63062e',
+=======
+        'reference' => '505ac0ac39030a0efefcf4494c0ffc3789699b21',
+>>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -382,7 +386,11 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => '558a12a05b92327a9a213aa2dde54a52ed63062e',
+=======
+            'reference' => '505ac0ac39030a0efefcf4494c0ffc3789699b21',
+>>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -407,9 +415,15 @@
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
+<<<<<<< HEAD
             'pretty_version' => 'v1.34.0',
             'version' => '1.34.0.0',
             'reference' => '511e9c95b0f3ee778dc9e11e242bcd2af8e002cd',
+=======
+            'pretty_version' => 'v1.33.0',
+            'version' => '1.33.0.0',
+            'reference' => 'd54af9d5745e3680d8a6463ffd9f314aa53eb2d1',
+>>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/sail',
             'aliases' => array(),
@@ -430,6 +444,15 @@
             'reference' => '1dc4a3dbfa2b7628a3114e43e32120cce7cdda9c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/serializable-closure',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'laravel/telescope' => array(
+            'pretty_version' => 'v5.2.2',
+            'version' => '5.2.2.0',
+            'reference' => 'daaf95dee9fab2dd80f59b5f6611c6c0eff44878',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/telescope',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -548,9 +571,15 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
+<<<<<<< HEAD
             'pretty_version' => 'v5.3.0',
             'version' => '5.3.0.0',
             'reference' => '3abf7425cd284141dc5d8d14a9ee444de3345d1a',
+=======
+            'pretty_version' => 'v5.2.0',
+            'version' => '5.2.0.0',
+            'reference' => '23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb',
+>>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),

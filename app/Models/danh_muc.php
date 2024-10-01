@@ -18,8 +18,4 @@ class danh_muc extends Model
     {
         return $this->hasMany(san_pham::class);
     }
-    public function san_pham()
-    {
-        return $this->hasOne(san_pham::class);
-    }
 }

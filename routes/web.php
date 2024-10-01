@@ -21,7 +21,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('admin.home');
 });
 Route::resource('/danhmucs', DanhMucController::class);
@@ -32,3 +32,11 @@ Route::resource('/baiviets', BaiVietController::class);
 Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
 Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
 Route::get('user', [UserController::class, 'index'])->name('user.index');
+
+
+
+
+
+Route::get('/', function () {
+    return view('client.home');
+});

@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DanhMucController;
-
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\StaffController;
@@ -39,7 +39,7 @@ Route::resource('/sanphams', SanPhamController::class);
 
 
 Route::get('/', function () {
-    return view('admin.home');
+    return view('welcome');
 });
 
 Route::resource('/danhmucs', DanhMucController::class);
@@ -51,7 +51,7 @@ Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
 Route::resource('/khuyenmais', KhuyenMaiController::class);
 
 
-// Route::resource('/auth', AuthController::class);
+// Route::resource('/auth', AuthController::class);phpb
 
 
 // login
@@ -64,13 +64,15 @@ Route::get('/auth/register', [AuthController::class, 'showFormRegister'])->name(
 Route::post('/auth/register', [AuthController::class, 'register']);
  
 // forgot password
-Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('auth.forgot_password');
-Route::post('forgot-password', [AuthController::class, 'sendResetLink'])->name('auth.email');
-Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('auth.reset_password');
-Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('auth.update_password');
-//mail 
-Route::get('verify-code', [AuthController::class, 'showVerifyCodeForm'])->name('auth.verify_code');
-Route::post('verify-code', [AuthController::class, 'verifyCode'])->name('auth.verifycode');
+Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('auth.forgot_password');
+Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('auth.email');
+//mã
+Route::get('verify-code', [ForgotPasswordController::class, 'showVerifyCodeForm'])->name('auth.verify_code');
+Route::post('verify-code', [ForgotPasswordController::class, 'verifyCode'])->name('auth.verifycode');
+//reset pass
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('auth.reset_password');
+Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('auth.update_password');
+
 
 //pham qu
 Route::middleware(['role:admin'])->group(function () {

@@ -11,7 +11,7 @@ class Storebai_vietRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**

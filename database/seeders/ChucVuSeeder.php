@@ -19,7 +19,7 @@ class ChucVuSeeder extends Seeder
         // for ($i = 0; $i < 10; $i++) {
             chuc_vu::query()->create([
                 'ten_chuc_vu' => $faker->name,
-                'mo_ta_chuc_vu' => $faker->randomElement(['quản trị', 'nhân viên']),
+                'mo_ta_chuc_vu' => $faker->randomElement(['khach_hang', 'nhan_vien']),
             ]);
         // }
     }

@@ -170,7 +170,7 @@
                          role="button" aria-haspopup="false" aria-expanded="false">
                          <img src="assets/images/users/user-11.jpg" alt="user-image" class="rounded-circle">
                          <span class="pro-user-name ms-1">
-                             Christian <i class="mdi mdi-chevron-down"></i>
+                             {{ Auth::user()->ho_ten }}<i class="mdi mdi-chevron-down"></i>
                          </span>
                      </a>
                      <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -194,7 +194,7 @@
                          <div class="dropdown-divider"></div>
 
                          <!-- item-->
-                         <a class='dropdown-item notify-item' href='auth-logout.html'>
+                         <a class='dropdown-item notify-item' href='{{ route('auth.logout') }}'>
                              <i class="mdi mdi-location-exit fs-16 align-middle"></i>
                              <span>Logout</span>
                          </a>

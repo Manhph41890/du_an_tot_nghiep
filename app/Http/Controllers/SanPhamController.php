@@ -51,6 +51,7 @@ class SanPhamController extends Controller
         // dd($data);
         $title = 'Danh Sách Sản Phẩm';
         return view('admin.sanpham.index', compact('data', 'title', 'danhmucs'));
+        //
     }
 
     /**
@@ -58,13 +59,12 @@ class SanPhamController extends Controller
      */
     public function create()
     {
-        $danh_mucs = danh_muc::query()->pluck('ten_danh_muc', 'id')->all();
-        $sizes = size_san_pham::pluck('ten_size', 'id')->all(); // Lấy tên size và id
-        $colors = color_san_pham::pluck('ten_color', 'id')->all(); // Lấy tên color và id
-        $title = "Thêm mới sản phẩm";
-        return view('admin.sanpham.create', compact('danh_mucs', 'colors', 'sizes', 'title'));
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Storesan_phamRequest $request)
     {
         DB::beginTransaction();
@@ -258,33 +258,8 @@ class SanPhamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(san_pham $san_pham)
     {
-        try {
-            DB::beginTransaction();
-
-            // Lấy sản phẩm từ ID
-            $product = san_pham::findOrFail($id);
-
-            // Xóa ảnh sản phẩm chính nếu có
-            if ($product->anh_san_pham) {
-                Storage::disk('public')->delete($product->anh_san_pham);
-            }
-
-            // Xóa tất cả biến thể của sản phẩm
-            bien_the_san_pham::where('san_pham_id', $product->id)->delete();
-
-            // Xóa sản phẩm chính
-            $product->delete();
-
-            DB::commit();
-
-            return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được xóa thành công.');
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            // Ghi log lỗi với thông tin chi tiết
-            Log::error('Lỗi khi xóa sản phẩm: ' . $exception->getMessage() . ' - Line: ' . $exception->getLine() . ' - File: ' . $exception->getFile());
-            return back()->withErrors('Đã xảy ra lỗi khi xóa sản phẩm. Vui lòng thử lại.');
-        }
+        //
     }
 }

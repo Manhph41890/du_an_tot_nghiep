@@ -2,10 +2,15 @@
 
 use App\Http\Controllers\BaiVietController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChucVuController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DanhMucController;
-use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\PhuongThucThanhToanController;
+use App\Models\phuong_thuc_thanh_toan;
+
+use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\UserController;

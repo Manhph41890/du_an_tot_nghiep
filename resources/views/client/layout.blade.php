@@ -45,8 +45,6 @@
 </head>
 
 <body>
-
-
     
 
     @include('client.partials.header')

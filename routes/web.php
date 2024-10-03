@@ -47,3 +47,9 @@ Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index'
 Route::get('/', function () {
     return view('client.home');
 });
+Route::get('/sanpham', function () {
+    return view('client.sanpham.danhsach');
+});
+Route::get('/sanpham/detail', function () {
+    return view('client.sanpham.detail');
+});

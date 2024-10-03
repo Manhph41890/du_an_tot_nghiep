@@ -278,20 +278,6 @@
                 </li>
 
                 <li>
-<<<<<<< HEAD
-                    <a href="#baiviet" data-bs-toggle="collapse">
-                        <i data-feather="file-text"></i>
-                        <span> Bài viết </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="baiviet">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('baiviets.create') }}'>Thêm</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('baiviets.index') }}'>Danh sách</a>
-=======
                     <a href="#danhgia" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> Đánh giá </span>
@@ -301,7 +287,6 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='{{ route('danhgia.index') }}'>Danh sách</a>
->>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
                             </li>
                         </ul>
                     </div>

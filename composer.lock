@@ -1443,17 +1443,6 @@
             "time": "2024-09-23T13:33:08+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "laravel/tinker",
-            "version": "v2.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/tinker.git",
-                "reference": "ba4d51eb56de7711b3a37d63aa0643e99a339ae5"
-            },
-            "dist": {
-                "type": "zip",
-=======
             "name": "laravel/telescope",
             "version": "v5.2.2",
             "source": {
@@ -1532,7 +1521,6 @@
             },
             "dist": {
                 "type": "zip",
->>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
                 "url": "https://api.github.com/repos/laravel/tinker/zipball/ba4d51eb56de7711b3a37d63aa0643e99a339ae5",
                 "reference": "ba4d51eb56de7711b3a37d63aa0643e99a339ae5",
                 "shasum": ""
@@ -2323,7 +2311,6 @@
         },
         {
             "name": "nikic/php-parser",
-<<<<<<< HEAD
             "version": "v5.3.0",
             "source": {
                 "type": "git",
@@ -2334,18 +2321,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3abf7425cd284141dc5d8d14a9ee444de3345d1a",
                 "reference": "3abf7425cd284141dc5d8d14a9ee444de3345d1a",
-=======
-            "version": "v5.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
-                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
->>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
                 "shasum": ""
             },
             "require": {
@@ -2388,15 +2363,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/nikic/PHP-Parser/tree/v5.3.0"
             },
             "time": "2024-09-29T13:56:26+00:00"
-=======
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.2.0"
-            },
-            "time": "2024-09-15T16:40:33+00:00"
->>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
         },
         {
             "name": "nunomaduro/termwind",
@@ -5957,7 +5926,6 @@
         },
         {
             "name": "laravel/sail",
-<<<<<<< HEAD
             "version": "v1.34.0",
             "source": {
                 "type": "git",
@@ -5968,18 +5936,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/511e9c95b0f3ee778dc9e11e242bcd2af8e002cd",
                 "reference": "511e9c95b0f3ee778dc9e11e242bcd2af8e002cd",
-=======
-            "version": "v1.33.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/sail.git",
-                "reference": "d54af9d5745e3680d8a6463ffd9f314aa53eb2d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/d54af9d5745e3680d8a6463ffd9f314aa53eb2d1",
-                "reference": "d54af9d5745e3680d8a6463ffd9f314aa53eb2d1",
->>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
                 "shasum": ""
             },
             "require": {
@@ -6029,11 +5985,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-<<<<<<< HEAD
             "time": "2024-09-27T14:58:09+00:00"
-=======
-            "time": "2024-09-22T19:04:21+00:00"
->>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427
         },
         {
             "name": "mockery/mockery",
@@ -8242,5 +8194,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

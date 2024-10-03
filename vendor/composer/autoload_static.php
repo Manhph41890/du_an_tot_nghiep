@@ -4,6 +4,7 @@
 
 namespace Composer\Autoload;
 
+
 class ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d
 {
     public static $files = array (
@@ -125,6 +126,7 @@ class ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d
             'League\\Config\\' => 14,
             'League\\CommonMark\\' => 18,
             'Laravel\\Tinker\\' => 15,
+
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Sanctum\\' => 16,
             'Laravel\\Sail\\' => 13,
@@ -6708,9 +6710,11 @@ class ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+
             $loader->prefixLengthsPsr4 = ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d::$classMap;
+
 
         }, null, ClassLoader::class);
     }

@@ -1,3 +1,4 @@
+
 [2024-09-14 16:28:28] local.ERROR: Undefined variable $danhmucs {"view":{"view":"C:\\laragon\\www\\datn\\du_an_tot_nghiep\\resources\\views\\admin\\khuyenmai\\index.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-416316734 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#1254</a><samp data-depth=1 class=sf-dump-expanded>
   #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
 </samp>}

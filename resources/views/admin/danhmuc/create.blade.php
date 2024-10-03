@@ -15,6 +15,7 @@
                         <h4 class="fs-18 fw-semibold m-0"> {{ $title }} </h4>
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="col-12">
                         <div class="card">

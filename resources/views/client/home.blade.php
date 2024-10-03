@@ -1,8 +1,6 @@
 @extends('client.layout')
 
 @section('content')
-
-
 <!-- main slider start -->
 <section class="bg-light">
     <div class="main-slider dots-style theme1">
@@ -136,7 +134,7 @@
             <div class="d-flex static-media2 flex-column flex-sm-row">
               <img
                 class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                src="assets/images/icon/2.png"
+                src="assets/img/icon/2.png"
                 alt="icon"
               />
               <div class="media-body">
@@ -149,7 +147,7 @@
             <div class="d-flex static-media2 flex-column flex-sm-row">
               <img
                 class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                src="assets/images/icon/3.png"
+                src="assets/img/icon/3.png"
                 alt="icon"
               />
               <div class="media-body">
@@ -162,7 +160,7 @@
             <div class="d-flex static-media2 flex-column flex-sm-row">
               <img
                 class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                src="assets/images/icon/4.png"
+                src="assets/img/icon/4.png"
                 alt="icon"
               />
               <div class="media-body">
@@ -175,7 +173,7 @@
             <div class="d-flex static-media2 flex-column flex-sm-row">
               <img
                 class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                src="assets/images/icon/5.png"
+                src="assets/img/icon/5.png"
                 alt="icon"
               />
               <div class="media-body">
@@ -199,7 +197,7 @@
               href="shop-grid-4-column.html"
               class="zoom-in d-block overflow-hidden"
             >
-              <img src="assets/images/banner/1.jpg" alt="banner-thumb-naile" />
+              <img src="assets/img/banner/1.jpg" alt="banner-thumb-naile" />
             </a>
           </div>
         </div>
@@ -209,7 +207,7 @@
               href="shop-grid-4-column.html"
               class="zoom-in d-block overflow-hidden"
             >
-              <img src="assets/images/banner/2.jpg" alt="banner-thumb-naile" />
+              <img src="assets/img/banner/2.jpg" alt="banner-thumb-naile" />
             </a>
           </div>
         </div>
@@ -219,7 +217,7 @@
               href="shop-grid-4-column.html"
               class="zoom-in d-block overflow-hidden"
             >
-              <img src="assets/images/banner/3.jpg" alt="banner-thumb-naile" />
+              <img src="assets/img/banner/3.jpg" alt="banner-thumb-naile" />
             </a>
           </div>
         </div>
@@ -311,7 +309,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/1.png"
+                              src="assets/img/product/1.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -403,7 +401,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/2.png"
+                              src="assets/img/product/2.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -495,7 +493,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/3.png"
+                              src="assets/img/product/3.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -587,7 +585,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/4.png"
+                              src="assets/img/product/4.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -679,12 +677,12 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/5.png"
+                              src="assets/img/product/5.png"
                               alt="thumbnail"
                             />
                             <img
                               class="second-img"
-                              src="assets/images/product/6.png"
+                              src="assets/img/product/6.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -786,7 +784,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/1.png"
+                              src="assets/img/product/1.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -878,7 +876,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/2.png"
+                              src="assets/img/product/2.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -970,7 +968,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/3.png"
+                              src="assets/img/product/3.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -1062,7 +1060,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/4.png"
+                              src="assets/img/product/4.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -1154,12 +1152,12 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/5.png"
+                              src="assets/img/product/5.png"
                               alt="thumbnail"
                             />
                             <img
                               class="second-img"
-                              src="assets/images/product/6.png"
+                              src="assets/img/product/6.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -1261,7 +1259,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/1.png"
+                              src="assets/img/product/1.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -1353,7 +1351,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/2.png"
+                              src="assets/img/product/2.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -1445,7 +1443,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/3.png"
+                              src="assets/img/product/3.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -1537,7 +1535,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/4.png"
+                              src="assets/img/product/4.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -1629,12 +1627,12 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/images/product/5.png"
+                              src="assets/img/product/5.png"
                               alt="thumbnail"
                             />
                             <img
                               class="second-img"
-                              src="assets/images/product/6.png"
+                              src="assets/img/product/6.png"
                               alt="thumbnail"
                             />
                           </a>
@@ -1734,7 +1732,7 @@
             <a
               class="zoom-in d-block overflow-hidden position-relative"
               href="shop-grid-4-column.html"
-              ><img src="assets/images/banner/5.jpg" alt="banner-thumb-naile"
+              ><img src="assets/img/banner/5.jpg" alt="banner-thumb-naile"
             /></a>
           </div>
         </div>
@@ -1744,7 +1742,7 @@
               class="zoom-in d-block overflow-hidden position-relative"
               href="shop-grid-4-column.html"
             >
-              <img src="assets/images/banner/6.jpg" alt="banner-thumb-naile"
+              <img src="assets/img/banner/6.jpg" alt="banner-thumb-naile"
             /></a>
           </div>
         </div>
@@ -1754,7 +1752,7 @@
               class="zoom-in d-block overflow-hidden position-relative"
               href="shop-grid-4-column.html"
             >
-              <img src="assets/images/banner/4.jpg" alt="banner-thumb-naile"
+              <img src="assets/img/banner/4.jpg" alt="banner-thumb-naile"
             /></a>
           </div>
         </div>
@@ -1786,7 +1784,7 @@
                       <a href="single-product.html">
                         <img
                           class="first-img"
-                          src="assets/images/product/8.png"
+                          src="assets/img/product/8.png"
                           alt="thumbnail"
                         />
                       </a>
@@ -1878,7 +1876,7 @@
                       <a href="single-product.html">
                         <img
                           class="first-img"
-                          src="assets/images/product/9.png"
+                          src="assets/img/product/9.png"
                           alt="thumbnail"
                         />
                       </a>
@@ -1970,7 +1968,7 @@
                       <a href="single-product.html">
                         <img
                           class="first-img"
-                          src="assets/images/product/10.png"
+                          src="assets/img/product/10.png"
                           alt="thumbnail"
                         />
                       </a>
@@ -2062,7 +2060,7 @@
                       <a href="single-product.html">
                         <img
                           class="first-img"
-                          src="assets/images/product/11.png"
+                          src="assets/img/product/11.png"
                           alt="thumbnail"
                         />
                       </a>
@@ -2154,12 +2152,12 @@
                       <a href="single-product.html">
                         <img
                           class="first-img"
-                          src="assets/images/product/12.png"
+                          src="assets/img/product/12.png"
                           alt="thumbnail"
                         />
                         <img
                           class="second-img"
-                          src="assets/images/product/13.png"
+                          src="assets/img/product/13.png"
                           alt="thumbnail"
                         />
                       </a>
@@ -2272,7 +2270,7 @@
                   class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                   href="blog-grid-left-sidebar.html"
                 >
-                  <img src="assets/images/blog-post/1.png" alt="blog-thumb-naile" />
+                  <img src="assets/img/blog-post/1.png" alt="blog-thumb-naile" />
                 </a>
                 <div class="blog-post-content">
                   <a
@@ -2302,7 +2300,7 @@
                   class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                   href="blog-grid-left-sidebar.html"
                 >
-                  <img src="assets/images/blog-post/2.png" alt="blog-thumb-naile" />
+                  <img src="assets/img/blog-post/2.png" alt="blog-thumb-naile" />
                 </a>
                 <div class="blog-post-content">
                   <a
@@ -2332,7 +2330,7 @@
                   class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                   href="blog-grid-left-sidebar.html"
                 >
-                  <img src="assets/images/blog-post/3.png" alt="blog-thumb-naile" />
+                  <img src="assets/img/blog-post/3.png" alt="blog-thumb-naile" />
                 </a>
                 <div class="blog-post-content">
                   <a
@@ -2362,7 +2360,7 @@
                   class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                   href="blog-grid-left-sidebar.html"
                 >
-                  <img src="assets/images/blog-post/4.png" alt="blog-thumb-naile" />
+                  <img src="assets/img/blog-post/4.png" alt="blog-thumb-naile" />
                 </a>
                 <div class="blog-post-content">
                   <a
@@ -2392,7 +2390,7 @@
                   class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                   href="blog-grid-left-sidebar.html"
                 >
-                  <img src="assets/images/blog-post/5.png" alt="blog-thumb-naile" />
+                  <img src="assets/img/blog-post/5.png" alt="blog-thumb-naile" />
                 </a>
                 <div class="blog-post-content">
                   <a
@@ -2434,7 +2432,7 @@
                   href="https://themeforest.net/user/hastech"
                   class="brand-thumb"
                 >
-                  <img src="assets/images/brand/1.jpg" alt="brand-thumb-nail" />
+                  <img src="assets/img/brand/1.jpg" alt="brand-thumb-nail" />
                 </a>
               </div>
             </div>
@@ -2445,7 +2443,7 @@
                   href="https://themeforest.net/user/hastech"
                   class="brand-thumb"
                 >
-                  <img src="assets/images/brand/2.jpg" alt="brand-thumb-nail" />
+                  <img src="assets/img/brand/2.jpg" alt="brand-thumb-nail" />
                 </a>
               </div>
             </div>
@@ -2456,7 +2454,7 @@
                   href="https://themeforest.net/user/hastech"
                   class="brand-thumb"
                 >
-                  <img src="assets/images/brand/3.jpg" alt="brand-thumb-nail" />
+                  <img src="assets/img/brand/3.jpg" alt="brand-thumb-nail" />
                 </a>
               </div>
             </div>
@@ -2467,7 +2465,7 @@
                   href="https://themeforest.net/user/hastech"
                   class="brand-thumb"
                 >
-                  <img src="assets/images/brand/4.jpg" alt="brand-thumb-nail" />
+                  <img src="assets/img/brand/4.jpg" alt="brand-thumb-nail" />
                 </a>
               </div>
             </div>
@@ -2478,7 +2476,7 @@
                   href="https://themeforest.net/user/hastech"
                   class="brand-thumb"
                 >
-                  <img src="assets/images/brand/5.jpg" alt="brand-thumb-nail" />
+                  <img src="assets/img/brand/5.jpg" alt="brand-thumb-nail" />
                 </a>
               </div>
             </div>
@@ -2489,7 +2487,7 @@
                   href="https://themeforest.net/user/hastech"
                   class="brand-thumb"
                 >
-                  <img src="assets/images/brand/2.jpg" alt="brand-thumb-nail" />
+                  <img src="assets/img/brand/2.jpg" alt="brand-thumb-nail" />
                 </a>
               </div>
             </div>
@@ -2500,7 +2498,7 @@
                   href="https://themeforest.net/user/hastech"
                   class="brand-thumb"
                 >
-                  <img src="assets/images/brand/3.jpg" alt="brand-thumb-nail" />
+                  <img src="assets/img/brand/3.jpg" alt="brand-thumb-nail" />
                 </a>
               </div>
             </div>
@@ -2510,7 +2508,4 @@
       </div>
     </div>
   </div>
-  <!-- brand slider end -->
-
-
 @endsection

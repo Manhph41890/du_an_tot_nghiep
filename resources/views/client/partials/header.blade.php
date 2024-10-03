@@ -216,7 +216,7 @@
     <ul class="minicart-product-list">
       <li>
         <a href="single-product.html" class="image"
-          ><img src="assets/images/mini-cart/4.png" alt="Cart product Image"
+          ><img src="assets/img/mini-cart/4.png" alt="Cart product Image"
         /></a>
         <div class="content">
           <a href="single-product.html" class="title"
@@ -230,7 +230,7 @@
       </li>
       <li>
         <a href="single-product.html" class="image"
-          ><img src="assets/images/mini-cart/5.png" alt="Cart product Image"
+          ><img src="assets/img/mini-cart/5.png" alt="Cart product Image"
         /></a>
         <div class="content">
           <a href="single-product.html" class="title"
@@ -244,7 +244,7 @@
       </li>
       <li>
         <a href="single-product.html" class="image"
-          ><img src="assets/images/mini-cart/6.png" alt="Cart product Image"
+          ><img src="assets/img/mini-cart/6.png" alt="Cart product Image"
         /></a>
         <div class="content">
           <a href="single-product.html" class="title"
@@ -276,7 +276,7 @@
     <ul class="minicart-product-list">
       <li>
         <a href="single-product.html" class="image"
-          ><img src="assets/images/mini-cart/1.png" alt="Cart product Image"
+          ><img src="assets/img/mini-cart/1.png" alt="Cart product Image"
         /></a>
         <div class="content">
           <a href="single-product.html" class="title"
@@ -290,7 +290,7 @@
       </li>
       <li>
         <a href="single-product.html" class="image"
-          ><img src="assets/images/mini-cart/2.png" alt="Cart product Image"
+          ><img src="assets/img/mini-cart/2.png" alt="Cart product Image"
         /></a>
         <div class="content">
           <a href="single-product.html" class="title"
@@ -304,7 +304,7 @@
       </li>
       <li>
         <a href="single-product.html" class="image"
-          ><img src="assets/images/mini-cart/3.png" alt="Cart product Image"
+          ><img src="assets/img/mini-cart/3.png" alt="Cart product Image"
         /></a>
         <div class="content">
           <a href="single-product.html" class="title"
@@ -430,7 +430,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <img src="assets/images/logo/us-flag.jpg" alt="us flag" />
+                  <img src="assets/img/logo/us-flag.jpg" alt="us flag" />
                   English
                   <i class="ion ion-ios-arrow-down"></i>
                 </a>
@@ -440,14 +440,14 @@
                 >
                   <li class="active">
                     <a href="#"
-                      ><img src="assets/images/logo/us-flag.jpg" alt="us flag" />
+                      ><img src="assets/img/logo/us-flag.jpg" alt="us flag" />
                       English</a
                     >
                   </li>
                   <li>
                     <a href="#"
                       ><img
-                        src="assets/images/logo/france.jpg"
+                        src="assets/img/logo/france.jpg"
                         alt="france flag"
                       />
                       Français</a
@@ -469,7 +469,7 @@
         <div class="col-6 col-lg-2 col-xl-2">
           <div class="logo">
             <a href="index.html"
-              ><img src="assets/images/logo/logo.png" alt="logo"
+              ><img src="assets/img/logo/logo.png" alt="logo"
             /></a>
           </div>
         </div>
@@ -552,12 +552,12 @@
                 </li>
                 <li class="col-6 mt-4">
                   <a href="single-product.html" class="zoom-in overflow-hidden"
-                    ><img src="assets/images/mega-menu/1.jpg" alt="img"
+                    ><img src="assets/img/mega-menu/1.jpg" alt="img"
                   /></a>
                 </li>
                 <li class="col-6 mt-4">
                   <a href="single-product.html" class="zoom-in overflow-hidden"
-                    ><img src="assets/images/mega-menu/2.jpg" alt="img"
+                    ><img src="assets/img/mega-menu/2.jpg" alt="img"
                   /></a>
                 </li>
               </ul>

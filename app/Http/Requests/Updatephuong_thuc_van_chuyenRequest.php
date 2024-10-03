@@ -11,7 +11,7 @@ class Updatephuong_thuc_van_chuyenRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**

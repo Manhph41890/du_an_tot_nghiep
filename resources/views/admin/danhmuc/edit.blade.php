@@ -23,18 +23,11 @@
                             </div><!-- end card header -->
 
                             <div class="card-body">
-<<<<<<< HEAD
-                                <form action="{{ route('danhmucs.update', $danhmuc->id) }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    
-=======
                                 <form action="{{ route('danhmucs.update', $danhmuc->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
->>>>>>> 4d54e452c940a9909296a0b48559993c10c55a10
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="mb-3">
@@ -49,11 +42,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-<<<<<<< HEAD
-                            
-=======
 
->>>>>>> 4d54e452c940a9909296a0b48559993c10c55a10
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="anh_danh_muc" class="form-label">Hình ảnh </label>
@@ -71,25 +60,11 @@
                                                 </div>
                                             </div>
                                         </div>
-<<<<<<< HEAD
-                            
-=======
 
->>>>>>> 4d54e452c940a9909296a0b48559993c10c55a10
                                         <div class="mb-3">
                                             <label for="trang_thai" class="form-label">Trạng thái</label>
                                             <div class="col-sm-10 mb-3 d-flex gap-2">
                                                 <div class="form-check">
-<<<<<<< HEAD
-                                                    <input class="form-check-input" type="radio" name="is_active" id="trang_thai_show" value="0"
-                                                        {{ old('is_active', $danhmuc->is_active) == 0 ? 'checked' : '' }}>
-                                                    <label class="form-check-label text-success" for="trang_thai_show">Hiển thị</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="is_active" value="1" id="trang_thai_hide"
-                                                        {{ old('is_active', $danhmuc->is_active) == 1 ? 'checked' : '' }}>
-                                                    <label class="form-check-label text-danger" for="trang_thai_hide">Ẩn</label>
-=======
                                                     <input class="form-check-input" type="radio" name="is_active"
                                                         id="trang_thai_show" value="0"
                                                         {{ $danhmuc->is_active == 0 ? 'checked' : '' }}>
@@ -102,7 +77,6 @@
                                                         {{ $danhmuc->is_active == 1 ? 'checked' : '' }}>
                                                     <label class="form-check-label text-danger"
                                                         for="trang_thai_hide">Ẩn</label>
->>>>>>> 4d54e452c940a9909296a0b48559993c10c55a10
                                                 </div>
                                                 @error('is_active')
                                                     <div class="invalid-feedback">
@@ -111,22 +85,14 @@
                                                 @enderror
                                             </div>
                                         </div>
-<<<<<<< HEAD
-                            
-=======
 
->>>>>>> 4d54e452c940a9909296a0b48559993c10c55a10
                                         <div class="d-flex justify-content-center">
                                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-<<<<<<< HEAD
-                            
-=======
 
->>>>>>> 4d54e452c940a9909296a0b48559993c10c55a10
 
                         </div>
                     </div>

@@ -50,7 +50,7 @@
                          <div class="dropdown-divider"></div>
 
                          <!-- item-->
-                         <a class='dropdown-item notify-item' href='auth-logout.html'>
+                         <a class='dropdown-item notify-item' href='{{ route('auth.logout') }}'>
                              <i class="mdi mdi-location-exit fs-16 align-middle"></i>
                              <span>Đăng Xuất</span>
                          </a>

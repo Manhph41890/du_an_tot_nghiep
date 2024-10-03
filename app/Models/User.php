@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'chuc_vu_id',
         'ho_ten',
         'anh_dai_dien',
         'email',
@@ -26,6 +27,9 @@ class User extends Authenticatable
         'is_active',
         'chuc_vu_id', // Foreign key cho chức vụ
     ];
+    public function chuc_vus(){
+        return $this->belongsTo(chuc_vu::class, 'id');
+    }
 
     /**
      * Các trường cần ẩn khi trả về JSON.

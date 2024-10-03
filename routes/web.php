@@ -39,7 +39,7 @@ Route::resource('/sanphams', SanPhamController::class);
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.home');
 });
 
 Route::resource('/danhmucs', DanhMucController::class);

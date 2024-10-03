@@ -56,7 +56,7 @@
 
                 <li class="menu-title">Pages</li>
 
-                {{-- <li>
+                <li>
                     <a href="#sidebarAuth" data-bs-toggle="collapse">
                         <i data-feather="users"></i>
                         <span> Authentication </span>
@@ -87,9 +87,9 @@
                             </li>
                         </ul>
                     </div>
-                </li> --}}
+                </li>
 
-                {{-- <li>
+                <li>
                     <a href="#sidebarError" data-bs-toggle="collapse">
                         <i data-feather="alert-octagon"></i>
                         <span> Error Pages </span>
@@ -114,9 +114,9 @@
                             </li>
                         </ul>
                     </div>
-                </li> --}}
+                </li>
 
-                {{-- <li>
+                <li>
                     <a href="#sidebarExpages" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> Utility </span>
@@ -153,7 +153,7 @@
                             </li>
                         </ul>
                     </div>
-                </li> --}}
+                </li>
 
                 <li>
                     <a href="#danhmuc" data-bs-toggle="collapse">
@@ -164,7 +164,6 @@
                     <div class="collapse" id="danhmuc">
                         <ul class="nav-second-level">
                             <li>
-                                <a class='tp-link' href='{{ route('danhmucs.create') }}'>Thêm</a>
                                 <a class='tp-link' href='{{ route('danhmucs.create') }}'>Thêm</a>
                             </li>
                             <li>
@@ -200,7 +199,6 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='{{ route('sanphams.create') }}'>Thêm</a>
-                                <a class='tp-link' href='{{ route('danhmucs.index') }}'>Danh sách</a>
                             </li>
                             <li>
                                 <a class='tp-link' href='{{ route('sanphams.index') }}'>Danh sách</a>
@@ -222,7 +220,25 @@
                             <li>
                                 <a class='tp-link' href='{{ route('phuongthucthanhtoans.create') }}'>Thêm</a>
                             </li>
-                        
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> PT vận chuyển </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="phuongthucvanchuyen">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.index') }}'>Danh sách</a>
+                            </li>
+                            <li>
+                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.create') }}'>Thêm</a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>
@@ -230,6 +246,9 @@
 
                 <li>
                     <a href="#khuyenmai" data-bs-toggle="collapse">
+
+                <li>
+                    <a href="#chucvu" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>
@@ -241,6 +260,40 @@
                             </li>
                             <li>
                                 <a class='tp-link' href='{{ route('khuyenmais.index') }}'>Danh sách</a>
+                                <a class='tp-link' href='{{ route('chucvus.index') }}'>Danh sách</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#user" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> User </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="user">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class='tp-link' href='{{ route('user.index') }}'>Danh sách</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#baiviet" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> Bài viết </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="baiviet">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class='tp-link' href='{{ route('baiviets.create') }}'>Thêm</a>
+                            </li>
+                            <li>
+                                <a class='tp-link' href='{{ route('baiviets.index') }}'>Danh sách</a>
                             </li>
                         </ul>
                     </div>

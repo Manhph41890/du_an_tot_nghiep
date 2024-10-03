@@ -33,18 +33,18 @@ class PhuongThucThanhToanController extends Controller
     public function store(Storephuong_thuc_thanh_toanRequest $request)
     {
         phuong_thuc_thanh_toan::create($request->all());
-        
+
         return redirect()->route('phuongthucthanhtoans.index')->with('success', 'Thêm phương thức thanh toán thành công');
     }
 
     /**
      * Display the specified resource.
      */
-   
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan , $id)
+    public function edit(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan, $id)
     {
         $title = "Cập nhật phương thức thanh toán";
         $phuong_thuc_thanh_toan = phuong_thuc_thanh_toan::query()->findOrFail($id);

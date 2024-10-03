@@ -31,7 +31,6 @@ class UpdateUsersTableNullableFields extends Migration
             $table->string('gioi_tinh')->nullable(false)->change();
             $table->string('anh_dai_dien')->nullable(false)->change();
            
-          
         });
     }
 }

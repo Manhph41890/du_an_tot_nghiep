@@ -45,10 +45,18 @@
 @endsection
 
 @section('content')
+<<<<<<< HEAD
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+=======
+    <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+    </div>
+>>>>>>> 371ba3c315c2fc1bffe7e28b7b12d59713ce52ff
     <form action="{{ route('auth.login') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="container d-flex justify-content-center align-items-center min-vh-100">

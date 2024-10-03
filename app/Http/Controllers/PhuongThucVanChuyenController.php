@@ -13,7 +13,9 @@ class PhuongThucVanChuyenController extends Controller
      */
     public function index()
     {
-        //
+        $phuongthucvanchuyens = phuong_thuc_van_chuyen::query()->latest('id')->paginate(5);
+        $title = "Phương thức vận chuyển";
+        return view('admin.phuongthucvanchuyen.index', compact('phuongthucvanchuyens', 'title'));
     }
 
     /**
@@ -21,7 +23,8 @@ class PhuongThucVanChuyenController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Thêm mới PT Vận Chuyển";
+        return view('admin.phuongthucvanchuyen.create', compact('title'));
     }
 
     /**
@@ -29,7 +32,25 @@ class PhuongThucVanChuyenController extends Controller
      */
     public function store(Storephuong_thuc_van_chuyenRequest $request)
     {
-        //
+        // 
+        $gia_ship = 0;
+
+        switch ($request->kieu_van_chuyen) {
+            case 'Giao hàng hỏa tốc':
+                $gia_ship = 50000; // Giá ship cho Giao hàng hỏa tốc
+                break;
+            case 'Giao hàng thường':
+                $gia_ship = 25000; // Giá ship cho Giao hàng thường
+                break;
+        }
+
+        phuong_thuc_van_chuyen::create([
+            'kieu_van_chuyen' => $request->kieu_van_chuyen,
+            'gia_ship' => $gia_ship
+        ]);
+
+        return redirect()->route('phuongthucvanchuyens.index')
+            ->with('success', 'Thêm phương thức vận chuyển thành công');
     }
 
     /**
@@ -59,8 +80,13 @@ class PhuongThucVanChuyenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(phuong_thuc_van_chuyen $phuong_thuc_van_chuyen)
+    public function destroy(phuong_thuc_van_chuyen $phuong_thuc_van_chuyen, $id)
     {
-        //
+
+        $phuongThucVanChuyen = $phuong_thuc_van_chuyen::findOrFail($id);
+        $phuongThucVanChuyen->delete();
+
+        return redirect()->route('phuongthucvanchuyens.index')
+            ->with('success', 'Xóa phương thức vận chuyển thành công');
     }
 }

@@ -13,4 +13,8 @@ class anh_san_pham extends Model
         'san_pham_id',
         'anh_san_pham',
     ];
+    public function san_pham()
+    {
+        return $this->belongsTo(san_pham::class);
+    }
 }

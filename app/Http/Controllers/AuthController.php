@@ -26,8 +26,6 @@ class AuthController extends Controller
     }
 
 
-
-
     // register có thêm tính năng tặng voucher cho khách hàng mới và ko bị giới hạn đăng kí đối với sdt
     public function register(Request $request)
     {
@@ -115,8 +113,19 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
+        $credentials = $request->validate(
+            [
+                'email' => 'required|string|email|max:255',
+                'password' => 'required|string'
+            ],
+            [
+                'email.required' => 'Email không được bỏ trống',
+                'email.email' => 'Email không hợp lệ',
+                'email.max' => 'Email quá dài',
+                'password.required' => 'Mật khẩu không được bỏ trống',
+                'password.string' => 'Mật khẩu phải là chuỗi ký tự',
 
-
+            ]);
         $credentials = $request->validate(
             [
                 'email' => 'required|string|email|max:255',
@@ -146,18 +155,31 @@ class AuthController extends Controller
                     return redirect()->route('admin.home')->with('success', 'Đăng nhập thành công');
                 case 'khach_hang':
                     return redirect()->route('welcome')->with('success', 'Đăng nhập thành công');
-                    // case 'thanh_vien':
-                    //     return redirect()->route('welcome')->with('success', 'Đăng nhập thành công');
                 default:
                     Auth::logout();
                     return redirect()->route('login')->withErrors(['error' => 'Chức vụ không tồn tại']);
             }
         }
 
-
         return redirect()->back()->withErrors([
             'email' => 'Email hoặc mật khẩu không đúng',
         ]);
+    }
+    public function logout(Request $request)
+    {
+        // Đăng xuất người dùng
+        Auth::logout();
+
+        // Xóa session hiện tại
+        $request->session()->invalidate();
+
+        // Tạo lại session để tránh các cuộc tấn công session fixation
+        $request->session()->regenerateToken();
+
+        // Chuyển hướng về trang đăng nhập hoặc trang chủ
+
+
+        return redirect()->route('auth.login')->with('success', 'Đăng xuất thành công');
     }
 
 

@@ -11,7 +11,7 @@ class Storedon_hangRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**

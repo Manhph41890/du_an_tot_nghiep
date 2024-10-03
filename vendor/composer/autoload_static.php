@@ -6804,6 +6804,7 @@ class ComposerStaticInit58652518b02848b4be0149de02f50187
             $loader->prefixDirsPsr4 = ComposerStaticInit58652518b02848b4be0149de02f50187::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit58652518b02848b4be0149de02f50187::$classMap;
 
+
         }, null, ClassLoader::class);
     }
 }

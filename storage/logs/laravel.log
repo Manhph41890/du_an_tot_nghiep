@@ -1,3 +1,4 @@
+
 [2024-09-14 16:28:28] local.ERROR: Undefined variable $danhmucs {"view":{"view":"C:\\laragon\\www\\datn\\du_an_tot_nghiep\\resources\\views\\admin\\khuyenmai\\index.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-416316734 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#1254</a><samp data-depth=1 class=sf-dump-expanded>
   #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
 </samp>}
@@ -7012,5 +7013,157 @@
 #18 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1278): Illuminate\\Container\\Container->call(Object(Closure))
 #19 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(215): Illuminate\\Foundation\\Application->terminate()
 #20 C:\\laragon\\www\\du_an_tot_nghiep\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->terminate(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\Response))
+#21 {main}
+"} 
+[2024-10-03 09:41:03] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'domythuat-laravel.telescope_entries' doesn't exist (Connection: mysql, SQL: insert into `telescope_entries` (`batch_id`, `content`, `created_at`, `family_hash`, `type`, `uuid`) values (9d27ef6f-b7af-495f-9428-4165d9bf9c7e, {"command":"list","exit_code":0,"arguments":{"command":"list","namespace":null},"options":{"raw":false,"format":"txt","short":false,"help":false,"quiet":false,"verbose":false,"version":false,"ansi":null,"no-interaction":false,"env":null},"hostname":"Autumn2001"}, 2024-10-03 09:41:03, ?, command, 9d27ef6f-b24f-4ff1-b8d5-3172b00e29eb)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'domythuat-laravel.telescope_entries' doesn't exist (Connection: mysql, SQL: insert into `telescope_entries` (`batch_id`, `content`, `created_at`, `family_hash`, `type`, `uuid`) values (9d27ef6f-b7af-495f-9428-4165d9bf9c7e, {\"command\":\"list\",\"exit_code\":0,\"arguments\":{\"command\":\"list\",\"namespace\":null},\"options\":{\"raw\":false,\"format\":\"txt\",\"short\":false,\"help\":false,\"quiet\":false,\"verbose\":false,\"version\":false,\"ansi\":null,\"no-interaction\":false,\"env\":null},\"hostname\":\"Autumn2001\"}, 2024-10-03 09:41:03, ?, command, 9d27ef6f-b24f-4ff1-b8d5-3172b00e29eb)) at C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:829)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback('insert into `te...', Array, Object(Closure))
+#1 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(34): Illuminate\\Database\\Connection->run('insert into `te...', Array, Object(Closure))
+#2 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3498): Illuminate\\Database\\MySqlConnection->insert('insert into `te...', Array)
+#3 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(145): Illuminate\\Database\\Query\\Builder->insert(Array)
+#4 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Traits\\EnumeratesValues.php(240): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->Laravel\\Telescope\\Storage\\{closure}(Object(Illuminate\\Support\\Collection), 0)
+#5 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(144): Illuminate\\Support\\Collection->each(Object(Closure))
+#6 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(661): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->store(Object(Illuminate\\Support\\Collection))
+#7 [internal function]: Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#8 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(286): call_user_func(Object(Closure))
+#9 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(653): Laravel\\Telescope\\Telescope::withoutRecording(Object(Closure))
+#10 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\ListensForStorageOpportunities.php(65): Laravel\\Telescope\\Telescope::store(Object(Laravel\\Telescope\\Storage\\DatabaseEntriesRepository))
+#11 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#12 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#13 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(81): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#14 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Object(Closure), Object(Closure))
+#15 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Object(Closure), Array, NULL)
+#16 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1278): Illuminate\\Container\\Container->call(Object(Closure))
+#17 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(220): Illuminate\\Foundation\\Application->terminate()
+#18 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->terminate(Object(Symfony\\Component\\Console\\Input\\ArgvInput), 0)
+#19 {main}
+
+[previous exception] [object] (PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'domythuat-laravel.telescope_entries' doesn't exist at C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php:39)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(39): PDO->prepare('insert into `te...')
+#1 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(816): Illuminate\\Database\\MySqlConnection->Illuminate\\Database\\{closure}('insert into `te...', Array)
+#2 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback('insert into `te...', Array, Object(Closure))
+#3 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(34): Illuminate\\Database\\Connection->run('insert into `te...', Array, Object(Closure))
+#4 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3498): Illuminate\\Database\\MySqlConnection->insert('insert into `te...', Array)
+#5 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(145): Illuminate\\Database\\Query\\Builder->insert(Array)
+#6 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Traits\\EnumeratesValues.php(240): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->Laravel\\Telescope\\Storage\\{closure}(Object(Illuminate\\Support\\Collection), 0)
+#7 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(144): Illuminate\\Support\\Collection->each(Object(Closure))
+#8 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(661): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->store(Object(Illuminate\\Support\\Collection))
+#9 [internal function]: Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#10 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(286): call_user_func(Object(Closure))
+#11 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(653): Laravel\\Telescope\\Telescope::withoutRecording(Object(Closure))
+#12 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\ListensForStorageOpportunities.php(65): Laravel\\Telescope\\Telescope::store(Object(Laravel\\Telescope\\Storage\\DatabaseEntriesRepository))
+#13 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#14 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#15 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(81): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#16 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Object(Closure), Object(Closure))
+#17 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Object(Closure), Array, NULL)
+#18 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1278): Illuminate\\Container\\Container->call(Object(Closure))
+#19 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(220): Illuminate\\Foundation\\Application->terminate()
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->terminate(Object(Symfony\\Component\\Console\\Input\\ArgvInput), 0)
+#21 {main}
+"} 
+[2024-10-03 09:41:03] local.ERROR: Unclosed '{' on line 9 {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Unclosed '{' on line 9 at C:\\laragon\\www\\du_an_tot_nghiep\\app\\Models\\bai_viet.php:26)
+[stacktrace]
+#0 {main}
+"} 
+[2024-10-03 09:41:59] local.ERROR: Unclosed '{' on line 9 {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Unclosed '{' on line 9 at C:\\laragon\\www\\du_an_tot_nghiep\\app\\Models\\bai_viet.php:26)
+[stacktrace]
+#0 {main}
+"} 
+[2024-10-03 09:41:59] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'domythuat-laravel.telescope_entries' doesn't exist (Connection: mysql, SQL: insert into `telescope_entries` (`batch_id`, `content`, `created_at`, `family_hash`, `type`, `uuid`) values (9d27efc4-9bc7-4a55-a0ed-4ddaaf61816e, {"command":"list","exit_code":0,"arguments":{"command":"list","namespace":null},"options":{"raw":false,"format":"txt","short":false,"help":false,"quiet":false,"verbose":false,"version":false,"ansi":null,"no-interaction":false,"env":null},"hostname":"Autumn2001"}, 2024-10-03 09:41:59, ?, command, 9d27efc4-976c-4d33-bb10-0a9698c1467c)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'domythuat-laravel.telescope_entries' doesn't exist (Connection: mysql, SQL: insert into `telescope_entries` (`batch_id`, `content`, `created_at`, `family_hash`, `type`, `uuid`) values (9d27efc4-9bc7-4a55-a0ed-4ddaaf61816e, {\"command\":\"list\",\"exit_code\":0,\"arguments\":{\"command\":\"list\",\"namespace\":null},\"options\":{\"raw\":false,\"format\":\"txt\",\"short\":false,\"help\":false,\"quiet\":false,\"verbose\":false,\"version\":false,\"ansi\":null,\"no-interaction\":false,\"env\":null},\"hostname\":\"Autumn2001\"}, 2024-10-03 09:41:59, ?, command, 9d27efc4-976c-4d33-bb10-0a9698c1467c)) at C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:829)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback('insert into `te...', Array, Object(Closure))
+#1 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(34): Illuminate\\Database\\Connection->run('insert into `te...', Array, Object(Closure))
+#2 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3498): Illuminate\\Database\\MySqlConnection->insert('insert into `te...', Array)
+#3 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(145): Illuminate\\Database\\Query\\Builder->insert(Array)
+#4 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Traits\\EnumeratesValues.php(240): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->Laravel\\Telescope\\Storage\\{closure}(Object(Illuminate\\Support\\Collection), 0)
+#5 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(144): Illuminate\\Support\\Collection->each(Object(Closure))
+#6 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(661): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->store(Object(Illuminate\\Support\\Collection))
+#7 [internal function]: Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#8 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(286): call_user_func(Object(Closure))
+#9 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(653): Laravel\\Telescope\\Telescope::withoutRecording(Object(Closure))
+#10 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\ListensForStorageOpportunities.php(65): Laravel\\Telescope\\Telescope::store(Object(Laravel\\Telescope\\Storage\\DatabaseEntriesRepository))
+#11 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#12 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#13 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(81): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#14 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Object(Closure), Object(Closure))
+#15 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Object(Closure), Array, NULL)
+#16 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1278): Illuminate\\Container\\Container->call(Object(Closure))
+#17 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(220): Illuminate\\Foundation\\Application->terminate()
+#18 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->terminate(Object(Symfony\\Component\\Console\\Input\\ArgvInput), 0)
+#19 {main}
+
+[previous exception] [object] (PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'domythuat-laravel.telescope_entries' doesn't exist at C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php:39)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(39): PDO->prepare('insert into `te...')
+#1 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(816): Illuminate\\Database\\MySqlConnection->Illuminate\\Database\\{closure}('insert into `te...', Array)
+#2 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback('insert into `te...', Array, Object(Closure))
+#3 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(34): Illuminate\\Database\\Connection->run('insert into `te...', Array, Object(Closure))
+#4 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3498): Illuminate\\Database\\MySqlConnection->insert('insert into `te...', Array)
+#5 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(145): Illuminate\\Database\\Query\\Builder->insert(Array)
+#6 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Traits\\EnumeratesValues.php(240): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->Laravel\\Telescope\\Storage\\{closure}(Object(Illuminate\\Support\\Collection), 0)
+#7 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(144): Illuminate\\Support\\Collection->each(Object(Closure))
+#8 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(661): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->store(Object(Illuminate\\Support\\Collection))
+#9 [internal function]: Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#10 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(286): call_user_func(Object(Closure))
+#11 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(653): Laravel\\Telescope\\Telescope::withoutRecording(Object(Closure))
+#12 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\ListensForStorageOpportunities.php(65): Laravel\\Telescope\\Telescope::store(Object(Laravel\\Telescope\\Storage\\DatabaseEntriesRepository))
+#13 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#14 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#15 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(81): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#16 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Object(Closure), Object(Closure))
+#17 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Object(Closure), Array, NULL)
+#18 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1278): Illuminate\\Container\\Container->call(Object(Closure))
+#19 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(220): Illuminate\\Foundation\\Application->terminate()
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->terminate(Object(Symfony\\Component\\Console\\Input\\ArgvInput), 0)
+#21 {main}
+"} 
+[2024-10-03 09:41:59] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'domythuat-laravel.telescope_entries' doesn't exist (Connection: mysql, SQL: insert into `telescope_entries` (`batch_id`, `content`, `created_at`, `family_hash`, `type`, `uuid`) values (9d27efc4-ca3f-4e7d-b6fc-8454d2fa4899, {"command":"list","exit_code":0,"arguments":{"command":"list","namespace":null},"options":{"raw":false,"format":"txt","short":false,"help":false,"quiet":false,"verbose":false,"version":false,"ansi":null,"no-interaction":false,"env":null},"hostname":"Autumn2001"}, 2024-10-03 09:41:59, ?, command, 9d27efc4-c2b0-423e-9d46-568817b994e9)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'domythuat-laravel.telescope_entries' doesn't exist (Connection: mysql, SQL: insert into `telescope_entries` (`batch_id`, `content`, `created_at`, `family_hash`, `type`, `uuid`) values (9d27efc4-ca3f-4e7d-b6fc-8454d2fa4899, {\"command\":\"list\",\"exit_code\":0,\"arguments\":{\"command\":\"list\",\"namespace\":null},\"options\":{\"raw\":false,\"format\":\"txt\",\"short\":false,\"help\":false,\"quiet\":false,\"verbose\":false,\"version\":false,\"ansi\":null,\"no-interaction\":false,\"env\":null},\"hostname\":\"Autumn2001\"}, 2024-10-03 09:41:59, ?, command, 9d27efc4-c2b0-423e-9d46-568817b994e9)) at C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:829)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback('insert into `te...', Array, Object(Closure))
+#1 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(34): Illuminate\\Database\\Connection->run('insert into `te...', Array, Object(Closure))
+#2 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3498): Illuminate\\Database\\MySqlConnection->insert('insert into `te...', Array)
+#3 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(145): Illuminate\\Database\\Query\\Builder->insert(Array)
+#4 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Traits\\EnumeratesValues.php(240): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->Laravel\\Telescope\\Storage\\{closure}(Object(Illuminate\\Support\\Collection), 0)
+#5 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(144): Illuminate\\Support\\Collection->each(Object(Closure))
+#6 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(661): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->store(Object(Illuminate\\Support\\Collection))
+#7 [internal function]: Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#8 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(286): call_user_func(Object(Closure))
+#9 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(653): Laravel\\Telescope\\Telescope::withoutRecording(Object(Closure))
+#10 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\ListensForStorageOpportunities.php(65): Laravel\\Telescope\\Telescope::store(Object(Laravel\\Telescope\\Storage\\DatabaseEntriesRepository))
+#11 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#12 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#13 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(81): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#14 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Object(Closure), Object(Closure))
+#15 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Object(Closure), Array, NULL)
+#16 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1278): Illuminate\\Container\\Container->call(Object(Closure))
+#17 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(220): Illuminate\\Foundation\\Application->terminate()
+#18 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->terminate(Object(Symfony\\Component\\Console\\Input\\ArgvInput), 0)
+#19 {main}
+
+[previous exception] [object] (PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'domythuat-laravel.telescope_entries' doesn't exist at C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php:39)
+[stacktrace]
+#0 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(39): PDO->prepare('insert into `te...')
+#1 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(816): Illuminate\\Database\\MySqlConnection->Illuminate\\Database\\{closure}('insert into `te...', Array)
+#2 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback('insert into `te...', Array, Object(Closure))
+#3 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(34): Illuminate\\Database\\Connection->run('insert into `te...', Array, Object(Closure))
+#4 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3498): Illuminate\\Database\\MySqlConnection->insert('insert into `te...', Array)
+#5 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(145): Illuminate\\Database\\Query\\Builder->insert(Array)
+#6 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Traits\\EnumeratesValues.php(240): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->Laravel\\Telescope\\Storage\\{closure}(Object(Illuminate\\Support\\Collection), 0)
+#7 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Storage\\DatabaseEntriesRepository.php(144): Illuminate\\Support\\Collection->each(Object(Closure))
+#8 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(661): Laravel\\Telescope\\Storage\\DatabaseEntriesRepository->store(Object(Illuminate\\Support\\Collection))
+#9 [internal function]: Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#10 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(286): call_user_func(Object(Closure))
+#11 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\Telescope.php(653): Laravel\\Telescope\\Telescope::withoutRecording(Object(Closure))
+#12 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\telescope\\src\\ListensForStorageOpportunities.php(65): Laravel\\Telescope\\Telescope::store(Object(Laravel\\Telescope\\Storage\\DatabaseEntriesRepository))
+#13 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Laravel\\Telescope\\Telescope::Laravel\\Telescope\\{closure}()
+#14 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#15 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(81): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#16 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Object(Closure), Object(Closure))
+#17 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Object(Closure), Array, NULL)
+#18 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1278): Illuminate\\Container\\Container->call(Object(Closure))
+#19 C:\\laragon\\www\\du_an_tot_nghiep\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(220): Illuminate\\Foundation\\Application->terminate()
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->terminate(Object(Symfony\\Component\\Console\\Input\\ArgvInput), 0)
 #21 {main}
 "} 

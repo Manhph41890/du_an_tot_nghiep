@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\san_pham;
 use App\Http\Requests\Storesan_phamRequest;
 use App\Http\Requests\Updatesan_phamRequest;
 use App\Models\bien_the_san_pham;
-use App\Models\color_san_pham;
+
 use App\Models\danh_muc;
+use App\Models\san_pham;
+use App\Models\color_san_pham;
 use App\Models\size_san_pham;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 
 class SanPhamController extends Controller
@@ -19,12 +21,36 @@ class SanPhamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(request $request)
     {
-        $data = san_pham::query()->with('danh_muc')->latest('id')->paginate(5);
+        $danhmucs = danh_muc::query()->get();
+        $query = san_pham::query();
+
+        // search theo trạng thái
+        if ($request->has('search_sp')) {
+            $is_active = $request->input('search_sp');
+            if ($is_active == '1' || $is_active == '0') {
+                $query->where('is_active', $is_active);
+            }
+        }
+
+        // search theo danh mục
+        if ($request->has('search_sp_dm')) {
+            $dm = $request->input('search_sp_dm');
+            if ($dm) {
+                $query->where('danh_muc_id', $dm);
+            }
+        }
+
+        // search form input
+        if ($request->has('search_sp_ten')) {
+            $query->where('ten_san_pham', 'LIKE', "%{$request->input('search_sp_ten')}%");
+        }
+
+        $data = $query->with('danh_muc')->latest('id')->paginate(5);
         // dd($data);
         $title = 'Danh Sách Sản Phẩm';
-        return view('admin.sanpham.index', compact('data', 'title'));
+        return view('admin.sanpham.index', compact('data', 'title', 'danhmucs'));
     }
 
     /**
@@ -146,7 +172,7 @@ class SanPhamController extends Controller
      */
     public function update(Updatesan_phamRequest $request, $id)
     {
-        dd($request->all()); // Kiểm tra dữ liệu gửi từ form
+        // dd($request->all()); // Kiểm tra dữ liệu gửi từ form
 
         DB::beginTransaction();
         try {

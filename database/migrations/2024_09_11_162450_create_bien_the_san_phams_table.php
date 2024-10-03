@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignIdFor(size_san_pham::class)->constrained();
             $table->foreignIdFor(color_san_pham::class)->constrained();
             $table->string('anh_bien_the')->nullable();
-            $table->bigInteger('so_luong');
             $table->unique(['san_pham_id', 'size_san_pham_id', 'color_san_pham_id'], 'bien_the_san_pham_unique');
             $table->timestamps();
         });

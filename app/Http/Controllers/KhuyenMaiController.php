@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\danh_muc;
 use App\Models\khuyen_mai;
 use App\Http\Requests\Storekhuyen_maiRequest;
 use App\Http\Requests\Updatekhuyen_maiRequest;
@@ -16,10 +17,10 @@ class KhuyenMaiController extends Controller
      */
     public function index(Request $request)
     {
+        $danhmucs = danh_muc::all();
         $query = khuyen_mai::query();
 
-        if ($request->has('search_km')) 
-        {
+        if ($request->has('search_km')) {
             $query->where('ma_khuyen_mai', 'LIKE', "%{$request->input('search_km')}%");
         }
 
@@ -27,7 +28,7 @@ class KhuyenMaiController extends Controller
 
         $title = 'Danh sách khuyến mãi';
 
-        return view('admin.khuyenmai.index', compact('khuyenMais', 'title'));
+        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title'));
     }
 
     /**
@@ -46,7 +47,7 @@ class KhuyenMaiController extends Controller
      */
     public function store(Storekhuyen_maiRequest $request)
     {
-        // admin tạo mã khuyến mãi 
+        // admin tạo mã khuyến mãi
         khuyen_mai::create([
             'ten_khuyen_mai' => $request->input('ten_khuyen_mai'),
             // Sinh ngẫu nhiên mã khuyến mãi

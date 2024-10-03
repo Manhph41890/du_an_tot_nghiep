@@ -134,7 +134,7 @@
             <div class="d-flex static-media2 flex-column flex-sm-row">
               <img
                 class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                src="assets/img/icon/2.png"
+                src="{{asset('assets/img/icon/2.png')}}"
                 alt="icon"
               />
               <div class="media-body">
@@ -147,7 +147,7 @@
             <div class="d-flex static-media2 flex-column flex-sm-row">
               <img
                 class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                src="assets/img/icon/3.png"
+                src="{{asset('assets/img/icon/3.png')}}"
                 alt="icon"
               />
               <div class="media-body">
@@ -160,7 +160,7 @@
             <div class="d-flex static-media2 flex-column flex-sm-row">
               <img
                 class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                src="assets/img/icon/4.png"
+                src="{{asset('assets/img/icon/4.png')}}"
                 alt="icon"
               />
               <div class="media-body">
@@ -173,7 +173,7 @@
             <div class="d-flex static-media2 flex-column flex-sm-row">
               <img
                 class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                src="assets/img/icon/5.png"
+                src="{{asset('assets/img/icon/5.png')}}"
                 alt="icon"
               />
               <div class="media-body">
@@ -197,7 +197,7 @@
               href="shop-grid-4-column.html"
               class="zoom-in d-block overflow-hidden"
             >
-              <img src="assets/img/banner/1.jpg" alt="banner-thumb-naile" />
+              <img src="{{asset('assets/img/banner/1.jpg" alt="banner-thumb-naile')}}" />
             </a>
           </div>
         </div>
@@ -207,7 +207,7 @@
               href="shop-grid-4-column.html"
               class="zoom-in d-block overflow-hidden"
             >
-              <img src="assets/img/banner/2.jpg" alt="banner-thumb-naile" />
+              <img src="{{asset('assets/img/banner/2.jpg" alt="banner-thumb-naile')}}" />
             </a>
           </div>
         </div>
@@ -217,7 +217,7 @@
               href="shop-grid-4-column.html"
               class="zoom-in d-block overflow-hidden"
             >
-              <img src="assets/img/banner/3.jpg" alt="banner-thumb-naile" />
+              <img src="{{asset('assets/img/banner/3.jpg" alt="banner-thumb-naile')}}" />
             </a>
           </div>
         </div>
@@ -309,7 +309,7 @@
                           <a href="single-product.html">
                             <img
                               class="first-img"
-                              src="assets/img/product/1.png"
+                              src="{{asset('assets/img/product/1.png')}}"
                               alt="thumbnail"
                             />
                           </a>

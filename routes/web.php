@@ -25,7 +25,12 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('admin.home');
 });
+
+
+
 Route::resource('/danhmucs', DanhMucController::class);
+Route::resource('/chucvus', ChucVuController::class);
+Route::resource('/sanphams', SanPhamController::class);
 Route::resource('/chucvus', ChucVuController::class);
 Route::resource('/sanphams', SanPhamController::class);
 Route::resource('/khuyenmais', KhuyenMaiController::class);

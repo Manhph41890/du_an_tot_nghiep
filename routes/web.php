@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
@@ -23,9 +24,10 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('admin.home');
+    return redirect()->route('dashboard');
 });
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
 Route::resource('/danhmucs', DanhMucController::class);

@@ -30,21 +30,11 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="#sidebarDashboards" data-bs-toggle="collapse">
-                        <i data-feather="home"></i>
+                    <a href="<?php echo e(route('dashboard')); ?>" data-bs-toggle="collapse">
                         <span> Dashboard </span>
-                        <span class="menu-arrow"></span>
+                        
                     </a>
-                    <div class="collapse" id="sidebarDashboards">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='index.html'>Analytical</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='ecommerce.html'>E-commerce</a>
-                            </li>
-                        </ul>
-                    </div>
+                    
                 </li>
 
                 <!-- <li>
@@ -186,11 +176,12 @@
 
                 <li>
                     <a href="#danhgia" data-bs-toggle="collapse">
+
                         <i data-feather="file-text"></i>
-                        <span> Đánh giá </span>
+                        <span> Bài viết </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="danhgia">
+                    <div class="collapse" id="baiviet">
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('danhgia.index')); ?>'>Danh sách</a>

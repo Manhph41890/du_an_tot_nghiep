@@ -63,6 +63,7 @@ Route::get('/client/taikhoan', function () {
     return view('client.taikhoan.dashboard');
 });
 Route::get('/client/giohang', function () {
+
     return view('client.giohang');
 });
 Route::get('/client/gioithieu', function () {

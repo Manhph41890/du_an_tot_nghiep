@@ -62,7 +62,7 @@
                                                     <td>{{ $item->chuc_vus?->ten_chuc_vu }}</td>
                                                     <td>{{ $item->ho_ten }}</td>
                                                     <td><img src="{{ asset('storage/' . $item->anh_dai_dien) }}"
-                                                            alt="Hình ảnh bài viết" width="150px"></td>
+                                                            alt="Hình ảnh" width="150px"></td>
                                                     <td>{{ $item->email }}</td>
                                                     <td>{{ $item->so_dien_thoai }}</td>
                                                     <td>{{ $item->ngay_sinh }}</td>

@@ -74,7 +74,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="me-auto">
-                                                    <span class="text-muted">Lượt xem:
+                                                    <span class="text-muted">Lượt xem: 3
                                                         {{ $mostViewedProduct->views }}</span>
                                                 </div>
                                             @else
@@ -143,7 +143,7 @@
                                                     </td>
                                                     <td>{{ $product->ten_san_pham }}</td>
                                                     <td>{{ number_format($product->gia_goc, 0, ',', '.') }} VND</td>
-                                                    <td>{{ $product->created_at->format('d/m/Y') }}</td>
+                                                    <td>{{ $product->created_at }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'b6e38e632403a14dad56014c2fdd9a4757cb57ac',
+        'reference' => '2ee7156ca662ed6b911c6af50bd3b8426812e80d',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -382,7 +382,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'b6e38e632403a14dad56014c2fdd9a4757cb57ac',
+            'reference' => '2ee7156ca662ed6b911c6af50bd3b8426812e80d',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -407,6 +407,9 @@
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
+            'pretty_version' => 'v1.34.0',
+            'version' => '1.34.0.0',
+            'reference' => '511e9c95b0f3ee778dc9e11e242bcd2af8e002cd',
             'pretty_version' => 'v1.34.0',
             'version' => '1.34.0.0',
             'reference' => '511e9c95b0f3ee778dc9e11e242bcd2af8e002cd',
@@ -539,9 +542,9 @@
             'dev_requirement' => false,
         ),
         'nette/schema' => array(
-            'pretty_version' => 'v1.3.0',
-            'version' => '1.3.0.0',
-            'reference' => 'a6d3a6d1f545f01ef38e60f375d1cf1f4de98188',
+            'pretty_version' => 'v1.3.1',
+            'version' => '1.3.1.0',
+            'reference' => '9522dad6211c4d995a01a9ac529da88d0b0ba7b5',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nette/schema',
             'aliases' => array(),
@@ -557,6 +560,9 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
+            'pretty_version' => 'v5.3.0',
+            'version' => '5.3.0.0',
+            'reference' => '3abf7425cd284141dc5d8d14a9ee444de3345d1a',
             'pretty_version' => 'v5.3.0',
             'version' => '5.3.0.0',
             'reference' => '3abf7425cd284141dc5d8d14a9ee444de3345d1a',
@@ -766,8 +772,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(

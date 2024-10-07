@@ -15,7 +15,7 @@ class DanhMucController extends Controller
     {
         $query = danh_muc::query();
 
-        // lọc trạng thái 
+        // lọc trạng thái
         if ($request->has('search_dm')) {
             $is_active = $request->input('search_dm');
             if ($is_active == '1' || $is_active == '0') {
@@ -23,7 +23,7 @@ class DanhMucController extends Controller
             }
         }
 
-        // lọc tên danh mục 
+        // lọc tên danh mục
         if ($request->has('search_ten_danh_muc') && !empty($request->input('search_ten_danh_muc'))) {
             $search_ten_danh_muc = $request->input('search_ten_danh_muc');
             $query->where('ten_danh_muc', 'like', '%' . $search_ten_danh_muc . '%');

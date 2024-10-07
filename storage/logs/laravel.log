@@ -15312,3 +15312,387 @@
 #71 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('E:\\\\laragon\\\\www\\\\...')
 #72 {main}
 "} 
+[2024-10-07 13:45:55] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:45:56] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:45:57] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:45:58] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:45:58] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:45:59] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:01] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:02] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:03] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:04] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:06] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:07] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:08] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:08] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:09] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:11] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:12] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:13] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:13] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:14] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:16] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:17] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:18] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:19] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:21] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:22] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:23] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:24] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:26] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:27] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:28] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-10-07 13:46:29] local.ERROR: Class "Laravel\Telescope\TelescopeServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Telescope\\TelescopeServiceProvider\" not found at E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:855)
+[stacktrace]
+#0 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(789): Illuminate\\Foundation\\Application->resolveProvider('Laravel\\\\Telesco...')
+#1 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('Laravel\\\\Telesco...')
+#2 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(769): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(263): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 E:\\laragon\\www\\DATN\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 

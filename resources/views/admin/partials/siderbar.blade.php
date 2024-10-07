@@ -278,7 +278,8 @@
                 </li>
 
                 <li>
-                    <a href="#baiviet" data-bs-toggle="collapse">
+                    <a href="#danhgia" data-bs-toggle="collapse">
+
                         <i data-feather="file-text"></i>
                         <span> Bài viết </span>
                         <span class="menu-arrow"></span>
@@ -286,10 +287,7 @@
                     <div class="collapse" id="baiviet">
                         <ul class="nav-second-level">
                             <li>
-                                <a class='tp-link' href='{{ route('baiviets.create') }}'>Thêm</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('baiviets.index') }}'>Danh sách</a>
+                                <a class='tp-link' href='{{ route('danhgia.index') }}'>Danh sách</a>
                             </li>
                         </ul>
                     </div>

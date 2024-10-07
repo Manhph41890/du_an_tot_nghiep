@@ -23,9 +23,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('dashboard');
-});
+
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

@@ -4,26 +4,30 @@
 <?php $__env->startSection('content'); ?>
 
     <div class="content-page">
-
         <div class="content">
-
             <!-- Start Content-->
             <div class="container">
-
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0"><?php echo e($title); ?></h4>
                     </div>
                 </div>
-
                 <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
-
                         <div class="card-header justify-content-between">
-
                             <div class="row">
-
+                                <div class="col-2">
+                                    <a href="<?php echo e(route('danhmucs.create')); ?>" class="btn btn-success">Tạo Mới</a>
+                                </div>
+                                <div class="col-4">
+                                    <form action="<?php echo e(route('danhmucs.index')); ?>" method="GET">
+                                        <?php echo csrf_field(); ?>
+                                        <input type="text" id="search_ten_danh_muc" name="search_ten_danh_muc"
+                                            placeholder="Tìm kiếm" value="<?php echo e(request('search_ten_danh_muc')); ?>"
+                                            class="form-control" onchange="this.form.submit();">
+                                    </form>
+                                </div>
                                 <div class="col-3">
                                     <form action="<?php echo e(route('danhmucs.index')); ?>" method="POST" id="filter-form">
                                         <?php echo csrf_field(); ?>
@@ -38,29 +42,12 @@
                                         </select>
                                     </form>
                                 </div>
-
-                                <div class="col-9">
-                                    <!-- Hiển thị thông báo thành công -->
-                                    <?php if(session('success')): ?>
-                                        <div class="alert alert-success d-flex justify-content-between mb-0" role="alert">
-                                            <?php echo e(session('success')); ?>
-
-                                            <button type="button" class="btn-close"
-                                                data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
-
                             </div>
-
                         </div><!-- end card header -->
-
                         <div class="row">
                             <div class="card-body">
                                 <div class="table-responsive">
-
                                     <table class="table table-striped mb-0">
-
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -70,7 +57,6 @@
                                                 <th scope="col">Hành Động </th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             <?php $__currentLoopData = $danhmucs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
@@ -110,19 +96,12 @@
                                     </table>
                                 </div>
                             </div>
-
-
                         </div>
-
                         <?php echo e($danhmucs->links()); ?>
 
                     </div>
-
                 </div>
-
-
             </div> <!-- container-fluid -->
-
         </div>
     </div>
 

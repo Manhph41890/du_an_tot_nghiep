@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '505ac0ac39030a0efefcf4494c0ffc3789699b21',
+        'reference' => 'b6e38e632403a14dad56014c2fdd9a4757cb57ac',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -382,8 +382,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-
-            'reference' => '505ac0ac39030a0efefcf4494c0ffc3789699b21',
+            'reference' => 'b6e38e632403a14dad56014c2fdd9a4757cb57ac',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -408,10 +407,9 @@
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
-            'pretty_version' => 'v1.33.0',
-            'version' => '1.33.0.0',
-            'reference' => 'd54af9d5745e3680d8a6463ffd9f314aa53eb2d1',
-
+            'pretty_version' => 'v1.34.0',
+            'version' => '1.34.0.0',
+            'reference' => '511e9c95b0f3ee778dc9e11e242bcd2af8e002cd',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/sail',
             'aliases' => array(),
@@ -559,11 +557,9 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
-
-            'pretty_version' => 'v5.2.0',
-            'version' => '5.2.0.0',
-            'reference' => '23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb',
-
+            'pretty_version' => 'v5.3.0',
+            'version' => '5.3.0.0',
+            'reference' => '3abf7425cd284141dc5d8d14a9ee444de3345d1a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),

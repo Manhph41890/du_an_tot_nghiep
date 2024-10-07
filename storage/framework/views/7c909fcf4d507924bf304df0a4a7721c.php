@@ -14,13 +14,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="<?php echo e(asset('assets/images/favicon.ico')); ?>">
+        <link rel="shortcut icon" href="<?php echo e(asset('assets/admin/images/favicon.ico')); ?>">
 
         <!-- App css -->
-        <link href="<?php echo e(asset('assets/css/app.min.css')); ?>" rel="stylesheet" type="text/css" id="app-style" />
+        <link href="<?php echo e(asset('assets/admin/css/app.min.css')); ?>" rel="stylesheet" type="text/css" id="app-style" />
 
         <!-- Icons -->
-        <link href="<?php echo e(asset('assets/css/icons.min.css')); ?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo e(asset('assets/admin/css/icons.min.css')); ?>" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -48,25 +48,25 @@
         <!-- END wrapper -->
 
         <!-- Vendor -->
-        <script src="<?php echo e(asset('assets/libs/jquery/jquery.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/libs/simplebar/simplebar.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/libs/node-waves/waves.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/libs/waypoints/lib/jquery.waypoints.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/libs/jquery.counterup/jquery.counterup.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/libs/feather-icons/feather.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/libs/jquery/jquery.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/libs/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/libs/simplebar/simplebar.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/libs/node-waves/waves.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/libs/waypoints/lib/jquery.waypoints.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/libs/jquery.counterup/jquery.counterup.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/libs/feather-icons/feather.min.js')); ?>"></script>
 
         <!-- Apexcharts JS -->
-        <script src="<?php echo e(asset('assets/libs/apexcharts/apexcharts.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/libs/apexcharts/apexcharts.min.js')); ?>"></script>
 
         <!-- for basic area chart -->
-        <script src="<?php echo e(asset('assets/apexcharts.com/samples/assets/stock-prices.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/apexcharts.com/samples/assets/admin/stock-prices.js')); ?>"></script>
 
         <!-- Widgets Init Js -->
-        <script src="<?php echo e(asset('assets/js/pages/analytics-dashboard.init.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/js/pages/analytics-dashboard.init.js')); ?>"></script>
 
         <!-- App js-->
-        <script src="<?php echo e(asset('assets/js/app.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/admin/js/app.js')); ?>"></script>
 
     </body>
 

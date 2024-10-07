@@ -9,7 +9,17 @@
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Dashboard</h4>
+                        <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4>
+                        <form action="{{ route('dashboard') }}" method="post">
+                            @csrf
+                            @method('GET')
+                            <select class="form-select form-select-sm mt-3">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </form>
                     </div>
                 </div>
 
@@ -19,16 +29,19 @@
                         <div class="row g-3">
 
                             <div class="col-md-6 col-xl-3">
-                                <div class="card">
+                                <div class="card text-bg-success">
                                     <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="fs-14 mb-1">Tổng sản phẩm trong kho</div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fs-14 mb-1 "> <i class="fa-solid fa-image me-2"></i> Sản phẩm</div>
+                                            <span class="text-primary d-inline-flex align-items-center">
+                                                <a href="{{ route('sanphams.index') }}" class="text-white"> <i
+                                                        class="fa-solid fa-plus"></i> </a>
+                                            </span>
                                         </div>
-
                                         <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ $totalProducts }}</div>
+                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $sanphams }}</div>
                                             <div class="me-auto">
-
+                                                {{-- <div class="fs-14 mb-1">Người dùng</div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -36,18 +49,19 @@
                             </div>
                             {{--  --}}
                             <div class="col-md-6 col-xl-3">
-                                <div class="card">
+                                <div class="card text-bg-primary">
                                     <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="fs-14 mb-1">Người dùng</div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fs-14 mb-1 text-white"> <i class="fa-solid fa-truck-fast me-2"></i>
+                                                Đơn hàng</div>
+                                            <span class="text-primary d-inline-flex align-items-center">
+                                                {{-- <a href="{{ route('user.index') }}" class="text-white"> <i class="fa-solid fa-plus"></i> </a> --}}
+                                            </span>
                                         </div>
-
                                         <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ $totalUsers }}</div>
+                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $donhangs }}</div>
                                             <div class="me-auto">
-                                                <span class="text-primary d-inline-flex align-items-center">
-                                                    <a href="{{ route('user.index') }}"> Quản lý người dùng </a>
-                                                </span>
+                                                {{-- <div class="fs-14 mb-1">Người dùng</div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -55,30 +69,46 @@
                             </div>
                             {{--  --}}
                             <div class="col-md-6 col-xl-3">
-                                <div class="card">
+                                <div class="card text-bg-warning">
                                     <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="fs-14 mb-1">Sản phẩm có nhiều lượt xem nhất</div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fs-14 mb-1 text-white"> <i
+                                                    class="fa-solid fa-money-check-dollar me-2"></i> Doanh thu</div>
+                                            <span class="text-primary d-inline-flex align-items-center">
+                                                {{-- <a href="{{ route('user.index') }}" class="text-white"> <i class="fa-solid fa-plus"></i> </a> --}}
+                                            </span>
                                         </div>
-
                                         <div class="d-flex align-items-baseline mb-2">
-                                            @if ($mostViewedProduct)
-                                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">
-                                                    <a href="{{ route('sanphams.show', $mostViewedProduct->id) }}">
-                                                        {{ $mostViewedProduct->ten_san_pham }}
-                                                    </a>
-                                                </div>
-                                                <div class="me-auto">
-                                                    <span class="text-muted">Lượt xem:
-                                                        {{ $mostViewedProduct->views }}</span>
-                                                </div>
-                                            @else
-                                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">Không có sản phẩm</div>
-                                            @endif
+                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $tong_tien }}</div>
+                                            <div class="me-auto">
+                                                <div class="fs-14 mb-1">VNĐ</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {{--  --}}
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card text-bg-info">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fs-14 mb-1 text-white"> <i class="fa-solid fa-user me-2"></i> Tài
+                                                khoản</div>
+                                            <span class="text-primary d-inline-flex align-items-center">
+                                                <a href="{{ route('user.index') }}" class="text-white"> <i
+                                                        class="fa-solid fa-plus"></i> </a>
+                                            </span>
+                                        </div>
+                                        <div class="d-flex align-items-baseline mb-2">
+                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $users }}</div>
+                                            <div class="me-auto">
+                                                {{-- <div class="fs-14 mb-1">Người dùng</div> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--  --}}
 
 
                         </div>
@@ -125,11 +155,11 @@
                                                 <th>Ảnh</th>
                                                 <th>Tên sản phẩm</th>
                                                 <th>Giá</th>
-                                                <th>Ngày tạo</th>
+                                                <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($latestProducts as $product)
+                                            @foreach ($views_product as $product)
                                                 <tr>
                                                     <td>
                                                         <img src="{{ asset('storage/' . $product->anh_san_pham) }}"
@@ -137,8 +167,8 @@
                                                             style="width: 50px; height: 50px;">
                                                     </td>
                                                     <td>{{ $product->ten_san_pham }}</td>
-                                                    <td>{{ number_format($product->gia_goc, 0, ',', '.') }} VND</td>
-                                                    <td>{{ $product->created_at->format('d/m/Y') }}</td>
+                                                    <td>{{ number_format($product->gia_goc, 0, ',', '.') }}.000 VND</td>
+                                                    {{-- <td><a href="{{ route('san_phams.show') }}"><i class="fa-solid fa-square-plus"></i></a></td> --}}
                                                 </tr>
                                             @endforeach
                                         </tbody>

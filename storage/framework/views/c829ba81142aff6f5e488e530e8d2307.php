@@ -41,7 +41,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                    value="<?php echo e(old('ten_san_pham')); ?>" required>
+                                                    value="<?php echo e(old('ten_san_pham')); ?>">
                                                 <?php $__errorArgs = ['ten_san_pham'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -64,7 +64,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                    value="<?php echo e(old('gia_goc')); ?>" required>
+                                                    value="<?php echo e(old('gia_goc')); ?>">
                                                 <?php $__errorArgs = ['gia_goc'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -78,7 +78,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="danh_muc_id" class="form-label">Danh mục</label>
-                                                <select class="form-select" name="danh_muc_id" id="danh_muc_id" required>
+                                                <select class="form-select" name="danh_muc_id" id="danh_muc_id">
                                                     <?php $__currentLoopData = $danh_mucs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $ten_danh_muc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <option value="<?php echo e($id); ?>"><?php echo e($ten_danh_muc); ?></option>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

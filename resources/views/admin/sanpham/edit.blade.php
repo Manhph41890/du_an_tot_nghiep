@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 @extends('admin.layout')
 
 @section('css')
@@ -237,4 +234,3 @@
         };
     </script>
 @endsection
->>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427

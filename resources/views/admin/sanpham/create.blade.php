@@ -36,7 +36,7 @@
                                                 <label for="ten_san_pham" class="form-label">Tên sản phẩm</label>
                                                 <input type="text" id="ten_san_pham" name="ten_san_pham"
                                                     class="form-control @error('ten_san_pham') is-invalid @enderror"
-                                                    value="{{ old('ten_san_pham') }}" required>
+                                                    value="{{ old('ten_san_pham') }}">
                                                 @error('ten_san_pham')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -45,14 +45,14 @@
                                                 <label for="gia_goc" class="form-label">Giá gốc</label>
                                                 <input type="number" id="gia_goc" name="gia_goc"
                                                     class="form-control @error('gia_goc') is-invalid @enderror"
-                                                    value="{{ old('gia_goc') }}" required>
+                                                    value="{{ old('gia_goc') }}">
                                                 @error('gia_goc')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mb-3">
                                                 <label for="danh_muc_id" class="form-label">Danh mục</label>
-                                                <select class="form-select" name="danh_muc_id" id="danh_muc_id" required>
+                                                <select class="form-select" name="danh_muc_id" id="danh_muc_id">
                                                     @foreach ($danh_mucs as $id => $ten_danh_muc)
                                                         <option value="{{ $id }}">{{ $ten_danh_muc }}</option>
                                                     @endforeach
@@ -89,7 +89,7 @@
                                                 <label for="so_luong" class="form-label">Số lượng</label>
                                                 <input type="number" id="so_luong" name="so_luong"
                                                     class="form-control @error('so_luong') is-invalid @enderror"
-                                                    value="{{ old('so_luong') }}" required>
+                                                    value="{{ old('so_luong') }}" >
                                                 @error('so_luong')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

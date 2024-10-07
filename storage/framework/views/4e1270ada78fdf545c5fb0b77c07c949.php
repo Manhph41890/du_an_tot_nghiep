@@ -61,7 +61,7 @@
                                                     <td><?php echo e($item->chuc_vus?->ten_chuc_vu); ?></td>
                                                     <td><?php echo e($item->ho_ten); ?></td>
                                                     <td><img src="<?php echo e(asset('storage/' . $item->anh_dai_dien)); ?>"
-                                                            alt="Hình ảnh bài viết" width="150px"></td>
+                                                            alt="Hình ảnh" width="150px"></td>
                                                     <td><?php echo e($item->email); ?></td>
                                                     <td><?php echo e($item->so_dien_thoai); ?></td>
                                                     <td><?php echo e($item->ngay_sinh); ?></td>

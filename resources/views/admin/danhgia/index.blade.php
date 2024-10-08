@@ -21,6 +21,38 @@
                 <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
+                        <div class="card-header justify-content-between">
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <form action="{{ route('danhgia.index') }}" method="GET">
+                                        @csrf
+                                        <input type="text" id="search_product_name" name="search_product_name"
+                                            placeholder="Tìm kiếm sản phẩm" value="{{ request('search_product_name') }}"
+                                            class="form-control" onchange="this.form.submit();">
+                                    </form>
+                                </div>
+                                
+  
+                                <div class="col-3">
+                                    <form action="{{ route('danhgia.index') }}" method="GET" id="filter-form">
+                                        @csrf
+                                        <select class="form-select" name="diem_so" onchange="document.getElementById('filter-form').submit();">
+                                            <option value="">Tất cả điểm số</option>
+                                            @for ($i = 0; $i <= 10; $i++)
+                                                <option value="{{ $i }}" {{ request('diem_so') == $i ? 'selected' : '' }}>
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </form>
+                                </div>
+                                
+
+                            </div>
+
+                        </div><!-- end card header -->
+
 
                         <div class=" d-flex justify-content-between">
                             <!-- Hiển thị thông báo thành công -->

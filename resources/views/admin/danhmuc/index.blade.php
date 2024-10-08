@@ -6,26 +6,30 @@
 @section('content')
 
     <div class="content-page">
-
         <div class="content">
-
             <!-- Start Content-->
             <div class="container">
-
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4>
                     </div>
                 </div>
-
                 <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
-
                         <div class="card-header justify-content-between">
-
                             <div class="row">
-
+                                <div class="col-2">
+                                    <a href="{{ route('danhmucs.create') }}" class="btn btn-success">Tạo Mới</a>
+                                </div>
+                                <div class="col-4">
+                                    <form action="{{ route('danhmucs.index') }}" method="GET">
+                                        @csrf
+                                        <input type="text" id="search_ten_danh_muc" name="search_ten_danh_muc"
+                                            placeholder="Tìm kiếm" value="{{ request('search_ten_danh_muc') }}"
+                                            class="form-control" onchange="this.form.submit();">
+                                    </form>
+                                </div>
                                 <div class="col-3">
                                     <form action="{{ route('danhmucs.index') }}" method="POST" id="filter-form">
                                         @csrf
@@ -40,28 +44,12 @@
                                         </select>
                                     </form>
                                 </div>
-
-                                <div class="col-9">
-                                    <!-- Hiển thị thông báo thành công -->
-                                    @if (session('success'))
-                                        <div class="alert alert-success d-flex justify-content-between mb-0" role="alert">
-                                            {{ session('success') }}
-                                            <button type="button" class="btn-close"
-                                                data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    @endif
-                                </div>
-
                             </div>
-
                         </div><!-- end card header -->
-
                         <div class="row">
                             <div class="card-body">
                                 <div class="table-responsive">
-
                                     <table class="table table-striped mb-0">
-
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -71,7 +59,6 @@
                                                 <th scope="col">Hành Động </th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             @foreach ($danhmucs as $index => $item)
                                                 <tr>
@@ -110,18 +97,11 @@
                                     </table>
                                 </div>
                             </div>
-
-
                         </div>
-
                         {{ $danhmucs->links() }}
                     </div>
-
                 </div>
-
-
             </div> <!-- container-fluid -->
-
         </div>
     </div>
 

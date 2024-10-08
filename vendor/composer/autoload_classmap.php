@@ -13,6 +13,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DanhGiaController' => $baseDir . '/app/Http/Controllers/DanhGiaController.php',
     'App\\Http\\Controllers\\DanhMucController' => $baseDir . '/app/Http/Controllers/DanhMucController.php',
+    'App\\Http\\Controllers\\DashboardController' => $baseDir . '/app/Http/Controllers/DashboardController.php',
     'App\\Http\\Controllers\\DonHangController' => $baseDir . '/app/Http/Controllers/DonHangController.php',
     'App\\Http\\Controllers\\KhuyenMaiController' => $baseDir . '/app/Http/Controllers/KhuyenMaiController.php',
     'App\\Http\\Controllers\\PhuongThucThanhToanController' => $baseDir . '/app/Http/Controllers/PhuongThucThanhToanController.php',

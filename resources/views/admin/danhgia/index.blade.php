@@ -39,7 +39,7 @@
                                         @csrf
                                         <select class="form-select" name="diem_so" onchange="document.getElementById('filter-form').submit();">
                                             <option value="">Tất cả điểm số</option>
-                                            @for ($i = 0; $i <= 10; $i++)
+                                            @for ($i = 1; $i <= 5; $i++)
                                                 <option value="{{ $i }}" {{ request('diem_so') == $i ? 'selected' : '' }}>
                                                     {{ $i }}
                                                 </option>
@@ -75,7 +75,7 @@
                                             <tr>
                                                 <th scope="col">Id</th>
                                                 <th scope="col">ID sản phẩm</th>
-                                                <th scope="col">ID user</th>
+                                                <th scope="col">Tên Người Dùng</th>
                                                 <th scope="col">Ngày đánh giá</th>
                                                 <th scope="col">Điểm số</th>
                                                 <th scope="col">Bình luận</th>

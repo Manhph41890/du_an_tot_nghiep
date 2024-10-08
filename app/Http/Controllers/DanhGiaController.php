@@ -7,6 +7,7 @@ use App\Http\Requests\Storedanh_giaRequest;
 use App\Http\Requests\Updatedanh_giaRequest;
 use Illuminate\Http\Request;
 
+
 class DanhGiaController extends Controller
 {
     /**
@@ -22,7 +23,7 @@ class DanhGiaController extends Controller
             $diem_so = $request->input('diem_so');
 
             // Kiểm tra xem 'diem_so' có phải là số hợp lệ và nằm trong khoảng 0 đến 10
-            if (is_numeric($diem_so) && $diem_so >= 0 && $diem_so <= 10) {
+            if (is_numeric($diem_so) && $diem_so >= 1 && $diem_so <= 5) {
                 $query->where('diem_so', $diem_so);
             }
         }

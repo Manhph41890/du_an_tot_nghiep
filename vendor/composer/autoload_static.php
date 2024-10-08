@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d
+class ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -315,13 +315,13 @@ class ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
-            1 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
+            0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
+            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
         ),
         'Spatie\\Ignition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
-            1 => __DIR__ . '/..' . '/spatie/ignition/src',
+            0 => __DIR__ . '/..' . '/spatie/ignition/src',
+            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
         ),
         'Spatie\\FlareClient\\' => 
         array (
@@ -547,6 +547,7 @@ class ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DanhGiaController' => __DIR__ . '/../..' . '/app/Http/Controllers/DanhGiaController.php',
         'App\\Http\\Controllers\\DanhMucController' => __DIR__ . '/../..' . '/app/Http/Controllers/DanhMucController.php',
+        'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\DonHangController' => __DIR__ . '/../..' . '/app/Http/Controllers/DonHangController.php',
         'App\\Http\\Controllers\\KhuyenMaiController' => __DIR__ . '/../..' . '/app/Http/Controllers/KhuyenMaiController.php',
         'App\\Http\\Controllers\\PhuongThucThanhToanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhuongThucThanhToanController.php',
@@ -6800,9 +6801,9 @@ class ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit85c68bfdff8e8862af1fc671abf60e2d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e::$classMap;
 
         }, null, ClassLoader::class);
     }

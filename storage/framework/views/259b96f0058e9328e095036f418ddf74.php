@@ -30,7 +30,7 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="<?php echo e(route('dashboard')); ?>" data-bs-toggle="collapse">
+                    <a href="<?php echo e(route('dashboard')); ?>">
                         <span> Dashboard </span>
                         
                     </a>

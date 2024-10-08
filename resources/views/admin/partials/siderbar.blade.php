@@ -30,7 +30,7 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="{{ route('dashboard') }}" data-bs-toggle="collapse">
+                    <a href="{{ route('dashboard') }}">
                         <span> Dashboard </span>
                         {{-- <span class="menu-arrow"></span> --}}
                     </a>

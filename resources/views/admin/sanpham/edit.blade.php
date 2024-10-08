@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 @extends('admin.layout')
 
 @section('css')
@@ -12,7 +9,7 @@
             <div class="container-xxl">
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Chỉnh sửa sản phẩm</h4>
+                        <h4 class="fs-18 fw-semibold m-0"> {{ $title }} </h4>
                     </div>
                 </div>
                 <div class="row">
@@ -60,7 +57,7 @@
                                                 <select class="form-select" name="danh_muc_id" id="danh_muc_id" required>
                                                     @foreach ($danh_mucs as $id => $ten_danh_muc)
                                                         <option value="{{ $id }}"
-                                                            {{ $id == $product->danh_muc_id ? 'selected' : '' }}>
+                                                            {{ old('danh_muc_id', $product->danh_muc_id) == $id ? 'selected' : '' }}>
                                                             {{ $ten_danh_muc }}</option>
                                                     @endforeach
                                                 </select>
@@ -88,17 +85,12 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                                 <div class="mt-2">
-                                                    @if ($product->anh_san_pham)
-                                                        <img id="imagePreview"
-                                                            src="{{ asset('storage/' . $product->anh_san_pham) }}"
-                                                            alt="Hình ảnh" style="width: 200px;">
-                                                    @else
-                                                        <img id="imagePreview" src="#" alt="Hình ảnh"
-                                                            style="display: none; width: 200px;">
-                                                    @endif
+                                                    <img id="imagePreview"
+                                                        src="{{ $product->anh_san_pham ? asset('storage/' . $product->anh_san_pham) : '#' }}"
+                                                        alt="Hình ảnh"
+                                                        style="width: 200px; {{ $product->anh_san_pham ? 'display: block;' : 'display: none;' }}">
                                                 </div>
                                             </div>
-
                                             <div class="mb-3">
                                                 <label for="ma_ta_san_pham" class="form-label">Mô tả sản phẩm</label>
                                                 <input type="text" id="ma_ta_san_pham" name="ma_ta_san_pham"
@@ -133,89 +125,66 @@
                                 </div>
                             </div>
 
+                            <!-- Form nhập biến thể sản phẩm -->
                             <div class="card">
-                                <div class="card-header">
+                                <div class="card-header d-flex justify-content-between align-items-center">
                                     <h5 class="card-title mb-0">Biến thể sản phẩm</h5>
+                                    <button type="button" class="btn btn-success" id="add-variant">Thêm biến
+                                        thể</button>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="card-body" style="height: 450px; overflow: scroll">
-                                            <div class="live-preview">
-                                                <div class="row gy-4">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-bordered">
-                                                            <tr class="text-center">
-                                                                <th>Size</th>
-                                                                <th>Màu Sắc</th>
-                                                                <th>Số Lượng</th>
-                                                                <th>Image</th>
-                                                            </tr>
-                                                            @foreach ($sizes as $sizeID => $sizeName)
-                                                                @foreach ($colors as $colorID => $colorName)
-                                                                    @php
-                                                                        // Tìm biến thể đã lưu
-                                                                        $variant = $product->bien_the_san_phams->first(
-                                                                            function ($v) use ($sizeID, $colorID) {
-                                                                                return $v->size_san_pham_id ==
-                                                                                    $sizeID &&
-                                                                                    $v->color_san_pham_id == $colorID;
-                                                                            },
-                                                                        );
-                                                                    @endphp
-                                                                    <tr class="text-center">
-                                                                        <td><b>{{ $sizeName }}</b></td>
-                                                                        <td>{{ $colorName }}</td>
-                                                                        <td>
-                                                                            <input type="number" class="form-control"
-                                                                                name="product_variants[{{ $sizeID . '-' . $colorID }}][so_luong]"
-                                                                                value="{{ $variant->so_luong ?? 0 }}"
-                                                                                min="0">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input type="file" class="form-control"
-                                                                                name="product_variants[{{ $sizeID . '-' . $colorID }}][anh_bien_the]">
-                                                                            @if ($variant && $variant->anh_bien_the)
-                                                                                <img src="{{ asset('storage/' . $variant->anh_bien_the) }}"
-                                                                                    alt="Hình ảnh biến thể"
-                                                                                    style="width: 100px;">
-                                                                            @endif
-                                                                        </td>
-                                                                        <input type="hidden"
-                                                                            name="product_variants[{{ $sizeID . '-' . $colorID }}][size]"
-                                                                            value="{{ $sizeID }}">
-                                                                        <input type="hidden"
-                                                                            name="product_variants[{{ $sizeID . '-' . $colorID }}][color]"
-                                                                            value="{{ $colorID }}">
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endforeach
-
-
-                                                            {{-- @foreach ($product->bien_the_san_phams as $variant)
-                                                                <div class="variant">
-                                                                    <select
-                                                                        name="product_variants[{{ $variant->size_san_pham_id }}-{{ $variant->color_san_pham_id }}][so_luong]">
-                                                                        <option value="{{ $variant->so_luong }}">
-                                                                            {{ $variant->so_luong }}</option>
-                                                                    </select>
-                                                                    <input type="file"
-                                                                        name="product_variants[{{ $variant->size_san_pham_id }}-{{ $variant->color_san_pham_id }}][anh_bien_the]">
-                                                                    <img src="{{ asset('storage/' . $variant->anh_bien_the) }}"
-                                                                        alt="Variant Image">
-                                                                </div>
-                                                            @endforeach --}}
-
-                                                        </table>
+                                <div class="card-body">
+                                    <div id="variant-container">
+                                        @foreach ($product->bien_the_san_phams as $variant)
+                                            <div class="row variant-item mb-3">
+                                                <div class="col-lg-3">
+                                                    <label for="size_san_pham" class="form-label">Size</label>
+                                                    <select name="product_variants[size_san_pham][]" class="form-select">
+                                                        <option value="{{ optional($variant->size)->id }}">
+                                                            {{ optional($variant->size)->ten_size }}</option>
+                                                        @foreach ($sizes as $size)
+                                                            <option value="{{ $size->id }}">{{ $size->ten_size }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label for="color_san_pham" class="form-label">Màu sắc</label>
+                                                    <select name="product_variants[color_san_pham][]" class="form-select">
+                                                        <option value="{{ optional($variant->color)->id }}">
+                                                            {{ optional($variant->color)->ten_color }}</option>
+                                                        @foreach ($colors as $color)
+                                                            <option value="{{ $color->id }}">{{ $color->ten_color }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label for="so_luong" class="form-label">Số lượng</label>
+                                                    <input type="number" name="product_variants[so_luong][]"
+                                                        class="form-control" value="{{ $variant->so_luong }}" required>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
+                                                    <input type="file" name="product_variants[anh_bien_the][]"
+                                                        class="form-control">
+                                                    <div class="mt-2">
+                                                        <img src="{{ $variant->anh_bien_the ? asset('storage/' . $variant->anh_bien_the) : '#' }}"
+                                                            alt="Hình ảnh biến thể"
+                                                            style="width: 100px; {{ $variant->anh_bien_the ? 'display: block;' : 'display: none;' }}">
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-1 d-flex align-items-end">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-danger remove-variant">Xóa</button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary">Cập nhật sản phẩm</button>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>
                             </div>
                         </form>
                     </div>
@@ -223,18 +192,66 @@
             </div>
         </div>
     </div>
-@endsection
 
-@section('script')
     <script>
-        // Preview ảnh sản phẩm chính
-        document.getElementById("anh_san_pham").onchange = function(event) {
-            const [file] = event.target.files;
-            if (file) {
-                document.getElementById("imagePreview").src = URL.createObjectURL(file);
-                document.getElementById("imagePreview").style.display = 'block';
-            }
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Xem trước hình ảnh chính sản phẩm
+            document.getElementById('anh_san_pham').addEventListener('change', function(event) {
+                const imagePreview = document.getElementById('imagePreview');
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Thêm biến thể sản phẩm
+            document.getElementById('add-variant').addEventListener('click', function() {
+                const variantContainer = document.getElementById('variant-container');
+                const newVariant = document.createElement('div');
+                newVariant.classList.add('row', 'variant-item', 'mb-3');
+                newVariant.innerHTML = `
+                    <div class="col-lg-3">
+                        <label for="size_san_pham" class="form-label">Size</label>
+                        <select name="product_variants[size_san_pham][]" class="form-select" required>
+                            @foreach ($sizes as $size)
+                                <option value="{{ $size->id }}">{{ $size->ten_size }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="color_san_pham" class="form-label">Màu sắc</label>
+                        <select name="product_variants[color_san_pham][]" class="form-select" required>
+                            @foreach ($colors as $color)
+                                <option value="{{ $color->id }}">{{ $color->ten_color }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="so_luong" class="form-label">Số lượng</label>
+                        <input type="number" name="product_variants[so_luong][]" class="form-control" value="0" required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
+                        <input type="file" name="product_variants[anh_bien_the][]" class="form-control">
+                    </div>
+                    <div class="col-lg-1 d-flex align-items-end">
+                        <button type="button" class="btn btn-sm btn-danger remove-variant">Xóa</button>
+                    </div>
+                `;
+                variantContainer.appendChild(newVariant);
+            });
+
+            // Xóa biến thể sản phẩm
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('remove-variant')) {
+                    event.target.closest('.variant-item').remove();
+                }
+            });
+        });
     </script>
 @endsection
->>>>>>> 4dd882d1671e0cc572fad98fc93d6d4a5ac8a427

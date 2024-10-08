@@ -26,7 +26,6 @@ class Storedanh_mucRequest extends FormRequest
             'ten_danh_muc' => 'required|max:255|unique:danh_mucs,ten_danh_muc',
             'anh_danh_muc' => 'required|image|mimes:jpg,png,jpeg,gif,webp',
             'is_active' => 'boolean|required',
-
         ];
     }
 

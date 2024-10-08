@@ -94,6 +94,22 @@
 
                                                     </td>
                                                     <td>
+                                                        <div>
+                                                            <a href="<?php echo e(route('baiviets.show', $baiviet->id)); ?>"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal<?php echo e($baiviet->id); ?>">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="myModal<?php echo e($baiviet->id); ?>">
+                                                                <?php echo $__env->make('admin.baiviet.show', [
+                                                                    'post' => $baiviet,
+                                                                ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                                            </div>
+                                                        </div>
+
                                                         <a href="<?php echo e(route('baiviets.edit', $baiviet->id)); ?>"><i
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
                                                         <form action="<?php echo e(route('baiviets.destroy', $baiviet->id)); ?>"

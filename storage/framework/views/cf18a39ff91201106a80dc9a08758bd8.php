@@ -30,27 +30,12 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="<?php echo e(route('dashboard')); ?>" data-bs-toggle="collapse">
-                        <span> Dashboard </span>
-                        
+                    <a href="<?php echo e(route('dashboard')); ?>">
+                        <span> Thông kê </span>
                     </a>
-                    
                 </li>
 
-                <!-- <li>
-            <a href="landing.html" target="_blank">
-                <i data-feather="globe"></i>
-                <span> Landing </span>
-            </a>
-        </li> -->
-
                 <li class="menu-title">Pages</li>
-
-                
-
-                
-
-                
 
                 <li>
                     <a href="#danhmuc" data-bs-toggle="collapse">

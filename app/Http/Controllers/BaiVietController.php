@@ -95,9 +95,12 @@ class BaiVietController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(bai_viet $bai_viet)
+    public function show(bai_viet $bai_viet, $id)
     {
-        //
+        $post = bai_viet::findOrFail($id);
+        $user = User::query()->pluck('ho_ten', 'id')->all();
+        $title = "Chi tiết sản phẩm";
+        return view('admin.baiviet.show', compact('post', 'user', 'title'));
     }
 
     /**

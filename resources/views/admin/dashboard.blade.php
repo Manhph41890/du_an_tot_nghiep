@@ -9,17 +9,47 @@
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4>
-                        <form action="{{ route('dashboard') }}" method="post">
-                            @csrf
-                            @method('GET')
-                            <select class="form-select form-select-sm mt-3">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </form>
+                        <div class="row justify-content-end">
+                            <div class="col-md-6">
+                                <h4 class="fw-semibold">{{ $title }}</h4>
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    <strong>Success!</strong> This alert box could indicate a successful or positive action.
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <form action="{{ route('dashboard') }}" method="post">
+                                    @csrf
+                                    @method('GET')
+                                    <div class="mb-3 ">
+                                        <label for="ngay_bat_dau" class="form-label">Từ ngày:</label>
+                                        <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-2">
+                                <form action="{{ route('dashboard') }}" method="post">
+                                    @csrf
+                                    @method('GET')
+                                    <div class="mb-3 ">
+                                        <label for="ngay_ket_thuc" class="form-label">Đến ngày:</label>
+                                        <input type="date" class="form-control" id="ngay_ket_thuc" name="ngay_ket_thuc">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-2">
+                                <form action="{{ route('dashboard') }}" method="post" class=" mb-3 ">
+                                    @csrf
+                                    @method('GET')
+                                    <label for="ngay_ket_thuc" class="form-label">Lọc:</label>
+                                    <select class="form-select ">
+                                        <option>Theo tháng</option>
+                                        <option>Theo năm</option>
+                                        <option>Theo Qúy</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -115,88 +145,59 @@
                     </div> <!-- end sales -->
                 </div> <!-- end row -->
 
-                <!-- Start Monthly Sales -->
-                <div class="row">
-                    <div class="col-md-6 col-xl-8">
-                        <div class="card">
-
-                            <div class="card-header">
-                                <div class="d-flex align-items-center">
-                                    <div class="border border-dark rounded-2 me-2 widget-icons-sections">
-                                        <i data-feather="bar-chart" class="widgets-icons"></i>
-                                    </div>
-                                    <h5 class="card-title mb-0">Doanh thu</h5>
-                                </div>
-                            </div>
-
-                            <div class="card-body">
-                                <div id="monthly-sales" class="apex-charts"></div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xl-4">
-                        <div class="card overflow-hidden">
-                            <div class="card-header">
-                                <div class="d-flex align-items-center">
-                                    <div class="border border-dark rounded-2 me-2 widget-icons-sections">
-                                        <i data-feather="tablet" class="widgets-icons"></i>
-                                    </div>
-                                    <h5 class="card-title mb-0">Sản phẩm mới nhất</h5>
-                                </div>
-                            </div>
-
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-traffic mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Ảnh</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Giá</th>
-                                                <th>Hành động</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($views_product as $product)
-                                                <tr>
-                                                    <td>
-                                                        <img src="{{ asset('storage/' . $product->anh_san_pham) }}"
-                                                            alt="{{ $product->ten_san_pham }}"
-                                                            style="width: 50px; height: 50px;">
-                                                    </td>
-                                                    <td>{{ $product->ten_san_pham }}</td>
-                                                    <td>{{ number_format($product->gia_goc, 0, ',', '.') }}.000 VND</td>
-                                                    {{-- <td><a href="{{ route('san_phams.show') }}"><i class="fa-solid fa-square-plus"></i></a></td> --}}
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                <!-- End Monthly Sales -->
 
                 <div class="row">
                     <div class="col-md-6 col-xl-6">
                         <div class="card">
 
-                            <div class="card-header">
+                            <div class="card-header text-bg-dark">
                                 <div class="d-flex align-items-center">
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                         <i data-feather="minus-square" class="widgets-icons"></i>
                                     </div>
-                                    <h5 class="card-title mb-0">Audiences By Time Of Day</h5>
+                                    <h5 class="card-title mb-0">Biểu đồ cột doanh thu</h5>
                                 </div>
                             </div>
 
                             <div class="card-body">
-                                <div id="audiences-daily" class="apex-charts mt-n3"></div>
+                                <canvas id="myChart1" height="200"></canvas>
+                                <script>
+                                    var ctx = document.getElementById('myChart1').getContext('2d');
+                                    var myChart = new Chart(ctx, {
+                                        type: 'bar',
+                                        data: {
+                                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Số tiền'],
+                                            datasets: [{
+                                                label: '# of Votes',
+                                                data: [12, 19, 3, 5, 2, 3],
+                                                backgroundColor: [
+                                                    'rgba(255, 99, 132, 0.2)',
+                                                    'rgba(54, 162, 235, 0.2)',
+                                                    'rgba(255, 206, 86, 0.2)',
+                                                    'rgba(75, 192, 192, 0.2)',
+                                                    'rgba(153, 102, 255, 0.2)',
+                                                    'rgba(255, 159, 64, 0.2)'
+                                                ],
+                                                borderColor: [
+                                                    'rgba(255, 99, 132, 1)',
+                                                    'rgba(54, 162, 235, 1)',
+                                                    'rgba(255, 206, 86, 1)',
+                                                    'rgba(75, 192, 192, 1)',
+                                                    'rgba(153, 102, 255, 1)',
+                                                    'rgba(255, 159, 64, 1)'
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        }
+                                    });
+                                </script>
                             </div>
 
                         </div>
@@ -205,151 +206,147 @@
                     <div class="col-md-6 col-xl-6">
                         <div class="card overflow-hidden">
 
-                            <div class="card-header">
+                            <div class="card-header text-bg-dark">
                                 <div class="d-flex align-items-center">
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                         <i data-feather="table" class="widgets-icons"></i>
                                     </div>
-                                    <h5 class="card-title mb-0">Most Visited Pages</h5>
+                                    <h5 class="card-title mb-0">Biểu đồ % đơn hàng</h5>
                                 </div>
                             </div>
 
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-traffic mb-0">
-                                        <tbody>
+                            <div class="card-body">
+                                <div class="container">
+                                    <canvas id="myChart2" height="370"></canvas>
+                                </div>
+                            </div>
+                        </div>
 
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Thêm thư viện Chart.js nếu chưa có -->
+                        <script>
+                            var ctx2 = document.getElementById('myChart2').getContext('2d');
+                            var data = [300, 50, 100, 234, 45];
+                            var myChart = new Chart(ctx2, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [
+                                        'Xác nhận',
+                                        'Chờ xử lý',
+                                        'Thành công',
+                                        'Đã hủy',
+                                        'Hoàn'
+                                    ],
+                                    datasets: [{
+                                        label: 'My First Dataset',
+                                        data: data,
+                                        backgroundColor: [
+                                            '#023cba',
+                                            '#f5f52c',
+                                            '#0e9104',
+                                            '#f20c0c',
+                                            '#ba6a02'
+                                        ],
+                                        hoverOffset: 4
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    plugins: {
+                                        tooltip: {
+                                            callbacks: {
+                                                label: function(tooltipItem) {
+                                                    // Tính phần trăm
+                                                    var total = data.reduce((a, b) => a + b, 0);
+                                                    var currentValue = tooltipItem.raw;
+                                                    var percentage = ((currentValue / total) * 100).toFixed(2);
+                                                    return tooltipItem.label + ': ' + percentage + '%';
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+
+                    </div>
+
+
+
+
+
+                    <!-- Start Monthly Sales -->
+                    <div class="row">
+                        <div class="col-md-6 col-xl-8">
+                            <div class="card">
+
+                                <div class="card-header">
+                                    <div class="d-flex align-items-center">
+                                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
+                                            <i data-feather="bar-chart" class="widgets-icons"></i>
+                                        </div>
+                                        <h5 class="card-title mb-0">Địa chỉ</h5>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <iframe style="width:100%;"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.863806019078!2d105.74468687476954!3d21.038134787457476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455e940879933%3A0xcf10b34e9f1a03df!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1svi!2s!4v1728399016270!5m2!1svi!2s"
+                                        height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card overflow-hidden">
+                                <div class="card-header">
+                                    <div class="d-flex align-items-center">
+                                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
+                                            <i data-feather="tablet" class="widgets-icons"></i>
+                                        </div>
+                                        <h5 class="card-title mb-0">Sản phẩm mới nhất</h5>
+                                    </div>
+                                </div>
+
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-traffic mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>Page name</th>
-                                                    <th>Visitors</th>
-                                                    <th>Unique</th>
-                                                    <th colspan="2">Bounce rate</th>
+                                                    <th>Ảnh</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Giá</th>
+                                                    <th>Hành động</th>
                                                 </tr>
                                             </thead>
-
-                                            <tr>
-                                                <td>
-                                                    /home
-                                                    <a href="#" class="ms-1" aria-label="Open website">
-                                                        <i data-feather="link" class="ms-1 text-primary"
-                                                            style="height: 15px; width: 15px;"></i>
-                                                    </a>
-                                                </td>
-                                                <td>5,896</td>
-                                                <td>3,654</td>
-                                                <td>82.54%</td>
-                                                <td class="w-25">
-                                                    <div id="sparkline-bounce-1" class="apex-charts"></div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    /about.html
-                                                    <a href="#" class="ms-1" aria-label="Open website">
-                                                        <i data-feather="link" class="ms-1 text-primary"
-                                                            style="height: 15px; width: 15px;"></i>
-                                                    </a>
-                                                </td>
-                                                <td>3,898</td>
-                                                <td>3,450</td>
-                                                <td>76.29%</td>
-                                                <td class="w-25">
-                                                    <div id="sparkline-bounce-2" class="apex-charts"></div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    /index.html
-                                                    <a href="#" class="ms-1" aria-label="Open website">
-                                                        <i data-feather="link" class="ms-1 text-primary"
-                                                            style="height: 15px; width: 15px;"></i>
-                                                    </a>
-                                                </td>
-                                                <td>3,057</td>
-                                                <td>2,589</td>
-                                                <td>72.68%</td>
-                                                <td class="w-25">
-                                                    <div id="sparkline-bounce-3" class="apex-charts"></div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    /invoice.html
-                                                    <a href="#" class="ms-1" aria-label="Open website">
-                                                        <i data-feather="link" class="ms-1 text-primary"
-                                                            style="height: 15px; width: 15px;"></i>
-                                                    </a>
-                                                </td>
-                                                <td>867</td>
-                                                <td>795</td>
-                                                <td>44.78%</td>
-                                                <td class="w-25">
-                                                    <div id="sparkline-bounce-4" class="apex-charts"></div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    /docs/
-                                                    <a href="#" class="ms-1" aria-label="Open website">
-                                                        <i data-feather="link" class="ms-1 text-primary"
-                                                            style="height: 15px; width: 15px;"></i>
-                                                    </a>
-                                                </td>
-                                                <td>958</td>
-                                                <td>801</td>
-                                                <td>41.15%</td>
-                                                <td class="w-25">
-                                                    <div id="sparkline-bounce-5" class="apex-charts"></div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    /service.html
-                                                    <a href="#" class="ms-1" aria-label="Open website">
-                                                        <i data-feather="link" class="ms-1 text-primary"
-                                                            style="height: 15px; width: 15px;"></i>
-                                                    </a>
-                                                </td>
-                                                <td>658</td>
-                                                <td>589</td>
-                                                <td>32.65%</td>
-                                                <td class="w-25">
-                                                    <div id="sparkline-bounce-6" class="apex-charts"></div>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    /analytical.html
-                                                    <a href="#" class="ms-1" aria-label="Open website">
-                                                        <i data-feather="link" class="ms-1 text-primary"
-                                                            style="height: 15px; width: 15px;"></i>
-                                                    </a>
-                                                </td>
-                                                <td>457</td>
-                                                <td>859</td>
-                                                <td>32.65%</td>
-                                                <td class="w-25">
-                                                    <div id="sparkline-bounce-7" class="apex-charts"></div>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
+                                            <tbody>
+                                                @foreach ($views_product as $product)
+                                                    <tr>
+                                                        <td>
+                                                            <img src="{{ asset('storage/' . $product->anh_san_pham) }}"
+                                                                alt="{{ $product->ten_san_pham }}"
+                                                                style="width: 50px; height: 50px;">
+                                                        </td>
+                                                        <td>{{ $product->ten_san_pham }}</td>
+                                                        <td>{{ number_format($product->gia_goc, 0, ',', '.') }}.000 VND
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div>
-                </div>
 
-            </div> <!-- container-fluid -->
-        </div> <!-- content -->
-    </div>
-@endsection
+
+                    </div>
+                    <!-- End Monthly Sales -->
+
+
+                </div> <!-- container-fluid -->
+            </div> <!-- content -->
+        </div>
+    @endsection

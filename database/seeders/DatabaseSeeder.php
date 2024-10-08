@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             SanPhamSeeder::class,
             BienTheSanPhamSeeder::class,
             AnhSanPhamSeeder::class,
+            DonHangSeeder::class,
         ]);
     }
 }

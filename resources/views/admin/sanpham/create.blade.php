@@ -52,13 +52,9 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="danh_muc_id" class="form-label">Danh mục</label>
-<<<<<<< HEAD
                                                 <select class="form-select @error('danh_muc_id') is-invalid @enderror"
                                                     name="danh_muc_id" id="danh_muc_id" required>
                                                     <option value="">Chọn danh mục</option>
-=======
-                                                <select class="form-select" name="danh_muc_id" id="danh_muc_id">
->>>>>>> c24463c45610facdd31fb595d664ef62e7d000ee
                                                     @foreach ($danh_mucs as $id => $ten_danh_muc)
                                                         <option value="{{ $id }}"
                                                             {{ old('danh_muc_id') == $id ? 'selected' : '' }}>
@@ -93,18 +89,6 @@
                                                         style="display: none; width: 200px;">
                                                 </div>
                                             </div>
-<<<<<<< HEAD
-=======
-                                            {{-- <div class="mb-3">
-                                                <label for="so_luong" class="form-label">Số lượng</label>
-                                                <input type="number" id="so_luong" name="so_luong"
-                                                    class="form-control @error('so_luong') is-invalid @enderror"
-                                                    value="{{ old('so_luong') }}" >
-                                                @error('so_luong')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div> --}}
->>>>>>> c24463c45610facdd31fb595d664ef62e7d000ee
                                             <div class="mb-3">
                                                 <label for="ma_ta_san_pham" class="form-label">Mô tả sản phẩm</label>
                                                 <input type="text" id="ma_ta_san_pham" name="ma_ta_san_pham"

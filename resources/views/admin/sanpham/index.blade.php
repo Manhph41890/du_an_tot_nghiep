@@ -167,16 +167,11 @@
                                                             <i
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                         </a>
-                                                        <form action="{{ route('sanphams.destroy', $item->id) }}"
-                                                            method="POST" style="display:inline;"
-                                                            onsubmit="return confirm('Bạn có muốn xóa sản phẩm này không?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" style="border: none; background: none;">
-                                                                <i
-                                                                    class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
-                                                            </button>
-                                                        </form>
+                                                        <button type="button" class="btn btn-link p-0"
+                                                            onclick="showDeleteModal({{ $item->id }})">
+                                                            <i
+                                                                class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -192,4 +187,39 @@
             </div> <!-- container-fluid -->
         </div>
     </div>
+
+    <!-- Modal xác nhận xóa -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xóa sản phẩm này không?
+                </div>
+                <div class="modal-footer">
+                    <form id="deleteForm" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-danger">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showDeleteModal(productId) {
+            // Cập nhật form với action là route xóa sản phẩm
+            let deleteForm = document.getElementById('deleteForm');
+            deleteForm.action = '/sanphams/' + productId;
+
+            // Hiển thị modal
+            let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
+        }
+    </script>
 @endsection

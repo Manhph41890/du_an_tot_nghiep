@@ -24,7 +24,6 @@ use App\Http\Controllers\UserController;
 */
 
 
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 

@@ -14,6 +14,16 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
+                        <!-- Hiển thị thông báo thành công -->
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                                <div class="mt-3">
+                                    <a href="{{ route('sanphams.create') }}" class="btn btn-primary">Thêm sản phẩm khác</a>
+                                    <a href="{{ route('sanphams.index') }}" class="btn btn-secondary">Quay lại danh sách</a>
+                                </div>
+                            </div>
+                        @endif
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -113,7 +123,8 @@
                                                 <input class="form-check-input @error('is_active') is-invalid @enderror"
                                                     type="radio" name="is_active" id="trang_thai_hide" value="0"
                                                     {{ old('is_active') == 0 ? 'checked' : '' }}>
-                                                <label class="form-check-label text-danger" for="trang_thai_hide">Ẩn</label>
+                                                <label class="form-check-label text-danger"
+                                                    for="trang_thai_hide">Ẩn</label>
                                             </div>
                                             @error('is_active')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -127,7 +138,8 @@
                             <div class="card mb-3">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <h5 class="card-title mb-0">Biến thể sản phẩm</h5>
-                                    <button type="button" class="btn btn-success" id="add-variant">Thêm biến thể</button>
+                                    <button type="button" class="btn btn-success" id="add-variant">Thêm biến
+                                        thể</button>
                                 </div>
                                 <div class="card-body">
                                     <div id="variant-container">

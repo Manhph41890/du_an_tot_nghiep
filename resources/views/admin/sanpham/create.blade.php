@@ -62,7 +62,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="danh_muc_id" class="form-label">Danh mục</label>
-                                                <select class="form-select" name="danh_muc_id" id="danh_muc_id">
+                                                <select class="form-select @error('danh_muc_id') is-invalid @enderror"
+                                                    name="danh_muc_id" id="danh_muc_id" required>
                                                     <option value="">Chọn danh mục</option>
                                                     @foreach ($danh_mucs as $id => $ten_danh_muc)
                                                         <option value="{{ $id }}"

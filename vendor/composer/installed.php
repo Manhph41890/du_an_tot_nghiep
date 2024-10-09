@@ -3,7 +3,11 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => 'e5541c4a509af4f850e955ffe45fe547469fed30',
+=======
+        'reference' => '779983557a4af303e2a6f2f58d0f4f1df19a5bbf',
+>>>>>>> 83875f0bd1400ceb8bb858fbaf8431015b1b37d7
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -382,7 +386,11 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => 'e5541c4a509af4f850e955ffe45fe547469fed30',
+=======
+            'reference' => '779983557a4af303e2a6f2f58d0f4f1df19a5bbf',
+>>>>>>> 83875f0bd1400ceb8bb858fbaf8431015b1b37d7
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -407,9 +415,9 @@
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
-            'pretty_version' => 'v1.34.0',
-            'version' => '1.34.0.0',
-            'reference' => '511e9c95b0f3ee778dc9e11e242bcd2af8e002cd',
+            'pretty_version' => 'v1.35.0',
+            'version' => '1.35.0.0',
+            'reference' => '992bc2d9e52174c79515967f30849d21daa334d8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/sail',
             'aliases' => array(),
@@ -557,9 +565,9 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v5.3.0',
-            'version' => '5.3.0.0',
-            'reference' => '3abf7425cd284141dc5d8d14a9ee444de3345d1a',
+            'pretty_version' => 'v5.3.1',
+            'version' => '5.3.1.0',
+            'reference' => '8eea230464783aa9671db8eea6f8c6ac5285794b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
@@ -656,9 +664,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '10.5.35',
-            'version' => '10.5.35.0',
-            'reference' => '7ac8b4e63f456046dcb4c9787da9382831a1874b',
+            'pretty_version' => '10.5.36',
+            'version' => '10.5.36.0',
+            'reference' => 'aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),

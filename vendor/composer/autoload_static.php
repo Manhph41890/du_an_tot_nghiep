@@ -315,13 +315,13 @@ class ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
-            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
+            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
+            1 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
         ),
         'Spatie\\Ignition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/ignition/src',
-            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            1 => __DIR__ . '/..' . '/spatie/ignition/src',
         ),
         'Spatie\\FlareClient\\' => 
         array (
@@ -357,8 +357,8 @@ class ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (

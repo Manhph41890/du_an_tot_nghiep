@@ -126,15 +126,14 @@ class SanPhamController extends Controller
             $product->save();
 
             DB::commit();
-            return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được thêm thành công.');
+            // Chuyển hướng về trang create với thông báo thành công
+            return redirect()->route('sanphams.create')->with('success', 'Sản phẩm đã được thêm thành công. Bạn có muốn thêm sản phẩm khác không?');
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error('Lỗi khi thêm sản phẩm: ' . $exception->getMessage());
             return back()->withErrors('Đã xảy ra lỗi khi thêm sản phẩm. Vui lòng thử lại.');
         }
     }
-
-
     private function handleImageUpload($request, $imageField)
     {
         if ($request->hasFile($imageField)) {
@@ -152,7 +151,7 @@ class SanPhamController extends Controller
     public function show(san_pham $san_pham, $id)
     {
         //
-        
+
     }
 
     /**

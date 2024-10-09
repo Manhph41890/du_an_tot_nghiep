@@ -31,8 +31,8 @@ class DanhGiaController extends Controller
         // Lọc theo tên sản phẩm
         if ($request->has('search_product_name') && !empty($request->input('search_product_name'))) {
             $search_product_name = $request->input('search_product_name');
-            $query->whereHas('users', function ($q) use ($search_product_name) {
-                $q->where('ho_ten', 'like', '%' . $search_product_name . '%');
+            $query->whereHas('san_phams', function ($q) use ($search_product_name) {
+                $q->where('ten_san_pham', 'like', '%' . $search_product_name . '%');
             });
         }
 

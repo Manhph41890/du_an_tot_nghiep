@@ -15,7 +15,7 @@ class DanhGiaController extends Controller
      */
     public function index(Request $request)
     {
-    
+
         $query = danh_gia::query();
 
         // Lọc điểm số từ 0 đến 10
@@ -38,7 +38,7 @@ class DanhGiaController extends Controller
 
         // Lấy danh sách đã lọc
         $params = [];
-        $params['list'] = $query->get(); // Execute the query to get results
+        $params['list'] = $query->get();
         return view('admin.danhgia.index', $params);
     }
 
@@ -68,7 +68,6 @@ class DanhGiaController extends Controller
 
         // Trả về view admin.danhgia.show với dữ liệu đánh giá
         return view('admin.danhgia.show', compact('danhgia'));
-
     }
 
     /**

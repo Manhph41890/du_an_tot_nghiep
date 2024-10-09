@@ -25,8 +25,9 @@
 
                             <div class="row">
                                 <div class="col-4">
-                                    <form action="{{ route('danhgia.index') }}" method="GET">
+                                    <form action="{{ route('danhgia.index') }}" method="POST">
                                         @csrf
+                                        @method('GET')
                                         <input type="text" id="search_product_name" name="search_product_name"
                                             placeholder="Tìm kiếm sản phẩm" value="{{ request('search_product_name') }}"
                                             class="form-control" onchange="this.form.submit();">
@@ -35,8 +36,9 @@
                                 
   
                                 <div class="col-3">
-                                    <form action="{{ route('danhgia.index') }}" method="GET" id="filter-form">
+                                    <form action="{{ route('danhgia.index') }}" method="POST" id="filter-form">
                                         @csrf
+                                        @method('GET')
                                         <select class="form-select" name="diem_so" onchange="document.getElementById('filter-form').submit();">
                                             <option value="">Tất cả điểm số</option>
                                             @for ($i = 1; $i <= 5; $i++)

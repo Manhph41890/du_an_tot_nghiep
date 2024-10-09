@@ -15,7 +15,7 @@ class DanhGiaController extends Controller
      */
     public function index(Request $request)
     {
-    
+
         $query = danh_gia::query();
 
         // Lọc điểm số từ 0 đến 10
@@ -31,14 +31,14 @@ class DanhGiaController extends Controller
         // Lọc theo tên sản phẩm
         if ($request->has('search_product_name') && !empty($request->input('search_product_name'))) {
             $search_product_name = $request->input('search_product_name');
-            $query->whereHas('users', function ($q) use ($search_product_name) {
-                $q->where('ho_ten', 'like', '%' . $search_product_name . '%');
+            $query->whereHas('san_phams', function ($q) use ($search_product_name) {
+                $q->where('ten_san_pham', 'like', '%' . $search_product_name . '%');
             });
         }
 
         // Lấy danh sách đã lọc
         $params = [];
-        $params['list'] = $query->get(); // Execute the query to get results
+        $params['list'] = $query->get();
         return view('admin.danhgia.index', $params);
     }
 
@@ -68,7 +68,6 @@ class DanhGiaController extends Controller
 
         // Trả về view admin.danhgia.show với dữ liệu đánh giá
         return view('admin.danhgia.show', compact('danhgia'));
-
     }
 
     /**

@@ -186,6 +186,9 @@
                             <li>
                                 <a class='tp-link' href='{{ route('danhgia.index') }}'>Danh sách</a>
                             </li>
+                            {{-- <li>
+                                <a class='tp-link' href='{{ route('danhgia.show', ['id' => $item->id]) }}'>Hiển thị</a>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>

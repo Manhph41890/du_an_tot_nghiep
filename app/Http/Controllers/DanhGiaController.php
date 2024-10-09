@@ -61,9 +61,14 @@ class DanhGiaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(danh_gia $danh_gia)
+    public function show($id)
     {
-        //
+        $danhgia = danh_gia::findOrFail($id);  // Tìm đánh giá theo id
+        dd($danhgia);
+
+        // Trả về view admin.danhgia.show với dữ liệu đánh giá
+        return view('admin.danhgia.show', compact('danhgia'));
+
     }
 
     /**

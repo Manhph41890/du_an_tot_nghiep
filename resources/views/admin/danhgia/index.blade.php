@@ -74,26 +74,52 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Id</th>
-                                                <th scope="col">ID sản phẩm</th>
-                                                <th scope="col">Tên Người Dùng</th>
+                                                <th scope="col">Tên sản phẩm</th>
+                                                <th scope="col">Tên người dùng</th>
                                                 <th scope="col">Ngày đánh giá</th>
                                                 <th scope="col">Điểm số</th>
-                                                <th scope="col">Bình luận</th>
+                                                {{-- <th scope="col">Bình luận</th> --}}
+                                                <th scope="col">Thao tác</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             @foreach ($list as $item)
-                                                <tr>
-                                                    <td>{{ $item->id }}</td>
-                                                    <td>{{ $item->san_phams?->ten_san_pham }}</td>
-                                                    <td>{{ $item->users?->ho_ten }}</td>
-                                                    <td>{{ $item->ngay_danh_gia }}</td>
-                                                    <td>{{ $item->diem_so }}</td>
-                                                    <td>{{ $item->binh_luan }}</td>
-                                                </tr>
+                                            <tr>
+                                                <td>{{ $item->id }}</td>
+                                                <td>{{ $item->san_phams?->ten_san_pham }}</td>
+                                                <td>{{ $item->users?->ho_ten }}</td>
+                                                <td>{{ $item->ngay_danh_gia }}</td>
+                                                <td>{{ $item->diem_so }}</td>
+                                                {{-- <td>{{ $item->binh_luan }}</td> --}}
+                                                <td>
+                                                    <div>
+                                                        <!-- Thay đổi data-bs-target để tương ứng với ID của item -->
+                                                        <a href="{{ route('danhgia.show', $item->id) }}" data-bs-toggle="modal" data-bs-target="#myModal{{ $item->id }}">
+                                                            <i class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                        </a>
+                                        
+                                                        <!-- Đảm bảo mỗi modal có ID riêng -->
+                                                        <div class="modal fade" id="myModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $item->id }}" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    {{-- <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel{{ $item->id }}">Chi tiết đánh giá</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div> --}}
+                                                                    <div class="modal-body">
+                                                                        @include('admin.danhgia.show', ['post' => $item])
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                             @endforeach
-                                        </tbody>
+                                        </tbody>                                        
 
                                     </table>
                                 </div>

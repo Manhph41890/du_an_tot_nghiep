@@ -214,3 +214,8 @@
 #26 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->terminate(Object(Symfony\\Component\\Console\\Input\\ArgvInput), 0)
 #27 {main}
 "} 
+[2024-10-10 15:49:41] local.INFO: Bắt đầu quá trình đăng ký.  
+[2024-10-10 15:49:42] local.INFO: Dữ liệu đã xác thực:  {"ho_ten":"lethu","email":"123@gmail.com","so_dien_thoai":"012345678","password":"123@gmail.com"} 
+[2024-10-10 15:49:42] local.INFO: Người dùng đã được tạo:  {"user_id":3} 
+[2024-10-10 15:49:42] local.INFO: Kiểm tra voucher:  {"existingUserWithVoucher":false} 
+[2024-10-10 15:49:42] local.INFO: Đăng nhập tự động cho người dùng:  {"user_id":3} 

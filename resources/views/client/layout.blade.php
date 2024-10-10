@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from htmldemo.net/looki/looki/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Oct 2024 09:35:59 GMT -->
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,11 +13,11 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/favicon.ico') }}" />
 
-    <!--********************************** 
-        all css files 
+    <!--**********************************
+        all css files
     *************************************-->
 
-    <!--*************************************************** 
+    <!--***************************************************
        fontawesome,bootstrap,plugins and main style css
      ***************************************************-->
     <!-- cdn links -->
@@ -31,11 +32,11 @@
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
 
-    <!--**************************** 
-         Minified  css 
+    <!--****************************
+         Minified  css
     ****************************-->
 
-    <!--*********************************************** 
+    <!--***********************************************
        vendor min css,plugins min css,style min css
      ***********************************************-->
     <!-- <link rel="stylesheet" href="('assets/client') }}/css/vendor/vendor.min.css" />
@@ -44,13 +45,13 @@
 </head>
 
 <body>
-    
-     @include('client.partials.header')
+
+    @include('client.partials.header')
 
 
-      @yield('content')
-<!-- brand slider end -->
-   @include('client.partials.footer')
+    @yield('content')
+    <!-- brand slider end -->
+    @include('client.partials.footer')
 
 
     <script src="{{ asset('assets/client/js/vendor/jquery-3.6.0.min.js') }}"></script>
@@ -74,6 +75,7 @@
 
 
 <!-- Mirrored from htmldemo.net/looki/looki/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Oct 2024 09:35:59 GMT -->
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -83,11 +85,11 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/favicon.ico') }}" />
 
-    <!--********************************** 
-        all css files 
+    <!--**********************************
+        all css files
     *************************************-->
 
-    <!--*************************************************** 
+    <!--***************************************************
        fontawesome,bootstrap,plugins and main style css
      ***************************************************-->
     <!-- cdn links -->
@@ -102,11 +104,11 @@
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
 
-    <!--**************************** 
-         Minified  css 
+    <!--****************************
+         Minified  css
     ****************************-->
 
-    <!--*********************************************** 
+    <!--***********************************************
        vendor min css,plugins min css,style min css
      ***********************************************-->
     <!-- <link rel="stylesheet" href="('assets/client') }}/css/vendor/vendor.min.css" />
@@ -115,13 +117,13 @@
 </head>
 
 <body>
-    
-     @include('client.partials.header')
+
+    @include('client.partials.header')
 
 
-      @yield('content')
-<!-- brand slider end -->
-   @include('client.partials.footer')
+    @yield('content')
+    <!-- brand slider end -->
+    @include('client.partials.footer')
 
 
     <script src="{{ asset('assets/client/js/vendor/jquery-3.6.0.min.js') }}"></script>

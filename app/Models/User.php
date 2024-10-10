@@ -26,13 +26,21 @@ class User extends Authenticatable
         'ngay_sinh',
         'dia_chi',
         'gioi_tinh',
-        'mat_khau',
+        'password',
         'is_active'
     ];
-    public function chuc_vus(){
+    public function chuc_vus()
+    {
         return $this->belongsTo(chuc_vu::class, 'id');
     }
-
+    public function chuc_vu()
+    {
+        return $this->belongsTo(chuc_vu::class,'chuc_vu_id');
+    }
+    public function khuyen_mai()
+    {
+        return $this->hasOne(khuyen_mai::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

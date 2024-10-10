@@ -12,4 +12,9 @@ class chuc_vu extends Model
         'ten_chuc_vu',
         'mo_ta_chuc_vu',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'chuc_vu_id');
+    }
 }

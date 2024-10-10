@@ -24,7 +24,7 @@
 
                         <div class="card-header d-flex justify-content-between">
                             <div>
-                                <a href="{{ route('phuongthucvanchuyens.create') }}" class="btn btn-success">Thêm Phương Thức
+                                <a href="{{ route('phuongthucvanchuyens.create') }}" class="btn btn-success">Thêm PT
                                     Vận Chuyển</a>
                             </div>
                             <!-- Hiển thị thông báo thành công -->
@@ -45,7 +45,7 @@
 
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
+                                                <th scope="col">ID</th>
                                                 <th scope="col">Kiểu Vận Chuyển</th>
                                                 <th scope="col">Giá Vận Chuyển</th>
                                                 <th scope="col">Hành Động</th>

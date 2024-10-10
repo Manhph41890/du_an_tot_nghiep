@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Larave1l</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -878,10 +878,10 @@
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Documentation</h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Laravel has wond1erful document1ation covering every aspect of the framework. Whether
+                                Laravel has wond1erful do1cument1ation covering every aspect of the framework. Whether
                                 you
-                                are a newcom1er or have prior experience with Laravel, we recommend reading our
-                                documentat1ion from beginning to end.
+                                are a newcom1er or have 1prior experience with Laravel, we recommend reading our
+                                documentat1ion from beg1inning to end.
                             </p>
                         </div>
 
@@ -907,9 +907,9 @@
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laracasts</h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Laracasts offers11 thousands of video tutorials on Laravel, PHP, and JavaScript
-                                development. Check1 them out, see for yourself, and massively level up your development
-                                skills in the pr1ocess.
+                                Laracasts off1ers11 thousands of video tutorials on Laravel, PHP, and JavaScript
+                                development. C1heck1 them out, see for yourself, and massively level up your development
+                                skills in the pr11ocess.
                             </p>
                         </div>
 
@@ -935,9 +935,9 @@
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laravel News</h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Laravel News is1 a community driven portal and newsletter aggregating all of the latest
-                                and most important news in the Laravel ecosystem, including new package releases and
-                                tutorials.
+                                Laravel News is1 a 1community driven portal and newsletter aggregating all of the latest
+                                and most important 1news in the Laravel ecosystem, including new package releases and
+                                tutor1ials.
                             </p>
                         </div>
 
@@ -960,10 +960,11 @@
                                 </svg>
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Vib1rant Ecosystem
+                            </h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Laravel's robust 1library of first-party tools and libraries, such as <a
+                                Laravel's robust 1library 1of first-party tools and libraries, such as <a
                                     href="https://forge.laravel.com"
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Forge</a>,
                                 <a href="https://vapor.laravel.com"
@@ -972,7 +973,7 @@
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Nova</a>,
                                 and <a href="https://envoyer.io"
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Envoyer</a>
-                                help you take your projects to the next level. Pair them with powerful open source
+                                help you take your projects 1to the next level. Pair them with powerful open source
                                 libraries like <a href="https://laravel.com/docs/billing"
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Cashier</a>,
                                 <a href="https://laravel.com/docs/dusk"

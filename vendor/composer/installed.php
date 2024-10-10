@@ -3,11 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-<<<<<<< Updated upstream
-        'reference' => '8de1f5d89059f1fb988d023001d48c723512ad44',
-=======
-        'reference' => '6bf0c0f5154628d3f3db235ff14343d9df27bb29',
->>>>>>> Stashed changes
+        'reference' => 'e4924d8b479d33686c3d94115018b7dd0f68d922',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -386,11 +382,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-<<<<<<< Updated upstream
-            'reference' => '8de1f5d89059f1fb988d023001d48c723512ad44',
-=======
-            'reference' => '6bf0c0f5154628d3f3db235ff14343d9df27bb29',
->>>>>>> Stashed changes
+            'reference' => 'e4924d8b479d33686c3d94115018b7dd0f68d922',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -415,9 +407,9 @@
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
-            'pretty_version' => 'v1.34.0',
-            'version' => '1.34.0.0',
-            'reference' => '511e9c95b0f3ee778dc9e11e242bcd2af8e002cd',
+            'pretty_version' => 'v1.35.0',
+            'version' => '1.35.0.0',
+            'reference' => '992bc2d9e52174c79515967f30849d21daa334d8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/sail',
             'aliases' => array(),
@@ -478,9 +470,9 @@
             'dev_requirement' => false,
         ),
         'league/flysystem' => array(
-            'pretty_version' => '3.29.0',
-            'version' => '3.29.0.0',
-            'reference' => '0adc0d9a51852e170e0028a60bd271726626d3f0',
+            'pretty_version' => '3.29.1',
+            'version' => '3.29.1.0',
+            'reference' => 'edc1bb7c86fab0776c3287dbd19b5fa278347319',
             'type' => 'library',
             'install_path' => __DIR__ . '/../league/flysystem',
             'aliases' => array(),
@@ -565,9 +557,9 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v5.3.0',
-            'version' => '5.3.0.0',
-            'reference' => '3abf7425cd284141dc5d8d14a9ee444de3345d1a',
+            'pretty_version' => 'v5.3.1',
+            'version' => '5.3.1.0',
+            'reference' => '8eea230464783aa9671db8eea6f8c6ac5285794b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
@@ -664,9 +656,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '10.5.35',
-            'version' => '10.5.35.0',
-            'reference' => '7ac8b4e63f456046dcb4c9787da9382831a1874b',
+            'pretty_version' => '10.5.36',
+            'version' => '10.5.36.0',
+            'reference' => 'aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
@@ -774,8 +766,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(

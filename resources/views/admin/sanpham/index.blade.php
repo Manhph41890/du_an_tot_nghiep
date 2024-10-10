@@ -7,13 +7,6 @@
             border: 1px solid #ddd;
             padding: 10px;
             border-radius: 5px;
-            display: none;
-            /* Ẩn các biến thể ban đầu */
-        }
-
-        .toggle-variants {
-            cursor: pointer;
-            /* Thêm con trỏ tay cho các nút xổ ra */
         }
     </style>
 @endsection
@@ -26,6 +19,17 @@
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4>
                     </div>
+                    <form method="GET" action="{{ route('sanphams.index') }}" class="d-flex">
+                        <input type="text" name="search" class="form-control me-2" placeholder="Tìm sản phẩm..."
+                            value="{{ request()->query('search') }}">
+                        <select name="status" class="form-select me-2">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="1" {{ request()->query('status') == '1' ? 'selected' : '' }}>Hiển Thị
+                            </option>
+                            <option value="0" {{ request()->query('status') === '0' ? 'selected' : '' }}>Ẩn</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Tìm</button>
+                    </form>
                 </div>
 
                 <!-- Striped Rows -->
@@ -42,145 +46,150 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
-                        </div>
-                    </div><!-- end card header -->
+                        </div><!-- end card header -->
 
-                    <div class="row">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Id</th>
-                                            <th scope="col">Danh Mục</th>
-                                            <th scope="col">Tên Sản Phẩm</th>
-                                            <th scope="col">Giá Gốc</th>
-                                            <th scope="col">Giá Khuyến Mãi</th>
-                                            <th scope="col">Ảnh Sản Phẩm</th>
-                                            <th scope="col">Số Lượng</th>
-                                            <th scope="col">Mô tả sản Phẩm</th>
-                                            <th scope="col">Trạng Thái</th>
-                                            <th scope="col">Biến Thể</th>
-                                            <th scope="col">Hành Động</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                        {{-- <div id="accordion">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
-                                                            Collapsible Group Item #1
-                                                        </a>
-                                                    </div>
-                                                    <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
-                                                        <div class="card-body">
-                                                            Lorem ipsum..
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-
-                                        @foreach ($data as $index => $item)
+                        <div class="row">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0">
+                                        <thead>
                                             <tr>
-                                                <th scope="row">{{ $index + 1 }}</th>
-                                                <td>{{ $item->danh_muc?->ten_danh_muc }}</td>
-                                                <td>{{ $item->ten_san_pham }}</td>
-                                                <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
-                                                <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
-                                                <td>
-                                                    @if ($item->anh_san_pham)
-                                                        <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
-                                                            alt="Hình ảnh sản phẩm" width="50px">
-                                                    @else
-                                                        <img src="{{ asset('images/placeholder.png') }}" alt="Không có ảnh"
-                                                            width="50px">
-                                                        <!-- Placeholder image -->
-                                                    @endif
-                                                </td>
-                                                <td>{{ $item->so_luong }}</td>
-                                                <td>{{ $item->ma_ta_san_pham }}</td>
-                                                <td>{!! $item->is_active
-                                                    ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                    : '<span class="badge bg-danger">Ẩn</span>' !!}</td>
-
-                                                <td>
-                                                    <div id="variants-{{ $item->id }}" class="variant-list">
-                                                        @if ($item->bien_the_san_phams->isNotEmpty())
-                                                            @foreach ($item->bien_the_san_phams as $variant)
-                                                                @if ($variant->so_luong > 0)
-                                                                    <!-- Kiểm tra số lượng lớn hơn 0 -->
-                                                                    @if ($variant->sizeSanPham && $variant->colorSanPham)
-                                                                        <p>
-                                                                            Size: {{ $variant->sizeSanPham->ten_size }}
-                                                                            -
-                                                                            Màu:
-                                                                            {{ $variant->colorSanPham->ten_color }} -
-                                                                            Số lượng: {{ $variant->so_luong }}
-                                                                        </p>
-                                                                    @endif
-                                                                @endif
-                                                            @endforeach
-                                                        @else
-                                                            <p>Không có biến thể nào.</p>
-                                                        @endif
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('sanphams.edit', $item->id) }}">
-                                                        <i
-                                                            class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
-                                                    </a>
-                                                    <form action="{{ route('sanphams.destroy', $item->id) }}"
-                                                        method="POST" style="display:inline;"
-                                                        onsubmit="return confirm('Bạn có muốn xóa sản phẩm này không?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" style="border: none; background: none;">
-                                                            <i
-                                                                class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Danh Mục</th>
+                                                <th scope="col">Tên Sản Phẩm</th>
+                                                <th scope="col">Giá Gốc</th>
+                                                <th scope="col">Giá Khuyến Mãi</th>
+                                                <th scope="col">Ảnh Sản Phẩm</th>
+                                                <th scope="col">Số Lượng</th>
+                                                <th scope="col">Mô tả sản Phẩm</th>
+                                                <th scope="col">Trạng Thái</th>
+                                                <th scope="col">Biến Thể</th>
+                                                <th scope="col">Hành Động</th>
                                             </tr>
-                                        @endforeach
+                                        </thead>
 
-                                    </tbody>
-                                </table>
+                                        <tbody>
+                                            @foreach ($data as $index => $item)
+                                                <tr>
+                                                    <th scope="row">{{ $index + 1 }}</th>
+                                                    <td>{{ $item->danh_muc?->ten_danh_muc }}</td>
+                                                    <td>{{ $item->ten_san_pham }}</td>
+                                                    <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                    <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                                    <td>
+                                                        @if ($item->anh_san_pham)
+                                                            <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                                alt="Hình ảnh sản phẩm" width="50px">
+                                                        @else
+                                                            <img src="{{ asset('images/placeholder.png') }}"
+                                                                alt="Không có ảnh" width="50px">
+                                                            <!-- Placeholder image -->
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $item->so_luong }}</td>
+                                                    <td>{{ $item->ma_ta_san_pham }}</td>
+                                                    <td>{!! $item->is_active
+                                                        ? '<span class="badge bg-primary">Hiển Thị</span>'
+                                                        : '<span class="badge bg-danger">Ẩn</span>' !!}</td>
+
+                                                    <td>
+                                                        <!-- Nút mở modal -->
+                                                        <button class="btn btn-link" data-bs-toggle="modal"
+                                                            data-bs-target="#variantModal-{{ $item->id }}">
+                                                            Xem Biến Thể
+                                                        </button>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="variantModal-{{ $item->id }}"
+                                                            tabindex="-1"
+                                                            aria-labelledby="variantModalLabel-{{ $item->id }}"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="variantModalLabel-{{ $item->id }}">Biến
+                                                                            Thể của {{ $item->ten_san_pham }}</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        @if ($item->bien_the_san_phams->isNotEmpty())
+                                                                            <table class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Màu Sắc</th>
+                                                                                        <th>Kích Thước</th>
+                                                                                        <th>Số Lượng</th>
+                                                                                        <th>Ảnh Biến Thể</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    @foreach ($item->bien_the_san_phams as $variant)
+                                                                                        <tr>
+                                                                                            <td>{{ $variant->color->ten_color }}
+                                                                                            </td>
+                                                                                            <td>{{ $variant->size->ten_size }}
+                                                                                            </td>
+                                                                                            <td>{{ $variant->so_luong }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @if ($variant->anh_bien_the)
+                                                                                                    <img src="{{ asset('storage/' . $variant->anh_bien_the) }}"
+                                                                                                        alt="Ảnh biến thể"
+                                                                                                        width="50px">
+                                                                                                @else
+                                                                                                    <img src="{{ asset('images/placeholder.png') }}"
+                                                                                                        alt="Không có ảnh"
+                                                                                                        width="50px">
+                                                                                                @endif
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    @endforeach
+                                                                                </tbody>
+                                                                            </table>
+                                                                        @else
+                                                                            <p>Không có biến thể nào cho sản phẩm này.</p>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Đóng</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="{{ route('sanphams.edit', $item->id) }}">
+                                                            <i
+                                                                class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                        </a>
+                                                        <form action="{{ route('sanphams.destroy', $item->id) }}"
+                                                            method="POST" style="display:inline;"
+                                                            onsubmit="return confirm('Bạn có muốn xóa sản phẩm này không?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" style="border: none; background: none;">
+                                                                <i
+                                                                    class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
+
+                        {{ $data->links() }}
                     </div>
-
-                    {{ $data->links() }}
                 </div>
-            </div>
-        </div> <!-- container-fluid -->
+            </div> <!-- container-fluid -->
+        </div>
     </div>
-    </div>
-
-@section('js')
-    <script>
-        document.querySelectorAll('.toggle-variants').forEach(function(toggle) {
-            toggle.addEventListener('click', function() {
-                const targetId = this.getAttribute('data-target');
-                const targetElement = document.querySelector(targetId);
-
-                // Kiểm tra sự tồn tại của phần tử mục tiêu
-                if (targetElement) {
-                    if (targetElement.style.display === "none" || targetElement.style.display === "") {
-                        targetElement.style.display = "block"; // Hiển thị phần tử
-                        this.querySelector('.plus-icon').textContent = '-'; // Đổi biểu tượng
-                    } else {
-                        targetElement.style.display = "none"; // Ẩn phần tử
-                        this.querySelector('.plus-icon').textContent = '+'; // Đổi biểu tượng
-                    }
-                } else {
-                    console.log('Element not found for ID:', targetId);
-                }
-            });
-        });
-    </script>
-@endsection
 @endsection

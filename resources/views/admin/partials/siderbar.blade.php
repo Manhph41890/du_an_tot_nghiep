@@ -79,74 +79,67 @@
                     <a href="#sanpham" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> Sản phẩm </span>
-                    <a href="#sanpham" data-bs-toggle="collapse">
-                        <i data-feather="file-text"></i>
-                        <span> Sản phẩm </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sanpham">
-                    <div class="collapse" id="sanpham">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('sanphams.create') }}'>Thêm</a>
-                                <a class='tp-link' href='{{ route('sanphams.create') }}'>Thêm</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('sanphams.index') }}'>Danh sách</a>
-                                <a class='tp-link' href='{{ route('sanphams.index') }}'>Danh sách</a>
-                            </li>
-                        </ul>
-                    </div>
+
+                        <div class="collapse" id="sanpham">
+                            <div class="collapse" id="sanpham">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='{{ route('sanphams.create') }}'>Thêm</a>
+                                    </li>
+                                    <li>
+                                        <a class='tp-link' href='{{ route('sanphams.index') }}'>Danh sách</a>
+                                    </li>
+                                </ul>
+                            </div>
                 </li>
                 <li>
                     <a href="#phuongthucthanhtoan" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> PT thanh toán </span>
-                    <a href="#phuongthucthanhtoan" data-bs-toggle="collapse">
-                        <i data-feather="file-text"></i>
-                        <span> PT thanh toán </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="phuongthucthanhtoan">
-                    <div class="collapse" id="phuongthucthanhtoan">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('phuongthucthanhtoans.index') }}'>Danh sách</a>
-                                <a class='tp-link' href='{{ route('phuongthucthanhtoans.index') }}'>Danh sách</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('phuongthucthanhtoans.create') }}'>Thêm</a>
-                                <a class='tp-link' href='{{ route('phuongthucthanhtoans.create') }}'>Thêm</a>
-                            </li>
+                        <a href="#phuongthucthanhtoan" data-bs-toggle="collapse">
+                            <i data-feather="file-text"></i>
+                            <span> PT thanh toán </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="phuongthucthanhtoan">
+                            <div class="collapse" id="phuongthucthanhtoan">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='{{ route('phuongthucthanhtoans.index') }}'>Danh
+                                            sách</a>
+
+                                    </li>
+                                    <li>
+                                        <a class='tp-link' href='{{ route('phuongthucthanhtoans.create') }}'>Thêm</a>
+                                    </li>
 
 
-                        </ul>
-                    </div>
+                                </ul>
+                            </div>
                 </li>
                 <li>
                     <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> PT vận chuyển </span>
-                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
-                        <i data-feather="file-text"></i>
-                        <span> PT vận chuyển </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="phuongthucvanchuyen">
-                    <div class="collapse" id="phuongthucvanchuyen">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.index') }}'>Danh sách</a>
-                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.index') }}'>Danh sách</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.create') }}'>Thêm</a>
-                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.create') }}'>Thêm</a>
-                            </li>
+                        <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
+                            <i data-feather="file-text"></i>
+                            <span> PT vận chuyển </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="phuongthucvanchuyen">
+                            <div class="collapse" id="phuongthucvanchuyen">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='{{ route('phuongthucvanchuyens.index') }}'>Danh
+                                            sách</a>
+
+                                    <li>
+                                        <a class='tp-link' href='{{ route('phuongthucvanchuyens.create') }}'>Thêm</a>
+                                    </li>
 
 
-                        </ul>
-                    </div>
+                                </ul>
+                            </div>
                 </li>
 
 
@@ -193,7 +186,7 @@
                         <span>Bài viết </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="baiviet">
+                    <div class="collapse" id="danhgia">
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='{{ route('baiviets.create') }}'>Thêm</a>

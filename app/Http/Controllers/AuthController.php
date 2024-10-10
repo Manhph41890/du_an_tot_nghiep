@@ -232,4 +232,9 @@ class AuthController extends Controller
             'email' => 'Email hoặc mật khẩu không đúng',
         ]);
     }
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Đăng xuất người dùng
+        return redirect('/');
+    }
 }

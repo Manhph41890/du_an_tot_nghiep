@@ -123,15 +123,15 @@
                                 class="img-fluid" />
                         </div>
 
-                        <form id="add-to-cart-form" action="{{ route('cart.add') }}" method="POST">
+                        <form id="add-to-cart-form{{ $sanPhamCT->id }}" action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             <input type="hidden" name="san_pham_id" value="{{ $sanPhamCT->id }}">
                             <div class="product-footer">
                                 <div class="d-flex">
                                     <div class="product-size me-5">
-                                        <h3 class="title">Kích thước</h3>
-                                        <select name="size_san_pham_id" id="size_san_pham_id">
-                                            <option value="">--Chọn--</option>
+                                        <h3 class="title">Size</h3>
+                                        <select name="size_san_pham_id" id="size_san_pham_id{{ $sanPhamCT->id }}">
+                                            <option value="">--Chọn size--</option>
                                             @foreach ($sanPhamCT->bien_the_san_phams as $bienThe)
                                                 <option value="{{ $bienThe->size->id }}">{{ $bienThe->size->ten_size }}
                                                 </option>
@@ -157,14 +157,14 @@
                                                 chọn màu!</span>
 
                                         </div>
-
                                     </div>
                                 </div>
 
                                 <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-20">
                                     <div class="count d-flex">
-                                        <input type="number" name="quantity" min="1" max="10"
-                                            step="1" value="1" required />
+                                        <input type="number" name="quantity" min="1"
+                                            max="{{ $sanPhamCT->so_luong }}" value="1" required
+                                            id="quantity-input" />
                                         <div class="button-group">
                                             <button type="button" class="count-btn increment"
                                                 onclick="incrementQuantity()">

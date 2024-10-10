@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="description" content="{{ $description ?? 'Default description' }}" />
 
-    <title>ArtiCraft Vẽ sáng tạo - Tô hạnh phúc</title>
+    <title>ArtiCraft</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/favicon.ico') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/logo/logo_art.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/fontawesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/ionicons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/simple-line-icons.css') }}" />
@@ -18,9 +18,14 @@
     <link rel="stylesheet" href="{{ asset('assets/client/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/plugins/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/style.min.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
 
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
         .bg-img1 {
             background-image: url('./assets/client/images/banner/bn1.jpg');
             width: 50%;
@@ -41,6 +46,7 @@
             background-repeat: no-repeat;
         }
     </style>
+
 </head>
 
 <body>

@@ -552,6 +552,32 @@
                                 </svg>
                             </a>
                         </div>
+                        <div class="cart-block-links theme1 d-none d-sm-block">
+                            <ul class="d-flex">
+                                @auth
+                                    <li>
+
+                                        <!-- Nếu đã đăng nhập, hiển thị nút Đăng Xuất -->
+                                        <a href="{{ route('auth.logout') }}">
+                                            Đăng Xuất
+                                        </a>
+                                    </li>
+                                @else
+                                    <li><!-- Nếu chưa đăng nhập, hiển thị nút Đăng Nhập và Đăng Ký -->
+                                        <a href="{{ route('auth.login') }}">
+                                            Đăng Nhập
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('auth.register') }}">
+                                            Đăng Ký
+                                        </a>
+                                    </li>
+
+                                @endauth
+                            </ul>
+
+                        </div>
                     </div>
                 </div>
             </div>

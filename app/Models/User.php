@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Các trường có thể điền được (fillable).
      *
      * @var array<int, string>
      */
@@ -42,7 +42,7 @@ class User extends Authenticatable
         return $this->hasOne(khuyen_mai::class);
     }
     /**
-     * The attributes that should be hidden for serialization.
+     * Các trường cần ẩn khi trả về JSON.
      *
      * @var array<int, string>
      */
@@ -52,12 +52,17 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * Các trường sẽ được cast thành kiểu dữ liệu khác.
      *
      * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password' => 'hashed', // Laravel 10 hỗ trợ hashed password casting
     ];
+
+    /**
+     * Định nghĩa quan hệ với model `ChucVu`.
+     */
+
 }

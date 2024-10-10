@@ -7,6 +7,64 @@
     <div class="content-page">
 
         <div class="content">
+            <!-- Success Modal -->
+            <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{ session('success') }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Hiển thị modal nếu có thông báo thành công
+                $(document).ready(function() {
+                    @if (session('success'))
+                        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                        successModal.show();
+                    @endif
+                });
+            </script>
+
+
+            <!-- Success Modal -->
+            <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{ session('success') }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Hiển thị modal nếu có thông báo thành công
+                $(document).ready(function() {
+                    @if (session('success'))
+                        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                        successModal.show();
+                    @endif
+                });
+            </script>
+
+
 
             <!-- Start Content-->
             <div class="container-xxl">
@@ -15,7 +73,7 @@
                         <h4 class="fs-18 fw-semibold m-0"> {{ $title }} </h4>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -85,7 +143,10 @@
 
                                         <div class="d-flex justify-content-center">
                                             <button type="submit" class="btn btn-success">Thêm mới</button>
+                                            <button type="submit" class="btn btn-success">Thêm mới</button>
                                         </div>
+
+
 
 
                                     </div>
@@ -100,28 +161,9 @@
     </div> <!-- container-fluid -->
 @endsection
 
+
+
 @section('js')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const fileInput = document.getElementById('anh_danh_muc');
-            const imagePreview = document.getElementById('imagePreview');
-
-            fileInput.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                    };
-
-                    reader.readAsDataURL(file);
-                } else {
-                    imagePreview.src = '#';
-                    imagePreview.style.display = 'none';
-                }
-            });
-        });
-    </script>
+  
+  
 @endsection

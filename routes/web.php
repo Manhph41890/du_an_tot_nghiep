@@ -29,7 +29,6 @@ use App\Http\Controllers\UserController;
 */
 
 
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
@@ -44,6 +43,7 @@ Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
 Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
 Route::get('user', [UserController::class, 'index'])->name('user.index');
 Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+Route::get('/danhgia/{id}', [DanhgiaController::class, 'show'])->name('danhgia.show');
 
 
 Route::get('/', function () {

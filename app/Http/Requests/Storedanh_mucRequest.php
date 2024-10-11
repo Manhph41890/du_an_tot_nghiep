@@ -24,8 +24,11 @@ class Storedanh_mucRequest extends FormRequest
         return [
             //
             'ten_danh_muc' => 'required|max:255|unique:danh_mucs,ten_danh_muc',
+            'ten_danh_muc' => 'required|max:255|unique:danh_mucs,ten_danh_muc',
             'anh_danh_muc' => 'required|image|mimes:jpg,png,jpeg,gif,webp',
             'is_active' => 'boolean|required',
+
+
         ];
     }
 
@@ -40,6 +43,8 @@ class Storedanh_mucRequest extends FormRequest
             //
             'ten_danh_muc.required' => 'Tên danh mục là bắt buộc ',
             'ten_danh_muc.max' => 'Tên danh mục không được vượt quá 255 ký tự ',
+            'ten_danh_muc.unique' => 'Tên danh mục đã tồn tại ',
+
             'ten_danh_muc.unique' => 'Tên danh mục đã tồn tại ',
 
 

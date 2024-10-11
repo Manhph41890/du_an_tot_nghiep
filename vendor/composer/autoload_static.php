@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e
+class ComposerStaticInit28d547657ccec39a13924306dc8a762c
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -541,24 +541,31 @@ class ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e
 
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Events\\SendMail' => __DIR__ . '/../..' . '/app/Events/SendMail.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\BaiVietController' => __DIR__ . '/../..' . '/app/Http/Controllers/BaiVietController.php',
         'App\\Http\\Controllers\\ChucVuController' => __DIR__ . '/../..' . '/app/Http/Controllers/ChucVuController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\CustomerController' => __DIR__ . '/../..' . '/app/Http/Controllers/CustomerController.php',
         'App\\Http\\Controllers\\DanhGiaController' => __DIR__ . '/../..' . '/app/Http/Controllers/DanhGiaController.php',
         'App\\Http\\Controllers\\DanhMucController' => __DIR__ . '/../..' . '/app/Http/Controllers/DanhMucController.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\DonHangController' => __DIR__ . '/../..' . '/app/Http/Controllers/DonHangController.php',
+        'App\\Http\\Controllers\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/ForgotPasswordController.php',
         'App\\Http\\Controllers\\KhuyenMaiController' => __DIR__ . '/../..' . '/app/Http/Controllers/KhuyenMaiController.php',
         'App\\Http\\Controllers\\PhuongThucThanhToanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhuongThucThanhToanController.php',
         'App\\Http\\Controllers\\PhuongThucVanChuyenController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhuongThucVanChuyenController.php',
         'App\\Http\\Controllers\\SanPhamController' => __DIR__ . '/../..' . '/app/Http/Controllers/SanPhamController.php',
+        'App\\Http\\Controllers\\StaffController' => __DIR__ . '/../..' . '/app/Http/Controllers/StaffController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
+        'App\\Http\\Middleware\\RoleMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/RoleMiddleware.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
@@ -590,6 +597,7 @@ class ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e
         'App\\Http\\Requests\\Updatephuong_thuc_van_chuyenRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Updatephuong_thuc_van_chuyenRequest.php',
         'App\\Http\\Requests\\Updatesan_phamRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Updatesan_phamRequest.php',
         'App\\Http\\Requests\\Updatesize_san_phamRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Updatesize_san_phamRequest.php',
+        'App\\Listeners\\SendVerificationEmail' => __DIR__ . '/../..' . '/app/Listeners/SendVerificationEmail.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\anh_san_pham' => __DIR__ . '/../..' . '/app/Models/anh_san_pham.php',
         'App\\Models\\bai_viet' => __DIR__ . '/../..' . '/app/Models/bai_viet.php',
@@ -600,6 +608,7 @@ class ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e
         'App\\Models\\danh_gia' => __DIR__ . '/../..' . '/app/Models/danh_gia.php',
         'App\\Models\\danh_muc' => __DIR__ . '/../..' . '/app/Models/danh_muc.php',
         'App\\Models\\don_hang' => __DIR__ . '/../..' . '/app/Models/don_hang.php',
+        'App\\Models\\forgot_password' => __DIR__ . '/../..' . '/app/Models/forgot_password.php',
         'App\\Models\\khuyen_mai' => __DIR__ . '/../..' . '/app/Models/khuyen_mai.php',
         'App\\Models\\phuong_thuc_thanh_toan' => __DIR__ . '/../..' . '/app/Models/phuong_thuc_thanh_toan.php',
         'App\\Models\\phuong_thuc_van_chuyen' => __DIR__ . '/../..' . '/app/Models/phuong_thuc_van_chuyen.php',
@@ -6801,9 +6810,9 @@ class ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit0d80ac5f86da4966ec5b6697cd14bc8e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit28d547657ccec39a13924306dc8a762c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit28d547657ccec39a13924306dc8a762c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit28d547657ccec39a13924306dc8a762c::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -33,6 +33,7 @@ class DanhMucController extends Controller
 
         $title = "Danh sách danh mục";
 
+
         return view('admin.danhmuc.index', compact('danhmucs', 'title'));
     }
 
@@ -43,6 +44,7 @@ class DanhMucController extends Controller
     {
         //
         $title = "Thêm mới danh mục";
+
 
         return view('admin.danhmuc.create', compact('title'));
     }
@@ -63,8 +65,6 @@ class DanhMucController extends Controller
                 $filepath = null;
             }
             $param['anh_danh_muc'] = $filepath;
-            $param['is_active'] = $request->input('is_active', 0);
-            danh_muc::create($param);
         }
 
         return redirect()->route('danhmucs.index')->with('success', 'Thêm danh mục thành công!');

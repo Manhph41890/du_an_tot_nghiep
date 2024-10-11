@@ -15,6 +15,7 @@ class khuyen_mai extends Model
         'so_luong_ma',
         'ngay_bat_dau',
         'ngay_ket_thuc',
+        'user_id',
         'is_active',
     ];
 
@@ -22,4 +23,8 @@ class khuyen_mai extends Model
     {
         return $this->hasMany(don_hang::class);
     }
+    public function khachhang_new()
+{
+    return $this->belongsTo(User::class);
+}
 }

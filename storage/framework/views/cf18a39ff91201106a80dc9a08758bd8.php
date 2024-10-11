@@ -70,7 +70,7 @@
                         </ul>
                     </div>
                 </li>
-                
+
                 <li>
                     <a href="#sanpham" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
@@ -97,10 +97,12 @@
                     <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
                             <li>
-                                <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.index')); ?>'>Danh sách</a>
+                                <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.index')); ?>'>Danh
+                                    sách</a>
                             </li>
                             <li>
-                                <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.create')); ?>'>Thêm</a>
+                                <a class='tp-link'
+                                    href='<?php echo e(route('phuongthucthanhtoans.create')); ?>'>Thêm</a>
                             </li>
 
                         </ul>
@@ -115,10 +117,12 @@
                     <div class="collapse" id="phuongthucvanchuyen">
                         <ul class="nav-second-level">
                             <li>
-                                <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.index')); ?>'>Danh sách</a>
+                                <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.index')); ?>'>Danh
+                                    sách</a>
                             </li>
                             <li>
-                                <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.create')); ?>'>Thêm</a>
+                                <a class='tp-link'
+                                    href='<?php echo e(route('phuongthucvanchuyens.create')); ?>'>Thêm</a>
                             </li>
 
                         </ul>
@@ -182,6 +186,7 @@
         <!-- End Sidebar -->
 
         <div class="clearfix"></div>
+
 
     </div>
 </div>

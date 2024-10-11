@@ -180,6 +180,7 @@
     </div>
 </div>
 <!-- offcanvas-mobile-menu end -->
+
 <!-- OffCanvas Wishlist Start -->
 <div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist theme1">
     <div class="inner">
@@ -218,6 +219,7 @@
         </ul>
         <a href="wishlist.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block mt-30">view wishlist</a>
     </div>
+
 </div>
 <!-- OffCanvas Wishlist End -->
 
@@ -265,6 +267,7 @@
         <a href="checkout.html" class="btn btn-dark btn--lg d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
         <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
     </div>
+
 </div>
 <!-- OffCanvas Cart End -->
 
@@ -330,17 +333,19 @@
                             <li class="english">
                                 <a href="#" id="dropdown3" class="pe-0" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <img src="assets/img/logo/us-flag.jpg" alt="us flag" />
+                                    <img src="assets/admin/images/logo/us-flag.jpg" alt="us flag" />
                                     English
                                     <i class="ion ion-ios-arrow-down"></i>
                                 </a>
                                 <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown3">
                                     <li class="active">
-                                        <a href="#"><img src="assets/img/logo/us-flag.jpg" alt="us flag" />
+                                        <a href="#"><img src="assets/admin/images/logo/us-flag.jpg"
+                                                alt="us flag" />
                                             English</a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="assets/img/logo/france.jpg" alt="france flag" />
+                                        <a href="#"><img src="assets/admin/images/logo/france.jpg"
+                                                alt="france flag" />
                                             Français</a>
                                     </li>
                                 </ul>
@@ -350,6 +355,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <!-- header top end -->
     <!-- header-middle satrt -->
@@ -358,7 +364,7 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="index.html"><img src="assets/client/img/logo/logo.png" alt="logo" /></a>
+                        <a href="index.html"><img src="assets/client/img/logo/logo_art.png" alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
@@ -545,6 +551,32 @@
                                         transform="translate(480, 320) scale(1, -1) translate(-480, -318)"></path>
                                 </svg>
                             </a>
+                        </div>
+                        <div class="cart-block-links theme1 d-none d-sm-block">
+                            <ul class="d-flex">
+                                @auth
+                                    <li>
+
+                                        <!-- Nếu đã đăng nhập, hiển thị nút Đăng Xuất -->
+                                        <a href="{{ route('auth.logout') }}">
+                                            Đăng Xuất
+                                        </a>
+                                    </li>
+                                @else
+                                    <li><!-- Nếu chưa đăng nhập, hiển thị nút Đăng Nhập và Đăng Ký -->
+                                        <a href="{{ route('auth.login') }}">
+                                            Đăng Nhập
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('auth.register') }}">
+                                            Đăng Ký
+                                        </a>
+                                    </li>
+
+                                @endauth
+                            </ul>
+
                         </div>
                     </div>
                 </div>

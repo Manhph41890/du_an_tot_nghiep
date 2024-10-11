@@ -29,9 +29,11 @@ class User extends Authenticatable
         'mat_khau',
         'is_active'
     ];
-    public function chuc_vus(){
-        return $this->belongsTo(chuc_vu::class, 'id');
+    public function chuc_vu()
+    {
+        return $this->belongsTo(chuc_vu::class, 'chuc_vu_id');
     }
+
 
     /**
      * The attributes that should be hidden for serialization.

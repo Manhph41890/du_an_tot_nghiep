@@ -91,7 +91,6 @@
                                                     <td>{!! $item->is_active
                                                         ? '<span class="badge bg-primary">Hiển Thị</span>'
                                                         : '<span class="badge bg-danger">Ẩn</span>' !!}</td>
-
                                                     <td>
                                                         <!-- Nút mở modal -->
                                                         <button class="btn btn-link" data-bs-toggle="modal"

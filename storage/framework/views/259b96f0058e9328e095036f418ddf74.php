@@ -33,6 +33,9 @@
                     <a href="<?php echo e(route('dashboard')); ?>">
                         <span> Thông kê </span>
                     </a>
+                    <a href="<?php echo e(route('dashboard')); ?>">
+                        <span> Thông kê </span>
+                    </a>
                 </li>
 
                 <li class="menu-title">Pages</li>
@@ -71,18 +74,25 @@
                     </div>
                 </li>
                 
+                
                 <li>
+                    <a href="#sanpham" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> Sản phẩm </span>
                     <a href="#sanpham" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> Sản phẩm </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sanpham">
+                    <div class="collapse" id="sanpham">
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('sanphams.create')); ?>'>Thêm</a>
+                                <a class='tp-link' href='<?php echo e(route('sanphams.create')); ?>'>Thêm</a>
                             </li>
                             <li>
+                                <a class='tp-link' href='<?php echo e(route('sanphams.index')); ?>'>Danh sách</a>
                                 <a class='tp-link' href='<?php echo e(route('sanphams.index')); ?>'>Danh sách</a>
                             </li>
                         </ul>
@@ -92,16 +102,23 @@
                     <a href="#phuongthucthanhtoan" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> PT thanh toán </span>
+                    <a href="#phuongthucthanhtoan" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> PT thanh toán </span>
                         <span class="menu-arrow"></span>
                     </a>
+                    <div class="collapse" id="phuongthucthanhtoan">
                     <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.index')); ?>'>Danh sách</a>
+                                <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.index')); ?>'>Danh sách</a>
                             </li>
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.create')); ?>'>Thêm</a>
+                                <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.create')); ?>'>Thêm</a>
                             </li>
+
 
                         </ul>
                     </div>
@@ -110,20 +127,28 @@
                     <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> PT vận chuyển </span>
+                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> PT vận chuyển </span>
                         <span class="menu-arrow"></span>
                     </a>
+                    <div class="collapse" id="phuongthucvanchuyen">
                     <div class="collapse" id="phuongthucvanchuyen">
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.index')); ?>'>Danh sách</a>
+                                <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.index')); ?>'>Danh sách</a>
                             </li>
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.create')); ?>'>Thêm</a>
+                                <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.create')); ?>'>Thêm</a>
                             </li>
+
 
                         </ul>
                     </div>
                 </li>
+
 
 
                 <li>
@@ -144,6 +169,7 @@
                     </div>
                 </li>
 
+
                 <li>
                     <a href="#user" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
@@ -160,6 +186,7 @@
                 </li>
 
 
+
                 <li>
                     <a href="#baiviet" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
@@ -169,24 +196,11 @@
                     <div class="collapse" id="baiviet">
                         <ul class="nav-second-level">
                             <li>
-                                
+                                <a class='tp-link' href='<?php echo e(route('baiviets.create')); ?>'>Thêm</a>
                             </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="#danhgia" data-bs-toggle="collapse">
-                        <i data-feather="file-text"></i>
-                        <span> Đánh giá </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="danhgia">
-                        <ul class="nav-second-level">
                             <li>
-                                <a class='tp-link' href='<?php echo e(route('danhgia.index')); ?>'>Danh sách</a>
+                                <a class='tp-link' href='<?php echo e(route('baiviets.index')); ?>'>Danh sách</a>
                             </li>
-                            
                         </ul>
                     </div>
                 </li>

@@ -272,19 +272,17 @@
             // Xem trước hình ảnh chính sản phẩm
             document.getElementById('anh_san_pham').addEventListener('change', function(event) {
                 const imagePreview = document.getElementById('imagePreview');
-            // Xem trước hình ảnh chính sản phẩm
-            document.getElementById('anh_san_pham').addEventListener('change', function(event) {
-                const imagePreview = document.getElementById('imagePreview');
                 const file = event.target.files[0];
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         imagePreview.src = e.target.result;
                         imagePreview.style.display = 'block';
+            
                     }
                     reader.readAsDataURL(file);
                 }
-            })
+            });
 
             // Thêm biến thể sản phẩm
             document.getElementById('add-variant').addEventListener('click', function() {

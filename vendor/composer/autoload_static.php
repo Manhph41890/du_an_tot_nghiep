@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit28d547657ccec39a13924306dc8a762c
+class ComposerStaticInitb9b5fa1df900a0ce8b18beeeeed50b12
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -320,8 +320,8 @@ class ComposerStaticInit28d547657ccec39a13924306dc8a762c
         ),
         'Spatie\\Ignition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
-            1 => __DIR__ . '/..' . '/spatie/ignition/src',
+            0 => __DIR__ . '/..' . '/spatie/ignition/src',
+            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
         ),
         'Spatie\\FlareClient\\' => 
         array (
@@ -357,8 +357,8 @@ class ComposerStaticInit28d547657ccec39a13924306dc8a762c
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -6810,9 +6810,9 @@ class ComposerStaticInit28d547657ccec39a13924306dc8a762c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit28d547657ccec39a13924306dc8a762c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit28d547657ccec39a13924306dc8a762c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit28d547657ccec39a13924306dc8a762c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb9b5fa1df900a0ce8b18beeeeed50b12::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb9b5fa1df900a0ce8b18beeeeed50b12::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitb9b5fa1df900a0ce8b18beeeeed50b12::$classMap;
 
         }, null, ClassLoader::class);
     }

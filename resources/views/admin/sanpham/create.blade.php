@@ -282,10 +282,9 @@
                         imagePreview.src = e.target.result;
                         imagePreview.style.display = 'block';
                     }
-                    }
                     reader.readAsDataURL(file);
                 }
-            });
+            })
 
             // Thêm biến thể sản phẩm
             document.getElementById('add-variant').addEventListener('click', function() {

@@ -84,7 +84,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="assets/client/img/icon/2.png"
+                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="assets/img/icon/2.png"
                                 alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Free Shipping</h4>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="assets/client/img/icon/3.png"
+                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="assets/img/icon/3.png"
                                 alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Free Returns</h4>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="assets/client/img/icon/4.png"
+                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="assets/img/icon/4.png"
                                 alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">100% Payment Secure</h4>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="assets/client/img/icon/5.png"
+                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="assets/img/icon/5.png"
                                 alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Support 24/7</h4>
@@ -134,21 +134,21 @@
                 <div class="col-md-6 mb-30">
                     <div class="banner-thumb">
                         <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="assets/client/img/banner/1.jpg" alt="banner-thumb-naile" />
+                            <img src="assets/img/banner/1.jpg" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-30">
                     <div class="banner-thumb">
                         <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="assets/client/img/banner/2.jpg" alt="banner-thumb-naile" />
+                            <img src="assets/img/banner/2.jpg" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-30">
                     <div class="banner-thumb">
                         <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="assets/client/img/banner/3.jpg" alt="banner-thumb-naile" />
+                            <img src="assets/img/banner/3.jpg" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/1.png"
+                                                        <img class="first-img" src="assets/img/product/1.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -272,7 +272,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/2.png"
+                                                        <img class="first-img" src="assets/img/product/2.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -335,7 +335,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/3.png"
+                                                        <img class="first-img" src="assets/img/product/3.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -398,7 +398,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/4.png"
+                                                        <img class="first-img" src="assets/img/product/4.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -461,9 +461,9 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/5.png"
+                                                        <img class="first-img" src="assets/img/product/5.png"
                                                             alt="thumbnail" />
-                                                        <img class="second-img" src="assets/client/img/product/6.png"
+                                                        <img class="second-img" src="assets/img/product/6.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -532,7 +532,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/1.png"
+                                                        <img class="first-img" src="assets/img/product/1.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -595,7 +595,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/2.png"
+                                                        <img class="first-img" src="assets/img/product/2.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -658,7 +658,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/3.png"
+                                                        <img class="first-img" src="assets/img/product/3.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -721,7 +721,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/4.png"
+                                                        <img class="first-img" src="assets/img/product/4.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -784,9 +784,9 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/5.png"
+                                                        <img class="first-img" src="assets/img/product/5.png"
                                                             alt="thumbnail" />
-                                                        <img class="second-img" src="assets/client/img/product/6.png"
+                                                        <img class="second-img" src="assets/img/product/6.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -855,7 +855,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/1.png"
+                                                        <img class="first-img" src="assets/img/product/1.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -918,7 +918,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/2.png"
+                                                        <img class="first-img" src="assets/img/product/2.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -981,7 +981,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/3.png"
+                                                        <img class="first-img" src="assets/img/product/3.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -1044,7 +1044,7 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/4.png"
+                                                        <img class="first-img" src="assets/img/product/4.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -1107,9 +1107,9 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
-                                                        <img class="first-img" src="assets/client/img/product/5.png"
+                                                        <img class="first-img" src="assets/img/product/5.png"
                                                             alt="thumbnail" />
-                                                        <img class="second-img" src="assets/client/img/product/6.png"
+                                                        <img class="second-img" src="assets/img/product/6.png"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -1180,19 +1180,19 @@
                 <div class="col-lg-3 col-md-6 mb-30">
                     <div class="banner-thumb">
                         <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html"><img
-                                src="assets/client/img/banner/5.jpg" alt="banner-thumb-naile" /></a>
+                                src="assets/img/banner/5.jpg" alt="banner-thumb-naile" /></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-30">
                     <div class="banner-thumb">
                         <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html">
-                            <img src="assets/client/img/banner/6.jpg" alt="banner-thumb-naile" /></a>
+                            <img src="assets/img/banner/6.jpg" alt="banner-thumb-naile" /></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 mb-30">
                     <div class="banner-thumb">
                         <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html">
-                            <img src="assets/client/img/banner/4.jpg" alt="banner-thumb-naile" /></a>
+                            <img src="assets/img/banner/4.jpg" alt="banner-thumb-naile" /></a>
                     </div>
                 </div>
             </div>
@@ -1221,8 +1221,7 @@
                                         <div class="product-thumbnail position-relative">
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
-                                                <img class="first-img" src="assets/client/img/product/8.png"
-                                                    alt="thumbnail" />
+                                                <img class="first-img" src="assets/img/product/8.png" alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
                                             <ul class="actions d-flex justify-content-center">
@@ -1284,7 +1283,7 @@
                                         <div class="product-thumbnail position-relative">
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
-                                                <img class="first-img" src="assets/client/img/product/9.png"
+                                                <img class="first-img" src="assets/img/product/9.png"
                                                     alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
@@ -1347,7 +1346,7 @@
                                         <div class="product-thumbnail position-relative">
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
-                                                <img class="first-img" src="assets/client/img/product/10.png"
+                                                <img class="first-img" src="assets/img/product/10.png"
                                                     alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
@@ -1410,7 +1409,7 @@
                                         <div class="product-thumbnail position-relative">
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
-                                                <img class="first-img" src="assets/client/img/product/11.png"
+                                                <img class="first-img" src="assets/img/product/11.png"
                                                     alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
@@ -1473,9 +1472,9 @@
                                         <div class="product-thumbnail position-relative">
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
-                                                <img class="first-img" src="assets/client/img/product/12.png"
+                                                <img class="first-img" src="assets/img/product/12.png"
                                                     alt="thumbnail" />
-                                                <img class="second-img" src="assets/client/img/product/13.png"
+                                                <img class="second-img" src="assets/img/product/13.png"
                                                     alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
@@ -1559,7 +1558,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="assets/client/img/blog-post/1.png" alt="blog-thumb-naile" />
+                                    <img src="assets/img/blog-post/1.png" alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
                                     <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
@@ -1581,7 +1580,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="assets/client/img/blog-post/2.png" alt="blog-thumb-naile" />
+                                    <img src="assets/img/blog-post/2.png" alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
                                     <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
@@ -1603,7 +1602,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="assets/client/img/blog-post/3.png" alt="blog-thumb-naile" />
+                                    <img src="assets/img/blog-post/3.png" alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
                                     <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
@@ -1625,7 +1624,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="assets/client/img/blog-post/4.png" alt="blog-thumb-naile" />
+                                    <img src="assets/img/blog-post/4.png" alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
                                     <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
@@ -1647,7 +1646,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="assets/client/img/blog-post/5.png" alt="blog-thumb-naile" />
+                                    <img src="assets/img/blog-post/5.png" alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
                                     <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
@@ -1681,7 +1680,7 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="assets/client/img/brand/1.jpg" alt="brand-thumb-nail" />
+                                    <img src="assets/img/brand/1.jpg" alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1689,7 +1688,7 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="assets/client/img/brand/2.jpg" alt="brand-thumb-nail" />
+                                    <img src="assets/img/brand/2.jpg" alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1697,7 +1696,7 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="assets/client/img/brand/3.jpg" alt="brand-thumb-nail" />
+                                    <img src="assets/img/brand/3.jpg" alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1705,7 +1704,7 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="assets/client/img/brand/4.jpg" alt="brand-thumb-nail" />
+                                    <img src="assets/img/brand/4.jpg" alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1713,7 +1712,7 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="assets/client/img/brand/5.jpg" alt="brand-thumb-nail" />
+                                    <img src="assets/img/brand/5.jpg" alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1721,7 +1720,7 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="assets/client/img/brand/2.jpg" alt="brand-thumb-nail" />
+                                    <img src="assets/img/brand/2.jpg" alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1729,7 +1728,7 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="assets/client/img/brand/3.jpg" alt="brand-thumb-nail" />
+                                    <img src="assets/img/brand/3.jpg" alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>

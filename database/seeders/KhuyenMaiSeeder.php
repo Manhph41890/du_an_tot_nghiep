@@ -13,5 +13,7 @@ class KhuyenMaiSeeder extends Seeder
     public function run(): void
     {
         //
+        
+
     }
 }

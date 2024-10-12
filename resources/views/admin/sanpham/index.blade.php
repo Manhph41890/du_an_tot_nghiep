@@ -9,6 +9,14 @@
             border-radius: 5px;
         }
     </style>
+    <style>
+        .variant-list {
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -30,6 +38,17 @@
                         </select>
                         <button type="submit" class="btn btn-primary">Tìm</button>
                     </form>
+                    <form method="GET" action="{{ route('sanphams.index') }}" class="d-flex">
+                        <input type="text" name="search" class="form-control me-2" placeholder="Tìm sản phẩm..."
+                            value="{{ request()->query('search') }}">
+                        <select name="status" class="form-select me-2">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="1" {{ request()->query('status') == '1' ? 'selected' : '' }}>Hiển Thị
+                            </option>
+                            <option value="0" {{ request()->query('status') === '0' ? 'selected' : '' }}>Ẩn</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Tìm</button>
+                    </form>
                 </div>
 
                 <!-- Striped Rows -->
@@ -40,6 +59,7 @@
                                 <a href="{{ route('sanphams.create') }}" class="btn btn-success">Thêm Sản Phẩm</a>
                             </div>
                             @if (session('success'))
+                                <div class="alert alert-success alert-dismissable fade show" role="alert">
                                 <div class="alert alert-success alert-dismissable fade show" role="alert">
                                     {{ session('success') }}
                                     <button type="button" class="btn-close justify-content-center" data-bs-dismiss="alert"
@@ -65,6 +85,9 @@
                                                 <th scope="col">Trạng Thái</th>
                                                 <th scope="col">Biến Thể</th>
                                                 <th scope="col">Hành Động</th>
+                                                <th scope="col">Trạng Thái</th>
+                                                <th scope="col">Biến Thể</th>
+                                                <th scope="col">Hành Động</th>
                                             </tr>
                                         </thead>
 
@@ -76,11 +99,18 @@
                                                     <td>{{ $item->ten_san_pham }}</td>
                                                     <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
                                                     <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                                    <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                    <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
                                                     <td>
                                                         @if ($item->anh_san_pham)
                                                             <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                                 alt="Hình ảnh sản phẩm" width="50px">
+                                                            <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                                alt="Hình ảnh sản phẩm" width="50px">
                                                         @else
+                                                            <img src="{{ asset('images/placeholder.png') }}"
+                                                                alt="Không có ảnh" width="50px">
+                                                            <!-- Placeholder image -->
                                                             <img src="{{ asset('images/placeholder.png') }}"
                                                                 alt="Không có ảnh" width="50px">
                                                             <!-- Placeholder image -->

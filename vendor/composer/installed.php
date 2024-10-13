@@ -3,11 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-<<<<<<< HEAD
-        'reference' => 'e5541c4a509af4f850e955ffe45fe547469fed30',
-=======
-        'reference' => '779983557a4af303e2a6f2f58d0f4f1df19a5bbf',
->>>>>>> 83875f0bd1400ceb8bb858fbaf8431015b1b37d7
+        'reference' => 'cbb74f20c32c8ced038c391d90b292ecf564aedb',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -72,9 +68,9 @@
             'dev_requirement' => false,
         ),
         'dragonmantank/cron-expression' => array(
-            'pretty_version' => 'v3.3.3',
-            'version' => '3.3.3.0',
-            'reference' => 'adfb1f505deb6384dc8b39804c5065dd3c8c8c0a',
+            'pretty_version' => 'v3.4.0',
+            'version' => '3.4.0.0',
+            'reference' => '8c784d071debd117328803d86b2097615b457500',
             'type' => 'library',
             'install_path' => __DIR__ . '/../dragonmantank/cron-expression',
             'aliases' => array(),
@@ -386,11 +382,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-<<<<<<< HEAD
-            'reference' => 'e5541c4a509af4f850e955ffe45fe547469fed30',
-=======
-            'reference' => '779983557a4af303e2a6f2f58d0f4f1df19a5bbf',
->>>>>>> 83875f0bd1400ceb8bb858fbaf8431015b1b37d7
+            'reference' => 'cbb74f20c32c8ced038c391d90b292ecf564aedb',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

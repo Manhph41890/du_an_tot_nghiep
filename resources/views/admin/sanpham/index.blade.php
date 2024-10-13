@@ -9,6 +9,14 @@
             border-radius: 5px;
         }
     </style>
+    <style>
+        .variant-list {
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -30,6 +38,17 @@
                         </select>
                         <button type="submit" class="btn btn-primary">Tìm</button>
                     </form>
+                    <form method="GET" action="{{ route('sanphams.index') }}" class="d-flex">
+                        <input type="text" name="search" class="form-control me-2" placeholder="Tìm sản phẩm..."
+                            value="{{ request()->query('search') }}">
+                        <select name="status" class="form-select me-2">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="1" {{ request()->query('status') == '1' ? 'selected' : '' }}>Hiển Thị
+                            </option>
+                            <option value="0" {{ request()->query('status') === '0' ? 'selected' : '' }}>Ẩn</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Tìm</button>
+                    </form>
                 </div>
 
                 <!-- Striped Rows -->
@@ -40,6 +59,7 @@
                                 <a href="{{ route('sanphams.create') }}" class="btn btn-success">Thêm Sản Phẩm</a>
                             </div>
                             @if (session('success'))
+                                <div class="alert alert-success alert-dismissable fade show" role="alert">
                                 <div class="alert alert-success alert-dismissable fade show" role="alert">
                                     {{ session('success') }}
                                     <button type="button" class="btn-close justify-content-center" data-bs-dismiss="alert"
@@ -65,6 +85,9 @@
                                                 <th scope="col">Trạng Thái</th>
                                                 <th scope="col">Biến Thể</th>
                                                 <th scope="col">Hành Động</th>
+                                                <th scope="col">Trạng Thái</th>
+                                                <th scope="col">Biến Thể</th>
+                                                <th scope="col">Hành Động</th>
                                             </tr>
                                         </thead>
 
@@ -76,11 +99,18 @@
                                                     <td>{{ $item->ten_san_pham }}</td>
                                                     <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
                                                     <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                                    <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                    <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
                                                     <td>
                                                         @if ($item->anh_san_pham)
                                                             <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                                 alt="Hình ảnh sản phẩm" width="50px">
+                                                            <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                                alt="Hình ảnh sản phẩm" width="50px">
                                                         @else
+                                                            <img src="{{ asset('images/placeholder.png') }}"
+                                                                alt="Không có ảnh" width="50px">
+                                                            <!-- Placeholder image -->
                                                             <img src="{{ asset('images/placeholder.png') }}"
                                                                 alt="Không có ảnh" width="50px">
                                                             <!-- Placeholder image -->
@@ -166,11 +196,16 @@
                                                             <i
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                         </a>
-                                                        <button type="button" class="btn btn-link p-0"
-                                                            onclick="showDeleteModal({{ $item->id }})">
-                                                            <i
-                                                                class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
-                                                        </button>
+                                                        <form action="{{ route('sanphams.destroy', $item->id) }}"
+                                                            method="POST" style="display:inline;"
+                                                            onsubmit="return confirm('Bạn có muốn xóa sản phẩm này không?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" style="border: none; background: none;">
+                                                                <i
+                                                                    class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -186,39 +221,4 @@
             </div> <!-- container-fluid -->
         </div>
     </div>
-
-    <!-- Modal xác nhận xóa -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa sản phẩm</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có chắc chắn muốn xóa sản phẩm này không?
-                </div>
-                <div class="modal-footer">
-                    <form id="deleteForm" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-danger">Xác nhận</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function showDeleteModal(productId) {
-            // Cập nhật form với action là route xóa sản phẩm
-            let deleteForm = document.getElementById('deleteForm');
-            deleteForm.action = '/sanphams/' + productId;
-
-            // Hiển thị modal
-            let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-            deleteModal.show();
-        }
-    </script>
 @endsection

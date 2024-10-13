@@ -40,6 +40,9 @@ class DanhGiaController extends Controller
         $params = [];
         $params['list'] = $query->get();
         return view('admin.danhgia.index', $params);
+        $params = [];
+        $params['list'] = danh_gia::all();
+        return view('admin.danhgia.index', $params);
     }
 
     /**

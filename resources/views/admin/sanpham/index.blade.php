@@ -9,14 +9,6 @@
             border-radius: 5px;
         }
     </style>
-    <style>
-        .variant-list {
-            margin-top: 10px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -38,35 +30,21 @@
                         </select>
                         <button type="submit" class="btn btn-primary">Tìm</button>
                     </form>
-                    <form method="GET" action="{{ route('sanphams.index') }}" class="d-flex">
-                        <input type="text" name="search" class="form-control me-2" placeholder="Tìm sản phẩm..."
-                            value="{{ request()->query('search') }}">
-                        <select name="status" class="form-select me-2">
-                            <option value="">Tất cả trạng thái</option>
-                            <option value="1" {{ request()->query('status') == '1' ? 'selected' : '' }}>Hiển Thị
-                            </option>
-                            <option value="0" {{ request()->query('status') === '0' ? 'selected' : '' }}>Ẩn</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">Tìm</button>
-                    </form>
                 </div>
 
                 <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
-                            <div>
-                                <a href="{{ route('sanphams.create') }}" class="btn btn-success">Thêm Sản Phẩm</a>
-                            </div>
+                            <a href="{{ route('sanphams.create') }}" class="btn btn-success">Thêm Sản Phẩm</a>
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissable fade show" role="alert">
-                                <div class="alert alert-success alert-dismissable fade show" role="alert">
                                     {{ session('success') }}
-                                    <button type="button" class="btn-close justify-content-center" data-bs-dismiss="alert"
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
                                         aria-label="Close"></button>
                                 </div>
                             @endif
-                        </div><!-- end card header -->
+                        </div>
 
                         <div class="row">
                             <div class="card-body">
@@ -74,23 +52,19 @@
                                     <table class="table table-striped mb-0">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Danh Mục</th>
-                                                <th scope="col">Tên Sản Phẩm</th>
-                                                <th scope="col">Giá Gốc</th>
-                                                <th scope="col">Giá Khuyến Mãi</th>
-                                                <th scope="col">Ảnh Sản Phẩm</th>
-                                                <th scope="col">Số Lượng</th>
-                                                <th scope="col">Mô tả sản Phẩm</th>
-                                                <th scope="col">Trạng Thái</th>
-                                                <th scope="col">Biến Thể</th>
-                                                <th scope="col">Hành Động</th>
-                                                <th scope="col">Trạng Thái</th>
-                                                <th scope="col">Biến Thể</th>
-                                                <th scope="col">Hành Động</th>
+                                                <th>Id</th>
+                                                <th>Danh Mục</th>
+                                                <th>Tên Sản Phẩm</th>
+                                                <th>Giá Gốc</th>
+                                                <th>Giá Khuyến Mãi</th>
+                                                <th>Ảnh Sản Phẩm</th>
+                                                <th>Số Lượng</th>
+                                                <th>Mô Tả Sản Phẩm</th>
+                                                <th>Trạng Thái</th>
+                                                <th>Biến Thể</th>
+                                                <th>Hành Động</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             @foreach ($data as $index => $item)
                                                 <tr>
@@ -99,36 +73,27 @@
                                                     <td>{{ $item->ten_san_pham }}</td>
                                                     <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
                                                     <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
-                                                    <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
-                                                    <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
                                                     <td>
                                                         @if ($item->anh_san_pham)
-                                                            <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
-                                                                alt="Hình ảnh sản phẩm" width="50px">
                                                             <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                                 alt="Hình ảnh sản phẩm" width="50px">
                                                         @else
                                                             <img src="{{ asset('images/placeholder.png') }}"
                                                                 alt="Không có ảnh" width="50px">
-                                                            <!-- Placeholder image -->
-                                                            <img src="{{ asset('images/placeholder.png') }}"
-                                                                alt="Không có ảnh" width="50px">
-                                                            <!-- Placeholder image -->
                                                         @endif
                                                     </td>
                                                     <td>{{ $item->so_luong }}</td>
-                                                    <td>{{ $item->ma_ta_san_pham }}</td>
-                                                    <td>{!! $item->is_active
-                                                        ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                        : '<span class="badge bg-danger">Ẩn</span>' !!}</td>
-
+                                                    <td>{{ $item->mo_ta_san_pham }}</td>
                                                     <td>
-                                                        <!-- Nút mở modal -->
+                                                        {!! $item->is_active
+                                                            ? '<span class="badge bg-primary">Hiển Thị</span>'
+                                                            : '<span class="badge bg-danger">Ẩn</span>' !!}
+                                                    </td>
+                                                    <td>
                                                         <button class="btn btn-link" data-bs-toggle="modal"
                                                             data-bs-target="#variantModal-{{ $item->id }}">
                                                             Xem Biến Thể
                                                         </button>
-
                                                         <!-- Modal -->
                                                         <div class="modal fade" id="variantModal-{{ $item->id }}"
                                                             tabindex="-1"
@@ -191,7 +156,6 @@
                                                             </div>
                                                         </div>
                                                     </td>
-
                                                     <td>
                                                         <a href="{{ route('sanphams.edit', $item->id) }}">
                                                             <i
@@ -219,7 +183,7 @@
                         {{ $data->links() }}
                     </div>
                 </div>
-            </div> <!-- container-fluid -->
+            </div>
         </div>
     </div>
 @endsection

@@ -33,7 +33,6 @@ class DanhMucController extends Controller
 
         $title = "Danh sách danh mục";
 
-
         return view('admin.danhmuc.index', compact('danhmucs', 'title'));
     }
 
@@ -44,7 +43,6 @@ class DanhMucController extends Controller
     {
         //
         $title = "Thêm mới danh mục";
-
 
         return view('admin.danhmuc.create', compact('title'));
     }

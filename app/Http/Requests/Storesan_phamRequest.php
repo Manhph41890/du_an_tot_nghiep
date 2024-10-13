@@ -13,7 +13,6 @@ class Storesan_phamRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-        return true;
     }
 
     /**
@@ -26,13 +25,9 @@ class Storesan_phamRequest extends FormRequest
         return [
             'danh_muc_id' => ['required', Rule::exists('danh_mucs', 'id')],
             'ten_san_pham' => 'required|string|max:255|unique:san_phams,ten_san_pham',
-            'ten_san_pham' => 'required|string|max:255|unique:san_phams,ten_san_pham',
             'gia_goc' => 'required|min:0',
             'gia_km' => 'nullable|min:0|lte:gia_goc', // Giá khuyến mãi không được lớn hơn giá gốc
-            'gia_km' => 'nullable|min:0|lte:gia_goc', // Giá khuyến mãi không được lớn hơn giá gốc
             'ma_ta_san_pham' => 'max:255',
-            'anh_san_pham' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
-
             'anh_san_pham' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
 
             'is_active' => [Rule::in([0, 1])],

@@ -143,7 +143,6 @@
 
                                         <div class="d-flex justify-content-center">
                                             <button type="submit" class="btn btn-success">Thêm mới</button>
-                                            <button type="submit" class="btn btn-success">Thêm mới</button>
                                         </div>
 
 
@@ -164,6 +163,4 @@
 
 
 @section('js')
-  
-  
 @endsection

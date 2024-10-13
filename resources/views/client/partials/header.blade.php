@@ -556,26 +556,34 @@
                             <ul class="d-flex">
                                 @auth
                                     <li>
-
                                         <!-- Nếu đã đăng nhập, hiển thị nút Đăng Xuất -->
-                                        <a href="{{ route('auth.logout') }}">
+                                        <a href="#"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             Đăng Xuất
                                         </a>
+
+                                        <!-- Form ẩn để gửi yêu cầu POST cho logout -->
+                                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
                                     </li>
                                 @else
-                                    <li><!-- Nếu chưa đăng nhập, hiển thị nút Đăng Nhập và Đăng Ký -->
+                                    <li>
+                                        <!-- Nếu chưa đăng nhập, hiển thị nút Đăng Nhập -->
                                         <a href="{{ route('auth.login') }}">
                                             Đăng Nhập
                                         </a>
                                     </li>
                                     <li>
+                                        <!-- Hiển thị nút Đăng Ký -->
                                         <a href="{{ route('auth.register') }}">
                                             Đăng Ký
                                         </a>
                                     </li>
-
                                 @endauth
                             </ul>
+
 
                         </div>
                     </div>

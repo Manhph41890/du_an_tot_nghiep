@@ -3,9 +3,7 @@
     <div class="h-100" data-simplebar>
 
         <!--- Sidemenu -->
-
         <div id="sidebar-menu">
-
             <div class="logo-box">
                 <a class='logo logo-light' href='index.html'>
                     <span class="logo-sm">
@@ -26,15 +24,11 @@
             </div>
 
             <ul id="side-menu">
-
                 <li class="menu-title">Menu</li>
 
                 <li>
                     <a href="<?php echo e(route('dashboard')); ?>">
-                        <span> Thông kê </span>
-                    </a>
-                    <a href="<?php echo e(route('dashboard')); ?>">
-                        <span> Thông kê </span>
+                        <span> Thống kê </span>
                     </a>
                 </li>
 
@@ -68,88 +62,67 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('chucvus.create')); ?>'>Thêm</a>
+                            </li>
+                            <li>
                                 <a class='tp-link' href='<?php echo e(route('chucvus.index')); ?>'>Danh sách</a>
                             </li>
                         </ul>
                     </div>
                 </li>
-                
-                
+
                 <li>
-                    <a href="#sanpham" data-bs-toggle="collapse">
-                        <i data-feather="file-text"></i>
-                        <span> Sản phẩm </span>
                     <a href="#sanpham" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> Sản phẩm </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sanpham">
-                    <div class="collapse" id="sanpham">
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('sanphams.create')); ?>'>Thêm</a>
-                                <a class='tp-link' href='<?php echo e(route('sanphams.create')); ?>'>Thêm</a>
                             </li>
                             <li>
-                                <a class='tp-link' href='<?php echo e(route('sanphams.index')); ?>'>Danh sách</a>
                                 <a class='tp-link' href='<?php echo e(route('sanphams.index')); ?>'>Danh sách</a>
                             </li>
                         </ul>
                     </div>
                 </li>
+
                 <li>
-                    <a href="#phuongthucthanhtoan" data-bs-toggle="collapse">
-                        <i data-feather="file-text"></i>
-                        <span> PT thanh toán </span>
                     <a href="#phuongthucthanhtoan" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> PT thanh toán </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="phuongthucthanhtoan">
-                    <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.index')); ?>'>Danh sách</a>
-                                <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.index')); ?>'>Danh sách</a>
                             </li>
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.create')); ?>'>Thêm</a>
-                                <a class='tp-link' href='<?php echo e(route('phuongthucthanhtoans.create')); ?>'>Thêm</a>
                             </li>
-
-
                         </ul>
                     </div>
                 </li>
+
                 <li>
-                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
-                        <i data-feather="file-text"></i>
-                        <span> PT vận chuyển </span>
                     <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
                         <span> PT vận chuyển </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="phuongthucvanchuyen">
-                    <div class="collapse" id="phuongthucvanchuyen">
                         <ul class="nav-second-level">
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.index')); ?>'>Danh sách</a>
-                                <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.index')); ?>'>Danh sách</a>
                             </li>
                             <li>
                                 <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.create')); ?>'>Thêm</a>
-                                <a class='tp-link' href='<?php echo e(route('phuongthucvanchuyens.create')); ?>'>Thêm</a>
                             </li>
-
-
                         </ul>
                     </div>
                 </li>
-
-
 
                 <li>
                     <a href="#khuyenmai" data-bs-toggle="collapse">
@@ -169,7 +142,6 @@
                     </div>
                 </li>
 
-
                 <li>
                     <a href="#user" data-bs-toggle="collapse">
                         <i data-feather="file-text"></i>
@@ -184,8 +156,6 @@
                         </ul>
                     </div>
                 </li>
-
-
 
                 <li>
                     <a href="#baiviet" data-bs-toggle="collapse">
@@ -209,7 +179,6 @@
         <!-- End Sidebar -->
 
         <div class="clearfix"></div>
-
     </div>
 </div>
 <!-- Left Sidebar End -->

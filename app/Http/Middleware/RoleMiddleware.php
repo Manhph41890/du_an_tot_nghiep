@@ -8,33 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  mixed  ...$roles
-     * @return mixed
-     */
-    public function handle(Request $request, Closure $next, ...$roles)
+    public function handle($request, Closure $next, $role)
     {
-        // Check user đã đăng nhập chưa theo từng chức vụ 
-        if (Auth::check() && in_array(Auth::user()->chuc_vu->ten_chuc_vu, $roles)) {
+        if (Auth::check() && Auth::user()->chuc_vu->ten_chuc_vu === $role) {
             return $next($request);
         }
 
-        return redirect('/auth/register')->withErrors('Access Denied. You do not have permission.');
+        // Nếu không phải là role mong muốn, điều hướng về trang khác hoặc thông báo lỗi
+        return redirect('/customer')->withErrors('Bạn không có quyền truy cập vào trang này.');
     }
-
-    // public function handle(Request $request, Closure $next, ...$roles)
-    // {
-    //     if (Auth::check()) {
-    //         dd(Auth::user()->chuc_vu->ten_chuc_vu);  // Kiểm tra vai trò của người dùng
-    //         if (in_array(Auth::user()->chuc_vu->ten_chuc_vu, $roles)) {
-    //             return $next($request);
-    //         }
-    //     }
-
-    //     return redirect('/auth/register')->withErrors('Access Denied. You do not have permission.');
-    // }
 }

@@ -59,28 +59,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 </head>
 
-<!-- body start -->
-
 <body data-menu-color="light" data-sidebar="default">
-<!-- body start -->
+    <!-- body start -->
 
-<body data-menu-color="light" data-sidebar="default">
 
     <!-- Begin page -->
     <div id="app-layout">
-    <!-- Begin page -->
-    <div id="app-layout">
+
 
         @include('admin.partials.header');
 
         @include('admin.partials.siderbar');
-
-        @include('admin.partials.header');
-
-        @include('admin.partials.siderbar');
-
 
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
@@ -92,16 +85,6 @@
         <!-- ============================================================== -->
         @include('admin.partials.footer')
     </div>
-    <!-- END wrapper -->
-        <!-- ============================================================== -->
-        <!-- Start Page Content here -->
-        <!-- ============================================================== -->
-        @yield('content')
-
-        <!-- ============================================================== -->
-        <!-- End Page content -->
-        <!-- ============================================================== -->
-        @include('admin.partials.footer')
     </div>
     <!-- END wrapper -->
 
@@ -113,40 +96,23 @@
     <script src="{{ asset('assets/admin/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/feather-icons/feather.min.js') }}"></script>
-    <!-- Vendor -->
-    <script src="{{ asset('assets/admin/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/libs/feather-icons/feather.min.js') }}"></script>
 
-    <!-- Apexcharts JS -->
-    <script src="{{ asset('assets/admin/libs/apexcharts/apexcharts.min.js') }}"></script>
+
     <!-- Apexcharts JS -->
     <script src="{{ asset('assets/admin/libs/apexcharts/apexcharts.min.js') }}"></script>
 
     <!-- for basic area chart -->
     <script src="{{ asset('assets/admin/apexcharts.com/samples/assets/admin/stock-prices.js') }}"></script>
-    <!-- for basic area chart -->
-    <script src="{{ asset('assets/admin/apexcharts.com/samples/assets/admin/stock-prices.js') }}"></script>
 
-    <!-- Widgets Init Js -->
-    <script src="{{ asset('assets/admin/js/pages/analytics-dashboard.init.js') }}"></script>
     <!-- Widgets Init Js -->
     <script src="{{ asset('assets/admin/js/pages/analytics-dashboard.init.js') }}"></script>
 
     <!-- App js-->
     <script src="{{ asset('assets/admin/js/app.js') }}"></script>
-    <!-- App js-->
-    <script src="{{ asset('assets/admin/js/app.js') }}"></script>
+
 
 </body>
-</body>
 
-<!-- Mirrored from zoyothemes.com/tapeli/html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jul 2024 08:34:03 GMT -->
 
 
 </html>
-

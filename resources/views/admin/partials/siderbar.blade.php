@@ -23,9 +23,10 @@
                 </a>
             </div>
 
-            <ul id="side-menu">
+            <ul id="side-menu" class="list-unstyled">
                 <li class="menu-title">Menu</li>
 
+                <!-- Dashboard Link -->
                 <li>
                     <a href="{{ route('dashboard') }}">
                         <span> Thống kê </span>
@@ -34,146 +35,127 @@
 
                 <li class="menu-title">Pages</li>
 
+                <!-- Danh mục -->
                 <li>
-                    <a href="#danhmuc" data-bs-toggle="collapse">
+                    <a href="#danhmuc" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="file-text"></i>
                         <span> Danh mục </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="danhmuc">
                         <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('danhmucs.create') }}'>Thêm</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('danhmucs.index') }}'>Danh sách</a>
-                            </li>
+                            <li><a class="tp-link" href="{{ route('danhmucs.create') }}">Thêm</a></li>
+                            <li><a class="tp-link" href="{{ route('danhmucs.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <!-- Chức vụ -->
                 <li>
-                    <a href="#chucvu" data-bs-toggle="collapse">
+                    <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="file-text"></i>
                         <span> Chức vụ </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="chucvu">
                         <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('chucvus.create') }}'>Thêm</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('chucvus.index') }}'>Danh sách</a>
-                            </li>
+                            <li><a class="tp-link" href="{{ route('chucvus.create') }}">Thêm</a></li>
+                            <li><a class="tp-link" href="{{ route('chucvus.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <!-- Sản phẩm -->
                 <li>
-                    <a href="#sanpham" data-bs-toggle="collapse">
+                    <a href="#sanpham" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="file-text"></i>
                         <span> Sản phẩm </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sanpham">
                         <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('sanphams.create') }}'>Thêm</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('sanphams.index') }}'>Danh sách</a>
-                            </li>
+                            <li><a class="tp-link" href="{{ route('sanphams.create') }}">Thêm</a></li>
+                            <li><a class="tp-link" href="{{ route('sanphams.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <!-- Phương thức thanh toán -->
                 <li>
-                    <a href="#phuongthucthanhtoan" data-bs-toggle="collapse">
+                    <a href="#phuongthucthanhtoan" data-bs-toggle="collapse" aria-expanded="false"
+                        data-bs-parent="#side-menu">
                         <i data-feather="file-text"></i>
                         <span> PT thanh toán </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('phuongthucthanhtoans.index') }}'>Danh sách</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('phuongthucthanhtoans.create') }}'>Thêm</a>
-                            </li>
+                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.create') }}">Thêm</a></li>
+                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <!-- Phương thức vận chuyển -->
                 <li>
-                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse">
+                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse" aria-expanded="false"
+                        data-bs-parent="#side-menu">
                         <i data-feather="file-text"></i>
                         <span> PT vận chuyển </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="phuongthucvanchuyen">
                         <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.index') }}'>Danh sách</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('phuongthucvanchuyens.create') }}'>Thêm</a>
-                            </li>
+                            <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.create') }}">Thêm</a></li>
+                            <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <!-- Khuyến mãi -->
                 <li>
-                    <a href="#khuyenmai" data-bs-toggle="collapse">
+                    <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="file-text"></i>
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="khuyenmai">
                         <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('khuyenmais.create') }}'>Thêm</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('khuyenmais.index') }}'>Danh sách</a>
-                            </li>
+                            <li><a class="tp-link" href="{{ route('khuyenmais.create') }}">Thêm</a></li>
+                            <li><a class="tp-link" href="{{ route('khuyenmais.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <!-- User -->
                 <li>
-                    <a href="#user" data-bs-toggle="collapse">
+                    <a href="#user" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="file-text"></i>
                         <span> User </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="user">
                         <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('user.index') }}'>Danh sách</a>
-                            </li>
+                            <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <!-- Bài viết -->
                 <li>
-                    <a href="#baiviet" data-bs-toggle="collapse">
+                    <a href="#baiviet" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="file-text"></i>
-                        <span>Bài viết </span>
+                        <span> Bài viết </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="baiviet">
                         <ul class="nav-second-level">
-                            <li>
-                                <a class='tp-link' href='{{ route('baiviets.create') }}'>Thêm</a>
-                            </li>
-                            <li>
-                                <a class='tp-link' href='{{ route('baiviets.index') }}'>Danh sách</a>
-                            </li>
+                            <li><a class="tp-link" href="{{ route('baiviets.create') }}">Thêm</a></li>
+                            <li><a class="tp-link" href="{{ route('baiviets.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
+
             </ul>
         </div>
         <!-- End Sidebar -->

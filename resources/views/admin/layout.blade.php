@@ -18,27 +18,15 @@
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
     <meta name="author" content="Zoyothemes" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta charset="utf-8" />
-    <title>Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
-    <meta name="author" content="Zoyothemes" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.ico') }}">
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.ico') }}">
-
     <!-- App css -->
     <link href="{{ asset('assets/admin/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
-    <!-- App css -->
-    <link href="{{ asset('assets/admin/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+    <!-- Icons -->
+    <link href="{{ asset('assets/admin/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <!-- Icons -->
-    <link href="{{ asset('assets/admin/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- Icons -->
-    <link href="{{ asset('assets/admin/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -55,13 +43,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha384-..." crossorigin="anonymous">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <body data-menu-color="light" data-sidebar="default">
     <!-- body start -->
@@ -89,8 +75,6 @@
     <!-- END wrapper -->
 
     <!-- Vendor -->
-    <script src="{{ asset('assets/admin/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/node-waves/waves.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
@@ -110,6 +94,8 @@
     <!-- App js-->
     <script src="{{ asset('assets/admin/js/app.js') }}"></script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 

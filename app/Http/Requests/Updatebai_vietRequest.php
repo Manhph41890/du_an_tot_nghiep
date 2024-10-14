@@ -40,18 +40,22 @@ class Updatebai_vietRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'anh_bai_viet.mimes' => 'Hình ảnh phải là định dạng jpeg, png, jpg hoặc gif.',
+            'anh_bai_viet.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
+
             'tieu_de_bai_viet.required' => 'Tiêu đề bài viết là bắt buộc.',
             'tieu_de_bai_viet.max' => 'Tiêu đề bài viết không được vượt quá 255 ký tự.',
 
+            'noi_dung.required' => 'Nội dung là bắt buộc.',
+            'noi_dung.max' => 'Nội dung không được vượt quá 1000 ký tự.',
+
+            'user_id.exists' => 'Tác giả không tồn tại.',
+
             'ngay_dang.required' => 'Ngày đăng là bắt buộc.',
-            'ngay_dang.date' => 'Ngày đăng phải là một định dạng ngày hợp lệ.',
+            'ngay_dang.date' => 'Ngày đăng phải là định dạng ngày hợp lệ.',
 
-            'noi_dung.max' => 'Nội dung bài viết không được vượt quá 200 ký tự.',
-
-            'anh_bai_viet.mimes' => 'Hình ảnh phải là định dạng: jpeg, png, jpg, hoặc gif.',
-            'anh_bai_viet.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
-
-            'is_active.in' => 'Trạng thái bài viết không hợp lệ.',
+            'is_active.required' => 'Trạng thái là bắt buộc.',
+            'is_active.in' => 'Trạng thái không hợp lệ.',
         ];
     }
 }

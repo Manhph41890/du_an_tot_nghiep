@@ -12,10 +12,6 @@ class chuc_vu extends Model
         'ten_chuc_vu',
         'mo_ta_chuc_vu',
     ];
-<<<<<<< HEAD
-=======
-
->>>>>>> 96daa95f178df5793f2a729748ec7a9625f9645a
     public function users()
     {
         return $this->hasMany(User::class, 'chuc_vu_id');

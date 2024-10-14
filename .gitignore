@@ -38,3 +38,7 @@ yarn-error.log
 
 # Bỏ qua file .env
 .env
+
+# Bỏ qua file composer
+/composer.json
+/composer.lock

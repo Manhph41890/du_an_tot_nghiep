@@ -52,8 +52,6 @@ class DanhMucController extends Controller
      */
     public function store(Storedanh_mucRequest $request)
     {
-
-
         //
         if ($request->isMethod('POST')) {
             $param = $request->except('_token');
@@ -64,6 +62,7 @@ class DanhMucController extends Controller
             }
             $param['anh_danh_muc'] = $filepath;
         }
+        danh_muc::create($param);
 
         return redirect()->route('danhmucs.index')->with('success', 'Thêm danh mục thành công!');
     }

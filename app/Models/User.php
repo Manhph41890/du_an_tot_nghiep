@@ -29,6 +29,14 @@ class User extends Authenticatable
         'password',
         'is_active'
     ];
+<<<<<<< HEAD
+    public function chuc_vu()
+    {
+        return $this->belongsTo(chuc_vu::class, 'chuc_vu_id');
+    }
+
+
+=======
     public function chuc_vus()
     {
         return $this->belongsTo(chuc_vu::class, 'id');
@@ -41,6 +49,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(khuyen_mai::class);
     }
+>>>>>>> 96daa95f178df5793f2a729748ec7a9625f9645a
     /**
      * Các trường cần ẩn khi trả về JSON.
      *

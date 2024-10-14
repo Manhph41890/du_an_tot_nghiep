@@ -8264,3 +8264,4 @@ Did you mean one of these?
 #26 D:\\laragon\\www\\du_an_tot_nghiep\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->terminate(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\Response))
 #27 {main}
 "} 
+[2024-10-14 10:21:53] local.ERROR: Lỗi khi thêm sản phẩm: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'anh_san_pham' cannot be null (Connection: mysql, SQL: insert into `san_phams` (`ten_san_pham`, `gia_goc`, `danh_muc_id`, `gia_km`, `ma_ta_san_pham`, `is_active`, `anh_san_pham`, `updated_at`, `created_at`) values (Product, 120, 32, 110, Ngô Thị Thắm, 1, ?, 2024-10-14 10:21:53, 2024-10-14 10:21:53))  

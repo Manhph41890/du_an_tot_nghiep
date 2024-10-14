@@ -94,6 +94,22 @@
                                                         {{ $baiviet->is_active == 0 ? 'Hiển Thị' : 'Ẩn' }}
                                                     </td>
                                                     <td>
+                                                        <div>
+                                                            <a href="{{ route('baiviets.show', $baiviet->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal{{ $baiviet->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="myModal{{ $baiviet->id }}">
+                                                                @include('admin.baiviet.show', [
+                                                                    'post' => $baiviet,
+                                                                ])
+                                                            </div>
+                                                        </div>
+
                                                         <a href="{{ route('baiviets.edit', $baiviet->id) }}"><i
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
                                                         <form action="{{ route('baiviets.destroy', $baiviet->id) }}"

@@ -30,6 +30,8 @@
                             <div class="card-body">
                                 <form action="{{ route('baiviets.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
+
+
                                     <div class="form-group mb-3">
                                         <label for="anh_bai_viet">Hình ảnh bài viết</label>
                                         <input type="file" name="anh_bai_viet"
@@ -62,27 +64,12 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="user_id">Tác giả</label>
-                                        <select name="user_id" class="form-select @error('user_id') is-invalid @enderror">
-                                            @foreach ($user as $id => $ho_ten)
-                                                <option value="{{ $id }}"
-                                                    {{ old('user_id') == $id ? 'selected' : '' }}>{{ $ho_ten }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('user_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-
-
                                     <div class="form-group mb-3">
                                         <label for="ngay_dang">Ngày Đăng:</label>
-                                        <input type="date" name="ngay_dang" value="{{ old('ngay_dang') }}"
-                                            class="form-control @error('ngay_dang') is-invalid @enderror">
+                                        <input type="date" name="ngay_dang"
+                                            value="{{ old('ngay_dang', now()->format('Y-m-d')) }}"
+                                            class="form-control @error('ngay_dang')
+                                        is-invalid @enderror">
                                         @error('ngay_dang')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

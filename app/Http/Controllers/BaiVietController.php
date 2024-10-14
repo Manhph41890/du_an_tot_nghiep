@@ -69,6 +69,12 @@ class BaiVietController extends Controller
             // Lấy toàn bộ dữ liệu từ form dưới dạng mảng
             $data_bai_viet = $request->all();
 
+            // Gán user_id từ người dùng đang đăng nhập
+            $data_bai_viet['user_id'] = $request->input('user_id', auth()->id()); // Lấy ID của người dùng đang đăng nhập
+
+            // Lấy ngày hiện tại để điền vào trường "Ngày Đăng"
+            $data_bai_viet['ngay_dang'] = $request->input('ngay_dang', now());
+
             // Xử lý upload file hình ảnh bài viếts
             if ($request->hasFile('anh_bai_viet')) {
                 $file = $request->file('anh_bai_viet');

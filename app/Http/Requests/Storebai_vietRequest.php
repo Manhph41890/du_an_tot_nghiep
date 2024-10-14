@@ -51,7 +51,6 @@ class Storebai_vietRequest extends FormRequest
 
             'user_id.exists' => 'Tác giả không tồn tại.',
 
-            'ngay_dang.required' => 'Ngày đăng là bắt buộc.',
             'ngay_dang.date' => 'Ngày đăng phải là định dạng ngày hợp lệ.',
 
             'is_active.required' => 'Trạng thái là bắt buộc.',

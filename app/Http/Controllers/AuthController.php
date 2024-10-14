@@ -223,6 +223,7 @@ class AuthController extends Controller
     {
         switch ($user->chuc_vu->ten_chuc_vu) {
             case 'admin':
+                return redirect('/dashboard')->with('success', 'Đăng nhập thành công');
             case 'nhan_vien':
                 return redirect('/dashboard')->with('success', 'Đăng nhập thành công');
             case 'khach_hang':

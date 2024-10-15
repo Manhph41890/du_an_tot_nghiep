@@ -23,7 +23,8 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="<?php echo e(asset('assets/admin/images/favicon.ico')); ?>">
     <!-- App css -->
-    <link href="<?php echo e(asset('assets/admin/css/app.min.css')); ?>" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="<?php echo e(asset('assets/admin/css/app.min.css')); ?>" rel="stylesheet" type="text/css"
+        id="app-style" />
     <!-- Icons -->
     <link href="<?php echo e(asset('assets/admin/css/icons.min.css')); ?>" rel="stylesheet" type="text/css" />
 

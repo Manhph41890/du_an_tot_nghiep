@@ -90,8 +90,10 @@
                     </a>
                     <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="<?php echo e(route('phuongthucthanhtoans.create')); ?>">Thêm</a></li>
-                            <li><a class="tp-link" href="<?php echo e(route('phuongthucthanhtoans.index')); ?>">Danh sách</a></li>
+                            <li><a class="tp-link"
+                                    href="<?php echo e(route('phuongthucthanhtoans.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('phuongthucthanhtoans.index')); ?>">Danh
+                                    sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -106,8 +108,10 @@
                     </a>
                     <div class="collapse" id="phuongthucvanchuyen">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="<?php echo e(route('phuongthucvanchuyens.create')); ?>">Thêm</a></li>
-                            <li><a class="tp-link" href="<?php echo e(route('phuongthucvanchuyens.index')); ?>">Danh sách</a></li>
+                            <li><a class="tp-link"
+                                    href="<?php echo e(route('phuongthucvanchuyens.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('phuongthucvanchuyens.index')); ?>">Danh
+                                    sách</a></li>
                         </ul>
                     </div>
                 </li>

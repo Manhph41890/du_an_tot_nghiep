@@ -49,7 +49,7 @@ class UserController extends Controller
         return view('admin.user.index', $params);
     }
 
-    /** 
+    /**
      * Show the form for creating a new resource.
      */
     public function create() {}
@@ -84,6 +84,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+
         // Lấy thông tin người dùng hiện tại
         $user = Auth::user();
 
@@ -111,7 +112,7 @@ class UserController extends Controller
 
             // Lưu ảnh mới vào storage/app/public/user
             $imageName = time() . '_' . $request->file('anh_dai_dien')->getClientOriginalName();
-            $path = $request->file('anh_dai_dien')->storeAs('public/user', $imageName);
+            $path = $request->file('anh_dai_dien')->storeAs('user', $imageName, "public");
 
             // Cập nhật đường dẫn ảnh trong cơ sở dữ liệu
             $user->anh_dai_dien = 'user/' . $imageName; // Chỉ lưu đường dẫn tương đối

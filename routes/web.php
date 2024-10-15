@@ -42,7 +42,7 @@ Route::resource('/baiviets', BaiVietController::class);
 Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
 Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
 Route::get('user', [UserController::class, 'index'])->name('user.index');
-Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
 Route::get('/danhgia/{id}', [DanhgiaController::class, 'show'])->name('danhgia.show');
 

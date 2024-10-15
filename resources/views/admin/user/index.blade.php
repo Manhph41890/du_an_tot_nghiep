@@ -21,10 +21,10 @@
                 <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
+                        <div class="card-header justify-content-between">
 
-                        <div class="d-flex justify-content-between">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-4">
                                     <form action="{{ route('user.index') }}" method="POST">
                                         @csrf
                                         @method('GET')
@@ -34,7 +34,7 @@
                                     </form>
                                 </div>
                              
-                            </div>
+                            
 
                             <div class="col-3">
                                 <form action="{{ route('user.index') }}" method="POST" id="filter-form">
@@ -50,7 +50,7 @@
                                     </select>
                                 </form>
                             </div>
-
+                        </div>
 
 
                             <!-- Hiển thị thông báo thành công -->

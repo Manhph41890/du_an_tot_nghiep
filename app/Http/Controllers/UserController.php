@@ -49,7 +49,7 @@ class UserController extends Controller
         return view('admin.user.index', $params);
     }
 
-    /** 
+    /**
      * Show the form for creating a new resource.
      */
     public function create() {}

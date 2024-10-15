@@ -84,9 +84,6 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        // Lấy thông tin người dùng hiện tại
-        $user = Auth::user();
-
         // Validate dữ liệu từ form
         $request->validate([
             'ho_ten' => 'required|string|max:255',
@@ -94,35 +91,37 @@ class UserController extends Controller
             'dia_chi' => 'nullable|string|max:255',
         ]);
 
-        // Ghi log thông tin người dùng và dữ liệu yêu cầu
-        Log::info('User data before update:', $user->toArray());
-        Log::info('Request data:', $request->all());
+        // Lấy thông tin người dùng hiện tại
+        $user = Auth::user();
 
-        // Cập nhật tên người dùng
+        // Cập nhật tên và địa chỉ người dùng
         $user->ho_ten = $request->ho_ten;
         $user->dia_chi = $request->dia_chi;
 
-        // Xử lý ảnh đại diện
+        // Xử lý ảnh đại diện nếu có
         if ($request->hasFile('anh_dai_dien')) {
-            // Xóa ảnh cũ nếu cần thiết
+            // Xóa ảnh cũ nếu tồn tại
             if ($user->anh_dai_dien) {
-                Storage::delete('public/' . $user->anh_dai_dien); // Xóa ảnh cũ
+                // Xóa ảnh cũ từ thư mục lưu trữ
+                Storage::delete('public/' . $user->anh_dai_dien);
             }
 
-            // Lưu ảnh mới vào storage/app/public/user
+            // Lưu ảnh mới vào thư mục 'public/storage/user'
             $imageName = time() . '_' . $request->file('anh_dai_dien')->getClientOriginalName();
-            $path = $request->file('anh_dai_dien')->storeAs('public/user', $imageName);
+            // Thay đổi đường dẫn lưu ảnh
+            $path = $request->file('anh_dai_dien')->storeAs('user', $imageName, 'public');
 
-            // Cập nhật đường dẫn ảnh trong cơ sở dữ liệu
+            // Cập nhật đường dẫn ảnh đại diện trong cơ sở dữ liệu
             $user->anh_dai_dien = 'user/' . $imageName; // Chỉ lưu đường dẫn tương đối
         }
 
-        // Lưu người dùng
+        // Lưu thay đổi vào cơ sở dữ liệu
         $user->save();
 
-        // Chuyển hướng về trang profile hoặc thông báo thành công
-        return redirect()->back()->with('success', 'Cập nhật thông tin thành công');
+        // Trả về phản hồi thành công
+        return response()->json(['success' => 'Cập nhật thành công']);
     }
+
 
     /**
      * Remove the specified resource from storage.

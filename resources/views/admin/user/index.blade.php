@@ -106,7 +106,7 @@
                                                     <td>
                                                         <div>
                                                             <!-- Thay đổi data-bs-target để tương ứng với ID của item -->
-                                                            <a href="{{ route('user.show', $item->id) }}" data-bs-toggle="modal" data-bs-target="#myModal{{ $item->id }}">
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal{{ $item->id }}">
                                                                 <i class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
                                             

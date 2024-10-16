@@ -70,7 +70,7 @@ class BaiVietController extends Controller
             $data_bai_viet = $request->all();
 
             // Gán user_id từ người dùng đang đăng nhập
-            $data_bai_viet['user_id'] = $request->input('user_id', auth()->id()); // Lấy ID của người dùng đang đăng nhập
+            $data_bai_viet['user_id'] = auth()->id(); // Lấy ID của người dùng đang đăng nhập
 
             // Lấy ngày hiện tại để điền vào trường "Ngày Đăng"
             $data_bai_viet['ngay_dang'] = $request->input('ngay_dang', now());

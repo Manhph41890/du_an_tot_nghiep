@@ -22,8 +22,8 @@
                 <li class="dropdown notification-list topbar-dropdown">
                     <a class="nav-link dropdown-toggle nav-user me-0" href="#" id="profileDropdown" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}" alt="user-image"
-                            class="rounded-circle">
+                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}" alt="Ảnh đại diện"
+                            width="50" height="50" class="rounded-circle">
                         <span class="pro-user-name ms-1">
                             {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
                         </span>
@@ -49,7 +49,7 @@
 </div>
 <!-- End Topbar -->
 
-<!-- Form thông tin tài khoản -->
+<!-- Popup thông tin tài khoản -->
 <div id="userProfilePopup" class="user-profile-popup" style="display: none">
     <div class="popup-content">
         <div class="popup-header">
@@ -69,7 +69,7 @@
     </div>
 </div>
 
-<!-- Form chỉnh sửa tài khoản (Ẩn mặc định, hiển thị khi bấm Sửa) -->
+<!-- Popup chỉnh sửa tài khoản -->
 <div id="editUserProfilePopup" class="user-profile-popup" style="display: none">
     <div class="popup-content">
         <div class="popup-header">
@@ -83,7 +83,7 @@
                 <div class="mb-3">
                     <label for="hoTen" class="form-label">Họ tên</label>
                     <input type="text" class="form-control" id="hoTen" name="ho_ten"
-                        value="{{ Auth::user()->ho_ten }}">
+                        value="{{ Auth::user()->ho_ten }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="anhDaiDien" class="form-label">Ảnh đại diện</label>
@@ -91,15 +91,15 @@
                     @if (Auth::user()->anh_dai_dien)
                         <div class="mt-2">
                             <label>Ảnh hiện tại:</label>
-                            <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}" alt="Current User Image"
+                            <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}" alt="Ảnh hiện tại"
                                 class="rounded-circle" style="width: 100px; height: 100px;">
                         </div>
                     @endif
                 </div>
                 <div class="mb-3">
-                    <label for="anhDaiDien" class="form-label">Địa Chỉ</label>
-                    <input type="text" class="form-control" id="diaChi" value="{{ Auth::user()->dia_chi }}"
-                        name="dia_chi">
+                    <label for="diaChi" class="form-label">Địa Chỉ</label>
+                    <input type="text" class="form-control" id="diaChi" name="dia_chi"
+                        value="{{ Auth::user()->dia_chi }}">
                 </div>
                 <button type="submit" class="btn btn-success">Lưu</button>
                 <button type="button" class="btn btn-secondary" id="cancelEditProfile">Hủy</button>
@@ -108,20 +108,16 @@
     </div>
 </div>
 
-
-
 <!-- CSS -->
 <style>
     .user-profile-popup {
         display: none;
-        /* Ẩn mặc định */
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        /* Màu nền tối */
         z-index: 9999;
         display: flex;
         justify-content: center;
@@ -143,16 +139,9 @@
         align-items: center;
     }
 
-    .popup-header h5 {
-        margin: 0;
-    }
-
     .close-popup {
         cursor: pointer;
         font-size: 24px;
-        position: absolute;
-        top: 10px;
-        right: 10px;
     }
 
     .popup-body p,
@@ -168,74 +157,56 @@
 <!-- JavaScript -->
 <script>
     $(document).ready(function() {
-        // Ẩn tất cả các popup khi trang được tải
-        $('#userProfilePopup').hide();
-        $('#editUserProfilePopup').hide();
-
-        // Hiển thị form thông tin khi click vào "Tài khoản"
+        // Hiển thị popup thông tin người dùng
         $('#showUserProfile').click(function(e) {
-            e.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
-            console.log("Đang hiển thị popup thông tin người dùng.");
-            $('#userProfilePopup').fadeIn(); // Hiển thị khung thông tin
+            e.preventDefault();
+            $('#userProfilePopup').fadeIn();
         });
 
-        // Ẩn form thông tin khi click vào nút đóng hoặc biểu tượng "x"
+        // Ẩn popup thông tin người dùng
         $('#closeUserProfile, #closeUserProfileBtn').click(function() {
-            console.log("Đang ẩn popup thông tin người dùng.");
-            $('#userProfilePopup').fadeOut(); // Ẩn khung thông tin
+            $('#userProfilePopup').fadeOut();
         });
 
-        // Hiển thị form chỉnh sửa khi click vào "Sửa"
+        // Hiển thị popup chỉnh sửa tài khoản
         $('#editUserProfileBtn').click(function() {
-            console.log("Đang hiển thị popup chỉnh sửa thông tin người dùng.");
-            $('#userProfilePopup').fadeOut(); // Ẩn khung thông tin
-            $('#editUserProfilePopup').fadeIn(); // Hiển thị khung chỉnh sửa
+            $('#userProfilePopup').fadeOut();
+            $('#editUserProfilePopup').fadeIn();
         });
 
-        // Ẩn form chỉnh sửa khi click vào nút hủy hoặc biểu tượng "x"
+        // Ẩn popup chỉnh sửa tài khoản
         $('#closeEditUserProfile, #cancelEditProfile').click(function() {
-            console.log("Đang ẩn popup chỉnh sửa thông tin người dùng.");
-            $('#editUserProfilePopup').fadeOut(); // Ẩn khung chỉnh sửa
+            $('#editUserProfilePopup').fadeOut();
         });
 
-        // Đóng popup khi nhấn vào bất kỳ đâu bên ngoài popup
+        // Đóng popup khi click bên ngoài popup
         $(window).click(function(e) {
             if ($(e.target).is('#userProfilePopup')) {
-                console.log("Đang ẩn popup thông tin người dùng do click bên ngoài.");
-                $('#userProfilePopup').fadeOut(); // Ẩn khung thông tin
+                $('#userProfilePopup').fadeOut();
             }
             if ($(e.target).is('#editUserProfilePopup')) {
-                console.log("Đang ẩn popup chỉnh sửa thông tin người dùng do click bên ngoài.");
-                $('#editUserProfilePopup').fadeOut(); // Ẩn khung chỉnh sửa
+                $('#editUserProfilePopup').fadeOut();
             }
         });
 
-        // Ngăn form tự động gửi
+        // Gửi form chỉnh sửa qua AJAX
         $('#editUserProfileForm').on('submit', function(e) {
-            e.preventDefault(); // Ngăn không cho form tự động gửi
+            e.preventDefault();
 
-            // Gửi form qua AJAX
             $.ajax({
-                url: $(this).attr('action'), // Lấy URL từ thuộc tính action của form
-                type: $(this).attr('method'), // Lấy phương thức từ thuộc tính method của form
-                data: new FormData(this), // Lấy dữ liệu từ form
-                processData: false, // Không xử lý dữ liệu
-                contentType: false, // Không định dạng nội dung
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
                 success: function(response) {
-                    // Hiển thị thông báo thành công
-                    console.log("Form chỉnh sửa tài khoản đã được gửi.");
-                    // Có thể hiển thị thông báo bằng alert hoặc thêm một thông báo trên giao diện
                     alert('Cập nhật thông tin thành công!');
-                    // Đóng popup sau khi lưu
                     $('#editUserProfilePopup').fadeOut();
                 },
                 error: function(xhr) {
-                    // Xử lý lỗi nếu có
-                    console.log("Có lỗi xảy ra:", xhr.responseText);
                     alert('Có lỗi xảy ra. Vui lòng thử lại.');
                 }
             });
         });
-
     });
 </script>

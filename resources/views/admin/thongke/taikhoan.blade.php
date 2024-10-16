@@ -10,44 +10,48 @@
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
                         <div class="row justify-content-end">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <h4 class="fw-semibold">{{ $title }}</h4>
-                                <div class="alert alert-success alert-dismissible">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                    <strong>Success!</strong> This alert box could indicate a successful or positive action.
-                                </div>
                             </div>
                             <div class="col-md-2">
-                                <form action="{{ route('dashboard') }}" method="post">
+                                <form action="{{ route('thong_ke_tai_khoan') }}" method="post">
                                     @csrf
                                     @method('GET')
-                                    <div class="mb-3 ">
-                                        <label for="ngay_bat_dau" class="form-label">Từ ngày:</label>
-                                        <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
-                                    </div>
+                                    <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
+                                </form>
+                            </div>
+                            <div class="col-md-1 text-center">Tới</div>
+                            <div class="col-md-2">
+                                <form action="{{ route('thong_ke_tai_khoan') }}" method="post">
+                                    @csrf
+                                    @method('GET')
+                                    <input type="date" class="form-control" id="ngay_ket_thuc" name="ngay_ket_thuc">
                                 </form>
                             </div>
                             <div class="col-md-2">
-                                <form action="{{ route('dashboard') }}" method="post">
+                                <form action="{{ route('thong_ke_tai_khoan') }}" method="post">
                                     @csrf
                                     @method('GET')
-                                    <div class="mb-3 ">
-                                        <label for="ngay_ket_thuc" class="form-label">Đến ngày:</label>
-                                        <input type="date" class="form-control" id="ngay_ket_thuc" name="ngay_ket_thuc">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-2">
-                                <form action="{{ route('dashboard') }}" method="post" class=" mb-3 ">
-                                    @csrf
-                                    @method('GET')
-                                    <label for="ngay_ket_thuc" class="form-label">Lọc:</label>
                                     <select class="form-select ">
                                         <option>Theo tháng</option>
                                         <option>Theo năm</option>
                                         <option>Theo Qúy</option>
                                     </select>
                                 </form>
+                            </div>
+                            <div class="col-md-1">
+                                <form action="{{ route('thong_ke_tai_khoan') }}" method="post">
+                                    @csrf
+                                    @method('GET')
+                                    <input type="submit" value="Tìm kiếm" class="btn btn-primary w-100 text-center">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                <strong>Thành công</strong> This alert box could indicate a successful or positive
+                                action.
                             </div>
                         </div>
                     </div>
@@ -57,7 +61,6 @@
                 <div class="row">
                     <div class="col-md-12 col-xl-12">
                         <div class="row g-3">
-
                             <div class="col-md-6 col-xl-3">
                                 <div class="card text-bg-success">
                                     <div class="card-body">
@@ -71,7 +74,6 @@
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $sanphams }}</div>
                                             <div class="me-auto">
-                                                {{-- <div class="fs-14 mb-1">Người dùng</div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -84,15 +86,9 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="fs-14 mb-1 text-white"> <i class="fa-solid fa-truck-fast me-2"></i>
                                                 Đơn hàng</div>
-                                            <span class="text-primary d-inline-flex align-items-center">
-                                                {{-- <a href="{{ route('user.index') }}" class="text-white"> <i class="fa-solid fa-plus"></i> </a> --}}
-                                            </span>
                                         </div>
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $donhangs }}</div>
-                                            <div class="me-auto">
-                                                {{-- <div class="fs-14 mb-1">Người dùng</div> --}}
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -104,9 +100,6 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="fs-14 mb-1 text-white"> <i
                                                     class="fa-solid fa-money-check-dollar me-2"></i> Doanh thu</div>
-                                            <span class="text-primary d-inline-flex align-items-center">
-                                                {{-- <a href="{{ route('user.index') }}" class="text-white"> <i class="fa-solid fa-plus"></i> </a> --}}
-                                            </span>
                                         </div>
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $tong_tien }}</div>
@@ -131,9 +124,6 @@
                                         </div>
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $users }}</div>
-                                            <div class="me-auto">
-                                                {{-- <div class="fs-14 mb-1">Người dùng</div> --}}
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -349,4 +339,5 @@
                 </div> <!-- container-fluid -->
             </div> <!-- content -->
         </div>
-    @endsection
+    </div>
+@endsection

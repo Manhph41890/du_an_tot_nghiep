@@ -54,7 +54,7 @@ class BaiVietController extends Controller
     public function create()
     {
         $user = User::query()->pluck('ho_ten', 'id')->all();
-        $title = "Thêm mới sản phẩm";
+        $title = "Thêm mới bài viết";
         return view('admin.baiviet.create', compact('user', 'title'));
     }
 
@@ -63,6 +63,7 @@ class BaiVietController extends Controller
      */
     public function store(Storebai_vietRequest $request)
     {
+
         // dd($request->all());
         DB::beginTransaction();
         try {
@@ -70,7 +71,7 @@ class BaiVietController extends Controller
             $data_bai_viet = $request->all();
 
             // Gán user_id từ người dùng đang đăng nhập
-            $data_bai_viet['user_id'] = $request->input('user_id', auth()->id()); // Lấy ID của người dùng đang đăng nhập
+            $data_bai_viet['user_id'] =  auth()->id(); // Lấy ID của người dùng đang đăng nhập
 
             // Lấy ngày hiện tại để điền vào trường "Ngày Đăng"
             $data_bai_viet['ngay_dang'] = $request->input('ngay_dang', now());

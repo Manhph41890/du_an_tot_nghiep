@@ -84,7 +84,6 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-
         // Validate dữ liệu từ form
         $request->validate([
             'ho_ten' => 'required|string|max:255',
@@ -109,7 +108,8 @@ class UserController extends Controller
 
             // Lưu ảnh mới vào thư mục 'public/storage/user'
             $imageName = time() . '_' . $request->file('anh_dai_dien')->getClientOriginalName();
-            $path = $request->file('anh_dai_dien')->storeAs('user', $imageName, "public");
+            // Thay đổi đường dẫn lưu ảnh
+            $path = $request->file('anh_dai_dien')->storeAs('user', $imageName, 'public');
 
             // Cập nhật đường dẫn ảnh đại diện trong cơ sở dữ liệu
             $user->anh_dai_dien = 'user/' . $imageName; // Chỉ lưu đường dẫn tương đối

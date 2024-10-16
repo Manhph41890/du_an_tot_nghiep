@@ -5,20 +5,20 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <div class="logo-box">
-                <a class='logo logo-light' href='index.html'>
+                <a class='logo logo-light' href='http://127.0.0.1:8000/dashboard'>
                     <span class="logo-sm">
-                        <img src="assets/images/logo-sm.png" alt="" height="22">
+                        <img src="assets/client/img/logo/logo_art.png" alt="" height="70">
                     </span>
                     <span class="logo-lg">
-                        <img src="assets/images/logo-light.png" alt="" height="24">
+                        <img src="assets/client/img/logo/logo_art.png" alt="" height="70">
                     </span>
                 </a>
-                <a class='logo logo-dark' href='index.html'>
+                <a class='logo logo-dark' href='http://127.0.0.1:8000/dashboard'>
                     <span class="logo-sm">
-                        <img src="assets/images/logo-sm.png" alt="" height="22">
+                        <img src="assets/client/img/logo/logo_art.png" alt="" height="70">
                     </span>
                     <span class="logo-lg">
-                        <img src="assets/images/logo-dark.png" alt="" height="24">
+                        <img src="assets/client/img/logo/logo_art.png" alt="" height="70">
                     </span>
                 </a>
             </div>
@@ -29,6 +29,7 @@
                 <!-- Dashboard Link -->
                 <li>
                     <a href="{{ route('dashboard') }}">
+                        <i class="fa-duotone fa-solid fa-chart-simple"></i>
                         <span> Thống kê </span>
                     </a>
                 </li>
@@ -38,7 +39,7 @@
                 <!-- Danh mục -->
                 <li>
                     <a href="#danhmuc" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="file-text"></i>
+                        <i class="fa-duotone fa-solid fa-list"></i>
                         <span> Danh mục </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -53,7 +54,7 @@
                 <!-- Chức vụ -->
                 <li>
                     <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="file-text"></i>
+                        <i class="fa-duotone fa-solid fa-users"></i>
                         <span> Chức vụ </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -68,7 +69,8 @@
                 <!-- Sản phẩm -->
                 <li>
                     <a href="#sanpham" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="file-text"></i>
+                        {{-- <i data-feather="file-text"></i> --}}
+                        <i class="fa-duotone fa-solid fa-cart-shopping"></i>
                         <span> Sản phẩm </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -84,7 +86,7 @@
                 <li>
                     <a href="#phuongthucthanhtoan" data-bs-toggle="collapse" aria-expanded="false"
                         data-bs-parent="#side-menu">
-                        <i data-feather="file-text"></i>
+                        <i class="fa-duotone fa-solid fa-money-bill"></i>
                         <span> PT thanh toán </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -100,7 +102,8 @@
                 <li>
                     <a href="#phuongthucvanchuyen" data-bs-toggle="collapse" aria-expanded="false"
                         data-bs-parent="#side-menu">
-                        <i data-feather="file-text"></i>
+                        {{-- <i data-feather="file-text"></i> --}}
+                        <i class="fa-duotone fa-solid fa-motorcycle"></i>
                         <span> PT vận chuyển </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -115,7 +118,7 @@
                 <!-- Khuyến mãi -->
                 <li>
                     <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="file-text"></i>
+                        <i class="fa-sharp-duotone fa-solid fa-percent"></i>
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -130,7 +133,7 @@
                 <!-- User -->
                 <li>
                     <a href="#user" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="file-text"></i>
+                        <i class="fa-duotone fa-solid fa-user"></i>
                         <span> User </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -144,7 +147,7 @@
                 <!-- Bài viết -->
                 <li>
                     <a href="#baiviet" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="file-text"></i>
+                        <i class="fa-duotone fa-solid fa-pen-to-square"></i>
                         <span> Bài viết </span>
                         <span class="menu-arrow"></span>
                     </a>

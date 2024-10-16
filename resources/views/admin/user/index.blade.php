@@ -22,18 +22,16 @@
                 <div class="col-xl-12">
                     <div class="card">
 
-                        <div class="d-flex justify-content-between">
-                            <div class="row">
-                                <div class="col-12">
-                                    <form action="{{ route('user.index') }}" method="POST">
-                                        @csrf
-                                        @method('GET')
-                                        <input type="text" id="search_product_name" name="search_product_name"
-                                            placeholder="Tìm kiếm" value="{{ request('search_product_name') }}"
-                                            class="form-control" onchange="this.form.submit();">
-                                    </form>
-                                </div>
+                        <div class="card-header d-flex justify-content-between">
 
+                            <div class="col-4">
+                                <form action="{{ route('user.index') }}" method="POST">
+                                    @csrf
+                                    @method('GET')
+                                    <input type="text" id="search_product_name" name="search_product_name"
+                                        placeholder="Tìm kiếm" value="{{ request('search_product_name') }}"
+                                        class="form-control" onchange="this.form.submit();">
+                                </form>
                             </div>
 
                             <div class="col-3">
@@ -52,7 +50,6 @@
                             </div>
 
 
-
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissable fade show " role="alert">
@@ -61,6 +58,7 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
+
                         </div><!-- end card header -->
 
                         <div class="row">

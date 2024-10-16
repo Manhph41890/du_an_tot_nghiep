@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     //
-    public function thong_ke_don_hang()
+    public function thong_ke_chung()
     {
 
         $title = "Thống kê đơn hàng";
@@ -43,13 +43,13 @@ class AdminController extends Controller
             $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
         }
         
-        return view('admin.thongke.donhang', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
+        return view('admin.thongke.tongquan', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
     }
     //
     public function thong_ke_tai_khoan()
     {
 
-        $title = "Thống kê tài khoản";
+        $title = "Thống kê đơn hàng";
 
         // Đếm số lượng đơn hàng
         $donhangs = don_hang::count();
@@ -84,7 +84,7 @@ class AdminController extends Controller
     public function thong_ke_doanh_thu()
     {
 
-        $title = "Thống kê doanh thu";
+        $title = "Thống kê đơn hàng";
 
         // Đếm số lượng đơn hàng
         $donhangs = don_hang::count();
@@ -119,7 +119,7 @@ class AdminController extends Controller
     public function thong_ke_san_pham()
     {
 
-        $title = "Thống kê sản phẩm";
+        $title = "Thống kê san";
 
         // Đếm số lượng đơn hàng
         $donhangs = don_hang::count();

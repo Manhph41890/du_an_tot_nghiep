@@ -22,7 +22,7 @@
                                 <div class="col-2">
                                     <a href="{{ route('danhmucs.create') }}" class="btn btn-success">Tạo Mới</a>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <form action="{{ route('danhmucs.index') }}" method="GET">
                                         @csrf
                                         <input type="text" id="search_ten_danh_muc" name="search_ten_danh_muc"
@@ -42,6 +42,24 @@
                                             </option>
                                         </select>
                                     </form>
+                                </div>
+                                <div class="col-4">
+                                    @if (session('success'))
+                                        <div class="alert alert-success alert-dismissable fade show d-flex justify-content-between mb-0"
+                                            role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
+                                    @if (session('error'))
+                                        <div class="alert alert-danger alert-dismissable fade show d-flex justify-content-between mb-0"
+                                            role="alert">
+                                            {{ session('error') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div><!-- end card header -->
@@ -96,7 +114,9 @@
                                 </div>
                             </div>
                         </div>
-                        {{ $danhmucs->links() }}
+                        <div class="row p-2">
+                            {{ $danhmucs->links() }}
+                        </div>
                     </div>
                 </div>
             </div> <!-- container-fluid -->

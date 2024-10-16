@@ -85,4 +85,5 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 });
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');

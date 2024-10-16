@@ -5,20 +5,20 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <div class="logo-box">
-                <a class='logo logo-light' href='http://127.0.0.1:8000/dashboard'>
+                <a class='logo logo-light' href='index.html'>
                     <span class="logo-sm">
-                        <img src="assets/client/img/logo/logo_art.png" alt="" height="70">
+                        <img src="assets/images/logo-sm.png" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="assets/client/img/logo/logo_art.png" alt="" height="70">
+                        <img src="assets/images/logo-light.png" alt="" height="24">
                     </span>
                 </a>
-                <a class='logo logo-dark' href='http://127.0.0.1:8000/dashboard'>
+                <a class='logo logo-dark' href='index.html'>
                     <span class="logo-sm">
-                        <img src="assets/client/img/logo/logo_art.png" alt="" height="70">
+                        <img src="assets/images/logo-sm.png" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="assets/client/img/logo/logo_art.png" alt="" height="70">
+                        <img src="assets/images/logo-dark.png" alt="" height="24">
                     </span>
                 </a>
             </div>
@@ -28,8 +28,7 @@
 
                 <!-- Dashboard Link -->
                 <li>
-                    <a href="{{ route('dashboard') }}">
-                        <i class="fa-duotone fa-solid fa-chart-simple"></i>
+                    <a href="<?php echo e(route('dashboard')); ?>">
                         <span> Thống kê </span>
                     </a>
                 </li>
@@ -39,14 +38,14 @@
                 <!-- Danh mục -->
                 <li>
                     <a href="#danhmuc" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i class="fa-duotone fa-solid fa-list"></i>
+                        <i data-feather="file-text"></i>
                         <span> Danh mục </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="danhmuc">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('danhmucs.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('danhmucs.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('danhmucs.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('danhmucs.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -54,14 +53,14 @@
                 <!-- Chức vụ -->
                 <li>
                     <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i class="fa-duotone fa-solid fa-users"></i>
+                        <i data-feather="file-text"></i>
                         <span> Chức vụ </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="chucvu">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('chucvus.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('chucvus.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('chucvus.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('chucvus.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -69,15 +68,14 @@
                 <!-- Sản phẩm -->
                 <li>
                     <a href="#sanpham" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        {{-- <i data-feather="file-text"></i> --}}
-                        <i class="fa-duotone fa-solid fa-cart-shopping"></i>
+                        <i data-feather="file-text"></i>
                         <span> Sản phẩm </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sanpham">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('sanphams.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('sanphams.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('sanphams.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('sanphams.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -86,14 +84,16 @@
                 <li>
                     <a href="#phuongthucthanhtoan" data-bs-toggle="collapse" aria-expanded="false"
                         data-bs-parent="#side-menu">
-                        <i class="fa-duotone fa-solid fa-money-bill"></i>
+                        <i data-feather="file-text"></i>
                         <span> PT thanh toán </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link"
+                                    href="<?php echo e(route('phuongthucthanhtoans.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('phuongthucthanhtoans.index')); ?>">Danh
+                                    sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -102,15 +102,16 @@
                 <li>
                     <a href="#phuongthucvanchuyen" data-bs-toggle="collapse" aria-expanded="false"
                         data-bs-parent="#side-menu">
-                        {{-- <i data-feather="file-text"></i> --}}
-                        <i class="fa-duotone fa-solid fa-motorcycle"></i>
+                        <i data-feather="file-text"></i>
                         <span> PT vận chuyển </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="phuongthucvanchuyen">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link"
+                                    href="<?php echo e(route('phuongthucvanchuyens.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('phuongthucvanchuyens.index')); ?>">Danh
+                                    sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -118,14 +119,14 @@
                 <!-- Khuyến mãi -->
                 <li>
                     <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i class="fa-sharp-duotone fa-solid fa-percent"></i>
+                        <i data-feather="file-text"></i>
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="khuyenmai">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('khuyenmais.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('khuyenmais.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('khuyenmais.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('khuyenmais.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -133,13 +134,13 @@
                 <!-- User -->
                 <li>
                     <a href="#user" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i class="fa-duotone fa-solid fa-user"></i>
+                        <i data-feather="file-text"></i>
                         <span> User </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="user">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('user.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -147,14 +148,14 @@
                 <!-- Bài viết -->
                 <li>
                     <a href="#baiviet" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i class="fa-duotone fa-solid fa-pen-to-square"></i>
+                        <i data-feather="file-text"></i>
                         <span> Bài viết </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="baiviet">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('baiviets.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('baiviets.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('baiviets.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('baiviets.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -167,3 +168,4 @@
     </div>
 </div>
 <!-- Left Sidebar End -->
+<?php /**PATH D:\laragon\www\du_an_tot_nghiep\resources\views/admin/partials/siderbar.blade.php ENDPATH**/ ?>

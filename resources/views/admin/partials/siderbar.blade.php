@@ -12,7 +12,7 @@
 
                 <!-- Dashboard Link -->
                 <li>
-                    <a href="#dashboard" data-bs-tophp gle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                    <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="pie-chart"></i>
                         <span> Thống kê </span>
                         <span class="menu-arrow"></span>
@@ -59,8 +59,7 @@
 
 
                 <li>
-                    <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-parent="#side-menu">
+                    <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="tag"></i>
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>
@@ -72,7 +71,7 @@
                     </div>
                 </li>
 
-                
+
                 <!-- Chức vụ -->
                 <li>
                     <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
@@ -131,7 +130,7 @@
                     </div>
                 </li>
 
-                
+
                 <!-- Phương thức thanh toán -->
                 <li>
                     <a href="#phuongthucthanhtoan" data-bs-toggle="collapse" aria-expanded="false"
@@ -143,7 +142,8 @@
                     <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
                             <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.index') }}">Danh sách</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -164,10 +164,6 @@
                         </ul>
                     </div>
                 </li>
-
-
-code kkkk 
-
 
             </ul>
         </div>

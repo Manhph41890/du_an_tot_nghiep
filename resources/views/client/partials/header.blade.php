@@ -333,7 +333,7 @@
                             <li class="english">
                                 <a href="#" id="dropdown3" class="pe-0" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <img src="assets/admin/images/logo/us-flag.jpg" alt="us flag" />
+                                    <img src="{{asset('assets/admin/images/logo/logo_art.jpg')}}" alt="us flag" />
                                     English
                                     <i class="ion ion-ios-arrow-down"></i>
                                 </a>

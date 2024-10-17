@@ -88,7 +88,7 @@
                                                     <img id="imagePreview"
                                                         src="{{ $product->anh_san_pham ? asset('storage/' . $product->anh_san_pham) : '#' }}"
                                                         alt="Hình ảnh"
-                                                        style="width: 200px; {{ $product->anh_san_pham ? 'display: block;' : 'display: none;' }}">
+                                                        style="width: 200px; display: block;display: none; ">
                                                 </div>
                                             </div>
                                             <div class="mb-3">
@@ -170,7 +170,7 @@
                                                     <div class="mt-2">
                                                         <img src="{{ $variant->anh_bien_the ? asset('storage/' . $variant->anh_bien_the) : '#' }}"
                                                             alt="Hình ảnh biến thể"
-                                                            style="width: 100px; {{ $variant->anh_bien_the ? 'display: block;' : 'display: none;' }}">
+                                                            style="width: 100px;  display: block ; display: none; ">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-1 d-flex align-items-end">

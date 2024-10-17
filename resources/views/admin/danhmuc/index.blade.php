@@ -44,22 +44,24 @@
                                     </form>
                                 </div>
                                 <div class="col-4">
-                                    @if (session('success'))
-                                        <div class="alert alert-success alert-dismissable fade show d-flex justify-content-between mb-0"
-                                            role="alert">
-                                            {{ session('success') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="Close"></button>
-                                        </div>
+                                    @if (Session::has('success'))
+                                        <script>
+                                            toastr.options = {
+                                                'progressBar': true,
+                                                'closeButton': true
+                                            }
+                                            toastr.success("{{ Session::get('success') }}",'success',{timeOut:3000});
+                                        </script>
                                     @endif
-                                    @if (session('error'))
-                                        <div class="alert alert-danger alert-dismissable fade show d-flex justify-content-between mb-0"
-                                            role="alert">
-                                            {{ session('error') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="Close"></button>
-                                        </div>
-                                    @endif
+                                    @if (Session::has('error'))
+                                    <script>
+                                        toastr.options = {
+                                            'progressBar': true,
+                                            'closeButton': true
+                                        }
+                                        toastr.error("{{ Session::get('error') }}",'error',{timeOut:3000});
+                                    </script>
+                                @endif
                                 </div>
                             </div>
                         </div><!-- end card header -->

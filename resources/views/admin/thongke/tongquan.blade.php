@@ -17,7 +17,7 @@
                                     <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
                                 </form>
                             </div>
-                            <div class="col-md-1 text-center">Tới</div>
+                            <div class="col-md-1 d-flex align-items-center justify-content-center ">Tới</div>
                             <div class="col-md-2">
                                 <form action="{{ route('thong_ke_chung') }}" method="post">
                                     @csrf

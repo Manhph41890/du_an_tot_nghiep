@@ -27,10 +27,10 @@
             <script>
                 // Hiển thị modal nếu có thông báo thành công
                 $(document).ready(function() {
-                    @if (session('success'))
+                    if (session('success'))
                         var successModal = new bootstrap.Modal(document.getElementById('successModal'));
                         successModal.show();
-                    @endif
+                    endif
                 });
             </script>
 

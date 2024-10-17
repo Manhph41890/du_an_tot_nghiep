@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function thong_ke_chung()
     {
 
-        $title = "Thống kê đơn hàng";
+        $title = "Tổng quan chung";
 
         // Đếm số lượng đơn hàng
         $donhangs = don_hang::count();
@@ -49,7 +49,7 @@ class AdminController extends Controller
     public function thong_ke_tai_khoan()
     {
 
-        $title = "Thống kê đơn hàng";
+        $title = "Thống kê tài khoản";
 
         // Đếm số lượng đơn hàng
         $donhangs = don_hang::count();
@@ -84,7 +84,7 @@ class AdminController extends Controller
     public function thong_ke_doanh_thu()
     {
 
-        $title = "Thống kê đơn hàng";
+        $title = "Thống kê doanh thu";
 
         // Đếm số lượng đơn hàng
         $donhangs = don_hang::count();
@@ -119,7 +119,7 @@ class AdminController extends Controller
     public function thong_ke_san_pham()
     {
 
-        $title = "Thống kê san";
+        $title = "Thống kê sản phẩm ";
 
         // Đếm số lượng đơn hàng
         $donhangs = don_hang::count();

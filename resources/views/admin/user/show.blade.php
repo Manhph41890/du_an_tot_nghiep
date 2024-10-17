@@ -3,7 +3,7 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-            <h3 class="modal-title">Chi tiết user</h3>
+            <h3 class="modal-title">Chi tiết</h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 

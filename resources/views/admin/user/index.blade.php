@@ -34,23 +34,21 @@
                                     </form>
                                 </div>
 
-                            <div class="col-3">
-                                <form action="{{ route('user.index') }}" method="POST" id="filter-form">
-                                    @csrf
-                                    @method('GET')
-                                    <select class="form-select" name="search_dm"
-                                        onchange="document.getElementById('filter-form').submit();">
-                                        <option value="">Hiển thị tất cả</option>
-                                        <option value="1" {{ request('search_dm') == '1' ? 'selected' : '' }}>Hiển
-                                            thị</option>
-                                        <option value="0" {{ request('search_dm') == '0' ? 'selected' : '' }}>Ẩn
-                                        </option>
-                                    </select>
-                                </form>
+                                <div class="col-3">
+                                    <form action="{{ route('user.index') }}" method="POST" id="filter-form">
+                                        @csrf
+                                        @method('GET')
+                                        <select class="form-select" name="search_dm"
+                                            onchange="document.getElementById('filter-form').submit();">
+                                            <option value="">Hiển thị tất cả</option>
+                                            <option value="1" {{ request('search_dm') == '1' ? 'selected' : '' }}>Hiển
+                                                thị</option>
+                                            <option value="0" {{ request('search_dm') == '0' ? 'selected' : '' }}>Ẩn
+                                            </option>
+                                        </select>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        </div>
-
 
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
@@ -60,6 +58,7 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
+
                         </div><!-- end card header -->
 
                         <div class="row">

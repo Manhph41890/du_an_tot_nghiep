@@ -63,7 +63,13 @@ Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']
 
 // Route cho các chức năng quản lý (admin)
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Thống kê 
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
+        Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
+        Route::get('/taikhoan', [AdminController::class, 'thong_ke_tai_khoan'])->name('thong_ke_tai_khoan');
+        Route::get('/sanpham', [AdminController::class, 'thong_ke_san_pham'])->name('thong_ke_san_pham');
+    });
     // profile
     Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile'); // Thêm route này
 
@@ -75,13 +81,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
+    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
-    Route::get('/customer', [UserController::class, 'index'])->name('client.home');
-    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
-    Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
+    Route::get('/customer', fn() => view('client.home'));
+    // Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    // Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');

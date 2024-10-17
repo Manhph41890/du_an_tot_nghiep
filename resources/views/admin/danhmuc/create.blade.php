@@ -24,15 +24,8 @@
                 </div>
             </div>
 
-            <script>
-                // Hiển thị modal nếu có thông báo thành công
-                $(document).ready(function() {
-                    @if (session('success'))
-                        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                        successModal.show();
-                    @endif
-                });
-            </script>
+
+
 
             <!-- Start Content-->
             <div class="container-xxl">
@@ -121,8 +114,33 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 @endsection
 
 @section('js')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.getElementById('anh_danh_muc');
+        const imagePreview = document.getElementById('imagePreview');
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = '#';
+                imagePreview.style.display = 'none';
+            }
+        });
+    });
+</script>
 @endsection

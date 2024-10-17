@@ -12,7 +12,7 @@
 
                 <!-- Dashboard Link -->
                 <li>
-                    <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                    <a href="#dashboard" data-bs-tophp gle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="pie-chart"></i>
                         <span> Thống kê </span>
                         <span class="menu-arrow"></span>
@@ -152,6 +152,10 @@
                         </ul>
                     </div>
                 </li>
+
+
+code kkkk 
+
 
             </ul>
         </div>

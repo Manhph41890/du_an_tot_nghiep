@@ -81,16 +81,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
+    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::get('/customer', fn() => view('client.home'));
-    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
-    Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
+    // Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    // Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
-

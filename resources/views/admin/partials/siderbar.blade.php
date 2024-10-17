@@ -58,7 +58,6 @@
                 </li>
 
 
-                <!-- Khuyến mãi -->
                 <li>
                     <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false"
                         data-bs-parent="#side-menu">
@@ -66,10 +65,9 @@
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="khuyenmai">
+                    <div class="collapse" id="danhgia">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('khuyenmais.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('khuyenmais.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="{{ route('danhgia.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -104,7 +102,21 @@
                     </div>
                 </li>
 
-                <!-- Bài viết -->
+                <li>
+                    <a href="#danhgia" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="star"></i>
+                        <span> Đánh giá </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="danhgia">
+                        <ul class="nav-second-level">
+                            <li><a class="tp-link" href="{{ route('danhgia.index') }}">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+
+
                 <li>
                     <a href="#baiviet" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="book-open"></i>

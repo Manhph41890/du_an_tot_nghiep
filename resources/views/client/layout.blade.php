@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/plugins/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/style.min.css') }}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
 
 </head>
 

@@ -5,7 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor/
-.env.example
+/project-name
 .env
 .env.backup
 .env.production

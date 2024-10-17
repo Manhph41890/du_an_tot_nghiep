@@ -82,12 +82,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
-<<<<<<< HEAD
     Route::resource('/donhangs', DonhangController::class);
-=======
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
->>>>>>> e80f5a78c214d13a94a7eebd8b40f0dfa3eeb39f
 });
 
 // Route cho người dùng (khách hàng)

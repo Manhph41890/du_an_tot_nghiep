@@ -50,7 +50,7 @@
                                                 'progressBar': true,
                                                 'closeButton': true
                                             }
-                                            toastr.success("{{ Session::get('success') }}",'success',{timeOut:3000});
+                                            toastr.success("{{ Session::get('success') }}",{timeOut:3000});
                                         </script>
                                     @endif
                                     @if (Session::has('error'))
@@ -59,7 +59,7 @@
                                             'progressBar': true,
                                             'closeButton': true
                                         }
-                                        toastr.error("{{ Session::get('error') }}",'error',{timeOut:3000});
+                                        toastr.error("{{ Session::get('error') }}",{timeOut:3000});
                                     </script>
                                 @endif
                                 </div>

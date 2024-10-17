@@ -20,6 +20,11 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
 
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('auth.profile', compact('user')); // Đường dẫn tới view của bạn
+    }
     public function showFormRegister()
     {
         return view('auth.register');
@@ -186,9 +191,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-
-
-
         $credentials = $request->validate(
             [
                 'email' => 'required|string|email|max:255',
@@ -200,38 +202,37 @@ class AuthController extends Controller
                 'email.max' => 'Email quá dài',
                 'password.required' => 'Mật khẩu không được bỏ trống',
                 'password.string' => 'Mật khẩu phải là chuỗi ký tự',
-
             ]
         );
 
-        if (Auth::attempt([
-            'email' => $request->input('email'),
-            'password' => $request->input('password')
-        ], $request->has('remember'))) {
-            $user = Auth::user();
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            // Eager load quan hệ chuc_vu của người dùng
+            $user = User::with('chuc_vu')->find(Auth::user()->id);
 
-            // Phân quyênf cho từng chức vụ của người dùng
-            switch ($user->chuc_vu->ten_chuc_vu) {
-                case 'admin':
-                    return redirect()->route('admin.dashboard')->with('success', 'Đăng nhập thành công');
-                case 'nhan_vien':
-                    return redirect()->route('admin.dashboard')->with('success', 'Đăng nhập thành công');
-                case 'khach_hang':
-                    return redirect()->route('client.home')->with('success', 'Đăng nhập thành công');
-                    // case 'thanh_vien':
-                    //     return redirect()->route('welcome')->with('success', 'Đăng nhập thành công');
-                default:
-                    Auth::logout();
-
-                    return redirect()->route('login')->withErrors(['error' => 'Chức vụ không tồn tại']);
-            }
+            return $this->redirectToDashboardBasedOnRole($user);
         }
 
-
+        // Thất bại đăng nhập
         return redirect()->back()->withErrors([
             'email' => 'Email hoặc mật khẩu không đúng',
         ]);
     }
+
+
+    protected function redirectToDashboardBasedOnRole($user)
+    {
+        switch ($user->chuc_vu->ten_chuc_vu) {
+            case 'admin':
+            case 'nhan_vien':
+                return redirect('/dashboard')->with('success', 'Đăng nhập thành công');
+            case 'khach_hang':
+                return redirect()->route('client.home')->with('success', 'Đăng nhập thành công');
+            default:
+                Auth::logout();
+                return redirect()->route('login')->withErrors(['error' => 'Chức vụ không tồn tại']);
+        }
+    }
+
     public function logout(Request $request)
     {
         Auth::logout(); // Đăng xuất người dùng

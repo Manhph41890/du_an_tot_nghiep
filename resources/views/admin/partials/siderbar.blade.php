@@ -19,7 +19,7 @@
                     </a>
                     <div class="collapse" id="dashboard">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('thong_ke_don_hang') }}">Đơn hàng</a></li>
+                            <li><a class="tp-link" href="{{ route('thong_ke_chung') }}">Tổng quan</a></li>
                             <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li>
                             <li><a class="tp-link" href="{{ route('thong_ke_tai_khoan') }}">Tài khoản</a></li>
                             <li><a class="tp-link" href="{{ route('thong_ke_san_pham') }}">Sản phẩm</a></li>

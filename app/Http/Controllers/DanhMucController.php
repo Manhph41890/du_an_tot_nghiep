@@ -64,6 +64,8 @@ class DanhMucController extends Controller
         }
         danh_muc::create($param);
 
+
+
         return redirect()->route('danhmucs.index')->with('success', 'Thêm danh mục thành công!');
     }
 
@@ -124,10 +126,14 @@ class DanhMucController extends Controller
     {
         //
         $danhMuc = danh_muc::findOrFail($id);
-        if ($danhMuc->anh_danh_muc) {
-            Storage::disk('public')->delete($danhMuc->anh_danh_muc);
+        if ($danhMuc->san_phams()->count() > 0) {
+            return redirect()->route('danhmucs.index')->with('error', 'Không xóa danh mục vì có sản phẩm thuộc danh mục này.');
+        } else {
+            if ($danhMuc->anh_danh_muc) {
+                Storage::disk('public')->delete($danhMuc->anh_danh_muc);
+            }
+            $danhMuc->delete();
+            return redirect()->route('danhmucs.index')->with('success', 'Xóa danh mục thành công');
         }
-        $danhMuc->delete();
-        return redirect()->route('danhmucs.index')->with('success', 'Xóa danh mục thành công');
     }
 }

@@ -65,8 +65,7 @@ Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Thống kê 
     Route::prefix('dashboard')->group(function () {
-        Route::get('/', [AdminController::class, 'thong_ke_don_hang'])->name('thong_ke_don_hang');
-        Route::get('/donhang', [AdminController::class, 'thong_ke_don_hang'])->name('thong_ke_don_hang');
+        Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
         Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
         Route::get('/taikhoan', [AdminController::class, 'thong_ke_tai_khoan'])->name('thong_ke_tai_khoan');
         Route::get('/sanpham', [AdminController::class, 'thong_ke_san_pham'])->name('thong_ke_san_pham');
@@ -94,3 +93,4 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
+

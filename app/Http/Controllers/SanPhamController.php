@@ -36,7 +36,8 @@ class SanPhamController extends Controller
 
         $data = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color'])->paginate(10);
         $title = 'Danh sách sản phẩm';
-        return view('admin.sanpham.index', compact('data', 'title'));
+        $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+        return view('admin.sanpham.index', compact('data', 'title', 'isAdmin'));
     }
 
     /**

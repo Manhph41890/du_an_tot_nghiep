@@ -43,6 +43,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(khuyen_mai::class);
     }
+    
     /**
      * Các trường cần ẩn khi trả về JSON.
      *

@@ -204,7 +204,8 @@ class AuthController extends Controller
                 'password.string' => 'Mật khẩu phải là chuỗi ký tự',
             ]
         );
-
+            
+        
         if (Auth::attempt($credentials, $request->has('remember'))) {
             // Eager load quan hệ chuc_vu của người dùng
             $user = User::with('chuc_vu')->find(Auth::user()->id);
@@ -223,7 +224,6 @@ class AuthController extends Controller
     {
         switch ($user->chuc_vu->ten_chuc_vu) {
             case 'admin':
-                return redirect('/dashboard')->with('success', 'Đăng nhập thành công');
             case 'nhan_vien':
                 return redirect('/dashboard')->with('success', 'Đăng nhập thành công');
             case 'khach_hang':

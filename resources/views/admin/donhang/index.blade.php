@@ -1,12 +1,12 @@
 @foreach ($donhangs as $item)
-    {{ optional($item->user)->user_id ?? 'Null' }}
+    <td>{{ optional($item->user)->user_id ?? 'Null' }}</td>
 
-    <td>{{ $item->san_pham_id }}</td>
-    <td>{{ $item->phuong_thuc_thanh_toan_id }}</td>
-    <td>{{ $item->phuong_thuc_van_chuyen_id }}</td>
-    <td>{{ $item->tong_tien }}</td>
-    <td>{{ $item->ho_ten }}</td>
-    <td>{{ $item->email }}</td>
-    <td>{{ $item->so_dien_thoai }}</td>
-    <td>{{ $item->dia_chi }}</td>
+    <td>{{ optional($item)->san_pham_id ?? 'Null' }}</td>
+    <td>{{ optional($item)->phuong_thuc_thanh_toan_id ?? 'Null' }}</td>
+    <td>{{ optional($item)->phuong_thuc_van_chuyen_id ?? 'Null' }}</td>
+    <td>{{ optional($item)->tong_tien ?? 'Null' }}</td>
+    <td>{{ optional($item)->ho_ten ?? 'Null' }}</td>
+    <td>{{ optional($item)->email ?? 'Null' }}</td>
+    <td>{{ optional($item)->so_dien_thoai ?? 'Null' }}</td>
+    <td>{{ optional($item)->dia_chi ?? 'Null' }}</td>
 @endforeach

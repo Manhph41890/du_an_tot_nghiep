@@ -3,7 +3,7 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-            <h3 class="modal-title">Chi tiết user</h3>
+            <h3 class="modal-title">Chi tiết</h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
@@ -25,9 +25,7 @@
                                     <p><strong>Họ và tên:</strong> {{ $post->ho_ten }}</p>
                                 </div>
                                 <div class="mb-3">
-                                    <p><strong>Ảnh đại diện:</strong>
-                                        <img src=" {{ $post->anh_dai_dien }}" alt="">
-                                    </p>
+                                    <p><strong>Ảnh đại diện:</strong> {{ $post->anh_dai_dien }}</p>
                                 </div>
                                 <div class="mb-3">
                                     <p><strong>Email:</strong> {{ $post->email }}</p>

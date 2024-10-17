@@ -21,10 +21,10 @@
                 <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
+                        <div class="card-header justify-content-between">
 
-                        <div class="d-flex justify-content-between">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-4">
                                     <form action="{{ route('user.index') }}" method="POST">
                                         @csrf
                                         @method('GET')
@@ -34,24 +34,21 @@
                                     </form>
                                 </div>
 
+                                <div class="col-3">
+                                    <form action="{{ route('user.index') }}" method="POST" id="filter-form">
+                                        @csrf
+                                        @method('GET')
+                                        <select class="form-select" name="search_dm"
+                                            onchange="document.getElementById('filter-form').submit();">
+                                            <option value="">Hiển thị tất cả</option>
+                                            <option value="1" {{ request('search_dm') == '1' ? 'selected' : '' }}>Hiển
+                                                thị</option>
+                                            <option value="0" {{ request('search_dm') == '0' ? 'selected' : '' }}>Ẩn
+                                            </option>
+                                        </select>
+                                    </form>
+                                </div>
                             </div>
-
-                            <div class="col-3">
-                                <form action="{{ route('user.index') }}" method="POST" id="filter-form">
-                                    @csrf
-                                    @method('GET')
-                                    <select class="form-select" name="search_dm"
-                                        onchange="document.getElementById('filter-form').submit();">
-                                        <option value="">Hiển thị tất cả</option>
-                                        <option value="1" {{ request('search_dm') == '1' ? 'selected' : '' }}>Hiển
-                                            thị</option>
-                                        <option value="0" {{ request('search_dm') == '0' ? 'selected' : '' }}>Ẩn
-                                        </option>
-                                    </select>
-                                </form>
-                            </div>
-
-
 
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
@@ -61,6 +58,7 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
+
                         </div><!-- end card header -->
 
                         <div class="row">
@@ -121,10 +119,7 @@
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
-                                                                        {{-- <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel{{ $item->id }}">Chi tiết đánh giá</h5>
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div> --}}
+                                                                        
                                                                         <div class="modal-body">
                                                                             @include('admin.user.show', [
                                                                                 'post' => $item,

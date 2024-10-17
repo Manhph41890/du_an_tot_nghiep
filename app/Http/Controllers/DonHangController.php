@@ -18,7 +18,7 @@ class DonHangController extends Controller
         $donhangs = don_hang::with('user')->get();
 
         $title = "Danh sách đơn hàng";
-        dd($donhangs);
+        // dd($donhangs);
         return view('admin.donhang.index', compact('donhangs', 'title'));
     }
 

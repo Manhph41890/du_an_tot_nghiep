@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\don_hang;
 use App\Http\Requests\Storedon_hangRequest;
 use App\Http\Requests\Updatedon_hangRequest;
+use App\Models\User;
 
 class DonHangController extends Controller
 {
@@ -13,7 +14,12 @@ class DonHangController extends Controller
      */
     public function index()
     {
-        //
+
+        $donhangs = don_hang::with('user')->get();
+
+        $title = "Danh sách đơn hàng";
+        dd($donhangs);
+        return view('admin.donhang.index', compact('donhangs', 'title'));
     }
 
     /**

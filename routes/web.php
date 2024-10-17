@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DonhangController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BaiVietController;
@@ -63,7 +64,7 @@ Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']
 
 // Route cho các chức năng quản lý (admin)
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    // Thống kê 
+    // Thống kê
     Route::prefix('dashboard')->group(function () {
         Route::get('/donhang', [AdminController::class, 'thong_ke_don_hang'])->name('thong_ke_don_hang');
         Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
@@ -81,6 +82,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
+    Route::resource('/donhangs', DonhangController::class);
 });
 
 // Route cho người dùng (khách hàng)

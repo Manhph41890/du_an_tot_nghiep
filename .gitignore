@@ -38,7 +38,7 @@ yarn-error.log
 
 # Bỏ qua file .env
 .env
-
+.gitignore
 # Bỏ qua file composer
-/composer.json
-/composer.lock
+composer.json
+composer.lock

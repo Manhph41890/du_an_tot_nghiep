@@ -41,7 +41,6 @@
                                 <form action="{{ route('baiviets.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
 
-
                                     <div class="form-group mb-3">
                                         <label for="anh_bai_viet">Hình ảnh bài viết</label>
                                         <input type="file" name="anh_bai_viet"

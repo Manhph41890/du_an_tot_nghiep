@@ -23,7 +23,6 @@ class Storebai_vietRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', Rule::exists('users', 'id')],
             'tieu_de_bai_viet' => 'required|max:255',
             'ngay_dang' => 'required|date',
             'noi_dung' => 'max:200',

@@ -96,7 +96,7 @@ class AuthController extends Controller
         Auth::login($user);
         Log::info('Đăng nhập tự động cho người dùng: ', ['user_id' => $user->id]);
 
-        return redirect()->route('client.home')->with('success', 'Đăng ký tài khoản thành công.' . ($existingUserWithVoucher ? ', nhưng bạn không nhận được voucher.' : ' và bạn đã nhận được voucher khuyến mãi!'));
+        return redirect('/customer')->with('success', 'Đăng ký tài khoản thành công.' . ($existingUserWithVoucher ? ', nhưng bạn không nhận được voucher.' : ' và bạn đã nhận được voucher khuyến mãi!'));
     }
 
     // Kiểm tra voucher
@@ -227,10 +227,10 @@ class AuthController extends Controller
             case 'nhan_vien':
                 return redirect('/dashboard')->with('success', 'Đăng nhập thành công');
             case 'khach_hang':
-                return redirect()->route('client.home')->with('success', 'Đăng nhập thành công');
+                return redirect('/customer')->with('success', 'Đăng nhập thành công');
             default:
                 Auth::logout();
-                return redirect()->route('login')->withErrors(['error' => 'Chức vụ không tồn tại']);
+                return redirect()->route('auth.login')->withErrors(['error' => 'Chức vụ không tồn tại']);
         }
     }
 

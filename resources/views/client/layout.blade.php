@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-
-<!-- Mirrored from htmldemo.net/looki/looki/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Oct 2024 09:35:59 GMT -->
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,18 +16,17 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/plugins/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/style.min.css') }}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
 
 </head>
 
 <body>
-
     @include('client.partials.header')
 
-
     @yield('content')
-    <!-- brand slider end -->
-    @include('client.partials.footer')
 
+    @include('client.partials.footer')
 
     <script src="{{ asset('assets/admin/js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
@@ -41,8 +37,13 @@
     <script src="{{ asset('assets/admin/js/plugins/ajax-contact.js') }}"></script>
     <script src="{{ asset('assets/admin/js/main.js') }}"></script>
 
-
-
+    <script>
+        $(document).ready(function() {
+            $('#profileDropdown').on('click', function() {
+                $(this).next('.dropdown-menu').toggle();
+            });
+        });
+    </script>
 </body>
 
 </html>

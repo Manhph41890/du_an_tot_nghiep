@@ -22,18 +22,16 @@
                 <div class="col-xl-12">
                     <div class="card">
 
-                        <div class="d-flex justify-content-between">
-                            <div class="row">
-                                <div class="col-12">
-                                    <form action="{{ route('user.index') }}" method="POST">
-                                        @csrf
-                                        @method('GET')
-                                        <input type="text" id="search_product_name" name="search_product_name"
-                                            placeholder="Tìm kiếm" value="{{ request('search_product_name') }}"
-                                            class="form-control" onchange="this.form.submit();">
-                                    </form>
-                                </div>
-                             
+                        <div class="card-header d-flex justify-content-between">
+
+                            <div class="col-4">
+                                <form action="{{ route('user.index') }}" method="POST">
+                                    @csrf
+                                    @method('GET')
+                                    <input type="text" id="search_product_name" name="search_product_name"
+                                        placeholder="Tìm kiếm" value="{{ request('search_product_name') }}"
+                                        class="form-control" onchange="this.form.submit();">
+                                </form>
                             </div>
 
                             <div class="col-3">
@@ -52,7 +50,6 @@
                             </div>
 
 
-
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissable fade show " role="alert">
@@ -61,6 +58,7 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
+
                         </div><!-- end card header -->
 
                         <div class="row">
@@ -90,7 +88,8 @@
                                             @foreach ($list as $item)
                                                 <tr>
                                                     <td>{{ $item->id }}</td>
-                                                    <td>{{ $item->chuc_vu?->ten_chuc_vu }}</td> <!-- Hiển thị tên chức vụ -->
+                                                    <td>{{ $item->chuc_vu?->ten_chuc_vu }}</td>
+                                                    <!-- Hiển thị tên chức vụ -->
                                                     <td>{{ $item->ho_ten }}</td>
                                                     {{-- <td><img src="{{ asset('storage/' . $item->anh_dai_dien) }}"
                                                             alt="Hình ảnh" width="150px"></td> --}}
@@ -106,12 +105,18 @@
                                                     <td>
                                                         <div>
                                                             <!-- Thay đổi data-bs-target để tương ứng với ID của item -->
-                                                            <a href="{{ route('user.show', $item->id) }}" data-bs-toggle="modal" data-bs-target="#myModal{{ $item->id }}">
-                                                                <i class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            <a href="{{ route('user.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
-                                            
+
                                                             <!-- Đảm bảo mỗi modal có ID riêng -->
-                                                            <div class="modal fade" id="myModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $item->id }}" aria-hidden="true">
+                                                            <div class="modal fade" id="myModal{{ $item->id }}"
+                                                                tabindex="-1"
+                                                                aria-labelledby="exampleModalLabel{{ $item->id }}"
+                                                                aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         {{-- <div class="modal-header">
@@ -119,10 +124,13 @@
                                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                         </div> --}}
                                                                         <div class="modal-body">
-                                                                            @include('admin.user.show', ['post' => $item])
+                                                                            @include('admin.user.show', [
+                                                                                'post' => $item,
+                                                                            ])
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                                            <button type="button" class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">Đóng</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -154,4 +162,7 @@
     <!-- Include your JS files here -->
 @endsection
 @endsection
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38d68d8d8f5dd2cc5d5fa917143f21dc98dcd6cd

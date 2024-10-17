@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -12,7 +15,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $query = User::with('chuc_vu'); // Nạp dữ liệu chức vụ cùng với người dùng
 
         // Lọc trạng thái nếu có
@@ -46,21 +49,15 @@ class UserController extends Controller
         return view('admin.user.index', $params);
     }
 
-    /** 
+    /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-       
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -85,10 +82,46 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        // Validate dữ liệu từ form
+        $request->validate([
+            'ho_ten' => 'required|string|max:255',
+            'anh_dai_dien' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra định dạng ảnh
+            'dia_chi' => 'nullable|string|max:255',
+        ]);
+
+        // Lấy thông tin người dùng hiện tại
+        $user = Auth::user();
+
+        // Cập nhật tên và địa chỉ người dùng
+        $user->ho_ten = $request->ho_ten;
+        $user->dia_chi = $request->dia_chi;
+
+        // Xử lý ảnh đại diện nếu có
+        if ($request->hasFile('anh_dai_dien')) {
+            // Xóa ảnh cũ nếu tồn tại
+            if ($user->anh_dai_dien) {
+                // Xóa ảnh cũ từ thư mục lưu trữ
+                Storage::delete('public/' . $user->anh_dai_dien);
+            }
+
+            // Lưu ảnh mới vào thư mục 'public/storage/user'
+            $imageName = time() . '_' . $request->file('anh_dai_dien')->getClientOriginalName();
+            // Thay đổi đường dẫn lưu ảnh
+            $path = $request->file('anh_dai_dien')->storeAs('user', $imageName, 'public');
+
+            // Cập nhật đường dẫn ảnh đại diện trong cơ sở dữ liệu
+            $user->anh_dai_dien = 'user/' . $imageName; // Chỉ lưu đường dẫn tương đối
+        }
+
+        // Lưu thay đổi vào cơ sở dữ liệu
+        $user->save();
+
+        // Trả về phản hồi thành công
+        return response()->json(['success' => 'Cập nhật thành công']);
     }
+
 
     /**
      * Remove the specified resource from storage.

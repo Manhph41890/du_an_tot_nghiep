@@ -62,14 +62,16 @@ class DonHangController extends Controller
      */
     public function show(don_hang $don_hang, $id)
     {
-        $donhang = don_hang::firstOrFail($id);
+        $donhang = don_hang::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
         $khuyenmai = khuyen_mai::query()->pluck('ten_khuyen_mai', 'id')->all();
         $pttt = phuong_thuc_thanh_toan::query()->pluck('kieu_thanh_toan', 'id')->all();
         $ptvc = phuong_thuc_van_chuyen::query()->pluck('kieu_van_chuyen', 'id')->all();
+
         $title = "Chi tiết đơn hàng";
         return view('admin.donhang.show', compact('donhang', 'user', 'title', 'khuyenmai', 'pttt', 'ptvc'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

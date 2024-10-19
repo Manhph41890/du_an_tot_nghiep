@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('don_hangs', function (Blueprint $table) {
-            DB::statement("ALTER TABLE don_hangs MODIFY COLUMN trang_thai ENUM('Đơn hàng mới', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công', 'Đã hủy')");
+            DB::statement("ALTER TABLE don_hangs MODIFY COLUMN trang_thai ENUM('Chờ xác nhận', 'Đã xác nhận', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công', 'Đã hủy')");
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('don_hangs', function (Blueprint $table) {
-            DB::statement("ALTER TABLE don_hangs MODIFY COLUMN trang_thai ENUM('Đơn hàng mới', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công', 'Đã hủy')");
+            DB::statement("ALTER TABLE don_hangs MODIFY COLUMN trang_thai ENUM('Chờ xác nhận', 'Đã xác nhận', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công', 'Đã hủy')");
         });
     }
 };

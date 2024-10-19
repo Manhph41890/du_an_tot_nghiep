@@ -36,7 +36,7 @@
                                 <div class="form-group mb-3">
                                     <label for="customer_name">Tên khuyến mại</label>
                                     <input type="text" name="customer_name"
-                                        value="{{ $donhang->khuyenmai?->ten_khuyen_mai }}" class="form-control"
+                                        value="{{ $donhang->khuyen_mai?->ten_khuyen_mai }}" class="form-control"
                                         readonly>
                                 </div>
 

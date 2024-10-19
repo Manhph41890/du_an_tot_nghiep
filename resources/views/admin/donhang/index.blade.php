@@ -75,17 +75,26 @@
                                                 @foreach ($donhangs as $item)
                                                     <tr>
                                                         <td>{{ $item->id }}</td>
-                                                        <td>{{ $item->user_id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
                                                         <td>{{ $item->trang_thai }}</td>
                                                         <td>
-                                                            <a href="{{ route('donhangs.show', $item->id) }}">
+                                                            <a href="{{ route('donhangs.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal{{ $item->id }}">
                                                                 <i
                                                                     class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                                @include('admin.donhang.show', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
 
                                                             <a href="{{ route('donhangs.edit', $item->id) }}"><i
                                                                     class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
@@ -100,7 +109,8 @@
                                     <h4>Đang chuẩn bị hàng</h4>
                                     <p>Nội dung đang chuẩn bị hàng...</p>
                                 </div>
-                                <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+                                <div class="tab-pane fade" id="shipping" role="tabpanel"
+                                    aria-labelledby="shipping-tab">
                                     <h4>Đang vận chuyển</h4>
                                     <p>Nội dung đang vận chuyển...</p>
                                 </div>
@@ -131,6 +141,12 @@
             background-color: #f8f9fa;
             color: #495057;
             margin-right: 2px;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff #007bff transparent;
         }
     </style>
 @section('js')

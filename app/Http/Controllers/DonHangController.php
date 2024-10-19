@@ -41,9 +41,12 @@ class DonHangController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(don_hang $don_hang)
+    public function show(don_hang $don_hang, $id)
     {
-        //
+        $donhang = don_hang::firstOrFail($id);
+        $user = User::query()->pluck('ho_ten', 'id')->all();
+        $title = "Chi tiết đơn hàng";
+        return view('admin.donhang.show', compact('donhang', 'user', 'title'));
     }
 
     /**

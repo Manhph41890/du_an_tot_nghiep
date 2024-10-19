@@ -22,7 +22,7 @@
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="success-tab" data-bs-toggle="tab"
                                         data-bs-target="#success" type="button" role="tab" aria-controls="success"
-                                        aria-selected="true">Đặt hàng thành công</button>
+                                        aria-selected="true">Đơn hàng mới</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="preparing-tab" data-bs-toggle="tab"

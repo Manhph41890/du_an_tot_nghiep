@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\don_hang;
 use App\Http\Requests\Storedon_hangRequest;
 use App\Http\Requests\Updatedon_hangRequest;
+use App\Models\khuyen_mai;
 use App\Models\User;
 
 class DonHangController extends Controller
@@ -45,6 +46,7 @@ class DonHangController extends Controller
     {
         $donhang = don_hang::firstOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
+        $khuyenmai = khuyen_mai::query()->pluck('ten_khuyen_mai', 'id')->all();
         $title = "Chi tiết đơn hàng";
         return view('admin.donhang.show', compact('donhang', 'user', 'title'));
     }

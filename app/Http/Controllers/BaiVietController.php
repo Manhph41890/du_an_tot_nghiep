@@ -107,7 +107,7 @@ class BaiVietController extends Controller
     {
         $post = bai_viet::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
-        $title = "Chi tiết sản phẩm";
+        $title = "Chi tiết bai viet";
         return view('admin.baiviet.show', compact('post', 'user', 'title'));
     }
 

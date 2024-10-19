@@ -24,7 +24,7 @@ class khuyen_mai extends Model
         return $this->hasMany(don_hang::class);
     }
     public function khachhang_new()
-{
-    return $this->belongsTo(User::class);
-}
+    {
+        return $this->belongsTo(User::class);
+    }
 }

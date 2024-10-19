@@ -56,7 +56,7 @@
                             <div class="tab-content mt-1" id="myTabContent">
                                 <div class="tab-pane fade show active" id="success" role="tabpanel"
                                     aria-labelledby="success-tab">
-                                    <!-- Nội dung Đặt hàng thành công -->
+                                    <!-- Đơn hàng mới -->
                                     <div class="table-responsive">
                                         <table class="table table-striped mb-0">
                                             <thead>
@@ -67,12 +67,11 @@
                                                     <th scope="col">Địa chỉ giao hàng</th>
                                                     <th scope="col">Ngày tạo đơn hàng</th>
                                                     <th scope="col">Tổng tiền</th>
-                                                    <th scope="col">Trạng thái đơn hàng</th>
                                                     <th scope="col">Hành Động</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($donhangs as $item)
+                                                @foreach ($donHangMoi as $item)
                                                     <tr>
                                                         <td>{{ $item->id }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
@@ -80,7 +79,6 @@
                                                         <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
-                                                        <td>{{ $item->trang_thai }}</td>
                                                         <td>
                                                             <a href="{{ route('donhangs.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
@@ -106,28 +104,248 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="preparing" role="tabpanel" aria-labelledby="preparing-tab">
-                                    <h4>Đang chuẩn bị hàng</h4>
-                                    <p>Nội dung đang chuẩn bị hàng...</p>
+                                    <!-- Đang chuẩn bị hàng -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Mã đơn hàng</th>
+                                                    <th scope="col">Người đặt</th>
+                                                    <th scope="col">Số điện thoại</th>
+                                                    <th scope="col">Địa chỉ giao hàng</th>
+                                                    <th scope="col">Ngày tạo đơn hàng</th>
+                                                    <th scope="col">Tổng tiền</th>
+                                                    <th scope="col">Hành Động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($dangChuanBi as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
+                                                        <td>{{ $item->so_dien_thoai }}</td>
+                                                        <td>{{ $item->dia_chi }}</td>
+                                                        <td>{{ $item->ngay_tao }}</td>
+                                                        <td>{{ $item->tong_tien }}</td>
+                                                        <td>
+                                                            <a href="{{ route('donhangs.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                                @include('admin.donhang.show', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="shipping" role="tabpanel"
                                     aria-labelledby="shipping-tab">
-                                    <h4>Đang vận chuyển</h4>
-                                    <p>Nội dung đang vận chuyển...</p>
+                                    {{-- Đang vận chuyển --}}
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Mã đơn hàng</th>
+                                                    <th scope="col">Người đặt</th>
+                                                    <th scope="col">Số điện thoại</th>
+                                                    <th scope="col">Địa chỉ giao hàng</th>
+                                                    <th scope="col">Ngày tạo đơn hàng</th>
+                                                    <th scope="col">Tổng tiền</th>
+                                                    <th scope="col">Hành Động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($dangVanChuyen as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
+                                                        <td>{{ $item->so_dien_thoai }}</td>
+                                                        <td>{{ $item->dia_chi }}</td>
+                                                        <td>{{ $item->ngay_tao }}</td>
+                                                        <td>{{ $item->tong_tien }}</td>
+                                                        <td>
+                                                            <a href="{{ route('donhangs.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                                @include('admin.donhang.show', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="delivered" role="tabpanel"
                                     aria-labelledby="delivered-tab">
-                                    <h4>Đã giao</h4>
-                                    <p>Nội dung đã giao...</p>
+                                    {{-- Đã giao --}}
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Mã đơn hàng</th>
+                                                    <th scope="col">Người đặt</th>
+                                                    <th scope="col">Số điện thoại</th>
+                                                    <th scope="col">Địa chỉ giao hàng</th>
+                                                    <th scope="col">Ngày tạo đơn hàng</th>
+                                                    <th scope="col">Tổng tiền</th>
+                                                    <th scope="col">Hành Động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($daGiao as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
+                                                        <td>{{ $item->so_dien_thoai }}</td>
+                                                        <td>{{ $item->dia_chi }}</td>
+                                                        <td>{{ $item->ngay_tao }}</td>
+                                                        <td>{{ $item->tong_tien }}</td>
+                                                        <td>
+                                                            <a href="{{ route('donhangs.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                                @include('admin.donhang.show', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="completed" role="tabpanel"
                                     aria-labelledby="completed-tab">
-                                    <h4>Thành công</h4>
-                                    <p>Nội dung thành công...</p>
+                                    {{-- Thành công --}}
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Mã đơn hàng</th>
+                                                    <th scope="col">Người đặt</th>
+                                                    <th scope="col">Số điện thoại</th>
+                                                    <th scope="col">Địa chỉ giao hàng</th>
+                                                    <th scope="col">Ngày tạo đơn hàng</th>
+                                                    <th scope="col">Tổng tiền</th>
+                                                    <th scope="col">Hành Động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($thanhCong as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
+                                                        <td>{{ $item->so_dien_thoai }}</td>
+                                                        <td>{{ $item->dia_chi }}</td>
+                                                        <td>{{ $item->ngay_tao }}</td>
+                                                        <td>{{ $item->tong_tien }}</td>
+                                                        <td>
+                                                            <a href="{{ route('donhangs.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                                @include('admin.donhang.show', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="canceled" role="tabpanel"
                                     aria-labelledby="canceled-tab">
-                                    <h4>Đã hủy</h4>
-                                    <p>Nội dung đã hủy...</p>
+                                    {{-- Đã hủy --}}
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Mã đơn hàng</th>
+                                                    <th scope="col">Người đặt</th>
+                                                    <th scope="col">Số điện thoại</th>
+                                                    <th scope="col">Địa chỉ giao hàng</th>
+                                                    <th scope="col">Ngày tạo đơn hàng</th>
+                                                    <th scope="col">Tổng tiền</th>
+                                                    <th scope="col">Hành Động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($daHuy as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
+                                                        <td>{{ $item->so_dien_thoai }}</td>
+                                                        <td>{{ $item->dia_chi }}</td>
+                                                        <td>{{ $item->ngay_tao }}</td>
+                                                        <td>{{ $item->tong_tien }}</td>
+                                                        <td>
+                                                            <a href="{{ route('donhangs.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                                @include('admin.donhang.show', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

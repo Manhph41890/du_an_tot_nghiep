@@ -19,10 +19,10 @@
                     </a>
                     <div class="collapse" id="dashboard">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('thong_ke_chung') }}">Tổng quan</a></li>
-                            <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li>
-                            <li><a class="tp-link" href="{{ route('thong_ke_tai_khoan') }}">Tài khoản</a></li>
-                            <li><a class="tp-link" href="{{ route('thong_ke_san_pham') }}">Sản phẩm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('thong_ke_chung')); ?>">Tổng quan</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('thong_ke_doanh_thu')); ?>">Doanh thu</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('thong_ke_tai_khoan')); ?>">Tài khoản</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('thong_ke_san_pham')); ?>">Sản phẩm</a></li>
                         </ul>
                     </div>
                 </li>
@@ -36,8 +36,8 @@
                     </a>
                     <div class="collapse" id="danhmuc">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('danhmucs.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('danhmucs.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('danhmucs.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('danhmucs.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -51,8 +51,8 @@
                     </a>
                     <div class="collapse" id="sanpham">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('sanphams.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('sanphams.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('sanphams.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('sanphams.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -66,7 +66,7 @@
                     </a>
                     <div class="collapse" id="danhgia">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('danhgia.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('danhgia.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -81,8 +81,8 @@
                     </a>
                     <div class="collapse" id="chucvu">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('chucvus.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('chucvus.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('chucvus.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('chucvus.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -96,7 +96,7 @@
                     </a>
                     <div class="collapse" id="user">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('user.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -109,7 +109,7 @@
                     </a>
                     <div class="collapse" id="danhgia">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('danhgia.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('danhgia.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -124,8 +124,8 @@
                     </a>
                     <div class="collapse" id="baiviet">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('baiviets.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('baiviets.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('baiviets.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('baiviets.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -141,8 +141,8 @@
                     </a>
                     <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.index') }}">Danh sách</a>
+                            <li><a class="tp-link" href="<?php echo e(route('phuongthucthanhtoans.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('phuongthucthanhtoans.index')); ?>">Danh sách</a>
                             </li>
                         </ul>
                     </div>
@@ -158,8 +158,8 @@
                     </a>
                     <div class="collapse" id="phuongthucvanchuyen">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.index') }}">Danh sách</a>
+                            <li><a class="tp-link" href="<?php echo e(route('phuongthucvanchuyens.create')); ?>">Thêm</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('phuongthucvanchuyens.index')); ?>">Danh sách</a>
                             </li>
                         </ul>
                     </div>
@@ -175,7 +175,7 @@
                     </a>
                     <div class="collapse" id="donhang">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('donhangs.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('donhangs.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -188,3 +188,4 @@
     </div>
 </div>
 <!-- Left Sidebar End -->
+<?php /**PATH D:\laragon\www\du_an_tot_nghiep\resources\views/admin/partials/siderbar.blade.php ENDPATH**/ ?>

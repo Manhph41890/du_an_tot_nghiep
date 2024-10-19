@@ -41,7 +41,6 @@
                                 <form action="{{ route('baiviets.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
 
-
                                     <div class="form-group mb-3">
                                         <label for="anh_bai_viet">Hình ảnh bài viết</label>
                                         <input type="file" name="anh_bai_viet"
@@ -76,7 +75,7 @@
 
                                     <div class="form-group mb-3">
                                         <label for="ngay_dang">Ngày Đăng:</label>
-                                        <input type="date" name="ngay_dang"
+                                        <input type="hidden" name="ngay_dang"
                                             value="{{ old('ngay_dang', now()->format('Y-m-d')) }}"
                                             class="form-control @error('ngay_dang')
                                         is-invalid @enderror">

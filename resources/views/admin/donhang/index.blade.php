@@ -126,7 +126,13 @@
             </div>
         </div>
     </div>
-
+    <style>
+        .nav-tabs .nav-link {
+            background-color: #f8f9fa;
+            color: #495057;
+            margin-right: 2px;
+        }
+    </style>
 @section('js')
     <!-- Include your JS files here -->
 @endsection

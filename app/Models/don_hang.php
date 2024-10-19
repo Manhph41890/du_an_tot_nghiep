@@ -24,7 +24,7 @@ class don_hang extends Model
         'trang_thai'
     ];
     protected $casts = [
-        'trang_thai' => ['Đặt hàng thành công ', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao']
+        'trang_thai' => 'string', // Chuyển đổi thành chuỗi
     ];
 
     public function user()

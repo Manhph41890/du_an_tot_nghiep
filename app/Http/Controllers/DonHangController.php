@@ -14,11 +14,11 @@ class DonHangController extends Controller
      */
     public function index()
     {
-
         $donhangs = don_hang::with('user')->get();
 
         $title = "Danh sách đơn hàng";
         // dd($donhangs);
+        // dump($donhangs);
         return view('admin.donhang.index', compact('donhangs', 'title'));
     }
 

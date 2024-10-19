@@ -165,6 +165,21 @@
                     </div>
                 </li>
 
+
+                <!-- Đơn hàng -->
+                <li>
+                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="donhang"></i>
+                        <span> Đơn hàng </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="donhang">
+                        <ul class="nav-second-level">
+                            <li><a class="tp-link" href="{{ route('donhangs.index') }}">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </div>
         <!-- End Sidebar -->

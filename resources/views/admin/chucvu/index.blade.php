@@ -23,13 +23,15 @@
                     <div class="card">
 
                         <div class="card-header justify-content-between">
-
+                     
                             <div class="row">
-
+                                       @if ($isAdmin)
+                                           
+                                      
                                 <div class="col-3">
                                     <a href="{{ route('chucvus.create') }}" class="btn btn-success">Thêm Chức Vụ</a>
                                 </div>
-
+                                @endif
                                 <div class="col-9">
                                     <!-- Hiển thị thông báo thành công -->
                                     @if (session('success'))
@@ -56,7 +58,9 @@
                                                 <th scope="col">#</th>
                                                 <th scope="col">Tên chức vụ</th>
                                                 <th scope="col">Mô tả chức vụ</th>
+                                                @if($isAdmin)
                                                 <th scope="col">Hành Động </th>
+                                                @endif
                                             </tr>
                                         </thead>
 
@@ -67,6 +71,7 @@
                                                     <td>{{ $item->ten_chuc_vu }}</td>
                                                     <td>{{ $item->mo_ta_chuc_vu }}</td>
                                                     <td>
+                                                        @if($isAdmin)
                                                         <a href="{{ route('chucvus.edit', $item->id) }}"><i
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
                                                         <form action="{{ route('chucvus.destroy', $item->id) }}"
@@ -78,7 +83,8 @@
                                                                 <i
                                                                     class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
                                                             </button>
-                                                        </form>
+                                                        </form>    
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -9,12 +9,12 @@
             border-radius: 5px;
         }
 
-        /* New styles for table cells to prevent long text wrapping */
+     
         .table td, .table th {
-            max-width: 150px; /* Set maximum width for the cell */
-            overflow: hidden; /* Hide overflow text */
-            text-overflow: ellipsis; /* Show ellipsis for overflow text */
-            white-space: nowrap; /* Prevent text from wrapping to the next line */
+            max-width: 150px;
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            white-space: nowrap; 
         }
     </style>
 @endsection
@@ -44,7 +44,9 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
+                            @if($isAdmin)
                             <a href="{{ route('sanphams.create') }}" class="btn btn-success">Thêm Sản Phẩm</a>
+                            @endif
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissable fade show" role="alert">
                                     {{ session('success') }}
@@ -97,7 +99,7 @@
                                                     </td>
                                                   
                                                     <td>
-                                                        @if ($isAdmin)
+                                                      @if ($isAdmin)
                                                         <a href="{{ route('sanphams.show', $item->id) }}"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#productModal-{{ $item->id }}">

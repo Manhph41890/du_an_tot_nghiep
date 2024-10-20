@@ -75,7 +75,9 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Tên danh mục</th>
                                                 <th scope="col">Trạng Thái </th>
+                                                @if($isAdmin)
                                                 <th scope="col">Hành Động </th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -96,6 +98,7 @@
                                                         {{ $item->is_active == 0 ? 'Hiển Thị' : 'Ẩn' }}
                                                     </td>
                                                     <td>
+                                                        @if($isAdmin)
                                                         <a href="{{ route('danhmucs.edit', $item->id) }}"><i
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
                                                         <form action="{{ route('danhmucs.destroy', $item->id) }}"
@@ -108,6 +111,10 @@
                                                                     class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
                                                             </button>
                                                         </form>
+                                                        @else
+                                                         
+                                                      
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

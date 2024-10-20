@@ -13,6 +13,8 @@ class DanhMucController extends Controller
 
     public function index(Request $request)
     {
+
+        $this->authorize('viewAny', danh_muc::class);
         $query = danh_muc::query();
 
         // lọc trạng thái
@@ -32,8 +34,8 @@ class DanhMucController extends Controller
         $danhmucs = $query->latest('id')->paginate(5);
 
         $title = "Danh sách danh mục";
-
-        return view('admin.danhmuc.index', compact('danhmucs', 'title'));
+         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+        return view('admin.danhmuc.index', compact('danhmucs', 'title','isAdmin'));
     }
 
     /**
@@ -41,6 +43,7 @@ class DanhMucController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', danh_muc::class);
         //
         $title = "Thêm mới danh mục";
 
@@ -83,8 +86,10 @@ class DanhMucController extends Controller
     public function edit(danh_muc $danh_muc, string $id)
     {
         //
+        
         $title = "Cập nhật danh mục";
         $danhmuc = danh_muc::query()->findOrFail($id);
+        $this->authorize('update', $danh_muc);
         return view('admin.danhmuc.edit', compact('danhmuc', 'title'));
     }
 
@@ -125,6 +130,7 @@ class DanhMucController extends Controller
     public function destroy(danh_muc $danh_muc, string $id)
     {
         //
+        $this->authorize('delete', $danh_muc);
         $danhMuc = danh_muc::findOrFail($id);
         if ($danhMuc->san_phams()->count() > 0) {
             return redirect()->route('danhmucs.index')->with('error', 'Không xóa danh mục vì có sản phẩm thuộc danh mục này.');

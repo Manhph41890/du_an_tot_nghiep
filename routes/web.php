@@ -60,7 +60,8 @@ Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']
 
 // Route cho các chức năng quản lý (admin)
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard'); // Change to unique name
+
+    Route::get('/dashboard', [AdminController::class, 'thong_ke_chung'])->name('admin.thongke.tongquan'); // Change to unique name
     Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile');
 
     // Resource routes cho quản lý

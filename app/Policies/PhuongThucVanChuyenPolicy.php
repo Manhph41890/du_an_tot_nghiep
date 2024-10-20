@@ -14,6 +14,7 @@ class PhuongThucVanChuyenPolicy
     public function viewAny(User $user): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
@@ -22,6 +23,7 @@ class PhuongThucVanChuyenPolicy
     public function view(User $user, phuong_thuc_van_chuyen $phuongThucVanChuyen): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
@@ -30,6 +32,7 @@ class PhuongThucVanChuyenPolicy
     public function create(User $user): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin' ;
     }
 
     /**
@@ -38,6 +41,7 @@ class PhuongThucVanChuyenPolicy
     public function update(User $user, phuong_thuc_van_chuyen $phuongThucVanChuyen): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin' ;
     }
 
     /**
@@ -46,21 +50,8 @@ class PhuongThucVanChuyenPolicy
     public function delete(User $user, phuong_thuc_van_chuyen $phuongThucVanChuyen): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin' ;
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, phuong_thuc_van_chuyen $phuongThucVanChuyen): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, phuong_thuc_van_chuyen $phuongThucVanChuyen): bool
-    {
-        //
-    }
+    
 }

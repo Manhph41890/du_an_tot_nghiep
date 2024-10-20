@@ -27,9 +27,9 @@ class san_pham extends Model
     {
         return $this->hasMany(anh_san_pham::class);
     }
-    public function don_hang()
+    public function don_hangs()
     {
-        return $this->hasOne(don_hang::class);
+        return $this->hasMany(don_hang::class, 'san_pham_id');
     }
     public function bien_the_san_phams()
     {

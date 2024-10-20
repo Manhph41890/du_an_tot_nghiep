@@ -23,9 +23,13 @@
                     <div class="card">
 
                         <div class="card-header d-flex justify-content-between">
+                            @if ($isAdmin)
+                                
+                           
                             <div>
                                 <a href="{{ route('phuongthucthanhtoans.create') }}" class="btn btn-success">Thêm Phương Thức Thanh Toán</a>
                             </div>
+                            @endif
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissable fade show " role="alert">
@@ -46,7 +50,9 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Kiểu thanh toán</th>
+                                                @if($isAdmin)
                                                 <th scope="col">Hành Động </th>
+                                                @endif
                                             </tr>
                                         </thead>
 
@@ -57,6 +63,7 @@
                                                     <td>{{ $item->kieu_thanh_toan }}</td>
                                                     
                                                     <td>
+                                                        @if ($isAdmin)
                                                         <a href="{{ route('phuongthucthanhtoans.edit', $item->id) }}"><i
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
                                                         <form action="{{ route('phuongthucthanhtoans.destroy', $item->id) }}"
@@ -69,6 +76,7 @@
                                                                     class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
                                                             </button>
                                                         </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

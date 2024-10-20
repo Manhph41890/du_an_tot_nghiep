@@ -14,9 +14,11 @@ class ChucVuController extends Controller
     public function index()
     {
         //
+        $this->authorize('viewAny', chuc_vu::class);
         $chucvus = chuc_vu::query()->latest('id')->paginate(5);
         $title = "Danh sách chức vụ";
-        return view('admin.chucvu.index', compact('chucvus', 'title'));
+        $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+        return view('admin.chucvu.index', compact('chucvus', 'title', 'isAdmin'));
     }
 
     /**
@@ -25,6 +27,7 @@ class ChucVuController extends Controller
     public function create()
     {
         //
+        $this->authorize('create', chuc_vu::class);
         $title = "Thêm mới chức vụ";
         return view('admin.chucvu.create', compact('title'));
     }
@@ -56,8 +59,11 @@ class ChucVuController extends Controller
     public function edit(chuc_vu $chuc_vu, string $id)
     {
         //
+       
         $title = "Cập nhật chức vụ";
         $chuc_vu = chuc_vu::query()->findOrFail($id);
+
+        $this->authorize('update', $chuc_vu);
         return view('admin.chucvu.edit', compact('title', 'chuc_vu'));
     }
 
@@ -83,6 +89,7 @@ class ChucVuController extends Controller
     {
 
         $chucvu = chuc_vu::findOrFail($id);
+        $this->authorize('delete', $chucvu);
         if ($chucvu) {
             $chucvu->delete();
             return redirect()->route('chucvus.index')->with('success', 'Xóa chức vụ thành công');

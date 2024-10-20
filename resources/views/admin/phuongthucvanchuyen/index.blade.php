@@ -23,10 +23,12 @@
                     <div class="card">
 
                         <div class="card-header d-flex justify-content-between">
+                            @if($isAdmin)
                             <div>
                                 <a href="{{ route('phuongthucvanchuyens.create') }}" class="btn btn-success">Thêm PT
                                     Vận Chuyển</a>
                             </div>
+                            @endif
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissable fade show" role="alert">
@@ -48,7 +50,9 @@
                                                 <th scope="col">ID</th>
                                                 <th scope="col">Kiểu Vận Chuyển</th>
                                                 <th scope="col">Giá Vận Chuyển</th>
+                                                @if($isAdmin)
                                                 <th scope="col">Hành Động</th>
+                                                @endif
                                             </tr>
                                         </thead>
 
@@ -63,6 +67,7 @@
                                                     <!-- Hiển thị giá ship -->
 
                                                     <td>
+                                                        @if($isAdmin)
                                                         {{-- <a href="{{ route('phuongthucvanchuyens.edit', $item->id) }}">
                                                             <i
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
@@ -78,6 +83,7 @@
                                                                     class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
                                                             </button>
                                                         </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

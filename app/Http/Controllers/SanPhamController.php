@@ -22,7 +22,8 @@ class SanPhamController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
+    {   
+        $this->authorize('viewAny', san_pham::class);
         $query = san_pham::query();
 
         // Kiểm tra xem có từ khóa tìm kiếm không
@@ -36,14 +37,16 @@ class SanPhamController extends Controller
 
         $data = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color'])->paginate(10);
         $title = 'Danh sách sản phẩm';
-        return view('admin.sanpham.index', compact('data', 'title'));
+        $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+        return view('admin.sanpham.index', compact('data', 'title', 'isAdmin'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   
+        $this->authorize('create', san_pham::class);
         $danh_mucs = danh_muc::query()->pluck('ten_danh_muc', 'id')->all();
         $sizes = size_san_pham::pluck('ten_size', 'id')->all(); // Lấy tên size và id
         $colors = color_san_pham::pluck('ten_color', 'id')->all(); // Lấy tên color và id
@@ -158,9 +161,11 @@ class SanPhamController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {
+    {    
+        
         // Lấy sản phẩm theo ID
         $product = san_pham::with(['bien_the_san_phams.size', 'bien_the_san_phams.color'])->findOrFail($id);
+        $this->authorize('update', $product);
 
         // Lấy danh sách danh mục, màu sắc và kích thước
         $danh_mucs = danh_muc::pluck('ten_danh_muc', 'id');
@@ -180,11 +185,14 @@ class SanPhamController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Updatesan_phamRequest $request, $id)
-    {
+    {   
+
+
         DB::beginTransaction();
         try {
             // Tìm sản phẩm 
             $product = san_pham::findOrFail($id);
+           
             $data_san_phams = $request->except('product_variants');
 
             // Xử lý ảnh sản phẩm chính
@@ -270,13 +278,14 @@ class SanPhamController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {
+    {   
+       
         try {
             DB::beginTransaction();
 
             // Lấy sản phẩm từ ID
             $product = san_pham::findOrFail($id);
-
+            $this->authorize('delete', $product);
             // Xóa ảnh sản phẩm chính nếu có
             if ($product->anh_san_pham) {
                 Storage::disk('public')->delete($product->anh_san_pham);

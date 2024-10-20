@@ -16,7 +16,8 @@ class KhuyenMaiController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
+    {    
+        $this->authorize('viewAny',khuyen_mai::class);
         $danhmucs = danh_muc::all();
         $query = khuyen_mai::query();
 
@@ -27,15 +28,15 @@ class KhuyenMaiController extends Controller
         $khuyenMais = $query->latest('id')->paginate(5);
 
         $title = 'Danh sách khuyến mãi';
-
-        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title'));
+         $isAdmin = auth()->user()->chuc_vu ->ten_chuc_vu === 'admin';
+        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title','isAdmin'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {  $this->authorize('create',khuyen_mai::class);
         //
         $title = 'Tạo khuyến mãi';
 
@@ -74,10 +75,10 @@ class KhuyenMaiController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(khuyen_mai $khuyen_mai, string $id)
-    {
+    {  
         //
         $khuyenmais = khuyen_mai::findorfail($id);
-
+        $this->authorize('update',$khuyen_mai);
         $title = 'Cập nhật khuyến mãi';
 
         return view('admin.khuyenmai.edit', compact('khuyenmais', 'title'));
@@ -106,8 +107,9 @@ class KhuyenMaiController extends Controller
     public function destroy(khuyen_mai $khuyen_mai, string $id)
     {
         //
+      
         $khuyen_mai = khuyen_mai::findOrFail($id);
-
+        $this->authorize('delete',$khuyen_mai);
         $khuyen_mai->delete();
 
         return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');

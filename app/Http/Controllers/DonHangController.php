@@ -9,6 +9,7 @@ use App\Models\khuyen_mai;
 use App\Models\phuong_thuc_thanh_toan;
 use App\Models\phuong_thuc_van_chuyen;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class DonHangController extends Controller
 {
@@ -20,7 +21,8 @@ class DonHangController extends Controller
         $donhangs = don_hang::with('user')->get();
         $title = "Danh sách đơn hàng";
 
-        $donHangMoi = don_hang::where('trang_thai', 'Đơn hàng mới')->get();
+        $choXacNhan = don_hang::where('trang_thai', 'Chờ xác nhận')->get();
+        $daXacNhan = don_hang::where('trang_thai', 'Đã xác nhận')->get();
         $dangChuanBi = don_hang::where('trang_thai', 'Đang chuẩn bị hàng')->get();
         $dangVanChuyen = don_hang::where('trang_thai', 'Đang vận chuyển')->get();
         $daGiao = don_hang::where('trang_thai', 'Đã giao')->get();
@@ -32,7 +34,8 @@ class DonHangController extends Controller
         return view('admin.donhang.index', compact(
             'donhangs',
             'title',
-            'donHangMoi',
+            'choXacNhan',
+            'daXacNhan',
             'dangChuanBi',
             'dangVanChuyen',
             'daGiao',
@@ -76,19 +79,36 @@ class DonHangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(don_hang $don_hang)
+    public function edit(don_hang $don_hang, $id)
     {
-        //
+        $donhang = don_hang::findOrFail($id);
+        $title = "Cập nhật đơn hàng";
+        return view('admin.donhang.edit', compact('donhang', 'title'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatedon_hangRequest $request, don_hang $don_hang)
+    public function update(Updatedon_hangRequest $request, don_hang $don_hang, $id)
     {
-        //
-    }
+        // dd($request->all());
+        DB::beginTransaction();
+        try {
+            $donhang = don_hang::findOrFail($id);
 
+            // Lấy toàn bộ dữ liệu từ form dưới dạng mảng
+            $data_don_hang = $request->all();
+
+            // Tạo bản ghi mới trong bảng bai_viet
+            $donhang->update($data_don_hang);
+
+            DB::commit();
+            return redirect()->route('donhangs.index')->with('success', 'Bai viet đã được cập nhật thành công.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', 'Đã xảy ra lỗi khi thêm bai viet.');
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */

@@ -45,7 +45,7 @@ class DashboardController extends Controller
                 // Nếu tổng tiền có phần thập phân khác .00, hiển thị đầy đủ 2 chữ số sau dấu phẩy
                 $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
             }
-            return view('admin.dashboard', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
+            return view('admin.thongke.tongquan', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
         }
 
         return redirect('/client')->withErrors('Bạn không có quyền truy cập vào trang này.');

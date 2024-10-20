@@ -14,6 +14,7 @@ class KhuyenMaiPolicy
     public function viewAny(User $user): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
@@ -22,6 +23,7 @@ class KhuyenMaiPolicy
     public function view(User $user, khuyen_mai $khuyenMai): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
@@ -30,6 +32,7 @@ class KhuyenMaiPolicy
     public function create(User $user): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 
     /**
@@ -38,6 +41,7 @@ class KhuyenMaiPolicy
     public function update(User $user, khuyen_mai $khuyenMai): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 
     /**
@@ -46,21 +50,8 @@ class KhuyenMaiPolicy
     public function delete(User $user, khuyen_mai $khuyenMai): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, khuyen_mai $khuyenMai): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, khuyen_mai $khuyenMai): bool
-    {
-        //
-    }
+    
 }

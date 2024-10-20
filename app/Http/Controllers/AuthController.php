@@ -204,7 +204,8 @@ class AuthController extends Controller
                 'password.string' => 'Mật khẩu phải là chuỗi ký tự',
             ]
         );
-
+            
+        
         if (Auth::attempt($credentials, $request->has('remember'))) {
             // Eager load quan hệ chuc_vu của người dùng
             $user = User::with('chuc_vu')->find(Auth::user()->id);

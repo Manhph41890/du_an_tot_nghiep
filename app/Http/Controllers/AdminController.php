@@ -7,10 +7,11 @@ use App\Models\don_hang;
 use App\Models\san_pham;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    //
+
     public function thong_ke_chung()
     {
 
@@ -42,7 +43,7 @@ class AdminController extends Controller
             // Nếu tổng tiền có phần thập phân khác .00, hiển thị đầy đủ 2 chữ số sau dấu phẩy
             $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
         }
-        
+
         return view('admin.thongke.tongquan', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
     }
     //
@@ -77,7 +78,7 @@ class AdminController extends Controller
             // Nếu tổng tiền có phần thập phân khác .00, hiển thị đầy đủ 2 chữ số sau dấu phẩy
             $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
         }
-        
+
         return view('admin.thongke.taikhoan', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
     }
     //
@@ -112,7 +113,7 @@ class AdminController extends Controller
             // Nếu tổng tiền có phần thập phân khác .00, hiển thị đầy đủ 2 chữ số sau dấu phẩy
             $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
         }
-        
+
         return view('admin.thongke.doanhthu', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
     }
     //
@@ -147,8 +148,7 @@ class AdminController extends Controller
             // Nếu tổng tiền có phần thập phân khác .00, hiển thị đầy đủ 2 chữ số sau dấu phẩy
             $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
         }
-        
+
         return view('admin.thongke.sanpham', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
     }
-
 }

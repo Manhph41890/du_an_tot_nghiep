@@ -20,15 +20,12 @@ use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+// Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
+// Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
-|
 */
-
 
 // Route trang chủ
 Route::get('/', fn() => view('client.home'));
@@ -89,15 +86,24 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
-    Route::get('/customer', fn() => view('client.home'));
-    // Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
-    // Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
+    Route::get('/customer', [CustomerController::class, 'index'])->name('client.home');
+    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 
+// Route cho nhân viên (quản lý)
+Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
+    Route::get('/nhanvien', [StaffController::class, 'index'])->name('thong_ke_chung');
+    Route::resource('/danhmucs', DanhMucController::class);
+    Route::resource('/chucvus', ChucVuController::class);
+
+    Route::resource('/khuyenmais', KhuyenMaiController::class);
+    Route::resource('/baiviets', BaiVietController::class);
+    Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
+    Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
+});
+
+// Route cho quản lý người dùng
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
-
-Route::get('/ctdonhang', function () {
-    return view('admin.donhang.chitiet');
-});

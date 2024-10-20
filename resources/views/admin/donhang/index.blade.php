@@ -20,9 +20,19 @@
                         <div class="card-header">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="success-tab" data-bs-toggle="tab"
-                                        data-bs-target="#success" type="button" role="tab" aria-controls="success"
-                                        aria-selected="true">Đơn hàng mới</button>
+                                    <button class="nav-link active" id="all-tab" data-bs-toggle="tab"
+                                        data-bs-target="#all" type="button" role="tab" aria-controls="all"
+                                        aria-selected="true">Tất cả</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending"
+                                        type="button" role="tab" aria-controls="pending" aria-selected="false">Chờ xác
+                                        nhận</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="confirmed-tab" data-bs-toggle="tab"
+                                        data-bs-target="#confirmed" type="button" role="tab" aria-controls="confirmed"
+                                        aria-selected="false">Đã xác nhận</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="preparing-tab" data-bs-toggle="tab"
@@ -50,13 +60,14 @@
                                         aria-selected="false">Đã hủy</button>
                                 </li>
                             </ul>
+
                         </div>
 
                         <div class="card-body">
                             <div class="tab-content mt-1" id="myTabContent">
-                                <div class="tab-pane fade show active" id="success" role="tabpanel"
-                                    aria-labelledby="success-tab">
-                                    <!-- Đơn hàng mới -->
+                                <div class="tab-pane fade show active" id="all" role="tabpanel"
+                                    aria-labelledby="all-tab">
+                                    <!-- All -->
                                     <div class="table-responsive">
                                         <table class="table table-striped mb-0">
                                             <thead>
@@ -71,7 +82,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($donHangMoi as $item)
+                                                @foreach ($donhangs as $item)
                                                     <tr>
                                                         <td>{{ $item->id }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
@@ -82,20 +93,32 @@
                                                         <td>
                                                             <a href="{{ route('donhangs.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                data-bs-target="#allmyModal{{ $item->id }}">
                                                                 <i
                                                                     class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
 
                                                             <!-- The Modal -->
-                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                            <div class="modal" id="allmyModal{{ $item->id }}">
                                                                 @include('admin.donhang.show', [
                                                                     'donhang' => $item,
                                                                 ])
                                                             </div>
 
-                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
-                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#allmyModalEdit{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="allmyModalEdit{{ $item->id }}">
+                                                                @include('admin.donhang.edit', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -103,7 +126,129 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="preparing" role="tabpanel" aria-labelledby="preparing-tab">
+                                <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                                    <!-- Chờ xác nhận -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Mã đơn hàng</th>
+                                                    <th scope="col">Người đặt</th>
+                                                    <th scope="col">Số điện thoại</th>
+                                                    <th scope="col">Địa chỉ giao hàng</th>
+                                                    <th scope="col">Ngày tạo đơn hàng</th>
+                                                    <th scope="col">Tổng tiền</th>
+                                                    <th scope="col">Hành Động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($choXacNhan as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
+                                                        <td>{{ $item->so_dien_thoai }}</td>
+                                                        <td>{{ $item->dia_chi }}</td>
+                                                        <td>{{ $item->ngay_tao }}</td>
+                                                        <td>{{ $item->tong_tien }}</td>
+                                                        <td>
+                                                            <a href="{{ route('donhangs.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#pendingmyModal{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="pendingmyModal{{ $item->id }}">
+                                                                @include('admin.donhang.show', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#pendingmyModalEdit{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal"
+                                                                id="pendingmyModalEdit{{ $item->id }}">
+                                                                @include('admin.donhang.edit', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="confirmed" role="tabpanel"
+                                    aria-labelledby="confirmed-tab">
+                                    <!-- Đã xác nhận -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Mã đơn hàng</th>
+                                                    <th scope="col">Người đặt</th>
+                                                    <th scope="col">Số điện thoại</th>
+                                                    <th scope="col">Địa chỉ giao hàng</th>
+                                                    <th scope="col">Ngày tạo đơn hàng</th>
+                                                    <th scope="col">Tổng tiền</th>
+                                                    <th scope="col">Hành Động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($daXacNhan as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
+                                                        <td>{{ $item->so_dien_thoai }}</td>
+                                                        <td>{{ $item->dia_chi }}</td>
+                                                        <td>{{ $item->ngay_tao }}</td>
+                                                        <td>{{ $item->tong_tien }}</td>
+                                                        <td>
+                                                            <a href="{{ route('donhangs.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#confirmedmyModal{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal" id="confirmedmyModal{{ $item->id }}">
+                                                                @include('admin.donhang.show', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#confirmedmyModalEdit{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal"
+                                                                id="confirmedmyModalEdit{{ $item->id }}">
+                                                                @include('admin.donhang.edit', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="preparing" role="tabpanel"
+                                    aria-labelledby="preparing-tab">
                                     <!-- Đang chuẩn bị hàng -->
                                     <div class="table-responsive">
                                         <table class="table table-striped mb-0">
@@ -130,20 +275,33 @@
                                                         <td>
                                                             <a href="{{ route('donhangs.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                data-bs-target="#preparingdmyModal{{ $item->id }}">
                                                                 <i
                                                                     class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
 
                                                             <!-- The Modal -->
-                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                            <div class="modal"
+                                                                id="preparingdmyModal{{ $item->id }}">
                                                                 @include('admin.donhang.show', [
                                                                     'donhang' => $item,
                                                                 ])
                                                             </div>
 
-                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
-                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#preparingdmyModalEdit{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal"
+                                                                id="preparingdmyModalEdit{{ $item->id }}">
+                                                                @include('admin.donhang.edit', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -179,20 +337,32 @@
                                                         <td>
                                                             <a href="{{ route('donhangs.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                data-bs-target="#shippingmyModal{{ $item->id }}">
                                                                 <i
                                                                     class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
 
                                                             <!-- The Modal -->
-                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                            <div class="modal" id="shippingmyModal{{ $item->id }}">
                                                                 @include('admin.donhang.show', [
                                                                     'donhang' => $item,
                                                                 ])
                                                             </div>
 
-                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
-                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#shippingmyModalEdit{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal"
+                                                                id="shippingmyModalEdit{{ $item->id }}">
+                                                                @include('admin.donhang.edit', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -228,20 +398,32 @@
                                                         <td>
                                                             <a href="{{ route('donhangs.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                data-bs-target="#deliveredmyModal{{ $item->id }}">
                                                                 <i
                                                                     class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
 
                                                             <!-- The Modal -->
-                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                            <div class="modal" id="deliveredmyModal{{ $item->id }}">
                                                                 @include('admin.donhang.show', [
                                                                     'donhang' => $item,
                                                                 ])
                                                             </div>
 
-                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
-                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deliveredmyModalEdit{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal"
+                                                                id="deliveredmyModalEdit{{ $item->id }}">
+                                                                @include('admin.donhang.edit', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -249,7 +431,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="completed" role="tabpanel"
+                                <div class="tab-pane fade show" id="completed" role="tabpanel"
                                     aria-labelledby="completed-tab">
                                     {{-- Thành công --}}
                                     <div class="table-responsive">
@@ -277,20 +459,32 @@
                                                         <td>
                                                             <a href="{{ route('donhangs.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                data-bs-target="#completedmyModal{{ $item->id }}">
                                                                 <i
                                                                     class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
 
                                                             <!-- The Modal -->
-                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                            <div class="modal" id="completedmyModal{{ $item->id }}">
                                                                 @include('admin.donhang.show', [
                                                                     'donhang' => $item,
                                                                 ])
                                                             </div>
 
-                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
-                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#completedmyModalEdit{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal"
+                                                                id="completedmyModalEdit{{ $item->id }}">
+                                                                @include('admin.donhang.edit', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -326,20 +520,32 @@
                                                         <td>
                                                             <a href="{{ route('donhangs.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#myModal{{ $item->id }}">
+                                                                data-bs-target="#canceledmyModal{{ $item->id }}">
                                                                 <i
                                                                     class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
 
                                                             <!-- The Modal -->
-                                                            <div class="modal" id="myModal{{ $item->id }}">
+                                                            <div class="modal" id="canceledmyModal{{ $item->id }}">
                                                                 @include('admin.donhang.show', [
                                                                     'donhang' => $item,
                                                                 ])
                                                             </div>
 
-                                                            <a href="{{ route('donhangs.edit', $item->id) }}"><i
-                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            <a href="{{ route('donhangs.edit', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#canceledmyModalEdit{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+
+                                                            <!-- The Modal -->
+                                                            <div class="modal"
+                                                                id="canceledmyModalEdit{{ $item->id }}">
+                                                                @include('admin.donhang.edit', [
+                                                                    'donhang' => $item,
+                                                                ])
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach

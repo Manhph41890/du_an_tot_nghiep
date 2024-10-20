@@ -11,46 +11,48 @@
                                 <h4 class="fw-semibold">{{ $title }}</h4>
                             </div>
                             <div class="col-md-2">
-                                <form action="{{ route('thong_ke_don_hang') }}" method="post">
+                                <form action="{{ route('thong_ke_chung') }}" method="post">
                                     @csrf
                                     @method('GET')
                                     <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
                                 </form>
                             </div>
-                            <div class="col-md-1 text-center">Tới</div>
+                            <div class="col-md-1 d-flex align-items-center justify-content-center ">Tới</div>
                             <div class="col-md-2">
-                                <form action="{{ route('thong_ke_don_hang') }}" method="post">
+                                <form action="{{ route('thong_ke_chung') }}" method="post">
                                     @csrf
                                     @method('GET')
                                     <input type="date" class="form-control" id="ngay_ket_thuc" name="ngay_ket_thuc">
                                 </form>
                             </div>
                             <div class="col-md-2">
-                                <form action="{{ route('thong_ke_don_hang') }}" method="post">
+                                <form action="{{ route('thong_ke_chung') }}" method="post">
                                     @csrf
                                     @method('GET')
                                     <select class="form-select ">
-                                        <option>Theo tháng</option>
-                                        <option>Theo năm</option>
-                                        <option>Theo Qúy</option>
+                                        <option>Hôm nay</option>
+                                        <option>7 ngày trước</option>
+                                        <option>Tháng trước</option>
+                                        <option>Năm nay</option>
                                     </select>
                                 </form>
                             </div>
                             <div class="col-md-1">
-                                <form action="{{ route('thong_ke_don_hang') }}" method="post">
+                                <form action="{{ route('thong_ke_chung') }}" method="post">
                                     @csrf
                                     @method('GET')
                                     <input type="submit" value="Tìm kiếm" class="btn btn-primary w-100 text-center">
                                 </form>
                             </div>
                         </div>
-                        <div class="col-12 mt-3">
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                <strong>Thành công</strong> This alert box could indicate a successful or positive
-                                action.
+                        @if (session('success'))
+                            <div class="col-12 mt-3">
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    <strong>Thành công</strong>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
 
@@ -58,76 +60,118 @@
                 <div class="row">
                     <div class="col-md-12 col-xl-12">
                         <div class="row g-3">
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card text-bg-success">
+
+                            <div class="col-md-4 col-xl-4">
+                                <div class="card ">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <div class="fs-14 mb-1 "> <i class="fa-solid fa-image me-2"></i> Sản phẩm</div>
+                                            <div class="fs-17 mb-1 "> <i
+                                                    class="fa-solid fa-truck-fast me-2 text-success"></i>Tổng hàng thành
+                                                công</div>
                                             <span class="text-primary d-inline-flex align-items-center">
                                                 <a href="{{ route('sanphams.index') }}" class="text-white"> <i
                                                         class="fa-solid fa-plus"></i> </a>
                                             </span>
                                         </div>
-                                        <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $sanphams }}</div>
-                                            <div class="me-auto">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p class="fs-10 mt-3 mb-1">Tổng tiền</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-22 mb-0 me-2 fw-semibold text-success">
+                                                        {{ $tong_tien }}
+                                                    </div>
+                                                    <div class="me-auto text-success">
+                                                        đ
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="fs-10 mt-3 mb-1">Số lượng đơn hàng</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-22 mb-0 me-2 fw-semibold ">
+                                                        {{ $donhangs }}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {{--  --}}
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card text-bg-primary">
+                            <div class="col-md-4 col-xl-4">
+                                <div class="card ">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <div class="fs-14 mb-1 text-white"> <i class="fa-solid fa-truck-fast me-2"></i>
-                                                Đơn hàng</div>
-                                        </div>
-                                        <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $donhangs }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{--  --}}
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card text-bg-warning">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="fs-14 mb-1 text-white"> <i
-                                                    class="fa-solid fa-money-check-dollar me-2"></i> Doanh thu</div>
-                                        </div>
-                                        <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $tong_tien }}</div>
-                                            <div class="me-auto">
-                                                <div class="fs-14 mb-1">VNĐ</div>
+                                            <div class="fs-17 mb-1 "><i
+                                                    class="fa-solid fa-truck-fast me-2 text-danger"></i>Tổng hàng hoàn
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{--  --}}
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card text-bg-info">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="fs-14 mb-1 text-white"> <i class="fa-solid fa-user me-2"></i> Tài
-                                                khoản</div>
                                             <span class="text-primary d-inline-flex align-items-center">
-                                                <a href="{{ route('user.index') }}" class="text-white"> <i
+                                                <a href="{{ route('sanphams.index') }}" class="text-white"> <i
                                                         class="fa-solid fa-plus"></i> </a>
                                             </span>
                                         </div>
-                                        <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $users }}</div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p class="fs-10 mt-3 mb-1">Tổng tiền</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-22 mb-0 me-2 fw-semibold text-danger">
+                                                        {{ $tong_tien }}
+                                                    </div>
+                                                    <div class="me-auto text-danger">
+                                                        đ
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="fs-10 mt-3 mb-1">Số lượng đơn hàng</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-22 mb-0 me-2 fw-semibold ">
+                                                        {{ $sanphams }}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {{--  --}}
-
-
+                            <div class="col-md-4 col-xl-4">
+                                <div class="card ">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fs-17 mb-1 "><i
+                                                    class="fa-solid fa-truck-fast me-2 text-info"></i>Sản phẩm tồn kho
+                                            </div>
+                                            <span class="text-primary d-inline-flex align-items-center">
+                                                <a href="{{ route('sanphams.index') }}" class="text-white"> <i
+                                                        class="fa-solid fa-plus"></i> </a>
+                                            </span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p class="fs-10 mt-3 mb-1">Tổng tiền</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-22 mb-0 me-2 fw-semibold text-info">
+                                                        {{ $tong_tien }}
+                                                    </div>
+                                                    <div class="me-auto text-info">
+                                                        đ
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="fs-10 mt-3 mb-1">Số lượng sản phẩm</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-22 mb-0 me-2 fw-semibold ">
+                                                        {{ $sanphams }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--  --}}
                         </div>
                     </div> <!-- end sales -->
                 </div> <!-- end row -->
@@ -136,7 +180,7 @@
                 <div class="row">
                     <div class="col-md-6 col-xl-6">
                         <div class="card">
-                            <div class="card-header text-bg-dark">
+                            <div class="card-header">
                                 <div class="d-flex align-items-center">
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                         <i data-feather="minus-square" class="widgets-icons"></i>
@@ -149,29 +193,20 @@
                                 <script>
                                     var ctx = document.getElementById('myChart1').getContext('2d');
                                     var myChart = new Chart(ctx, {
-                                        type: 'bar',
+                                        type: 'line',
                                         data: {
                                             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Số tiền'],
                                             datasets: [{
                                                 label: '# of Votes',
                                                 data: [12, 19, 3, 5, 2, 3],
                                                 backgroundColor: [
-                                                    'rgba(255, 99, 132, 0.2)',
-                                                    'rgba(54, 162, 235, 0.2)',
-                                                    'rgba(255, 206, 86, 0.2)',
-                                                    'rgba(75, 192, 192, 0.2)',
-                                                    'rgba(153, 102, 255, 0.2)',
-                                                    'rgba(255, 159, 64, 0.2)'
+                                                    'rgba(255, 99, 132, 0.2)'
                                                 ],
                                                 borderColor: [
-                                                    'rgba(255, 99, 132, 1)',
-                                                    'rgba(54, 162, 235, 1)',
-                                                    'rgba(255, 206, 86, 1)',
-                                                    'rgba(75, 192, 192, 1)',
-                                                    'rgba(153, 102, 255, 1)',
-                                                    'rgba(255, 159, 64, 1)'
+                                                    'rgba(255, 99, 132, 1)'
                                                 ],
-                                                borderWidth: 1
+                                                borderWidth: 2,
+                                                fill: false
                                             }]
                                         },
                                         options: {
@@ -183,6 +218,7 @@
                                         }
                                     });
                                 </script>
+
                             </div>
                         </div>
                     </div>
@@ -190,7 +226,7 @@
                     <div class="col-md-6 col-xl-6">
                         <div class="card overflow-hidden">
 
-                            <div class="card-header text-bg-dark">
+                            <div class="card-header">
                                 <div class="d-flex align-items-center">
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                         <i data-feather="table" class="widgets-icons"></i>
@@ -300,7 +336,6 @@
                                                     <th>Ảnh</th>
                                                     <th>Tên sản phẩm</th>
                                                     <th>Giá</th>
-                                                    <th>Hành động</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -312,8 +347,7 @@
                                                                 style="width: 50px; height: 50px;">
                                                         </td>
                                                         <td>{{ $product->ten_san_pham }}</td>
-                                                        <td>{{ number_format($product->gia_goc, 0, ',', '.') }}.000 VND
-                                                        </td>
+                                                        <td>{{ number_format($product->gia_goc, 0, ',', '.') }}.000 VND</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

@@ -81,7 +81,7 @@
                         <div class="input-group mb-3">
                             <input type="number" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
                                 required
-                                class="form-control form-control-lg bg-light fs-6 @error('so_dien_thoai') is-invalid @enderror"
+                            class="form-control form-control-lg bg-  fs-6 @error('so_dien_thoai') is-invalid @enderror"
                                 placeholder="Số điện thoại">
                             @error('so_dien_thoai')
                                 <div class="invalid-feedback">{{ $message }}</div>

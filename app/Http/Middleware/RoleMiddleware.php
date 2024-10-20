@@ -15,6 +15,6 @@ class RoleMiddleware
         }
 
         // Nếu không phải là role mong muốn, điều hướng về trang khác hoặc thông báo lỗi
-        return redirect('/customer')->withErrors('Bạn không có quyền truy cập vào trang này.');
+        return redirect('/auth/login')->withErrors('Bạn không có quyền truy cập vào trang này.');
     }
 }

@@ -23,13 +23,12 @@ class don_hang extends Model
         'tong_tien',
         'trang_thai'
     ];
-    protected $casts = [
-        'trang_thai' => ['Đặt hàng thành công ', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao']
-    ];
+    protected $table = 'don_hangs'; // Tên bảng
+
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, "user_id");
     }
     public function san_phams()
     {

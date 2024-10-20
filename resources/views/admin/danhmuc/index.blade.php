@@ -22,7 +22,7 @@
                                 <div class="col-2">
                                     <a href="{{ route('danhmucs.create') }}" class="btn btn-success">Tạo Mới</a>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <form action="{{ route('danhmucs.index') }}" method="GET">
                                         @csrf
                                         <input type="text" id="search_ten_danh_muc" name="search_ten_danh_muc"
@@ -42,6 +42,26 @@
                                             </option>
                                         </select>
                                     </form>
+                                </div>
+                                <div class="col-4">
+                                    @if (Session::has('success'))
+                                        <script>
+                                            toastr.options = {
+                                                'progressBar': true,
+                                                'closeButton': true
+                                            }
+                                            toastr.success("{{ Session::get('success') }}",{timeOut:3000});
+                                        </script>
+                                    @endif
+                                    @if (Session::has('error'))
+                                    <script>
+                                        toastr.options = {
+                                            'progressBar': true,
+                                            'closeButton': true
+                                        }
+                                        toastr.error("{{ Session::get('error') }}",{timeOut:3000});
+                                    </script>
+                                @endif
                                 </div>
                             </div>
                         </div><!-- end card header -->
@@ -96,7 +116,9 @@
                                 </div>
                             </div>
                         </div>
-                        {{ $danhmucs->links() }}
+                        <div class="row p-2">
+                            {{ $danhmucs->links() }}
+                        </div>
                     </div>
                 </div>
             </div> <!-- container-fluid -->

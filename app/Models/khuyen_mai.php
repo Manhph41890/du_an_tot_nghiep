@@ -27,7 +27,4 @@ class khuyen_mai extends Model
     {
         return $this->belongsTo(User::class);
     }
-    {
-        return $this->belongsTo(User::class);
-    }
 }

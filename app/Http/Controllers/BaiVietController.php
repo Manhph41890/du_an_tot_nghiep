@@ -70,7 +70,7 @@ class BaiVietController extends Controller
             $data_bai_viet = $request->all();
 
             // Gán user_id từ người dùng đang đăng nhập
-          
+
             $data_bai_viet['user_id'] = auth()->id(); // Lấy ID của người hiện tại
 
             // Lấy ngày hiện tại để điền vào trường "Ngày Đăng"
@@ -107,7 +107,7 @@ class BaiVietController extends Controller
     {
         $post = bai_viet::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
-        $title = "Chi tiết sản phẩm";
+        $title = "Chi tiết bai viet";
         return view('admin.baiviet.show', compact('post', 'user', 'title'));
     }
 

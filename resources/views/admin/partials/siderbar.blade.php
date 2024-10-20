@@ -20,9 +20,9 @@
                     <div class="collapse" id="dashboard">
                         <ul class="nav-second-level">
                             <li><a class="tp-link" href="{{ route('thong_ke_chung') }}">Tổng quan</a></li>
-                            {{-- <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li>
+                            <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li>
                             <li><a class="tp-link" href="{{ route('thong_ke_tai_khoan') }}">Tài khoản</a></li>
-                            <li><a class="tp-link" href="{{ route('thong_ke_san_pham') }}">Sản phẩm</a></li> --}}
+                            <li><a class="tp-link" href="{{ route('thong_ke_san_pham') }}">Sản phẩm</a></li>
                         </ul>
                     </div>
                 </li>
@@ -143,6 +143,21 @@
                                 <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.create') }}">Thêm</a></li>
                             @endif
                             <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.index') }}">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+
+                <!-- Đơn hàng -->
+                <li>
+                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="donhang"></i>
+                        <span> Đơn hàng </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="donhang">
+                        <ul class="nav-second-level">
+                            <li><a class="tp-link" href="{{ route('donhangs.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>

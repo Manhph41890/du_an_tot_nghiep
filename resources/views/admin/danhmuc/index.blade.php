@@ -11,7 +11,28 @@
             <div class="container">
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4>
+                        <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4> 
+                    </div>
+                    <div class="col-3">
+                        <form action="{{ route('danhmucs.index') }}" method="GET">
+                            @csrf
+                            <input type="text" id="search_ten_danh_muc" name="search_ten_danh_muc"
+                                placeholder="Tìm kiếm" value="{{ request('search_ten_danh_muc') }}"
+                                class="form-control" onchange="this.form.submit();">
+                        </form>
+                    </div>
+                    <div class="col-3">
+                        <form action="{{ route('danhmucs.index') }}" method="GET" id="filter-form">
+                            @csrf
+                            <select class="form-select" name="search_dm"
+                                onchange="document.getElementById('filter-form').submit();">
+                                <option value="">Hiển thị tất cả</option>
+                                <option value="0" {{ request('search_dm') == '0' ? 'selected' : '' }}>Hiển
+                                    thị</option>
+                                <option value="1" {{ request('search_dm') == '1' ? 'selected' : '' }}>Ẩn
+                                </option>
+                            </select>
+                        </form>
                     </div>
                 </div>
                 <!-- Striped Rows -->
@@ -20,29 +41,11 @@
                         <div class="card-header justify-content-between">
                             <div class="row">
                                 <div class="col-2">
+                                    @if($isAdmin)
                                     <a href="{{ route('danhmucs.create') }}" class="btn btn-success">Tạo Mới</a>
+                                    @endif
                                 </div>
-                                <div class="col-3">
-                                    <form action="{{ route('danhmucs.index') }}" method="GET">
-                                        @csrf
-                                        <input type="text" id="search_ten_danh_muc" name="search_ten_danh_muc"
-                                            placeholder="Tìm kiếm" value="{{ request('search_ten_danh_muc') }}"
-                                            class="form-control" onchange="this.form.submit();">
-                                    </form>
-                                </div>
-                                <div class="col-3">
-                                    <form action="{{ route('danhmucs.index') }}" method="GET" id="filter-form">
-                                        @csrf
-                                        <select class="form-select" name="search_dm"
-                                            onchange="document.getElementById('filter-form').submit();">
-                                            <option value="">Hiển thị tất cả</option>
-                                            <option value="0" {{ request('search_dm') == '0' ? 'selected' : '' }}>Hiển
-                                                thị</option>
-                                            <option value="1" {{ request('search_dm') == '1' ? 'selected' : '' }}>Ẩn
-                                            </option>
-                                        </select>
-                                    </form>
-                                </div>
+                                
                                 <div class="col-4">
                                     @if (Session::has('success'))
                                         <script>

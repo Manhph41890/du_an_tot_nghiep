@@ -20,6 +20,20 @@
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0"> {{ $title }} </h4>
                     </div>
+                    <form method="GET" action="{{ route('khuyenmais.index') }}" class="d-flex">
+                        <input type="text" name="search_km" class="form-control me-2" placeholder="Tìm mã khuyến mãi .."
+                            value="{{ request()->query('search_km') }}"> <!-- Use search_km here -->
+                        <select name="is_active" class="form-select me-2">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="1" {{ request()->query('is_active') == '1' ? 'selected' : '' }}>Đang hoạt
+                                động</option>
+                            <option value="0" {{ request()->query('is_active') == '0' ? 'selected' : '' }}>Hết hạn
+                            </option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Tìm</button>
+                    </form>
+
+
                 </div>
 
                 <!-- Striped Rows -->
@@ -28,24 +42,15 @@
 
                         <div class="card-header ">
                             <div class="row">
-                                @if($isAdmin)
-                                <div class="col-2">
+                                @if ($isAdmin)
+                                    <div class="col-3">
 
-                                    <a href="{{ route('khuyenmais.create') }}" class="btn btn-success">Thêm mã khuyến mãi
-                                    </a>
-                                </div>
+                                        <a href="{{ route('khuyenmais.create') }}" class="btn btn-success">Thêm mã khuyến
+                                            mãi
+                                        </a>
+                                    </div>
                                 @endif
-                                <div class="col-3">
-                                    <form action="{{ route('khuyenmais.index') }}" method="POST" id="filter-form-km">
-                                        @csrf
-                                        @method('GET')
-                                        <div class="form-group mb-3">
-                                            <input type="text" name="search_km" class="form-control"
-                                                placeholder="Tìm kiếm theo mã khuyến mãi"
-                                                onchange="document.getElementById('filter-form-km').submit();">
-                                        </div>
-                                    </form>
-                                </div>
+                               
                                 <div class="col-7">
                                     <!-- Hiển thị thông báo thành công -->
                                     @if (session('success'))
@@ -74,8 +79,8 @@
                                                 <th scope="col">Ngày bắt đầu </th>
                                                 <th scope="col">Ngày kết thúc</th>
                                                 <th scope="col">Trạng Thái </th>
-                                                @if($isAdmin)
-                                                <th scope="col">Hành Động </th>
+                                                @if ($isAdmin)
+                                                    <th scope="col">Hành Động </th>
                                                 @endif
                                             </tr>
                                         </thead>
@@ -90,24 +95,26 @@
                                                     <td>{{ $khuyenMai->ngay_bat_dau }}</td>
                                                     <td>{{ $khuyenMai->ngay_ket_thuc }}</td>
                                                     <td
-                                                        class="{{ $khuyenMai->is_active == 0 ? 'text-success' : 'text-danger' }}">
-                                                        {{ $khuyenMai->is_active == 0 ? 'Đang Hoạt Động ' : 'Hết Hạn' }}
+                                                        class="{{ $khuyenMai->is_active == 0 ? 'text-danger' : 'text-success' }}">
+                                                        {{ $khuyenMai->is_active == 1 ? 'Đang Hoạt Động ' : 'Hết Hạn' }}
                                                     </td>
                                                     <td>
-                                                        @if($isAdmin)
-                                                        <a href="{{ route('khuyenmais.edit', $khuyenMai->id) }}"><i
-                                                                class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
-                                                        <form action="{{ route('khuyenmais.destroy', $khuyenMai->id) }}"
-                                                            method="POST" style="display:inline;"
-                                                            onsubmit="return confirm ('Bạn có muốn xóa danh mục sản phẩm này không ?') ">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" style="border: none; background: none;">
-                                                                <i
-                                                                    class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
-                                                            </button>
-                                                        </form>
-                                                        @endif    
+                                                        @if ($isAdmin)
+                                                            <a href="{{ route('khuyenmais.edit', $khuyenMai->id) }}"><i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            <form
+                                                                action="{{ route('khuyenmais.destroy', $khuyenMai->id) }}"
+                                                                method="POST" style="display:inline;"
+                                                                onsubmit="return confirm ('Bạn có muốn xóa danh mục sản phẩm này không ?') ">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    style="border: none; background: none;">
+                                                                    <i
+                                                                        class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
+                                                                </button>
+                                                            </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -115,7 +122,8 @@
                                     </table>
                                 </div>
                             </div>
-                            {{-- {{ $khuyenMai->links() }} --}}
+                            {{ $khuyenMais->links() }}
+
                         </div>
 
                     </div>

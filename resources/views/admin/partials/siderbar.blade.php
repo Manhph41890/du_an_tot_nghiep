@@ -44,7 +44,7 @@
                         </div>
                 </li>
 
-                <!-- Sản phẩm -->
+            
                 <!-- Sản phẩm -->
                 <li>
                     <a href="#sanpham" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
@@ -61,24 +61,33 @@
                         </ul>
                     </div>
                 </li>
-
-                <!-- Chức vụ -->
+                  <!-- Đơn hàng -->
                 <li>
-                    <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="award"></i>
-                        <span> Chức vụ </span>
+                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="shopping-bag"></i>
+                        <span> Đơn hàng </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="chucvu">
+                    <div class="collapse" id="donhang">
                         <ul class="nav-second-level">
-                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
-                                <li><a class="tp-link" href="{{ route('chucvus.create') }}">Thêm</a></li>
-                            @endif
-                            <li><a class="tp-link" href="{{ route('chucvus.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="{{ route('donhangs.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
-
+                
+                   <!-- Quản lý User -->
+                   <li>
+                    <a href="#user" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="users"></i>
+                        <span> Quản lý user </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="user">
+                        <ul class="nav-second-level">
+                            <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <!-- Bài viết -->
                 <li>
                     <a href="#baiviet" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
@@ -99,7 +108,7 @@
                 <!-- KHuyến mãi -->
                 <li>
                     <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="book-open"></i>
+                        <i data-feather="archive"></i>
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -112,7 +121,22 @@
                         </ul>
                     </div>
                 </li>
-
+                 <!-- Chức vụ -->
+                <li>
+                    <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="award"></i>
+                        <span> Chức vụ </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="chucvu">
+                        <ul class="nav-second-level">
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
+                                <li><a class="tp-link" href="{{ route('chucvus.create') }}">Thêm</a></li>
+                            @endif
+                            <li><a class="tp-link" href="{{ route('chucvus.index') }}">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <!-- Phương thức thanh toán -->
                 <li>
                     <a href="#phuongthucthanhtoan" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
@@ -148,19 +172,7 @@
                 </li>
 
 
-                <!-- Đơn hàng -->
-                <li>
-                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="donhang"></i>
-                        <span> Đơn hàng </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="donhang">
-                        <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('donhangs.index') }}">Danh sách</a></li>
-                        </ul>
-                    </div>
-                </li>
+               
 
             </ul>
         </div>

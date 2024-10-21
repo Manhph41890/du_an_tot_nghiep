@@ -16,27 +16,55 @@ class KhuyenMaiController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {    
-        $this->authorize('viewAny',khuyen_mai::class);
-        $danhmucs = danh_muc::all();
-        $query = khuyen_mai::query();
+{
+    $this->authorize('viewAny', khuyen_mai::class);
 
-        if ($request->has('search_km')) {
-            $query->where('ma_khuyen_mai', 'LIKE', "%{$request->input('search_km')}%");
+    $danhmucs = danh_muc::all();
+    $query = khuyen_mai::query();
+  
+    // Automatically update 'is_active' status based on dates
+    $query->each(function ($promotion) {
+        $currentDate = now();
+        if ($currentDate->greaterThan($promotion->ngay_ket_thuc)) {
+            // Mark promotion as expired if the current date is past 'ngay_ket_thuc'
+            $promotion->is_active = 0;
+        } elseif ($currentDate->between($promotion->ngay_bat_dau, $promotion->ngay_ket_thuc)) {
+            // Mark promotion as active if the current date is between 'ngay_bat_dau' and 'ngay_ket_thuc'
+            $promotion->is_active = 1;
+        } else {
+            // Mark promotion as inactive if current date is before 'ngay_bat_dau'
+            $promotion->is_active = 0;
         }
+        $promotion->save();
+    });
 
-        $khuyenMais = $query->latest('id')->paginate(5);
-
-        $title = 'Danh sách khuyến mãi';
-         $isAdmin = auth()->user()->chuc_vu ->ten_chuc_vu === 'admin';
-        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title','isAdmin'));
+    // Filter by 'is_active'
+    if ($request->has('is_active') && $request->get('is_active') !== '') {
+        $query->where('is_active', $request->get('is_active'));
     }
+
+    // Search by 'ma_khuyen_mai'
+    if ($request->has('search_km') && $request->input('search_km') !== null) {
+        $query->where('ma_khuyen_mai', 'LIKE', "%{$request->input('search_km')}%");
+    }
+
+    // Paginate results
+    $khuyenMais = $query->latest('id')->paginate(5);
+
+    $title = 'Danh sách khuyến mãi';
+    $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+
+    return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title', 'isAdmin'));
+}
+
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {  $this->authorize('create',khuyen_mai::class);
+    {
+        $this->authorize('create', khuyen_mai::class);
         //
         $title = 'Tạo khuyến mãi';
 
@@ -75,10 +103,10 @@ class KhuyenMaiController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(khuyen_mai $khuyen_mai, string $id)
-    {  
+    {
         //
         $khuyenmais = khuyen_mai::findorfail($id);
-        $this->authorize('update',$khuyen_mai);
+        $this->authorize('update', $khuyen_mai);
         $title = 'Cập nhật khuyến mãi';
 
         return view('admin.khuyenmai.edit', compact('khuyenmais', 'title'));
@@ -107,9 +135,9 @@ class KhuyenMaiController extends Controller
     public function destroy(khuyen_mai $khuyen_mai, string $id)
     {
         //
-      
+
         $khuyen_mai = khuyen_mai::findOrFail($id);
-        $this->authorize('delete',$khuyen_mai);
+        $this->authorize('delete', $khuyen_mai);
         $khuyen_mai->delete();
 
         return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');

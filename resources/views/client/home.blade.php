@@ -84,7 +84,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="{{asset('assets/client/img/icon/2.png')}}"
+                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="{{asset('assets/client/images/icon/2.png')}}"
                                 alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Free Shipping</h4>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="{{asset('assets/client/img/icon/3.png')}}"
+                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="{{asset('assets/client/images/icon/3.png')}}"
                                 alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Free Returns</h4>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="{{asset('assets/client/img/icon/4.png')}}"
+                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="{{asset('assets/client/images/icon/4.png')}}"
                                 alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">100% Payment Secure</h4>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="{{asset('assets/client/img/icon/5.png')}}"
+                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3" src="{{asset('assets/client/images/icon/5.png')}}"
                                 alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Support 24/7</h4>

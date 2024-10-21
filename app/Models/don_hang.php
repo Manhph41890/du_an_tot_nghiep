@@ -23,8 +23,9 @@ class don_hang extends Model
         'tong_tien',
         'trang_thai'
     ];
-    protected $table = 'don_hangs'; // Tên bảng
-
+    protected $casts = [
+        'trang_thai' => 'string', // Chuyển đổi thành chuỗi
+    ];
 
     public function user()
     {

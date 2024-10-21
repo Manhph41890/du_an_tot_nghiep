@@ -12,10 +12,13 @@ class PhuongThucThanhToanController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {    
+        $this ->authorize('viewany' , phuong_thuc_thanh_toan::class);
         $phuongthucthanhtoans = phuong_thuc_thanh_toan::query()->latest('id')->paginate(5);
         $title = "Phương thức thanh toán";
-        return view('admin.phuongthucthanhtoan.index', compact('phuongthucthanhtoans', 'title'));
+        $isAdmin = auth ()->user()->chuc_vu ->ten_chuc_vu === 'admin';
+        
+        return view('admin.phuongthucthanhtoan.index', compact('phuongthucthanhtoans', 'title', 'isAdmin'));
     }
 
     /**
@@ -23,6 +26,7 @@ class PhuongThucThanhToanController extends Controller
      */
     public function create()
     {
+        $this ->authorize('create' , phuong_thuc_thanh_toan::class);
         $title = "Thêm mới PT Thanh toán";
         return view('admin.phuongthucthanhtoan.create', compact('title'));
     }
@@ -48,6 +52,7 @@ class PhuongThucThanhToanController extends Controller
     {
         $title = "Cập nhật phương thức thanh toán";
         $phuong_thuc_thanh_toan = phuong_thuc_thanh_toan::query()->findOrFail($id);
+        $this ->authorize('update' , $phuong_thuc_thanh_toan);
         return view('admin.phuongthucthanhtoan.edit', compact('title', 'phuong_thuc_thanh_toan'));
     }
 
@@ -71,6 +76,7 @@ class PhuongThucThanhToanController extends Controller
     public function destroy(phuong_thuc_thanh_toan $phuong_thuc_thanh_toan, $id)
     {
         $phuong_thuc_thanh_toan = $phuong_thuc_thanh_toan::findOrFail($id);
+        $this ->authorize('delete' , $phuong_thuc_thanh_toan);
         if ($phuong_thuc_thanh_toan) {
             $phuong_thuc_thanh_toan->delete();
             return redirect()->route('phuongthucthanhtoans.index')->with('success', 'Xóa phương thức thanh toán thành công');

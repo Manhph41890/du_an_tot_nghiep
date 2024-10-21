@@ -41,5 +41,4 @@ yarn-error.log
 .env
 .gitignore
 # Bỏ qua file composer
-composer.json
 composer.lock

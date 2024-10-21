@@ -96,7 +96,7 @@ class AuthController extends Controller
         Auth::login($user);
         Log::info('Đăng nhập tự động cho người dùng: ', ['user_id' => $user->id]);
 
-        return redirect('/customer')->with('success', 'Đăng ký tài khoản thành công.' . ($existingUserWithVoucher ? ', nhưng bạn không nhận được voucher.' : ' và bạn đã nhận được voucher khuyến mãi!'));
+        return redirect()->route('customer')->with('success', 'Đăng ký tài khoản thành công.' . ($existingUserWithVoucher ? ', nhưng bạn không nhận được voucher.' : ' và bạn đã nhận được voucher khuyến mãi!'));
     }
 
     // Kiểm tra voucher
@@ -204,8 +204,7 @@ class AuthController extends Controller
                 'password.string' => 'Mật khẩu phải là chuỗi ký tự',
             ]
         );
-            
-        
+
         if (Auth::attempt($credentials, $request->has('remember'))) {
             // Eager load quan hệ chuc_vu của người dùng
             $user = User::with('chuc_vu')->find(Auth::user()->id);

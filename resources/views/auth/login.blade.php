@@ -72,7 +72,6 @@
                         <div
                             class="header-text mb-4 text-center d-flex flex-column justify-content-center align-items-center">
                             <h2>Đăng Nhập</h2>
-                            <p>Chào mừng bạn quay trở lại với chúng tôi</p>
                         </div>
 
                         <div class="input-group mb-3">
@@ -102,7 +101,7 @@
                             </div>
 
                             <div class="forgot">
-                                <small><a href="{{route('auth.forgot_password')}}">Quên mật khẩu?</a></small>
+                                <small><a href="{{ route('auth.forgot_password') }}">Quên mật khẩu?</a></small>
                             </div>
                         </div>
 

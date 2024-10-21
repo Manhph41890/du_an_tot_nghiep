@@ -13,4 +13,8 @@ class phuong_thuc_thanh_toan extends Model
     //     'kieu_thanh_toan' => ['Thanh toán online', 'Thanh toán khi nhận hàng']
     // ];
     //casts dung cho kieu du lieu booleans vs enums
+    public function don_hangs()
+    {
+        return $this->hasMany(don_hang::class, 'phuong_thuc_thanh_toan_id'); // Thay 'phuong_thuc_thanh_toan_id' bằng khóa ngoại thực tế nếu khác
+    }
 }

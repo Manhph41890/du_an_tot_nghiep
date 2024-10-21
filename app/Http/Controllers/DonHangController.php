@@ -8,6 +8,7 @@ use App\Http\Requests\Updatedon_hangRequest;
 use App\Models\khuyen_mai;
 use App\Models\phuong_thuc_thanh_toan;
 use App\Models\phuong_thuc_van_chuyen;
+use App\Models\san_pham;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -59,6 +60,11 @@ class DonHangController extends Controller
     {
         //
     }
+    public function storet(Storedon_hangRequest $request)
+    {
+        $title = "Create a new resource";
+        return view('admin.donhang.chitiet', compact('title'));
+    }
 
     /**
      * Display the specified resource.
@@ -67,12 +73,13 @@ class DonHangController extends Controller
     {
         $donhang = don_hang::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
+        $sanpham = san_pham::query()->pluck('ten_san_pham', 'id')->all();
         $khuyenmai = khuyen_mai::query()->pluck('ten_khuyen_mai', 'id')->all();
         $pttt = phuong_thuc_thanh_toan::query()->pluck('kieu_thanh_toan', 'id')->all();
         $ptvc = phuong_thuc_van_chuyen::query()->pluck('kieu_van_chuyen', 'id')->all();
 
         $title = "Chi tiết đơn hàng";
-        return view('admin.donhang.show', compact('donhang', 'user', 'title', 'khuyenmai', 'pttt', 'ptvc'));
+        return view('admin.donhang.show', compact('donhang', 'user', 'title', 'khuyenmai', 'pttt', 'ptvc', 'sanpham'));
     }
 
 

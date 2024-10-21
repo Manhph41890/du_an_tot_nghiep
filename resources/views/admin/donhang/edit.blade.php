@@ -13,6 +13,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @error('trang_thai')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             <form action="{{ route('donhangs.update', $donhang->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
@@ -40,7 +43,6 @@
                                             Đã hủy</option>
                                     </select>
                                 </div>
-
                                 <!-- Actions -->
                                 <div class="mt-3">
                                     <button type="submit" class="btn btn-primary">Cập nhật</button>

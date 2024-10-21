@@ -333,7 +333,8 @@
                             <li class="english">
                                 <a href="#" id="dropdown3" class="pe-0" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <img src="{{asset('assets/admin/images/logo/logo_art.jpg')}}" alt="us flag" />
+
+                                    <img src="{{asset('assets/client/images/logo/logo_art.jpg')}}" alt="us flag" />
                                     English
                                     <i class="ion ion-ios-arrow-down"></i>
                                 </a>
@@ -364,7 +365,7 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="index.html"><img src="assets/client/img/logo/logo_art.png" alt="logo" /></a>
+                        <a href="index.html"><img src="{{asset('assets/client/images/logo/logo_art.png')}}" alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">

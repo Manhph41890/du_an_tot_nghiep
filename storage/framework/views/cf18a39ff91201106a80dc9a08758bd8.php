@@ -64,9 +64,9 @@
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="danhgia">
+                    <div class="collapse" id="khuyenmai">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="<?php echo e(route('danhgia.index')); ?>">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('khuyenmais.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>

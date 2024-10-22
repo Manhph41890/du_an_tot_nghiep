@@ -130,10 +130,9 @@ class DanhMucController extends Controller
     public function destroy(danh_muc $danh_muc, string $id)
     {
         //
-        $this->authorize('delete', $danh_muc);
         $danhMuc = danh_muc::findOrFail($id);
         if ($danhMuc->san_phams()->count() > 0) {
-            return redirect()->route('danhmucs.index')->with('error', 'Không xóa danh mục vì có sản phẩm thuộc danh mục này.');
+            return redirect()->back()->with('error', 'Không xóa danh mục vì có sản phẩm thuộc danh mục này.');
         } else {
             if ($danhMuc->anh_danh_muc) {
                 Storage::disk('public')->delete($danhMuc->anh_danh_muc);

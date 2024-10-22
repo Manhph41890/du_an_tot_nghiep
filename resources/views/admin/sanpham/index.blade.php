@@ -9,12 +9,13 @@
             border-radius: 5px;
         }
 
-     
-        .table td, .table th {
+
+        .table td,
+        .table th {
             max-width: 150px;
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     </style>
 @endsection
@@ -44,8 +45,8 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
-                            @if($isAdmin)
-                            <a href="{{ route('sanphams.create') }}" class="btn btn-success">Thêm Sản Phẩm</a>
+                            @if ($isAdmin)
+                                <a href="{{ route('sanphams.create') }}" class="btn btn-success">Thêm Sản Phẩm</a>
                             @endif
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissable fade show" role="alert">
@@ -65,12 +66,12 @@
                                                 <th>Id</th>
                                                 <th>Danh Mục</th>
                                                 <th>Tên Sản Phẩm</th>
-                                                <th>Giá Gốc</th>
-                                                <th>Giá Khuyến Mãi</th>
+                                                {{-- <th>Giá Gốc</th>
+                                                <th>Giá Khuyến Mãi</th> --}}
                                                 <th>Ảnh Sản Phẩm</th>
-                                               
+
                                                 <th>Trạng Thái</th>
-                                              
+
                                                 <th>Hành Động</th>
                                             </tr>
                                         </thead>
@@ -80,8 +81,8 @@
                                                     <th scope="row">{{ $index + 1 }}</th>
                                                     <td>{{ $item->danh_muc?->ten_danh_muc }}</td>
                                                     <td>{{ $item->ten_san_pham }}</td>
-                                                    <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
-                                                    <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                                    {{-- <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                    <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td> --}}
                                                     <td>
                                                         @if ($item->anh_san_pham)
                                                             <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -91,105 +92,105 @@
                                                                 alt="Không có ảnh" width="50px">
                                                         @endif
                                                     </td>
-                                                   
+
                                                     <td>
                                                         {!! $item->is_active
                                                             ? '<span class="badge bg-primary">Hiển Thị</span>'
                                                             : '<span class="badge bg-danger">Ẩn</span>' !!}
                                                     </td>
-                                                  
-                                                    <td>
-                                                      @if ($isAdmin)
-                                                        <a href="{{ route('sanphams.show', $item->id) }}"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#productModal-{{ $item->id }}">
-                                                            <i class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
-                                                        </a>
-                                                        <!-- Modal show chi tiết sản phẩm -->
-                                                        <div class="modal fade" id="productModal-{{ $item->id }}"
-                                                            tabindex="-1"
-                                                            aria-labelledby="productModalLabel-{{ $item->id }}"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog modal-lg">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="productModalLabel-{{ $item->id }}">
-                                                                            {{ $item->ten_san_pham }}</h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="mb-3 ">
-                                                                            <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
-                                                                                alt="{{ $item->ten_san_pham }}"
-                                                                                class="img-fluid " width="200px">
-                                                                        </div>
-                                                                        <p><strong>Mô Tả:</strong>
-                                                                            {{ $item->mo_ta_san_pham }}</p>
-                                                                        <p><strong>Giá Gốc:</strong>
-                                                                            {{ number_format($item->gia_goc, 0, ',', '.') }}
-                                                                            VND</p>
-                                                                        <p><strong>Giá Khuyến Mãi:</strong>
-                                                                            {{ number_format($item->gia_km, 0, ',', '.') }}
-                                                                            VND</p>
-                                                                        <p><strong>Số Lượng:</strong>
-                                                                            {{ $item->so_luong }}</p>
-                                                                        <p><strong>Trạng Thái:</strong>
-                                                                            {!! $item->is_active
-                                                                                ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                                                : '<span class="badge bg-danger">Ẩn</span>' !!}
-                                                                        </p>
 
-                                                                        <h6>Biến Thể:</h6>
-                                                                        @if ($item->bien_the_san_phams->isNotEmpty())
-                                                                            <table class="table">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Màu Sắc</th>
-                                                                                        <th>Kích Thước</th>
-                                                                                        <th>Số Lượng</th>
-                                                                                        <th>Ảnh Biến Thể</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    @foreach ($item->bien_the_san_phams as $variant)
-                                                                                        <tr>
-                                                                                            <td>{{ $variant->color->ten_color }}
-                                                                                            </td>
-                                                                                            <td>{{ $variant->size->ten_size }}
-                                                                                            </td>
-                                                                                            <td>{{ $variant->so_luong }}
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                @if ($variant->anh_bien_the)
-                                                                                                    <img src="{{ asset('storage/' . $variant->anh_bien_the) }}"
-                                                                                                        alt="Ảnh biến thể"
-                                                                                                        width="50px">
-                                                                                                @else
-                                                                                                    <img src="{{ asset('images/placeholder.png') }}"
-                                                                                                        alt="Không có ảnh"
-                                                                                                        width="50px">
-                                                                                                @endif
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    @endforeach
-                                                                                </tbody>
-                                                                            </table>
-                                                                        @else
-                                                                            <p>Không có biến thể nào cho sản phẩm này.
+                                                    <td>
+                                                        @if ($isAdmin)
+                                                            <a href="{{ route('sanphams.show', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#productModal-{{ $item->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                            </a>
+                                                            <!-- Modal show chi tiết sản phẩm -->
+                                                            <div class="modal fade" id="productModal-{{ $item->id }}"
+                                                                tabindex="-1"
+                                                                aria-labelledby="productModalLabel-{{ $item->id }}"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="productModalLabel-{{ $item->id }}">
+                                                                                {{ $item->ten_san_pham }}</h5>
+                                                                            <button type="button" class="btn-close"
+                                                                                data-bs-dismiss="modal"
+                                                                                aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="mb-3 ">
+                                                                                <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                                                    alt="{{ $item->ten_san_pham }}"
+                                                                                    class="img-fluid " width="200px">
+                                                                            </div>
+                                                                            <p><strong>Mô Tả:</strong>
+                                                                                {{ $item->mo_ta_san_pham }}</p>
+                                                                            <p><strong>Giá Gốc:</strong>
+                                                                                {{ number_format($item->gia_goc, 0, ',', '.') }}
+                                                                                VND</p>
+                                                                            <p><strong>Giá Khuyến Mãi:</strong>
+                                                                                {{ number_format($item->gia_km, 0, ',', '.') }}
+                                                                                VND</p>
+                                                                            <p><strong>Số Lượng:</strong>
+                                                                                {{ $item->so_luong }}</p>
+                                                                            <p><strong>Trạng Thái:</strong>
+                                                                                {!! $item->is_active
+                                                                                    ? '<span class="badge bg-primary">Hiển Thị</span>'
+                                                                                    : '<span class="badge bg-danger">Ẩn</span>' !!}
                                                                             </p>
-                                                                        @endif
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button"
-                                                                            class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">Đóng</button>
+
+                                                                            <h6>Biến Thể:</h6>
+                                                                            @if ($item->bien_the_san_phams->isNotEmpty())
+                                                                                <table class="table">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Màu Sắc</th>
+                                                                                            <th>Kích Thước</th>
+                                                                                            <th>Số Lượng</th>
+                                                                                            <th>Ảnh Biến Thể</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @foreach ($item->bien_the_san_phams as $variant)
+                                                                                            <tr>
+                                                                                                <td>{{ $variant->color->ten_color }}
+                                                                                                </td>
+                                                                                                <td>{{ $variant->size->ten_size }}
+                                                                                                </td>
+                                                                                                <td>{{ $variant->so_luong }}
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    @if ($variant->anh_bien_the)
+                                                                                                        <img src="{{ asset('storage/' . $variant->anh_bien_the) }}"
+                                                                                                            alt="Ảnh biến thể"
+                                                                                                            width="50px">
+                                                                                                    @else
+                                                                                                        <img src="{{ asset('images/placeholder.png') }}"
+                                                                                                            alt="Không có ảnh"
+                                                                                                            width="50px">
+                                                                                                    @endif
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        @endforeach
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            @else
+                                                                                <p>Không có biến thể nào cho sản phẩm này.
+                                                                                </p>
+                                                                            @endif
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">Đóng</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                             <a href="{{ route('sanphams.edit', $item->id) }}">
                                                                 <i
                                                                     class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
@@ -205,12 +206,12 @@
                                                                         class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
                                                                 </button>
                                                             </form>
-                                                           
                                                         @else
                                                             <a href="{{ route('sanphams.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#productModal-{{ $item->id }}">
-                                                                <i class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
                                                             <!-- Modal show chi tiết sản phẩm -->
                                                             <div class="modal fade" id="productModal-{{ $item->id }}"
@@ -298,7 +299,7 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-                                                    </td> 
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -150,8 +150,10 @@
                                             <div class="col-lg-3">
                                                 <label for="size_san_pham" class="form-label">Size</label>
                                                 <input type="text" name="product_variants[size_san_pham][]"
-                                                    class="form-control" placeholder="Nhập size"
-                                                    value="{{ old('size_san_pham') }}">
+                                                    class="form-control" placeholder="Nhập size" id="sizeInput">
+                                                <span id="sizeError" class="color-error text-danger"
+                                                    style="display: none;">Kích thước không
+                                                    hợp lệ!</span>
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="color_san_pham" class="form-label">Màu sắc</label>
@@ -209,6 +211,20 @@
     </script>
 @endsection
 <script>
+    // 
+    const validSizes = ["S", "M", "L", "XL", "XXL", "36", "38", "40"]; // Danh sách kích thước hợp lệ
+
+    document.getElementById('sizeInput').addEventListener('input', function() {
+        const sizeInput = this.value.trim();
+        const sizeError = document.getElementById('sizeError');
+
+        if (!validSizes.includes(sizeInput)) {
+            sizeError.style.display = 'block'; // Hiện thông báo lỗi nếu kích thước không hợp lệ
+        } else {
+            sizeError.style.display = 'none'; // Ẩn thông báo lỗi nếu kích thước hợp lệ
+        }
+    });
+    // 
     const vietnameseToCssColors = {
         "đỏ": "red",
         "xanh lá": "green",

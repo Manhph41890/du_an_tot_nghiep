@@ -13,12 +13,13 @@ class PhuongThucThanhToanController extends Controller
      */
     public function index()
     {    
-        $this ->authorize('viewany' , phuong_thuc_thanh_toan::class);
-        $phuongthucthanhtoans = phuong_thuc_thanh_toan::query()->latest('id')->paginate(5);
-        $title = "Phương thức thanh toán";
-        $isAdmin = auth ()->user()->chuc_vu ->ten_chuc_vu === 'admin';
+        $this->authorize('viewAny', phuong_thuc_thanh_toan::class);
         
-        return view('admin.phuongthucthanhtoan.index', compact('phuongthucthanhtoans', 'title', 'isAdmin'));
+        $phuongThucThanhToans = phuong_thuc_thanh_toan::latest('id')->paginate(5);
+        $title = "Phương thức thanh toán";
+        $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+        
+        return view('admin.phuongthucthanhtoan.index', compact('phuongThucThanhToans', 'title', 'isAdmin'));
     }
 
     /**

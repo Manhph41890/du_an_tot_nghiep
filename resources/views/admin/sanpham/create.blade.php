@@ -66,7 +66,7 @@
                                             <div class="mb-3">
                                                 <label for="danh_muc_id" class="form-label">Danh mục</label>
                                                 <select class="form-select @error('danh_muc_id') is-invalid @enderror"
-                                                    name="danh_muc_id" id="danh_muc_id" required>
+                                                    name="danh_muc_id" id="danh_muc_id">
                                                     <option value="">Chọn danh mục</option>
                                                     @foreach ($danh_mucs as $id => $ten_danh_muc)
                                                         <option value="{{ $id }}"
@@ -80,7 +80,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="gia_km" class="form-label">Giá khuyến mãi</label>
-                                                <input type="number" id="gia_km" name="gia_km"
+                                                <input type="number" id="gia_km" name="gia_km" min="0"
                                                     class="form-control @error('gia_km') is-invalid @enderror"
                                                     value="{{ old('gia_km') }}">
                                                 @error('gia_km')
@@ -150,12 +150,16 @@
                                             <div class="col-lg-3">
                                                 <label for="size_san_pham" class="form-label">Size</label>
                                                 <input type="text" name="product_variants[size_san_pham][]"
-                                                    class="form-control" placeholder="Nhập size">
+                                                    class="form-control" placeholder="Nhập size"
+                                                    value="{{ old('size_san_pham') }}">
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="color_san_pham" class="form-label">Màu sắc</label>
                                                 <input type="text" name="product_variants[color_san_pham][]"
-                                                    class="form-control" placeholder="Nhập màu sắc">
+                                                    class="form-control color-input" placeholder="Nhập màu sắc"
+                                                    value="{{ old('color_san_pham') }}">
+                                                <span class="color-error text-danger" style="display: none;">Tên màu không
+                                                    hợp lệ!</span>
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="so_luong" class="form-label">Số lượng</label>
@@ -205,6 +209,38 @@
     </script>
 @endsection
 <script>
+    const vietnameseToCssColors = {
+        "đỏ": "red",
+        "xanh lá": "green",
+        "xanh dương": "blue",
+        "vàng": "yellow",
+        "đen": "black",
+        "trắng": "white",
+        "hồng": "pink",
+        "cam": "orange",
+        "tím": "purple",
+        "nâu": "brown",
+        "xám": "gray",
+        "bạc": "silver",
+        "vàng kim": "gold",
+        "chàm": "indigo",
+        "xanh ngọc": "aqua",
+        "xanh lục": "lime",
+        "xanh lá cây": "olive"
+    };
+
+    document.querySelectorAll('.color-input').forEach(function(input) {
+        input.addEventListener('input', function() {
+            const userInput = this.value.trim().toLowerCase();
+            const colorError = this.nextElementSibling;
+
+            if (!vietnameseToCssColors[userInput]) {
+                colorError.style.display = 'block'; // Hiển thị lỗi nếu không hợp lệ
+            } else {
+                colorError.style.display = 'none';
+            }
+        });
+    });
     document.addEventListener('DOMContentLoaded', function() {
         // Xem trước hình ảnh chính sản phẩm
         document.getElementById('anh_san_pham').addEventListener('change', function(event) {

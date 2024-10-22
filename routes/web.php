@@ -65,8 +65,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
         Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
-        Route::get('/taikhoan', [AdminController::class, 'thong_ke_tai_khoan'])->name('thong_ke_tai_khoan');
-        Route::get('/sanpham', [AdminController::class, 'thong_ke_san_pham'])->name('thong_ke_san_pham');
     });
     // profile
     Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile'); // Thêm route này
@@ -86,14 +84,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
-    Route::get('/customer', [CustomerController::class, 'index'])->name('client.home');
+    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 
 // Route cho nhân viên (quản lý)
 Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
-    Route::get('/nhanvien', [StaffController::class, 'index'])->name('thong_ke_chung');
+    Route::get('/', [StaffController::class, 'index'])->name('thong_ke_chung');
     Route::resource('/danhmucs', DanhMucController::class);
     Route::resource('/chucvus', ChucVuController::class);
 

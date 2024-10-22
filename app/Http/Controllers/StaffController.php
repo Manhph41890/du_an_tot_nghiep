@@ -14,9 +14,7 @@ class StaffController extends Controller
     //
     public function index()
     {
-       
-
-            
+             
             $title = "Thống kê";
 
             // Đếm số lượng đơn hàng

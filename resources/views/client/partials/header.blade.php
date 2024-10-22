@@ -10,22 +10,10 @@
         <div class="offcanvas-head mb-4">
             <nav class="offcanvas-top-nav">
                 <ul class="d-flex flex-wrap">
-                    <li class="my-2 mx-2">
-                        <a href="wishlist.html">
-                            <i class="icon-bag"></i> Wishlist <span>(0)</span></a>
-                    </li>
-                    <li class="my-2 mx-2">
-                        <a href="wishlist.html">
-                            <i class="ion-android-favorite-outline"></i> Wishlist
-                            <span>(3)</span></a>
-                    </li>
-                    <li class="my-2 mx-2">
-                        <a href="compare.html"><i class="ion-ios-loop-strong"></i> Compare <span>(2)</span>
-                        </a>
-                    </li>
+                    
                     <li class="my-2 mx-2">
                         <a class="search search-toggle" href="javascript:void(0)">
-                            <i class="icon-magnifier"></i> Search</a>
+                            <i class="icon-magnifier"></i> Tìm kiếm</a>
                     </li>
                 </ul>
             </nav>
@@ -33,15 +21,27 @@
         <nav class="offcanvas-menu">
             <ul>
                 <li>
-                    <a href="#"><span class="menu-text">Home</span></a>
-                    <ul class="offcanvas-submenu">
+                    <a href="#"><span class="menu-text">Trang chủ</span></a>
+                    <!-- <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <li>
-                    <a href="#"><span class="menu-text">Shop</span></a>
-                    <ul class="offcanvas-submenu">
+                    <a href="#"><span class="menu-text">Giới thiệu</span></a>
+                    <!-- <ul class="offcanvas-submenu">
+                        <li><a href="about-us.html">About Page</a></li>
+                        <li><a href="cart.html">Cart Page</a></li>
+                        <li><a href="checkout.html">Checkout Page</a></li>
+                        <li><a href="compare.html">Compare Page</a></li>
+                        <li><a href="login.html">Login &amp; Register Page</a></li>
+                        <li><a href="myaccount.html">Account Page</a></li>
+                        <li><a href="wishlist.html">Wishlist Page</a></li>
+                    </ul> -->
+                </li>
+                <li>
+                    <a href="#"><span class="menu-text">Cửa hàng</span></a>
+                    <!-- <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Shop Grid</span></a>
                             <ul class="offcanvas-submenu">
@@ -96,23 +96,12 @@
                                 <li><a href="wishlist.html">Wishlist Page</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
-                <li>
-                    <a href="#"><span class="menu-text">Pages</span></a>
-                    <ul class="offcanvas-submenu">
-                        <li><a href="about-us.html">About Page</a></li>
-                        <li><a href="cart.html">Cart Page</a></li>
-                        <li><a href="checkout.html">Checkout Page</a></li>
-                        <li><a href="compare.html">Compare Page</a></li>
-                        <li><a href="login.html">Login &amp; Register Page</a></li>
-                        <li><a href="myaccount.html">Account Page</a></li>
-                        <li><a href="wishlist.html">Wishlist Page</a></li>
-                    </ul>
-                </li>
+                
                 <li>
                     <a href="blog-grid-3-column.html"><span class="menu-text">Blog</span></a>
-                    <ul class="offcanvas-submenu">
+                    <!-- <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Blog Grid</span></a>
                             <ul class="offcanvas-submenu">
@@ -153,9 +142,9 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
             </ul>
         </nav>
         <div class="offcanvas-social py-30">
@@ -286,15 +275,24 @@
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="active ml-0">
-                            <a href="index.html" class="ps-0">Home <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="index.html">Home 1</a></li>
-                                <li><a href="index-2.html">Home 2</a></li>
-                            </ul>
+                            <a href="index.html" class="ps-0">Trang chủ </a>
+                        </li>
+                        <li>
+                            <a href="#">Giới thiệu</a>
+                            <!-- <i class="ion-ios-arrow-down"></i> -->
+                            <!-- <ul class="sub-menu">
+                                <li><a href="about-us.html">About Page</a></li>
+                                <li><a href="cart.html">Cart Page</a></li>
+                                <li><a href="checkout.html">Checkout Page</a></li>
+                                <li><a href="compare.html">Compare Page</a></li>
+                                <li><a href="login.html">Login &amp; Register Page</a></li>
+                                <li><a href="myaccount.html">Account Page</a></li>
+                                <li><a href="wishlist.html">Wishlist Page</a></li>
+                            </ul> -->
                         </li>
                         <li class="position-static">
-                            <a href="shop-grid-3-column.html">Shop <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="mega-menu row">
+                            <a href="shop-grid-3-column.html">Cửa hàng </a>
+                            <!-- <ul class="mega-menu row">
                                 <li class="col-3">
                                     <ul>
                                         <li class="mega-menu-title"><a href="#">Shop Grid</a></li>
@@ -354,23 +352,12 @@
                                     <a href="single-product.html" class="zoom-in overflow-hidden"><img
                                             src="assets/img/mega-menu/2.jpg" alt="img" /></a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
+                        
                         <li>
-                            <a href="#">Pages <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="about-us.html">About Page</a></li>
-                                <li><a href="cart.html">Cart Page</a></li>
-                                <li><a href="checkout.html">Checkout Page</a></li>
-                                <li><a href="compare.html">Compare Page</a></li>
-                                <li><a href="login.html">Login &amp; Register Page</a></li>
-                                <li><a href="myaccount.html">Account Page</a></li>
-                                <li><a href="wishlist.html">Wishlist Page</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="blog-grid-3-column.html">Blog <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
+                            <a href="blog-grid-3-column.html">Blog</a>
+                            <!-- <ul class="sub-menu">
                                 <li>
                                     <a href="blog-grid-3-column.html">Blog Grid</a>
                                     <ul class="sub-menu">
@@ -411,9 +398,9 @@
                                         </li>
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
-                        <li><a href="contact.html">contact Us</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3 col-xl-2">
@@ -427,22 +414,8 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="compare.html">
-                                        <span class="position-relative">
-                                            <i class="icon-shuffle"></i>
-                                            <span class="badge cbdg1">1</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="offcanvas-toggle" href="#offcanvas-wishlist">
-                                        <span class="position-relative">
-                                            <i class="icon-heart"></i>
-                                            <span class="badge cbdg1">3</span>
-                                        </span>
-                                    </a>
-                                </li>
+                               
+                               
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="offcanvas-toggle" href="#offcanvas-cart">
                                         <span class="position-relative">

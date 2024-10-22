@@ -19,14 +19,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <style>
     .bg-img1{
-        background-image: url('./assets/client/images/slider/1slider.png') ;
+        background-image: url('./assets/client/images/slider/1.png') ;
         width: 50%;
     }
     .bg-img2{
         background-image: url('./assets/client/images/slider/2.png') ;
     }
     .bg-img3{
-        background-image: url('./assets/client/images/slider/3.png') ;
+        background-image: url('./assets/client/images/slider/3.jpg') ;
     }
    </style>
 

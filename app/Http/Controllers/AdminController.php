@@ -34,8 +34,8 @@ class AdminController extends Controller
         $donhangs_thanhcong = don_hang::query()->where('trang_thai', 'Thành công')->count();
         $donhangs_dahuy = don_hang::query()->where('trang_thai', 'Đã hủy')->count();
 
-        // Đếm tổng số sản phẩm
-        $sanphams = san_pham::count();
+        // Sản phẩm sắp hết hàng
+        $sanphams_saphet = san_pham::query()->where('so_luong', '<', '10')->get();
 
         // Lấy 5 sản phẩm có lượt xem nhiều nhất
         $query = san_pham::query();
@@ -64,7 +64,7 @@ class AdminController extends Controller
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
 
 
-        return view('admin.thongke.tongquan', compact('sanphams', 'views_product', 'title', 'donhangs', 'tong_tien', 'isAdmin', 'soluong_donhangs', 'soluong_donhangs_new', 'tongtien_donhangs_moi', 'donhangs_daxacnhan', 'donhangs_dangchuanbihang', 'donhangs_dangvanchuyen', 'donhangs_dagiao', 'donhangs_thanhcong', 'donhangs_dahuy'));
+        return view('admin.thongke.tongquan', compact('sanphams_saphet', 'views_product', 'title', 'donhangs', 'tong_tien', 'isAdmin', 'soluong_donhangs', 'soluong_donhangs_new', 'tongtien_donhangs_moi', 'donhangs_daxacnhan', 'donhangs_dangchuanbihang', 'donhangs_dangvanchuyen', 'donhangs_dagiao', 'donhangs_thanhcong', 'donhangs_dahuy'));
     }
     //
 

@@ -32,7 +32,7 @@
                             @endif
                             <!-- Hiển thị thông báo thành công -->
                             @if (session('success'))
-                                <div class="alert alert-success alert-dismissable fade show " role="alert">
+                                <div class="alert-dismissable alert alert-success  fade show " role="alert">
                                     {{ session('success') }}
                                     <button type="button" class="btn-close justify-content-center" data-bs-dismiss="alert"
                                         aria-label="Close"></button>
@@ -48,7 +48,7 @@
 
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
+                                                <th scope="col">STT</th>
                                                 <th scope="col">Kiểu thanh toán</th>
                                                 @if($isAdmin)
                                                 <th scope="col">Hành Động </th>
@@ -68,7 +68,7 @@
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
                                                         <form action="{{ route('phuongthucthanhtoans.destroy', $item->id) }}"
                                                             method="POST" style="display:inline;"
-                                                            onsubmit="return confirm ('Bạn có muốn xóa kiểu thanh toán này không ?') ">
+                                                            onsubmit="return confirm ('Bạn có muốn xóa phương thức thanh toán này không ?') ">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" style="border: none; background: none;">

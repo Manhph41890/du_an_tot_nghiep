@@ -94,7 +94,7 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 
 // Route cho nhân viên (quản lý)
 Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
-    Route::get('/', [StaffController::class, 'index'])->name('thong_ke_chung');
+    Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke_chung');
     Route::resource('/danhmucs', DanhMucController::class);
     Route::resource('/chucvus', ChucVuController::class);
 

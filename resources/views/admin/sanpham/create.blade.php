@@ -159,7 +159,7 @@
                                                 <label for="color_san_pham" class="form-label">Màu sắc</label>
                                                 <input type="text" name="product_variants[color_san_pham][]"
                                                     class="form-control color-input" placeholder="Nhập màu sắc"
-                                                    value="{{ old('color_san_pham') }}">
+                                                    value="{{ old('color_san_pham') }}" id="colorInput">
                                                 <span class="color-error text-danger" style="display: none;">Tên màu không
                                                     hợp lệ!</span>
                                             </div>
@@ -211,8 +211,34 @@
     </script>
 @endsection
 <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        let colorSizePairs = [];
+        let isDuplicate = false;
+
+        document.querySelectorAll('.variant-item').forEach(function(item) {
+            const color = item.querySelector('.colorInput').value.trim();
+            const size = item.querySelector('.sizeInput').value.trim();
+            const colorSizePair = color + "-" + size;
+
+            if (colorSizePairs.includes(colorSizePair)) {
+                isDuplicate = true;
+                alert(
+                    `Bạn đã nhập trùng biến thể với màu ${color} và size ${size}. Vui lòng chọn biến thể khác.`
+                );
+                event.preventDefault(); // Ngăn không cho form submit
+                return;
+            }
+
+            colorSizePairs.push(colorSizePair);
+        });
+
+        if (isDuplicate) {
+            return false; // Dừng việc submit nếu có trùng lặp
+        }
+    });
+
     // 
-    const validSizes = ["S", "M", "L", "XL", "XXL", "36", "38", "40"]; // Danh sách kích thước hợp lệ
+    const validSizes = ["S", "M", "L", "XL", "XXL", "36", "38", "40", "A1", "A2", "A0"]; // Danh sách kích thước hợp lệ
 
     document.getElementById('sizeInput').addEventListener('input', function() {
         const sizeInput = this.value.trim();

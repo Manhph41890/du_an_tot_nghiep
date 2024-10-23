@@ -31,9 +31,10 @@
                                     @method('GET')
                                     <select class="form-select ">
                                         <option>Hôm nay</option>
-                                        <option>7 ngày trước</option>
-                                        <option>Tháng trước</option>
-                                        <option>Năm nay</option>
+                                        <option>Ngày</option>
+                                        <option>Tuần</option>
+                                        <option>Tháng</option>
+                                        <option>Năm</option>
                                     </select>
                                 </form>
                             </div>
@@ -45,14 +46,24 @@
                                 </form>
                             </div>
                         </div>
-                        @if (session('success'))
-                            <div class="col-12 mt-3">
-                                <div class="alert alert-success alert-dismissible">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                    <strong>Thành công</strong>
-                                </div>
-                            </div>
-                        @endif
+                        <script>
+                            $(document).ready(function() {
+                                @if (Session::has('success'))
+                                    toastr.success("{{ Session::get('success') }}", "Thông báo", {
+                                        progressBar: true,
+                                        closeButton: true,
+                                        timeOut: 3000
+                                    });
+                                @endif
+                                @if (Session::has('error'))
+                                    toastr.error("{{ Session::get('error') }}", "Thông báo", {
+                                        progressBar: true,
+                                        closeButton: true,
+                                        timeOut: 3000
+                                    });
+                                @endif
+                            });
+                        </script>
                     </div>
                 </div>
 
@@ -194,17 +205,16 @@
 
                 <div class="row">
                     <div class="col-md-12 col-xl-12">
+                        
                         <div class="card">
-
-
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                         <i data-feather="minus-square" class="widgets-icons"></i>
                                     </div>
-                                    <h5 class="card-title mb-0">Biểu đồ cột doanh thu</h5>
-                                    <div class="d-flex ms-auto">
-                                        <div class="me-5">
+                                    <h5 class="card-title mb-0">Biểu đồ</h5>
+                                    <div class="d-flex m-auto">
+                                        <div class="me-3">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio1"
                                                     name="optradio" value="option1" checked
@@ -212,7 +222,7 @@
                                                 <label class="form-check-label" for="radio1"></label>
                                             </div>
                                         </div>
-                                        <div class="me-5">
+                                        <div class="me-3">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio2"
                                                     name="optradio" value="option2" onclick="showTab('menu1')">Lợi nhuận
@@ -228,9 +238,46 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row justify-content-end">
+                                        <div class="col-md-3">
+                                            <form action="{{ route('thong_ke_chung') }}" method="post">
+                                                @csrf
+                                                @method('GET')
+                                                <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 d-flex align-items-center justify-content-center ">Tới</div>
+                                        <div class="col-md-3">
+                                            <form action="{{ route('thong_ke_chung') }}" method="post">
+                                                @csrf
+                                                @method('GET')
+                                                <input type="date" class="form-control" id="ngay_ket_thuc" name="ngay_ket_thuc">
+                                            </form>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <form action="{{ route('thong_ke_chung') }}" method="post">
+                                                @csrf
+                                                @method('GET')
+                                                <select class="form-select ">
+                                                    <option>Hôm nay</option>
+                                                    <option>Ngày</option>
+                                                    <option>Tuần</option>
+                                                    <option>Tháng</option>
+                                                    <option>Năm</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <form action="{{ route('thong_ke_chung') }}" method="post">
+                                                @csrf
+                                                @method('GET')
+                                                <input type="submit" value="Tìm kiếm" class="btn btn-primary w-100 text-center">
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane container active" id="home" style="opacity: 1;">
@@ -460,6 +507,64 @@
                         </div>
                     </div>
                     <!-- End Monthly Sales -->
+                    <div class="row">
+                        <div class="col-md-12 col-xl-12">
+                            <div class="card">
+
+                                <div class="card-header">
+                                    <div class="d-flex align-items-center">
+                                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
+                                            <i data-feather="bar-chart" class="widgets-icons"></i>
+                                        </div>
+                                        <h5 class="card-title mb-0">Sản phẩm sắp hết hàng</h5>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <table class="table table-traffic mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Ảnh</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Giá gốc</th>
+                                                <th>Giá khuyến mãi</th>
+                                                <th>Ảnh</th>
+                                                <th>Trạng thái</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($sanphams_saphet as $index => $item)
+                                                <tr>
+                                                    <th scope="row">{{ $index + 1 }}</th>
+                                                    {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
+                                                    <td>{{ $item->ten_san_pham }}</td>
+                                                    <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                    <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                                    <td>
+                                                        @if ($item->anh_san_pham)
+                                                            <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                                alt="Hình ảnh sản phẩm" width="50px">
+                                                        @else
+                                                            <img src="{{ asset('images/placeholder.png') }}"
+                                                                alt="Không có ảnh" width="50px">
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        {!! $item->is_active
+                                                            ? '<span class="badge bg-primary">Hiển Thị</span>'
+                                                            : '<span class="badge bg-danger">Ẩn</span>' !!}
+                                                    </td>
+
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div> <!-- container-fluid -->
             </div> <!-- content -->
         </div>

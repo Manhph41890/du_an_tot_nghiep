@@ -211,6 +211,32 @@
     </script>
 @endsection
 <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        let colorSizePairs = [];
+        let isDuplicate = false;
+
+        document.querySelectorAll('.variant-item').forEach(function(item) {
+            const color = item.querySelector('.colorInput').value.trim();
+            const size = item.querySelector('.sizeInput').value.trim();
+            const colorSizePair = color + "-" + size;
+
+            if (colorSizePairs.includes(colorSizePair)) {
+                isDuplicate = true;
+                alert(
+                    `Bạn đã nhập trùng biến thể với màu ${color} và size ${size}. Vui lòng chọn biến thể khác.`
+                    );
+                event.preventDefault(); // Ngăn không cho form submit
+                return;
+            }
+
+            colorSizePairs.push(colorSizePair);
+        });
+
+        if (isDuplicate) {
+            return false; // Dừng việc submit nếu có trùng lặp
+        }
+    });
+
     // 
     const validSizes = ["S", "M", "L", "XL", "XXL", "36", "38", "40"]; // Danh sách kích thước hợp lệ
 

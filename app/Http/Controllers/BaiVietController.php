@@ -20,29 +20,16 @@ class BaiVietController extends Controller
     {
         $user = User::query()->get();
         $query = bai_viet::query();
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        
+        if($startDate && $endDate){
+            $baiviets= bai_viet::whereBetween('ngay_dang',[$startDate , $endDate])->paginate(5);
 
-        // search theo trạng thái
-        if ($request->has('search_bv')) {
-            $is_active = $request->input('search_bv');
-            if ($is_active == '1' || $is_active == '0') {
-                $query->where('is_active', $is_active);
-            }
+        }else{
+            $baiviets= bai_viet::paginate(5);
         }
 
-        // search theo tac gia
-        if ($request->has('search_bv_tg')) {
-            $tg = $request->input('search_bv_tg');
-            if ($tg) {
-                $query->where('user_id', $tg);
-            }
-        }
-
-        // search form input
-        if ($request->has('search_bv_td')) {
-            $query->where('tieu_de_bai_viet', 'LIKE', "%{$request->input('search_bv_td')}%");
-        }
-
-        $baiviets = $query->with('user')->latest('id')->paginate(5);
 
         $title = "Danh sách bài viết";
 
@@ -119,7 +106,7 @@ class BaiVietController extends Controller
         //Tim bai viet theo id
         $post = bai_viet::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
-        $title = "Sua mới sản phẩm";
+        $title = "Sửa mới sản phẩm";
         return view('admin.baiviet.edit', compact('post', 'user', 'title'));
     }
 

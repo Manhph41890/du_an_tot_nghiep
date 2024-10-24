@@ -34,8 +34,8 @@ class DanhMucController extends Controller
         $danhmucs = $query->latest('id')->paginate(5);
 
         $title = "Danh sách danh mục";
-         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
-        return view('admin.danhmuc.index', compact('danhmucs', 'title','isAdmin'));
+        $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+        return view('admin.danhmuc.index', compact('danhmucs', 'title', 'isAdmin'));
     }
 
     /**
@@ -86,7 +86,7 @@ class DanhMucController extends Controller
     public function edit(danh_muc $danh_muc, string $id)
     {
         //
-        
+
         $title = "Cập nhật danh mục";
         $danhmuc = danh_muc::query()->findOrFail($id);
         $this->authorize('update', $danh_muc);

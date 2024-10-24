@@ -55,7 +55,16 @@
                                                 @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <label for="gia_goc" class="form-label">Giá gốc</label>
+                                                <label for="gia_nhap" class="form-label">Giá Nhập</label>
+                                                <input type="number" id="gia_nhap" name="gia_nhap"
+                                                    class="form-control @error('gia_nhap') is-invalid @enderror"
+                                                    value="{{ old('gia_nhap') }}">
+                                                @error('gia_nhap')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="gia_goc" class="form-label">Giá Bán</label>
                                                 <input type="number" id="gia_goc" name="gia_goc"
                                                     class="form-control @error('gia_goc') is-invalid @enderror"
                                                     value="{{ old('gia_goc') }}">
@@ -63,6 +72,19 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
+
+                                            <div class="mb-3">
+                                                <label for="gia_km" class="form-label">Giá khuyến mãi</label>
+                                                <input type="number" id="gia_km" name="gia_km" min="0"
+                                                    class="form-control @error('gia_km') is-invalid @enderror"
+                                                    value="{{ old('gia_km') }}">
+                                                @error('gia_km')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="danh_muc_id" class="form-label">Danh mục</label>
                                                 <select class="form-select @error('danh_muc_id') is-invalid @enderror"
@@ -78,18 +100,6 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="gia_km" class="form-label">Giá khuyến mãi</label>
-                                                <input type="number" id="gia_km" name="gia_km" min="0"
-                                                    class="form-control @error('gia_km') is-invalid @enderror"
-                                                    value="{{ old('gia_km') }}">
-                                                @error('gia_km')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="anh_san_pham" class="form-label">Hình ảnh chính</label>
                                                 <input type="file" id="anh_san_pham" name="anh_san_pham"

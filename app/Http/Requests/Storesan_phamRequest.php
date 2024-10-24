@@ -27,6 +27,7 @@ class Storesan_phamRequest extends FormRequest
             'ten_san_pham' => 'required|string|max:255|unique:san_phams,ten_san_pham',
             'gia_goc' => 'required|min:0',
             'gia_km' => 'nullable|min:0|lte:gia_goc', // Giá khuyến mãi không được lớn hơn giá gốc
+            'gia_nhap' => 'nullable|min:0|lte:gia_goc', // Giá nhập không được lớn hơn giá gốc
             'ma_ta_san_pham' => 'max:255',
             'anh_san_pham' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
 
@@ -56,6 +57,9 @@ class Storesan_phamRequest extends FormRequest
             'gia_km.required' => 'Giá khuyến mãi là bắt buộc.',
             'gia_km.min' => 'Giá khuyến mãi phải lớn hơn hoặc bằng 0.',
             'gia_km.lte' => 'Giá khuyến mãi không được lớn hơn giá gốc.',
+            'gia_nhap.required' => 'Giá nhập là bắt buộc.',
+            'gia_nhap.min' => 'Giá nhập phải lớn hơn hoặc bằng 0.',
+            'gia_nhap.lte' => 'Giá nhập không được lớn hơn giá gốc.',
             'ma_ta_san_pham.max' => 'Mô tả sản phẩm không được vượt quá :max ký tự.',
             'anh_san_pham.required' => 'Ảnh sản phẩm là bắt buộc.',
             'anh_san_pham.mimes' => 'Ảnh sản phẩm phải có định dạng: jpeg, png, jpg, gif.',

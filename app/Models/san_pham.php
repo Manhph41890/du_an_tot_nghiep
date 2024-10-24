@@ -13,6 +13,7 @@ class san_pham extends Model
         'ten_san_pham',
         'gia_goc',
         'gia_km',
+        'gia_nhap',
         'anh_san_pham',
         'so_luong',
         'ma_ta_san_pham',

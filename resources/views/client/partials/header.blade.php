@@ -10,7 +10,7 @@
         <div class="offcanvas-head mb-4">
             <nav class="offcanvas-top-nav">
                 <ul class="d-flex flex-wrap">
-                    
+
                     <li class="my-2 mx-2">
                         <a class="search search-toggle" href="javascript:void(0)">
                             <i class="icon-magnifier"></i> Tìm kiếm</a>
@@ -98,7 +98,7 @@
                         </li>
                     </ul> -->
                 </li>
-                
+
                 <li>
                     <a href="blog-grid-3-column.html"><span class="menu-text">Blog</span></a>
                     <!-- <ul class="offcanvas-submenu">
@@ -262,14 +262,15 @@
 
 <!-- header start -->
 <header>
-   
+
     <!-- header-middle satrt -->
     <div id="sticky" class="header-middle theme1 py-15 py-lg-0">
         <div class="container position-relative">
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="index.html"><img src="{{asset('assets/client/images/logo/logo_art.png')}}" alt="logo" /></a>
+                        <a href="index.html"><img src="{{ asset('assets/client/images/logo/logo_art.png') }}"
+                                alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
@@ -354,7 +355,7 @@
                                 </li>
                             </ul> -->
                         </li>
-                        
+
                         <li>
                             <a href="blog-grid-3-column.html">Blog</a>
                             <!-- <ul class="sub-menu">
@@ -414,8 +415,8 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
-                               
-                               
+
+
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="offcanvas-toggle" href="#offcanvas-cart">
                                         <span class="position-relative">
@@ -450,16 +451,18 @@
                                             aria-haspopup="true" aria-expanded="false">
                                             <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
                                                 alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
-                                            <span class="pro-user-name ms-1">
+                                            {{-- <span class="pro-user-name ms-1">
                                                 {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
-                                            </span>
+                                            </span> --}}
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end profile-dropdown">
+                                            <!-- Tài khoản -->
                                             <a class="dropdown-item notify-item" href="#" id="showUserProfile">
                                                 <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
                                                 <span>Tài khoản</span>
                                             </a>
                                             <div class="dropdown-divider"></div>
+                                            <!-- Đăng xuất -->
                                             <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="dropdown-item notify-item">
@@ -469,6 +472,7 @@
                                             </form>
                                         </div>
                                     </li>
+
                                     <!-- Popup thông tin tài khoản -->
                                     <div id="userProfilePopup" class="user-profile-popup" style="display: none">
                                         <div class="popup-content">

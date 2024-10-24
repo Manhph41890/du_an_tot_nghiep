@@ -367,13 +367,13 @@ class AdminController extends Controller
             }
 
             // Biểu đồ tỉ lệ % ĐƠN HÀNG------------
-            // $phantramdonhang = [];
-            // foreach ($labels_phantram as $trang_thai) {
-            //     $count = don_hang::where('trang_thai', $trang_thai)->count();
-            //     $phantramdonhang[$trang_thai] = $count;
-            // }
+            $phantramdonhang = [];
+            foreach ($labels_phantram as $trang_thai) {
+                $count = don_hang::where('trang_thai', $trang_thai)->count();
+                $phantramdonhang[$trang_thai] = $count;
+            }
 
-            // // Biểu đồ LỢI NHUẬN-------------------
+            // Biểu đồ LỢI NHUẬN-------------------
             // $loi_nhuan_theo_thang = [];
             // for ($thang = 1; $thang <= 12; $thang++) {
             //     $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)->sum('tong_tien');

@@ -22,9 +22,14 @@ class AdminController extends Controller
         $request->validate([
             'ngay_bat_dau' => 'nullable|before_or_equal:ngay_ket_thuc',
             'ngay_ket_thuc' => 'nullable|after_or_equal:ngay_bat_dau',
+            'ngay_bat_dau_bieudo' => 'nullable|before_or_equal:ngay_ket_thuc_bieudo',
+            'ngay_ket_thuc_bieudo' => 'nullable|after_or_equal:ngay_bat_dau_bieudo',
+
         ], [
             'ngay_bat_dau.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
             'ngay_ket_thuc.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
+            'ngay_bat_dau_bieudo.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
+            'ngay_ket_thuc_bieudo.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
         ]);
 
 
@@ -309,8 +314,25 @@ class AdminController extends Controller
             'Đã hủy',
         ];
         if ($request->isMethod('get') && $request->input('ngay_bat_dau_bieudo') && $request->input('ngay_ket_thuc_bieudo')) {
-        } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam_bieudo')) {
+            // Biểu đồ DOANH THU-------------------
+            $tongTienThang = [];
+            for ($thang = 1; $thang <= 12; $thang++) {
+                $tongTien = don_hang::whereMonth('ngay_tao', $thang)
+                    ->whereYear('ngay_tao', Carbon::now()->year)
+                    ->whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->sum('tong_tien');
+                $tongTienThang[$thang] = $tongTien ?: 0;
+            }
 
+            // Biểu đồ tỉ lệ % ĐƠN HÀNG------------ 
+            $phantramdonhang = [];
+            foreach ($labels_phantram as $trang_thai) {
+                $count = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')]) 
+                    ->where('trang_thai', $trang_thai)
+                    ->count();
+                $phantramdonhang[$trang_thai] = $count;
+            }
+        } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam_bieudo')) {
             switch ($request->input('loc_ngay_thang_quy_nam')) {
                 case 'today':
 
@@ -328,24 +350,17 @@ class AdminController extends Controller
                     break;
             }
         } else {
-
             // Biểu đồ DOANH THU-------------------
             $tongTienThang = [];
-            // Duyệt qua 12 tháng
             for ($thang = 1; $thang <= 12; $thang++) {
-                // Lấy tổng tiền cho từng tháng
                 $tongTien = don_hang::whereMonth('ngay_tao', $thang)
                     ->whereYear('ngay_tao', Carbon::now()->year)
                     ->sum('tong_tien');
-
-                // Lưu dữ liệu vào mảng
                 $tongTienThang[] = $tongTien;
             }
 
-
             // Biểu đồ tỉ lệ % ĐƠN HÀNG------------
             $phantramdonhang = [];
-            // số đơn hàng theo từng trạng thái 
             foreach ($labels_phantram as $trang_thai) {
                 $count = don_hang::where('trang_thai', $trang_thai)->count();
                 $phantramdonhang[$trang_thai] = $count;

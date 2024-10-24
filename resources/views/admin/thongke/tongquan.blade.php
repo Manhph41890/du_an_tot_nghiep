@@ -36,10 +36,17 @@
                                 </div>
                                 <div class="col-md-2">
                                     <select class="form-select" name="loc_ngay_thang_quy_nam">
-                                        <option value="today" {{ request('loc_ngay_thang_quy_nam') == 'today' ? 'selected' : '' }}>Hôm nay</option>
-                                        <option value="last_7_days" {{ request('loc_ngay_thang_quy_nam') == 'last_7_days' ? 'selected' : '' }}>7 Ngày</option>
-                                        <option value="month" {{ request('loc_ngay_thang_quy_nam') == 'month' ? 'selected' : '' }}>Tháng</option>
-                                        <option value="year" {{ request('loc_ngay_thang_quy_nam') == 'year' ? 'selected' : '' }}>Năm</option>
+                                        <option value="today"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'today' ? 'selected' : '' }}>Hôm nay
+                                        </option>
+                                        <option value="last_7_days"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'last_7_days' ? 'selected' : '' }}>7
+                                            Ngày</option>
+                                        <option value="month"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'month' ? 'selected' : '' }}>Tháng
+                                        </option>
+                                        <option value="year"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'year' ? 'selected' : '' }}>Năm</option>
                                     </select>
                                 </div>
                                 <div class="col-md-1">
@@ -228,14 +235,26 @@
                                         @method('GET')
                                         <div class="row justify-content-end">
                                             <div class="col-md-3">
-                                                <input type="date" class="form-control" id="ngay_bat_dau_bieudo"
-                                                    name="ngay_bat_dau">
+                                                <input type="date"
+                                                    class="form-control  @error('ngay_bat_dau_bieudo') is-invalid @enderror"
+                                                    id="ngay_bat_dau_bieudo" name="ngay_bat_dau_bieudo" value="{{ old('ngay_bat_dau_bieudo', request('ngay_bat_dau_bieudo')) }}">
+                                                @error('ngay_bat_dau_bieudo')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                             <div class="col-md-1 d-flex align-items-center justify-content-center">Tới
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="date" class="form-control" id="ngay_ket_thuc_bieudo"
-                                                    name="ngay_ket_thuc">
+                                                <input type="date"
+                                                    class="form-control @error('ngay_ket_thuc_bieudo') is-invalid @enderror"
+                                                    id="ngay_ket_thuc_bieudo" name="ngay_ket_thuc_bieudo"  value="{{ old('ngay_ket_thuc_bieudo', request('ngay_ket_thuc_bieudo')) }}">
+                                                @error('ngay_ket_thuc_bieudo')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                             <div class="col-md-3">
                                                 <select class="form-select" name="loc_ngay_thang_quy_nam_bieudo">

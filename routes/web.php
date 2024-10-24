@@ -81,12 +81,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
+Route::get('/', [BaiVietController::class, 'index'])->name('baiviets.index');
+
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
+    Route::get('/sanpham/search', [SanPhamController::class, 'search'])->name('sanpham.search');
 });
 
 // Route cho nhân viên (quản lý)

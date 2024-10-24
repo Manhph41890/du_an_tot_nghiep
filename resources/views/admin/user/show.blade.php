@@ -42,13 +42,8 @@
                                 <div class="mb-3">
                                     <p><strong>Giới tính:</strong> {{ $post->gioi_tinh }}</p>
                                 </div>
-                                <div class="mb-3">
-                                    {{-- <p><strong>Mật khẩu:</strong> {{ $post->password }}</p> --}}
-                                    <p><strong>Mật khẩu:</strong> {{ str_repeat('*', 8) }}</p>
-                                </div>
-                                <div class="mb-3">
-                                    <p><strong>Trạng thái:</strong> {{ $post->is_active }}</p>
-                                </div>
+
+
                             </form>
 
                         </div>

@@ -40,8 +40,7 @@ class DanhGiaController extends Controller
         // Lấy danh sách đã lọc
         $params = [];
         $params['list'] = $query->get();
-        return view('admin.danhgia.index', $params);
-        $params['list'] = danh_gia::all();
+        $params['title'] = "Danh sách đánh giá";
         return view('admin.danhgia.index', $params);
     }
 

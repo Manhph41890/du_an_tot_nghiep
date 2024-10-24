@@ -23,7 +23,7 @@ class Storechuc_vuRequest extends FormRequest
     {
         return [
             //
-            'ten_chuc_vu' => 'required|max:255',
+            'ten_chuc_vu' => 'required|max:255|unique:chuc_vus,ten_chuc_vu',
             'mo_ta_chuc_vu' => 'required|max:255',
         ];
     }
@@ -39,6 +39,7 @@ class Storechuc_vuRequest extends FormRequest
             //
             'ten_chuc_vu.required' => 'Tên chức vụ là bắt buộc ',
             'ten_chuc_vu.max' => 'Tên chức vụ không được vượt quá 255 ký tự ',
+            'ten_chuc_vu.unique' => 'Chức vụ đã tồn tại ',
 
             'mo_ta_chuc_vu.required' => 'Mô tả chức vụ là bắt buộc ',
             'mo_ta_chuc_vu.max' => 'Mô tả chức vụ không được vượt quá 255 ký tự ',

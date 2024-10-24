@@ -32,12 +32,31 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     {{-- toast  --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
 </head>
 
 <!-- body start -->
 <body data-menu-color="light" data-sidebar="default">
+
+    <script>
+        $(document).ready(function() {
+            @if (Session::has('success'))
+                toastr.success("{{ Session::get('success') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            @endif
+            @if (Session::has('error'))
+                toastr.error("{{ Session::get('error') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            @endif
+        });
+    </script>
 
     <!-- Begin page -->
     <div id="app-layout">

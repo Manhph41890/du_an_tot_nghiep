@@ -56,16 +56,6 @@
                         </div><!-- end card header -->
 
 
-                        <div class=" d-flex justify-content-between">
-                            <!-- Hiển thị thông báo thành công -->
-                            @if (session('success'))
-                                <div class="alert alert-success alert-dismissable fade show " role="alert">
-                                    {{ session('success') }}
-                                    <button type="button" class="btn-close justify-content-center" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                                </div>
-                            @endif
-                        </div><!-- end card header -->
 
                         <div class="row">
                             <div class="card-body">

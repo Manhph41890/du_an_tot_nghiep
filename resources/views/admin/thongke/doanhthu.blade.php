@@ -9,132 +9,130 @@
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <div class="row justify-content-end">
-                            <div class="col-md-4">
-                                <h4 class="fw-semibold">{{ $title }}</h4>
-                            </div>
-                            <div class="col-md-2">
-                                <form action="{{ route('thong_ke_doanh_thu') }}" method="post">
-                                    @csrf
-                                    @method('GET')
-                                    <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
-                                </form>
-                            </div>
-                            <div class="col-md-1 text-center">Tới</div>
-                            <div class="col-md-2">
-                                <form action="{{ route('thong_ke_doanh_thu') }}" method="post">
-                                    @csrf
-                                    @method('GET')
-                                    <input type="date" class="form-control" id="ngay_ket_thuc" name="ngay_ket_thuc">
-                                </form>
-                            </div>
-                            <div class="col-md-2">
-                                <form action="{{ route('thong_ke_doanh_thu') }}" method="post">
-                                    @csrf
-                                    @method('GET')
-                                    <select class="form-select ">
-                                        <option>Theo tháng</option>
-                                        <option>Theo năm</option>
-                                        <option>Theo Qúy</option>
+                        <form action="{{ route('thong_ke_doanh_thu') }}" method="post">
+                            @csrf
+                            @method('GET')
+                            <div class="row justify-content-end">
+                                <div class="col-md-4">
+                                    <h4 class="fw-semibold">{{ $title }}</h4>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="date" class="form-control @error('ngay_bat_dau') is-invalid @enderror"
+                                        id="ngay_bat_dau" name="ngay_bat_dau"
+                                        value="{{ old('ngay_bat_dau', request('ngay_bat_dau')) }}">
+                                    @error('ngay_bat_dau')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-1 d-flex align-items-center justify-content-center">Tới</div>
+                                <div class="col-md-2">
+                                    <input type="date" class="form-control @error('ngay_ket_thuc') is-invalid @enderror"
+                                        id="ngay_ket_thuc" name="ngay_ket_thuc"
+                                        value="{{ old('ngay_bat_dau', request('ngay_ket_thuc')) }}">
+                                    @error('ngay_ket_thuc')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-select" name="loc_ngay_thang_quy_nam">
+                                        <option value="today"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'today' ? 'selected' : '' }}>Hôm nay
+                                        </option>
+                                        <option value="last_7_days"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'last_7_days' ? 'selected' : '' }}>7
+                                            Ngày</option>
+                                        <option value="month"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'month' ? 'selected' : '' }}>Tháng
+                                        </option>
+                                        <option value="year"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'year' ? 'selected' : '' }}>Năm</option>
                                     </select>
-                                </form>
-                            </div>
-                            <div class="col-md-1">
-                                <form action="{{ route('thong_ke_doanh_thu') }}" method="post">
-                                    @csrf
-                                    @method('GET')
+                                </div>
+                                <div class="col-md-1">
                                     <input type="submit" value="Tìm kiếm" class="btn btn-primary w-100 text-center">
-                                </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                <strong>Thành công</strong> This alert box could indicate a successful or positive
-                                action.
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
+
+
 
                 <!-- start row -->
                 <div class="row">
                     <div class="col-md-12 col-xl-12">
                         <div class="row g-3">
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card text-bg-success">
+                            <div class="col-md-6 col-xl-6">
+                                <div class="card ">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <div class="fs-14 mb-1 "> <i class="fa-solid fa-image me-2"></i> Sản phẩm</div>
-                                            <span class="text-primary d-inline-flex align-items-center">
-                                                <a href="{{ route('sanphams.index') }}" class="text-white"> <i
-                                                        class="fa-solid fa-plus"></i> </a>
-                                            </span>
+                                            <div class="fs-15 mb-1 "> <i
+                                                    class="fa-solid fa-truck-fast me-2 text-success"></i>Tổng doanh thu
+                                            </div>
                                         </div>
-                                        <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $sanphams }}</div>
-                                            <div class="me-auto">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="fs-10 mt-3 mb-1">Tổng tiền</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold text-success">
+                                                        Tổng doanh thu
+                                                    </div>
+                                                    <div class="me-auto text-success">
+                                                        đ
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <p class="fs-10 mt-3 mb-1">Số lượng</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
+                                                        Tổng doanh thu
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {{--  --}}
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card text-bg-primary">
+                            <div class="col-md-6 col-xl-6">
+                                <div class="card ">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <div class="fs-14 mb-1 text-white"> <i class="fa-solid fa-truck-fast me-2"></i>
-                                                Đơn hàng</div>
+                                            <div class="fs-15 mb-1 "> <i
+                                                    class="fa-solid fa-truck-fast me-2 text-success"></i>Tổng lợi nhuận
+                                            </div>
                                         </div>
-                                        <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $donhangs }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{--  --}}
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card text-bg-warning">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="fs-14 mb-1 text-white"> <i
-                                                    class="fa-solid fa-money-check-dollar me-2"></i> Doanh thu</div>
-                                        </div>
-                                        <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $tong_tien }}</div>
-                                            <div class="me-auto">
-                                                <div class="fs-14 mb-1">VNĐ</div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="fs-10 mt-3 mb-1">Tổng tiền</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold text-success">
+                                                        Tổng lợi nhuận
+                                                    </div>
+                                                    <div class="me-auto text-success">
+                                                        đ
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <p class="fs-10 mt-3 mb-1">Số lượng</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
+                                                        Tổng lợi nhuận
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {{--  --}}
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card text-bg-info">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="fs-14 mb-1 text-white"> <i class="fa-solid fa-user me-2"></i> Tài
-                                                khoản</div>
-                                            <span class="text-primary d-inline-flex align-items-center">
-                                                <a href="{{ route('user.index') }}" class="text-white"> <i
-                                                        class="fa-solid fa-plus"></i> </a>
-                                            </span>
-                                        </div>
-                                        <div class="d-flex align-items-baseline mb-2">
-                                            <div class="fs-22 mb-0 me-2 fw-semibold text-white">{{ $users }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{--  --}}
-
-
                         </div>
                     </div> <!-- end sales -->
                 </div> <!-- end row -->
-
 
                 <div class="row">
                     <div class="col-md-6 col-xl-6">
@@ -212,7 +210,6 @@
                             </div>
                         </div>
 
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Thêm thư viện Chart.js nếu chưa có -->
                         <script>
                             var ctx2 = document.getElementById('myChart2').getContext('2d');
                             var data = [300, 50, 100, 234, 45];
@@ -258,82 +255,7 @@
                                 }
                             });
                         </script>
-
                     </div>
-
-
-
-
-
-                    <!-- Start Monthly Sales -->
-                    <div class="row">
-                        <div class="col-md-6 col-xl-8">
-                            <div class="card">
-
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
-                                            <i data-feather="bar-chart" class="widgets-icons"></i>
-                                        </div>
-                                        <h5 class="card-title mb-0">Địa chỉ</h5>
-                                    </div>
-                                </div>
-
-                                <div class="card-body">
-                                    <iframe style="width:100%;"
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.863806019078!2d105.74468687476954!3d21.038134787457476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455e940879933%3A0xcf10b34e9f1a03df!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1svi!2s!4v1728399016270!5m2!1svi!2s"
-                                        height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-xl-4">
-                            <div class="card overflow-hidden">
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
-                                            <i data-feather="tablet" class="widgets-icons"></i>
-                                        </div>
-                                        <h5 class="card-title mb-0">Sản phẩm mới nhất</h5>
-                                    </div>
-                                </div>
-
-                                <div class="card-body p-0">
-                                    <div class="table-responsive">
-                                        <table class="table table-traffic mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ảnh</th>
-                                                    <th>Tên sản phẩm</th>
-                                                    <th>Giá</th>
-                                                    <th>Hành động</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($views_product as $product)
-                                                    <tr>
-                                                        <td>
-                                                            <img src="{{ asset('storage/' . $product->anh_san_pham) }}"
-                                                                alt="{{ $product->ten_san_pham }}"
-                                                                style="width: 50px; height: 50px;">
-                                                        </td>
-                                                        <td>{{ $product->ten_san_pham }}</td>
-                                                        <td>{{ number_format($product->gia_goc, 0, ',', '.') }}.000 VND
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <!-- End Monthly Sales -->
 
 
                 </div> <!-- container-fluid -->

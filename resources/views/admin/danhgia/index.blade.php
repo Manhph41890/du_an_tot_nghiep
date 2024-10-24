@@ -69,7 +69,7 @@
                                                 <th scope="col">Tên sản phẩm</th>
                                                 <th scope="col">Tên người dùng</th>
                                                 <th scope="col">Ngày đánh giá</th>
-                                                <th scope="col">Điểm số</th>
+                                                <th scope="col">Đánh giá</th>
                                                 {{-- <th scope="col">Bình luận</th> --}}
                                                 <th scope="col">Thao tác</th>
                                             </tr>
@@ -81,7 +81,17 @@
                                                 <td>{{ $item->san_phams?->ten_san_pham }}</td>
                                                 <td>{{ $item->users?->ho_ten }}</td>
                                                 <td>{{ $item->ngay_danh_gia }}</td>
-                                                <td>{{ $item->diem_so }}</td>
+                                                {{-- <td>{{ $item->diem_so }}</td> --}}
+                                                <td>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $item->diem_so)
+                                                            <i class="mdi mdi-star text-warning"></i> <!-- Ngôi sao đầy -->
+                                                        @else
+                                                            <i class="mdi mdi-star-outline text-muted"></i> <!-- Ngôi sao rỗng -->
+                                                        @endif
+                                                    @endfor
+                                                </td>
+                                                
                                                 {{-- <td>{{ $item->binh_luan }}</td> --}}
                                                 <td>
                                                     <div>

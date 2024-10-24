@@ -48,14 +48,14 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><img src="path-to-image.jpg" alt="Product Image"
-                                                                width="50"></td>
-                                                        <td> {{ $donhang->}}<br>Màu:
+                                                        <td><img src="{{ asset('/storage/' . $donhang->san_phams?->anh_san_pham) }}"
+                                                                width="50px"></td>
+                                                        <td> {{ $donhang->san_phams?->ten_san_pham }}<br>Màu:
                                                             Đỏ
                                                             Size: M</td>
                                                         <td>12</td>
-                                                        <td>{{ $donhang-> }}</td>
-                                                        <td>{{ $donhang-> }}</td>
+                                                        <td>{{ $donhang->san_phams?->gia_km }}</td>
+                                                        <td>???</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

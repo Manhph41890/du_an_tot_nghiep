@@ -40,6 +40,25 @@
 
 <body data-menu-color="light" data-sidebar="default">
 
+    <script>
+        $(document).ready(function() {
+            <?php if(Session::has('success')): ?>
+                toastr.success("<?php echo e(Session::get('success')); ?>", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            <?php endif; ?>
+            <?php if(Session::has('error')): ?>
+                toastr.error("<?php echo e(Session::get('error')); ?>", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            <?php endif; ?>
+        });
+    </script>
+
     <!-- Begin page -->
     <div id="app-layout">
         <?php echo $__env->make('admin.partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

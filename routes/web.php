@@ -93,6 +93,7 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 
 // Route cho nhân viên (quản lý)
 Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
+    // Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke_chung');
     Route::get('/', [StaffController::class, 'index'])->name('thong_ke_chung');
     Route::resource('/danhmucs', DanhMucController::class);
     Route::resource('/chucvus', ChucVuController::class);
@@ -109,4 +110,3 @@ Route::post('/user/update', [UserController::class, 'update'])->name('user.updat
 
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
-

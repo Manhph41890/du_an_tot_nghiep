@@ -99,26 +99,5 @@
         </div>
     </div>
     <!-- footer bottom end -->
-    <!-- coppy-right start -->
-    <div class="coppy-right bg-dark py-15">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6 col-xl-4 order-last order-md-first">
-                    <div class="text-md-start text-center mt-3 mt-md-0">
-                        <p>
-                            Copyright &copy; <a href="https://hasthemes.com/">HasThemes</a>.
-                            All Rights Reserved
-                        </p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xl-8">
-                    <div class="text-md-end text-center">
-                        <img src="assets/img/payment/1.png" alt="img" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- coppy-right end -->
 </footer>
 <!-- footer end -->

@@ -10,17 +10,17 @@
                         <div class="col-12">
                             <div class="slider-content">
                                 <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300">
-                                    Face Makeup Brush
+                                    ArtiCraft
                                 </p>
                                 <h2 class="title animated">
                                     <span class="animated d-block" data-animation-in="fadeInLeft"
-                                        data-delay-in=".800">Skincare Brush Set</span>
+                                        data-delay-in=".800">Vẽ sáng tạo - Tô hạnh phúc</span>
                                     <span class="animated font-weight-bold" data-animation-in="fadeInRight"
                                         data-delay-in="1.5">Sale 30% Off</span>
                                 </h2>
-                                <a href="shop-grid-4-column.html"
+                                <ngay href="shop-grid-4-column.html"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Shop now</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</ngay>
                             </div>
                         </div>
                     </div>
@@ -33,18 +33,18 @@
                         <div class="col-12">
                             <div class="slider-content">
                                 <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300">
-                                    Morneva Shampoo
+                                    ArtiCraft
                                 </p>
 
                                 <h2 class="title">
                                     <span class="animated d-block" data-animation-in="fadeInRight"
-                                        data-delay-in=".800">scalpcare Shampoo</span>
+                                        data-delay-in=".800">Vẽ sáng tạo - Tô hạnh phúc</span>
                                     <span class="animated font-weight-bold" data-animation-in="fadeInUp"
-                                        data-delay-in="1.5">Sale 40% Off</span>
+                                        data-delay-in="1.5">Sale 30% Off</span>
                                 </h2>
-                                <a href="shop-grid-4-column.html"
+                                <Nga href="shop-grid-4-column.html"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Shop now</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
                             </div>
                         </div>
                     </div>
@@ -57,17 +57,17 @@
                         <div class="col-12">
                             <div class="slider-content">
                                 <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300">
-                                    Runway Lip Palette red
+                                    ArtiCraft
                                 </p>
                                 <h2 class="title">
                                     <span class="animated d-block" data-animation-in="fadeInRight"
-                                        data-delay-in=".800">Lipscare Lipsticks</span>
+                                        data-delay-in=".800">Vẽ sáng tạo - Tô hạnh phúc</span>
                                     <span class="animated font-weight-bold" data-animation-in="fadeInUp"
-                                        data-delay-in="1.5">Sale 60% Off</span>
+                                        data-delay-in="1.5">Sale 30% Off</span>
                                 </h2>
                                 <a href="shop-grid-4-column.html"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Shop now</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</a>
                             </div>
                         </div>
                     </div>

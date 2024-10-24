@@ -59,7 +59,7 @@ class ChucVuController extends Controller
     public function edit(chuc_vu $chuc_vu, string $id)
     {
         //
-       
+
         $title = "Cập nhật chức vụ";
         $chuc_vu = chuc_vu::query()->findOrFail($id);
 
@@ -90,11 +90,13 @@ class ChucVuController extends Controller
 
         $chucvu = chuc_vu::findOrFail($id);
         $this->authorize('delete', $chucvu);
-        if ($chucvu) {
+        if ($chucvu->users()->count() > 0) {
+            return redirect()->back()->with('error', 'Không xóa chức vụ vì có người dùng thuộc chức vụ này.');
+        } else if ($chucvu) {
             $chucvu->delete();
             return redirect()->route('chucvus.index')->with('success', 'Xóa chức vụ thành công');
         } else {
-            return redirect()->back()->with('success', 'Không tồn tại người dùng');
+            return redirect()->back()->with('error', 'Không tồn tại người dùng');
         }
     }
 }

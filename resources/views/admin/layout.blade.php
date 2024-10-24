@@ -38,7 +38,7 @@
 
     {{-- toast  --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    
+
 
 </head>
 
@@ -46,6 +46,25 @@
 <!-- body start -->
 
 <body data-menu-color="light" data-sidebar="default">
+
+    <script>
+        $(document).ready(function() {
+            @if (Session::has('success'))
+                toastr.success("{{ Session::get('success') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            @endif
+            @if (Session::has('error'))
+                toastr.error("{{ Session::get('error') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            @endif
+        });
+    </script>
 
     <!-- Begin page -->
     <div id="app-layout">
@@ -89,7 +108,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    
+
 
 </body>
 

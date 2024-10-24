@@ -6,64 +6,47 @@
             <div class="container-xxl">
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <div class="row justify-content-end">
-                            <div class="col-md-4">
-                                <h4 class="fw-semibold">{{ $title }}</h4>
-                            </div>
-                            <div class="col-md-2">
-                                <form action="{{ route('thong_ke_chung') }}" method="post">
-                                    @csrf
-                                    @method('GET')
-                                    <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
-                                </form>
-                            </div>
-                            <div class="col-md-1 d-flex align-items-center justify-content-center ">Tới</div>
-                            <div class="col-md-2">
-                                <form action="{{ route('thong_ke_chung') }}" method="post">
-                                    @csrf
-                                    @method('GET')
-                                    <input type="date" class="form-control" id="ngay_ket_thuc" name="ngay_ket_thuc">
-                                </form>
-                            </div>
-                            <div class="col-md-2">
-                                <form action="{{ route('thong_ke_chung') }}" method="post">
-                                    @csrf
-                                    @method('GET')
-                                    <select class="form-select ">
-                                        <option>Hôm nay</option>
-                                        <option>Ngày</option>
-                                        <option>Tuần</option>
-                                        <option>Tháng</option>
-                                        <option>Năm</option>
+                        <form action="{{ route('thong_ke_chung') }}" method="post">
+                            @csrf
+                            @method('GET')
+                            <div class="row justify-content-end">
+                                <div class="col-md-4">
+                                    <h4 class="fw-semibold">{{ $title }}</h4>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="date" class="form-control @error('ngay_bat_dau') is-invalid @enderror"
+                                        id="ngay_bat_dau" name="ngay_bat_dau"
+                                        value="{{ old('ngay_bat_dau', request('ngay_bat_dau')) }}">
+                                    @error('ngay_bat_dau')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-1 d-flex align-items-center justify-content-center">Tới</div>
+                                <div class="col-md-2">
+                                    <input type="date" class="form-control @error('ngay_ket_thuc') is-invalid @enderror"
+                                        id="ngay_ket_thuc" name="ngay_ket_thuc"
+                                        value="{{ old('ngay_bat_dau', request('ngay_ket_thuc')) }}">
+                                    @error('ngay_ket_thuc')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-select" name="loc_ngay_thang_quy_nam">
+                                        <option value="today" {{ request('loc_ngay_thang_quy_nam') == 'today' ? 'selected' : '' }}>Hôm nay</option>
+                                        <option value="last_7_days" {{ request('loc_ngay_thang_quy_nam') == 'last_7_days' ? 'selected' : '' }}>7 Ngày</option>
+                                        <option value="month" {{ request('loc_ngay_thang_quy_nam') == 'month' ? 'selected' : '' }}>Tháng</option>
+                                        <option value="year" {{ request('loc_ngay_thang_quy_nam') == 'year' ? 'selected' : '' }}>Năm</option>
                                     </select>
-                                </form>
-                            </div>
-                            <div class="col-md-1">
-                                <form action="{{ route('thong_ke_chung') }}" method="post">
-                                    @csrf
-                                    @method('GET')
+                                </div>
+                                <div class="col-md-1">
                                     <input type="submit" value="Tìm kiếm" class="btn btn-primary w-100 text-center">
-                                </form>
+                                </div>
                             </div>
-                        </div>
-                        <script>
-                            $(document).ready(function() {
-                                @if (Session::has('success'))
-                                    toastr.success("{{ Session::get('success') }}", "Thông báo", {
-                                        progressBar: true,
-                                        closeButton: true,
-                                        timeOut: 3000
-                                    });
-                                @endif
-                                @if (Session::has('error'))
-                                    toastr.error("{{ Session::get('error') }}", "Thông báo", {
-                                        progressBar: true,
-                                        closeButton: true,
-                                        timeOut: 3000
-                                    });
-                                @endif
-                            });
-                        </script>
+                        </form>
                     </div>
                 </div>
 
@@ -139,7 +122,8 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="fs-17 mb-1 "> <i
-                                                    class="fa-solid fa-truck-fast me-2 text-success"></i>Số lượng từng trạng
+                                                    class="fa-solid fa-truck-fast me-2 text-success"></i>Số
+                                                lượng từng trạng
                                                 thái đơn hàng</div>
                                             <span class="text-primary d-inline-flex align-items-center">
                                             </span>
@@ -205,7 +189,7 @@
 
                 <div class="row">
                     <div class="col-md-12 col-xl-12">
-                        
+
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
@@ -218,7 +202,8 @@
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio1"
                                                     name="optradio" value="option1" checked
-                                                    onclick="showTab('home')">Doanh thu
+                                                    onclick="showTab('home')">Doanh
+                                                thu
                                                 <label class="form-check-label" for="radio1"></label>
                                             </div>
                                         </div>
@@ -238,43 +223,34 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row justify-content-end">
-                                        <div class="col-md-3">
-                                            <form action="{{ route('thong_ke_chung') }}" method="post">
-                                                @csrf
-                                                @method('GET')
-                                                <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
-                                            </form>
-                                        </div>
-                                        <div class="col-md-1 d-flex align-items-center justify-content-center ">Tới</div>
-                                        <div class="col-md-3">
-                                            <form action="{{ route('thong_ke_chung') }}" method="post">
-                                                @csrf
-                                                @method('GET')
-                                                <input type="date" class="form-control" id="ngay_ket_thuc" name="ngay_ket_thuc">
-                                            </form>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <form action="{{ route('thong_ke_chung') }}" method="post">
-                                                @csrf
-                                                @method('GET')
-                                                <select class="form-select ">
-                                                    <option>Hôm nay</option>
-                                                    <option>Ngày</option>
-                                                    <option>Tuần</option>
-                                                    <option>Tháng</option>
-                                                    <option>Năm</option>
+                                    <form action="{{ route('thong_ke_chung') }}" method="post">
+                                        @csrf
+                                        @method('GET')
+                                        <div class="row justify-content-end">
+                                            <div class="col-md-3">
+                                                <input type="date" class="form-control" id="ngay_bat_dau_bieudo"
+                                                    name="ngay_bat_dau">
+                                            </div>
+                                            <div class="col-md-1 d-flex align-items-center justify-content-center">Tới
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="date" class="form-control" id="ngay_ket_thuc_bieudo"
+                                                    name="ngay_ket_thuc">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select class="form-select" name="loc_ngay_thang_quy_nam_bieudo">
+                                                    <option value="today">Hôm nay</option>
+                                                    <option value="last_7_days">7 Ngày</option>
+                                                    <option value="month">Tháng</option>
+                                                    <option value="year">Năm</option>
                                                 </select>
-                                            </form>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="submit" value="Tìm kiếm"
+                                                    class="btn btn-primary w-100 text-center">
+                                            </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <form action="{{ route('thong_ke_chung') }}" method="post">
-                                                @csrf
-                                                @method('GET')
-                                                <input type="submit" value="Tìm kiếm" class="btn btn-primary w-100 text-center">
-                                            </form>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
 
@@ -282,18 +258,24 @@
                             <div class="tab-content">
                                 <div class="tab-pane container active" id="home" style="opacity: 1;">
                                     <div class="card-body">
-                                        <canvas id="myChart1" style="height: 100px !important"></canvas>
+                                        <canvas id="myChart1"></canvas>
                                         <script>
                                             var ctx = document.getElementById('myChart1').getContext('2d');
                                             var myChart = new Chart(ctx, {
                                                 type: 'bar',
                                                 data: {
-                                                    labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8',
-                                                        'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'
+                                                    labels: [
+                                                        @foreach ($labels as $label)
+                                                            '{{ $label }}',
+                                                        @endforeach
                                                     ],
                                                     datasets: [{
                                                         label: 'Doanh thu',
-                                                        data: [12, 19, 3, 5, 2, 3],
+                                                        data: [
+                                                            @foreach ($tongTienThang as $tongTien)
+                                                                {{ $tongTien }},
+                                                            @endforeach
+                                                        ],
                                                         backgroundColor: [
                                                             'rgba(255, 99, 132, 0.2)'
                                                         ],
@@ -317,14 +299,16 @@
                                 </div>
                                 <div class="tab-pane container fade" id="menu1" style="opacity: 1;">
                                     <div class="card-body">
-                                        <canvas id="myChart3" style="height: 100px !important"></canvas>
+                                        <canvas id="myChart3"></canvas>
                                         <script>
                                             var ctx = document.getElementById('myChart3').getContext('2d');
                                             var myChart = new Chart(ctx, {
                                                 type: 'line',
                                                 data: {
-                                                    labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8',
-                                                        'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'
+                                                    labels: [
+                                                        @foreach ($labels as $label)
+                                                            '{{ $label }}',
+                                                        @endforeach
                                                     ],
                                                     datasets: [{
                                                         label: 'Lợi nhuận',
@@ -351,22 +335,21 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane container fade p-3" id="menu2" style="opacity: 1;">
-                                    <canvas id="myChart2" style="height: 100px !important"></canvas>
-                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                    <canvas id="myChart2"></canvas>
                                     <script>
                                         var ctx2 = document.getElementById('myChart2').getContext('2d');
-                                        var data = [300, 50, 100, 234, 45, 34, 53];
+                                        var data = [
+                                            @foreach ($phantramdonhang as $count)
+                                                {{ $count }}{{ !$loop->last ? ',' : '' }}
+                                            @endforeach
+                                        ];
                                         var myChart = new Chart(ctx2, {
                                             type: 'doughnut',
                                             data: {
                                                 labels: [
-                                                    'Chờ xác nhận',
-                                                    'Đã xác nhận',
-                                                    'Đang chuẩn bị hàng',
-                                                    'Đang vận chuyển',
-                                                    'Đã giao',
-                                                    'Thành công',
-                                                    'Đã hủy',
+                                                    @foreach ($labels_phantram as $label)
+                                                        '{{ $label }}',
+                                                    @endforeach
                                                 ],
                                                 datasets: [{
                                                     label: 'My First Dataset',

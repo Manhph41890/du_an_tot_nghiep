@@ -32,26 +32,6 @@
                                         <a href="{{ route('danhmucs.create') }}" class="btn btn-success">Tạo Mới</a>
                                     @endif
                                 </div>
-                                <div class="col-4">
-                                    <script>
-                                        $(document).ready(function() {
-                                            @if (Session::has('success'))
-                                                toastr.success("{{ Session::get('success') }}", "Thông báo", {
-                                                    progressBar: true,
-                                                    closeButton: true,
-                                                    timeOut: 3000
-                                                });
-                                            @endif
-                                            @if (Session::has('error'))
-                                                toastr.error("{{ Session::get('error') }}", "Thông báo", {
-                                                    progressBar: true,
-                                                    closeButton: true,
-                                                    timeOut: 3000
-                                                });
-                                            @endif
-                                        });
-                                    </script>
-                                </div>
                             </div>
                         </div><!-- end card header -->
 

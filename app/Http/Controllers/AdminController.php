@@ -22,9 +22,14 @@ class AdminController extends Controller
         $request->validate([
             'ngay_bat_dau' => 'nullable|before_or_equal:ngay_ket_thuc',
             'ngay_ket_thuc' => 'nullable|after_or_equal:ngay_bat_dau',
+            'ngay_bat_dau_bieudo' => 'nullable|before_or_equal:ngay_ket_thuc_bieudo',
+            'ngay_ket_thuc_bieudo' => 'nullable|after_or_equal:ngay_bat_dau_bieudo',
+
         ], [
             'ngay_bat_dau.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
             'ngay_ket_thuc.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
+            'ngay_bat_dau_bieudo.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
+            'ngay_ket_thuc_bieudo.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
         ]);
 
 
@@ -309,47 +314,88 @@ class AdminController extends Controller
             'Đã hủy',
         ];
         if ($request->isMethod('get') && $request->input('ngay_bat_dau_bieudo') && $request->input('ngay_ket_thuc_bieudo')) {
-        } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam_bieudo')) {
-
-            switch ($request->input('loc_ngay_thang_quy_nam')) {
-                case 'today':
-
-                    break;
-                case 'last_7_days':
-
-                    break;
-                case 'month':
-
-                    break;
-                case 'year':
-
-                    break;
-                default:
-                    break;
-            }
-        } else {
-
             // Biểu đồ DOANH THU-------------------
             $tongTienThang = [];
-            // Duyệt qua 12 tháng
             for ($thang = 1; $thang <= 12; $thang++) {
-                // Lấy tổng tiền cho từng tháng
+                $tongTien = don_hang::whereMonth('ngay_tao', $thang)
+                    ->whereYear('ngay_tao', Carbon::now()->year)
+                    ->whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->sum('tong_tien');
+                $tongTienThang[$thang] = $tongTien ?: 0;
+            }
+
+            // Biểu đồ tỉ lệ % ĐƠN HÀNG------------ 
+            $phantramdonhang = [];
+            foreach ($labels_phantram as $trang_thai) {
+                $count = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->where('trang_thai', $trang_thai)
+                    ->count();
+                $phantramdonhang[$trang_thai] = $count;
+            }
+        } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam_bieudo')) {
+            // Biểu đồ DOANH THU-------------------
+            $tongTienThang = [];
+            for ($thang = 1; $thang <= 12; $thang++) {
                 $tongTien = don_hang::whereMonth('ngay_tao', $thang)
                     ->whereYear('ngay_tao', Carbon::now()->year)
                     ->sum('tong_tien');
-
-                // Lưu dữ liệu vào mảng
+                $tongTienThang[] = $tongTien;
+            }
+            // Biểu đồ tỉ lệ % ĐƠN HÀNG------------
+            if ($request->input('loc_ngay_thang_quy_nam_bieudo')) {
+                list($year, $month) = explode('-', $request->input('loc_ngay_thang_quy_nam_bieudo'));
+            } else {
+                $year = Carbon::now()->year;
+                $month = Carbon::now()->month;
+            }
+            $phantramdonhang = [];
+            foreach ($labels_phantram as $trang_thai) {
+                $count = don_hang::whereMonth('ngay_tao', $month)
+                    ->whereYear('ngay_tao', $year)
+                    ->where('trang_thai', $trang_thai)
+                    ->count();
+                $phantramdonhang[$trang_thai] = $count;
+            }
+        } else {
+            // Biểu đồ DOANH THU-------------------
+            $tongTienThang = [];
+            for ($thang = 1; $thang <= 12; $thang++) {
+                $tongTien = don_hang::whereMonth('ngay_tao', $thang)
+                    ->whereYear('ngay_tao', Carbon::now()->year)
+                    ->sum('tong_tien');
                 $tongTienThang[] = $tongTien;
             }
 
-
             // Biểu đồ tỉ lệ % ĐƠN HÀNG------------
             $phantramdonhang = [];
-            // số đơn hàng theo từng trạng thái 
             foreach ($labels_phantram as $trang_thai) {
                 $count = don_hang::where('trang_thai', $trang_thai)->count();
                 $phantramdonhang[$trang_thai] = $count;
             }
+
+            // Biểu đồ LỢI NHUẬN-------------------
+            // $loi_nhuan_theo_thang = [];
+            // for ($thang = 1; $thang <= 12; $thang++) {
+            //     $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)->sum('tong_tien');
+            //     $loi_nhuan_theo_thang[$thang] = $tt_dh_tang;
+            // }
+
+            // $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
+            // $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
+
+            // // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+            // $tong_gia_tri_sp_chua_chua = [];
+
+            // // Lặp qua các sản phẩm
+            // foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+            //     // Lấy số lượng đơn hàng chưa chứa sản phẩm này
+            //     $so_luong_chua_chua = don_hang::where('san_pham_id', '!=', $san_pham_id)->count();
+
+            //     // Tính tổng giá trị cho sản phẩm này
+            //     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+            // }
+
+            // dd($loi_nhuan_theo_thang, $gianhap_sp, $don_hang_sp, $tong_gia_tri_sp_chua_chua);
         }
 
 

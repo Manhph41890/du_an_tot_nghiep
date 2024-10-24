@@ -20,9 +20,9 @@ use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
-// Web Routes
+| Web Routes
 |--------------------------------------------------------------------------
-// Here is where you can register web routes for your application. These
+| Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 */
@@ -66,8 +66,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
         Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
     });
-    // profile
-    Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile'); // Thêm route này
+
+    // Profile
+    Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile');
 
     // Resource routes cho quản lý
     Route::resource('/danhmucs', DanhMucController::class);
@@ -77,12 +78,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
-    Route::resource('/donhangs', DonhangController::class);
+    Route::resource('/donhangs', DonHangController::class);
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
-Route::get('/', [BaiVietController::class, 'index'])->name('baiviets.index');
-
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
@@ -97,7 +96,6 @@ Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
     Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke_chung');
     Route::resource('/danhmucs', DanhMucController::class);
     Route::resource('/chucvus', ChucVuController::class);
-
     Route::resource('/khuyenmais', KhuyenMaiController::class);
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
@@ -109,4 +107,5 @@ Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 
-Route::get('/ctdonhang', [DonHangController::class, 'storet']);
+// Route chi tiết đơn hàng
+Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');

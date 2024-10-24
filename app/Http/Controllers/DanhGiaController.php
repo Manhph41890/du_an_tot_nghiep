@@ -19,7 +19,7 @@ class DanhGiaController extends Controller
         $query = danh_gia::query();
         $title = "Đánh giá";
 
-        // Lọc điểm số từ 0 đến 10
+        // Lọc điểm số từ 0 đến 5
         if ($request->has('diem_so')) {
             $diem_so = $request->input('diem_so');
 
@@ -40,9 +40,10 @@ class DanhGiaController extends Controller
         // Lấy danh sách đã lọc
         $params = [];
         $params['list'] = $query->get();
+        $params['title'] = "Danh sách";
         return view('admin.danhgia.index', $params);
-        $params['list'] = danh_gia::all();
-        return view('admin.danhgia.index', $params);
+        // $params['list'] = danh_gia::all();
+        // return view('admin.danhgia.index', $params);
     }
 
     /**

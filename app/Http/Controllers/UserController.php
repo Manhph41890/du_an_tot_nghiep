@@ -43,8 +43,9 @@ class UserController extends Controller
             });
         }
 
-
+        $title = "Nguoi dung";
         $params = [];
+        $params['title'] = $title;
         $params['list'] = $query->get(); // Lấy danh sách người dùng
         return view('admin.user.index', $params);
     }

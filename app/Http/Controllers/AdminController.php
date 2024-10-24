@@ -327,27 +327,34 @@ class AdminController extends Controller
             // Biểu đồ tỉ lệ % ĐƠN HÀNG------------ 
             $phantramdonhang = [];
             foreach ($labels_phantram as $trang_thai) {
-                $count = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')]) 
+                $count = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
                     ->where('trang_thai', $trang_thai)
                     ->count();
                 $phantramdonhang[$trang_thai] = $count;
             }
         } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam_bieudo')) {
-            switch ($request->input('loc_ngay_thang_quy_nam')) {
-                case 'today':
-
-                    break;
-                case 'last_7_days':
-
-                    break;
-                case 'month':
-
-                    break;
-                case 'year':
-
-                    break;
-                default:
-                    break;
+            // Biểu đồ DOANH THU-------------------
+            $tongTienThang = [];
+            for ($thang = 1; $thang <= 12; $thang++) {
+                $tongTien = don_hang::whereMonth('ngay_tao', $thang)
+                    ->whereYear('ngay_tao', Carbon::now()->year)
+                    ->sum('tong_tien');
+                $tongTienThang[] = $tongTien;
+            }
+            // Biểu đồ tỉ lệ % ĐƠN HÀNG------------
+            if ($request->input('loc_ngay_thang_quy_nam_bieudo')) {
+                list($year, $month) = explode('-', $request->input('loc_ngay_thang_quy_nam_bieudo'));
+            } else {
+                $year = Carbon::now()->year;
+                $month = Carbon::now()->month;
+            }
+            $phantramdonhang = [];
+            foreach ($labels_phantram as $trang_thai) {
+                $count = don_hang::whereMonth('ngay_tao', $month)
+                    ->whereYear('ngay_tao', $year)
+                    ->where('trang_thai', $trang_thai)
+                    ->count();
+                $phantramdonhang[$trang_thai] = $count;
             }
         } else {
             // Biểu đồ DOANH THU-------------------
@@ -365,6 +372,9 @@ class AdminController extends Controller
                 $count = don_hang::where('trang_thai', $trang_thai)->count();
                 $phantramdonhang[$trang_thai] = $count;
             }
+
+            // Biểu đồ LỢI NHUẬN-------------------
+            
         }
 
 

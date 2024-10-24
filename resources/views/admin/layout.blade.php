@@ -34,10 +34,10 @@
     {{-- toast  --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
-
 </head>
 
 <!-- body start -->
+
 <body data-menu-color="light" data-sidebar="default">
 
     <script>

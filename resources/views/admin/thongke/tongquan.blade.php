@@ -139,7 +139,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đã xác nhận</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold">
                                                         {{ $donhangs_daxacnhan }}
                                                     </div>
                                                 </div>
@@ -147,7 +147,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đang chuẩn bị hàng</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold ">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
                                                         {{ $donhangs_dangchuanbihang }}
                                                     </div>
                                                 </div>
@@ -155,7 +155,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đang vận chuyển</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold">
                                                         {{ $donhangs_dangvanchuyen }}
                                                     </div>
                                                 </div>
@@ -163,7 +163,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đã giao</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold ">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
                                                         {{ $donhangs_dagiao }}
                                                     </div>
                                                 </div>
@@ -171,7 +171,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Thành công</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold">
                                                         {{ $donhangs_thanhcong }}
                                                     </div>
                                                 </div>
@@ -179,7 +179,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đã hủy</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold ">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
                                                         {{ $donhangs_dahuy }}
                                                     </div>
                                                 </div>
@@ -209,7 +209,7 @@
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio1"
                                                     name="optradio" value="option1" checked
-                                                    onclick="showTab('home')">Doanh
+                                                    onclick="showTab('home');hideMonthInput();">Doanh
                                                 thu
                                                 <label class="form-check-label" for="radio1"></label>
                                             </div>
@@ -217,16 +217,16 @@
                                         <div class="me-3">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio2"
-                                                    name="optradio" value="option2" onclick="showTab('menu1')">Lợi nhuận
+                                                    name="optradio" value="option2" onclick="showTab('menu1');hideMonthInput();">Lợi nhuận
                                                 <label class="form-check-label" for="radio2"></label>
                                             </div>
                                         </div>
                                         <div class="me-0">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio3"
-                                                    name="optradio" value="option3" onclick="showTab('menu2')">Tỉ lệ %
-                                                đơn hàng
-                                                <label class="form-check-label" for="radio3"></label>
+                                                    name="optradio" value="option3"
+                                                    onclick="showTab('menu2'); showMonthInput()">
+                                                <label class="form-check-label" for="radio3">Tỉ lệ % đơn hàng</label>
                                             </div>
                                         </div>
                                     </div>
@@ -234,10 +234,11 @@
                                         @csrf
                                         @method('GET')
                                         <div class="row justify-content-end">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <input type="date"
                                                     class="form-control  @error('ngay_bat_dau_bieudo') is-invalid @enderror"
-                                                    id="ngay_bat_dau_bieudo" name="ngay_bat_dau_bieudo" value="{{ old('ngay_bat_dau_bieudo', request('ngay_bat_dau_bieudo')) }}">
+                                                    id="ngay_bat_dau_bieudo" name="ngay_bat_dau_bieudo"
+                                                    value="{{ old('ngay_bat_dau_bieudo', request('ngay_bat_dau_bieudo')) }}">
                                                 @error('ngay_bat_dau_bieudo')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -246,26 +247,23 @@
                                             </div>
                                             <div class="col-md-1 d-flex align-items-center justify-content-center">Tới
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <input type="date"
                                                     class="form-control @error('ngay_ket_thuc_bieudo') is-invalid @enderror"
-                                                    id="ngay_ket_thuc_bieudo" name="ngay_ket_thuc_bieudo"  value="{{ old('ngay_ket_thuc_bieudo', request('ngay_ket_thuc_bieudo')) }}">
+                                                    id="ngay_ket_thuc_bieudo" name="ngay_ket_thuc_bieudo"
+                                                    value="{{ old('ngay_ket_thuc_bieudo', request('ngay_ket_thuc_bieudo')) }}">
                                                 @error('ngay_ket_thuc_bieudo')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-3">
-                                                <select class="form-select" name="loc_ngay_thang_quy_nam_bieudo">
-                                                    <option value="today">Hôm nay</option>
-                                                    <option value="last_7_days">7 Ngày</option>
-                                                    <option value="month">Tháng</option>
-                                                    <option value="year">Năm</option>
-                                                </select>
+                                            <div class="col-md-1" >
+                                                <input type="month" class="form-control" id="monthInput" style="display: none;"
+                                                    name="loc_ngay_thang_quy_nam_bieudo" value="{{ old('loc_ngay_thang_quy_nam_bieudo', request('loc_ngay_thang_quy_nam_bieudo')) }}">
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="submit" value="Tìm kiếm"
+                                                <input type="submit" value="Tìm"
                                                     class="btn btn-primary w-100 text-center">
                                             </div>
                                         </div>
@@ -582,6 +580,14 @@
             // Hiện tab được chọn
             const activeTab = document.getElementById(tabId);
             activeTab.classList.add('active', 'fade');
+        }
+
+        function showMonthInput() {
+            document.getElementById('monthInput').style.display = 'block';
+        }
+
+        function hideMonthInput() {
+            document.getElementById('monthInput').style.display = 'none';
         }
     </script>
 @endsection

@@ -71,7 +71,7 @@ class DonHangController extends Controller
      */
     public function show(don_hang $don_hang, $id)
     {
-        $donhang = don_hang::findOrFail($id);
+        $donhang = don_hang::with("san_phams")->findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
         $sanpham = san_pham::query()->pluck('ten_san_pham', 'id')->all();
         $khuyenmai = khuyen_mai::query()->pluck('ten_khuyen_mai', 'id')->all();

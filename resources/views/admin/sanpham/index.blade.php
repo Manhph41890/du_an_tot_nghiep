@@ -130,7 +130,10 @@
                                                                             </div>
                                                                             <p><strong>Mô Tả:</strong>
                                                                                 {{ $item->mo_ta_san_pham }}</p>
-                                                                            <p><strong>Giá Gốc:</strong>
+                                                                            <p><strong>Giá Nhập:</strong>
+                                                                                {{ number_format($item->gia_nhap, 0, ',', '.') }}
+                                                                                VND</p>
+                                                                            <p><strong>Giá Bán:</strong>
                                                                                 {{ number_format($item->gia_goc, 0, ',', '.') }}
                                                                                 VND</p>
                                                                             <p><strong>Giá Khuyến Mãi:</strong>

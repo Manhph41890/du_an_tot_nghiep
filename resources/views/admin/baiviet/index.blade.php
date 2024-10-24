@@ -84,7 +84,6 @@
                                                         @else
                                                             <img src="{{ asset('images/placeholder.png') }}"
                                                                 alt="Không có ảnh" width="50px">
-                                                            <!-- Placeholder image -->
                                                         @endif
                                                     </td>
                                                     <td>{{ $baiviet->ngay_dang }}</td>

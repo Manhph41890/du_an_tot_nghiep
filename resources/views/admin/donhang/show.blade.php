@@ -50,11 +50,12 @@
                                                     <tr>
                                                         <td><img src="path-to-image.jpg" alt="Product Image"
                                                                 width="50"></td>
-                                                        <td> {{ $donhang->san_pham?->ten_san_pham }}<br>Màu: Đỏ
+                                                        <td> {{ $donhang->}}<br>Màu:
+                                                            Đỏ
                                                             Size: M</td>
                                                         <td>12</td>
-                                                        <td>1,234 VND</td>
-                                                        <td>1,111,111 VND</td>
+                                                        <td>{{ $donhang-> }}</td>
+                                                        <td>{{ $donhang-> }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

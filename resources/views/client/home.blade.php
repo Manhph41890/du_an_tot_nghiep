@@ -134,21 +134,21 @@
                 <div class="col-md-6 mb-30">
                     <div class="banner-thumb">
                         <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/admin/img/banner/1.jpg') }}" alt="banner-thumb-naile" />
+                            <img src="{{asset('assets/client/images/banner/1a.jpg')}}" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-30">
                     <div class="banner-thumb">
                         <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/admin/img/banner/2.jpg') }}" alt="banner-thumb-naile" />
+                            <img src="{{asset('assets/client/images/banner/2.jpg')}}" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-30">
                     <div class="banner-thumb">
                         <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/admin/img/banner/3.jpg') }}" alt="banner-thumb-naile" />
+                            <img src="{{asset('assets/client/images/banner/3.jpg')}}" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>

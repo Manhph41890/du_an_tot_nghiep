@@ -27,13 +27,14 @@ class don_hang extends Model
         'trang_thai' => 'string', // Chuyển đổi thành chuỗi
     ];
 
+
     public function user()
     {
         return $this->belongsTo(User::class, "user_id");
     }
     public function san_phams()
     {
-        return $this->belongsTo(san_pham::class);
+        return $this->belongsTo(san_pham::class, "san_pham_id");
     }
     public function khuyen_mai()
     {

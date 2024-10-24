@@ -87,8 +87,8 @@
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
                                 src="{{ asset('assets/admin/images/icon/2.png') }}" alt="icon" />
                             <div class="media-body">
-                                <h4 class="title">Free Shipping</h4>
-                                <p class="text">On all orders over $75.00</p>
+                                <h4 class="title">Miễn phí vận chuyển</h4>
+                                <p class="text">Tất cả đơn hàng trên 50.000d</p>
                             </div>
                         </div>
                     </div>
@@ -97,8 +97,8 @@
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
                                 src="{{ asset('assets/admin/images/icon/3.png') }}" alt="icon" />
                             <div class="media-body">
-                                <h4 class="title">Free Returns</h4>
-                                <p class="text">Returns are free within 9 days</p>
+                                <h4 class="title">Trả hàng miễn phí</h4>
+                                <p class="text">Trong vòng 9 ngày</p>
                             </div>
                         </div>
                     </div>
@@ -107,8 +107,8 @@
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
                                 src="{{ asset('assets/admin/images/icon/4.png') }}" alt="icon" />
                             <div class="media-body">
-                                <h4 class="title">100% Payment Secure</h4>
-                                <p class="text">Your payment are safe with us.</p>
+                                <h4 class="title">Thanh toán an toàn 100%</h4>
+                                <p class="text">Thanh toán của bạn sẽ an toàn với chúng tôi</p>
                             </div>
                         </div>
                     </div>
@@ -117,8 +117,8 @@
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
                                 src="{{ asset('assets/admin/images/icon/5.png') }}" alt="icon" />
                             <div class="media-body">
-                                <h4 class="title">Support 24/7</h4>
-                                <p class="text">Contact us 24 hours a day</p>
+                                <h4 class="title">Hỗ trợ 24/7</h4>
+                                <p class="text">Liên hệ với chúng tôi 24h/7</p>
                             </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                 <div class="row align-items-center">
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h2 class="title pb-3 mb-3">Our products</h2>
+                            <h2 class="title pb-3 mb-3">Sản phẩm của chúng tôi</h2>
                             <p class="text">
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                                 Perspiciatis, culpa?
@@ -177,17 +177,17 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                         href="#pills-home" role="tab" aria-controls="pills-home"
-                                        aria-selected="true">new products</a>
+                                        aria-selected="true">Sản phẩm mới</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false">onsale</a>
+                                        aria-selected="false">Đang giảm giá</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                                         href="#pills-contact" role="tab" aria-controls="pills-contact"
-                                        aria-selected="false">upcoming products</a>
+                                        aria-selected="false">Sắp ra mắt</a>
                                 </li>
                             </ul>
                         </nav>

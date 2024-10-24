@@ -29,7 +29,6 @@ class StaffController extends Controller
 
         // Đếm tổng số lượng người dùng
         $users = User::count();
-
         // tổng tiền các tỏng tiền 
         $tong_tien_tat_ca_don_hang = don_hang::sum('tong_tien');
         if ($tong_tien_tat_ca_don_hang == 0) {

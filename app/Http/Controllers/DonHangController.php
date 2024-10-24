@@ -110,7 +110,7 @@ class DonHangController extends Controller
             $donhang->update($data_don_hang);
 
             DB::commit();
-            return redirect()->route('donhangs.index')->with('success', 'Bai viet đã được cập nhật thành công.');
+            return redirect()->route('donhangs.index')->with('success', 'Đơn hàng đã được cập nhật thành công.');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', 'Đã xảy ra lỗi khi thêm bai viet.');

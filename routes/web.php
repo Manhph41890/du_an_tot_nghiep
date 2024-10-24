@@ -60,7 +60,7 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showRese
 Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('auth.update_password');
 
 // Route cho các chức năng quản lý (admin)
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     // Thống kê
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
@@ -92,15 +92,16 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 });
 
 // Route cho nhân viên (quản lý)
-Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
-    Route::get('/', [StaffController::class, 'index'])->name('thong_ke_chung');
-    Route::resource('/danhmucs', DanhMucController::class);
-    Route::resource('/chucvus', ChucVuController::class);
-    Route::resource('/khuyenmais', KhuyenMaiController::class);
-    Route::resource('/baiviets', BaiVietController::class);
-    Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
-    Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
-});
+// Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
+//     // Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke_chung');
+//     // Route::get('/', [StaffController::class, 'index'])->name('thong_ke_chung');
+//     Route::resource('/danhmucs', DanhMucController::class);
+//     Route::resource('/chucvus', ChucVuController::class);
+//     Route::resource('/khuyenmais', KhuyenMaiController::class);
+//     Route::resource('/baiviets', BaiVietController::class);
+//     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
+//     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
+// });
 
 // Route cho quản lý người dùng
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
@@ -109,4 +110,3 @@ Route::post('/user/update', [UserController::class, 'update'])->name('user.updat
 
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
-

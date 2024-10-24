@@ -27,18 +27,18 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h3 class="title mb-30 pb-25 text-capitalize">Your cart items</h3>
+          <h3 class="title mb-30 pb-25 text-capitalize">Sản phẩm của bạn</h3>
           <div class="table-responsive">
             <table class="table">
               <thead class="thead-light">
                 <tr>
-                  <th class="text-center" scope="col">Product Image</th>
-                  <th class="text-center" scope="col">Product Name</th>
-                  <th class="text-center" scope="col">Stock Status</th>
-                  <th class="text-center" scope="col">Qty</th>
-                  <th class="text-center" scope="col">Price</th>
-                  <th class="text-center" scope="col">action</th>
-                  <th class="text-center" scope="col">Checkout</th>
+                  <th class="text-center" scope="col">Ảnh sản phẩm</th>
+                  <th class="text-center" scope="col">Tên sản phẩm</th>
+                  <th class="text-center" scope="col">Tình trạng</th>
+                  <th class="text-center" scope="col">Số lượng</th>
+                  <th class="text-center" scope="col">Giá</th>
+                  <th class="text-center" scope="col">Hành động</th>
+                  <th class="text-center" scope="col">Thanh toán</th>
                 </tr>
               </thead>
               <tbody>
@@ -99,7 +99,7 @@
                   </td>
                   <td class="text-center">
                     <span class="badge badge-danger position-static"
-                      >In Stock</span
+                      >Còn hàng</span
                     >
                   </td>
                   <td class="text-center">

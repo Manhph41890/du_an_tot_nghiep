@@ -5,7 +5,7 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <div class="logo-box">
-
+                <img src="{{ asset('assets/client/img/logo/logo_art.png') }}" alt="" width="200px">
             </div>
 
             <ul id="side-menu" class="list-unstyled">

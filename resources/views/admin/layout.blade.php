@@ -38,7 +38,11 @@
 
 <!-- body start -->
 
-<body data-menu-color="light" data-sidebar="default">
+<body data-menu-color="light" data-sidebar="default"
+    style=" background-image: url('assets/admin/images/bg.png');background-size: cover;background-position: center;
+
+
+">
 
     <script>
         $(document).ready(function() {
@@ -69,7 +73,7 @@
         @yield('content')
         <!-- End Page content -->
 
-        @include('admin.partials.footer')
+        {{-- @include('admin.partials.footer') --}}
     </div>
     <!-- END wrapper -->
 
@@ -94,6 +98,9 @@
 
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+
 </body>
 
 </html>

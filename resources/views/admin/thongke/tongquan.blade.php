@@ -36,10 +36,17 @@
                                 </div>
                                 <div class="col-md-2">
                                     <select class="form-select" name="loc_ngay_thang_quy_nam">
-                                        <option value="today" {{ request('loc_ngay_thang_quy_nam') == 'today' ? 'selected' : '' }}>Hôm nay</option>
-                                        <option value="last_7_days" {{ request('loc_ngay_thang_quy_nam') == 'last_7_days' ? 'selected' : '' }}>7 Ngày</option>
-                                        <option value="month" {{ request('loc_ngay_thang_quy_nam') == 'month' ? 'selected' : '' }}>Tháng</option>
-                                        <option value="year" {{ request('loc_ngay_thang_quy_nam') == 'year' ? 'selected' : '' }}>Năm</option>
+                                        <option value="today"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'today' ? 'selected' : '' }}>Hôm nay
+                                        </option>
+                                        <option value="last_7_days"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'last_7_days' ? 'selected' : '' }}>7
+                                            Ngày</option>
+                                        <option value="month"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'month' ? 'selected' : '' }}>Tháng
+                                        </option>
+                                        <option value="year"
+                                            {{ request('loc_ngay_thang_quy_nam') == 'year' ? 'selected' : '' }}>Năm</option>
                                     </select>
                                 </div>
                                 <div class="col-md-1">
@@ -132,7 +139,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đã xác nhận</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold">
                                                         {{ $donhangs_daxacnhan }}
                                                     </div>
                                                 </div>
@@ -140,7 +147,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đang chuẩn bị hàng</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold ">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
                                                         {{ $donhangs_dangchuanbihang }}
                                                     </div>
                                                 </div>
@@ -148,7 +155,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đang vận chuyển</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold">
                                                         {{ $donhangs_dangvanchuyen }}
                                                     </div>
                                                 </div>
@@ -156,7 +163,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đã giao</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold ">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
                                                         {{ $donhangs_dagiao }}
                                                     </div>
                                                 </div>
@@ -164,7 +171,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Thành công</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold">
                                                         {{ $donhangs_thanhcong }}
                                                     </div>
                                                 </div>
@@ -172,7 +179,7 @@
                                             <div class="col-4">
                                                 <p class="fs-10 mt-3 mb-1">Đã hủy</p>
                                                 <div class="d-flex align-items-baseline">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold ">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
                                                         {{ $donhangs_dahuy }}
                                                     </div>
                                                 </div>
@@ -202,7 +209,7 @@
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio1"
                                                     name="optradio" value="option1" checked
-                                                    onclick="showTab('home')">Doanh
+                                                    onclick="showTab('home');hideMonthInput();">Doanh
                                                 thu
                                                 <label class="form-check-label" for="radio1"></label>
                                             </div>
@@ -210,16 +217,17 @@
                                         <div class="me-3">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio2"
-                                                    name="optradio" value="option2" onclick="showTab('menu1')">Lợi nhuận
+                                                    name="optradio" value="option2"
+                                                    onclick="showTab('menu1');hideMonthInput();">Lợi nhuận
                                                 <label class="form-check-label" for="radio2"></label>
                                             </div>
                                         </div>
                                         <div class="me-0">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio3"
-                                                    name="optradio" value="option3" onclick="showTab('menu2')">Tỉ lệ %
-                                                đơn hàng
-                                                <label class="form-check-label" for="radio3"></label>
+                                                    name="optradio" value="option3"
+                                                    onclick="showTab('menu2'); showMonthInput()">
+                                                <label class="form-check-label" for="radio3">Tỉ lệ % đơn hàng</label>
                                             </div>
                                         </div>
                                     </div>
@@ -227,26 +235,37 @@
                                         @csrf
                                         @method('GET')
                                         <div class="row justify-content-end">
-                                            <div class="col-md-3">
-                                                <input type="date" class="form-control" id="ngay_bat_dau_bieudo"
-                                                    name="ngay_bat_dau">
+                                            <div class="col-md-4">
+                                                <input type="date"
+                                                    class="form-control  @error('ngay_bat_dau_bieudo') is-invalid @enderror"
+                                                    id="ngay_bat_dau_bieudo" name="ngay_bat_dau_bieudo"
+                                                    value="{{ old('ngay_bat_dau_bieudo', request('ngay_bat_dau_bieudo')) }}">
+                                                @error('ngay_bat_dau_bieudo')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                             <div class="col-md-1 d-flex align-items-center justify-content-center">Tới
                                             </div>
-                                            <div class="col-md-3">
-                                                <input type="date" class="form-control" id="ngay_ket_thuc_bieudo"
-                                                    name="ngay_ket_thuc">
+                                            <div class="col-md-4">
+                                                <input type="date"
+                                                    class="form-control @error('ngay_ket_thuc_bieudo') is-invalid @enderror"
+                                                    id="ngay_ket_thuc_bieudo" name="ngay_ket_thuc_bieudo"
+                                                    value="{{ old('ngay_ket_thuc_bieudo', request('ngay_ket_thuc_bieudo')) }}">
+                                                @error('ngay_ket_thuc_bieudo')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
-                                            <div class="col-md-3">
-                                                <select class="form-select" name="loc_ngay_thang_quy_nam_bieudo">
-                                                    <option value="today">Hôm nay</option>
-                                                    <option value="last_7_days">7 Ngày</option>
-                                                    <option value="month">Tháng</option>
-                                                    <option value="year">Năm</option>
-                                                </select>
+                                            <div class="col-md-1">
+                                                <input type="month" class="form-control" id="monthInput"
+                                                    style="display: none;" name="loc_ngay_thang_quy_nam_bieudo"
+                                                    value="{{ old('loc_ngay_thang_quy_nam_bieudo', request('loc_ngay_thang_quy_nam_bieudo')) }}">
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="submit" value="Tìm kiếm"
+                                                <input type="submit" value="Tìm"
                                                     class="btn btn-primary w-100 text-center">
                                             </div>
                                         </div>
@@ -300,27 +319,58 @@
                                 <div class="tab-pane container fade" id="menu1" style="opacity: 1;">
                                     <div class="card-body">
                                         <canvas id="myChart3"></canvas>
+
                                         <script>
                                             var ctx = document.getElementById('myChart3').getContext('2d');
+
+                                            var profitData = [
+                                                @foreach ($loi_nhuan_theo_thang as $ln)
+                                                    {{ $ln }}{{ !$loop->last ? ',' : '' }}
+                                                @endforeach
+                                            ];
+
+                                            var labels = [
+                                                @foreach ($labels as $label)
+                                                    '{{ $label }}',
+                                                @endforeach
+                                            ];
+
                                             var myChart = new Chart(ctx, {
                                                 type: 'line',
                                                 data: {
-                                                    labels: [
-                                                        @foreach ($labels as $label)
-                                                            '{{ $label }}',
-                                                        @endforeach
-                                                    ],
+                                                    labels: labels,
                                                     datasets: [{
-                                                        label: 'Lợi nhuận',
-                                                        data: [12, 19, 3, 5, 2, 3],
-                                                        backgroundColor: [
-                                                            '#00FF00'
-                                                        ],
-                                                        borderColor: [
-                                                            '#00FF00'
-                                                        ],
+                                                        label: function(context) {
+                                                            let data = context.raw;
+                                                            return data >= 0 ? 'Lãi' : 'Âm';
+                                                        },
+                                                        data: profitData,
                                                         borderWidth: 2,
-                                                        fill: false
+                                                        fill: false,
+                                                        pointBackgroundColor: function(context) {
+                                                            var value = context.dataset.data[context.dataIndex];
+                                                            return value >= 0 ? '#00FF00' :
+                                                                '#FF0000';
+                                                        },
+                                                        pointBorderColor: function(context) {
+                                                            var value = context.dataset.data[context.dataIndex];
+                                                            return value >= 0 ? '#00FF00' :
+                                                                '#FF0000';
+                                                        },
+                                                        pointRadius: 5,
+                                                        pointHoverRadius: 7,
+                                                        borderColor: function(context) {
+                                                            var value = context.dataset.data[context.dataIndex];
+                                                            return value >= 0 ? '#00FF00' :
+                                                                '#FF0000';
+                                                        },
+                                                        segment: {
+                                                            borderColor: ctx => {
+                                                                const index = ctx.p0DataIndex;
+                                                                const value = ctx.chart.data.datasets[0].data[index];
+                                                                return value >= 0 ? '#00FF00' : '#FF0000';
+                                                            }
+                                                        }
                                                     }]
                                                 },
                                                 options: {
@@ -328,10 +378,43 @@
                                                         y: {
                                                             beginAtZero: true
                                                         }
+                                                    },
+                                                    elements: {
+                                                        point: {
+                                                            radius: 5
+                                                        }
+                                                    },
+                                                    plugins: {
+                                                        tooltip: {
+                                                            callbacks: {
+                                                                label: function(context) {
+                                                                    let value = context.raw;
+                                                                    return value >= 0 ? `Lãi: ${value}` : `Âm: ${value}`;
+                                                                }
+                                                            }
+                                                        },
+                                                        legend: {
+                                                            display: true,
+                                                            labels: {
+                                                                generateLabels: function(chart) {
+                                                                    return [{
+                                                                        text: 'Lãi',
+                                                                        fillStyle: '#00FF00',
+                                                                        strokeStyle: '#00FF00'
+                                                                    }, {
+                                                                        text: 'Âm',
+                                                                        fillStyle: '#FF0000',
+                                                                        strokeStyle: '#FF0000'
+                                                                    }];
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             });
                                         </script>
+
+
                                     </div>
                                 </div>
                                 <div class="tab-pane container fade p-3" id="menu2" style="opacity: 1;">
@@ -423,7 +506,22 @@
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
-                                                        <td>{{ $item->tong_tien }}</td>
+                                                        <td>
+                                                            @php
+                                                                $tong_tien = $item->tong_tien;
+                                                                if (intval($tong_tien) == $tong_tien) {
+                                                                    // Nếu tổng tiền là số nguyên
+                                                                    echo number_format($tong_tien, 0, ',', '.');
+                                                                } elseif (floor($tong_tien) == $tong_tien) {
+                                                                    // Nếu tổng tiền có dạng như 200000.00
+                                                                    echo number_format($tong_tien, 0, ',', '.');
+                                                                } else {
+                                                                    // Nếu tổng tiền có phần thập phân khác .00
+                                                                    echo number_format($tong_tien, 2, ',', '.');
+                                                                }
+                                                            @endphp
+                                                            Vnđ
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -563,6 +661,14 @@
             // Hiện tab được chọn
             const activeTab = document.getElementById(tabId);
             activeTab.classList.add('active', 'fade');
+        }
+
+        function showMonthInput() {
+            document.getElementById('monthInput').style.display = 'block';
+        }
+
+        function hideMonthInput() {
+            document.getElementById('monthInput').style.display = 'none';
         }
     </script>
 @endsection

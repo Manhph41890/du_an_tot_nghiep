@@ -119,7 +119,7 @@
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
-                                                                        
+
                                                                         <div class="modal-body">
                                                                             @include('admin.user.show', [
                                                                                 'post' => $item,
@@ -133,6 +133,19 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </td>
+                                                    <td>
+
+                                                        <select class="form-select"
+                                                            onchange="updateChucVu({{ $item->id }}, this.value)">
+                                                            @foreach ($chucVus as $chucVu)
+                                                                <option value="{{ $chucVu->id }}"
+                                                                    {{ $item->chuc_vu_id == $chucVu->id ? 'selected' : '' }}>
+                                                                    {{ $chucVu->ten_chuc_vu }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -155,7 +168,22 @@
         </div>
     </div>
 
-@section('js')
-    <!-- Include your JS files here -->
-@endsection
+    <script>
+        function updateChucVu(userId, chucVuId) {
+            $.ajax({
+                url: '/user/' + userId + '/updatechucvu',
+                type: 'PUT',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    chuc_vu_id: chucVuId
+                },
+                success: function(response) {
+                    alert(response.message); // Thông báo thành công
+                },
+                error: function(xhr) {
+                    alert('Đã xảy ra lỗi khi cập nhật chức vụ.');
+                }
+            });
+        }
+    </script>
 @endsection

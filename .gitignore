@@ -23,9 +23,9 @@ yarn-error.log
 /storage/*
 
 # Bỏ qua tất cả các file ảnh
-*.jpg
+# *.jpg
 *.jpeg
-*.png
+# *.png
 *.gif
 
 # Bỏ qua tất cả các file tài liệu

@@ -22,12 +22,12 @@ class bien_the_san_pham extends Model
         return $this->belongsTo(san_pham::class);
     }
 
-    public function size_san_pham()
+    public function size()
     {
         return $this->belongsTo(size_san_pham::class, 'size_san_pham_id');
     }
 
-    public function color_san_pham()
+    public function color()
     {
         return $this->belongsTo(color_san_pham::class, 'color_san_pham_id');
     }

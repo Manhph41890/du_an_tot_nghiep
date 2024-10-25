@@ -33,9 +33,14 @@ class don_hang extends Model
     {
         return $this->belongsTo(User::class, "user_id");
     }
+    // public function san_phams()
+    // {
+    //     return $this->belongsTo(san_pham::class, "san_pham_id");
+    // }
+    // Lấy thông tin sản phẩm thông qua mối quan hệ bắc cầu qua biến thể sản phẩm
     public function san_phams()
     {
-        return $this->belongsTo(san_pham::class, "san_pham_id");
+        return $this->hasOneThrough(san_pham::class, bien_the_san_pham::class, 'id', 'id', 'bien_the_san_pham_id', 'san_pham_id');
     }
     public function khuyen_mai()
     {
@@ -53,8 +58,12 @@ class don_hang extends Model
     {
         return $this->hasMany(chi_tiet_don_hang::class, "don_hang_id");
     }
-    public function bienTheSanPham()
+    public function bien_the_san_pham()
     {
         return $this->belongsTo(bien_the_san_pham::class, "bien_the_san_pham_id");
+    }
+    public function getMaDonHangAttribute()
+    {
+        return 'DH-' . strtoupper(substr(md5($this->id), 0, 8)) . '-' . str_pad($this->id, 6, '0', STR_PAD_LEFT);
     }
 }

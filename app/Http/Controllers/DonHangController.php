@@ -72,8 +72,29 @@ class DonHangController extends Controller
      */
     public function show(don_hang $don_hang, $id)
     {
-        $donhang = don_hang::with('user', 'khuyen_mai', 'phuong_thuc_thanh_toan', 'phuong_thuc_van_chuyen', 'chi_tiet_don_hangs', 'bien_the_san_pham',)->findOrFail($id);
-        return view('admin.donhang.show', compact('donhang'));
+        $donhang = don_hang::with([
+            'user',
+            'san_phams',
+            'khuyen_mai',
+            'phuong_thuc_thanh_toan',
+            'phuong_thuc_van_chuyen',
+            'chi_tiet_don_hangs',
+            'bien_the_san_pham',
+            'san_phams.danh_gias'
+        ])->findOrFail($id);
+
+        // Trả về view cùng với dữ liệu đơn hàng
+        return view('orders.show', compact('donhang'));
+    }
+    public function confirmOrder($id)
+    {
+        $donhang = don_hang::findOrFail($id);
+
+        // Cập nhật trạng thái đơn hàng sang "Đã xác nhận"
+        $donhang->trang_thai = 'Đã xác nhận';
+        $donhang->save();
+
+        return redirect()->route('donhangs.index')->with('success', 'Đơn hàng đã được xác nhận thành công.');
     }
 
     /**

@@ -38,6 +38,6 @@ class san_pham extends Model
     }
     public function danh_gias()
     {
-        return $this->hasMany(danh_gia::class);
+        return $this->hasMany(danh_gia::class, "san_pham_id");
     }
 }

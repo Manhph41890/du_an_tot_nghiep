@@ -50,12 +50,17 @@
                                                     <tr>
                                                         <td><img src="{{ asset('/storage/' . $donhang->san_phams?->anh_san_pham) }}"
                                                                 width="50px"></td>
-                                                        <td> {{ $donhang->san_phams?->ten_san_pham }}<br>Màu:
-                                                            Đỏ
-                                                            Size: M</td>
-                                                        <td>12</td>
+                                                        <td> {{ $donhang->san_phams?->ten_san_pham }}<br>
+
+                                                            Màu:
+                                                            {{ $donhang->bien_the_san_pham?->color_san_pham ?? 'N/A' }}<br>
+                                                            Size:
+                                                            {{ $donhang->bien_the_san_pham?->size_san_pham ?? 'N/A' }}
+
+                                                        </td>
+                                                        <td>{{ $donhang->chi_tiet_don_hang?->so_luong }}</td>
                                                         <td>{{ $donhang->san_phams?->gia_km }}</td>
-                                                        <td>???</td>
+                                                        <td>{{ $donhang->chi_tiet_don_hang?->thanh_tien }} </td>
                                                     </tr>
                                                 </tbody>
                                             </table>

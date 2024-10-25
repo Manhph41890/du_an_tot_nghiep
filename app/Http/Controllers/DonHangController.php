@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\chi_tiet_don_hang;
 use App\Models\don_hang;
 use App\Http\Requests\Storedon_hangRequest;
 use App\Http\Requests\Updatedon_hangRequest;
@@ -71,17 +72,9 @@ class DonHangController extends Controller
      */
     public function show(don_hang $don_hang, $id)
     {
-        $donhang = don_hang::with("san_phams")->findOrFail($id);
-        $user = User::query()->pluck('ho_ten', 'id')->all();
-        $sanpham = san_pham::query()->pluck('ten_san_pham', 'id')->all();
-        $khuyenmai = khuyen_mai::query()->pluck('ten_khuyen_mai', 'id')->all();
-        $pttt = phuong_thuc_thanh_toan::query()->pluck('kieu_thanh_toan', 'id')->all();
-        $ptvc = phuong_thuc_van_chuyen::query()->pluck('kieu_van_chuyen', 'id')->all();
-
-        $title = "Chi tiết đơn hàng";
-        return view('admin.donhang.show', compact('donhang', 'user', 'title', 'khuyenmai', 'pttt', 'ptvc', 'sanpham'));
+        $donhang = don_hang::with('user', 'khuyen_mai', 'phuong_thuc_thanh_toan', 'phuong_thuc_van_chuyen', 'chi_tiet_don_hangs', 'bien_the_san_pham',)->findOrFail($id);
+        return view('admin.donhang.show', compact('donhang'));
     }
-
 
     /**
      * Show the form for editing the specified resource.

@@ -20,7 +20,7 @@
                     <div class="collapse" id="dashboard">
                         <ul class="nav-second-level">
                             <li><a class="tp-link" href="{{ route('thong_ke_chung') }}">Tổng quan</a></li>
-                            <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li>
+                            {{-- <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li> --}}
 
                         </ul>
                     </div>

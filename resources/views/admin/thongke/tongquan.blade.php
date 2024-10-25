@@ -350,19 +350,19 @@
                                                         pointBackgroundColor: function(context) {
                                                             var value = context.dataset.data[context.dataIndex];
                                                             return value >= 0 ? '#00FF00' :
-                                                            '#FF0000';
+                                                                '#FF0000';
                                                         },
                                                         pointBorderColor: function(context) {
                                                             var value = context.dataset.data[context.dataIndex];
                                                             return value >= 0 ? '#00FF00' :
-                                                            '#FF0000'; 
+                                                                '#FF0000';
                                                         },
                                                         pointRadius: 5,
-                                                        pointHoverRadius: 7, 
+                                                        pointHoverRadius: 7,
                                                         borderColor: function(context) {
                                                             var value = context.dataset.data[context.dataIndex];
                                                             return value >= 0 ? '#00FF00' :
-                                                            '#FF0000';
+                                                                '#FF0000';
                                                         },
                                                         segment: {
                                                             borderColor: ctx => {
@@ -376,7 +376,7 @@
                                                 options: {
                                                     scales: {
                                                         y: {
-                                                            beginAtZero: true 
+                                                            beginAtZero: true
                                                         }
                                                     },
                                                     elements: {
@@ -506,7 +506,22 @@
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
-                                                        <td>{{ $item->tong_tien }}</td>
+                                                        <td>
+                                                            @php
+                                                                $tong_tien = $item->tong_tien;
+                                                                if (intval($tong_tien) == $tong_tien) {
+                                                                    // Nếu tổng tiền là số nguyên
+                                                                    echo number_format($tong_tien, 0, ',', '.');
+                                                                } elseif (floor($tong_tien) == $tong_tien) {
+                                                                    // Nếu tổng tiền có dạng như 200000.00
+                                                                    echo number_format($tong_tien, 0, ',', '.');
+                                                                } else {
+                                                                    // Nếu tổng tiền có phần thập phân khác .00
+                                                                    echo number_format($tong_tien, 2, ',', '.');
+                                                                }
+                                                            @endphp
+                                                            Vnđ
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

@@ -217,7 +217,8 @@
                                         <div class="me-3">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input" id="radio2"
-                                                    name="optradio" value="option2" onclick="showTab('menu1');hideMonthInput();">Lợi nhuận
+                                                    name="optradio" value="option2"
+                                                    onclick="showTab('menu1');hideMonthInput();">Lợi nhuận
                                                 <label class="form-check-label" for="radio2"></label>
                                             </div>
                                         </div>
@@ -258,9 +259,10 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-1" >
-                                                <input type="month" class="form-control" id="monthInput" style="display: none;"
-                                                    name="loc_ngay_thang_quy_nam_bieudo" value="{{ old('loc_ngay_thang_quy_nam_bieudo', request('loc_ngay_thang_quy_nam_bieudo')) }}">
+                                            <div class="col-md-1">
+                                                <input type="month" class="form-control" id="monthInput"
+                                                    style="display: none;" name="loc_ngay_thang_quy_nam_bieudo"
+                                                    value="{{ old('loc_ngay_thang_quy_nam_bieudo', request('loc_ngay_thang_quy_nam_bieudo')) }}">
                                             </div>
                                             <div class="col-md-2">
                                                 <input type="submit" value="Tìm"
@@ -317,38 +319,102 @@
                                 <div class="tab-pane container fade" id="menu1" style="opacity: 1;">
                                     <div class="card-body">
                                         <canvas id="myChart3"></canvas>
+
                                         <script>
                                             var ctx = document.getElementById('myChart3').getContext('2d');
+
+                                            var profitData = [
+                                                @foreach ($loi_nhuan_theo_thang as $ln)
+                                                    {{ $ln }}{{ !$loop->last ? ',' : '' }}
+                                                @endforeach
+                                            ];
+
+                                            var labels = [
+                                                @foreach ($labels as $label)
+                                                    '{{ $label }}',
+                                                @endforeach
+                                            ];
+
                                             var myChart = new Chart(ctx, {
                                                 type: 'line',
                                                 data: {
-                                                    labels: [
-                                                        @foreach ($labels as $label)
-                                                            '{{ $label }}',
-                                                        @endforeach
-                                                    ],
+                                                    labels: labels,
                                                     datasets: [{
-                                                        label: 'Lợi nhuận',
-                                                        data: [12, 19, 3, 5, 2, 3],
-                                                        backgroundColor: [
-                                                            '#00FF00'
-                                                        ],
-                                                        borderColor: [
-                                                            '#00FF00'
-                                                        ],
+                                                        label: function(context) {
+                                                            let data = context.raw;
+                                                            return data >= 0 ? 'Lãi' : 'Âm';
+                                                        },
+                                                        data: profitData,
                                                         borderWidth: 2,
-                                                        fill: false
+                                                        fill: false,
+                                                        pointBackgroundColor: function(context) {
+                                                            var value = context.dataset.data[context.dataIndex];
+                                                            return value >= 0 ? '#00FF00' :
+                                                            '#FF0000';
+                                                        },
+                                                        pointBorderColor: function(context) {
+                                                            var value = context.dataset.data[context.dataIndex];
+                                                            return value >= 0 ? '#00FF00' :
+                                                            '#FF0000'; 
+                                                        },
+                                                        pointRadius: 5,
+                                                        pointHoverRadius: 7, 
+                                                        borderColor: function(context) {
+                                                            var value = context.dataset.data[context.dataIndex];
+                                                            return value >= 0 ? '#00FF00' :
+                                                            '#FF0000';
+                                                        },
+                                                        segment: {
+                                                            borderColor: ctx => {
+                                                                const index = ctx.p0DataIndex;
+                                                                const value = ctx.chart.data.datasets[0].data[index];
+                                                                return value >= 0 ? '#00FF00' : '#FF0000';
+                                                            }
+                                                        }
                                                     }]
                                                 },
                                                 options: {
                                                     scales: {
                                                         y: {
-                                                            beginAtZero: true
+                                                            beginAtZero: true 
+                                                        }
+                                                    },
+                                                    elements: {
+                                                        point: {
+                                                            radius: 5
+                                                        }
+                                                    },
+                                                    plugins: {
+                                                        tooltip: {
+                                                            callbacks: {
+                                                                label: function(context) {
+                                                                    let value = context.raw;
+                                                                    return value >= 0 ? `Lãi: ${value}` : `Âm: ${value}`;
+                                                                }
+                                                            }
+                                                        },
+                                                        legend: {
+                                                            display: true,
+                                                            labels: {
+                                                                generateLabels: function(chart) {
+                                                                    return [{
+                                                                        text: 'Lãi',
+                                                                        fillStyle: '#00FF00',
+                                                                        strokeStyle: '#00FF00'
+                                                                    }, {
+                                                                        text: 'Âm',
+                                                                        fillStyle: '#FF0000',
+                                                                        strokeStyle: '#FF0000'
+                                                                    }];
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
                                             });
                                         </script>
+
+
                                     </div>
                                 </div>
                                 <div class="tab-pane container fade p-3" id="menu2" style="opacity: 1;">

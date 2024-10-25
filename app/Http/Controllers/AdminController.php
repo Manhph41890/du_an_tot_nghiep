@@ -476,6 +476,11 @@ class AdminController extends Controller
 
         // Đơn hàng mới
         $donhangs = don_hang::query()->orderBy('id', 'desc')->paginate(5);
+        foreach ($donhangs as $item) {
+            $item->ngay_tao = Carbon::parse($item->ngay_tao)->format('d-m-Y');
+        }
+
+
         // Sản phẩm sắp hết hàng
         $sanphams_saphet = san_pham::query()->where('so_luong', '<', '10')->get();
         // Lấy 5 sản phẩm có lượt xem nhiều nhất
@@ -505,214 +510,246 @@ class AdminController extends Controller
     //
 
     //
-    public function thong_ke_doanh_thu(Request $request)
-    {
-        // Validate ngày bắt đầu, ngày kết thúc
-        $request->validate([
-            'ngay_bat_dau' => 'nullable|before_or_equal:ngay_ket_thuc',
-            'ngay_ket_thuc' => 'nullable|after_or_equal:ngay_bat_dau',
-            'ngay_bat_dau_bieudo' => 'nullable|before_or_equal:ngay_ket_thuc_bieudo',
-            'ngay_ket_thuc_bieudo' => 'nullable|after_or_equal:ngay_bat_dau_bieudo',
+    // public function thong_ke_doanh_thu(Request $request)
+    // {
+    //     // Validate ngày bắt đầu, ngày kết thúc
+    //     $request->validate([
+    //         'ngay_bat_dau' => 'nullable|before_or_equal:ngay_ket_thuc',
+    //         'ngay_ket_thuc' => 'nullable|after_or_equal:ngay_bat_dau',
+    //         'ngay_bat_dau_bieudo' => 'nullable|before_or_equal:ngay_ket_thuc_bieudo',
+    //         'ngay_ket_thuc_bieudo' => 'nullable|after_or_equal:ngay_bat_dau_bieudo',
 
-        ], [
-            'ngay_bat_dau.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
-            'ngay_ket_thuc.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
-            'ngay_bat_dau_bieudo.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
-            'ngay_ket_thuc_bieudo.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
-        ]);
+    //     ], [
+    //         'ngay_bat_dau.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
+    //         'ngay_ket_thuc.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
+    //         'ngay_bat_dau_bieudo.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
+    //         'ngay_ket_thuc_bieudo.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
+    //     ]);
 
-        $title = "Thống kê doanh thu";
-
-
-        if ($request->isMethod('get') && $request->input('ngay_bat_dau') && $request->input('ngay_ket_thuc')) {
-
-            // Số lượng đơn hàng
-            $soluong_donhangs = don_hang::query()
-                ->whereBetween('ngay_tao', [
-                    $request->input('ngay_bat_dau'),
-                    $request->input('ngay_ket_thuc')
-                ])
-                ->count();
-
-            // tổng tiền các tổng tiền của đơn hàng
-            $tong_tien_tat_ca_don_hang = don_hang::query()
-                ->whereBetween('ngay_tao', [
-                    $request->input('ngay_bat_dau'),
-                    $request->input('ngay_ket_thuc')
-                ])
-                ->sum('tong_tien');
-        } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam')) {
-
-            switch ($request->input('loc_ngay_thang_quy_nam')) {
-                case 'today':
-
-                    // Số lượng đơn hàng
-                    $soluong_donhangs = don_hang::whereDate('ngay_tao', Carbon::today())->count();
-                    // Tổng tiền các đơn hàng
-                    $tong_tien_tat_ca_don_hang = don_hang::whereDate('ngay_tao', Carbon::today())->sum('tong_tien');
+    //     $title = "Thống kê doanh thu";
 
 
-                    // LỢI NHUẬN
-                    $tt_dh_tang = don_hang::whereDate('ngay_tao', Carbon::today())->sum('tong_tien');
-                    $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
-                        ->whereDate('ngay_tao', Carbon::today())
-                        ->sum('san_phams.gia_nhap');
-                    // Tính tổng lợi nhuận
-                    $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
-                    // Lấy giá nhập của sản phẩm
-                    $gianhap_sp = san_pham::pluck('gia_nhap', 'id');
-                    // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
-                    $tong_gia_tri_sp_chua_chua = [];
-                    // Lặp qua các sản phẩm
-                    foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
-                        $so_luong_chua_chua = san_pham::where('id', $san_pham_id)
-                            ->whereDoesntHave('don_hangs', function ($query) {
-                                $query->whereDate('ngay_tao', Carbon::today());
-                            })->count();
-                        $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
-                    }
+    //     if ($request->isMethod('get') && $request->input('ngay_bat_dau') && $request->input('ngay_ket_thuc')) {
+
+    //         // Số lượng đơn hàng
+    //         $soluong_donhangs = don_hang::query()
+    //             ->whereBetween('ngay_tao', [
+    //                 $request->input('ngay_bat_dau'),
+    //                 $request->input('ngay_ket_thuc')
+    //             ])
+    //             ->count();
+
+    //         // tổng tiền các tổng tiền của đơn hàng
+    //         $tong_tien_tat_ca_don_hang = don_hang::query()
+    //             ->whereBetween('ngay_tao', [
+    //                 $request->input('ngay_bat_dau'),
+    //                 $request->input('ngay_ket_thuc')
+    //             ])
+    //             ->sum('tong_tien');
+
+    //         // LỢI NHUẬN-------------------
+    //         // Tính tổng tiền đơn hàng
+    //         $tt_dh_tang = don_hang::whereBetween('ngay_tao', [
+    //             $request->input('ngay_bat_dau'),
+    //             $request->input('ngay_ket_thuc')
+    //         ])->sum('tong_tien');
+
+    //         // Tính tổng giá nhập của sản phẩm
+    //         $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+    //             ->whereBetween('ngay_tao', [
+    //                 $request->input('ngay_bat_dau'),
+    //                 $request->input('ngay_ket_thuc')
+    //             ])->sum('san_phams.gia_nhap');
+
+    //         // Tính tổng lợi nhuận
+    //         $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
+
+    //         // Lấy giá nhập của tất cả sản phẩm
+    //         $gianhap_sp = san_pham::pluck('gia_nhap', 'id');
+
+    //         // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa có trong đơn hàng
+    //         $tong_gia_tri_sp_chua_chua = [];
+    //         $san_pham_ids = san_pham::pluck('id')->toArray(); // Lấy tất cả ID sản phẩm
+
+    //         foreach ($san_pham_ids as $san_pham_id) {
+    //             $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+    //                 $query->where('id', $san_pham_id);
+    //             })->count();
+
+    //             $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gianhap_sp[$san_pham_id] * $so_luong_chua_chua;
+    //         }
+    //     } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam')) {
+
+    //         switch ($request->input('loc_ngay_thang_quy_nam')) {
+    //             case 'today':
+
+    //                 // Số lượng đơn hàng
+    //                 $soluong_donhangs = don_hang::whereDate('ngay_tao', Carbon::today())->count();
+    //                 // Tổng tiền các đơn hàng
+    //                 $tong_tien_tat_ca_don_hang = don_hang::whereDate('ngay_tao', Carbon::today())->sum('tong_tien');
 
 
-                    break;
-                case 'last_7_days':
-
-                    // Số lượng đơn hàng
-                    $soluong_donhangs = don_hang::where('ngay_tao', '>=', Carbon::today()->subDays(6))->count();
-
-                    // Tổng tiền các đơn hàng
-                    $tong_tien_tat_ca_don_hang = don_hang::where('ngay_tao', '>=', Carbon::today()->subDays(6))->sum('tong_tien');
-
-
-                    // LỢI NHUẬN
-                    $tt_dh_tang = don_hang::where('ngay_tao', '>=', Carbon::today()->subDays(6))->sum('tong_tien');
-                    $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
-                        ->where('ngay_tao', '>=', Carbon::today()->subDays(6))
-                        ->sum('san_phams.gia_nhap');
-                    // Tính tổng lợi nhuận
-                    $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
-                    // Lấy giá nhập của sản phẩm
-                    $gianhap_sp = san_pham::pluck('gia_nhap', 'id');
-                    // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
-                    $tong_gia_tri_sp_chua_chua = [];
-                    // Lặp qua các sản phẩm
-                    foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
-                        $so_luong_chua_chua = san_pham::where('id', $san_pham_id)
-                            ->whereDoesntHave('don_hangs', function ($query) {
-                                $query->where('ngay_tao', '>=', Carbon::today()->subDays(6));
-                            })->count();
-
-                        $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
-                    }
+    //                 // LỢI NHUẬN
+    //                 $tt_dh_tang = don_hang::whereDate('ngay_tao', Carbon::today())->sum('tong_tien');
+    //                 $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+    //                     ->whereDate('ngay_tao', Carbon::today())
+    //                     ->sum('san_phams.gia_nhap');
+    //                 // Tính tổng lợi nhuận
+    //                 $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
+    //                 // Lấy giá nhập của sản phẩm
+    //                 $gianhap_sp = san_pham::pluck('gia_nhap', 'id');
+    //                 // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+    //                 $tong_gia_tri_sp_chua_chua = [];
+    //                 // Lặp qua các sản phẩm
+    //                 foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+    //                     $so_luong_chua_chua = san_pham::where('id', $san_pham_id)
+    //                         ->whereDoesntHave('don_hangs', function ($query) {
+    //                             $query->whereDate('ngay_tao', Carbon::today());
+    //                         })->count();
+    //                     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+    //                 }
 
 
-                    break;
-                case 'month':
+    //                 break;
+    //             case 'last_7_days':
 
-                    // Số lượng đơn hàng
-                    $soluong_donhangs = don_hang::query()->whereMonth('ngay_tao', Carbon::now()->month)->count();
+    //                 // Số lượng đơn hàng
+    //                 $soluong_donhangs = don_hang::where('ngay_tao', '>=', Carbon::today()->subDays(6))->count();
 
-                    // Tổng tiền các đơn hàng
-                    $tong_tien_tat_ca_don_hang = don_hang::whereMonth('ngay_tao', Carbon::now()->month)->sum('tong_tien');
-
-                    // LỢI NHUẬN
-                    $tt_dh_tang = don_hang::whereMonth('ngay_tao', Carbon::now()->month)->sum('tong_tien');
-                    $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
-                        ->whereMonth('ngay_tao', Carbon::now()->month)
-                        ->sum('san_phams.gia_nhap');
-                    // Tính tổng lợi nhuận
-                    $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
-                    // Lấy giá nhập của sản phẩm
-                    $gianhap_sp = san_pham::pluck('gia_nhap', 'id');
-                    // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
-                    $tong_gia_tri_sp_chua_chua = [];
-                    // Lặp qua các sản phẩm
-                    foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
-                        $so_luong_chua_chua = san_pham::where('id', $san_pham_id)
-                            ->whereDoesntHave('don_hangs', function ($query) {
-                                $query->whereMonth('ngay_tao', Carbon::now()->month);
-                            })->count();
-                        $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
-                    }
+    //                 // Tổng tiền các đơn hàng
+    //                 $tong_tien_tat_ca_don_hang = don_hang::where('ngay_tao', '>=', Carbon::today()->subDays(6))->sum('tong_tien');
 
 
-                    break;
-                case 'year':
+    //                 // LỢI NHUẬN
+    //                 $tt_dh_tang = don_hang::where('ngay_tao', '>=', Carbon::today()->subDays(6))->sum('tong_tien');
+    //                 $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+    //                     ->where('ngay_tao', '>=', Carbon::today()->subDays(6))
+    //                     ->sum('san_phams.gia_nhap');
+    //                 // Tính tổng lợi nhuận
+    //                 $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
+    //                 // Lấy giá nhập của sản phẩm
+    //                 $gianhap_sp = san_pham::pluck('gia_nhap', 'id');
+    //                 // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+    //                 $tong_gia_tri_sp_chua_chua = [];
+    //                 // Lặp qua các sản phẩm
+    //                 foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+    //                     $so_luong_chua_chua = san_pham::where('id', $san_pham_id)
+    //                         ->whereDoesntHave('don_hangs', function ($query) {
+    //                             $query->where('ngay_tao', '>=', Carbon::today()->subDays(6));
+    //                         })->count();
 
-                    // Số lượng đơn hàng
-                    $soluong_donhangs = don_hang::query()->whereYear('ngay_tao', Carbon::now()->year)->count();
-
-                    // Tổng tiền các đơn hàng
-                    $tong_tien_tat_ca_don_hang = don_hang::whereYear('ngay_tao', Carbon::now()->year)->sum('tong_tien');
-
-                    // LỢI NHUẬN
-                    $tt_dh_tang = don_hang::whereYear('ngay_tao', Carbon::now()->year)->sum('tong_tien');
-                    $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
-                        ->whereYear('ngay_tao', Carbon::now()->year)
-                        ->sum('san_phams.gia_nhap');
-                    // Tính tổng lợi nhuận
-                    $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
-                    // Lấy giá nhập của sản phẩm
-                    $gianhap_sp = san_pham::pluck('gia_nhap', 'id');
-                    // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
-                    $tong_gia_tri_sp_chua_chua = [];
-                    // Lặp qua các sản phẩm
-                    foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
-                        $so_luong_chua_chua = san_pham::where('id', $san_pham_id)
-                            ->whereDoesntHave('don_hangs', function ($query) {
-                                $query->whereYear('ngay_tao', Carbon::now()->year);
-                            })->count();
-                        $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
-                    }
-
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            // Số lượng tất cả đơn hàng
-            $soluong_donhangs = don_hang::query()->count();
-
-            // tổng tiền các tổng tiền của đơn hàng
-            $tong_tien_tat_ca_don_hang = don_hang::sum('tong_tien');
-
-            // LỢI NHUẬN-------------------
-            $tt_dh_tang = don_hang::sum('tong_tien');
-            $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
-                ->sum('san_phams.gia_nhap');
-            // Tính tổng lợi nhuận
-            $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
-            // Lấy giá nhập của sản phẩm
-            $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
-            $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
-            // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
-            $tong_gia_tri_sp_chua_chua = [];
-            // Lặp qua các sản phẩm
-            foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
-                $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
-                    $query->where('id', $san_pham_id);
-                })->count();
-                $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
-            }
-        }
+    //                     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+    //                 }
 
 
-        if (intval($tong_tien_tat_ca_don_hang) == $tong_tien_tat_ca_don_hang || intval($loi_nhuan_tong) == $loi_nhuan_tong) {
-            // Nếu tổng tiền là số nguyên (không có phần thập phân), hiển thị dạng không có phần thập phân
-            $tong_tien = number_format($tong_tien_tat_ca_don_hang, 0, ',', '.');
-            $loi_nhuan_tong = number_format($loi_nhuan_tong, 0, ',', '.');
-        } elseif (floor($tong_tien_tat_ca_don_hang) == $tong_tien_tat_ca_don_hang || floor($loi_nhuan_tong) == $loi_nhuan_tong) {
-            // Nếu tổng tiền có dạng như 200000.00, hiển thị dạng số nguyên
-            $tong_tien = number_format($tong_tien_tat_ca_don_hang, 0, ',', '.');
-            $loi_nhuan_tong = number_format($loi_nhuan_tong, 0, ',', '.');
-        } else {
-            // Nếu tổng tiền có phần thập phân khác .00, hiển thị đầy đủ 2 chữ số sau dấu phẩy
-            $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
-            $loi_nhuan_tong = number_format($loi_nhuan_tong, 2, ',', '.');
-        }
+    //                 break;
+    //             case 'month':
+
+    //                 // Số lượng đơn hàng
+    //                 $soluong_donhangs = don_hang::query()->whereMonth('ngay_tao', Carbon::now()->month)->count();
+
+    //                 // Tổng tiền các đơn hàng
+    //                 $tong_tien_tat_ca_don_hang = don_hang::whereMonth('ngay_tao', Carbon::now()->month)->sum('tong_tien');
+
+    //                 // LỢI NHUẬN
+    //                 $tt_dh_tang = don_hang::whereMonth('ngay_tao', Carbon::now()->month)->sum('tong_tien');
+    //                 $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+    //                     ->whereMonth('ngay_tao', Carbon::now()->month)
+    //                     ->sum('san_phams.gia_nhap');
+    //                 // Tính tổng lợi nhuận
+    //                 $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
+    //                 // Lấy giá nhập của sản phẩm
+    //                 $gianhap_sp = san_pham::pluck('gia_nhap', 'id');
+    //                 // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+    //                 $tong_gia_tri_sp_chua_chua = [];
+    //                 // Lặp qua các sản phẩm
+    //                 foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+    //                     $so_luong_chua_chua = san_pham::where('id', $san_pham_id)
+    //                         ->whereDoesntHave('don_hangs', function ($query) {
+    //                             $query->whereMonth('ngay_tao', Carbon::now()->month);
+    //                         })->count();
+    //                     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+    //                 }
 
 
-        return view('admin.thongke.doanhthu', compact('title', 'tong_tien', 'soluong_donhangs', 'loi_nhuan_tong'));
-    }
+    //                 break;
+    //             case 'year':
+
+    //                 // Số lượng đơn hàng
+    //                 $soluong_donhangs = don_hang::query()->whereYear('ngay_tao', Carbon::now()->year)->count();
+
+    //                 // Tổng tiền các đơn hàng
+    //                 $tong_tien_tat_ca_don_hang = don_hang::whereYear('ngay_tao', Carbon::now()->year)->sum('tong_tien');
+
+    //                 // LỢI NHUẬN
+    //                 $tt_dh_tang = don_hang::whereYear('ngay_tao', Carbon::now()->year)->sum('tong_tien');
+    //                 $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+    //                     ->whereYear('ngay_tao', Carbon::now()->year)
+    //                     ->sum('san_phams.gia_nhap');
+    //                 // Tính tổng lợi nhuận
+    //                 $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
+    //                 // Lấy giá nhập của sản phẩm
+    //                 $gianhap_sp = san_pham::pluck('gia_nhap', 'id');
+    //                 // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+    //                 $tong_gia_tri_sp_chua_chua = [];
+    //                 // Lặp qua các sản phẩm
+    //                 foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+    //                     $so_luong_chua_chua = san_pham::where('id', $san_pham_id)
+    //                         ->whereDoesntHave('don_hangs', function ($query) {
+    //                             $query->whereYear('ngay_tao', Carbon::now()->year);
+    //                         })->count();
+    //                     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+    //                 }
+
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+    //     } else {
+    //         // Số lượng tất cả đơn hàng
+    //         $soluong_donhangs = don_hang::query()->count();
+
+    //         // tổng tiền các tổng tiền của đơn hàng
+    //         $tong_tien_tat_ca_don_hang = don_hang::sum('tong_tien');
+
+    //         // LỢI NHUẬN-------------------
+    //         $tt_dh_tang = don_hang::sum('tong_tien');
+    //         $tong_gia_nhap_tang = don_hang::join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+    //             ->sum('san_phams.gia_nhap');
+    //         // Tính tổng lợi nhuận
+    //         $loi_nhuan_tong = $tt_dh_tang - $tong_gia_nhap_tang;
+    //         // Lấy giá nhập của sản phẩm
+    //         $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
+    //         $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
+    //         // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+    //         $tong_gia_tri_sp_chua_chua = [];
+    //         // Lặp qua các sản phẩm
+    //         foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+    //             $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+    //                 $query->where('id', $san_pham_id);
+    //             })->count();
+    //             $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+    //         }
+    //     }
+
+
+    //     if (intval($tong_tien_tat_ca_don_hang) == $tong_tien_tat_ca_don_hang || intval($loi_nhuan_tong) == $loi_nhuan_tong) {
+    //         // Nếu tổng tiền là số nguyên (không có phần thập phân), hiển thị dạng không có phần thập phân
+    //         $tong_tien = number_format($tong_tien_tat_ca_don_hang, 0, ',', '.');
+    //         $loi_nhuan_tong = number_format($loi_nhuan_tong, 0, ',', '.');
+    //     } elseif (floor($tong_tien_tat_ca_don_hang) == $tong_tien_tat_ca_don_hang || floor($loi_nhuan_tong) == $loi_nhuan_tong) {
+    //         // Nếu tổng tiền có dạng như 200000.00, hiển thị dạng số nguyên
+    //         $tong_tien = number_format($tong_tien_tat_ca_don_hang, 0, ',', '.');
+    //         $loi_nhuan_tong = number_format($loi_nhuan_tong, 0, ',', '.');
+    //     } else {
+    //         // Nếu tổng tiền có phần thập phân khác .00, hiển thị đầy đủ 2 chữ số sau dấu phẩy
+    //         $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
+    //         $loi_nhuan_tong = number_format($loi_nhuan_tong, 2, ',', '.');
+    //     }
+
+
+    //     return view('admin.thongke.doanhthu', compact('title', 'tong_tien', 'soluong_donhangs', 'loi_nhuan_tong'));
+    // }
     //
 
 }

@@ -41,7 +41,13 @@
                                         @method('GET')
                                         <div class="form-group mb-3">
                                             <input class="form-control" value="{{request()->search_km}}" type="text" name="search_km" id="search_km" placeholder="Nhập mã khuyến mãi">
-                                            <button class="btn btn-success">Tìm kiếm</button>
+                                            <label class="form-label" for="trang_thai">Trạng thái:</label>
+                                            <select class="form-select" id="trang_thai" name="trang_thai">
+                                                <option value="">Tất cả</option>
+                                                <option value="0" {{ request('trang_thai') == '0' ? 'selected' : '' }}>Đang hoạt động</option>
+                                                <option value="1" {{ request('trang_thai') == '1' ? 'selected' : '' }}>Hết hạn</option>
+                                            </select>
+                                            <button class="btn btn-success">Lọc</button>
                                         </div>
                                     </form>
                                 </div>

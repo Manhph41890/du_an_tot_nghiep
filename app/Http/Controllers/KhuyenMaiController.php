@@ -22,17 +22,20 @@ class KhuyenMaiController extends Controller
         $query = khuyen_mai::query();
 
         $searchKM = $request->input('search_km');
+        $isActive= $request->input('trang_thai');
         if($searchKM){
-            $khuyenMais = khuyen_mai::where('ma_khuyen_mai', $searchKM)->paginate(10);
-        }else{
-            $khuyenMais = $query->latest('id')->paginate(10);
+            $khuyenMais=$query->where('ma_khuyen_mai', $searchKM)->paginate(10);
+        } 
+        if ($isActive !== null && $isActive !== '') {
+            $khuyenMais =$query->where('is_active', $isActive)->paginate(10);
         }
-
-       
-
+        
+            $khuyenMais = $query->latest('id')->paginate(10);
+        
+        
         $title = 'Danh sách khuyến mãi';
          $isAdmin = auth()->user()->chuc_vu ->ten_chuc_vu === 'admin';
-        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title','isAdmin'));
+        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title','isAdmin','searchKM','isActive'));
     }
 
     /**

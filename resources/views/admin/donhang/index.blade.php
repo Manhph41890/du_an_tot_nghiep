@@ -75,7 +75,6 @@
                                                     <th scope="col">Mã đơn hàng</th>
                                                     <th scope="col">Người đặt</th>
                                                     <th scope="col">Số điện thoại</th>
-                                                    <th scope="col">Địa chỉ giao hàng</th>
                                                     <th scope="col">Ngày tạo đơn hàng</th>
                                                     <th scope="col">Tổng tiền</th>
                                                     <th scope="col">Hành Động</th>
@@ -87,7 +86,6 @@
                                                         <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
-                                                        <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
                                                         <td>
@@ -135,7 +133,6 @@
                                                     <th scope="col">Mã đơn hàng</th>
                                                     <th scope="col">Người đặt</th>
                                                     <th scope="col">Số điện thoại</th>
-                                                    <th scope="col">Địa chỉ giao hàng</th>
                                                     <th scope="col">Ngày tạo đơn hàng</th>
                                                     <th scope="col">Tổng tiền</th>
                                                     <th scope="col">Hành Động</th>
@@ -147,7 +144,6 @@
                                                         <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
-                                                        <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
                                                         <td>
@@ -196,7 +192,6 @@
                                                     <th scope="col">Mã đơn hàng</th>
                                                     <th scope="col">Người đặt</th>
                                                     <th scope="col">Số điện thoại</th>
-                                                    <th scope="col">Địa chỉ giao hàng</th>
                                                     <th scope="col">Ngày tạo đơn hàng</th>
                                                     <th scope="col">Tổng tiền</th>
                                                     <th scope="col">Hành Động</th>
@@ -208,7 +203,6 @@
                                                         <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
-                                                        <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
                                                         <td>
@@ -257,7 +251,6 @@
                                                     <th scope="col">Mã đơn hàng</th>
                                                     <th scope="col">Người đặt</th>
                                                     <th scope="col">Số điện thoại</th>
-                                                    <th scope="col">Địa chỉ giao hàng</th>
                                                     <th scope="col">Ngày tạo đơn hàng</th>
                                                     <th scope="col">Tổng tiền</th>
                                                     <th scope="col">Hành Động</th>
@@ -269,7 +262,6 @@
                                                         <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
-                                                        <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
                                                         <td>
@@ -319,7 +311,6 @@
                                                     <th scope="col">Mã đơn hàng</th>
                                                     <th scope="col">Người đặt</th>
                                                     <th scope="col">Số điện thoại</th>
-                                                    <th scope="col">Địa chỉ giao hàng</th>
                                                     <th scope="col">Ngày tạo đơn hàng</th>
                                                     <th scope="col">Tổng tiền</th>
                                                     <th scope="col">Hành Động</th>
@@ -331,7 +322,6 @@
                                                         <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
-                                                        <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
                                                         <td>
@@ -380,7 +370,6 @@
                                                     <th scope="col">Mã đơn hàng</th>
                                                     <th scope="col">Người đặt</th>
                                                     <th scope="col">Số điện thoại</th>
-                                                    <th scope="col">Địa chỉ giao hàng</th>
                                                     <th scope="col">Ngày tạo đơn hàng</th>
                                                     <th scope="col">Tổng tiền</th>
                                                     <th scope="col">Hành Động</th>
@@ -392,7 +381,6 @@
                                                         <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
-                                                        <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
                                                         <td>
@@ -441,7 +429,6 @@
                                                     <th scope="col">Mã đơn hàng</th>
                                                     <th scope="col">Người đặt</th>
                                                     <th scope="col">Số điện thoại</th>
-                                                    <th scope="col">Địa chỉ giao hàng</th>
                                                     <th scope="col">Ngày tạo đơn hàng</th>
                                                     <th scope="col">Tổng tiền</th>
                                                     <th scope="col">Hành Động</th>
@@ -453,7 +440,6 @@
                                                         <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
-                                                        <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
                                                         <td>
@@ -502,7 +488,6 @@
                                                     <th scope="col">Mã đơn hàng</th>
                                                     <th scope="col">Người đặt</th>
                                                     <th scope="col">Số điện thoại</th>
-                                                    <th scope="col">Địa chỉ giao hàng</th>
                                                     <th scope="col">Ngày tạo đơn hàng</th>
                                                     <th scope="col">Tổng tiền</th>
                                                     <th scope="col">Hành Động</th>
@@ -514,7 +499,6 @@
                                                         <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
-                                                        <td>{{ $item->dia_chi }}</td>
                                                         <td>{{ $item->ngay_tao }}</td>
                                                         <td>{{ $item->tong_tien }}</td>
                                                         <td>

@@ -461,15 +461,15 @@ class AdminController extends Controller
             $tong_gia_tri_sp_chua_chua = [];
 
             // Lặp qua các sản phẩm
-            foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
-                // Lấy số lượng đơn hàng chưa chứa sản phẩm này
-                $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
-                    $query->where('id', $san_pham_id);
-                })->count();
+            // foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+            //     // Lấy số lượng đơn hàng chưa chứa sản phẩm này
+            //     $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+            //         $query->where('id', $san_pham_id);
+            //     })->count();
 
-                // Tính tổng giá trị cho sản phẩm này
-                $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
-            }
+            //     // Tính tổng giá trị cho sản phẩm này
+            //     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+            // }
             // dd($loi_nhuan_theo_thang);
         }
 

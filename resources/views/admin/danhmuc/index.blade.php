@@ -14,7 +14,8 @@
                     <form method="post" action="{{ route('danhmucs.index') }}" class="d-flex">
                         @csrf
                         @method('GET')
-                        <input type="text" name="search_ten_danh_muc" class="form-control me-2" placeholder="Tìm sản phẩm..."  value="{{ request('search_ten_danh_muc') }}">
+                        <input type="text" name="search_ten_danh_muc" class="form-control me-2"
+                            placeholder="Tìm danh mục..." value="{{ request('search_ten_danh_muc') }}">
                         <select name="search_dm" class="form-select me-2">
                             <option value="">Hiển thị tất cả</option>
                             <option value="0" {{ request('search_dm') == '0' ? 'selected' : '' }}>Hiển thị</option>
@@ -34,7 +35,6 @@
                                 </div>
                             </div>
                         </div><!-- end card header -->
-
                         <div class="row">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -63,9 +63,10 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $item->ten_danh_muc }}</td>
-                                                    <td
-                                                        class="{{ $item->is_active == 0 ? 'text-success' : 'text-danger' }}">
-                                                        {{ $item->is_active == 0 ? 'Hiển Thị' : 'Ẩn' }}
+                                                    <td>
+                                                        {!! $item->is_active
+                                                            ? '<span class="badge bg-primary">Hiển Thị</span>'
+                                                            : '<span class="badge bg-danger">Ẩn</span>' !!}
                                                     </td>
                                                     <td>
                                                         @if ($isAdmin)

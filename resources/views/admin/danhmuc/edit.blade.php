@@ -66,15 +66,15 @@
                                             <div class="col-sm-10 mb-3 d-flex gap-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="is_active"
-                                                        id="trang_thai_show" value="0"
-                                                        {{ $danhmuc->is_active == 0 ? 'checked' : '' }}>
+                                                        id="trang_thai_show" value="1"
+                                                        {{ $danhmuc->is_active == 1 ? 'checked' : '' }}>
                                                     <label class="form-check-label text-success" for="trang_thai_show">Hiển
                                                         thị</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="is_active"
-                                                        value="1" id="trang_thai_hide"
-                                                        {{ $danhmuc->is_active == 1 ? 'checked' : '' }}>
+                                                        value="0" id="trang_thai_hide"
+                                                        {{ $danhmuc->is_active == 0 ? 'checked' : '' }}>
                                                     <label class="form-check-label text-danger"
                                                         for="trang_thai_hide">Ẩn</label>
                                                 </div>

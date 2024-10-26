@@ -64,7 +64,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     // Thống kê
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
-        Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
+        // Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
     });
 
     // Profile

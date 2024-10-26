@@ -5,10 +5,7 @@
 
 @section('content')
     <div class="content-page">
-
         <div class="content">
-
-            <!-- Start Content-->
             <div class="container-xxl">
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
@@ -21,13 +18,11 @@
                             <div class="card-header">
                                 <h5 class="card-title mb-0"></h5>
                             </div><!-- end card header -->
-
                             <div class="card-body">
                                 <form action="{{ route('danhmucs.update', $danhmuc->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
-
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="mb-3">
@@ -42,7 +37,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="anh_danh_muc" class="form-label">Hình ảnh </label>
@@ -60,7 +54,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="mb-3">
                                             <label for="trang_thai" class="form-label">Trạng thái</label>
                                             <div class="col-sm-10 mb-3 d-flex gap-2">
@@ -85,24 +78,18 @@
                                                 @enderror
                                             </div>
                                         </div>
-
                                         <div class="d-flex justify-content-center">
                                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- container-fluid -->
-@endsection
-
-@section('js')
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const fileInput = document.getElementById('anh_danh_muc');
@@ -127,3 +114,4 @@
         });
     </script>
 @endsection
+

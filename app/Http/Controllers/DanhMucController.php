@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\danh_muc;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Storedanh_mucRequest;
 use App\Http\Requests\Updatedanh_mucRequest;
@@ -30,9 +31,8 @@ class DanhMucController extends Controller
             $search_ten_danh_muc = $request->input('search_ten_danh_muc');
             $query->where('ten_danh_muc', 'like', '%' . $search_ten_danh_muc . '%');
         }
-
+        
         $danhmucs = $query->latest('id')->paginate(5);
-
         $title = "Danh sách danh mục";
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
         return view('admin.danhmuc.index', compact('danhmucs', 'title', 'isAdmin'));
@@ -44,9 +44,7 @@ class DanhMucController extends Controller
     public function create()
     {
         $this->authorize('create', danh_muc::class);
-        //
         $title = "Thêm mới danh mục";
-
         return view('admin.danhmuc.create', compact('title'));
     }
 
@@ -55,7 +53,6 @@ class DanhMucController extends Controller
      */
     public function store(Storedanh_mucRequest $request)
     {
-        //
         if ($request->isMethod('POST')) {
             $param = $request->except('_token');
             if ($request->hasFile('anh_danh_muc')) {
@@ -66,9 +63,6 @@ class DanhMucController extends Controller
             $param['anh_danh_muc'] = $filepath;
         }
         danh_muc::create($param);
-
-
-
         return redirect()->route('danhmucs.index')->with('success', 'Thêm danh mục thành công!');
     }
 
@@ -85,8 +79,6 @@ class DanhMucController extends Controller
      */
     public function edit(danh_muc $danh_muc, string $id)
     {
-        //
-
         $title = "Cập nhật danh mục";
         $danhmuc = danh_muc::query()->findOrFail($id);
         $this->authorize('update', $danh_muc);
@@ -98,7 +90,6 @@ class DanhMucController extends Controller
      */
     public function update(Updatedanh_mucRequest $request, string $id)
     {
-        //
         if ($request->isMethod('PUT')) {
             $param = $request->except('_token', '_method');
             $danhMuc = danh_muc::findOrFail($id);
@@ -112,12 +103,14 @@ class DanhMucController extends Controller
             }
             $param['anh_danh_muc'] = $filepath;
             $param['is_active'] = $request->input('is_active', $danhMuc->is_active);
-
-
-            // dd($param);
+            $request->validate([
+                'ten_danh_muc' =>Rule::unique('danh_mucs', 'ten_danh_muc')->ignore($id)
+            ], [
+                'ten_danh_muc.unique' => 'Tên danh mục đã tồn tại.',
+            ]);
+            $param['ten_danh_muc'] = $request->input('ten_danh_muc') ?: $danhMuc->ten_danh_muc;
             $danhMuc->update($param);
         }
-
         return redirect()->route('danhmucs.index')->with('success', 'Cập nhật danh mục thành công');
     }
 

@@ -29,7 +29,7 @@ class StaffController extends Controller
 
         // Đếm tổng số lượng người dùng
         $users = User::count();
-<<<<<<< HEAD
+
 
         // tổng tiền các tỏng tiền 
         $tong_tien_tat_ca_don_hang = don_hang::sum('tong_tien');
@@ -414,7 +414,6 @@ class StaffController extends Controller
 
 
         return view('admin.thongke.tongquan', compact('labels_phantram', 'phantramdonhang', 'labels', 'tongTienThang', 'sanphams_saphet', 'views_product', 'title', 'donhangs', 'tong_tien', 'isAdmin', 'soluong_donhangs', 'soluong_donhangs_new', 'tongtien_donhangs_moi', 'donhangs_daxacnhan', 'donhangs_dangchuanbihang', 'donhangs_dangvanchuyen', 'donhangs_dagiao', 'donhangs_thanhcong', 'donhangs_dahuy'));
-=======
 
         // tổng tiền các tỏng tiền 
         $tong_tien_tat_ca_don_hang = don_hang::sum('tong_tien');
@@ -431,6 +430,6 @@ class StaffController extends Controller
             $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
         }
         return view('admin.thongke.tongquan', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
->>>>>>> 41908a326f46f2be9134030f6259c558a54c7d8c
+
     }
 }

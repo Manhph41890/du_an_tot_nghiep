@@ -460,12 +460,15 @@ class AdminController extends Controller
             // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
             // $tong_gia_tri_sp_chua_chua = [];
 
-            // // Lặp qua các sản phẩm
-            // foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
-            //     // Lấy số lượng đơn hàng chưa chứa sản phẩm này
-            //     $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
-            //         $query->where('id', $san_pham_id);
-            //     })->count();
+            // Lặp qua các sản phẩm
+            foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+                // Lấy số lượng đơn hàng chưa chứa sản phẩm này
+                // $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+                //     $query->where('id', $san_pham_id);
+                // })->count();
+                $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+                    $query->where('san_phams.id', $san_pham_id); // Thêm tên bảng vào trước cột `id`
+                })->count();
 
             //     // Tính tổng giá trị cho sản phẩm này
             //     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
@@ -752,4 +755,5 @@ class AdminController extends Controller
     // }
     //
 
+}
 }

@@ -21,15 +21,27 @@ class KhuyenMaiController extends Controller
         $danhmucs = danh_muc::all();
         $query = khuyen_mai::query();
 
-        if ($request->has('search_km')) {
-            $query->where('ma_khuyen_mai', 'LIKE', "%{$request->input('search_km')}%");
+        $searchKM = $request->input('search_km');
+        $isActive= $request->input('trang_thai');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        if($searchKM){
+            $khuyenMais=$query->where('ma_khuyen_mai', $searchKM)->paginate(10);
+        } 
+        if($startDate && $endDate){
+            $khuyenMais= $query->whereBetween('ngay_bat_dau',[$startDate , $endDate])->paginate(10);
+
         }
-
-        $khuyenMais = $query->latest('id')->paginate(5);
-
+        if ($isActive !== null && $isActive !== '') {
+            $khuyenMais =$query->where('is_active', $isActive)->paginate(10);
+        }
+        
+            $khuyenMais = $query->latest('id')->paginate(10);
+        
+        
         $title = 'Danh sách khuyến mãi';
          $isAdmin = auth()->user()->chuc_vu ->ten_chuc_vu === 'admin';
-        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title','isAdmin'));
+        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title','isAdmin','searchKM','isActive','startDate','endDate'));
     }
 
     /**

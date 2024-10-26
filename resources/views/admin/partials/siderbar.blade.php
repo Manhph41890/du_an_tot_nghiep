@@ -5,7 +5,7 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <div class="logo-box">
-
+                <img src="{{ asset('assets/client/img/logo/logo_art.png') }}" alt="" width="200px">
             </div>
 
             <ul id="side-menu" class="list-unstyled">
@@ -20,9 +20,8 @@
                     <div class="collapse" id="dashboard">
                         <ul class="nav-second-level">
                             <li><a class="tp-link" href="{{ route('thong_ke_chung') }}">Tổng quan</a></li>
-                            <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li>
-                            <li><a class="tp-link" href="{{ route('thong_ke_tai_khoan') }}">Tài khoản</a></li>
-                            <li><a class="tp-link" href="{{ route('thong_ke_san_pham') }}">Sản phẩm</a></li>
+                            {{-- <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li> --}}
+
                         </ul>
                     </div>
                 </li>
@@ -184,6 +183,16 @@
         <!-- End Sidebar -->
 
         <div class="clearfix"></div>
+        {{-- <div class="row" style="margin-top: 180px">
+            <div class="col fs-13 text-muted text-center">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> - Made with <span class="mdi mdi-heart text-danger"></span> by <a
+                    href="#!" class="text-reset fw-semibold"><img src="assets/client/img/logo/logo_art.png"
+                        alt="" height="40" style="margin-bottom: 5px"></a>
+            </div>
+        </div> --}}
     </div>
 </div>
 <!-- Left Sidebar End -->

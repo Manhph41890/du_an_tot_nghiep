@@ -14,6 +14,7 @@ class san_pham extends Model
         'gia_goc',
         'gia_km',
         'anh_san_pham',
+        'gia_nhap',
         'so_luong',
         'ma_ta_san_pham',
         'is_active',
@@ -29,14 +30,14 @@ class san_pham extends Model
     }
     public function don_hangs()
     {
-        return $this->hasMany(don_hang::class, 'san_pham_id');
+        return $this->hasMany(don_hang::class);
     }
     public function bien_the_san_phams()
     {
-        return $this->hasMany(bien_the_san_pham::class);
+        return $this->hasMany(bien_the_san_pham::class, "san_pham_id");
     }
     public function danh_gias()
     {
-        return $this->hasMany(danh_gia::class);
+        return $this->hasMany(danh_gia::class, "san_pham_id");
     }
 }

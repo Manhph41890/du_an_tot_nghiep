@@ -5,7 +5,7 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <div class="logo-box">
-
+                <img src="<?php echo e(asset('assets/client/img/logo/logo_art.png')); ?>" alt="" width="200px">
             </div>
 
             <ul id="side-menu" class="list-unstyled">
@@ -21,8 +21,7 @@
                         <ul class="nav-second-level">
                             <li><a class="tp-link" href="<?php echo e(route('thong_ke_chung')); ?>">Tổng quan</a></li>
                             <li><a class="tp-link" href="<?php echo e(route('thong_ke_doanh_thu')); ?>">Doanh thu</a></li>
-                            <li><a class="tp-link" href="<?php echo e(route('thong_ke_tai_khoan')); ?>">Tài khoản</a></li>
-                            <li><a class="tp-link" href="<?php echo e(route('thong_ke_san_pham')); ?>">Sản phẩm</a></li>
+
                         </ul>
                     </div>
                 </li>
@@ -64,9 +63,9 @@
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="danhgia">
+                    <div class="collapse" id="khuyenmai">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="<?php echo e(route('danhgia.index')); ?>">Danh sách</a></li>
+                            <li><a class="tp-link" href="<?php echo e(route('khuyenmais.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -184,6 +183,7 @@
         <!-- End Sidebar -->
 
         <div class="clearfix"></div>
+        
     </div>
 </div>
 <!-- Left Sidebar End -->

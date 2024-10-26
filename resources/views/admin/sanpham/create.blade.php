@@ -55,7 +55,16 @@
                                                 @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <label for="gia_goc" class="form-label">Giá gốc</label>
+                                                <label for="gia_nhap" class="form-label">Giá Nhập</label>
+                                                <input type="number" id="gia_nhap" name="gia_nhap"
+                                                    class="form-control @error('gia_nhap') is-invalid @enderror"
+                                                    value="{{ old('gia_nhap') }}">
+                                                @error('gia_nhap')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="gia_goc" class="form-label">Giá Bán</label>
                                                 <input type="number" id="gia_goc" name="gia_goc"
                                                     class="form-control @error('gia_goc') is-invalid @enderror"
                                                     value="{{ old('gia_goc') }}">
@@ -63,10 +72,23 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
+
+                                            <div class="mb-3">
+                                                <label for="gia_km" class="form-label">Giá khuyến mãi</label>
+                                                <input type="number" id="gia_km" name="gia_km" min="0"
+                                                    class="form-control @error('gia_km') is-invalid @enderror"
+                                                    value="{{ old('gia_km') }}">
+                                                @error('gia_km')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="danh_muc_id" class="form-label">Danh mục</label>
                                                 <select class="form-select @error('danh_muc_id') is-invalid @enderror"
-                                                    name="danh_muc_id" id="danh_muc_id" required>
+                                                    name="danh_muc_id" id="danh_muc_id">
                                                     <option value="">Chọn danh mục</option>
                                                     @foreach ($danh_mucs as $id => $ten_danh_muc)
                                                         <option value="{{ $id }}"
@@ -78,18 +100,6 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="gia_km" class="form-label">Giá khuyến mãi</label>
-                                                <input type="number" id="gia_km" name="gia_km"
-                                                    class="form-control @error('gia_km') is-invalid @enderror"
-                                                    value="{{ old('gia_km') }}">
-                                                @error('gia_km')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="anh_san_pham" class="form-label">Hình ảnh chính</label>
                                                 <input type="file" id="anh_san_pham" name="anh_san_pham"
@@ -150,12 +160,18 @@
                                             <div class="col-lg-3">
                                                 <label for="size_san_pham" class="form-label">Size</label>
                                                 <input type="text" name="product_variants[size_san_pham][]"
-                                                    class="form-control" placeholder="Nhập size">
+                                                    class="form-control" placeholder="Nhập size" id="sizeInput">
+                                                <span id="sizeError" class="color-error text-danger"
+                                                    style="display: none;">Kích thước không
+                                                    hợp lệ!</span>
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="color_san_pham" class="form-label">Màu sắc</label>
                                                 <input type="text" name="product_variants[color_san_pham][]"
-                                                    class="form-control" placeholder="Nhập màu sắc">
+                                                    class="form-control color-input" placeholder="Nhập màu sắc"
+                                                    value="{{ old('color_san_pham') }}" id="colorInput">
+                                                <span class="color-error text-danger" style="display: none;">Tên màu không
+                                                    hợp lệ!</span>
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="so_luong" class="form-label">Số lượng</label>
@@ -205,6 +221,78 @@
     </script>
 @endsection
 <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        let colorSizePairs = [];
+        let isDuplicate = false;
+
+        document.querySelectorAll('.variant-item').forEach(function(item) {
+            const color = item.querySelector('.colorInput').value.trim();
+            const size = item.querySelector('.sizeInput').value.trim();
+            const colorSizePair = color + "-" + size;
+
+            if (colorSizePairs.includes(colorSizePair)) {
+                isDuplicate = true;
+                alert(
+                    `Bạn đã nhập trùng biến thể với màu ${color} và size ${size}. Vui lòng chọn biến thể khác.`
+                );
+                event.preventDefault(); // Ngăn không cho form submit
+                return;
+            }
+
+            colorSizePairs.push(colorSizePair);
+        });
+
+        if (isDuplicate) {
+            return false; // Dừng việc submit nếu có trùng lặp
+        }
+    });
+
+    // 
+    const validSizes = ["S", "M", "L", "XL", "XXL", "36", "38", "40", "A1", "A2", "A0"]; // Danh sách kích thước hợp lệ
+
+    document.getElementById('sizeInput').addEventListener('input', function() {
+        const sizeInput = this.value.trim();
+        const sizeError = document.getElementById('sizeError');
+
+        if (!validSizes.includes(sizeInput)) {
+            sizeError.style.display = 'block'; // Hiện thông báo lỗi nếu kích thước không hợp lệ
+        } else {
+            sizeError.style.display = 'none'; // Ẩn thông báo lỗi nếu kích thước hợp lệ
+        }
+    });
+    // 
+    const vietnameseToCssColors = {
+        "đỏ": "red",
+        "xanh lá": "green",
+        "xanh dương": "blue",
+        "vàng": "yellow",
+        "đen": "black",
+        "trắng": "white",
+        "hồng": "pink",
+        "cam": "orange",
+        "tím": "purple",
+        "nâu": "brown",
+        "xám": "gray",
+        "bạc": "silver",
+        "vàng kim": "gold",
+        "chàm": "indigo",
+        "xanh ngọc": "aqua",
+        "xanh lục": "lime",
+        "xanh lá cây": "olive"
+    };
+
+    document.querySelectorAll('.color-input').forEach(function(input) {
+        input.addEventListener('input', function() {
+            const userInput = this.value.trim().toLowerCase();
+            const colorError = this.nextElementSibling;
+
+            if (!vietnameseToCssColors[userInput]) {
+                colorError.style.display = 'block'; // Hiển thị lỗi nếu không hợp lệ
+            } else {
+                colorError.style.display = 'none';
+            }
+        });
+    });
     document.addEventListener('DOMContentLoaded', function() {
         // Xem trước hình ảnh chính sản phẩm
         document.getElementById('anh_san_pham').addEventListener('change', function(event) {

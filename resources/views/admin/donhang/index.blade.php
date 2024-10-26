@@ -84,7 +84,7 @@
                                             <tbody>
                                                 @foreach ($donhangs as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
@@ -144,7 +144,7 @@
                                             <tbody>
                                                 @foreach ($choXacNhan as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
@@ -205,7 +205,7 @@
                                             <tbody>
                                                 @foreach ($daXacNhan as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
@@ -266,7 +266,7 @@
                                             <tbody>
                                                 @foreach ($dangChuanBi as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
@@ -328,7 +328,7 @@
                                             <tbody>
                                                 @foreach ($dangVanChuyen as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
@@ -389,7 +389,7 @@
                                             <tbody>
                                                 @foreach ($daGiao as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
@@ -450,7 +450,7 @@
                                             <tbody>
                                                 @foreach ($thanhCong as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>
@@ -511,7 +511,7 @@
                                             <tbody>
                                                 @foreach ($daHuy as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->ma_don_hang }}</td>
                                                         <td>{{ $item->user?->ho_ten }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{{ $item->dia_chi }}</td>

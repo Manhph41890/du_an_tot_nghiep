@@ -1,8 +1,8 @@
 <?php
 
+use App\Models\bien_the_san_pham;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,7 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('don_hangs', function (Blueprint $table) {
-            DB::statement("ALTER TABLE don_hangs MODIFY COLUMN trang_thai ENUM('Chờ xác nhận', 'Đã xác nhận', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công', 'Đã hủy')");
+            // $table->foreignIdFor(bien_the_san_pham::class)->constrained()->nullable()->after('san_pham_id');
+            $table->foreignId('bien_the_san_pham_id')->nullable()->constrained('bien_the_san_phams')->after('san_pham_id');
         });
     }
 
@@ -23,7 +24,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('don_hangs', function (Blueprint $table) {
-            DB::statement("ALTER TABLE don_hangs MODIFY COLUMN trang_thai ENUM('Chờ xác nhận', 'Đã xác nhận', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công', 'Đã hủy')");
+            $table->dropForeign(['bien_the_san_pham_id']); // Xóa khóa ngoại
+            $table->dropColumn('bien_the_san_pham_id'); // Xóa cột
         });
     }
 };

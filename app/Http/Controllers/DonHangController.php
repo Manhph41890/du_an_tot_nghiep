@@ -11,6 +11,7 @@ use App\Models\phuong_thuc_thanh_toan;
 use App\Models\phuong_thuc_van_chuyen;
 use App\Models\san_pham;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DonHangController extends Controller
@@ -18,33 +19,35 @@ class DonHangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $donhangs = don_hang::with('user')->get();
+        // Khởi tạo query để áp dụng các bộ lọc
+        $query = don_hang::with('user');
+
+        // Lọc theo khoảng ngày tạo đơn hàng
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('ngay_tao', [$request->start_date, $request->end_date]);
+        }
+
+        // Lọc theo tên người đặt hàng
+        if ($request->has('user_name') && !empty($request->user_name)) {
+            $query->whereHas('user', function ($q) use ($request) {
+                $q->where('ho_ten', 'like', '%' . $request->user_name . '%');
+            });
+        }
+
+        // Lọc theo trạng thái đơn hàng từ tab hiện tại
+        if ($request->has('status') && !empty($request->status)) {
+            $query->where('trang_thai', $request->status);
+        }
+
+        // Lấy danh sách đơn hàng sau khi áp dụng bộ lọc
+        $donhangs = $query->get();
         $title = "Danh sách đơn hàng";
 
-        $choXacNhan = don_hang::where('trang_thai', 'Chờ xác nhận')->get();
-        $daXacNhan = don_hang::where('trang_thai', 'Đã xác nhận')->get();
-        $dangChuanBi = don_hang::where('trang_thai', 'Đang chuẩn bị hàng')->get();
-        $dangVanChuyen = don_hang::where('trang_thai', 'Đang vận chuyển')->get();
-        $daGiao = don_hang::where('trang_thai', 'Đã giao')->get();
-        $thanhCong = don_hang::where('trang_thai', 'Thành công')->get();
-        $daHuy = don_hang::where('trang_thai', 'Đã hủy')->get();
-
-        // dd($donhangs);
-        // dump($donhangs);
-        return view('admin.donhang.index', compact(
-            'donhangs',
-            'title',
-            'choXacNhan',
-            'daXacNhan',
-            'dangChuanBi',
-            'dangVanChuyen',
-            'daGiao',
-            'thanhCong',
-            'daHuy'
-        ));
+        return view('admin.donhang.index', compact('donhangs', 'title'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -84,7 +87,7 @@ class DonHangController extends Controller
         ])->findOrFail($id);
 
         // Trả về view cùng với dữ liệu đơn hàng
-        return view('orders.show', compact('donhang'));
+        return view('admin.donhang.show', compact('donhang'));
     }
     public function confirmOrder($id)
     {

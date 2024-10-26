@@ -352,20 +352,20 @@ class AdminController extends Controller
                 ->whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
                 ->pluck('san_pham_id', 'id')->all();
 
-            // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
-            $tong_gia_tri_sp_chua_chua = [];
+            // // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+            // $tong_gia_tri_sp_chua_chua = [];
 
-            // Lặp qua các sản phẩm
-            foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
-                // Lấy số lượng đơn hàng chưa chứa sản phẩm này
-                $so_luong_chua_chua = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
-                    ->whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
-                        $query->where('id', $san_pham_id);
-                    })->count();
+            // // Lặp qua các sản phẩm
+            // foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+            //     // Lấy số lượng đơn hàng chưa chứa sản phẩm này
+            //     $so_luong_chua_chua = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+            //         ->whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+            //             $query->where('id', $san_pham_id);
+            //         })->count();
 
-                // Tính tổng giá trị cho sản phẩm này
-                $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
-            }
+            //     // Tính tổng giá trị cho sản phẩm này
+            //     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+            // }
         } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam_bieudo')) {
 
             // Biểu đồ DOANH THU-------------------
@@ -410,19 +410,19 @@ class AdminController extends Controller
             $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
             $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
 
-            // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
-            $tong_gia_tri_sp_chua_chua = [];
+            // // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+            // $tong_gia_tri_sp_chua_chua = [];
 
-            // Lặp qua các sản phẩm
-            foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
-                // Lấy số lượng đơn hàng chưa chứa sản phẩm này
-                $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
-                    $query->where('id', $san_pham_id);
-                })->count();
+            // // Lặp qua các sản phẩm
+            // foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+            //     // Lấy số lượng đơn hàng chưa chứa sản phẩm này
+            //     $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+            //         $query->where('id', $san_pham_id);
+            //     })->count();
 
-                // Tính tổng giá trị cho sản phẩm này
-                $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
-            }
+            //     // Tính tổng giá trị cho sản phẩm này
+            //     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+            // }
         } else {
             // Biểu đồ DOANH THU-------------------
             $tongTienThang = [];
@@ -458,9 +458,9 @@ class AdminController extends Controller
             $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
 
             // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
-            $tong_gia_tri_sp_chua_chua = [];
+            // $tong_gia_tri_sp_chua_chua = [];
 
-            // Lặp qua các sản phẩm
+            // // Lặp qua các sản phẩm
             // foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
             //     // Lấy số lượng đơn hàng chưa chứa sản phẩm này
             //     $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {

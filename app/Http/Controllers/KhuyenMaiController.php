@@ -21,11 +21,14 @@ class KhuyenMaiController extends Controller
         $danhmucs = danh_muc::all();
         $query = khuyen_mai::query();
 
-        if ($request->has('search_km')) {
-            $query->where('ma_khuyen_mai', 'LIKE', "%{$request->input('search_km')}%");
+        $searchKM = $request->input('search_km');
+        if($searchKM){
+            $khuyenMais = khuyen_mai::where('ma_khuyen_mai', $searchKM)->paginate(10);
+        }else{
+            $khuyenMais = $query->latest('id')->paginate(10);
         }
 
-        $khuyenMais = $query->latest('id')->paginate(5);
+       
 
         $title = 'Danh sách khuyến mãi';
          $isAdmin = auth()->user()->chuc_vu ->ten_chuc_vu === 'admin';

@@ -40,22 +40,12 @@
                                         @csrf
                                         @method('GET')
                                         <div class="form-group mb-3">
-                                            <input type="text" name="search_km" class="form-control"
-                                                placeholder="Tìm kiếm theo mã khuyến mãi"
-                                                onchange="document.getElementById('filter-form-km').submit();">
+                                            <input class="form-control" value="{{request()->search_km}}" type="text" name="search_km" id="search_km" placeholder="Nhập mã khuyến mãi">
+                                            <button class="btn btn-success">Tìm kiếm</button>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-7">
-                                    <!-- Hiển thị thông báo thành công -->
-                                    @if (session('success'))
-                                        <div class="alert alert-success alert-dismissable fade show " role="alert">
-                                            {{ session('success') }}
-                                            <button type="button" class="btn-close justify-content-center"
-                                                data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    @endif
-                                </div>
+    
                             </div>
                         </div>
 
@@ -99,7 +89,7 @@
                                                                 class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
                                                         <form action="{{ route('khuyenmais.destroy', $khuyenMai->id) }}"
                                                             method="POST" style="display:inline;"
-                                                            onsubmit="return confirm ('Bạn có muốn xóa danh mục sản phẩm này không ?') ">
+                                                            onsubmit="return confirm ('Bạn có muốn xóa mã khuyến mãi này không ?') ">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" style="border: none; background: none;">
@@ -115,7 +105,7 @@
                                     </table>
                                 </div>
                             </div>
-                            {{-- {{ $khuyenMai->links() }} --}}
+                            {{ $khuyenMais->links() }}
                         </div>
 
                     </div>

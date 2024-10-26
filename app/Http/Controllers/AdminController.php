@@ -463,8 +463,11 @@ class AdminController extends Controller
             // Lặp qua các sản phẩm
             foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
                 // Lấy số lượng đơn hàng chưa chứa sản phẩm này
+                // $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+                //     $query->where('id', $san_pham_id);
+                // })->count();
                 $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
-                    $query->where('id', $san_pham_id);
+                    $query->where('san_phams.id', $san_pham_id); // Thêm tên bảng vào trước cột `id`
                 })->count();
 
                 // Tính tổng giá trị cho sản phẩm này

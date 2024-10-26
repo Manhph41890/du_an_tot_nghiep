@@ -68,9 +68,10 @@
                                                             Size:
                                                             {{ $donhang->bien_the_san_pham?->size?->ten_size ?? 'N/A' }}
                                                         </td>
+
                                                         <td>{{ $donhang->chi_tiet_don_hangs->first()?->so_luong ?? 'N/A' }}
                                                         </td>
-                                                        <td>{{ number_format($donhang->san_phams?->gia_km ?? 0, 0, ',', '.') }}
+                                                        <td>{{ number_format($donhang->chi_tiet_don_hangs->first()?->gia_tien ?? 0, 0, ',', '.') }}
                                                             VND</td>
                                                         <td>{{ number_format($donhang->chi_tiet_don_hangs->first()?->thanh_tien ?? 0, 0, ',', '.') }}
                                                             VND</td>
@@ -81,7 +82,8 @@
                                         <div class="mb-3">
                                             {{-- ----------- --}}
                                             <p><strong>Mã khuyến mãi</strong>:
-                                                {{ $donhang->khuyen_mai?->ten_khuyen_mai }}</p>
+                                                {{ $donhang->khuyen_mai?->ten_khuyen_mai }} -
+                                                {{ $donhang->khuyen_mai?->ma_khuyen_mai }}</p>
                                             <p><strong>Phương thức vận chuyển</strong>:
                                                 {{ $donhang->phuong_thuc_van_chuyen?->kieu_van_chuyen }}</p>
                                             <p><strong>Phương thức thanh toán</strong>:
@@ -92,11 +94,15 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <p><strong>Số lượng sản phẩm:</strong> 12</p>
-                                        <p><strong>Tổng tiền hàng:</strong> 1,111,111 VND</p>
-                                        <p><strong>Giảm giá:</strong> -21,234 VND</p>
-                                        <p><strong>Vận chuyển:</strong> 20,000 VND</p>
-                                        <p class="order-summary">Tổng giá trị đơn hàng:
+                                        <p><strong class="pe-1">Giảm
+                                                giá:</strong>-
+                                            {{ number_format($donhang->khuyen_mai?->gia_tri_khuyen_mai ?? 0, 0, ',', '.') }}VND
+                                        </p>
+                                        <p><strong class="pe-1">Vận
+                                                chuyển:</strong>
+                                            {{ number_format($donhang->phuong_thuc_van_chuyen?->gia_ship ?? 0, 0, ',', '.') }}VND
+                                        </p>
+                                        <p class="order-summary pe-1">Tổng giá trị đơn hàng:
                                             {{ number_format($donhang->tong_tien, 0, ',', '.') }} VND</p>
                                     </div>
                                 </div>

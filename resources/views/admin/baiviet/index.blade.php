@@ -47,7 +47,7 @@
                                                     
                                                 </div>
                                             </div>
-                                                <button class="btn btn-success" type="submit">Tìm kiếm</button>
+                                                <button class="btn btn-success" type="submit">Lọc</button>
                                         </div>
                                         
                                     </form>

@@ -33,7 +33,15 @@
 
     {{-- toast  --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <style>
+        h4{
+            color: white;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+           
 
+    </style>
 </head>
 
 <!-- body start -->
@@ -43,6 +51,7 @@
 
 
 ">
+
 
     <script>
         $(document).ready(function() {
@@ -99,7 +108,7 @@
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-
+    
 
 </body>
 

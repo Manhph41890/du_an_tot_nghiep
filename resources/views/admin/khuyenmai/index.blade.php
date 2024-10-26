@@ -41,6 +41,10 @@
                                         @method('GET')
                                         <div class="form-group mb-3">
                                             <input class="form-control" value="{{request()->search_km}}" type="text" name="search_km" id="search_km" placeholder="Nhập mã khuyến mãi">
+                                            <label for="">Từ:</label>
+                                                <input class="form-control" type="date" name="start_date" id="start_date" value="{{request()->start_date}}">
+                                            <label for="">Đến:</label>
+                                                <input class="form-control" type="date" name="end_date" id="end_date" value="{{request()->end_date}}">
                                             <label class="form-label" for="trang_thai">Trạng thái:</label>
                                             <select class="form-select" id="trang_thai" name="trang_thai">
                                                 <option value="">Tất cả</option>

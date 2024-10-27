@@ -11,6 +11,7 @@ use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
@@ -34,8 +35,8 @@ Route::get('/', fn() => view('client.home'));
 Route::prefix('client')->group(function () {
     Route::view('/sanpham', 'client.sanpham.danhsach');
     Route::view('/sanphamchitiet', 'client.sanpham.sanphamct');
-    Route::view('/baiviet', 'client.baiviet.baiviet');
-    Route::view('/baivietchitiet', 'client.baiviet.baivietchitiet');
+    Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
+    Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
     Route::view('/taikhoan', 'client.taikhoan.dashboard');
     Route::view('/giohang', 'client.giohang');
     Route::view('/gioithieu', 'client.gioithieu');

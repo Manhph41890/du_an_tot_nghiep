@@ -17,18 +17,27 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/plugins/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/style.min.css') }}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   <style>
-    .bg-img1{
-        background-image: url('./assets/client/images/slider/1.png') ;
-        width: 50%;
-    }
-    .bg-img2{
-        background-image: url('./assets/client/images/slider/2.png') ;
-    }
-    .bg-img3{
-        background-image: url('./assets/client/images/slider/3.jpg') ;
-    }
-   </style>
+    <style>
+        .bg-img1 {
+            background-image: url('./assets/client/images/slider/1.png');
+            width: 50%;
+        }
+
+        .bg-img2 {
+            background-image: url('./assets/client/images/slider/2.png');
+        }
+
+        .bg-img3 {
+            background-image: url('./assets/client/images/slider/3.jpg');
+        }
+
+        .breadcrumb-section {
+            background-image: url('/assets/client/images/banner/slider_1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
 
 </head>
 

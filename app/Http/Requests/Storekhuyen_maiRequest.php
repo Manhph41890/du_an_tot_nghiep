@@ -54,6 +54,7 @@ class Storekhuyen_maiRequest extends FormRequest
 
             'ngay_ket_thuc.required' => 'Ngày kết thúc không được để trống',
             'ngay_ket_thuc.date' => 'Ngày kết thúc không phải ngày',
+            'ngay_ket_thuc.after' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu',
 
             'is_active' => 'Trạng thái không được để trống',
         ];

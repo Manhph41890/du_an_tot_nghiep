@@ -29,7 +29,7 @@ use App\Http\Controllers\UserController;
 */
 
 // Route trang chủ
-Route::get('/', fn() => view('client.home'));
+Route::get('/', [HomeController::class, 'index']);
 
 // Route cho client
 Route::prefix('client')->group(function () {

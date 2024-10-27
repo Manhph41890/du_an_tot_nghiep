@@ -46,9 +46,9 @@
                                 </ul>
                                 @php
                                     $length = strlen($baiViet->noi_dung);
-                                    $part1 = substr($baiViet->noi_dung, 0, $length / 3);
-                                    $part2 = substr($baiViet->noi_dung, $length / 3, $length / 3);
-                                    $part3 = substr($baiViet->noi_dung, 2 * ($length / 3), $length / 3);
+                                    $part1 = substr($baiViet->noi_dung, 0, ceil($length / 3));
+                                    $part2 = substr($baiViet->noi_dung, ceil($length / 3), ceil($length / 3));
+                                    $part3 = substr($baiViet->noi_dung, 2 * ceil($length / 3));
                                 @endphp
                                 <p>{{ $part1 }}</p>
                             </div>
@@ -125,7 +125,7 @@
 
                         </div>
                     </div>
-                </div>````````````````````
+                </div>
             </div>
         </div>
     </section>

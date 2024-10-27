@@ -74,18 +74,6 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group mb-3">
-                                        <label for="ngay_dang">Ngày Đăng:</label>
-                                        <input type="date" name="ngay_dang"
-                                            value="{{ old('ngay_dang', $post->ngay_dang) }}"
-                                            class="form-control @error('ngay_dang') is-invalid @enderror">
-                                        @error('ngay_dang')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-
                                     <div class="mb-3">
                                         <label for="is_active" class="form-label">Trạng thái</label>
                                         <div class="col-sm-10 mb-3 d-flex gap-2">

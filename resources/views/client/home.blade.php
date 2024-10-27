@@ -1198,7 +1198,7 @@
                 <div class="col-lg-3 col-md-6 mb-30">
                     <div class="banner-thumb">
                         <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html"><img
-                                src="assets/admin/images/banner/5.jpg" alt="banner-thumb-naile" /></a>
+                                src="assets/admin/images/banner/1.jpg" alt="banner-thumb-naile" /></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-30">

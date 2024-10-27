@@ -28,8 +28,16 @@
                                         <p><strong>Ngày đánh giá:</strong> {{ $post->ngay_danh_gia }}</p>
                                 </div>
                                 <div class="mb-3">
-                                        <p><strong>Điểm số:</strong> {{ $post->diem_so }}</p>
-                                </div>
+                                    <p><strong>Đánh giá:</strong> 
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $post->diem_so)
+                                                <i class="mdi mdi-star text-warning"></i> <!-- Ngôi sao đầy -->
+                                            @else
+                                                <i class="mdi mdi-star-outline text-muted"></i> <!-- Ngôi sao rỗng -->
+                                            @endif
+                                        @endfor
+                                    </p>
+                                </div>                                
                                 <div class="mb-3">
                                         <p><strong>Bình luận:</strong> {{ $post->binh_luan }}</p>
                                 </div>

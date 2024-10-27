@@ -13,6 +13,7 @@ class san_pham extends Model
         'ten_san_pham',
         'gia_goc',
         'gia_km',
+        'gia_nhap',
         'anh_san_pham',
         'so_luong',
         'ma_ta_san_pham',
@@ -27,9 +28,9 @@ class san_pham extends Model
     {
         return $this->hasMany(anh_san_pham::class);
     }
-    public function don_hang()
+    public function don_hangs()
     {
-        return $this->hasOne(don_hang::class);
+        return $this->hasMany(don_hang::class);
     }
     public function bien_the_san_phams()
     {

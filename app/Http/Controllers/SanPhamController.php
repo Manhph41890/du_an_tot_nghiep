@@ -22,7 +22,7 @@ class SanPhamController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {   
+    {
         $this->authorize('viewAny', san_pham::class);
         $query = san_pham::query();
 
@@ -45,7 +45,7 @@ class SanPhamController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         $this->authorize('create', san_pham::class);
         $danh_mucs = danh_muc::query()->pluck('ten_danh_muc', 'id')->all();
         $sizes = size_san_pham::pluck('ten_size', 'id')->all(); // Lấy tên size và id
@@ -63,7 +63,6 @@ class SanPhamController extends Controller
         try {
             // Lấy dữ liệu xác thực từ request
             $data_san_phams = $request->except('product_variants');
-
             // Xử lý ảnh sản phẩm chính
             if ($request->hasFile('anh_san_pham')) {
                 $file = $request->file('anh_san_pham');
@@ -161,8 +160,8 @@ class SanPhamController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {    
-        
+    {
+
         // Lấy sản phẩm theo ID
         $product = san_pham::with(['bien_the_san_phams.size', 'bien_the_san_phams.color'])->findOrFail($id);
         $this->authorize('update', $product);
@@ -185,14 +184,14 @@ class SanPhamController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Updatesan_phamRequest $request, $id)
-    {   
+    {
 
 
         DB::beginTransaction();
         try {
             // Tìm sản phẩm 
             $product = san_pham::findOrFail($id);
-           
+
             $data_san_phams = $request->except('product_variants');
 
             // Xử lý ảnh sản phẩm chính
@@ -278,8 +277,8 @@ class SanPhamController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {   
-       
+    {
+
         try {
             DB::beginTransaction();
 

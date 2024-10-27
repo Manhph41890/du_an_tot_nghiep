@@ -18,4 +18,12 @@ class danh_muc extends Model
     {
         return $this->hasMany(san_pham::class);
     }
+
+    // khuyến mãi theo danh mục 
+    public function khuyen_mais()
+{
+    return $this->hasMany(khuyen_mai::class);
+}
+
+
 }

@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-xl">
     <div class="modal-content">
 
         <!-- Modal Header -->
@@ -11,97 +11,112 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <form>
-                                <!-- Order Information -->
-                                <div class="form-group mb-3">
-                                    <label for="order_id">Mã đơn hàng</label>
-                                    <input type="text" name="order_id" value="{{ $donhang->id }}"
-                                        class="form-control" readonly>
+                    <div class="container mt-2">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div class="card mb-3">
+                                    <div class="card-header d-flex justify-content-between">
+                                        {{-- ----------- --}}
+                                        <div class="">
+                                            <h5>Đơn Hàng: Fujitora {{ $donhang->id }}</h5>
+                                            <p>Ngày tạo: {{ $donhang->ngay_tao }}</p>
+                                        </div>
+                                        <div class="">
+                                            <div class="d-flex align-items-center">
+                                                <p class="mb-0 me-2">Trạng thái đơn hàng:</p>
+                                                <span
+                                                    class="badge 
+                                                    {{ $donhang->trang_thai == 'Hoàn thành' ? 'bg-success' : ($donhang->trang_thai == 'Đang xử lý' ? 'bg-warning' : 'bg-danger') }}">
+                                                    {{ $donhang->trang_thai }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <h5 class="order-summary mb-1">Tất Cả Sản Phẩm</h5>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hình ảnh</th>
+                                                        <th>Sản phẩm</th>
+                                                        <th>Số Lượng</th>
+                                                        <th>Giá</th>
+                                                        <th>Thành Tiền</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><img src="{{ asset('/storage/' . $donhang->san_phams?->anh_san_pham) }}"
+                                                                width="50px"></td>
+                                                        <td> {{ $donhang->san_phams?->ten_san_pham }}<br>Màu:
+                                                            Đỏ
+                                                            Size: M</td>
+                                                        <td>12</td>
+                                                        <td>{{ $donhang->san_phams?->gia_km }}</td>
+                                                        <td>???</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="mb-3">
+                                            {{-- ----------- --}}
+                                            <p><strong>Mã khuyến mãi</strong>:
+                                                {{ $donhang->khuyen_mai?->ten_khuyen_mai }}</p>
+                                            <p><strong>Phương thức vận chuyển</strong>:
+                                                {{ $donhang->phuong_thuc_van_chuyen?->kieu_van_chuyen }}</p>
+                                            <p><strong>Phương thức thanh toán</strong>:
+                                                {{ $donhang->phuong_thuc_thanh_toan?->kieu_thanh_toan }}</p>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label for="customer_name">Người đặt hàng</label>
-                                    <input type="text" name="customer_name" value="{{ $donhang->user?->ho_ten }}"
-                                        class="form-control" readonly>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p><strong>Số lượng sản phẩm:</strong> 12</p>
+                                        <p><strong>Tổng tiền hàng:</strong> 1,111,111 VND</p>
+                                        <p><strong>Giảm giá:</strong> -21,234 VND</p>
+                                        <p><strong>Vận chuyển:</strong> 20,000 VND</p>
+                                        <p class="order-summary">Tổng giá trị đơn hàng:
+                                            {{ number_format($donhang->tong_tien, 0, ',', '.') }} VND</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5>Xác nhận đơn hàng</h5>
+                                        <p>Xác nhận đơn hàng để chuẩn bị hàng</p>
+                                        <button class="complete-button">Xác nhận đơn hàng</button>
+                                    </div>
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label for="created_at">Ngày tạo đơn hàng</label>
-                                    <input type="text" name="created_at" value="{{ $donhang->ngay_tao }}"
-                                        class="form-control" readonly>
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5>Thông tin khách hàng</h5>
+                                        <br>
+                                        <h6>Khác hàng:</strong> {{ $donhang->user?->ho_ten }}</h6>
+                                        <br>
+                                        <p><strong>Tên người nhận:</strong> {{ $donhang->ho_ten }}</p>
+                                        <p><strong>Email:</strong> {{ $donhang->email }}</p>
+                                        <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
+                                        <p><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
+                                    </div>
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label for="customer_name">Tên khuyến mại</label>
-                                    <input type="text" name="customer_name"
-                                        value="{{ $donhang->khuyen_mai?->ten_khuyen_mai }}" class="form-control"
-                                        readonly>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5>Đánh giá của khách hàng</h5>
+                                        <p>Chưa có đánh giá nào.</p>
+                                    </div>
                                 </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="customer_name">Phương thức thanh toán</label>
-                                    <input type="text" name="customer_name"
-                                        value="{{ $donhang->phuong_thuc_thanh_toan?->kieu_thanh_toan }}"
-                                        class="form-control" readonly>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="customer_name">Phương thức vận chuyển</label>
-                                    <input type="text" name="customer_name"
-                                        value="{{ $donhang->phuong_thuc_van_chuyen?->kieu_van_chuyen }}"
-                                        class="form-control" readonly>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="total_amount">Tổng tiền</label>
-                                    <input type="text" name="total_amount"
-                                        value="{{ number_format($donhang->tong_tien, 0, ',', '.') }} VND"
-                                        class="form-control" readonly>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="phone">Người nhận hàng</label>
-                                    <input type="text" name="phone" value="{{ $donhang->ho_ten }}"
-                                        class="form-control" readonly>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="phone">Số điện thoại nhận hàng</label>
-                                    <input type="text" name="phone" value="{{ $donhang->so_dien_thoai }}"
-                                        class="form-control" readonly>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="phone">Email nhận hàng</label>
-                                    <input type="text" name="phone" value="{{ $donhang->email }}"
-                                        class="form-control" readonly>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="address">Địa chỉ nhận hàng</label>
-                                    <input type="text" name="address" value="{{ $donhang->dia_chi }}"
-                                        class="form-control" readonly>
-                                </div>
-
-
-                                <div class="form-group mb-3">
-                                    <label for="order_status">Trạng thái đơn hàng</label>
-                                    <input type="text" name="order_status" value="{{ $donhang->trang_thai }}"
-                                        class="form-control" readonly>
-                                </div>
-
-                                <!-- Actions -->
-                                <div class="mt-3">
-                                    <a href="{{ route('donhangs.edit', $donhang->id) }}" class="btn btn-primary">Chỉnh
-                                        sửa
-                                        đơn hàng</a>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Đóng</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
+                    </div>
+                    <div class="mt-3">
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                     </div>
                 </div>
             </div>
@@ -109,3 +124,38 @@
 
     </div>
 </div>
+
+<style>
+    .modal-backdrop.show.nested-modal {
+        z-index: 1055;
+    }
+
+    .modal.nested-modal {
+        z-index: 1060;
+    }
+
+    .order-status {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+
+    .order-summary {
+        font-weight: bold;
+    }
+
+    .complete-button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .complete-button:hover {
+        background-color: #218838;
+    }
+</style>

@@ -29,6 +29,7 @@ class Storekhuyen_maiRequest extends FormRequest
             'ngay_bat_dau' => 'required|date',
             'ngay_ket_thuc' => 'required|date|after:ngay_bat_dau',
             'is_active' => 'required|boolean',
+             'danh_muc_id' => 'required', 
         ];
     }
 
@@ -56,6 +57,7 @@ class Storekhuyen_maiRequest extends FormRequest
             'ngay_ket_thuc.date' => 'Ngày kết thúc không phải ngày',
 
             'is_active' => 'Trạng thái không được để trống',
+            'danh_muc_id' => 'Vui lòng chọn danh mục cần tạo mã khuyến mãi',
         ];
     }
 }

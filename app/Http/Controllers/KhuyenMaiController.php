@@ -16,46 +16,50 @@ class KhuyenMaiController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-{
-    $this->authorize('viewAny', khuyen_mai::class);
+    {
+        $this->authorize('viewAny', khuyen_mai::class);
 
-    $danhmucs = danh_muc::all();
-    $query = khuyen_mai::query();
-  
-    // Automatically update 'is_active' status based on dates
-    $query->each(function ($promotion) {
-        $currentDate = now();
-        if ($currentDate->greaterThan($promotion->ngay_ket_thuc)) {
-            // Mark promotion as expired if the current date is past 'ngay_ket_thuc'
-            $promotion->is_active = 0;
-        } elseif ($currentDate->between($promotion->ngay_bat_dau, $promotion->ngay_ket_thuc)) {
-            // Mark promotion as active if the current date is between 'ngay_bat_dau' and 'ngay_ket_thuc'
-            $promotion->is_active = 1;
-        } else {
-            // Mark promotion as inactive if current date is before 'ngay_bat_dau'
-            $promotion->is_active = 0;
+        $danhmucs = danh_muc::all();
+        $query = khuyen_mai::query();
+
+        // Tự động cập nhật trạng thái dự trên ngày 
+        $query->each(function ($promotion) {
+            $currentDate = now();
+            if ($currentDate->greaterThan($promotion->ngay_ket_thuc)) {
+                // Mark promotion as expired if the current date is past 'ngay_ket_thuc'
+                $promotion->is_active = 0;
+            } elseif ($currentDate->between($promotion->ngay_bat_dau, $promotion->ngay_ket_thuc)) {
+                // Mark promotion as active if the current date is between 'ngay_bat_dau' and 'ngay_ket_thuc'
+                $promotion->is_active = 1;
+            } else {
+                // Mark promotion as inactive if current date is before 'ngay_bat_dau'
+                $promotion->is_active = 0;
+            }
+            $promotion->save();
+        });
+
+        // Filter by 'is_active'
+        if ($request->has('is_active') && $request->get('is_active') !== '') {
+            $query->where('is_active', $request->get('is_active'));
         }
-        $promotion->save();
-    });
 
-    // Filter by 'is_active'
-    if ($request->has('is_active') && $request->get('is_active') !== '') {
-        $query->where('is_active', $request->get('is_active'));
+        // Search by 'ma_khuyen_mai'
+        if ($request->has('search_km') && $request->input('search_km') !== null) {
+            $query->where('ma_khuyen_mai', 'LIKE', "%{$request->input('search_km')}%");
+        }
+
+        // Lọc theo danh mục
+        if ($request->has('danh_muc_id') && $request->get('danh_muc_id') !== '') {
+            $query->where('danh_muc_id', $request->get('danh_muc_id'));
+        }
+        // Paginate results
+        $khuyenMais = $query->latest('id')->paginate(5);
+
+        $title = 'Danh sách khuyến mãi';
+        $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+
+        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title', 'isAdmin'));
     }
-
-    // Search by 'ma_khuyen_mai'
-    if ($request->has('search_km') && $request->input('search_km') !== null) {
-        $query->where('ma_khuyen_mai', 'LIKE', "%{$request->input('search_km')}%");
-    }
-
-    // Paginate results
-    $khuyenMais = $query->latest('id')->paginate(5);
-
-    $title = 'Danh sách khuyến mãi';
-    $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
-
-    return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title', 'isAdmin'));
-}
 
 
 
@@ -86,6 +90,7 @@ class KhuyenMaiController extends Controller
             'ngay_bat_dau' => $request->input('ngay_bat_dau'),
             'ngay_ket_thuc' => $request->input('ngay_ket_thuc'),
             'is_active' => $request->input('is_active'),
+
         ]);
 
         return redirect()->route('khuyenmais.index')->with('success', 'Tạo mã khuyến mãi thành công');

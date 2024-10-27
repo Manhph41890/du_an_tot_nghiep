@@ -32,26 +32,25 @@
                                     <a href="{{ route('baiviets.create') }}" class="btn btn-success">Thêm bài viết
                                     </a>
                                 </div>
-                                <div class="col-3">
-                                    <form action="{{ route('baiviets.index') }}" method="POST" id="filter-form-km">
-                                        @csrf
-                                        @method('GET')
-                                        <div class="form-group mb-3">
-                                            <input type="text" name="search_" class="form-control"
-                                                placeholder="Tìm kiếm theo mã khuyến mãi"
-                                                onchange="document.getElementById('filter-form-km').submit();">
+                                <div class="col-6">
+                                    <form action="{{ route('baiviets.index') }}" method="GET" id="filter-form-km">
+                                        <div class="d-flex gap-3 align-items-baseline">
+                                            <div class=" mb-3 d-flex align-items-center gap-3">
+                                                <div class = "form-group d-flex align-items-center justify-content-center gap-3">
+                                                    <label for="">Từ:</label>
+                                                    <input class="form-control" type="date" name="start_date" id="start_date" value="{{request()->start_date}}">
+                                                    
+                                                </div>
+                                                <div div class = "form-group d-flex align-items-center justify-content-center gap-3">
+                                                    <label for="">Đến:</label>
+                                                    <input class="form-control" type="date" name="end_date" id="end_date" value="{{request()->end_date}}">
+                                                    
+                                                </div>
+                                            </div>
+                                                <button class="btn btn-success" type="submit">Tìm kiếm</button>
                                         </div>
+                                        
                                     </form>
-                                </div>
-                                <div class="col-7">
-                                    <!-- Hiển thị thông báo thành công -->
-                                    @if (session('success'))
-                                        <div class="alert alert-success alert-dismissable fade show " role="alert">
-                                            {{ session('success') }}
-                                            <button type="button" class="btn-close justify-content-center"
-                                                data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -84,7 +83,6 @@
                                                         @else
                                                             <img src="{{ asset('images/placeholder.png') }}"
                                                                 alt="Không có ảnh" width="50px">
-                                                            <!-- Placeholder image -->
                                                         @endif
                                                     </td>
                                                     <td>{{ $baiviet->ngay_dang }}</td>

@@ -10,22 +10,10 @@
         <div class="offcanvas-head mb-4">
             <nav class="offcanvas-top-nav">
                 <ul class="d-flex flex-wrap">
-                    <li class="my-2 mx-2">
-                        <a href="wishlist.html">
-                            <i class="icon-bag"></i> Wishlist <span>(0)</span></a>
-                    </li>
-                    <li class="my-2 mx-2">
-                        <a href="wishlist.html">
-                            <i class="ion-android-favorite-outline"></i> Wishlist
-                            <span>(3)</span></a>
-                    </li>
-                    <li class="my-2 mx-2">
-                        <a href="compare.html"><i class="ion-ios-loop-strong"></i> Compare <span>(2)</span>
-                        </a>
-                    </li>
+
                     <li class="my-2 mx-2">
                         <a class="search search-toggle" href="javascript:void(0)">
-                            <i class="icon-magnifier"></i> Search</a>
+                            <i class="icon-magnifier"></i> Tìm kiếm</a>
                     </li>
                 </ul>
             </nav>
@@ -33,15 +21,27 @@
         <nav class="offcanvas-menu">
             <ul>
                 <li>
-                    <a href="#"><span class="menu-text">Home</span></a>
-                    <ul class="offcanvas-submenu">
+                    <a href="#"><span class="menu-text">Trang chủ</span></a>
+                    <!-- <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <li>
-                    <a href="#"><span class="menu-text">Shop</span></a>
-                    <ul class="offcanvas-submenu">
+                    <a href="#"><span class="menu-text">Giới thiệu</span></a>
+                    <!-- <ul class="offcanvas-submenu">
+                        <li><a href="about-us.html">About Page</a></li>
+                        <li><a href="cart.html">Cart Page</a></li>
+                        <li><a href="checkout.html">Checkout Page</a></li>
+                        <li><a href="compare.html">Compare Page</a></li>
+                        <li><a href="login.html">Login &amp; Register Page</a></li>
+                        <li><a href="myaccount.html">Account Page</a></li>
+                        <li><a href="wishlist.html">Wishlist Page</a></li>
+                    </ul> -->
+                </li>
+                <li>
+                    <a href="#"><span class="menu-text">Cửa hàng</span></a>
+                    <!-- <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Shop Grid</span></a>
                             <ul class="offcanvas-submenu">
@@ -96,23 +96,12 @@
                                 <li><a href="wishlist.html">Wishlist Page</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
-                <li>
-                    <a href="#"><span class="menu-text">Pages</span></a>
-                    <ul class="offcanvas-submenu">
-                        <li><a href="about-us.html">About Page</a></li>
-                        <li><a href="cart.html">Cart Page</a></li>
-                        <li><a href="checkout.html">Checkout Page</a></li>
-                        <li><a href="compare.html">Compare Page</a></li>
-                        <li><a href="login.html">Login &amp; Register Page</a></li>
-                        <li><a href="myaccount.html">Account Page</a></li>
-                        <li><a href="wishlist.html">Wishlist Page</a></li>
-                    </ul>
-                </li>
+
                 <li>
                     <a href="blog-grid-3-column.html"><span class="menu-text">Blog</span></a>
-                    <ul class="offcanvas-submenu">
+                    <!-- <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Blog Grid</span></a>
                             <ul class="offcanvas-submenu">
@@ -153,9 +142,9 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
             </ul>
         </nav>
         <div class="offcanvas-social py-30">
@@ -273,112 +262,38 @@
 
 <!-- header start -->
 <header>
-    <!-- header top start -->
-    <div class="header-top theme1 bg-dark py-15">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-sm-6 order-last order-sm-first">
-                    <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
-                        <div class="social-network2">
-                            <ul class="d-flex">
-                                <li>
-                                    <a href="https://www.facebook.com/" target="_blank"><span
-                                            class="icon-social-facebook"></span></a>
-                                </li>
-                                <li>
-                                    <a href="https://twitter.com/" target="_blank"><span
-                                            class="icon-social-twitter"></span></a>
-                                </li>
-                                <li>
-                                    <a href="https://www.youtube.com/" target="_blank"><span
-                                            class="icon-social-youtube"></span></a>
-                                </li>
-                                <li class="mr-0">
-                                    <a href="https://www.instagram.com/" target="_blank"><span
-                                            class="icon-social-instagram"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="media static-media ms-4 d-flex align-items-center">
-                            <div class="media-body">
-                                <div class="phone">
-                                    <a href="tel:(+123)4567890" class="text-white"><i class="icon-call-out me-1"></i>
-                                        (+123)4567890</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-6">
-                    <nav class="navbar-top pb-2 pb-sm-0 position-relative">
-                        <ul class="d-flex justify-content-center justify-content-md-end align-items-center">
-                            <li>
-                                <a href="#" id="dropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">Setting <i class="ion ion-ios-arrow-down"></i></a>
-                                <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown1">
-                                    <li><a href="myaccount.html">My account</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="login.html">Sign out</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" id="dropdown2" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">USD $ <i class="ion ion-ios-arrow-down"></i>
-                                </a>
-                                <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown2">
-                                    <li class="active"><a href="#">EUR €</a></li>
-                                    <li><a href="#">USD $</a></li>
-                                </ul>
-                            </li>
-                            <li class="english">
-                                <a href="#" id="dropdown3" class="pe-0" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <img src="{{asset('assets/admin/images/logo/logo_art.jpg')}}" alt="us flag" />
-                                    English
-                                    <i class="ion ion-ios-arrow-down"></i>
-                                </a>
-                                <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown3">
-                                    <li class="active">
-                                        <a href="#"><img src="assets/admin/images/logo/us-flag.jpg"
-                                                alt="us flag" />
-                                            English</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="assets/admin/images/logo/france.jpg"
-                                                alt="france flag" />
-                                            Français</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
 
-    </div>
-    <!-- header top end -->
     <!-- header-middle satrt -->
     <div id="sticky" class="header-middle theme1 py-15 py-lg-0">
         <div class="container position-relative">
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="index.html"><img src="assets/client/img/logo/logo_art.png" alt="logo" /></a>
+                        <a href="index.html"><img src="{{ asset('assets/client/images/logo/logo_art.png') }}"
+                                alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="active ml-0">
-                            <a href="index.html" class="ps-0">Home <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="index.html">Home 1</a></li>
-                                <li><a href="index-2.html">Home 2</a></li>
-                            </ul>
+                            <a href="index.html" class="ps-0">Trang chủ </a>
+                        </li>
+                        <li>
+                            <a href="#">Giới thiệu</a>
+                            <!-- <i class="ion-ios-arrow-down"></i> -->
+                            <!-- <ul class="sub-menu">
+                                <li><a href="about-us.html">About Page</a></li>
+                                <li><a href="cart.html">Cart Page</a></li>
+                                <li><a href="checkout.html">Checkout Page</a></li>
+                                <li><a href="compare.html">Compare Page</a></li>
+                                <li><a href="login.html">Login &amp; Register Page</a></li>
+                                <li><a href="myaccount.html">Account Page</a></li>
+                                <li><a href="wishlist.html">Wishlist Page</a></li>
+                            </ul> -->
                         </li>
                         <li class="position-static">
-                            <a href="shop-grid-3-column.html">Shop <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="mega-menu row">
+                            <a href="shop-grid-3-column.html">Cửa hàng </a>
+                            <!-- <ul class="mega-menu row">
                                 <li class="col-3">
                                     <ul>
                                         <li class="mega-menu-title"><a href="#">Shop Grid</a></li>
@@ -438,23 +353,12 @@
                                     <a href="single-product.html" class="zoom-in overflow-hidden"><img
                                             src="assets/img/mega-menu/2.jpg" alt="img" /></a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
+
                         <li>
-                            <a href="#">Pages <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="about-us.html">About Page</a></li>
-                                <li><a href="cart.html">Cart Page</a></li>
-                                <li><a href="checkout.html">Checkout Page</a></li>
-                                <li><a href="compare.html">Compare Page</a></li>
-                                <li><a href="login.html">Login &amp; Register Page</a></li>
-                                <li><a href="myaccount.html">Account Page</a></li>
-                                <li><a href="wishlist.html">Wishlist Page</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="blog-grid-3-column.html">Blog <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
+                            <a href="blog-grid-3-column.html">Blog</a>
+                            <!-- <ul class="sub-menu">
                                 <li>
                                     <a href="blog-grid-3-column.html">Blog Grid</a>
                                     <ul class="sub-menu">
@@ -495,9 +399,9 @@
                                         </li>
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
-                        <li><a href="contact.html">contact Us</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3 col-xl-2">
@@ -511,22 +415,8 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="compare.html">
-                                        <span class="position-relative">
-                                            <i class="icon-shuffle"></i>
-                                            <span class="badge cbdg1">1</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="offcanvas-toggle" href="#offcanvas-wishlist">
-                                        <span class="position-relative">
-                                            <i class="icon-heart"></i>
-                                            <span class="badge cbdg1">3</span>
-                                        </span>
-                                    </a>
-                                </li>
+
+
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="offcanvas-toggle" href="#offcanvas-cart">
                                         <span class="position-relative">
@@ -561,16 +451,18 @@
                                             aria-haspopup="true" aria-expanded="false">
                                             <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
                                                 alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
-                                            <span class="pro-user-name ms-1">
+                                            {{-- <span class="pro-user-name ms-1">
                                                 {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
-                                            </span>
+                                            </span> --}}
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end profile-dropdown">
+                                            <!-- Tài khoản -->
                                             <a class="dropdown-item notify-item" href="#" id="showUserProfile">
                                                 <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
                                                 <span>Tài khoản</span>
                                             </a>
                                             <div class="dropdown-divider"></div>
+                                            <!-- Đăng xuất -->
                                             <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="dropdown-item notify-item">
@@ -580,6 +472,7 @@
                                             </form>
                                         </div>
                                     </li>
+
                                     <!-- Popup thông tin tài khoản -->
                                     <div id="userProfilePopup" class="user-profile-popup" style="display: none">
                                         <div class="popup-content">

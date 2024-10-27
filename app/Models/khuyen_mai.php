@@ -17,14 +17,25 @@ class khuyen_mai extends Model
         'ngay_ket_thuc',
         'user_id',
         'is_active',
+        'danh_muc_id',
     ];
 
     public function don_hangs()
     {
         return $this->hasMany(don_hang::class);
     }
+    // register điều kiện 1 số điện thoại đc 1 mã
     public function khachhang_new()
     {
         return $this->belongsTo(User::class);
     }
+
+    // khuyến mãi danh mục
+    public function danh_muc()
+    {
+        return $this->belongsTo(danh_muc::class, 'danh_muc_id');
+    }
+    
+
+
 }

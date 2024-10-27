@@ -26,11 +26,12 @@ class KhuyenMaiController extends Controller
         $isActive = $request->input('trang_thai');
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-        if ($searchKM) {
-            $khuyenMais = $query->where('ma_khuyen_mai', $searchKM)->paginate(10);
-        }
-        if ($startDate && $endDate) {
-            $khuyenMais = $query->whereBetween('ngay_bat_dau', [$startDate, $endDate])->paginate(10);
+        if($searchKM){
+            $khuyenMais=$query->where('ma_khuyen_mai', 'LIKE', "%{$searchKM}%")->paginate(10);
+        } 
+        if($startDate && $endDate){
+            $khuyenMais= $query->whereBetween('ngay_bat_dau',[$startDate , $endDate])->paginate(10);
+
         }
         if ($isActive !== null && $isActive !== '') {
             $khuyenMais = $query->where('is_active', $isActive)->paginate(10);

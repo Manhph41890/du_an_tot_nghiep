@@ -26,12 +26,11 @@ class KhuyenMaiController extends Controller
         $isActive = $request->input('trang_thai');
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-        if($searchKM){
-            $khuyenMais=$query->where('ma_khuyen_mai', 'LIKE', "%{$searchKM}%")->paginate(10);
-        } 
-        if($startDate && $endDate){
-            $khuyenMais= $query->whereBetween('ngay_bat_dau',[$startDate , $endDate])->paginate(10);
-
+        if ($searchKM) {
+            $khuyenMais = $query->where('ma_khuyen_mai', 'LIKE', "%{$searchKM}%")->paginate(10);
+        }
+        if ($startDate && $endDate) {
+            $khuyenMais = $query->whereBetween('ngay_bat_dau', [$startDate, $endDate])->paginate(10);
         }
         if ($isActive !== null && $isActive !== '') {
             $khuyenMais = $query->where('is_active', $isActive)->paginate(10);
@@ -40,7 +39,7 @@ class KhuyenMaiController extends Controller
         $khuyenMais = $query->latest('id')->paginate(10);
         foreach ($khuyenMais as $item) {
             $item->ngay_bat_dau = Carbon::parse($item->ngay_bat_dau)->format('d-m-Y');
-            $item->	ngay_ket_thuc = Carbon::parse($item->ngay_ket_thuc)->format('d-m-Y');
+            $item->ngay_ket_thuc = Carbon::parse($item->ngay_ket_thuc)->format('d-m-Y');
         }
 
         $title = 'Danh sách khuyến mãi';

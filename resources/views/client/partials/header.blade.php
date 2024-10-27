@@ -100,7 +100,7 @@
                 </li>
 
                 <li>
-                    <a href="blog-grid-3-column.html"><span class="menu-text">Blog</span></a>
+                    <a href="{{ url('client/baiviet') }}"><span class="menu-text">Blog</span></a>
                     <!-- <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Blog Grid</span></a>
@@ -357,7 +357,7 @@
                         </li>
 
                         <li>
-                            <a href="blog-grid-3-column.html">Blog</a>
+                            <a href="{{ url('client/baiviet') }}">Blog</a>
                             <!-- <ul class="sub-menu">
                                 <li>
                                     <a href="blog-grid-3-column.html">Blog Grid</a>

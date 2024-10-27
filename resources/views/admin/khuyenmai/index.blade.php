@@ -1,35 +1,24 @@
 @extends('admin.layout')
 
-@section('title')
-    {{-- {{ $title }} --}}
-@endsection
 
 @section('css')
 @endsection
 
 @section('content')
     <div class="content-page">
-
         <div class="content">
-
-            <!-- Start Content-->
             <div class="container-xxl">
-
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0"> {{ $title }} </h4>
                     </div>
                 </div>
-
-                <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
-
                         <div class="card-header ">
                             <div class="row align-items-center">
                                 @if ($isAdmin)
-                                    <div class="col-2" style="margin-top: 8px;">
-
+                                    <div class="col-2">
                                         <a href="{{ route('khuyenmais.create') }}" class="btn btn-success">Thêm mã khuyến
                                             mãi
                                         </a>
@@ -39,25 +28,21 @@
                                     <form action="{{ route('khuyenmais.index') }}" method="POST" id="filter-form-km">
                                         @csrf
                                         @method('GET')
-                                        <div class="form-group mb-3 d-flex align-items-end gap-3">
+                                        <div class="form-group d-flex align-items-end gap-3">
                                             <div>
-                                                <label class="form-label" for="">Mã khuyến mãi:</label>
                                                 <input class="form-control" value="{{ request()->search_km }}"
                                                     type="text" name="search_km" id="search_km"
-                                                    placeholder="Nhập mã khuyến mãi">
+                                                    placeholder="Tìm kiếm theo mã">
                                             </div>
                                             <div>
-                                                <label class="form-label" for="">Từ:</label>
                                                 <input class="form-control" type="date" name="start_date" id="start_date"
                                                     value="{{ request()->start_date }}">
                                             </div>
                                             <div>
-                                                <label class="form-label"for="">Đến:</label>
                                                 <input class="form-control" type="date" name="end_date" id="end_date"
                                                     value="{{ request()->end_date }}">
                                             </div>
                                             <div>
-                                                <label class="form-label" for="trang_thai">Trạng thái:</label>
                                                 <select class="form-select" id="trang_thai" name="trang_thai">
                                                     <option value="">Tất cả</option>
                                                     <option value="0"
@@ -102,7 +87,19 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $khuyenMai->ten_khuyen_mai }}</td>
                                                     <td>{{ $khuyenMai->ma_khuyen_mai }}</td>
-                                                    <td>{{ $khuyenMai->gia_tri_khuyen_mai }}đ</td>
+                                                    <td>
+                                                        @php
+                                                            $tong_tien = $khuyenMai->gia_tri_khuyen_mai;
+                                                            if (intval($tong_tien) == $tong_tien) {
+                                                                echo number_format($tong_tien, 0, ',', '.');
+                                                            } elseif (floor($tong_tien) == $tong_tien) {
+                                                                echo number_format($tong_tien, 0, ',', '.');
+                                                            } else {
+                                                                echo number_format($tong_tien, 2, ',', '.');
+                                                            }
+                                                        @endphp
+                                                        đ
+                                                    </td>
                                                     <td>{{ $khuyenMai->so_luong_ma }}</td>
                                                     <td>{{ $khuyenMai->ngay_bat_dau }}</td>
                                                     <td>{{ $khuyenMai->ngay_ket_thuc }}</td>

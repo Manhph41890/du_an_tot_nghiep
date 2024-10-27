@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\danh_muc;
 use App\Models\khuyen_mai;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Policies\KhuyenMaiPolicy;
 use App\Http\Requests\Storekhuyen_maiRequest;
 use App\Http\Requests\Updatekhuyen_maiRequest;
-use App\Policies\KhuyenMaiPolicy;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class KhuyenMaiController extends Controller
 {
@@ -26,7 +27,7 @@ class KhuyenMaiController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         if ($searchKM) {
-            $khuyenMais = $query->where('ma_khuyen_mai', $searchKM)->paginate(10);
+            $khuyenMais = $query->where('ma_khuyen_mai', 'LIKE', "%{$searchKM}%")->paginate(10);
         }
         if ($startDate && $endDate) {
             $khuyenMais = $query->whereBetween('ngay_bat_dau', [$startDate, $endDate])->paginate(10);
@@ -36,7 +37,10 @@ class KhuyenMaiController extends Controller
         }
 
         $khuyenMais = $query->latest('id')->paginate(10);
-
+        foreach ($khuyenMais as $item) {
+            $item->ngay_bat_dau = Carbon::parse($item->ngay_bat_dau)->format('d-m-Y');
+            $item->ngay_ket_thuc = Carbon::parse($item->ngay_ket_thuc)->format('d-m-Y');
+        }
 
         $title = 'Danh sách khuyến mãi';
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
@@ -50,7 +54,7 @@ class KhuyenMaiController extends Controller
     {
         $this->authorize('create', khuyen_mai::class);
         //
-        $title = 'Tạo khuyến mãi';
+        $title = 'Tạo khuyến mãi mới';
 
         return view('admin.khuyenmai.create', compact('title'));
     }

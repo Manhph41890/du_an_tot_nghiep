@@ -190,6 +190,7 @@
     </section>
     <!-- product-single end -->
     <!-- product tab start -->
+
     <div class="product-tab theme1 bg-white pt-60 pb-80">
         <div class="container">
             <div class="product-tab-nav">
@@ -224,13 +225,7 @@
                         <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="single-product-desc">
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                    enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                    nisi ut aliquip ex ea commo consequat. Duis aute irure dolor in
-                                    reprehend in voluptate velit esse cillum dolore eu fugiat nulla
-                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                                    in culpa qui officia deserunt
+                                    {{ $sanPhamCT->ma_ta_san_pham }}
                                 </p>
                             </div>
                         </div>
@@ -240,13 +235,7 @@
                             <div class="single-product-desc">
                                 <div class="product-anotherinfo-wrapper">
                                     <ul>
-                                        <li><span>Weight</span> 400 g</li>
-                                        <li><span>Dimensions</span>10 x 10 x 15 cm</li>
-                                        <li><span>Materials</span> 60% cotton, 40% polyester</li>
-                                        <li>
-                                            <span>Other Info</span> American heirloom jean shorts pug
-                                            seitan letterpress
-                                        </li>
+                                        {{ $sanPhamCT->mo_ta_ngan }}
                                     </ul>
                                 </div>
                             </div>
@@ -266,7 +255,7 @@
                                                     <div class="review-top-wrap">
                                                         <div class="review-left">
                                                             <div class="review-name">
-                                                                <h4>White Lewis</h4>
+                                                                <h4></h4>
                                                             </div>
                                                             <div class="rating-product">
                                                                 <i class="ion-android-star"></i>
@@ -286,38 +275,6 @@
                                                             luctustrices posuere cubilia Curae Suspendisse
                                                             viverra ed viverra. Mauris ullarper euismod
                                                             vehicula. Phasellus quam nisi, congue id nulla.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="single-review child-review">
-                                                <div class="review-img">
-                                                    <img src="assets/img/testimonial-image/2.png" alt="" />
-                                                </div>
-                                                <div class="review-content">
-                                                    <div class="review-top-wrap">
-                                                        <div class="review-left">
-                                                            <div class="review-name">
-                                                                <h4>White Lewis</h4>
-                                                            </div>
-                                                            <div class="rating-product">
-                                                                <i class="ion-android-star"></i>
-                                                                <i class="ion-android-star"></i>
-                                                                <i class="ion-android-star"></i>
-                                                                <i class="ion-android-star"></i>
-                                                                <i class="ion-android-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="review-left">
-                                                            <a href="#">Reply</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-bottom">
-                                                        <p>
-                                                            Vestibulum ante ipsum primis aucibus orci
-                                                            luctustrices posuere cubilia Curae Sus pen disse
-                                                            viverra ed viverra. Mauris ullarper euismod
-                                                            vehicula.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -367,6 +324,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- product tab end -->

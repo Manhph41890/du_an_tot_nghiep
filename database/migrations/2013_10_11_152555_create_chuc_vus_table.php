@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chuc_vus', function (Blueprint $table) {
-            $table->id();
-            $table->string('ten_chuc_vu')->unique();
-            $table->string('mo_ta_chuc_vu')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('chuc_vus')) {
+            Schema::create('chuc_vus', function (Blueprint $table) {
+                $table->id();
+                $table->string('ten_chuc_vu');
+                $table->string('mo_ta_chuc_vu')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

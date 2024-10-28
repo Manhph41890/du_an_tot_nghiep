@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\chuc_vu;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class UserController extends Controller
     {
 
         $query = User::with('chuc_vu'); // Nạp dữ liệu chức vụ cùng với người dùng
-
+        $params['chucVus'] = chuc_vu::all();
         // Lọc trạng thái nếu có
         if ($request->has('search_dm')) {
             $is_active = $request->input('search_dm');
@@ -44,7 +45,7 @@ class UserController extends Controller
         }
 
         $title = "Nguoi dung";
-        $params = [];
+        // $params = [];
         $params['title'] = $title;
         $params['title'] = $title;
         $params['list'] = $query->get(); // Lấy danh sách người dùng
@@ -85,7 +86,7 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-    {
+    {   
         // Validate dữ liệu từ form
         $request->validate([
             'ho_ten' => 'required|string|max:255',
@@ -121,6 +122,15 @@ class UserController extends Controller
         $user->save();
 
         // Trả về phản hồi thành công
+        return response()->json(['success' => 'Cập nhật thành công']);
+    }
+    public function updatechucvu(Request $request, $userId){
+        $request->validate([
+            'chuc_vu_id' => 'required|string|max:255'
+        ]);
+        $user = User::findOrFail($userId);
+        $user->chuc_vu_id = $request->chuc_vu_id;
+        $user->save();
         return response()->json(['success' => 'Cập nhật thành công']);
     }
 

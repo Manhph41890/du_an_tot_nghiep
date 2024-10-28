@@ -18,15 +18,26 @@
                                     <div class="card-header d-flex justify-content-between">
                                         {{-- ----------- --}}
                                         <div class="">
-                                            <h5>Đơn Hàng: Fujitora {{ $donhang->id }}</h5>
+                                            <h5>Mã Đơn Hàng: {{ $donhang->ma_don_hang }}</h5>
                                             <p>Ngày tạo: {{ $donhang->ngay_tao }}</p>
                                         </div>
                                         <div class="">
                                             <div class="d-flex align-items-center">
                                                 <p class="mb-0 me-2">Trạng thái đơn hàng:</p>
-                                                <span
-                                                    class="badge 
-                                                    {{ $donhang->trang_thai == 'Hoàn thành' ? 'bg-success' : ($donhang->trang_thai == 'Đang xử lý' ? 'bg-warning' : 'bg-danger') }}">
+                                                @php
+                                                    $statusClasses = [
+                                                        'Chờ xác nhận' => 'bg-warning',
+                                                        'Đã xác nhận' => 'bg-info',
+                                                        'Đang chuẩn bị hàng' => 'bg-info',
+                                                        'Đang vận chuyển' => 'bg-info',
+                                                        'Đã giao' => 'bg-success',
+                                                        'Thành công' => 'bg-success',
+                                                        'Đã hủy' => 'bg-danger',
+                                                    ];
+                                                    $class = $statusClasses[$donhang->trang_thai] ?? 'bg-secondary';
+                                                @endphp
+
+                                                <span class="badge {{ $class }}">
                                                     {{ $donhang->trang_thai }}
                                                 </span>
                                             </div>
@@ -50,12 +61,20 @@
                                                     <tr>
                                                         <td><img src="{{ asset('/storage/' . $donhang->san_phams?->anh_san_pham) }}"
                                                                 width="50px"></td>
-                                                        <td> {{ $donhang->san_phams?->ten_san_pham }}<br>Màu:
-                                                            Đỏ
-                                                            Size: M</td>
-                                                        <td>12</td>
-                                                        <td>{{ $donhang->san_phams?->gia_km }}</td>
-                                                        <td>???</td>
+                                                        <td>
+                                                            {{ $donhang->san_phams?->ten_san_pham }}<br>
+                                                            Màu:
+                                                            {{ $donhang->bien_the_san_pham?->color?->ten_color ?? 'N/A' }}<br>
+                                                            Size:
+                                                            {{ $donhang->bien_the_san_pham?->size?->ten_size ?? 'N/A' }}
+                                                        </td>
+
+                                                        <td>{{ $donhang->chi_tiet_don_hangs->first()?->so_luong ?? 'N/A' }}
+                                                        </td>
+                                                        <td>{{ number_format($donhang->chi_tiet_don_hangs->first()?->gia_tien ?? 0, 0, ',', '.') }}
+                                                            VND</td>
+                                                        <td>{{ number_format($donhang->chi_tiet_don_hangs->first()?->thanh_tien ?? 0, 0, ',', '.') }}
+                                                            VND</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -63,7 +82,8 @@
                                         <div class="mb-3">
                                             {{-- ----------- --}}
                                             <p><strong>Mã khuyến mãi</strong>:
-                                                {{ $donhang->khuyen_mai?->ten_khuyen_mai }}</p>
+                                                {{ $donhang->khuyen_mai?->ten_khuyen_mai }} -
+                                                {{ $donhang->khuyen_mai?->ma_khuyen_mai }}</p>
                                             <p><strong>Phương thức vận chuyển</strong>:
                                                 {{ $donhang->phuong_thuc_van_chuyen?->kieu_van_chuyen }}</p>
                                             <p><strong>Phương thức thanh toán</strong>:
@@ -74,29 +94,42 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <p><strong>Số lượng sản phẩm:</strong> 12</p>
-                                        <p><strong>Tổng tiền hàng:</strong> 1,111,111 VND</p>
-                                        <p><strong>Giảm giá:</strong> -21,234 VND</p>
-                                        <p><strong>Vận chuyển:</strong> 20,000 VND</p>
-                                        <p class="order-summary">Tổng giá trị đơn hàng:
+                                        <p><strong class="pe-1">Giảm
+                                                giá:</strong>-
+                                            {{ number_format($donhang->khuyen_mai?->gia_tri_khuyen_mai ?? 0, 0, ',', '.') }}VND
+                                        </p>
+                                        <p><strong class="pe-1">Vận
+                                                chuyển:</strong>
+                                            {{ number_format($donhang->phuong_thuc_van_chuyen?->gia_ship ?? 0, 0, ',', '.') }}VND
+                                        </p>
+                                        <p class="order-summary pe-1">Tổng giá trị đơn hàng:
                                             {{ number_format($donhang->tong_tien, 0, ',', '.') }} VND</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h5>Xác nhận đơn hàng</h5>
-                                        <p>Xác nhận đơn hàng để chuẩn bị hàng</p>
-                                        <button class="complete-button">Xác nhận đơn hàng</button>
+
+                                <!-- Kiểm tra nếu trạng thái đơn hàng là 'Chờ xác nhận' -->
+                                @if ($donhang->trang_thai == 'Chờ xác nhận')
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5>Xác nhận đơn hàng</h5>
+                                            <p>Xác nhận đơn hàng để chuẩn bị hàng</p>
+                                            <form action="{{ route('donhangs.confirm', $donhang->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" class="complete-button btn btn-primary">Xác nhận
+                                                    đơn hàng</button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
 
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <h5>Thông tin khách hàng</h5>
                                         <br>
-                                        <h6>Khác hàng:</strong> {{ $donhang->user?->ho_ten }}</h6>
+                                        <h6>Khách hàng:</h6> {{ $donhang->user?->ho_ten }}
                                         <br>
                                         <p><strong>Tên người nhận:</strong> {{ $donhang->ho_ten }}</p>
                                         <p><strong>Email:</strong> {{ $donhang->email }}</p>
@@ -105,24 +138,55 @@
                                     </div>
                                 </div>
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5>Đánh giá của khách hàng</h5>
-                                        <p>Chưa có đánh giá nào.</p>
-                                    </div>
-                                </div>
+                                <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
+                                @if ($donhang->trang_thai == 'Thành công')
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5>Đánh giá của khách hàng</h5>
+                                            @if ($donhang->san_phams?->danh_gias->isNotEmpty())
+
+                                                @foreach ($donhang->san_phams?->danh_gias as $danhGia)
+                                                    <div class="d-flex justify-content-between">
+                                                        <h6></h6>
+                                                        <strong>{{ $danhGia->user?->ho_ten }}</strong>
+                                                        <small><em>Đánh giá:
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $danhGia->diem_so)
+                                                                        <i class="mdi mdi-star text-warning"></i>
+                                                                        <!-- Ngôi sao đầy -->
+                                                                    @else
+                                                                        <i class="mdi mdi-star-outline text-muted"></i>
+                                                                        <!-- Ngôi sao rỗng -->
+                                                                    @endif
+                                                                @endfor
+                                                            </em></small>
+                                                    </div>
+                                                    <h6>Bình luận:</h6>
+                                                    <textarea class="form-control" rows="3" readonly>{{ $danhGia->binh_luan }}</textarea>
+                                                    <p class="text-muted">Ngày đánh giá:
+                                                        {{ $danhGia->ngay_danh_gia }}</p>
+                                                    </li>
+                                                @endforeach
+                                                </ul>
+                                            @else
+                                                <p>Chưa có đánh giá nào.</p>
+                                            @endif
+                                        </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-3">
 
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                     </div>
+                </div>
+                <div class="mt-3">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>
-
     </div>
+
+</div>
 </div>
 
 <style>

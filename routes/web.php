@@ -11,6 +11,7 @@ use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
@@ -28,14 +29,14 @@ use App\Http\Controllers\UserController;
 */
 
 // Route trang chủ
-Route::get('/', fn() => view('client.home'));
+Route::get('/', [HomeController::class, 'index']);
 
 // Route cho client
 Route::prefix('client')->group(function () {
     Route::view('/sanpham', 'client.sanpham.danhsach');
     Route::view('/sanphamchitiet', 'client.sanpham.sanphamct');
-    Route::view('/baiviet', 'client.baiviet.baiviet');
-    Route::view('/baivietchitiet', 'client.baiviet.baivietchitiet');
+    Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
+    Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
     Route::view('/taikhoan', 'client.taikhoan.dashboard');
     Route::view('/giohang', 'client.giohang');
     Route::view('/gioithieu', 'client.gioithieu');
@@ -64,7 +65,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     // Thống kê
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
-        Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
+        // Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
     });
 
     // Profile
@@ -79,6 +80,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
     Route::resource('/donhangs', DonHangController::class);
+    Route::post('/donhang/{id}/confirm', [DonHangController::class, 'confirmOrder'])->name('donhangs.confirm');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
@@ -107,6 +109,6 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
-
+Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');

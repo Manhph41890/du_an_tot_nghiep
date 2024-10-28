@@ -33,28 +33,55 @@
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <style>
+        h4 {
+            color: white;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
 
+        body {
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('assets/admin/images/bg.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px);
+            /* Adjust the blur level as needed */
+            z-index: -1;
+            /* Keep the blurred background behind other content */
+        }
+    </style>
 </head>
 
 <!-- body start -->
 
 <body data-menu-color="light" data-sidebar="default">
 
+
     <script>
         $(document).ready(function() {
             <?php if(Session::has('success')): ?>
-                toastr.success("<?php echo e(Session::get('success')); ?>", "Thông báo", {
-                    progressBar: true,
-                    closeButton: true,
-                    timeOut: 3000
-                });
+            toastr.success("<?php echo e(Session::get('success')); ?>", "Thông báo", {
+                progressBar: true,
+                closeButton: true,
+                timeOut: 3000
+            });
             <?php endif; ?>
             <?php if(Session::has('error')): ?>
-                toastr.error("<?php echo e(Session::get('error')); ?>", "Thông báo", {
-                    progressBar: true,
-                    closeButton: true,
-                    timeOut: 3000
-                });
+            toastr.error("<?php echo e(Session::get('error')); ?>", "Thông báo", {
+                progressBar: true,
+                closeButton: true,
+                timeOut: 3000
+            });
             <?php endif; ?>
         });
     </script>
@@ -69,7 +96,7 @@
         <?php echo $__env->yieldContent('content'); ?>
         <!-- End Page content -->
 
-        <?php echo $__env->make('admin.partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        
     </div>
     <!-- END wrapper -->
 
@@ -94,7 +121,9 @@
 
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+
 </body>
 
-</html>
-<?php /**PATH D:\laragon\www\du_an_tot_nghiep\resources\views/admin/layout.blade.php ENDPATH**/ ?>
+</html><?php /**PATH D:\laragon\www\du_an_tot_nghiep\resources\views/admin/layout.blade.php ENDPATH**/ ?>

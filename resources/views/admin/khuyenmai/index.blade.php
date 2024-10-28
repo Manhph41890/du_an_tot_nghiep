@@ -89,7 +89,7 @@
                                                     <td>{{ $khuyenMai->ma_khuyen_mai }}</td>
                                                     <td>
                                                         @php
-                                                            $tong_tien = $khuyenMai->gia_tri_khuyen_mai	;
+                                                            $tong_tien = $khuyenMai->gia_tri_khuyen_mai;
                                                             if (intval($tong_tien) == $tong_tien) {
                                                                 echo number_format($tong_tien, 0, ',', '.');
                                                             } elseif (floor($tong_tien) == $tong_tien) {

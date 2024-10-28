@@ -540,7 +540,7 @@
                                                     <div class="product-thumbnail position-relative">
                                                         <span
                                                             class=" bg-danger badge badge-danger top-right p-2">-{{ $sanPhamGg->phan_tram_giam_gia }}%</span>
-                                                        <a href="single-product.html">
+                                                        <a href="{{route('sanpham.chitiet',$sanPhamGg->id)}}">
                                                             <img
                                                                 src="{{ asset('/storage/' . $sanPhamGg->anh_san_pham) }}">
                                                         </a>
@@ -576,7 +576,7 @@
                                                         <div class="product-desc">
                                                             <h3 class="title">
                                                                 <a
-                                                                    href="shop-grid-4-column.html">{{ $sanPhamGg->ten_san_pham }}</a>
+                                                                    href="{{route('sanpham.chitiet',$sanPhamGg->id)}}">{{ $sanPhamGg->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating d-flex justify-content-around">
                                                                 @for ($i = 1; $i <= 5; $i++)

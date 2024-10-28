@@ -34,7 +34,7 @@ Route::get('/', [HomeController::class, 'index']);
 // Route cho client
 Route::prefix('client')->group(function () {
     Route::view('/sanpham', 'client.sanpham.danhsach');
-    Route::view('/sanphamchitiet', 'client.sanpham.sanphamct');
+    Route::get('/sanphamchitiet/{id}', [HomeController::class, 'chiTietSanPham'])->name('sanpham.chitiet');
     Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
     Route::view('/taikhoan', 'client.taikhoan.dashboard');

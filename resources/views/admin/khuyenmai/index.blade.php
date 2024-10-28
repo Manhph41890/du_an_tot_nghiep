@@ -38,7 +38,8 @@
                                         </a>
                                     </div>
                                 @endif
-                                <div class="col-10">
+                                {{-- khong dung duoc  --}}
+                                {{-- <div class="col-10">
                                     <form action="{{ route('khuyenmais.index') }}" method="POST" id="filter-form-km">
                                         @csrf
                                         @method('GET')
@@ -70,7 +71,7 @@
                                             <button class="btn btn-success">Lọc</button>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>

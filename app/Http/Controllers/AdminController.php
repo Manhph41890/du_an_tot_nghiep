@@ -347,10 +347,10 @@ class AdminController extends Controller
                     ->sum('san_phams.gia_nhap');
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang;
             }
-            $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
-            $don_hang_sp = don_hang::query()
-                ->whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
-                ->pluck('san_pham_id', 'id')->all();
+            // $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
+            // $don_hang_sp = don_hang::query()
+            //     ->whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+            //     ->pluck('san_pham_id', 'id')->all();
 
             // // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
             // $tong_gia_tri_sp_chua_chua = [];
@@ -407,8 +407,8 @@ class AdminController extends Controller
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang;
             }
 
-            $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
-            $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
+            // $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
+            // $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
 
             // // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
             // $tong_gia_tri_sp_chua_chua = [];
@@ -454,8 +454,8 @@ class AdminController extends Controller
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang;
             }
 
-            $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
-            $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
+            // $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
+            // $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
 
             // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
             // $tong_gia_tri_sp_chua_chua = [];

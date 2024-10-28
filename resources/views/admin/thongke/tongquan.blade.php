@@ -671,4 +671,5 @@
             document.getElementById('monthInput').style.display = 'none';
         }
     </script>
+    
 @endsection

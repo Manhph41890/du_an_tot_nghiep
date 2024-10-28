@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KhuyenMaiController;
+
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\SanPhamController;
@@ -76,6 +77,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::resource('/chucvus', ChucVuController::class);
     Route::resource('/sanphams', SanPhamController::class);
     Route::resource('/khuyenmais', KhuyenMaiController::class);
+
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
@@ -94,16 +96,16 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 });
 
 // Route cho nhân viên (quản lý)
-// Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
-//     // Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke_chung');
-//     // Route::get('/', [StaffController::class, 'index'])->name('thong_ke_chung');
-//     Route::resource('/danhmucs', DanhMucController::class);
-//     Route::resource('/chucvus', ChucVuController::class);
-//     Route::resource('/khuyenmais', KhuyenMaiController::class);
-//     Route::resource('/baiviets', BaiVietController::class);
-//     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
-//     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
-// });
+Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
+    Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke');
+    // Route::get('/', [StaffController::class, 'index'])->name('thong_ke_chung');
+    Route::resource('/danhmucs', DanhMucController::class);
+    Route::resource('/chucvus', ChucVuController::class);
+    Route::resource('/khuyenmais', KhuyenMaiController::class);
+    Route::resource('/baiviets', BaiVietController::class);
+    Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
+    Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
+});
 
 // Route cho quản lý người dùng
 Route::get('/user', [UserController::class, 'index'])->name('user.index');

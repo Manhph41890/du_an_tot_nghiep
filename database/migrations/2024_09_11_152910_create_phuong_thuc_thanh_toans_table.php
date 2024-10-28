@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('phuong_thuc_thanh_toans', function (Blueprint $table) {
-            $table->id();
-            $table->enum('kieu_thanh_toan', ['Thanh toán online', 'Thanh toán khi nhận hàng']);
-            $table->timestamps();
-        });
+
+        if (!Schema::hasTable('phuong_thuc_thanh_toans')) {
+            Schema::create('phuong_thuc_thanh_toans', function (Blueprint $table) {
+                $table->id();
+                $table->enum('kieu_thanh_toan', ['Thanh toán online', 'Thanh toán khi nhận hàng']);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

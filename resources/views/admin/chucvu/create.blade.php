@@ -22,9 +22,21 @@
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="ten_chuc_vu" class="form-label">Tên chức vụ</label>
-                                                <input type="text" id="ten_chuc_vu" name="ten_chuc_vu" placeholder="Ví dụ: nhan_vien,khach_hang,.."
-                                                    class="form-control @error('ten_chuc_vu') is-invalid @enderror"
-                                                    value="{{ old('ten_chuc_vu') }}">
+                                                <select id="ten_chuc_vu" name="ten_chuc_vu"
+                                                    class="form-select @error('ten_chuc_vu') is-invalid @enderror">
+                                                    <option value="">--Chọn--</option>
+                                                    <option value="admin" {{ old('admin') == 'admin' ? 'selected' : '' }}>
+                                                        Admin
+                                                    </option>
+                                                    <option value="nhan_vien"
+                                                        {{ old('nhan_vien') == 'nhan_vien' ? 'selected' : '' }}>
+                                                        Nhân viên
+                                                    </option>
+                                                    <option value="khach_hang"
+                                                        {{ old('khach_hang') == 'khach_hang' ? 'selected' : '' }}>
+                                                        Khách hàng
+                                                    </option>
+                                                </select>
                                                 @error('ten_chuc_vu')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}

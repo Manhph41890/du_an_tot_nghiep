@@ -12,7 +12,7 @@ use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\KhuyenMaiController;
-use App\Http\Controllers\KhuyenMaiDMController;
+
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\SanPhamController;
@@ -65,7 +65,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     // Thống kê
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
-        Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
+        // Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
     });
 
     // Profile
@@ -76,11 +76,12 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::resource('/chucvus', ChucVuController::class);
     Route::resource('/sanphams', SanPhamController::class);
     Route::resource('/khuyenmais', KhuyenMaiController::class);
-    Route::resource('/khuyenmai', KhuyenMaiDMController::class);
+
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
     Route::resource('/donhangs', DonHangController::class);
+    Route::post('/donhang/{id}/confirm', [DonHangController::class, 'confirmOrder'])->name('donhangs.confirm');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
@@ -94,21 +95,21 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 });
 
 // Route cho nhân viên (quản lý)
-// Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
-//     // Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke_chung');
-//     // Route::get('/', [StaffController::class, 'index'])->name('thong_ke_chung');
-//     Route::resource('/danhmucs', DanhMucController::class);
-//     Route::resource('/chucvus', ChucVuController::class);
-//     Route::resource('/khuyenmais', KhuyenMaiController::class);
-//     Route::resource('/baiviets', BaiVietController::class);
-//     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
-//     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
-// });
+Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
+    Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke');
+    // Route::get('/', [StaffController::class, 'index'])->name('thong_ke_chung');
+    Route::resource('/danhmucs', DanhMucController::class);
+    Route::resource('/chucvus', ChucVuController::class);
+    Route::resource('/khuyenmais', KhuyenMaiController::class);
+    Route::resource('/baiviets', BaiVietController::class);
+    Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
+    Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
+});
 
 // Route cho quản lý người dùng
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
-
+Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');

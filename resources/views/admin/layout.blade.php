@@ -33,7 +33,33 @@
 
     {{-- toast  --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <style>
+        h4 {
+            color: white;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
 
+        body {
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('assets/admin/images/bg.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px);
+            /* Adjust the blur level as needed */
+            z-index: -1;
+            /* Keep the blurred background behind other content */
+        }
+    </style>
 </head>
 
 
@@ -42,19 +68,19 @@
 
     <script>
         $(document).ready(function() {
-            @if (Session::has('success'))
-                toastr.success("{{ Session::get('success') }}", "Thông báo", {
-                    progressBar: true,
-                    closeButton: true,
-                    timeOut: 3000
-                });
+            @if(Session::has('success'))
+            toastr.success("{{ Session::get('success') }}", "Thông báo", {
+                progressBar: true,
+                closeButton: true,
+                timeOut: 3000
+            });
             @endif
-            @if (Session::has('error'))
-                toastr.error("{{ Session::get('error') }}", "Thông báo", {
-                    progressBar: true,
-                    closeButton: true,
-                    timeOut: 3000
-                });
+            @if(Session::has('error'))
+            toastr.error("{{ Session::get('error') }}", "Thông báo", {
+                progressBar: true,
+                closeButton: true,
+                timeOut: 3000
+            });
             @endif
         });
     </script>

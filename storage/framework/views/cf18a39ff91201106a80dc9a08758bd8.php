@@ -5,7 +5,7 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <div class="logo-box">
-
+                <img src="<?php echo e(asset('assets/client/img/logo/logo_art.png')); ?>" alt="" width="200px">
             </div>
 
             <ul id="side-menu" class="list-unstyled">
@@ -20,7 +20,7 @@
                     <div class="collapse" id="dashboard">
                         <ul class="nav-second-level">
                             <li><a class="tp-link" href="<?php echo e(route('thong_ke_chung')); ?>">Tổng quan</a></li>
-                            <li><a class="tp-link" href="<?php echo e(route('thong_ke_doanh_thu')); ?>">Doanh thu</a></li>
+                            
 
                         </ul>
                     </div>
@@ -183,6 +183,7 @@
         <!-- End Sidebar -->
 
         <div class="clearfix"></div>
+        
     </div>
 </div>
 <!-- Left Sidebar End -->

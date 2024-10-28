@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class khuyen_mai extends Model
 {
-    use HasFactory;
+    use HasFactory; 
+    protected $table ='khuyen_mais';
+
+
     protected $fillable = [
         'ten_khuyen_mai',
         'ma_khuyen_mai',

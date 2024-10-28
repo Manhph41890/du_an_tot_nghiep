@@ -19,8 +19,13 @@
                     </a>
                     <div class="collapse" id="dashboard">
                         <ul class="nav-second-level">
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                             <li><a class="tp-link" href="{{ route('thong_ke_chung') }}">Tổng quan</a></li>
-                            <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li>
+                            @endif
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'nhan_vien')
+                            <li><a class="tp-link" href="{{ route('thong_ke') }}">Tổng quan</a></li>
+                            @endif
+                            {{-- <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li> --}}
 
                         </ul>
                     </div>
@@ -61,9 +66,7 @@
                     </div>
                 </li>
 
-          {{--  --}}
-               
-                <!-- KHuyến mãi -->
+                {{-- Khuyến mãi --}}
                 <li>
                     <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="tag"></i>
@@ -75,7 +78,6 @@
                             @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                                 <li><a class="tp-link" href="{{ route('khuyenmais.create') }}">Thêm</a></li>
 
-                                <li><a class="tp-link" href="{{route ('khuyenmai.create')}}">Khuyến mãi theo danh mục </a></li>
                             
 
 

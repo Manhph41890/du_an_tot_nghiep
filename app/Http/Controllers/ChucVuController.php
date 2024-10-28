@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\chuc_vu;
+use Illuminate\Validation\Rule;
 use App\Http\Requests\Storechuc_vuRequest;
 use App\Http\Requests\Updatechuc_vuRequest;
 
@@ -62,7 +63,6 @@ class ChucVuController extends Controller
 
         $title = "Cập nhật chức vụ";
         $chuc_vu = chuc_vu::query()->findOrFail($id);
-
         $this->authorize('update', $chuc_vu);
         return view('admin.chucvu.edit', compact('title', 'chuc_vu'));
     }
@@ -73,12 +73,16 @@ class ChucVuController extends Controller
     public function update(Updatechuc_vuRequest $request, chuc_vu $chuc_vu, string $id)
     {
         //
+        $request->validate([
+            'ten_chuc_vu' =>Rule::unique('chuc_vus', 'ten_chuc_vu')->ignore($id)
+        ], [
+            'ten_chuc_vu.unique' => 'Tên chức vụ đã tồn tại.',
+        ]);
         if ($request->isMethod('PUT')) {
             $param = $request->except('_token', '_method');
             $chucvu = chuc_vu::findOrFail($id);
             $chucvu->update($param);
         }
-
         return redirect()->route('chucvus.index')->with('success', 'Cập nhật chức vụ thành công');
     }
 
@@ -87,7 +91,6 @@ class ChucVuController extends Controller
      */
     public function destroy(chuc_vu $chuc_vu, string $id)
     {
-
         $chucvu = chuc_vu::findOrFail($id);
         $this->authorize('delete', $chucvu);
         if ($chucvu->users()->count() > 0) {

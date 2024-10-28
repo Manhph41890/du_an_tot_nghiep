@@ -75,22 +75,22 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-6">
                                                 <p class="fs-10 mt-3 mb-1">Tổng tiền</p>
                                                 <div class="d-flex align-items-baseline">
                                                     <div class="fs-17 mb-0 me-2 fw-semibold text-success">
-                                                        Tổng doanh thu
+                                                        {{ $tong_tien }}
                                                     </div>
                                                     <div class="me-auto text-success">
                                                         đ
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-6">
                                                 <p class="fs-10 mt-3 mb-1">Số lượng</p>
                                                 <div class="d-flex align-items-baseline">
                                                     <div class="fs-17 mb-0 me-2 fw-semibold ">
-                                                        Tổng doanh thu
+                                                        {{ $soluong_donhangs }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,7 +103,7 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="fs-15 mb-1 "> <i
-                                                    class="fa-solid fa-truck-fast me-2 text-success"></i>Tổng lợi nhuận
+                                                    class="fa-solid fa-truck-fast me-2 text-success"></i>Tổng lợi nhuận ước tính
                                             </div>
                                         </div>
                                         <div class="row">
@@ -111,21 +111,14 @@
                                                 <p class="fs-10 mt-3 mb-1">Tổng tiền</p>
                                                 <div class="d-flex align-items-baseline">
                                                     <div class="fs-17 mb-0 me-2 fw-semibold text-success">
-                                                        Tổng lợi nhuận
+                                                        {{ $loi_nhuan_tong }}
                                                     </div>
                                                     <div class="me-auto text-success">
                                                         đ
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12">
-                                                <p class="fs-10 mt-3 mb-1">Số lượng</p>
-                                                <div class="d-flex align-items-baseline">
-                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
-                                                        Tổng lợi nhuận
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>

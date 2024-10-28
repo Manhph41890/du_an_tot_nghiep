@@ -13,39 +13,8 @@ use Illuminate\Support\Facades\Auth;
 class StaffController extends Controller
 {
     //
-    public function index()
-    {
 
-        $title = "Thống kê";
-
-        // Đếm số lượng đơn hàng
-        $donhangs = don_hang::count();
-
-        // Đếm tổng số sản phẩm
-        $sanphams = san_pham::count();
-
-        // Lấy 5 sản phẩm có lượt xem nhiều nhất
-        $views_product = san_pham::orderBy('views', 'desc')->take(5)->get();
-
-        // Đếm tổng số lượng người dùng
-        $users = User::count();
-        // tổng tiền các tỏng tiền 
-        $tong_tien_tat_ca_don_hang = don_hang::sum('tong_tien');
-        if ($tong_tien_tat_ca_don_hang == 0) {
-            $tong_tien = '0';
-        } elseif (intval($tong_tien_tat_ca_don_hang) == $tong_tien_tat_ca_don_hang) {
-            // Nếu tổng tiền là số nguyên (không có phần thập phân), hiển thị dạng không có phần thập phân
-            $tong_tien = number_format($tong_tien_tat_ca_don_hang, 0, ',', '.');
-        } elseif (floor($tong_tien_tat_ca_don_hang) == $tong_tien_tat_ca_don_hang) {
-            // Nếu tổng tiền có dạng như 200000.00, hiển thị dạng số nguyên
-            $tong_tien = number_format($tong_tien_tat_ca_don_hang, 0, ',', '.');
-        } else {
-            // Nếu tổng tiền có phần thập phân khác .00, hiển thị đầy đủ 2 chữ số sau dấu phẩy
-            $tong_tien = number_format($tong_tien_tat_ca_don_hang, 2, ',', '.');
-        }
-        return view('admin.thongke.tongquan', compact('sanphams', 'views_product', 'users', 'title', 'donhangs', 'tong_tien'));
-    }
-    public function thong_ke_chung(Request $request)
+    public function index (Request $request)
     {
 
         $title = "Tổng quan chung";
@@ -54,9 +23,14 @@ class StaffController extends Controller
         $request->validate([
             'ngay_bat_dau' => 'nullable|before_or_equal:ngay_ket_thuc',
             'ngay_ket_thuc' => 'nullable|after_or_equal:ngay_bat_dau',
+            'ngay_bat_dau_bieudo' => 'nullable|before_or_equal:ngay_ket_thuc_bieudo',
+            'ngay_ket_thuc_bieudo' => 'nullable|after_or_equal:ngay_bat_dau_bieudo',
+
         ], [
             'ngay_bat_dau.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
             'ngay_ket_thuc.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
+            'ngay_bat_dau_bieudo.before_or_equal' => 'Ngày bắt đầu không được lớn hơn ngày kết thúc.',
+            'ngay_ket_thuc_bieudo.after_or_equal' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu.',
         ]);
 
 
@@ -341,52 +315,176 @@ class StaffController extends Controller
             'Đã hủy',
         ];
         if ($request->isMethod('get') && $request->input('ngay_bat_dau_bieudo') && $request->input('ngay_ket_thuc_bieudo')) {
-        } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam_bieudo')) {
-
-            switch ($request->input('loc_ngay_thang_quy_nam')) {
-                case 'today':
-
-                    break;
-                case 'last_7_days':
-
-                    break;
-                case 'month':
-
-                    break;
-                case 'year':
-
-                    break;
-                default:
-                    break;
+            // Biểu đồ DOANH THU-------------------
+            $tongTienThang = [];
+            for ($thang = 1; $thang <= 12; $thang++) {
+                $tongTien = don_hang::whereMonth('ngay_tao', $thang)
+                    ->whereYear('ngay_tao', Carbon::now()->year)
+                    ->whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->sum('tong_tien');
+                $tongTienThang[$thang] = $tongTien ?: 0;
             }
-        } else {
+
+            // Biểu đồ tỉ lệ % ĐƠN HÀNG------------ 
+            $phantramdonhang = [];
+            foreach ($labels_phantram as $trang_thai) {
+                $count = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->where('trang_thai', $trang_thai)
+                    ->count();
+                $phantramdonhang[$trang_thai] = $count;
+            }
+
+            // Biểu đồ LỢI NHUẬN-------------------
+            $loi_nhuan_theo_thang = [];
+            for ($thang = 1; $thang <= 12; $thang++) {
+                // Tính tổng tiền của đơn hàng theo tháng
+                $tt_dh_tang = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->whereMonth('ngay_tao', $thang)->sum('tong_tien');
+
+                // Lấy chi phí từ giá nhập
+                $tong_gia_nhap_tang = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->whereMonth('ngay_tao', $thang)
+                    ->join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+                    ->sum('san_phams.gia_nhap');
+                $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang;
+            }
+            $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
+            $don_hang_sp = don_hang::query()
+                ->whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                ->pluck('san_pham_id', 'id')->all();
+
+            // // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+            // $tong_gia_tri_sp_chua_chua = [];
+
+            // // Lặp qua các sản phẩm
+            // foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+            //     // Lấy số lượng đơn hàng chưa chứa sản phẩm này
+            //     $so_luong_chua_chua = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+            //         ->whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+            //             $query->where('id', $san_pham_id);
+            //         })->count();
+
+            //     // Tính tổng giá trị cho sản phẩm này
+            //     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+            // }
+        } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam_bieudo')) {
 
             // Biểu đồ DOANH THU-------------------
             $tongTienThang = [];
-            // Duyệt qua 12 tháng
             for ($thang = 1; $thang <= 12; $thang++) {
-                // Lấy tổng tiền cho từng tháng
                 $tongTien = don_hang::whereMonth('ngay_tao', $thang)
                     ->whereYear('ngay_tao', Carbon::now()->year)
                     ->sum('tong_tien');
-
-                // Lưu dữ liệu vào mảng
                 $tongTienThang[] = $tongTien;
             }
 
+            // Biểu đồ tỉ lệ % ĐƠN HÀNG------------
+            if ($request->input('loc_ngay_thang_quy_nam_bieudo')) {
+                list($year, $month) = explode('-', $request->input('loc_ngay_thang_quy_nam_bieudo'));
+            } else {
+                $year = Carbon::now()->year;
+                $month = Carbon::now()->month;
+            }
+            $phantramdonhang = [];
+            foreach ($labels_phantram as $trang_thai) {
+                $count = don_hang::whereMonth('ngay_tao', $month)
+                    ->whereYear('ngay_tao', $year)
+                    ->where('trang_thai', $trang_thai)
+                    ->count();
+                $phantramdonhang[$trang_thai] = $count;
+            }
+
+            // Biểu đồ LỢI NHUẬN-------------------
+            $loi_nhuan_theo_thang = [];
+            for ($thang = 1; $thang <= 12; $thang++) {
+                // Tính tổng tiền của đơn hàng theo tháng
+                $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)->sum('tong_tien');
+
+                // lấy chi phí từ giá nhập
+                $tong_gia_nhap_tang = don_hang::whereMonth('ngay_tao', $thang)
+                    ->join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+                    ->sum('san_phams.gia_nhap');
+
+                $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang;
+            }
+
+            $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
+            $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
+
+            // // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+            // $tong_gia_tri_sp_chua_chua = [];
+
+            // // Lặp qua các sản phẩm
+            // foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+            //     // Lấy số lượng đơn hàng chưa chứa sản phẩm này
+            //     $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+            //         $query->where('id', $san_pham_id);
+            //     })->count();
+
+            //     // Tính tổng giá trị cho sản phẩm này
+            //     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+            // }
+        } else {
+            // Biểu đồ DOANH THU-------------------
+            $tongTienThang = [];
+            for ($thang = 1; $thang <= 12; $thang++) {
+                $tongTien = don_hang::whereMonth('ngay_tao', $thang)
+                    ->whereYear('ngay_tao', Carbon::now()->year)
+                    ->sum('tong_tien');
+                $tongTienThang[] = $tongTien;
+            }
 
             // Biểu đồ tỉ lệ % ĐƠN HÀNG------------
             $phantramdonhang = [];
-            // số đơn hàng theo từng trạng thái 
             foreach ($labels_phantram as $trang_thai) {
                 $count = don_hang::where('trang_thai', $trang_thai)->count();
                 $phantramdonhang[$trang_thai] = $count;
             }
+
+            // Biểu đồ LỢI NHUẬN-------------------
+            $loi_nhuan_theo_thang = [];
+            for ($thang = 1; $thang <= 12; $thang++) {
+                // Tính tổng tiền của đơn hàng theo tháng
+                $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)->sum('tong_tien');
+
+                // lấy chi phí từ giá nhập
+                $tong_gia_nhap_tang = don_hang::whereMonth('ngay_tao', $thang)
+                    ->join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+                    ->sum('san_phams.gia_nhap');
+
+                $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang;
+            }
+
+            $gianhap_sp = san_pham::query()->pluck('gia_nhap', 'id')->all();
+            $don_hang_sp = don_hang::query()->pluck('san_pham_id', 'id')->all();
+
+            // Khởi tạo mảng để lưu trữ giá trị tổng cho sản phẩm chưa được chứa trong đơn hàng
+            // $tong_gia_tri_sp_chua_chua = [];
+
+            // Lặp qua các sản phẩm
+            // foreach ($gianhap_sp as $san_pham_id => $gia_nhap) {
+            // Lấy số lượng đơn hàng chưa chứa sản phẩm này
+            // $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+            //     $query->where('id', $san_pham_id);
+            // })->count();
+            // $so_luong_chua_chua = don_hang::whereDoesntHave('san_phams', function ($query) use ($san_pham_id) {
+            //     $query->where('san_phams.id', $san_pham_id); // Thêm tên bảng vào trước cột `id`
+            // })->count();
+
+            //     // Tính tổng giá trị cho sản phẩm này
+            //     $tong_gia_tri_sp_chua_chua[$san_pham_id] = $gia_nhap * $so_luong_chua_chua;
+            // }
+            // dd($loi_nhuan_theo_thang);
         }
 
 
         // Đơn hàng mới
         $donhangs = don_hang::query()->orderBy('id', 'desc')->paginate(5);
+        foreach ($donhangs as $item) {
+            $item->ngay_tao = Carbon::parse($item->ngay_tao)->format('d-m-Y');
+        }
+
+
         // Sản phẩm sắp hết hàng
         $sanphams_saphet = san_pham::query()->where('so_luong', '<', '10')->get();
         // Lấy 5 sản phẩm có lượt xem nhiều nhất
@@ -411,6 +509,6 @@ class StaffController extends Controller
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
 
 
-        return view('admin.thongke.tongquan', compact('labels_phantram', 'phantramdonhang', 'labels', 'tongTienThang', 'sanphams_saphet', 'views_product', 'title', 'donhangs', 'tong_tien', 'isAdmin', 'soluong_donhangs', 'soluong_donhangs_new', 'tongtien_donhangs_moi', 'donhangs_daxacnhan', 'donhangs_dangchuanbihang', 'donhangs_dangvanchuyen', 'donhangs_dagiao', 'donhangs_thanhcong', 'donhangs_dahuy'));
+        return view('admin.thongke.tongquan', compact('loi_nhuan_theo_thang', 'labels_phantram', 'phantramdonhang', 'labels', 'tongTienThang', 'sanphams_saphet', 'views_product', 'title', 'donhangs', 'tong_tien', 'isAdmin', 'soluong_donhangs', 'soluong_donhangs_new', 'tongtien_donhangs_moi', 'donhangs_daxacnhan', 'donhangs_dangchuanbihang', 'donhangs_dangvanchuyen', 'donhangs_dagiao', 'donhangs_thanhcong', 'donhangs_dahuy'));
     }
 }

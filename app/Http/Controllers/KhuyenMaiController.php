@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\KhuyenMaiMoiEvent;
 use App\Models\danh_muc;
 use App\Models\khuyen_mai;
 use App\Http\Requests\Storekhuyen_maiRequest;
@@ -9,6 +10,8 @@ use App\Http\Requests\Updatekhuyen_maiRequest;
 use App\Policies\KhuyenMaiPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Pusher\Pusher;
+
 
 class KhuyenMaiController extends Controller
 {
@@ -61,6 +64,21 @@ class KhuyenMaiController extends Controller
         return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title', 'isAdmin'));
     }
 
+    private function sendNotification($message)
+    {
+        $pusher = new Pusher(
+            config('broadcasting.connections.pusher.key'),
+            config('broadcasting.connections.pusher.secret'),
+            config('broadcasting.connections.pusher.app_id'),
+            [
+                'cluster' => config('broadcasting.connections.pusher.options.cluster'),
+                'useTLS' => true
+            ]
+        );
+
+        $data['message'] = $message;
+        $pusher->trigger('promotion-channel', 'promotion-event', $data);
+    }
 
 
     /**
@@ -80,8 +98,9 @@ class KhuyenMaiController extends Controller
      */
     public function store(Storekhuyen_maiRequest $request)
     {
+
         // admin tạo mã khuyến mãi
-        khuyen_mai::create([
+        $khuyen_mai =  khuyen_mai::create([
             'ten_khuyen_mai' => $request->input('ten_khuyen_mai'),
             // Sinh ngẫu nhiên mã khuyến mãi
             'ma_khuyen_mai' => strtoupper(Str::random(10)),
@@ -92,7 +111,9 @@ class KhuyenMaiController extends Controller
             'is_active' => $request->input('is_active'),
 
         ]);
-
+        event(new KhuyenMaiMoiEvent($khuyen_mai));
+        //check trong post man 
+        $this->sendNotification("Bạn đã tạo thành công khuyến mãi mới: {$khuyen_mai->ten_khuyen_mai}");
         return redirect()->route('khuyenmais.index')->with('success', 'Tạo mã khuyến mãi thành công');
     }
 
@@ -122,17 +143,26 @@ class KhuyenMaiController extends Controller
      */
     public function update(Updatekhuyen_maiRequest $request, khuyen_mai $khuyen_mai, string $id)
     {
-        if ($request->isMethod('PUT')) {
+        // if ($request->isMethod('PUT')) {
 
-            $param = $request->except('_token', '_method');
+        //     $param = $request->except('_token', '_method');
 
-            $khuyen_mai = khuyen_mai::findOrFail($id);
+        //     $khuyen_mai = khuyen_mai::findOrFail($id);
 
-            $khuyen_mai->update($param);
-        }
+        //     $khuyen_mai->update($param);
+        // }
+
+        // return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
+
+
+        $khuyen_mai = khuyen_mai::findOrFail($id);
+        $khuyen_mai->update($request->all());
+
+        event(new KhuyenMaiMoiEvent($khuyen_mai));
 
         return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -141,10 +171,17 @@ class KhuyenMaiController extends Controller
     {
         //
 
+        // $khuyen_mai = khuyen_mai::findOrFail($id);
+        // $this->authorize('delete', $khuyen_mai);
+        // $khuyen_mai->delete();
+
+        // return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
+
         $khuyen_mai = khuyen_mai::findOrFail($id);
-        $this->authorize('delete', $khuyen_mai);
         $khuyen_mai->delete();
 
-        return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
+        event(new KhuyenMaiMoiEvent($khuyen_mai));
+
+        return redirect()->route('khuyenmais.index')->with('success', 'Xóa mã khuyến mãi thành công');
     }
 }

@@ -1,21 +1,13 @@
 @extends('admin.layout')
 
-@section('title')
-    {{-- {{ $title }} --}}
-@endsection
 
 @section('css')
 @endsection
 
 @section('content')
-
     <div class="content-page">
-
         <div class="content">
-
-            <!-- Start Content-->
             <div class="container-xxl">
-
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0"> {{ $title }} </h4>
@@ -35,32 +27,51 @@
 
 
                 </div>
-
-                <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
-
                         <div class="card-header ">
-                            <div class="row">
+                            <div class="row align-items-center">
                                 @if ($isAdmin)
-                                    <div class="col-3">
-
+                                    <div class="col-2">
                                         <a href="{{ route('khuyenmais.create') }}" class="btn btn-success">Thêm mã khuyến
                                             mãi
                                         </a>
                                     </div>
                                 @endif
-                               
-                                <div class="col-7">
-                                    <!-- Hiển thị thông báo thành công -->
-                                    @if (session('success'))
-                                        <div class="alert alert-success alert-dismissable fade show " role="alert">
-                                            {{ session('success') }}
-                                            <button type="button" class="btn-close justify-content-center"
-                                                data-bs-dismiss="alert" aria-label="Close"></button>
+                                <div class="col-10">
+                                    <form action="{{ route('khuyenmais.index') }}" method="POST" id="filter-form-km">
+                                        @csrf
+                                        @method('GET')
+                                        <div class="form-group d-flex align-items-end gap-3">
+                                            <div>
+                                                <input class="form-control" value="{{ request()->search_km }}"
+                                                    type="text" name="search_km" id="search_km"
+                                                    placeholder="Tìm kiếm theo mã">
+                                            </div>
+                                            <div>
+                                                <input class="form-control" type="date" name="start_date" id="start_date"
+                                                    value="{{ request()->start_date }}">
+                                            </div>
+                                            <div>
+                                                <input class="form-control" type="date" name="end_date" id="end_date"
+                                                    value="{{ request()->end_date }}">
+                                            </div>
+                                            <div>
+                                                <select class="form-select" id="trang_thai" name="trang_thai">
+                                                    <option value="">Tất cả</option>
+                                                    <option value="0"
+                                                        {{ request('trang_thai') == '0' ? 'selected' : '' }}>Đang hoạt động
+                                                    </option>
+                                                    <option value="1"
+                                                        {{ request('trang_thai') == '1' ? 'selected' : '' }}>Hết hạn
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <button class="btn btn-success">Lọc</button>
                                         </div>
-                                    @endif
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
 
@@ -90,7 +101,19 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $khuyenMai->ten_khuyen_mai }}</td>
                                                     <td>{{ $khuyenMai->ma_khuyen_mai }}</td>
-                                                    <td>{{ $khuyenMai->gia_tri_khuyen_mai }}đ</td>
+                                                    <td>
+                                                        @php
+                                                            $tong_tien = $khuyenMai->gia_tri_khuyen_mai;
+                                                            if (intval($tong_tien) == $tong_tien) {
+                                                                echo number_format($tong_tien, 0, ',', '.');
+                                                            } elseif (floor($tong_tien) == $tong_tien) {
+                                                                echo number_format($tong_tien, 0, ',', '.');
+                                                            } else {
+                                                                echo number_format($tong_tien, 2, ',', '.');
+                                                            }
+                                                        @endphp
+                                                        đ
+                                                    </td>
                                                     <td>{{ $khuyenMai->so_luong_ma }}</td>
                                                     <td>{{ $khuyenMai->ngay_bat_dau }}</td>
                                                     <td>{{ $khuyenMai->ngay_ket_thuc }}</td>
@@ -105,7 +128,7 @@
                                                             <form
                                                                 action="{{ route('khuyenmais.destroy', $khuyenMai->id) }}"
                                                                 method="POST" style="display:inline;"
-                                                                onsubmit="return confirm ('Bạn có muốn xóa danh mục sản phẩm này không ?') ">
+                                                                onsubmit="return confirm ('Bạn có muốn xóa mã khuyến mãi này không ?') ">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit"
@@ -123,7 +146,6 @@
                                 </div>
                             </div>
                             {{ $khuyenMais->links() }}
-
                         </div>
 
                     </div>
@@ -135,8 +157,26 @@
 
         </div>
     </div>
-
+   @vite('resources/js/voucher.js')
 @section('js')
-    <!-- Include your JS files here -->
+  
+     <!-- Include Pusher JS library -->
+     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+     <script>
+         // Enable pusher logging - don't include this in production
+         Pusher.logToConsole = true;
+ 
+         var pusher = new Pusher('ceead74684be5e1955f8', {
+             cluster: 'ap1',
+             encrypted: true
+         });
+ 
+         var channel = pusher.subscribe('my-channel');
+         channel.bind('my-event', function(data) {
+             // Reload the page or update the table with new data
+             alert('New promotion code added or updated: ' + data.message);
+             location.reload(); // Optional: reload the page
+         });
+     </script>
 @endsection
 @endsection

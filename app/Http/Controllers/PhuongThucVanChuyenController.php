@@ -25,7 +25,7 @@ class PhuongThucVanChuyenController extends Controller
     public function create()
     {  
         $this ->authorize('create' , phuong_thuc_van_chuyen::class);
-        $title = "Thêm mới PT Vận Chuyển";
+        $title = "Thêm mới phương thức vận chuyển";
         return view('admin.phuongthucvanchuyen.create', compact('title'));
     }
 

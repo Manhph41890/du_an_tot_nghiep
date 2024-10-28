@@ -22,7 +22,7 @@ class Storephuong_thuc_thanh_toanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kieu_thanh_toan' => 'required|in:Thanh toán khi nhận hàng,Thanh toán online',
+            'kieu_thanh_toan' => 'required|unique:phuong_thuc_thanh_toans,kieu_thanh_toan',
         ];
     }
     /**
@@ -33,7 +33,8 @@ class Storephuong_thuc_thanh_toanRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'kieu_thanh_toan.required' => 'Bạn chưa chọn phương thức thanh toán '
+            'kieu_thanh_toan.required' => 'Bạn chưa chọn phương thức thanh toán ',
+            'kieu_thanh_toan.unique' => 'Phương thức thanh toán đã tồn tại'
         ];
     }
 }

@@ -5,8 +5,8 @@
     "build": "vite build"
   },
   "devDependencies": {
-    "vite": "^4.0.0",
-    "laravel-vite-plugin": "^0.7.0"
+    "laravel-vite-plugin": "^0.7.0",
+    "vite": "^4.0.0"
   },
   "dependencies": {
     "laravel-echo": "^1.16.1",

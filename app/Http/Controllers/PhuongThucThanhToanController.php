@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rule;
 use App\Models\phuong_thuc_thanh_toan;
 use App\Http\Requests\Storephuong_thuc_thanh_toanRequest;
 use App\Http\Requests\Updatephuong_thuc_thanh_toanRequest;
@@ -27,7 +28,7 @@ class PhuongThucThanhToanController extends Controller
     public function create()
     {
         $this ->authorize('create' , phuong_thuc_thanh_toan::class);
-        $title = "Thêm mới PT Thanh toán";
+        $title = "Thêm mới phương thức thanh toán";
         return view('admin.phuongthucthanhtoan.create', compact('title'));
     }
 
@@ -64,6 +65,11 @@ class PhuongThucThanhToanController extends Controller
         if ($request->isMethod('PUT')) {
             $param = $request->except('_token', '_method');
             $phuong_thuc_thanh_toan = phuong_thuc_thanh_toan::findOrFail($id);
+            $request->validate([
+                'kieu_thanh_toan' =>Rule::unique('phuong_thuc_thanh_toans', 'kieu_thanh_toan')->ignore($id)
+            ], [
+                'kieu_thanh_toan.unique' => 'Phương thức thanh toán đã tồn tại.',
+            ]);
             $phuong_thuc_thanh_toan->update($param);
         }
 
@@ -77,11 +83,11 @@ class PhuongThucThanhToanController extends Controller
     {
         $phuong_thuc_thanh_toan = $phuong_thuc_thanh_toan::findOrFail($id);
         $this ->authorize('delete' , $phuong_thuc_thanh_toan);
-        if ($phuong_thuc_thanh_toan) {
+        if ($phuong_thuc_thanh_toan->don_hangs()->count() > 0) {
+            return redirect()->back()->with('error', 'Không xóa được vì có đơn hàng đã chứa mục này');
+        } else {
             $phuong_thuc_thanh_toan->delete();
             return redirect()->route('phuongthucthanhtoans.index')->with('success', 'Xóa phương thức thanh toán thành công');
-        } else {
-            return redirect()->back()->with('success', 'Không tồn tại người dùng');
         }
     }
 }

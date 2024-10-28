@@ -12,19 +12,20 @@ class PhuongThucVanChuyenController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {         $this ->authorize('viewany' , phuong_thuc_van_chuyen::class);
+    {
+        $this->authorize('viewany', phuong_thuc_van_chuyen::class);
         $phuongthucvanchuyens = phuong_thuc_van_chuyen::query()->latest('id')->paginate(5);
         $title = "Phương thức vận chuyển";
-        $isAdmin = auth()->user() ->chuc_vu ->ten_chuc_vu ==='admin';
-        return view('admin.phuongthucvanchuyen.index', compact('phuongthucvanchuyens', 'title' ,'isAdmin'));
+        $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+        return view('admin.phuongthucvanchuyen.index', compact('phuongthucvanchuyens', 'title', 'isAdmin'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {  
-        $this ->authorize('create' , phuong_thuc_van_chuyen::class);
+    {
+        $this->authorize('create', phuong_thuc_van_chuyen::class);
         $title = "Thêm mới phương thức vận chuyển";
         return view('admin.phuongthucvanchuyen.create', compact('title'));
     }
@@ -83,13 +84,16 @@ class PhuongThucVanChuyenController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(phuong_thuc_van_chuyen $phuong_thuc_van_chuyen, $id)
-    {   
- 
-          $phuongThucVanChuyen = $phuong_thuc_van_chuyen::findOrFail($id);
-          $this ->authorize('delete' , $phuong_thuc_van_chuyen);
-        $phuongThucVanChuyen->delete();
+    {
 
-        return redirect()->route('phuongthucvanchuyens.index')
-            ->with('success', 'Xóa phương thức vận chuyển thành công');
+        $phuongThucVanChuyen = $phuong_thuc_van_chuyen::findOrFail($id);
+        $this->authorize('delete', $phuong_thuc_van_chuyen);
+        if ($phuongThucVanChuyen->don_hangs()->count() > 0) {
+            return redirect()->back()->with('error', 'Không xóa được vì có đơn hàng đã chứa mục này');
+        } else {
+            $phuongThucVanChuyen->delete();
+            return redirect()->route('phuongthucvanchuyens.index')
+                ->with('success', 'Xóa phương thức vận chuyển thành công');
+        }
     }
 }

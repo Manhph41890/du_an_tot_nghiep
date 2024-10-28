@@ -56,7 +56,7 @@
                     </div>
                 </li>
 
-
+                
                 <li>
                     <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="tag"></i>
@@ -65,6 +65,7 @@
                     </a>
                     <div class="collapse" id="khuyenmai">
                         <ul class="nav-second-level">
+                            <li><a class="tp-link" href="<?php echo e(route('khuyenmais.create')); ?>">Thêm</a></li>
                             <li><a class="tp-link" href="<?php echo e(route('khuyenmais.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>

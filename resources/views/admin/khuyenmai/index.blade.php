@@ -158,7 +158,7 @@
 
         </div>
     </div>
-   @vite('resources/js/voucher.js')
+
 @section('js')
   
      <!-- Include Pusher JS library -->

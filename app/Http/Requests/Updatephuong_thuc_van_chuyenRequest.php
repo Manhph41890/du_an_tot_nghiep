@@ -22,7 +22,13 @@ class Updatephuong_thuc_van_chuyenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'kieu_van_chuyen' => 'required',
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'kieu_van_chuyen.required' => 'Bạn chưa chọn phương thức vận chuyển',
         ];
     }
 }

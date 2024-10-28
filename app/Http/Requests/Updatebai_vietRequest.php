@@ -23,10 +23,8 @@ class Updatebai_vietRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|' . Rule::exists('users', 'id'),
             'tieu_de_bai_viet' => 'required|string|max:255',
-            'ngay_dang' => 'required|date',
-            'noi_dung' => 'required|string|max:200',
+            'noi_dung' => 'required|string|max:5000',
             'anh_bai_viet' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active' => 'required|boolean',
         ];
@@ -47,12 +45,7 @@ class Updatebai_vietRequest extends FormRequest
             'tieu_de_bai_viet.max' => 'Tiêu đề bài viết không được vượt quá 255 ký tự.',
 
             'noi_dung.required' => 'Nội dung là bắt buộc.',
-            'noi_dung.max' => 'Nội dung không được vượt quá 1000 ký tự.',
-
-            'user_id.exists' => 'Tác giả không tồn tại.',
-
-            'ngay_dang.required' => 'Ngày đăng là bắt buộc.',
-            'ngay_dang.date' => 'Ngày đăng phải là định dạng ngày hợp lệ.',
+            'noi_dung.max' => 'Nội dung không được vượt quá 5,000 ký tự.',
 
             'is_active.required' => 'Trạng thái là bắt buộc.',
             'is_active.in' => 'Trạng thái không hợp lệ.',

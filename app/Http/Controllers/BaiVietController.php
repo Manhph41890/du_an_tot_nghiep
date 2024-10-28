@@ -78,10 +78,10 @@ class BaiVietController extends Controller
             bai_viet::create($data_bai_viet);
 
             DB::commit();
-            return redirect()->route('baiviets.index')->with('success', 'Bai viet đã được thêm thành công.');
+            return redirect()->route('baiviets.index')->with('success', 'bài viết đã được thêm thành công.');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Đã xảy ra lỗi khi thêm bai viet.');
+            return back()->with('error', 'Đã xảy ra lỗi khi thêm bài viết.');
         }
     }
 
@@ -94,7 +94,7 @@ class BaiVietController extends Controller
     {
         $post = bai_viet::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
-        $title = "Chi tiết bai viet";
+        $title = "Chi tiết bài viết";
         return view('admin.baiviet.show', compact('post', 'user', 'title'));
     }
 
@@ -103,10 +103,10 @@ class BaiVietController extends Controller
      */
     public function edit(bai_viet $bai_viet, $id)
     {
-        //Tim bai viet theo id
+        //Tim bài viết theo id
         $post = bai_viet::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
-        $title = "Sửa mới sản phẩm";
+        $title = "Sửa bài viết";
         return view('admin.baiviet.edit', compact('post', 'user', 'title'));
     }
 
@@ -138,10 +138,10 @@ class BaiVietController extends Controller
             $post->update($data_bai_viet);
 
             DB::commit();
-            return redirect()->route('baiviets.index')->with('success', 'Bai viet đã được cập nhật thành công.');
+            return redirect()->route('baiviets.index')->with('success', 'bài viết đã được cập nhật thành công.');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Đã xảy ra lỗi khi thêm bai viet.');
+            return back()->with('error', 'Đã xảy ra lỗi khi thêm bài viết.');
         }
     }
 

@@ -14,6 +14,7 @@ class bien_the_san_pham extends Model
         'size_san_pham_id',
         'color_san_pham_id',
         'so_luong',
+        'gia',
         'anh_bien_the'
     ];
 

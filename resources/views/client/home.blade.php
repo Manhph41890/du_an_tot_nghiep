@@ -85,7 +85,7 @@
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                                src="{{ asset('assets/admin/images/icon/2.png') }}" alt="icon" />
+                                src="{{ asset('assets/client/images/icon/2.png') }}" alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Miễn phí vận chuyển</h4>
                                 <p class="text">Tất cả đơn hàng trên 50.000d</p>
@@ -95,7 +95,7 @@
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                                src="{{ asset('assets/admin/images/icon/3.png') }}" alt="icon" />
+                                src="{{ asset('assets/client/images/icon/3.png') }}" alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Trả hàng miễn phí</h4>
                                 <p class="text">Trong vòng 9 ngày</p>
@@ -105,7 +105,7 @@
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                                src="{{ asset('assets/admin/images/icon/4.png') }}" alt="icon" />
+                                src="{{ asset('assets/client/images/icon/4.png') }}" alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Thanh toán an toàn 100%</h4>
                                 <p class="text">Thanh toán của bạn sẽ an toàn với chúng tôi</p>
@@ -115,7 +115,7 @@
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                                src="{{ asset('assets/admin/images/icon/5.png') }}" alt="icon" />
+                                src="{{ asset('assets/client/images/icon/5.png') }}" alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Hỗ trợ 24/7</h4>
                                 <p class="text">Liên hệ với chúng tôi 24h/7</p>
@@ -202,6 +202,7 @@
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab">
                             <div class="product-slider-init theme1 slick-nav">
+                                @foreach ($sanPhamMois as $item )
                                 <div class="slider-item">
                                     <div class="card product-card">
                                         <div class="card-body p-0">
@@ -210,7 +211,7 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/images/product/1.png') }}"
+                                                            src="{{ asset('assets/client/images/product/1.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -242,8 +243,7 @@
                                                 <div class="media-body">
                                                     <div class="product-desc">
                                                         <h3 class="title">
-                                                            <a href="shop-grid-4-column.html">All Natural Makeup Beauty
-                                                                Cosmetics</a>
+                                                            <a href="shop-grid-4-column.html">{{$item->ten_san_pham}}</a>
                                                         </h3>
                                                         <div class="star-rating">
                                                             <span class="ion-ios-star"></span>
@@ -253,6 +253,9 @@
                                                             <span class="ion-ios-star de-selected"></span>
                                                         </div>
                                                         <div class="d-flex align-items-center justify-content-between">
+<<<<<<< HEAD
+                                                            <span class="product-price">{{$item->gia_goc}}</span>
+=======
                                                             <span class="product-price">$11.90</span>
                                                             <button class="pro-btn" data-bs-toggle="modal"
                                                                 data-bs-target="#add-to-cart">
@@ -274,7 +277,7 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/2.png') }}"
+                                                            src="{{ asset('assets/client/images/product/2.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -338,7 +341,7 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/3.png') }}"
+                                                            src="{{ asset('assets/client/images/product/3.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -402,7 +405,7 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/4.png') }}"
+                                                            src="{{ asset('assets/client/images/product/4.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -466,10 +469,10 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/5.png') }}"
+                                                            src="{{ asset('assets/client/images/product/5.png') }}"
                                                             alt="thumbnail" />
                                                         <img class="second-img"
-                                                            src="{{ asset('assets/admin/img/product/6.png') }}"
+                                                            src="{{ asset('assets/client/images/product/6.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -513,6 +516,7 @@
                                                         </div>
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <span class="product-price">$11.90</span>
+>>>>>>> 18f0796a608698621cb0c7f94c23a36b5635344c
                                                             <button class="pro-btn" data-bs-toggle="modal"
                                                                 data-bs-target="#add-to-cart">
                                                                 <i class="icon-basket"></i>
@@ -524,7 +528,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                                 <!-- slider-item end -->
+                                
                             </div>
                         </div>
                         <!-- second tab-pane -->
@@ -627,7 +633,7 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/1.png') }}"
+                                                            src="{{ asset('assets/client/images/product/1.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -691,7 +697,7 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/2.png') }}"
+                                                            src="{{ asset('assets/client/images/product/2.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -755,7 +761,7 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/3.png') }}"
+                                                            src="{{ asset('assets/client/images/product/3.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -819,7 +825,7 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/4.png') }}"
+                                                            src="{{ asset('assets/client/images/product/4.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -883,10 +889,10 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/5.png') }}"
+                                                            src="{{ asset('assets/client/images/product/5.png') }}"
                                                             alt="thumbnail" />
                                                         <img class="second-img"
-                                                            src="{{ asset('assets/admin/img/product/6.png') }}"
+                                                            src="{{ asset('assets/client/images/product/6.png') }}"
                                                             alt="thumbnail" />
                                                     </a>
                                                     <!-- product links -->
@@ -957,19 +963,19 @@
                 <div class="col-lg-3 col-md-6 mb-30">
                     <div class="banner-thumb">
                         <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html"><img
-                                src="assets/admin/images/banner/1.jpg" alt="banner-thumb-naile" /></a>
+                                src="assets/client/images/banner/1a.jpg" alt="banner-thumb-naile" /></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-30">
                     <div class="banner-thumb">
                         <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html">
-                            <img src="assets/admin/images/banner/6.jpg" alt="banner-thumb-naile" /></a>
+                            <img src="assets/client/images/banner/bottom_banner_1.jpg" alt="banner-thumb-naile" /></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 mb-30">
                     <div class="banner-thumb">
                         <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html">
-                            <img src="assets/admin/images/banner/4.jpg" alt="banner-thumb-naile" /></a>
+                            <img src="assets/client/images/banner/bottom_banner_3.jpg" alt="banner-thumb-naile" /></a>
                     </div>
                 </div>
             </div>
@@ -999,7 +1005,7 @@
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
                                                 <img class="first-img"
-                                                    src="{{ asset('assets/admin/img/product/8.png') }}"
+                                                    src="{{ asset('assets/client/images/product/8.png') }}"
                                                     alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
@@ -1063,7 +1069,7 @@
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
                                                 <img class="first-img"
-                                                    src="{{ asset('assets/admin/img/product/9.png') }}"
+                                                    src="{{ asset('assets/client/images/product/9.png') }}"
                                                     alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
@@ -1127,7 +1133,7 @@
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
                                                 <img class="first-img"
-                                                    src="{{ asset('assets/admin/img/product/10.png') }}"
+                                                    src="{{ asset('assets/client/images/product/10.png') }}"
                                                     alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
@@ -1191,7 +1197,7 @@
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
                                                 <img class="first-img"
-                                                    src="{{ asset('assets/admin/img/product/11.png') }}"
+                                                    src="{{ asset('assets/client/images/product/11.png') }}"
                                                     alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
@@ -1255,10 +1261,10 @@
                                             <span class="badge badge-danger top-right">New</span>
                                             <a href="single-product.html">
                                                 <img class="first-img"
-                                                    src="{{ asset('assets/admin/img/product/12.png') }}"
+                                                    src="{{ asset('assets/client/images/product/12.png') }}"
                                                     alt="thumbnail" />
                                                 <img class="second-img"
-                                                    src="{{ asset('assets/admin/img/product/13.png') }}"
+                                                    src="{{ asset('assets/client/images/product/13.png') }}"
                                                     alt="thumbnail" />
                                             </a>
                                             <!-- product links -->
@@ -1342,7 +1348,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="{{ asset('assets/admin/img/blog-post/1.png') }}"
+                                    <img src="{{ asset('assets/client/images/blog-post/1.png') }}"
                                         alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
@@ -1365,7 +1371,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="{{ asset('assets/admin/img/blog-post/2.png') }}"
+                                    <img src="{{ asset('assets/client/images/blog-post/2.png') }}"
                                         alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
@@ -1388,7 +1394,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="{{ asset('assets/admin/img/blog-post/3.png') }}"
+                                    <img src="{{ asset('assets/client/images/blog-post/3.png') }}"
                                         alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
@@ -1411,7 +1417,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="{{ asset('assets/admin/img/blog-post/4.png') }}"
+                                    <img src="{{ asset('assets/client/images/blog-post/4.png') }}"
                                         alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
@@ -1434,7 +1440,7 @@
                             <div class="single-blog">
                                 <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
                                     href="blog-grid-left-sidebar.html">
-                                    <img src="{{ asset('assets/admin/img/blog-post/5.png') }}"
+                                    <img src="{{ asset('assets/client/images/blog-post/5.png') }}"
                                         alt="blog-thumb-naile" />
                                 </a>
                                 <div class="blog-post-content">
@@ -1469,7 +1475,8 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="{{ asset('assets/admin/img/brand/1.jpg') }}" alt="brand-thumb-nail" />
+                                    <img src="{{ asset('assets/client/images/brand/1.jpg') }}"
+                                        alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1477,7 +1484,8 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="{{ asset('assets/admin/img/brand/2.jpg') }}" alt="brand-thumb-nail" />
+                                    <img src="{{ asset('assets/client/images/brand/2.jpg') }}"
+                                        alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1485,7 +1493,8 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="{{ asset('assets/admin/img/brand/3.jpg') }}" alt="brand-thumb-nail" />
+                                    <img src="{{ asset('assets/client/images/brand/3.jpg') }}"
+                                        alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1493,7 +1502,8 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="{{ asset('assets/admin/img/brand/4.jpg') }}" alt="brand-thumb-nail" />
+                                    <img src="{{ asset('assets/client/images/brand/4.jpg') }}"
+                                        alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1501,7 +1511,8 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="{{ asset('assets/admin/img/brand/5.jpg') }}" alt="brand-thumb-nail" />
+                                    <img src="{{ asset('assets/client/images/brand/5.jpg') }}"
+                                        alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1509,7 +1520,8 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="{{ asset('assets/admin/img/brand/2.jpg') }}" alt="brand-thumb-nail" />
+                                    <img src="{{ asset('assets/client/images/brand/2.jpg') }}"
+                                        alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>
@@ -1517,7 +1529,8 @@
                         <div class="slider-item">
                             <div class="single-brand">
                                 <a href="https://themeforest.net/user/hastech" class="brand-thumb">
-                                    <img src="{{ asset('assets/admin/img/brand/4.jpg') }}" alt="brand-thumb-nail" />
+                                    <img src="{{ asset('assets/client/images/brand/4.jpg') }}"
+                                        alt="brand-thumb-nail" />
                                 </a>
                             </div>
                         </div>

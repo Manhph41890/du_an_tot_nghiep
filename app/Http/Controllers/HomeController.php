@@ -77,4 +77,9 @@ class HomeController extends Controller
         $docThem = bai_viet::with('user')->where('id', '!=', $id)->orderBy('id', 'desc')->limit(3)->get();
         return view('client.baiviet.baivietchitiet', compact('baiViet', 'docThem'));
     }
+
+    public function lienhe()
+    {
+        return view('client.lienhe');
+    }
 }

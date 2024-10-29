@@ -19,6 +19,7 @@ use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VariantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,8 @@ use App\Http\Controllers\UserController;
 */
 
 // Route trang chủ
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('client.home');
+Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
 
 // Route cho client
 Route::prefix('client')->group(function () {

@@ -155,6 +155,7 @@
                                                                                             <th>Màu Sắc</th>
                                                                                             <th>Kích Thước</th>
                                                                                             <th>Số Lượng</th>
+                                                                                            <th>Giá Tiền</th>
                                                                                             <th>Ảnh Biến Thể</th>
                                                                                         </tr>
                                                                                     </thead>
@@ -166,6 +167,8 @@
                                                                                                 <td>{{ $variant->size->ten_size }}
                                                                                                 </td>
                                                                                                 <td>{{ $variant->so_luong }}
+                                                                                                </td>
+                                                                                                <td>{{ $variant->gia }}
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     @if ($variant->anh_bien_the)

@@ -41,15 +41,16 @@
                     <div class="footer-widget">
                         <div class="border-bottom cbb1 mb-25">
                             <div class="section-title">
-                                <h2 class="title">Information</h2>
+                                <h2 class="title">Chính Sách Bán Hàng</h2>
                             </div>
                         </div>
                         <!-- footer-menu start -->
                         <ul class="footer-menu">
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="#">payment</a></li>
-                            <li><a href="contact.html">Contact us</a></li>
-                            <li><a href="#">Stores</a></li>
+                            <li><a href="about-us.html">Chính sách bảo mật</a></li>
+                            <li><a href="#">Hình thức thanh toán</a></li>
+                            <li><a href="contact.html">Chính sách giao hàng</a></li>
+                            <li><a href="contact.html">Chính sách đổi trả</a></li>
+                            <li><a href="#">Điều khoản bán hàng</a></li>
                         </ul>
                         <!-- footer-menu end -->
                     </div>
@@ -58,15 +59,14 @@
                     <div class="footer-widget">
                         <div class="border-bottom cbb1 mb-25">
                             <div class="section-title">
-                                <h2 class="title">social Links</h2>
+                                <h2 class="title">Hỗ Trợ Khách Hàng</h2>
                             </div>
                         </div>
                         <!-- footer-menu start -->
                         <ul class="footer-menu">
-                            <li><a href="#">New products</a></li>
-                            <li><a href="#">Best sales</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="myaccount.html">My account</a></li>
+                            <li><a href="#">Hướng dẫn mua hàng</a></li>
+                            <li><a href="#">Phương thức vận chuyển</a></li>
+                            <li><a href="login.html">Phương thức thanh toán</a></li>
                         </ul>
                         <!-- footer-menu end -->
                     </div>
@@ -75,23 +75,17 @@
                     <div class="footer-widget">
                         <div class="border-bottom cbb1 mb-25">
                             <div class="section-title">
-                                <h2 class="title">Newsletter</h2>
+                                <h2 class="title">Địa Chỉ</h2>
                             </div>
                         </div>
-                        <p class="text mb-20">
-                            Subcribe to the TheFace mailing list to receive update on mnew
-                            arrivals, special offers and other discount information.
-                        </p>
                         <div class="nletter-form mb-35">
-                            <form class="form-inline position-relative"
-                                action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
-                                target="_blank" method="post">
-                                <input class="form-control" type="text" placeholder="Your email address" />
-                                <button class="btn news-letter-btn text-capitalize" type="submit">
-                                    Sign up
-                                </button>
-                            </form>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10993.517839725198!2d105.75015105398771!3d21.037658157177084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455e940879933%3A0xcf10b34e9f1a03df!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1sen!2s!4v1730219909258!5m2!1sen!2s" width="400" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
+                        <p class="text mb-20">
+                            Nhà cung cấp hàng đầu các Họa cụ, Mô hình
+                            kiến trúc, Văn phòng phẩm, Phụ kiện Handmade
+                            Bút doanh nhân,…với giá tốt nhất trên thị trường Việt Nam
+                        </p>
                     </div>
                 </div>
             </div>

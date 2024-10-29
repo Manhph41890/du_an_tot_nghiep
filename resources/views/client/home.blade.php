@@ -134,21 +134,21 @@
                 <div class="col-md-6 mb-30">
                     <div class="banner-thumb">
                         <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/1a.jpg') }}" alt="banner-thumb-naile" />
+                            <img src="{{ asset('assets/client/images/banner/bottom_banner_3.jpg') }}" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-30">
                     <div class="banner-thumb">
                         <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/2.jpg') }}" alt="banner-thumb-naile" />
+                            <img src="{{ asset('assets/client/images/banner/right_banner_1.jpg') }}" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-30">
                     <div class="banner-thumb">
                         <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/3.jpg') }}" alt="banner-thumb-naile" />
+                            <img src="{{ asset('assets/client/images/banner/right_banner_1.jpg') }}" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>
@@ -253,10 +253,7 @@
                                                             <span class="ion-ios-star de-selected"></span>
                                                         </div>
                                                         <div class="d-flex align-items-center justify-content-between">
-<<<<<<< HEAD
                                                             <span class="product-price">{{$item->gia_goc}}</span>
-=======
-                                                            <span class="product-price">$11.90</span>
                                                             <button class="pro-btn" data-bs-toggle="modal"
                                                                 data-bs-target="#add-to-cart">
                                                                 <i class="icon-basket"></i>
@@ -516,7 +513,6 @@
                                                         </div>
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <span class="product-price">$11.90</span>
->>>>>>> 18f0796a608698621cb0c7f94c23a36b5635344c
                                                             <button class="pro-btn" data-bs-toggle="modal"
                                                                 data-bs-target="#add-to-cart">
                                                                 <i class="icon-basket"></i>
@@ -956,32 +952,7 @@
         </div>
     </section>
     <!-- product tab end -->
-    <!-- common banner  start -->
-    <div class="common-banner bg-white pb-50">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-30">
-                    <div class="banner-thumb">
-                        <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html"><img
-                                src="assets/client/images/banner/1a.jpg" alt="banner-thumb-naile" /></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-30">
-                    <div class="banner-thumb">
-                        <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html">
-                            <img src="assets/client/images/banner/bottom_banner_1.jpg" alt="banner-thumb-naile" /></a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 mb-30">
-                    <div class="banner-thumb">
-                        <a class="zoom-in d-block overflow-hidden position-relative" href="shop-grid-4-column.html">
-                            <img src="assets/client/images/banner/bottom_banner_3.jpg" alt="banner-thumb-naile" /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- common banner  end -->
+
     <!-- product tab repetation start -->
     <section class="bg-white theme1 pb-80">
         <div class="container">

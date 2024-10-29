@@ -140,7 +140,7 @@
                                     <div id="variant-container">
                                         @foreach (old('product_variants', $product->bien_the_san_phams) as $index => $variant)
                                             <div class="row variant-item mb-3">
-                                                <div class="col-lg-3">
+                                                <div class="col-lg-2">
                                                     <label for="size_san_pham" class="form-label">Size</label>
                                                     <input type="text" name="product_variants[size_san_pham][]"
                                                         class="form-control"
@@ -150,7 +150,7 @@
                                                         style="display: none;">Kích thước không hợp lệ!</span>
                                                 </div>
 
-                                                <div class="col-lg-3">
+                                                <div class="col-lg-2">
                                                     <label for="color_san_pham" class="form-label">Màu sắc</label>
                                                     <input type="text" name="product_variants[color_san_pham][]"
                                                         class="form-control color-input"
@@ -165,6 +165,13 @@
                                                     <input type="number" name="product_variants[so_luong][]"
                                                         class="form-control"
                                                         value="{{ old("product_variants.so_luong.$index", $variant->so_luong) }}"
+                                                        required>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label for="gia" class="form-label">Giá biến thể</label>
+                                                    <input type="number" name="product_variants[gia][]"
+                                                        class="form-control"
+                                                        value="{{ old("product_variants.gia.$index", $variant->gia) }}"
                                                         required>
                                                 </div>
 
@@ -312,6 +319,10 @@
                     <div class="col-lg-2">
                         <label for="so_luong" class="form-label">Số lượng</label>
                         <input type="number" name="product_variants[so_luong][]" class="form-control" value="0" required>
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="gia" class="form-label">Giá biến thể</label>
+                        <input type="number" name="product_variants[gia][]" class="form-control" value="0" required>
                     </div>
                     <div class="col-lg-3">
                         <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>

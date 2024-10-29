@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+use App\Events\KhuyenMaiMoiEvent;
 use App\Models\danh_muc;
 use App\Models\khuyen_mai;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Policies\KhuyenMaiPolicy;
 use App\Http\Requests\Storekhuyen_maiRequest;
 use App\Http\Requests\Updatekhuyen_maiRequest;
+use App\Policies\KhuyenMaiPolicy;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Pusher\Pusher;
+
 
 class KhuyenMaiController extends Controller
 {
@@ -19,34 +21,65 @@ class KhuyenMaiController extends Controller
     public function index(Request $request)
     {
         $this->authorize('viewAny', khuyen_mai::class);
+
         $danhmucs = danh_muc::all();
         $query = khuyen_mai::query();
 
-        $searchKM = $request->input('search_km');
-        $isActive = $request->input('trang_thai');
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        if($searchKM){
-            $khuyenMais=$query->where('ma_khuyen_mai', 'LIKE', "%{$searchKM}%")->paginate(10);
-        } 
-        if($startDate && $endDate){
-            $khuyenMais= $query->whereBetween('ngay_bat_dau',[$startDate , $endDate])->paginate(10);
+        // Tự động cập nhật trạng thái dự trên ngày 
+        $query->each(function ($promotion) {
+            $currentDate = now();
+            if ($currentDate->greaterThan($promotion->ngay_ket_thuc)) {
+                // Mark promotion as expired if the current date is past 'ngay_ket_thuc'
+                $promotion->is_active = 0;
+            } elseif ($currentDate->between($promotion->ngay_bat_dau, $promotion->ngay_ket_thuc)) {
+                // Mark promotion as active if the current date is between 'ngay_bat_dau' and 'ngay_ket_thuc'
+                $promotion->is_active = 1;
+            } else {
+                // Mark promotion as inactive if current date is before 'ngay_bat_dau'
+                $promotion->is_active = 0;
+            }
+            $promotion->save();
+        });
 
-        }
-        if ($isActive !== null && $isActive !== '') {
-            $khuyenMais = $query->where('is_active', $isActive)->paginate(10);
+        // Filter by 'is_active'
+        if ($request->has('is_active') && $request->get('is_active') !== '') {
+            $query->where('is_active', $request->get('is_active'));
         }
 
-        $khuyenMais = $query->latest('id')->paginate(10);
-        foreach ($khuyenMais as $item) {
-            $item->ngay_bat_dau = Carbon::parse($item->ngay_bat_dau)->format('d-m-Y');
-            $item->	ngay_ket_thuc = Carbon::parse($item->ngay_ket_thuc)->format('d-m-Y');
+        // Search by 'ma_khuyen_mai'
+        if ($request->has('search_km') && $request->input('search_km') !== null) {
+            $query->where('ma_khuyen_mai', 'LIKE', "%{$request->input('search_km')}%");
         }
+
+        // Lọc theo danh mục
+        if ($request->has('danh_muc_id') && $request->get('danh_muc_id') !== '') {
+            $query->where('danh_muc_id', $request->get('danh_muc_id'));
+        }
+        // Paginate results
+        $khuyenMais = $query->latest('id')->paginate(5);
 
         $title = 'Danh sách khuyến mãi';
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
-        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title', 'isAdmin', 'searchKM', 'isActive', 'startDate', 'endDate'));
+
+        return view('admin.khuyenmai.index', compact('danhmucs', 'khuyenMais', 'title', 'isAdmin'));
     }
+
+    private function sendNotification($message)
+    {
+        $pusher = new Pusher(
+            config('broadcasting.connections.pusher.key'),
+            config('broadcasting.connections.pusher.secret'),
+            config('broadcasting.connections.pusher.app_id'),
+            [
+                'cluster' => config('broadcasting.connections.pusher.options.cluster'),
+                'useTLS' => true
+            ]
+        );
+
+        $data['message'] = $message;
+        $pusher->trigger('promotion-channel', 'promotion-event', $data);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -55,7 +88,7 @@ class KhuyenMaiController extends Controller
     {
         $this->authorize('create', khuyen_mai::class);
         //
-        $title = 'Tạo khuyến mãi mới';
+        $title = 'Tạo khuyến mãi';
 
         return view('admin.khuyenmai.create', compact('title'));
     }
@@ -65,8 +98,9 @@ class KhuyenMaiController extends Controller
      */
     public function store(Storekhuyen_maiRequest $request)
     {
+
         // admin tạo mã khuyến mãi
-        khuyen_mai::create([
+        $khuyen_mai =  khuyen_mai::create([
             'ten_khuyen_mai' => $request->input('ten_khuyen_mai'),
             // Sinh ngẫu nhiên mã khuyến mãi
             'ma_khuyen_mai' => strtoupper(Str::random(10)),
@@ -75,8 +109,11 @@ class KhuyenMaiController extends Controller
             'ngay_bat_dau' => $request->input('ngay_bat_dau'),
             'ngay_ket_thuc' => $request->input('ngay_ket_thuc'),
             'is_active' => $request->input('is_active'),
-        ]);
 
+        ]);
+        event(new KhuyenMaiMoiEvent($khuyen_mai));
+        //check trong post man 
+        $this->sendNotification("Bạn đã tạo thành công khuyến mãi mới: {$khuyen_mai->ten_khuyen_mai}");
         return redirect()->route('khuyenmais.index')->with('success', 'Tạo mã khuyến mãi thành công');
     }
 
@@ -106,17 +143,26 @@ class KhuyenMaiController extends Controller
      */
     public function update(Updatekhuyen_maiRequest $request, khuyen_mai $khuyen_mai, string $id)
     {
-        if ($request->isMethod('PUT')) {
+        // if ($request->isMethod('PUT')) {
 
-            $param = $request->except('_token', '_method');
+        //     $param = $request->except('_token', '_method');
 
-            $khuyen_mai = khuyen_mai::findOrFail($id);
+        //     $khuyen_mai = khuyen_mai::findOrFail($id);
 
-            $khuyen_mai->update($param);
-        }
+        //     $khuyen_mai->update($param);
+        // }
+
+        // return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
+
+
+        $khuyen_mai = khuyen_mai::findOrFail($id);
+        $khuyen_mai->update($request->all());
+
+        event(new KhuyenMaiMoiEvent($khuyen_mai));
 
         return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -125,10 +171,17 @@ class KhuyenMaiController extends Controller
     {
         //
 
+        // $khuyen_mai = khuyen_mai::findOrFail($id);
+        // $this->authorize('delete', $khuyen_mai);
+        // $khuyen_mai->delete();
+
+        // return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
+
         $khuyen_mai = khuyen_mai::findOrFail($id);
-        $this->authorize('delete', $khuyen_mai);
         $khuyen_mai->delete();
 
-        return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
+        event(new KhuyenMaiMoiEvent($khuyen_mai));
+
+        return redirect()->route('khuyenmais.index')->with('success', 'Xóa mã khuyến mãi thành công');
     }
 }

@@ -62,10 +62,9 @@
     </style>
 </head>
 
-<!-- body start -->
 
-<body data-menu-color="light" data-sidebar="default">
-
+<body data-menu-color="light" data-sidebar="default"
+    style=" background-image: url('assets/admin/images/bg.png');background-size: cover;background-position: center;">
 
     <script>
         $(document).ready(function() {

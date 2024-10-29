@@ -7,13 +7,12 @@
                 <div class="col-12 col-sm-6 col-lg-4 mb-30">
                     <div class="footer-widget mx-w-400">
                         <div class="footer-logo mb-25">
-                            <a href="index.html">
-                                <img src="assets/img/logo/logo.png" alt="footer logo" />
+                            <a href="{{route('client.home')}}">
+                                <img style="width:200px;" src="{{asset('assets/admin/images/logo/logo_art.png')}}" alt="footer logo" />
                             </a>
                         </div>
                         <p class="text mb-30">
-                            We are a team of professional designers and developers that create
-                            high quality wordpress plugins, Html, React Template.
+                            Vẽ sáng tạo - Tô hạnh phúc
                         </p>
 
                         <div class="social-network">

@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-
+         $title = "Quản lý User";
         $query = User::with('chuc_vu'); // Nạp dữ liệu chức vụ cùng với người dùng
         $params['chucVus'] = chuc_vu::all();
         // Lọc trạng thái nếu có
@@ -49,7 +49,7 @@ class UserController extends Controller
         $params['title'] = $title;
         $params['title'] = $title;
         $params['list'] = $query->get(); // Lấy danh sách người dùng
-        return view('admin.user.index', $params);
+        return view('admin.user.index', $params   , compact('title'));
     }
 
     /**

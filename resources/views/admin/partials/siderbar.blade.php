@@ -19,9 +19,28 @@
                     </a>
                     <div class="collapse" id="dashboard">
                         <ul class="nav-second-level">
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                             <li><a class="tp-link" href="{{ route('thong_ke_chung') }}">Tổng quan</a></li>
+                            @endif
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'nhan_vien')
+                            <li><a class="tp-link" href="{{ route('thong_ke') }}">Tổng quan</a></li>
+                            @endif
                             {{-- <li><a class="tp-link" href="{{ route('thong_ke_doanh_thu') }}">Doanh thu</a></li> --}}
 
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Đơn hàng -->
+                <li>
+                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="shopping-cart"></i>
+                        <span> Đơn hàng </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="donhang">
+                        <ul class="nav-second-level">
+                            <li><a class="tp-link" href="{{ route('donhangs.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -35,12 +54,15 @@
                     </a>
                     <div class="collapse" id="danhmuc">
                         <ul class="nav-second-level">
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                             <li><a class="tp-link" href="{{ route('danhmucs.create') }}">Thêm</a></li>
+                            @endif
                             <li><a class="tp-link" href="{{ route('danhmucs.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
+            
                 <!-- Sản phẩm -->
                 <li>
                     <a href="#sanpham" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
@@ -50,7 +72,9 @@
                     </a>
                     <div class="collapse" id="sanpham">
                         <ul class="nav-second-level">
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                             <li><a class="tp-link" href="{{ route('sanphams.create') }}">Thêm</a></li>
+                            @endif
                             <li><a class="tp-link" href="{{ route('sanphams.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
@@ -65,27 +89,22 @@
                     </a>
                     <div class="collapse" id="khuyenmai">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('khuyenmais.create') }}">Thêm</a></li>
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
+                                <li><a class="tp-link" href="{{ route('khuyenmais.create') }}">Thêm</a></li>
+
+                            
+
+
+                            
+                            @endif
                             <li><a class="tp-link" href="{{ route('khuyenmais.index') }}">Danh sách</a></li>
+
                         </ul>
                     </div>
                 </li>
 
 
-                <!-- Chức vụ -->
-                <li>
-                    <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="award"></i>
-                        <span> Chức vụ </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="chucvu">
-                        <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('chucvus.create') }}">Thêm</a></li>
-                            <li><a class="tp-link" href="{{ route('chucvus.index') }}">Danh sách</a></li>
-                        </ul>
-                    </div>
-                </li>
+                
 
                 <!-- User -->
                 <li>
@@ -124,13 +143,30 @@
                     </a>
                     <div class="collapse" id="baiviet">
                         <ul class="nav-second-level">
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                             <li><a class="tp-link" href="{{ route('baiviets.create') }}">Thêm</a></li>
+                            @endif
                             <li><a class="tp-link" href="{{ route('baiviets.index') }}">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
-
+                 <!-- Chức vụ -->
+                <li>
+                    <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="award"></i>
+                        <span> Chức vụ </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="chucvu">
+                        <ul class="nav-second-level">
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
+                                <li><a class="tp-link" href="{{ route('chucvus.create') }}">Thêm</a></li>
+                            @endif
+                            <li><a class="tp-link" href="{{ route('chucvus.index') }}">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <!-- Phương thức thanh toán -->
                 <li>
                     <a href="#phuongthucthanhtoan" data-bs-toggle="collapse" aria-expanded="false"
@@ -141,7 +177,9 @@
                     </a>
                     <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                             <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.create') }}">Thêm</a></li>
+                            @endif
                             <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.index') }}">Danh sách</a>
                             </li>
                         </ul>
@@ -158,26 +196,15 @@
                     </a>
                     <div class="collapse" id="phuongthucvanchuyen">
                         <ul class="nav-second-level">
+                            @if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                             <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.create') }}">Thêm</a></li>
+                            @endif
                             <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.index') }}">Danh sách</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!-- Đơn hàng -->
-                <li>
-                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="shopping-cart"></i>
-                        <span> Đơn hàng </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="donhang">
-                        <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('donhangs.index') }}">Danh sách</a></li>
-                        </ul>
-                    </div>
-                </li>
 
             </ul>
         </div>

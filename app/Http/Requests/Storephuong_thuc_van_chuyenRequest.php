@@ -22,14 +22,14 @@ class Storephuong_thuc_van_chuyenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kieu_van_chuyen' => 'required|in:Giao hàng hỏa tốc,Giao hàng thường',
+            'kieu_van_chuyen' => 'required|unique:phuong_thuc_van_chuyens,kieu_van_chuyen',
         ];
     }
     public function messages(): array
     {
         return [
             'kieu_van_chuyen.required' => 'Bạn chưa chọn phương thức vận chuyển',
-            'kieu_van_chuyen.in' => 'Phương thức vận chuyển không hợp lệ'
+            'kieu_van_chuyen.unique' => 'Phương thức vận chuyển đã tồn tại'
         ];
     }
 }

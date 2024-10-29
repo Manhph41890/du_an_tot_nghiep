@@ -19,6 +19,7 @@ use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VariantController;
 
 /*
 |--------------------------------------------------------------------------

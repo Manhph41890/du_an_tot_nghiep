@@ -179,7 +179,7 @@
         </div>
         <ul class="minicart-product-list">
             <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/4.png"
+                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/4.png"
                         alt="Cart product Image" /></a>
                 <div class="content">
                     <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
@@ -188,7 +188,7 @@
                 </div>
             </li>
             <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/5.png"
+                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/5.png"
                         alt="Cart product Image" /></a>
                 <div class="content">
                     <a href="single-product.html" class="title">On Trend Makeup and Beauty Cosmetics</a>
@@ -197,7 +197,7 @@
                 </div>
             </li>
             <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/6.png"
+                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/6.png"
                         alt="Cart product Image" /></a>
                 <div class="content">
                     <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
@@ -212,7 +212,7 @@
 </div>
 <!-- OffCanvas Wishlist End -->
 
-<!-- OffCanvas Cart Start -->
+<!-- Gio hang mini cart -->
 <div id="offcanvas-cart" class="offcanvas offcanvas-cart theme1">
     <div class="inner">
         <div class="head d-flex flex-wrap justify-content-between">
@@ -221,7 +221,7 @@
         </div>
         <ul class="minicart-product-list">
             <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/1.png"
+                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/1.png"
                         alt="Cart product Image" /></a>
                 <div class="content">
                     <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
@@ -230,7 +230,7 @@
                 </div>
             </li>
             <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/2.png"
+                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/2.png"
                         alt="Cart product Image" /></a>
                 <div class="content">
                     <a href="single-product.html" class="title">On Trend Makeup and Beauty Cosmetics</a>
@@ -239,7 +239,7 @@
                 </div>
             </li>
             <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/3.png"
+                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/3.png"
                         alt="Cart product Image" /></a>
                 <div class="content">
                     <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>

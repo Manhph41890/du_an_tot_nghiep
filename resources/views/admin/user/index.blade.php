@@ -73,13 +73,8 @@
                                                 <th scope="col">ID</th>
                                                 <th scope="col">Chức vụ</th>
                                                 <th scope="col">Họ và tên</th>
-                                                {{-- <th scope="col">Ảnh đại diện</th> --}}
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Số điện thoại</th>
-                                                {{-- <th scope="col">Ngày sinh</th>
-                                                <th scope="col">Địa chỉ</th>
-                                                <th scope="col">Giới tính</th>
-                                                <th scope="col">Mật khẩu</th> --}}
                                                 <th scope="col">Trạng thái</th>
                                                 <th scope="col">Hành động </th>
                                             </tr>
@@ -90,16 +85,9 @@
                                                 <tr>
                                                     <td>{{ $item->id }}</td>
                                                     <td>{{ $item->chuc_vu?->ten_chuc_vu }}</td>
-                                                    <!-- Hiển thị tên chức vụ -->
                                                     <td>{{ $item->ho_ten }}</td>
-                                                    {{-- <td><img src="{{ asset('storage/' . $item->anh_dai_dien) }}"
-                                                            alt="Hình ảnh" width="150px"></td> --}}
                                                     <td>{{ $item->email }}</td>
                                                     <td>{{ $item->so_dien_thoai }}</td>
-                                                    {{-- <td>{{ $item->ngay_sinh }}</td>
-                                                    <td>{{ $item->dia_chi }}</td>
-                                                    <td>{{ $item->gioi_tinh }}</td>
-                                                    <td>{{ $item->mat_khau }}</td> --}}
                                                     <td>{!! $item->is_active
                                                         ? '<span class="badge bg-primary">Hiển Thị</span>'
                                                         : '<span class="badge bg-danger">Ẩn</span>' !!}</td>

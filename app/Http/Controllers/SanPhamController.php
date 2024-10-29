@@ -99,6 +99,14 @@ class SanPhamController extends Controller
                     $quantity = $bien_the_san_phamsTmp['so_luong'][$key] ?? 0;
                     $totalQuantity += $quantity; // Cộng dồn số lượng biến thể
 
+                    // giá biến thể
+                    $giaBienThe = $bien_the_san_phamsTmp['gia'][$key] ?? 0;
+
+                    // Kiểm tra xem giá có hợp lệ không
+                    if ($giaBienThe < 0) {
+                        return back()->withErrors(['product_variants' => 'Giá biến thể không được nhỏ hơn 0']);
+                    }
+
                     // Xử lý file ảnh biến thể
                     $anh_bien_the_path = null; // 
 
@@ -118,6 +126,7 @@ class SanPhamController extends Controller
                         'size_san_pham_id' => $size_san_pham_id,
                         'color_san_pham_id' => $color_san_pham_id,
                         'anh_bien_the' => $anh_bien_the_path,
+                        'gia' => $giaBienThe,
                         'so_luong' => $quantity,
                     ]);
                 }
@@ -237,6 +246,14 @@ class SanPhamController extends Controller
                     $quantity = $bien_the_san_phamsTmp['so_luong'][$key] ?? 0;
                     $totalQuantity += $quantity; // 
 
+                    // giá biến thể
+                    $giaBienThe = $bien_the_san_phamsTmp['gia'][$key] ?? 0;
+
+                    // Kiểm tra xem giá có hợp lệ không
+                    if ($giaBienThe < 0) {
+                        return back()->withErrors(['product_variants' => 'Giá biến thể không được nhỏ hơn 0']);
+                    }
+
                     // Xử lý file ảnh biến thể
                     $anh_bien_the_path = null; // 
 
@@ -256,6 +273,7 @@ class SanPhamController extends Controller
                         'size_san_pham_id' => $size_san_pham_id,
                         'color_san_pham_id' => $color_san_pham_id,
                         'anh_bien_the' => $anh_bien_the_path,
+                        'gia' => $giaBienThe,
                         'so_luong' => $quantity,
                     ]);
                 }

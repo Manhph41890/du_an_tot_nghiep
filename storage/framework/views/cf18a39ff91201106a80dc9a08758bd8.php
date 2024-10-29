@@ -19,9 +19,28 @@
                     </a>
                     <div class="collapse" id="dashboard">
                         <ul class="nav-second-level">
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
                             <li><a class="tp-link" href="<?php echo e(route('thong_ke_chung')); ?>">Tổng quan</a></li>
+                            <?php endif; ?>
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'nhan_vien'): ?>
+                            <li><a class="tp-link" href="<?php echo e(route('thong_ke')); ?>">Tổng quan</a></li>
+                            <?php endif; ?>
                             
 
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Đơn hàng -->
+                <li>
+                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="shopping-cart"></i>
+                        <span> Đơn hàng </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="donhang">
+                        <ul class="nav-second-level">
+                            <li><a class="tp-link" href="<?php echo e(route('donhangs.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
@@ -35,12 +54,15 @@
                     </a>
                     <div class="collapse" id="danhmuc">
                         <ul class="nav-second-level">
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
                             <li><a class="tp-link" href="<?php echo e(route('danhmucs.create')); ?>">Thêm</a></li>
+                            <?php endif; ?>
                             <li><a class="tp-link" href="<?php echo e(route('danhmucs.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
+            
                 <!-- Sản phẩm -->
                 <li>
                     <a href="#sanpham" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
@@ -50,7 +72,9 @@
                     </a>
                     <div class="collapse" id="sanpham">
                         <ul class="nav-second-level">
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
                             <li><a class="tp-link" href="<?php echo e(route('sanphams.create')); ?>">Thêm</a></li>
+                            <?php endif; ?>
                             <li><a class="tp-link" href="<?php echo e(route('sanphams.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
@@ -65,8 +89,16 @@
                     </a>
                     <div class="collapse" id="khuyenmai">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="<?php echo e(route('khuyenmais.create')); ?>">Thêm</a></li>
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
+                                <li><a class="tp-link" href="<?php echo e(route('khuyenmais.create')); ?>">Thêm</a></li>
+
+                            
+
+
+                            
+                            <?php endif; ?>
                             <li><a class="tp-link" href="<?php echo e(route('khuyenmais.index')); ?>">Danh sách</a></li>
+
                         </ul>
                     </div>
                 </li>
@@ -74,14 +106,16 @@
 
                 <!-- Chức vụ -->
                 <li>
-                    <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="award"></i>
-                        <span> Chức vụ </span>
+                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="shopping-bag"></i>
+                        <span> Đơn hàng </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="chucvu">
+                    <div class="collapse" id="donhang">
                         <ul class="nav-second-level">
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
                             <li><a class="tp-link" href="<?php echo e(route('chucvus.create')); ?>">Thêm</a></li>
+                            <?php endif; ?>
                             <li><a class="tp-link" href="<?php echo e(route('chucvus.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
@@ -124,13 +158,30 @@
                     </a>
                     <div class="collapse" id="baiviet">
                         <ul class="nav-second-level">
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
                             <li><a class="tp-link" href="<?php echo e(route('baiviets.create')); ?>">Thêm</a></li>
+                            <?php endif; ?>
                             <li><a class="tp-link" href="<?php echo e(route('baiviets.index')); ?>">Danh sách</a></li>
                         </ul>
                     </div>
                 </li>
 
-
+                 <!-- Chức vụ -->
+                <li>
+                    <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="award"></i>
+                        <span> Chức vụ </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="chucvu">
+                        <ul class="nav-second-level">
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
+                                <li><a class="tp-link" href="<?php echo e(route('chucvus.create')); ?>">Thêm</a></li>
+                            <?php endif; ?>
+                            <li><a class="tp-link" href="<?php echo e(route('chucvus.index')); ?>">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <!-- Phương thức thanh toán -->
                 <li>
                     <a href="#phuongthucthanhtoan" data-bs-toggle="collapse" aria-expanded="false"
@@ -141,7 +192,9 @@
                     </a>
                     <div class="collapse" id="phuongthucthanhtoan">
                         <ul class="nav-second-level">
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
                             <li><a class="tp-link" href="<?php echo e(route('phuongthucthanhtoans.create')); ?>">Thêm</a></li>
+                            <?php endif; ?>
                             <li><a class="tp-link" href="<?php echo e(route('phuongthucthanhtoans.index')); ?>">Danh sách</a>
                             </li>
                         </ul>
@@ -158,26 +211,15 @@
                     </a>
                     <div class="collapse" id="phuongthucvanchuyen">
                         <ul class="nav-second-level">
+                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
                             <li><a class="tp-link" href="<?php echo e(route('phuongthucvanchuyens.create')); ?>">Thêm</a></li>
+                            <?php endif; ?>
                             <li><a class="tp-link" href="<?php echo e(route('phuongthucvanchuyens.index')); ?>">Danh sách</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!-- Đơn hàng -->
-                <li>
-                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="shopping-cart"></i>
-                        <span> Đơn hàng </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="donhang">
-                        <ul class="nav-second-level">
-                            <li><a class="tp-link" href="<?php echo e(route('donhangs.index')); ?>">Danh sách</a></li>
-                        </ul>
-                    </div>
-                </li>
 
             </ul>
         </div>

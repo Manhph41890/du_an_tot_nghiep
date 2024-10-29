@@ -202,6 +202,7 @@
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab">
                             <div class="product-slider-init theme1 slick-nav">
+                                @foreach ($sanPhamMois as $item )
                                 <div class="slider-item">
                                     <div class="card product-card">
                                         <div class="card-body p-0">
@@ -242,8 +243,7 @@
                                                 <div class="media-body">
                                                     <div class="product-desc">
                                                         <h3 class="title">
-                                                            <a href="shop-grid-4-column.html">All Natural Makeup Beauty
-                                                                Cosmetics</a>
+                                                            <a href="shop-grid-4-column.html">{{$item->ten_san_pham}}</a>
                                                         </h3>
                                                         <div class="star-rating">
                                                             <span class="ion-ios-star"></span>
@@ -253,7 +253,7 @@
                                                             <span class="ion-ios-star de-selected"></span>
                                                         </div>
                                                         <div class="d-flex align-items-center justify-content-between">
-                                                            <span class="product-price">$11.90</span>
+                                                            <span class="product-price">{{$item->gia_goc}}</span>
                                                             <button class="pro-btn" data-bs-toggle="modal"
                                                                 data-bs-target="#add-to-cart">
                                                                 <i class="icon-basket"></i>
@@ -265,266 +265,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                                 <!-- slider-item end -->
-                                <div class="slider-item">
-                                    <div class="card product-card">
-                                        <div class="card-body p-0">
-                                            <div class="media flex-column">
-                                                <div class="product-thumbnail position-relative">
-                                                    <span class="badge badge-danger top-right">New</span>
-                                                    <a href="single-product.html">
-                                                        <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/2.png') }}"
-                                                            alt="thumbnail" />
-                                                    </a>
-                                                    <!-- product links -->
-                                                    <ul class="actions d-flex justify-content-center">
-                                                        <li>
-                                                            <a class="action" href="wishlist.html">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="add to wishlist" class="icon-heart">
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#compare">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="Add to compare" class="icon-shuffle"></span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#quick-view">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="Quick view" class="icon-magnifier"></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- product links end-->
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="product-desc">
-                                                        <h3 class="title">
-                                                            <a href="shop-grid-4-column.html">On Trend Makeup and Beauty
-                                                                Cosmetics</a>
-                                                        </h3>
-                                                        <div class="star-rating">
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star de-selected"></span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <span class="product-price">$11.90</span>
-                                                            <button class="pro-btn" data-bs-toggle="modal"
-                                                                data-bs-target="#add-to-cart">
-                                                                <i class="icon-basket"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- slider-item end -->
-                                <div class="slider-item">
-                                    <div class="card product-card">
-                                        <div class="card-body p-0">
-                                            <div class="media flex-column">
-                                                <div class="product-thumbnail position-relative">
-                                                    <span class="badge badge-danger top-right">New</span>
-                                                    <a href="single-product.html">
-                                                        <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/3.png') }}"
-                                                            alt="thumbnail" />
-                                                    </a>
-                                                    <!-- product links -->
-                                                    <ul class="actions d-flex justify-content-center">
-                                                        <li>
-                                                            <a class="action" href="wishlist.html">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="add to wishlist" class="icon-heart">
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#compare">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="Add to compare" class="icon-shuffle"></span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#quick-view">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="Quick view" class="icon-magnifier"></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- product links end-->
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="product-desc">
-                                                        <h3 class="title">
-                                                            <a href="shop-grid-4-column.html">The Cosmetics and Beauty
-                                                                brand Shoppe</a>
-                                                        </h3>
-                                                        <div class="star-rating">
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star de-selected"></span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <span class="product-price">$21.51</span>
-                                                            <button class="pro-btn" data-bs-toggle="modal"
-                                                                data-bs-target="#add-to-cart">
-                                                                <i class="icon-basket"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- slider-item end -->
-                                <div class="slider-item">
-                                    <div class="card product-card">
-                                        <div class="card-body p-0">
-                                            <div class="media flex-column">
-                                                <div class="product-thumbnail position-relative">
-                                                    <span class="badge badge-danger top-right">New</span>
-                                                    <a href="single-product.html">
-                                                        <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/4.png') }}"
-                                                            alt="thumbnail" />
-                                                    </a>
-                                                    <!-- product links -->
-                                                    <ul class="actions d-flex justify-content-center">
-                                                        <li>
-                                                            <a class="action" href="wishlist.html">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="add to wishlist" class="icon-heart">
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#compare">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="Add to compare" class="icon-shuffle"></span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#quick-view">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="Quick view" class="icon-magnifier"></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- product links end-->
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="product-desc">
-                                                        <h3 class="title">
-                                                            <a href="shop-grid-4-column.html">orginal Age Defying Cosmetics
-                                                                Makeup</a>
-                                                        </h3>
-                                                        <div class="star-rating">
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star de-selected"></span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <span class="product-price">$11.90</span>
-                                                            <button class="pro-btn" data-bs-toggle="modal"
-                                                                data-bs-target="#add-to-cart">
-                                                                <i class="icon-basket"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- slider-item end -->
-                                <div class="slider-item">
-                                    <div class="card product-card">
-                                        <div class="card-body p-0">
-                                            <div class="media flex-column">
-                                                <div class="product-thumbnail position-relative">
-                                                    <span class="badge badge-danger top-right">New</span>
-                                                    <a href="single-product.html">
-                                                        <img class="first-img"
-                                                            src="{{ asset('assets/admin/img/product/5.png') }}"
-                                                            alt="thumbnail" />
-                                                        <img class="second-img"
-                                                            src="{{ asset('assets/admin/img/product/6.png') }}"
-                                                            alt="thumbnail" />
-                                                    </a>
-                                                    <!-- product links -->
-                                                    <ul class="actions d-flex justify-content-center">
-                                                        <li>
-                                                            <a class="action" href="wishlist.html">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="add to wishlist" class="icon-heart">
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#compare">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="Add to compare" class="icon-shuffle"></span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#quick-view">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="Quick view" class="icon-magnifier"></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- product links end-->
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="product-desc">
-                                                        <h3 class="title">
-                                                            <a href="shop-grid-4-column.html">orginal Clear Water Cosmetics
-                                                                On Trend</a>
-                                                        </h3>
-                                                        <div class="star-rating">
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star"></span>
-                                                            <span class="ion-ios-star de-selected"></span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <span class="product-price">$11.90</span>
-                                                            <button class="pro-btn" data-bs-toggle="modal"
-                                                                data-bs-target="#add-to-cart">
-                                                                <i class="icon-basket"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- slider-item end -->
+                                
                             </div>
                         </div>
                         <!-- second tab-pane -->

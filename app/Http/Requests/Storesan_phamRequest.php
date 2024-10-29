@@ -32,9 +32,12 @@ class Storesan_phamRequest extends FormRequest
             'anh_san_pham' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
 
             'is_active' => [Rule::in([0, 1])],
-            'product_variants.*.color_san_pham' => 'nullable|string', // Đảm bảo kiểu dữ liệu
+
+            // Thêm quy tắc cho biến thể sản phẩm
+            'product_variants.*.color_san_pham' => 'nullable|string',
             'product_variants.*.size_san_pham' => 'nullable|string',
             'product_variants.*.so_luong' => 'nullable|integer|min:0',
+            'product_variants.*.gia' => 'nullabble|numeric|min:0|gte:gia_km', // Giá biến thể là bắt buộc, không âm và phải lớn hơn hoặc bằng gia_km
             'product_variants.*.anh_bien_the' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
@@ -69,12 +72,12 @@ class Storesan_phamRequest extends FormRequest
             'product_variants.*.size_san_pham.nullable' => 'Kích thước có thể để trống.',
             'product_variants.*.so_luong.nullable' => 'Số lượng có thể để trống.',
             'product_variants.*.so_luong.integer' => 'Số lượng phải là một số nguyên.',
+            // 'product_variants.*.gia.required' => 'Giá biến thể là bắt buộc.',
+            'product_variants.*.gia.numeric' => 'Giá biến thể phải là một số.',
+            'product_variants.*.gia.min' => 'Giá biến thể phải lớn hơn hoặc bằng 0.',
+            'product_variants.*.gia.gte' => 'Giá biến thể không được nhỏ hơn giá khuyến mãi.',
             'product_variants.*.anh_bien_the.mimes' => 'Ảnh biến thể phải có định dạng: jpeg, png, jpg, gif.',
             'product_variants.*.anh_bien_the.max' => 'Ảnh biến thể không được vượt quá :max kilobytes.',
-            'product_variants.*.color_san_pham' => 'nullable|string', // Đảm bảo kiểu dữ liệu
-            'product_variants.*.size_san_pham' => 'nullable|string',
-            'product_variants.*.so_luong' => 'nullable|integer|min:0',
-            'product_variants.*.anh_bien_the' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

@@ -512,7 +512,8 @@
 
                                                 <!-- Chuyển hướng đến đăng ký -->
                                                 <div class="row">
-                                                    <small>Bạn chưa có tài khoản? <a href="{{ route('auth.register') }}">
+                                                    <small>Bạn chưa có tài khoản? <a href="javascript:void(0)"
+                                                            onclick="switchToRegisterModal()">
                                                             Đăng Kí
                                                         </a></small>
                                                 </div>
@@ -610,7 +611,8 @@
 
                                                 <!-- Chuyển hướng đến đăng nhập -->
                                                 <div class="row">
-                                                    <small>Bạn đã có tài khoản? <a href="{{ route('auth.login') }}"> Đăng
+                                                    <small>Bạn đã có tài khoản? <a href="javascript:void(0)"
+                                                            onclick="switchToLoginModal()"> Đăng
                                                             Nhập
                                                         </a></small>
                                                 </div>
@@ -637,6 +639,37 @@
     @else
         var isAuthenticated = false;
     @endauth
+    // Hàm mở modal đăng nhập
+    function openLoginModal() {
+        document.getElementById("loginModal").style.display = "block";
+    }
+
+    // Hàm mở modal đăng ký
+    function openRegisterModal() {
+        document.getElementById("registerModal").style.display = "block";
+    }
+
+    // Hàm đóng modal đăng nhập
+    function closeLoginModal() {
+        document.getElementById("loginModal").style.display = "none";
+    }
+
+    // Hàm đóng modal đăng ký
+    function closeRegisterModal() {
+        document.getElementById("registerModal").style.display = "none";
+    }
+
+    // Chuyển từ đăng nhập sang đăng ký
+    function switchToRegisterModal() {
+        closeLoginModal();
+        openRegisterModal();
+    }
+
+    // Chuyển từ đăng ký sang đăng nhập
+    function switchToLoginModal() {
+        closeRegisterModal();
+        openLoginModal();
+    }
 </script>
 
 <style>

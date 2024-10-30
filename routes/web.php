@@ -72,6 +72,20 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::resource('/sanphams', SanPhamController::class);
     Route::resource('/khuyenmais', KhuyenMaiController::class);
 
+    // Quản lý biến thể
+    Route::get('variants', [VariantController::class, 'index'])->name('variants.index');
+    Route::post('variants/colors', [VariantController::class, 'storeColor'])->name('variants.colors.store');
+    Route::post('variants/sizes', [VariantController::class, 'storeSize'])->name('variants.sizes.store');
+    Route::get('variants/colors/{id}/edit', [VariantController::class, 'editColor'])->name('variants.colors.edit');
+    Route::put('variants/colors/{id}', [VariantController::class, 'updateColor'])->name('variants.colors.update');
+    Route::delete('variants/colors/{colorId}', [VariantController::class, 'destroyColor'])->name('variants.colors.destroy');
+
+    Route::get('variants/sizes/{id}/edit', [VariantController::class, 'editSize'])->name('variants.sizes.edit');
+    Route::put('variants/sizes/{id}', [VariantController::class, 'updateSize'])->name('variants.sizes.update');
+    Route::delete('variants/sizes/{id}', [VariantController::class, 'destroySize'])->name('variants.sizes.destroy');
+
+
+
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);

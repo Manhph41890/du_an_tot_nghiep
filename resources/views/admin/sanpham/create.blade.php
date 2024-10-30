@@ -24,17 +24,6 @@
                                 </div>
                             </div>
                         @endif
-
-                        <!-- Display Errors -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         {{-- Lỗi biến thể --}}
                         @if ($errors->has('product_variants'))
                             <ul>
@@ -172,11 +161,15 @@
                                         <div class="row variant-item mb-3">
                                             <div class="col-lg-2">
                                                 <label for="size_san_pham" class="form-label">Size</label>
-                                                <input type="text" name="product_variants[size_san_pham][]"
-                                                    class="form-control" placeholder="Nhập size" id="sizeInput">
-                                                <span id="sizeError" class="color-error text-danger"
-                                                    style="display: none;">Kích thước không
-                                                    hợp lệ!</span>
+                                                <select name="product_variants[size_san_pham][]" class="form-control"
+                                                    id="sizeSelect">
+                                                    <option value="">Chọn kích thước</option>
+                                                    @foreach ($sizes as $size)
+                                                        <option value="{{ $size->id }}">{{ $size->ten_size }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
                                                 @error('product_variants.*.size_san_pham')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -184,11 +177,15 @@
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="color_san_pham" class="form-label">Màu sắc</label>
-                                                <input type="text" name="product_variants[color_san_pham][]"
-                                                    class="form-control color-input" placeholder="Nhập màu sắc"
-                                                    value="{{ old('color_san_pham') }}" id="colorInput">
-                                                <span class="color-error text-danger" style="display: none;">Tên màu không
-                                                    hợp lệ!</span>
+                                                <select name="product_variants[color_san_pham][]" class="form-control"
+                                                    id="sizeSelect">
+                                                    <option value="">Chọn kích thước</option>
+                                                    @foreach ($colors as $color)
+                                                        <option value="{{ $color->id }}">{{ $color->ten_color }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
                                                 @error('product_variants.*.color_san_pham')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -196,7 +193,7 @@
                                             <div class="col-lg-2">
                                                 <label for="so_luong" class="form-label">Số lượng</label>
                                                 <input type="number" name="product_variants[so_luong][]"
-                                                    class="form-control" value="0" min="0">
+                                                    class="form-control" value="0" min="0" required>
                                                 @error('product_variants.*.so_luong')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror

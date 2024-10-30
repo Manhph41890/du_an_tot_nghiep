@@ -33,12 +33,12 @@ class Storesan_phamRequest extends FormRequest
 
             'is_active' => [Rule::in([0, 1])],
 
-            // Thêm quy tắc cho biến thể sản phẩm
-            'product_variants.*.color_san_pham' => 'required|string',
-            'product_variants.*.size_san_pham' => 'required|string',
-            'product_variants.*.so_luong' => 'required|integer|min:0',
-            'product_variants.*.gia' => 'required|numeric|min:0|gte:gia_km', // Giá biến thể là bắt buộc, không âm và phải lớn hơn hoặc bằng gia_km
-            'product_variants.*.anh_bien_the' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+            // Thay đổi quy tắc cho biến thể sản phẩm
+            'product_variants.size_san_pham.*' => 'required|exists:size_san_phams,id', // Kiểm tra kích thước
+            'product_variants.color_san_pham.*' => 'required|exists:color_san_phams,id', // Kiểm tra màu sắc
+            'product_variants.so_luong.*' => 'required|integer|min:0',
+            'product_variants.gia.*' => 'required|numeric|min:0|gte:gia_km', // Giá biến thể là bắt buộc, không âm và phải lớn hơn hoặc bằng gia_km
+            'product_variants.anh_bien_the.*' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 
@@ -70,7 +70,9 @@ class Storesan_phamRequest extends FormRequest
             'anh_san_pham.max' => 'Ảnh sản phẩm không được vượt quá :max kilobytes.',
             'is_active.in' => 'Trạng thái không hợp lệ.',
             'product_variants.*.color_san_pham.required' => 'Màu không thể để trống.',
+            'product_variants.*.color_san_pham.exists' => 'Màu đã chọn không hợp lệ.',
             'product_variants.*.size_san_pham.required' => 'Kích thước không thể để trống.',
+            'product_variants.*.size_san_pham.exists' => 'Kích thước đã chọn không hợp lệ.',
             'product_variants.*.so_luong.required' => 'Số lượng không thể để trống.',
             'product_variants.*.so_luong.integer' => 'Số lượng phải là một số nguyên.',
             'product_variants.*.gia.required' => 'Giá biến thể là bắt buộc.',

@@ -12,14 +12,15 @@
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0"> {{ $title }} </h4>
                     </div>
-                    <form method="GET" action="{{ route('khuyenmais.index') }}" class="d-flex">
+                    <form method="POST" action="{{ route('khuyenmais.index') }}" class="d-flex">
+                        @csrf
+                        @method('GET')
                         <input type="text" name="search_km" class="form-control me-2" placeholder="Tìm mã khuyến mãi .."
-                            value="{{ request()->query('search_km') }}"> <!-- Use search_km here -->
+                        value="{{ request('search_km') }}">
                         <select name="is_active" class="form-select me-2">
                             <option value="">Tất cả trạng thái</option>
-                            <option value="1" {{ request()->query('is_active') == '1' ? 'selected' : '' }}>Đang hoạt
-                                động</option>
-                            <option value="0" {{ request()->query('is_active') == '0' ? 'selected' : '' }}>Hết hạn
+                            <option value="1" {{ request('is_active') == '0' ? 'selected' : '' }}>Đang hoạt động</option>
+                            <option value="0" {{ request('is_active') == '1' ? 'selected' : '' }}>Kết thúc</option>
                             </option>
                         </select>
                         <button type="submit" class="btn btn-primary">Tìm</button>

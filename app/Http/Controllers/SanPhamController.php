@@ -193,61 +193,52 @@ class SanPhamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatesan_phamRequest $request, $id)
+    public function update(Request $request, $id)
     {
-
-
         DB::beginTransaction();
         try {
-            // Tìm sản phẩm 
+            // Tìm sản phẩm theo ID
             $product = san_pham::findOrFail($id);
 
+            // Lấy dữ liệu xác thực từ request
             $data_san_phams = $request->except('product_variants');
 
-            // Xử lý ảnh sản phẩm chính
+            // Xử lý ảnh sản phẩm chính (nếu có)
             if ($request->hasFile('anh_san_pham')) {
                 $file = $request->file('anh_san_pham');
                 if ($file->isValid()) {
-                    // Xóa ảnh cũ nếu có
-                    if ($product->anh_san_pham && Storage::disk('public')->exists($product->anh_san_pham)) {
-                        Storage::disk('public')->delete($product->anh_san_pham);
-                    }
                     $filename = time() . '-' . $file->getClientOriginalName();
                     $data_san_phams['anh_san_pham'] = $file->storeAs('sanphams', $filename, 'public');
                 } else {
                     return back()->withErrors(['anh_san_pham' => 'File không hợp lệ']);
                 }
-            } else {
-                // Nếu không có ảnh sản phẩm, giữ nguyên giá trị ảnh cũ
-                $data_san_phams['anh_san_pham'] = $product->anh_san_pham;
             }
 
             // Cập nhật thông tin sản phẩm
             $product->update($data_san_phams);
 
-            // Xử lý biến thể sản phẩm và tính tổng số lượng
+            // Xử lý biến thể sản phẩm
             $bien_the_san_phamsTmp = $request->input('product_variants', []);
-            $totalQuantity = 0; // 
+            $totalQuantity = 0; // Tổng số lượng
 
-            // Xóa các biến thể cũ trước khi cập nhật
+            // Xóa tất cả biến thể hiện tại
             $product->bien_the_san_phams()->delete();
 
             if (!empty($bien_the_san_phamsTmp['size_san_pham']) && !empty($bien_the_san_phamsTmp['color_san_pham'])) {
                 foreach ($bien_the_san_phamsTmp['size_san_pham'] as $key => $size_san_pham) {
-                    // Kiểm tra và thêm kích thước vào bảng size_san_phams
-                    $size = size_san_pham::firstOrCreate(['ten_size' => $size_san_pham]);
-                    $size_san_pham_id = $size->id;
+                    $size_san_pham_id = $bien_the_san_phamsTmp['size_san_pham'][$key]; // ID từ dropdown kích thước
+                    $color_san_pham_id = $bien_the_san_phamsTmp['color_san_pham'][$key]; // ID từ dropdown màu sắc
 
-                    // Kiểm tra và thêm màu sắc vào bảng color_san_phams
-                    $color_san_pham = $bien_the_san_phamsTmp['color_san_pham'][$key] ?? null;
-                    $color = color_san_pham::firstOrCreate(['ten_color' => $color_san_pham]);
-                    $color_san_pham_id = $color->id;
+                    // Kiểm tra ID có hợp lệ không
+                    if (!$size_san_pham_id || !$color_san_pham_id) {
+                        return back()->withErrors(['product_variants' => 'Kích thước hoặc màu sắc không hợp lệ.']);
+                    }
 
                     // Lấy số lượng biến thể
                     $quantity = $bien_the_san_phamsTmp['so_luong'][$key] ?? 0;
-                    $totalQuantity += $quantity; // 
+                    $totalQuantity += $quantity; // Cộng dồn số lượng biến thể
 
-                    // giá biến thể
+                    // Giá biến thể
                     $giaBienThe = $bien_the_san_phamsTmp['gia'][$key] ?? 0;
 
                     // Kiểm tra xem giá có hợp lệ không
@@ -268,7 +259,7 @@ class SanPhamController extends Controller
                         }
                     }
 
-                    // Tạo biến thể 
+                    // Tạo biến thể sản phẩm mới
                     bien_the_san_pham::create([
                         'san_pham_id' => $product->id,
                         'size_san_pham_id' => $size_san_pham_id,
@@ -280,7 +271,7 @@ class SanPhamController extends Controller
                 }
             }
 
-            // Cập nhật 
+            // Cập nhật tổng số lượng sản phẩm
             $product->so_luong = $totalQuantity;
             $product->save();
 
@@ -292,6 +283,7 @@ class SanPhamController extends Controller
             return back()->withErrors('Đã xảy ra lỗi khi cập nhật sản phẩm. Vui lòng thử lại.');
         }
     }
+
     /**
      * Remove the specified resource from storage.
      */

@@ -20,16 +20,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         .bg-img1 {
-            background-image: url('./assets/client/images/slider/1.png');
+            background-image: url('./assets/client/images/slider/banner_1.jpg');
             width: 50%;
         }
 
         .bg-img2 {
-            background-image: url('./assets/client/images/slider/2.png');
+            background-image: url('./assets/client/images/slider/banner_2.jpg');
         }
 
         .bg-img3 {
-            background-image: url('./assets/client/images/slider/3.jpg');
+            background-image: url('./assets/client/images/slider/banner_3.jpg');
         }
 
         .breadcrumb-section {

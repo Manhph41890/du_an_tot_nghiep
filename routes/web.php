@@ -21,14 +21,6 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariantController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-*/
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
@@ -86,6 +78,8 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::resource('/donhangs', DonHangController::class);
     Route::post('/donhang/{id}/confirm', [DonHangController::class, 'confirmOrder'])->name('donhangs.confirm');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    // Route::get('/danhgia/create', [DanhGiaController::class, 'create'])->name('danhgia.create');
+    Route::post('/danhgia', [DanhGiaController::class, 'store'])->name('danhgia.store');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 

@@ -247,45 +247,40 @@
                                 <div class="row">
                                     <div class="col-lg-7">
                                         <div class="review-wrapper">
-                                            <div class="single-review">
-                                                <div class="review-img">
-                                                    <img src="assets/img/testimonial-image/1.png" alt="" />
-                                                </div>
-                                                <div class="review-content">
-                                                    <div class="review-top-wrap">
-                                                        <div class="review-left">
-                                                            <div class="review-name">
-                                                                <h4></h4>
-                                                            </div>
-                                                            <div class="rating-product">
-                                                                <i class="ion-android-star"></i>
-                                                                <i class="ion-android-star"></i>
-                                                                <i class="ion-android-star"></i>
-                                                                <i class="ion-android-star"></i>
-                                                                <i class="ion-android-star"></i>
+                                            @foreach ($sanPhamCT->danh_gias as $danhgia)
+                                                <div class="single-review">
+                                                    <div class="review-img">
+                                                        <img src="/assets/img/testimonial-image/1.png" alt="" />
+                                                    </div>
+                                                    <div class="review-content">
+                                                        <div class="review-top-wrap">
+                                                            <div class="review-left">
+                                                                <div class="review-name">
+                                                                    <h4>{{ $danhgia->users->ho_ten }}</h4>
+                                                                </div>
+                                                                <div class="rating-product">
+                                                                    @for ($i = 1; $i <= 5; $i++)
+                                                                        <i
+                                                                            class="{{ $i <= $danhgia->diem_so ? 'ion-android-star' : 'ion-android-star-outline' }}"></i>
+                                                                    @endfor
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="review-left">
-                                                            <a href="#">Reply</a>
+                                                        <div class="review-bottom">
+                                                            <p>
+                                                            <p>{{ $danhgia->binh_luan }}</p>
+                                                            </p>
                                                         </div>
                                                     </div>
-                                                    <div class="review-bottom">
-                                                        <p>
-                                                            Vestibulum ante ipsum primis aucibus orci
-                                                            luctustrices posuere cubilia Curae Suspendisse
-                                                            viverra ed viverra. Mauris ullarper euismod
-                                                            vehicula. Phasellus quam nisi, congue id nulla.
-                                                        </p>
-                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="ratting-form-wrapper">
                                             <h3>Add a Review</h3>
                                             <div class="ratting-form">
-                                                <form action="#">
+                                                <form action="{{ route('') }}">
                                                     <div class="star-box">
                                                         <span>Your rating:</span>
                                                         <div class="rating-product">
@@ -297,16 +292,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="rating-form-style mb-10">
-                                                                <input placeholder="Name" type="text" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="rating-form-style mb-10">
-                                                                <input placeholder="Email" type="email" />
-                                                            </div>
-                                                        </div>
                                                         <div class="col-md-12">
                                                             <div class="rating-form-style form-submit">
                                                                 <textarea name="Your Review" placeholder="Message"></textarea>

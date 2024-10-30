@@ -104,22 +104,7 @@
                 </li>
 
 
-                <!-- Chức vụ -->
-                <li>
-                    <a href="#donhang" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="shopping-bag"></i>
-                        <span> Đơn hàng </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="donhang">
-                        <ul class="nav-second-level">
-                            <?php if(auth()->user()->chuc_vu->ten_chuc_vu === 'admin'): ?>
-                            <li><a class="tp-link" href="<?php echo e(route('chucvus.create')); ?>">Thêm</a></li>
-                            <?php endif; ?>
-                            <li><a class="tp-link" href="<?php echo e(route('chucvus.index')); ?>">Danh sách</a></li>
-                        </ul>
-                    </div>
-                </li>
+                
 
                 <!-- User -->
                 <li>

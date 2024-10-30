@@ -55,11 +55,10 @@ class HomeController extends Controller
             $sanPhamCT->diem_trung_binh = 0;
         }
 
-
-
         // Lấy tất cả các size và màu sắc từ biến thể sản phẩm
         $sizes = $sanPhamCT->bien_the_san_phams->pluck('size')->unique('id'); // Lấy size duy nhất
         $colors = $sanPhamCT->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
+
         return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors'));
     }
 

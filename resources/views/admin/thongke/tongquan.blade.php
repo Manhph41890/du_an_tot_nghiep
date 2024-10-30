@@ -473,180 +473,181 @@
 
                         </div>
                     </div>
-                    <!-- Start Monthly Sales -->
-                    <div class="row">
-                        <div class="col-md-12 col-xl-12">
-                            <div class="card overflow-hidden">
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
-                                            <i data-feather="tablet" class="widgets-icons"></i>
-                                        </div>
-                                        <h5 class="card-title mb-0">Đơn hàng mới nhất</h5>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Mã đơn hàng</th>
-                                                    <th scope="col">Người đặt</th>
-                                                    <th scope="col">Số điện thoại</th>
-                                                    <th scope="col">Địa chỉ giao hàng</th>
-                                                    <th scope="col">Ngày tạo đơn hàng</th>
-                                                    <th scope="col">Tổng tiền</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($donhangs as $item)
-                                                    <tr>
-                                                        <td>{{ $item->id }}</td>
-                                                        <td>{{ $item->user?->ho_ten }}</td>
-                                                        <td>{{ $item->so_dien_thoai }}</td>
-                                                        <td>{{ $item->dia_chi }}</td>
-                                                        <td>{{ $item->ngay_tao }}</td>
-                                                        <td>
-                                                            @php
-                                                                $tong_tien = $item->tong_tien;
-                                                                if (intval($tong_tien) == $tong_tien) {
-                                                                    // Nếu tổng tiền là số nguyên
-                                                                    echo number_format($tong_tien, 0, ',', '.');
-                                                                } elseif (floor($tong_tien) == $tong_tien) {
-                                                                    // Nếu tổng tiền có dạng như 200000.00
-                                                                    echo number_format($tong_tien, 0, ',', '.');
-                                                                } else {
-                                                                    // Nếu tổng tiền có phần thập phân khác .00
-                                                                    echo number_format($tong_tien, 2, ',', '.');
-                                                                }
-                                                            @endphp
-                                                            Vnđ
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-xl-12">
-                            <div class="card">
-
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
-                                            <i data-feather="bar-chart" class="widgets-icons"></i>
-                                        </div>
-                                        <h5 class="card-title mb-0">Sản phẩm được xem nhiều nhất</h5>
-                                    </div>
-                                </div>
-
-                                <div class="card-body">
-                                    <table class="table table-traffic mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Ảnh</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Giá gốc</th>
-                                                <th>Giá khuyến mãi</th>
-                                                <th>Ảnh</th>
-                                                <th>Trạng thái</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($views_product as $index => $item)
-                                                <tr>
-                                                    <th scope="row">{{ $index + 1 }}</th>
-                                                    {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
-                                                    <td>{{ $item->ten_san_pham }}</td>
-                                                    <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
-                                                    <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
-                                                    <td>
-                                                        @if ($item->anh_san_pham)
-                                                            <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
-                                                                alt="Hình ảnh sản phẩm" width="50px">
-                                                        @else
-                                                            <img src="{{ asset('images/placeholder.png') }}"
-                                                                alt="Không có ảnh" width="50px">
-                                                        @endif
-                                                    </td>
-
-                                                    <td>
-                                                        {!! $item->is_active
-                                                            ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                            : '<span class="badge bg-danger">Ẩn</span>' !!}
-                                                    </td>
-
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Monthly Sales -->
-                    <div class="row">
-                        <div class="col-md-12 col-xl-12">
-                            <div class="card">
-
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
-                                            <i data-feather="bar-chart" class="widgets-icons"></i>
-                                        </div>
-                                        <h5 class="card-title mb-0">Sản phẩm sắp hết hàng</h5>
-                                    </div>
-                                </div>
-
-                                <div class="card-body">
-                                    <table class="table table-traffic mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Ảnh</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Giá gốc</th>
-                                                <th>Giá khuyến mãi</th>
-                                                <th>Ảnh</th>
-                                                <th>Trạng thái</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($sanphams_saphet as $index => $item)
-                                                <tr>
-                                                    <th scope="row">{{ $index + 1 }}</th>
-                                                    {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
-                                                    <td>{{ $item->ten_san_pham }}</td>
-                                                    <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
-                                                    <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
-                                                    <td>
-                                                        @if ($item->anh_san_pham)
-                                                            <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
-                                                                alt="Hình ảnh sản phẩm" width="50px">
-                                                        @else
-                                                            <img src="{{ asset('images/placeholder.png') }}"
-                                                                alt="Không có ảnh" width="50px">
-                                                        @endif
-                                                    </td>
-
-                                                    <td>
-                                                        {!! $item->is_active
-                                                            ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                            : '<span class="badge bg-danger">Ẩn</span>' !!}
-                                                    </td>
-
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                 </div> <!-- container-fluid -->
+
+                <!-- Start Monthly Sales -->
+                <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                        <div class="card overflow-hidden">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="border border-dark rounded-2 me-2 widget-icons-sections">
+                                        <i data-feather="tablet" class="widgets-icons"></i>
+                                    </div>
+                                    <h5 class="card-title mb-0">Đơn hàng mới nhất</h5>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Mã đơn hàng</th>
+                                                <th scope="col">Người đặt</th>
+                                                <th scope="col">Số điện thoại</th>
+                                                <th scope="col">Địa chỉ giao hàng</th>
+                                                <th scope="col">Ngày tạo đơn hàng</th>
+                                                <th scope="col">Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($donhangs as $item)
+                                                <tr>
+                                                    <td>{{ $item->id }}</td>
+                                                    <td>{{ $item->user?->ho_ten }}</td>
+                                                    <td>{{ $item->so_dien_thoai }}</td>
+                                                    <td>{{ $item->dia_chi }}</td>
+                                                    <td>{{ $item->ngay_tao }}</td>
+                                                    <td>
+                                                        @php
+                                                            $tong_tien = $item->tong_tien;
+                                                            if (intval($tong_tien) == $tong_tien) {
+                                                                // Nếu tổng tiền là số nguyên
+                                                                echo number_format($tong_tien, 0, ',', '.');
+                                                            } elseif (floor($tong_tien) == $tong_tien) {
+                                                                // Nếu tổng tiền có dạng như 200000.00
+                                                                echo number_format($tong_tien, 0, ',', '.');
+                                                            } else {
+                                                                // Nếu tổng tiền có phần thập phân khác .00
+                                                                echo number_format($tong_tien, 2, ',', '.');
+                                                            }
+                                                        @endphp
+                                                        Vnđ
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xl-12">
+                        <div class="card">
+
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="border border-dark rounded-2 me-2 widget-icons-sections">
+                                        <i data-feather="bar-chart" class="widgets-icons"></i>
+                                    </div>
+                                    <h5 class="card-title mb-0">Sản phẩm được xem nhiều nhất</h5>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <table class="table table-traffic mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá gốc</th>
+                                            <th>Giá khuyến mãi</th>
+                                            <th>Ảnh</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($views_product as $index => $item)
+                                            <tr>
+                                                <th scope="row">{{ $index + 1 }}</th>
+                                                {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
+                                                <td>{{ $item->ten_san_pham }}</td>
+                                                <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                                <td>
+                                                    @if ($item->anh_san_pham)
+                                                        <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                            alt="Hình ảnh sản phẩm" width="50px">
+                                                    @else
+                                                        <img src="{{ asset('images/placeholder.png') }}"
+                                                            alt="Không có ảnh" width="50px">
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    {!! $item->is_active
+                                                        ? '<span class="badge bg-primary">Hiển Thị</span>'
+                                                        : '<span class="badge bg-danger">Ẩn</span>' !!}
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End Monthly Sales -->
+                <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                        <div class="card">
+
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="border border-dark rounded-2 me-2 widget-icons-sections">
+                                        <i data-feather="bar-chart" class="widgets-icons"></i>
+                                    </div>
+                                    <h5 class="card-title mb-0">Sản phẩm sắp hết hàng</h5>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <table class="table table-traffic mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá gốc</th>
+                                            <th>Giá khuyến mãi</th>
+                                            <th>Ảnh</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($sanphams_saphet as $index => $item)
+                                            <tr>
+                                                <th scope="row">{{ $index + 1 }}</th>
+                                                {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
+                                                <td>{{ $item->ten_san_pham }}</td>
+                                                <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                                <td>
+                                                    @if ($item->anh_san_pham)
+                                                        <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                            alt="Hình ảnh sản phẩm" width="50px">
+                                                    @else
+                                                        <img src="{{ asset('images/placeholder.png') }}"
+                                                            alt="Không có ảnh" width="50px">
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    {!! $item->is_active
+                                                        ? '<span class="badge bg-primary">Hiển Thị</span>'
+                                                        : '<span class="badge bg-danger">Ẩn</span>' !!}
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div> <!-- content -->
         </div>
     </div>
@@ -671,5 +672,4 @@
             document.getElementById('monthInput').style.display = 'none';
         }
     </script>
-    
 @endsection

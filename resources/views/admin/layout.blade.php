@@ -20,19 +20,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha384-..." crossorigin="anonymous">
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha384-..." crossorigin="anonymous">
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
     {{-- biểu đồ  --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    {{-- toast  --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <style>
         h4 {
             color: white;
@@ -62,25 +58,28 @@
     </style>
 </head>
 
-
 <body data-menu-color="light" data-sidebar="default"
     style=" background-image: url('assets/admin/images/bg.png');background-size: cover;background-position: center;">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
         $(document).ready(function() {
-            @if(Session::has('success'))
-            toastr.success("{{ Session::get('success') }}", "Thông báo", {
-                progressBar: true,
-                closeButton: true,
-                timeOut: 3000
-            });
+            @if (Session::has('success'))
+                toastr.success("{{ Session::get('success') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
             @endif
-            @if(Session::has('error'))
-            toastr.error("{{ Session::get('error') }}", "Thông báo", {
-                progressBar: true,
-                closeButton: true,
-                timeOut: 3000
-            });
+            @if (Session::has('error'))
+                toastr.error("{{ Session::get('error') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
             @endif
         });
     </script>
@@ -89,7 +88,6 @@
     <div id="app-layout">
         @include('admin.partials.header')
         @include('admin.partials.siderbar')
-
 
         <!-- Start Page Content here -->
         @yield('content')
@@ -117,11 +115,6 @@
 
     <!-- App js-->
     <script src="{{ asset('assets/admin/js/app.js') }}"></script>
-
-    <!-- Toastr JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-
 
 </body>
 

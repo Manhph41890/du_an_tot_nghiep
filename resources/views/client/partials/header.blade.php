@@ -21,7 +21,7 @@
         <nav class="offcanvas-menu">
             <ul>
                 <li>
-                    <a href="{{route('client.home')}}"><span class="menu-text">Trang chủ</span></a>
+                    <a href="{{ route('client.home') }}"><span class="menu-text">Trang chủ</span></a>
                     <!-- <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
@@ -144,7 +144,7 @@
                         </li>
                     </ul> -->
                 </li>
-                <li><a href="{{route('client.lienhe')}}">Liên hệ</a></li>
+                <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
             </ul>
         </nav>
         <div class="offcanvas-social py-30">
@@ -269,18 +269,18 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="{{route('client.home')}}"><img src="{{ asset('assets/client/images/logo/logo_art.png') }}"
-                                alt="logo" /></a>
+                        <a href="{{ route('client.home') }}"><img
+                                src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="active ml-0">
-                            <a style="color: #333;" href="{{route('client.home')}}" class="ps-0">Trang chủ </a>
+                            <a style="color: #333;" href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>
                             <a href="#">Giới thiệu</a>
-        
+
                         </li>
                         <li class="position-static">
                             <a href="shop-grid-3-column.html">Cửa hàng </a>
@@ -288,9 +288,9 @@
 
                         <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>
-                            
+
                         </li>
-                        <li><a href="{{route('client.lienhe')}}">Liên hệ</a></li>
+                        <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3 col-xl-2">
@@ -512,7 +512,8 @@
 
                                                 <!-- Chuyển hướng đến đăng ký -->
                                                 <div class="row">
-                                                    <small>Bạn chưa có tài khoản? <a href="{{ route('auth.register') }}">
+                                                    <small>Bạn chưa có tài khoản? <a href="javascript:void(0)"
+                                                            onclick="switchToRegisterModal()">
                                                             Đăng Kí
                                                         </a></small>
                                                 </div>
@@ -610,7 +611,8 @@
 
                                                 <!-- Chuyển hướng đến đăng nhập -->
                                                 <div class="row">
-                                                    <small>Bạn đã có tài khoản? <a href="{{ route('auth.login') }}"> Đăng
+                                                    <small>Bạn đã có tài khoản? <a href="javascript:void(0)"
+                                                            onclick="switchToLoginModal()"> Đăng
                                                             Nhập
                                                         </a></small>
                                                 </div>
@@ -637,6 +639,37 @@
     @else
         var isAuthenticated = false;
     @endauth
+    // Hàm mở modal đăng nhập
+    function openLoginModal() {
+        document.getElementById("loginModal").style.display = "block";
+    }
+
+    // Hàm mở modal đăng ký
+    function openRegisterModal() {
+        document.getElementById("registerModal").style.display = "block";
+    }
+
+    // Hàm đóng modal đăng nhập
+    function closeLoginModal() {
+        document.getElementById("loginModal").style.display = "none";
+    }
+
+    // Hàm đóng modal đăng ký
+    function closeRegisterModal() {
+        document.getElementById("registerModal").style.display = "none";
+    }
+
+    // Chuyển từ đăng nhập sang đăng ký
+    function switchToRegisterModal() {
+        closeLoginModal();
+        openRegisterModal();
+    }
+
+    // Chuyển từ đăng ký sang đăng nhập
+    function switchToLoginModal() {
+        closeRegisterModal();
+        openLoginModal();
+    }
 </script>
 
 <style>

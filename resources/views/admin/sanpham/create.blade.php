@@ -24,17 +24,17 @@
                                 </div>
                             </div>
                         @endif
-
-                        <!-- Display Errors -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
+                        {{-- Lỗi biến thể --}}
+                        @if ($errors->has('product_variants'))
+                            <ul>
+                                @foreach ($errors->get('product_variants.*') as $variantIndex => $errorMessages)
+                                    @foreach ($errorMessages as $error)
+                                        <li>{{ str_replace(':index', $variantIndex + 1, $error) }}</li>
                                     @endforeach
-                                </ul>
-                            </div>
+                                @endforeach
+                            </ul>
                         @endif
+
 
                         <form action="{{ route('sanphams.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -108,8 +108,10 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                                 <div class="mt-2">
-                                                    <img id="imagePreview" src="#" alt="Hình ảnh"
-                                                        style="display: none; width: 200px;">
+                                                    <img id="imagePreview"
+                                                        src="{{ old('anh_san_pham') ? asset('storage/' . old('anh_san_pham')) : (isset($sanPham->anh_san_pham) ? asset('storage/' . $sanPham->anh_san_pham) : '') }}"
+                                                        alt="Hình ảnh"
+                                                        style="display: {{ old('anh_san_pham') || isset($sanPham->anh_san_pham) ? 'block' : 'none' }}; width: 200px;">
                                                 </div>
                                             </div>
                                             <div class="mb-3">
@@ -159,41 +161,58 @@
                                         <div class="row variant-item mb-3">
                                             <div class="col-lg-2">
                                                 <label for="size_san_pham" class="form-label">Size</label>
-                                                <input type="text" name="product_variants[size_san_pham][]"
-                                                    class="form-control" placeholder="Nhập size" id="sizeInput">
-                                                <span id="sizeError" class="color-error text-danger"
-                                                    style="display: none;">Kích thước không
-                                                    hợp lệ!</span>
-                                                @error('size_san_pham')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                <select name="product_variants[size_san_pham][]" class="form-control"
+                                                    id="sizeSelect">
+                                                    <option value="">Chọn kích thước</option>
+                                                    @foreach ($sizes as $size)
+                                                        <option value="{{ $size->id }}">{{ $size->ten_size }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @error('product_variants.*.size_san_pham')
+                                                    <span class="text-danger">{{ $message }}</span>
                                                 @enderror
+
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="color_san_pham" class="form-label">Màu sắc</label>
-                                                <input type="text" name="product_variants[color_san_pham][]"
-                                                    class="form-control color-input" placeholder="Nhập màu sắc"
-                                                    value="{{ old('color_san_pham') }}" id="colorInput">
-                                                <span class="color-error text-danger" style="display: none;">Tên màu không
-                                                    hợp lệ!</span>
+                                                <select name="product_variants[color_san_pham][]" class="form-control"
+                                                    id="sizeSelect">
+                                                    <option value="">Chọn kích thước</option>
+                                                    @foreach ($colors as $color)
+                                                        <option value="{{ $color->id }}">{{ $color->ten_color }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
 
+                                                @error('product_variants.*.color_san_pham')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="so_luong" class="form-label">Số lượng</label>
                                                 <input type="number" name="product_variants[so_luong][]"
-                                                    class="form-control" value="0" min="0">
-
+                                                    class="form-control" value="0" min="0" required>
+                                                @error('product_variants.*.so_luong')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="gia" class="form-label">Giá biến thể</label>
                                                 <input type="number" name="product_variants[gia][]" class="form-control"
                                                     value="0">
-
+                                                @error('product_variants.*.gia')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
                                                 <input type="file" name="product_variants[anh_bien_the][]"
                                                     class="form-control">
-
+                                                @error('product_variants.*.anh_bien_the')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-1 d-flex align-items-end">
                                                 <button type="button"

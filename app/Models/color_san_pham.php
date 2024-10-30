@@ -11,6 +11,7 @@ class color_san_pham extends Model
 
     protected $fillable = [
         'ten_color',
+        'ma_mau'
     ];
 
     public function bien_the_san_phams()

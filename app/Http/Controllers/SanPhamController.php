@@ -48,8 +48,8 @@ class SanPhamController extends Controller
     {
         $this->authorize('create', san_pham::class);
         $danh_mucs = danh_muc::query()->pluck('ten_danh_muc', 'id')->all();
-        $sizes = size_san_pham::pluck('ten_size', 'id')->all(); // Lấy tên size và id
-        $colors = color_san_pham::pluck('ten_color', 'id')->all(); // Lấy tên color và id
+        $sizes = size_san_pham::all();
+        $colors = color_san_pham::all();
         $title = "Thêm mới sản phẩm";
         return view('admin.sanpham.create', compact('danh_mucs', 'colors', 'sizes', 'title'));
     }
@@ -86,19 +86,20 @@ class SanPhamController extends Controller
 
             if (!empty($bien_the_san_phamsTmp['size_san_pham']) && !empty($bien_the_san_phamsTmp['color_san_pham'])) {
                 foreach ($bien_the_san_phamsTmp['size_san_pham'] as $key => $size_san_pham) {
-                    // Kiểm tra và thêm kích thước vào bảng size_san_phams
-                    $size = size_san_pham::firstOrCreate(['ten_size' => $size_san_pham]);
-                    $size_san_pham_id = $size->id;
+                    // Lấy kích thước từ form (ID đã được chọn từ dropdown)
+                    $size_san_pham_id = $bien_the_san_phamsTmp['size_san_pham'][$key]; // ID từ dropdown kích thước
 
-                    // Kiểm tra và thêm màu sắc vào bảng color_san_phams
-                    $color_san_pham = $bien_the_san_phamsTmp['color_san_pham'][$key] ?? null;
-                    $color = color_san_pham::firstOrCreate(['ten_color' => $color_san_pham]);
-                    $color_san_pham_id = $color->id;
+                    // Lấy màu sắc từ form (ID đã được chọn từ dropdown)
+                    $color_san_pham_id = $bien_the_san_phamsTmp['color_san_pham'][$key]; // ID từ dropdown màu sắc
+
+                    // Kiểm tra xem ID có hợp lệ không
+                    if (!$size_san_pham_id || !$color_san_pham_id) {
+                        return back()->withErrors(['product_variants' => 'Kích thước hoặc màu sắc không hợp lệ.']);
+                    }
 
                     // Lấy số lượng biến thể
                     $quantity = $bien_the_san_phamsTmp['so_luong'][$key] ?? 0;
                     $totalQuantity += $quantity; // Cộng dồn số lượng biến thể
-
                     // giá biến thể
                     $giaBienThe = $bien_the_san_phamsTmp['gia'][$key] ?? 0;
 

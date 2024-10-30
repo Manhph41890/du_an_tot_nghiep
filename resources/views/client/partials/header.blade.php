@@ -21,7 +21,7 @@
         <nav class="offcanvas-menu">
             <ul>
                 <li>
-                    <a href="#"><span class="menu-text">Trang chủ</span></a>
+                    <a href="{{ route('client.home') }}"><span class="menu-text">Trang chủ</span></a>
                     <!-- <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
@@ -144,7 +144,7 @@
                         </li>
                     </ul> -->
                 </li>
-                <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
             </ul>
         </nav>
         <div class="offcanvas-social py-30">
@@ -269,139 +269,28 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="index.html"><img src="{{ asset('assets/client/images/logo/logo_art.png') }}"
-                                alt="logo" /></a>
+                        <a href="{{ route('client.home') }}"><img
+                                src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="active ml-0">
-                            <a href="index.html" class="ps-0">Trang chủ </a>
+                            <a style="color: #333;" href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>
                             <a href="#">Giới thiệu</a>
-                            <!-- <i class="ion-ios-arrow-down"></i> -->
-                            <!-- <ul class="sub-menu">
-                                <li><a href="about-us.html">About Page</a></li>
-                                <li><a href="cart.html">Cart Page</a></li>
-                                <li><a href="checkout.html">Checkout Page</a></li>
-                                <li><a href="compare.html">Compare Page</a></li>
-                                <li><a href="login.html">Login &amp; Register Page</a></li>
-                                <li><a href="myaccount.html">Account Page</a></li>
-                                <li><a href="wishlist.html">Wishlist Page</a></li>
-                            </ul> -->
+
                         </li>
                         <li class="position-static">
                             <a href="shop-grid-3-column.html">Cửa hàng </a>
-                            <!-- <ul class="mega-menu row">
-                                <li class="col-3">
-                                    <ul>
-                                        <li class="mega-menu-title"><a href="#">Shop Grid</a></li>
-                                        <li>
-                                            <a href="shop-grid-3-column.html">Shop Grid 3 Column</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-4-column.html">Shop Grid 4 Column</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-left-sidebar.html">Shop Grid Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right-sidebar.html">Shop Grid Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="col-3">
-                                    <ul>
-                                        <li class="mega-menu-title"><a href="#">Shop List</a></li>
-                                        <li><a href="shop-grid-list.html">Shop List</a></li>
-                                        <li>
-                                            <a href="shop-grid-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="col-3">
-                                    <ul>
-                                        <li class="mega-menu-title"><a href="#">Shop Single</a></li>
-                                        <li><a href="single-product.html">Shop Single</a></li>
-                                        <li>
-                                            <a href="single-product-configurable.html">Shop Variable</a>
-                                        </li>
-                                        <li>
-                                            <a href="single-product-affiliate.html">Shop Affiliate</a>
-                                        </li>
-                                        <li><a href="single-product-group.html">Shop Group</a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-3">
-                                    <ul>
-                                        <li class="mega-menu-title"><a href="#">other pages</a></li>
-                                        <li><a href="about-us.html">About Page</a></li>
-                                        <li><a href="cart.html">Cart Page</a></li>
-                                        <li><a href="checkout.html">Checkout Page</a></li>
-                                        <li><a href="compare.html">Compare Page</a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-6 mt-4">
-                                    <a href="single-product.html" class="zoom-in overflow-hidden"><img
-                                            src="assets/client/images/mega-menu/1.jpg" alt="img" /></a>
-                                </li>
-                                <li class="col-6 mt-4">
-                                    <a href="single-product.html" class="zoom-in overflow-hidden"><img
-                                            src="assets/client/images/mega-menu/2.jpg" alt="img" /></a>
-                                </li>
-                            </ul> -->
                         </li>
 
                         <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>
-                            <!-- <ul class="sub-menu">
-                                <li>
-                                    <a href="blog-grid-3-column.html">Blog Grid</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="blog-grid-3-column.html">Blog Grid 3 column</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid-4-column.html">Blog Grid 4 column</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid-left-sidebar.html">Blog Grid Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid-right-sidebar.html">Blog Grid Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="blog-single-left-sidebar.html">Blog List</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="single-blog.html">Blog Single</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="single-blog.html">Single Blog</a></li>
-                                        <li>
-                                            <a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-single-right-sidebar.html">Blog Single Right Sidbar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul> -->
+
                         </li>
-                        <li><a href="contact.html">Liên hệ</a></li>
+                        <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3 col-xl-2">
@@ -623,7 +512,8 @@
 
                                                 <!-- Chuyển hướng đến đăng ký -->
                                                 <div class="row">
-                                                    <small>Bạn chưa có tài khoản? <a href="{{ route('auth.register') }}">
+                                                    <small>Bạn chưa có tài khoản? <a href="javascript:void(0)"
+                                                            onclick="switchToRegisterModal()">
                                                             Đăng Kí
                                                         </a></small>
                                                 </div>
@@ -721,7 +611,8 @@
 
                                                 <!-- Chuyển hướng đến đăng nhập -->
                                                 <div class="row">
-                                                    <small>Bạn đã có tài khoản? <a href="{{ route('auth.login') }}"> Đăng
+                                                    <small>Bạn đã có tài khoản? <a href="javascript:void(0)"
+                                                            onclick="switchToLoginModal()"> Đăng
                                                             Nhập
                                                         </a></small>
                                                 </div>
@@ -748,6 +639,37 @@
     @else
         var isAuthenticated = false;
     @endauth
+    // Hàm mở modal đăng nhập
+    function openLoginModal() {
+        document.getElementById("loginModal").style.display = "block";
+    }
+
+    // Hàm mở modal đăng ký
+    function openRegisterModal() {
+        document.getElementById("registerModal").style.display = "block";
+    }
+
+    // Hàm đóng modal đăng nhập
+    function closeLoginModal() {
+        document.getElementById("loginModal").style.display = "none";
+    }
+
+    // Hàm đóng modal đăng ký
+    function closeRegisterModal() {
+        document.getElementById("registerModal").style.display = "none";
+    }
+
+    // Chuyển từ đăng nhập sang đăng ký
+    function switchToRegisterModal() {
+        closeLoginModal();
+        openRegisterModal();
+    }
+
+    // Chuyển từ đăng ký sang đăng nhập
+    function switchToLoginModal() {
+        closeRegisterModal();
+        openLoginModal();
+    }
 </script>
 
 <style>

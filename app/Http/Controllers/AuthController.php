@@ -96,7 +96,7 @@ class AuthController extends Controller
         Auth::login($user);
         Log::info('Đăng nhập tự động cho người dùng: ', ['user_id' => $user->id]);
 
-        return redirect()->route('customer')->with('success', 'Đăng ký tài khoản thành công.' . ($existingUserWithVoucher ? ', nhưng bạn không nhận được voucher.' : ' và bạn đã nhận được voucher khuyến mãi!'));
+        return redirect()->route('customer')->with('notification', 'Đăng ký tài khoản thành công.' . ($existingUserWithVoucher ? ', nhưng bạn không nhận được voucher.' : ' và bạn đã nhận được voucher khuyến mãi!'));
     }
 
     // Kiểm tra voucher

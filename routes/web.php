@@ -31,7 +31,8 @@ use App\Http\Controllers\VariantController;
 */
 
 // Route trang chủ
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('client.home');
+Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
 
 // Route cho client
 Route::prefix('client')->group(function () {

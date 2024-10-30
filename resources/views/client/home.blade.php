@@ -202,6 +202,7 @@
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab">
                             <div class="product-slider-init theme1 slick-nav">
+                                @foreach ($sanPhamMois as $item )
                                 <div class="slider-item">
                                     <div class="card product-card">
                                         <div class="card-body p-0">
@@ -242,8 +243,7 @@
                                                 <div class="media-body">
                                                     <div class="product-desc">
                                                         <h3 class="title">
-                                                            <a href="shop-grid-4-column.html">All Natural Makeup Beauty
-                                                                Cosmetics</a>
+                                                            <a href="shop-grid-4-column.html">{{$item->ten_san_pham}}</a>
                                                         </h3>
                                                         <div class="star-rating">
                                                             <span class="ion-ios-star"></span>
@@ -253,6 +253,7 @@
                                                             <span class="ion-ios-star de-selected"></span>
                                                         </div>
                                                         <div class="d-flex align-items-center justify-content-between">
+                                                            <span class="product-price">{{$item->gia_goc}}</span>
                                                             <span class="product-price">$11.90</span>
                                                             <button class="pro-btn" data-bs-toggle="modal"
                                                                 data-bs-target="#add-to-cart">
@@ -524,7 +525,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                                 <!-- slider-item end -->
+                                
                             </div>
                         </div>
                         <!-- second tab-pane -->

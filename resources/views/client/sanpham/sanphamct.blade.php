@@ -280,7 +280,7 @@
                                         <div class="ratting-form-wrapper">
                                             <h3>Add a Review</h3>
                                             <div class="ratting-form">
-                                                <form action="{{ route('') }}">
+                                                <form action="#">
                                                     <div class="star-box">
                                                         <span>Your rating:</span>
                                                         <div class="rating-product">

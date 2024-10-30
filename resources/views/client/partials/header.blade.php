@@ -21,7 +21,7 @@
         <nav class="offcanvas-menu">
             <ul>
                 <li>
-                    <a href="{{route('client.home')}}"><span class="menu-text">Trang chủ</span></a>
+                    <a href="{{ route('client.home') }}"><span class="menu-text">Trang chủ</span></a>
                     <!-- <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
@@ -41,7 +41,7 @@
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Cửa hàng</span></a>
-                    <!-- <ul class="offcanvas-submenu">
+                    <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Shop Grid</span></a>
                             <ul class="offcanvas-submenu">
@@ -96,7 +96,7 @@
                                 <li><a href="wishlist.html">Wishlist Page</a></li>
                             </ul>
                         </li>
-                    </ul> -->
+                    </ul>
                 </li>
 
                 <li>
@@ -144,7 +144,7 @@
                         </li>
                     </ul> -->
                 </li>
-                <li><a href="{{route('client.lienhe')}}">Liên hệ</a></li>
+                <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
             </ul>
         </nav>
         <div class="offcanvas-social py-30">
@@ -269,18 +269,18 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="{{route('client.home')}}"><img src="{{ asset('assets/client/images/logo/logo_art.png') }}"
-                                alt="logo" /></a>
+                        <a href="{{ route('client.home') }}"><img
+                                src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="active ml-0">
-                            <a style="color: #333;" href="{{route('client.home')}}" class="ps-0">Trang chủ </a>
+                            <a style="color: #333;" href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>
                             <a href="#">Giới thiệu</a>
-        
+
                         </li>
                         <li class="position-static">
                             <a href="shop-grid-3-column.html">Cửa hàng </a>
@@ -288,9 +288,9 @@
 
                         <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>
-                            
+
                         </li>
-                        <li><a href="{{route('client.lienhe')}}">Liên hệ</a></li>
+                        <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3 col-xl-2">

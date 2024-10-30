@@ -26,10 +26,11 @@
 
         .bg-img2 {
             background-image: url('./assets/client/images/slider/slide1.jpg');
+
         }
 
         .bg-img3 {
-            background-image: url('./assets/client/images/slider/3.jpg');
+            background-image: url('./assets/client/images/slider/banner_3.jpg');
         }
 
         .breadcrumb-section {

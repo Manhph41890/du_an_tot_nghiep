@@ -211,8 +211,9 @@
                                                     <span class="badge badge-danger top-right">New</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
-                                                            src="{{ asset('assets/client/images/product/1.png') }}"
-                                                            alt="thumbnail" />
+                                                        
+                                                            src="{{ asset('/storage/' . $item->anh_san_pham) }}"
+                                                            alt="anh san pham" />
                                                     </a>
                                                     <!-- product links -->
                                                     <ul class="actions d-flex justify-content-center">
@@ -513,6 +514,7 @@
                                                         </div>
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <span class="product-price">$11.90</span>
+
                                                             <button class="pro-btn" data-bs-toggle="modal"
                                                                 data-bs-target="#add-to-cart">
                                                                 <i class="icon-basket"></i>
@@ -525,7 +527,7 @@
                                     </div>
                                 </div>
                                 @endforeach
-                                <!-- slider-item end -->
+                                
                                 
                             </div>
                         </div>

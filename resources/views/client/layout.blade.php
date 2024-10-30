@@ -20,12 +20,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         .bg-img1 {
-            background-image: url('./assets/client/images/slider/banner_1.jpg');
+            background-image: url('./assets/client/images/banner/bn1.jpg');
             width: 50%;
         }
 
         .bg-img2 {
-            background-image: url('./assets/client/images/slider/banner_2.jpg');
+            background-image: url('./assets/client/images/slider/slide1.jpg');
+
         }
 
         .bg-img3 {

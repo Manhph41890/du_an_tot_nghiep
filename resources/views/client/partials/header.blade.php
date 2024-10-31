@@ -28,20 +28,11 @@
                     </ul> -->
                 </li>
                 <li>
-                    <a href="#"><span class="menu-text">Giới thiệu</span></a>
-                    <!-- <ul class="offcanvas-submenu">
-                        <li><a href="about-us.html">About Page</a></li>
-                        <li><a href="cart.html">Cart Page</a></li>
-                        <li><a href="checkout.html">Checkout Page</a></li>
-                        <li><a href="compare.html">Compare Page</a></li>
-                        <li><a href="login.html">Login &amp; Register Page</a></li>
-                        <li><a href="myaccount.html">Account Page</a></li>
-                        <li><a href="wishlist.html">Wishlist Page</a></li>
-                    </ul> -->
+                    <a href="{{ route('client.gioithieu') }}"><span class="menu-text">Giới thiệu</span></a>
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Cửa hàng</span></a>
-                    <!-- <ul class="offcanvas-submenu">
+                    <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Shop Grid</span></a>
                             <ul class="offcanvas-submenu">
@@ -96,7 +87,7 @@
                                 <li><a href="wishlist.html">Wishlist Page</a></li>
                             </ul>
                         </li>
-                    </ul> -->
+                    </ul>
                 </li>
 
                 <li>
@@ -187,24 +178,6 @@
                     <a href="#" class="remove">×</a>
                 </div>
             </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/5.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">On Trend Makeup and Beauty Cosmetics</a>
-                    <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/6.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
         </ul>
         <a href="wishlist.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block mt-30">view wishlist</a>
     </div>
@@ -212,7 +185,7 @@
 </div>
 <!-- OffCanvas Wishlist End -->
 
-<!-- Gio hang mini cart -->
+<!-- ----------------------------Gio hang mini cart--------------------------- -->
 <div id="offcanvas-cart" class="offcanvas offcanvas-cart theme1">
     <div class="inner">
         <div class="head d-flex flex-wrap justify-content-between">
@@ -225,25 +198,9 @@
                         alt="Cart product Image" /></a>
                 <div class="content">
                     <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/2.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">On Trend Makeup and Beauty Cosmetics</a>
-                    <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/3.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
+                    <span class="quantity-price">1 x <span class="amount">$1 00.00</span></span>
+                    <span class="size mb-1">Kích thước: ???</span><br>
+                    <span class="color mb-1">Màu sắc: ???</span>
                     <a href="#" class="remove">×</a>
                 </div>
             </li>
@@ -254,7 +211,6 @@
         </div>
         <a href="cart.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block me-sm-2">view cart</a>
         <a href="checkout.html" class="btn btn-dark btn--lg d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
-        <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
     </div>
 
 </div>
@@ -279,16 +235,13 @@
                             <a style="color: #333;" href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>
-                            <a href="#">Giới thiệu</a>
-
+                            <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
                         </li>
-                        <li class="position-static">
-                            <a href="shop-grid-3-column.html">Cửa hàng </a>
+                        <li>
+                            <a href="{{ route('client.gioithieu') }}">Giới thiệu <span class="menu-text"></span></a>
                         </li>
-
                         <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>
-
                         </li>
                         <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
@@ -304,8 +257,6 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
-
-
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="offcanvas-toggle" href="#offcanvas-cart">
                                         <span class="position-relative">
@@ -441,7 +392,7 @@
                                     </li>
                                     <!-- Modal đăng nhập -->
                                     <div id="loginModal" class="modal-overlay">
-                                        <div class="modal-content">
+                                        <div class="modal-content form">
                                             <!-- Nút đóng modal -->
                                             <span class="close-button" onclick="closeLoginModal()">&times;</span>
 
@@ -522,7 +473,7 @@
                                     </div>
                                     <!-- Modal đăng ký -->
                                     <div id="registerModal" class="modal-overlay">
-                                        <div class="modal-content">
+                                        <div class="modal-content form">
                                             <!-- Nút đóng modal -->
                                             <span class="close-button" onclick="closeRegisterModal()">&times;</span>
 
@@ -736,7 +687,7 @@
     }
 
     /* Nội dung của modal (form đăng nhập) */
-    .modal-content {
+    .form {
         background: white;
         padding: 20px;
         border-radius: 10px;

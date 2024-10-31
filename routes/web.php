@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BaiVietController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChucVuController;
+use App\Http\Controllers\ClientSanPhamController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
@@ -21,29 +22,20 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariantController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-*/
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
-Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
 
 // Route cho client
 Route::prefix('client')->group(function () {
-    Route::view('/sanpham', 'client.sanpham.danhsach');
-    Route::view('/sanphamchitiet', 'client.sanpham.sanphamct');
+    Route::get('/sanphamchitiet/{id}', [HomeController::class, 'chiTietSanPham'])->name('sanpham.chitiet');
+    Route::get('/sanpham', [ClientSanPhamController::class, 'list'])->name('client.cuahang');
     Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
     Route::view('/taikhoan', 'client.taikhoan.dashboard');
     Route::view('/giohang', 'client.giohang');
-    Route::view('/gioithieu', 'client.gioithieu');
-    Route::view('/lienhe', 'client.lienhe');
+    Route::get('/gioithieu', [HomeController::class, 'gioithieu'])->name('client.gioithieu');
+    Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
     Route::view('/thanhtoan', 'client.thanhtoan');
 });
 
@@ -100,6 +92,8 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::resource('/donhangs', DonHangController::class);
     Route::post('/donhang/{id}/confirm', [DonHangController::class, 'confirmOrder'])->name('donhangs.confirm');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    // Route::get('/danhgia/create', [DanhGiaController::class, 'create'])->name('danhgia.create');
+    Route::post('/danhgia', [DanhGiaController::class, 'store'])->name('danhgia.store');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 

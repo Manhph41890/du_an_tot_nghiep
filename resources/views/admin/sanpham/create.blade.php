@@ -277,53 +277,6 @@
             return false; // Dừng việc submit nếu có trùng lặp
         }
     });
-
-    // 
-    const validSizes = ["S", "M", "L", "XL", "XXL", "36", "38", "40", "A1", "A2", "A0"]; // Danh sách kích thước hợp lệ
-
-    document.getElementById('sizeInput').addEventListener('input', function() {
-        const sizeInput = this.value.trim();
-        const sizeError = document.getElementById('sizeError');
-
-        if (!validSizes.includes(sizeInput)) {
-            sizeError.style.display = 'block'; // Hiện thông báo lỗi nếu kích thước không hợp lệ
-        } else {
-            sizeError.style.display = 'none'; // Ẩn thông báo lỗi nếu kích thước hợp lệ
-        }
-    });
-    // 
-    const vietnameseToCssColors = {
-        "đỏ": "red",
-        "xanh lá": "green",
-        "xanh dương": "blue",
-        "vàng": "yellow",
-        "đen": "black",
-        "trắng": "white",
-        "hồng": "pink",
-        "cam": "orange",
-        "tím": "purple",
-        "nâu": "brown",
-        "xám": "gray",
-        "bạc": "silver",
-        "vàng kim": "gold",
-        "chàm": "indigo",
-        "xanh ngọc": "aqua",
-        "xanh lục": "lime",
-        "xanh lá cây": "olive"
-    };
-
-    document.querySelectorAll('.color-input').forEach(function(input) {
-        input.addEventListener('input', function() {
-            const userInput = this.value.trim().toLowerCase();
-            const colorError = this.nextElementSibling;
-
-            if (!vietnameseToCssColors[userInput]) {
-                colorError.style.display = 'block'; // Hiển thị lỗi nếu không hợp lệ
-            } else {
-                colorError.style.display = 'none';
-            }
-        });
-    });
     document.addEventListener('DOMContentLoaded', function() {
         // Xem trước hình ảnh chính sản phẩm
         document.getElementById('anh_san_pham').addEventListener('change', function(event) {

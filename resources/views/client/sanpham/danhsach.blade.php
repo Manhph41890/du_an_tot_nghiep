@@ -1,7 +1,6 @@
 @extends('client.layout')
 
 @section('content')
-    <!-- breadcrumb-section start -->
     <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110 opacity-75">
         <div class="container">
             <div class="row">
@@ -65,9 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- product-tab-nav end -->
                     <div class="tab-content" id="pills-tabContent">
-                        <!-- first tab-pane -->
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab">
                             <div class="row grid-view theme1">
@@ -78,22 +75,25 @@
                                                 <div class="product-thumbnail position-relative">
                                                     <span
                                                         class="badge badge-danger top-right">{{ intval($item->phantramgia) }}%</span>
-                                                    <a href="single-product.html">
+                                                    <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                         <img class="first-img"
                                                             src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                             alt="thumbnail" />
                                                     </a>
-                                                    <!-- product links -->
                                                     <ul class="actions d-flex justify-content-center">
                                                         <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#quick-view">
+                                                            <a class="action"
+                                                                href="{{ route('client.quickview', $item->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#quickview{{ $item->id }}">
                                                                 <span data-bs-toggle="tooltip" data-placement="bottom"
                                                                     title="Quick view" class="icon-magnifier"></span>
                                                             </a>
+                                                            @include('client.sanpham.quickview', [
+                                                                'quickview' => $item,
+                                                            ])
                                                         </li>
                                                     </ul>
-                                                    <!-- product links end-->
                                                 </div>
                                                 <div class="product-desc py-0 px-0">
                                                     <h3 class="title">
@@ -118,15 +118,10 @@
                                                                 {{ $item->gia_goc }} đ
                                                             @endif
                                                         </span>
-                                                        <button class="pro-btn" data-bs-toggle="modal"
-                                                            data-bs-target="#add-to-cart">
-                                                            <i class="icon-basket"></i>
-                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- product-list End -->
                                     </div>
                                 @endforeach
                             </div>
@@ -142,37 +137,21 @@
                                                     <div class="product-thumbnail position-relative">
                                                         <span
                                                             class="badge badge-danger top-right">{{ intval($item->phantramgia) }}%</span>
-                                                        <a href="single-product.html">
+                                                        <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                                 alt="thumbnail" />
                                                         </a>
-                                                        <!-- product links -->
                                                         <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
                                                             <li>
                                                                 <a class="action" href="#" data-bs-toggle="modal"
                                                                     data-bs-target="#quick-view">
                                                                     <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
+                                                                        class="icon-magnifier" aria-label="Quick view"
+                                                                        data-bs-original-title="Quick view"></span>
                                                                 </a>
                                                             </li>
                                                         </ul>
-                                                        <!-- product links end-->
                                                     </div>
                                                     <div class="media-body ps-md-4">
                                                         <div class="product-desc py-0 px-0">
@@ -189,8 +168,6 @@
                                                                             <span class="ion-ios-star-outline"></span>
                                                                         @endif
                                                                     @endfor
-                                                                @else
-                                                                    <p>Chưa có đánh giá nào.</p>
                                                                 @endif
 
                                                             </div>
@@ -211,15 +188,10 @@
                                                         <div class="availability-list mb-20">
                                                             <p>Còn lại: <span> {{ $item->so_luong }}</span> sản phẩm</p>
                                                         </div>
-                                                        <button class="btn btn-dark btn--xl" data-bs-toggle="modal"
-                                                            data-bs-target="#add-to-cart">
-                                                            Thêm giỏ hàng
-                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- product-list End -->
                                     </div>
                                 @endforeach
                             </div>
@@ -228,95 +200,38 @@
                 </div>
                 <div class="col-lg-3 mb-30 order-lg-first">
                     <aside class="left-sidebar theme1">
-                        <!-- search-filter start -->
-                        {{-- <div class="search-filter">
-                            <div class="sidbar-widget pt-0">
-                                <h4 class="title">Beauty & Cosmetics</h4>
-                            </div>
-                        </div>
-                        <ul id="offcanvas-menu2" class="blog-ctry-menu">
-                            <li>
-                                <a href="javascript:void(0)">Shoes</a>
-                                <ul class="category-sub-menu">
-                                    <li><a href="#">Women Shoes</a></li>
-                                    <li><a href="#">Men Shoes</a></li>
-                                    <li><a href="#">Boots</a></li>
-                                    <li><a href="#">Casual Shoes</a></li>
-                                    <li><a href="#">Flip Flops</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Luggage &amp; Bags</a>
-                                <ul class="category-sub-menu">
-                                    <li><a href="#">Stylish Backpacks</a></li>
-                                    <li><a href="#">Shoulder Bags</a></li>
-                                    <li><a href="#">Crossbody Bags</a></li>
-                                    <li><a href="#">Briefcases</a></li>
-                                    <li><a href="#">Luggage &amp; Travel</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Accessories</a>
-                                <ul class="category-sub-menu">
-                                    <li><a href="#">Cosmetic Bags &amp; Cases</a></li>
-                                    <li><a href="#">Wallets &amp; Card Holders</a></li>
-                                    <li><a href="#">Luggage Covers</a></li>
-                                    <li><a href="#">Passport Covers</a></li>
-                                    <li><a href="#">Bag Parts &amp; Accessories</a></li>
-                                </ul>
-                            </li>
-                        </ul> --}}
-
                         <div class="search-filter">
                             <form action="#">
                                 <div class="sidbar-widget mt-10">
                                     <h4 class="title">LỌC THEO</h4>
                                     <h4 class="sub-title pt-10">Danh mục</h4>
-                                    <div class="">{{-- class form-group sẽ ẩn bớt  --}}
-                                        @foreach ($danhmucs as $item)
-                                            <div class="widget-check-box">
-                                                <input type="checkbox" id="danhmuc_{{ $item->id }}" />
-                                                <label for="danhmuc_{{ $item->id }}">{{ $item->ten_danh_muc }}
-                                                    <span> ({{ $item->soluong_sp_dm }}) </span></label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <!-- sidbar-widget -->
-                                {{-- <div class="sidbar-widget mt-10">
-                                    <h4 class="sub-title">Price</h4>
-                                    <div class="price-filter mt-10">
-                                        <div class="price-slider-amount">
-                                            <input type="text" id="amount" name="price" readonly
-                                                placeholder="Add Your Price" />
+                                    @foreach ($danhmucs as $item)
+                                        <div class="widget-check-box">
+                                            <input type="checkbox" id="danhmuc_{{ $item->id }}" />
+                                            <label for="danhmuc_{{ $item->id }}">{{ $item->ten_danh_muc }}
+                                                <span> ({{ $item->soluong_sp_dm }}) </span></label>
                                         </div>
-                                        <div id="slider-range"></div>
-                                    </div>
-                                </div> --}}
+                                    @endforeach
+                                </div>
                                 <div class="sidbar-widget mt-10">
                                     <h4 class="sub-title pt-10">Giá</h4>
                                     <div class="widget-check-box">
                                         <input type="checkbox" id="" />
-                                        <label for="">0 - 100.000
-                                            {{-- <span> ( 32 ) </span> --}} </label>
+                                        <label for="">0 - 100.000</label>
                                     </div>
                                     <div class="widget-check-box">
                                         <input type="checkbox" id="" />
-                                        <label for="">100.000 - 500.000
-                                            {{-- <span> ( 32 ) </span> --}} </label>
+                                        <label for="">100.000 - 500.000</label>
                                     </div>
                                     <div class="widget-check-box">
                                         <input type="checkbox" id="" />
-                                        <label for="">500.000 - 1.000.000
-                                            {{-- <span> ( 32 ) </span> --}} </label>
+                                        <label for="">500.000 - 1.000.000</label>
                                     </div>
                                     <div class="widget-check-box">
                                         <input type="checkbox" id="" />
-                                        <label for="">> 1.000.000
-                                            {{-- <span> ( 32 ) </span> --}} </label>
+                                        <label for="">> 1.000.000</label>
                                     </div>
                                 </div>
-
                                 <div class="sidbar-widget mt-10">
                                     <h4 class="sub-title">Size</h4>
                                     @foreach ($size_sidebar as $item)
@@ -332,7 +247,8 @@
                                     @foreach ($color_sidebar as $item)
                                         <div class="widget-check-box color-grey">
                                             <input type="checkbox" id="color-{{ $item->id }}" />
-                                            <label for="color-{{ $item->id }}" style=" background-color: {{ $item->ma_mau }} !important;">
+                                            <label for="color-{{ $item->id }}"
+                                                style=" background-color: {{ $item->ma_mau }} !important;">
                                                 {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
                                             </label>
                                         </div>
@@ -354,5 +270,180 @@
             </div>
         </div>
     </div>
-    <!-- product tab end -->
+
+
+
+    <!-- first modal -->
+    <div class="modal fade theme1 style1" id="quickview" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8 mx-auto col-lg-5 mb-5 mb-lg-0">
+                            <div class="product-sync-init mb-20">
+                                <div class="single-product">
+                                    <div class="product-thumb">
+                                        <img src="assets/img/slider/thumb/1.jpg" alt="product-thumb" />
+                                    </div>
+                                </div>
+                                <!-- single-product end -->
+                                <div class="single-product">
+                                    <div class="product-thumb">
+                                        <img src="assets/img/slider/thumb/2.jpg" alt="product-thumb" />
+                                    </div>
+                                </div>
+                                <!-- single-product end -->
+                                <div class="single-product">
+                                    <div class="product-thumb">
+                                        <img src="assets/img/slider/thumb/3.jpg" alt="product-thumb" />
+                                    </div>
+                                </div>
+                                <!-- single-product end -->
+                                <div class="single-product">
+                                    <div class="product-thumb">
+                                        <img src="assets/img/slider/thumb/4.jpg" alt="product-thumb" />
+                                    </div>
+                                </div>
+                                <!-- single-product end -->
+                            </div>
+
+                            <div class="product-sync-nav">
+                                <div class="single-product">
+                                    <div class="product-thumb">
+                                        <a href="javascript:void(0)">
+                                            <img src="assets/img/slider/thumb/1.1.jpg" alt="product-thumb" /></a>
+                                    </div>
+                                </div>
+                                <!-- single-product end -->
+                                <div class="single-product">
+                                    <div class="product-thumb">
+                                        <a href="javascript:void(0)">
+                                            <img src="assets/img/slider/thumb/2.1.jpg" alt="product-thumb" /></a>
+                                    </div>
+                                </div>
+                                <!-- single-product end -->
+                                <div class="single-product">
+                                    <div class="product-thumb">
+                                        <a href="javascript:void(0)"><img src="assets/img/slider/thumb/3.1.jpg"
+                                                alt="product-thumb" /></a>
+                                    </div>
+                                </div>
+                                <!-- single-product end -->
+                                <div class="single-product">
+                                    <div class="product-thumb">
+                                        <a href="javascript:void(0)"><img src="assets/img/slider/thumb/4.1.jpg"
+                                                alt="product-thumb" /></a>
+                                    </div>
+                                </div>
+                                <!-- single-product end -->
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="modal-product-info">
+                                <div class="product-head">
+                                    <h2 class="title">
+                                        New Balance Running Arishi trainers
+                                        in triple
+                                    </h2>
+                                    <h4 class="sub-title">Reference: demo_5
+                                    </h4>
+                                    <div class="star-content mb-20">
+                                        <span class="star-on"><i class="fas fa-star"></i>
+                                        </span>
+                                        <span class="star-on"><i class="fas fa-star"></i>
+                                        </span>
+                                        <span class="star-on"><i class="fas fa-star"></i>
+                                        </span>
+                                        <span class="star-on"><i class="fas fa-star"></i>
+                                        </span>
+                                        <span class="star-on de-selected"><i class="fas fa-star"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <span class="product-price text-center">
+                                        <span class="new-price">$29.00</span>
+                                    </span>
+                                    <p>
+                                        Break old records and make new goals
+                                        in the New Balance®
+                                        Arishi Sport v1.
+                                    </p>
+                                    <ul>
+                                        <li>Predecessor: None.</li>
+                                        <li>Support Type: Neutral.</li>
+                                        <li>Cushioning: High energizing
+                                            cushioning.</li>
+                                    </ul>
+                                </div>
+                                <div class="d-flex mt-30">
+                                    <div class="product-size">
+                                        <h3 class="title">Dimension</h3>
+                                        <select>
+                                            <option value="0">40x60cm
+                                            </option>
+                                            <option value="1">60x90cm
+                                            </option>
+                                            <option value="2">80x120cm
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="product-footer">
+                                    <div class="product-count style d-flex flex-column flex-sm-row my-4">
+                                        <div class="count d-flex">
+                                            <input type="number" min="1" max="10" step="1"
+                                                value="1" />
+                                            <div class="button-group">
+                                                <button class="count-btn increment">
+                                                    <i class="fas fa-chevron-up"></i>
+                                                </button>
+                                                <button class="count-btn decrement">
+                                                    <i class="fas fa-chevron-down"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-dark btn--xl mt-5 mt-sm-0">
+                                                <span class="me-2"><i class="ion-android-add"></i></span>
+                                                Add to cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="addto-whish-list">
+                                        <a href="#"><i class="icon-heart"></i> Add
+                                            to wishlist</a>
+                                        <a href="#"><i class="icon-shuffle"></i>
+                                            Add to compare</a>
+                                    </div>
+                                    <div class="pro-social-links mt-10">
+                                        <ul class="d-flex align-items-center">
+                                            <li class="share">Share</li>
+                                            <li>
+                                                <a href="#"><i class="ion-social-facebook"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-social-twitter"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-social-google"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-social-pinterest"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

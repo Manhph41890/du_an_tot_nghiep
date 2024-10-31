@@ -5,8 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="" />
+    <meta name="description" content="{{ $description ?? 'Default description' }}" />
     <title>{{ $title }}</title>
+    
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/fontawesome.min.css') }}" />
@@ -17,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/client/css/plugins/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/style.min.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <style>
         .bg-img1 {
             background-image: url('./assets/client/images/banner/bn1.jpg');
@@ -26,7 +27,6 @@
 
         .bg-img2 {
             background-image: url('./assets/client/images/slider/slide1.jpg');
-
         }
 
         .bg-img3 {
@@ -40,7 +40,6 @@
             background-repeat: no-repeat;
         }
     </style>
-
 </head>
 
 <body>

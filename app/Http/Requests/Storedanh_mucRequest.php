@@ -42,7 +42,7 @@ class Storedanh_mucRequest extends FormRequest
             'ten_danh_muc.max' => 'Tên danh mục không được vượt quá 255 ký tự ',
             'ten_danh_muc.unique' => 'Tên danh mục đã tồn tại ',
 
-            'anh_danh_muc.required' => 'Hình ảnh không hợp lệ',
+            'anh_danh_muc.required' => 'Hình ảnh không được để trống',
             'anh_danh_muc.image' => 'Hình ảnh không hợp lệ',
             'anh_danh_muc.mimes' => 'Hình ảnh phải là một trong các định dạng: jpg, png, jpeg, gif,webp',
         ];

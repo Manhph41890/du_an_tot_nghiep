@@ -62,4 +62,31 @@ class ClientSanPhamController extends Controller
 
         return view('client.sanpham.danhsach', compact('list_sanphams', 'title', 'danhmucs', 'soluongsanpham','size_sidebar','color_sidebar'));
     }
+
+    public function quick_view($id){
+
+        $quick_view = san_pham::with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color', 'danh_gias'])->findOrFail($id);
+
+        // Tính phần trăm giảm giá
+        if ($quick_view->gia_goc > 0 && $quick_view->gia_km > 0) {
+            $quick_view->phan_tram_giam_gia = round((1 - ($quick_view->gia_km / $quick_view->gia_goc)) * 100);
+        } else {
+            $quick_view->phan_tram_giam_gia = 0;
+        }
+
+        // Tính trung bình điểm đánh giá và số lần đánh giá
+        $quick_view->so_lan_danh_gia = $quick_view->danh_gias->count();
+        if ($quick_view->so_lan_danh_gia > 0) {
+            $quick_view->diem_trung_binh = round($quick_view->danh_gias->avg('diem_so'), 1);
+        } else {
+            $quick_view->diem_trung_binh = 0;
+        }
+
+        // Lấy tất cả các size và màu sắc từ biến thể sản phẩm
+        $sizes = $quick_view->bien_the_san_phams->pluck('size')->unique('id'); // Lấy size duy nhất
+        $colors = $quick_view->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
+        return view('client.sanpham.quickview', compact('quick_view', 'sizes', 'colors'));
+
+
+    }
 }

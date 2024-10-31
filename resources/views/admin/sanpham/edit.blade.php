@@ -193,11 +193,22 @@
                                                     <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
                                                     <input type="file" name="product_variants[anh_bien_the][]"
                                                         class="form-control">
+
+                                                    <input type="hidden" name="product_variants[old_anh_bien_the][]"
+                                                        value="{{ $variant->anh_bien_the }}">
+
                                                     <div class="mt-2">
-                                                        <img src="{{ $variant->anh_bien_the ? asset('storage/' . $variant->anh_bien_the) : '#' }}"
-                                                            alt="Hình ảnh biến thể" style="width: 100px; display: block;">
+                                                        @if ($variant->anh_bien_the)
+                                                            <img id="imagePreview"
+                                                                src="{{ asset('storage/' . $variant->anh_bien_the) }}"
+                                                                alt="Hình ảnh" style="width: 200px; display: block;">
+                                                        @else
+                                                            <img id="imagePreview" src="#" alt="Hình ảnh"
+                                                                style="display: none;">
+                                                        @endif
                                                     </div>
                                                 </div>
+
 
                                                 <div class="col-lg-1 d-flex align-items-end">
                                                     <button type="button"

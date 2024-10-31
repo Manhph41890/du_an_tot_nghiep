@@ -8,14 +8,14 @@
     <meta name="description" content="" />
     <title>Art</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/admin/img/favicon.ico') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/fontawesome.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/ionicons.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/simple-line-icons.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/plugins/jquery-ui.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/plugins/plugins.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/style.min.css') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/client/css/fontawesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/client/css/ionicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/client/css/simple-line-icons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/client/css/plugins/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/client/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/client/css/plugins/plugins.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/client/css/style.min.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
@@ -50,14 +50,14 @@
 
     @include('client.partials.footer')
 
-    <script src="{{ asset('assets/admin/js/vendor/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/vendor/modernizr-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/plugins/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/plugins/plugins.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/plugins/ajax-contact.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/main.js') }}"></script>
+    <script src="{{ asset('assets/client/js/vendor/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/client/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
+    <script src="{{ asset('assets/client/js/vendor/modernizr-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/client/js/plugins/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('assets/client/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/client/js/plugins/plugins.js') }}"></script>
+    <script src="{{ asset('assets/client/js/plugins/ajax-contact.js') }}"></script>
+    <script src="{{ asset('assets/client/js/main.js') }}"></script>
 
     <script>
         $(document).ready(function() {

@@ -212,7 +212,7 @@
 </div>
 <!-- OffCanvas Wishlist End -->
 
-<!-- Gio hang mini cart -->
+{{-- <!-- Gio hang mini cart -->
 <div id="offcanvas-cart" class="offcanvas offcanvas-cart theme1">
     <div class="inner">
         <div class="head d-flex flex-wrap justify-content-between">
@@ -257,7 +257,7 @@
         <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
     </div>
 
-</div>
+</div> --}}
 <!-- OffCanvas Cart End -->
 
 <!-- header start -->
@@ -363,12 +363,12 @@
                         <div class="cart-block-links theme1 d-none d-sm-block">
                             <ul class="d-flex">
                                 <li>
-                                    <a href="javascript:void(0)" class="search search-toggle">
+                                    <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
                                 <li class="mr-xl-0 cart-block position-relative">
-                                    <a class="offcanvas-toggle" href="#offcanvas-cart">
+                                    <a href="{{ route('cart.index') }}">
                                         <span class="position-relative">
                                             <i class="icon-bag"></i>
                                             <span class="badge cbdg1">3</span>
@@ -378,7 +378,7 @@
                                 <!-- cart block end -->
                             </ul>
                         </div>
-                        <div class="mobile-menu-toggle theme1 d-lg-none">
+                        {{-- <div class="mobile-menu-toggle theme1 d-lg-none">
                             <a href="#offcanvas-mobile-menu" class="offcanvas-toggle">
                                 <svg viewbox="0 0 700 550">
                                     <path
@@ -391,7 +391,7 @@
                                         transform="translate(480, 320) scale(1, -1) translate(-480, -318)"></path>
                                 </svg>
                             </a>
-                        </div>
+                        </div> --}}
                         <div class="cart-block-links theme1 d-none d-sm-block">
                             <ul class="d-flex">
                                 @auth

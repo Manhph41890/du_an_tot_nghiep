@@ -76,7 +76,8 @@
                                         <div class="card product-card">
                                             <div class="card-body">
                                                 <div class="product-thumbnail position-relative">
-                                                    <span class="badge badge-danger top-right">New</span>
+                                                    <span
+                                                        class="badge badge-danger top-right">{{ intval($item->phantramgia) }}%</span>
                                                     <a href="single-product.html">
                                                         <img class="first-img"
                                                             src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -84,20 +85,6 @@
                                                     </a>
                                                     <!-- product links -->
                                                     <ul class="actions d-flex justify-content-center">
-                                                        <li>
-                                                            <a class="action" href="wishlist.html">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="add to wishlist" class="icon-heart">
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="action" href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#compare">
-                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                    title="Add to compare" class="icon-shuffle"></span>
-                                                            </a>
-                                                        </li>
                                                         <li>
                                                             <a class="action" href="#" data-bs-toggle="modal"
                                                                 data-bs-target="#quick-view">
@@ -145,8 +132,7 @@
                             </div>
                         </div>
                         <!-- second tab-pane -->
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                            aria-labelledby="pills-profile-tab">
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <div class="row grid-view-list theme1">
                                 @foreach ($list_sanphams as $item)
                                     <div class="col-12 mb-30">
@@ -154,7 +140,8 @@
                                             <div class="card-body">
                                                 <div class="media flex-column flex-md-row">
                                                     <div class="product-thumbnail position-relative">
-                                                        <span class="badge badge-danger top-right">New</span>
+                                                        <span
+                                                            class="badge badge-danger top-right">{{ intval($item->phantramgia) }}%</span>
                                                         <a href="single-product.html">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -207,7 +194,13 @@
                                                                 @endif
 
                                                             </div>
-                                                            <span class="product-price">$11.90</span>
+                                                            <span class="product-price">
+                                                                @if (isset($item->gia_km) && !empty($item->gia_km))
+                                                                    {{ $item?->gia_km }} đ
+                                                                @else
+                                                                    {{ $item->gia_goc }} đ
+                                                                @endif
+                                                            </span>
                                                         </div>
                                                         <ul class="product-list-des">
                                                             <li>
@@ -326,42 +319,24 @@
 
                                 <div class="sidbar-widget mt-10">
                                     <h4 class="sub-title">Size</h4>
-                                    <div class="widget-check-box">
-                                        <input type="checkbox" id="test9" />
-                                        <label for="test9">s <span>(2)</span></label>
-                                    </div>
-                                    <div class="widget-check-box">
-                                        <input type="checkbox" id="test10" />
-                                        <label for="test10">m <span>(2)</span></label>
-                                    </div>
-                                    <div class="widget-check-box">
-                                        <input type="checkbox" id="test11" />
-                                        <label for="test11">l <span>(2)</span></label>
-                                    </div>
-                                    <div class="widget-check-box">
-                                        <input type="checkbox" id="test12" />
-                                        <label for="test12">xl <span>(2)</span></label>
-                                    </div>
+                                    @foreach ($size_sidebar as $item)
+                                        <div class="widget-check-box">
+                                            <input type="checkbox" id="size-{{ $item->id }}" />
+                                            <label for="size-{{ $item->id }}">{{ $item->ten_size }}
+                                                <span>({{ $item->sl_size }})</span></label>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                <!-- sidbar-widget -->
                                 <div class="sidbar-widget mt-10">
                                     <h4 class="sub-title">color</h4>
-                                    <div class="widget-check-box color-grey">
-                                        <input type="checkbox" id="20826" />
-                                        <label for="20826">grey <span>(4)</span></label>
-                                    </div>
-                                    <div class="widget-check-box color-white">
-                                        <input type="checkbox" id="20827" />
-                                        <label for="20827">white <span>(3)</span></label>
-                                    </div>
-                                    <div class="widget-check-box color-black">
-                                        <input type="checkbox" id="20828" />
-                                        <label for="20828">black <span>(6)</span></label>
-                                    </div>
-                                    <div class="widget-check-box color-camel">
-                                        <input type="checkbox" id="20829" />
-                                        <label for="20829">camel <span>(2)</span></label>
-                                    </div>
+                                    @foreach ($color_sidebar as $item)
+                                        <div class="widget-check-box color-grey">
+                                            <input type="checkbox" id="color-{{ $item->id }}" />
+                                            <label for="color-{{ $item->id }}" style=" background-color: {{ $item->ma_mau }} !important;">
+                                                {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </form>
                         </div>

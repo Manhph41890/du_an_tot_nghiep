@@ -29,7 +29,7 @@
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Giới thiệu</span></a>
-                    <!-- <ul class="offcanvas-submenu">
+                    <ul class="offcanvas-submenu">
                         <li><a href="about-us.html">About Page</a></li>
                         <li><a href="cart.html">Cart Page</a></li>
                         <li><a href="checkout.html">Checkout Page</a></li>
@@ -37,7 +37,7 @@
                         <li><a href="login.html">Login &amp; Register Page</a></li>
                         <li><a href="myaccount.html">Account Page</a></li>
                         <li><a href="wishlist.html">Wishlist Page</a></li>
-                    </ul> -->
+                    </ul>
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Cửa hàng</span></a>
@@ -279,16 +279,79 @@
                             <a style="color: #333;" href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>
-                            <a href="#">Giới thiệu</a>
-
+                            <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
+                        </li>
+                        <li>
+                            <a href="#">Giới thiệu <i class="ion-ios-arrow-down"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="about-us.html">About Page</a></li>
+                                <li><a href="cart.html">Cart Page</a></li>
+                                <li><a href="checkout.html">Checkout Page</a></li>
+                                <li><a href="compare.html">Compare Page</a></li>
+                                <li><a href="login.html">Login &amp; Register Page</a></li>
+                                <li><a href="myaccount.html">Account Page</a></li>
+                                <li><a href="wishlist.html">Wishlist Page</a></li>
+                            </ul>
                         </li>
                         <li class="position-static">
-                            <a href="shop-grid-3-column.html">Cửa hàng </a>
+                            <a href="#">Danh mục <i class="ion-ios-arrow-down"></i></a>
+                            <ul class="mega-menu row">
+                                <!-- Phần danh mục, chia thành các cột ngang -->
+                                <li class="col-md-6 col-lg-3">
+                                    <ul class="list-unstyled">
+                                        @foreach ($danhmucs->take(4) as $item)
+                                            <li><a href="{{ $item->id }}"
+                                                    class="text-decoration-none text-dark">{{ $item?->ten_danh_muc }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                                <li class="col-md-6 col-lg-3">
+                                    <ul class="list-unstyled">
+                                        @foreach ($danhmucs->slice(4, 4) as $item)
+                                            <li><a href="{{ $item->id }}"
+                                                    class="text-decoration-none text-dark">{{ $item?->ten_danh_muc }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+
+                                <li class="col-md-6 col-lg-3">
+                                    <ul class="list-unstyled">
+                                        @foreach ($danhmucs->slice(8, 4) as $item)
+                                            <li><a href="{{ $item->id }}"
+                                                    class="text-decoration-none text-dark">{{ $item?->ten_danh_muc }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+
+                                <li class="col-md-6 col-lg-3">
+                                    <ul class="list-unstyled">
+                                        @foreach ($danhmucs->slice(12, 4) as $item)
+                                            <li><a href="{{ $item->id }}"
+                                                    class="text-decoration-none text-dark">{{ $item?->ten_danh_muc }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+
+                                <!-- Phần hình ảnh -->
+                                <li class="col-6 mt-4">
+                                    <a href="single-product.html" class="zoom-in overflow-hidden"><img
+                                            src="{{ asset('assets/client/images/mega-menu/1.jpg') }}"
+                                            alt="img"></a>
+                                </li>
+                                <li class="col-6 mt-4">
+                                    <a href="single-product.html" class="zoom-in overflow-hidden"><img
+                                            src="{{ asset('assets/client/images/mega-menu/2.jpg') }}"
+                                            alt="img"></a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>
-
                         </li>
                         <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
@@ -304,8 +367,6 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
-
-
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="offcanvas-toggle" href="#offcanvas-cart">
                                         <span class="position-relative">
@@ -441,7 +502,7 @@
                                     </li>
                                     <!-- Modal đăng nhập -->
                                     <div id="loginModal" class="modal-overlay">
-                                        <div class="modal-content">
+                                        <div class="modal-content form">
                                             <!-- Nút đóng modal -->
                                             <span class="close-button" onclick="closeLoginModal()">&times;</span>
 
@@ -522,7 +583,7 @@
                                     </div>
                                     <!-- Modal đăng ký -->
                                     <div id="registerModal" class="modal-overlay">
-                                        <div class="modal-content">
+                                        <div class="modal-content form">
                                             <!-- Nút đóng modal -->
                                             <span class="close-button" onclick="closeRegisterModal()">&times;</span>
 
@@ -736,7 +797,7 @@
     }
 
     /* Nội dung của modal (form đăng nhập) */
-    .modal-content {
+    .form {
         background: white;
         padding: 20px;
         border-radius: 10px;

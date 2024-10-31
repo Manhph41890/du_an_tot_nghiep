@@ -2,6 +2,21 @@
 @section('css')
 @endsection
 @section('content')
+    <style>
+        #maMauInput {
+            background-color: transparent;
+            /* Màu nền mặc định */
+            color: #000;
+            /* Màu chữ */
+            border: 1px solid #ccc;
+            /* Đường viền mặc định */
+        }
+
+        #maMauInput.valid {
+            color: #fff;
+            /* Màu chữ cho mã màu hợp lệ */
+        }
+    </style>
     <div class="content-page">
 
         <div class="content">
@@ -44,7 +59,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $color->ten_color }}</td>
-                                        <td>{{ $color->ma_mau }}</td>
+                                        <td style="color: {{ $color->ma_mau }};">{{ $color->ma_mau }}</td>
                                         <td>
                                             <!-- Nút sửa -->
                                             <button class="btn btn-warning btn-sm" data-toggle="modal"
@@ -122,8 +137,9 @@
                                     </div>
                                 @endif
 
-                                <input type="text" name="ma_mau" class="form-control" placeholder="Nhập mã màu"
-                                    value="{{ old('ma_mau') }}" required>
+                                <input type="text" name="ma_mau" class="form-control"
+                                    placeholder="Nhập mã màu (ví dụ: #ff0000)" id="maMauInput" required>
+
                                 @if ($errors->has('ma_mau'))
                                     <div class="invalid-feedback d-block">
                                         {{ $errors->first('ma_mau') }}
@@ -242,11 +258,17 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            // Kiểm tra xem nút sửa có hoạt động không
-            $('.btn-warning').click(function() {
-                console.log('Nút sửa đã được bấm!');
-            });
+        document.getElementById('maMauInput').addEventListener('input', function() {
+            const colorValue = this.value;
+
+            // Kiểm tra mã màu hợp lệ
+            if (/^#([0-9A-F]{3}){1,2}$/i.test(colorValue)) {
+                this.style.backgroundColor = colorValue; // Cập nhật màu nền
+                this.classList.add('valid'); // Thêm lớp để thay đổi màu chữ
+            } else {
+                this.style.backgroundColor = 'transparent'; // Đặt lại màu nền nếu không hợp lệ
+                this.classList.remove('valid'); // Xóa lớp nếu không hợp lệ
+            }
         });
         $(document).ready(function() {
             $('.btn-warning').click(function() {

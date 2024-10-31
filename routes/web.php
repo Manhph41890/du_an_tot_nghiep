@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BaiVietController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChucVuController;
+use App\Http\Controllers\ClientSanPhamController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
@@ -24,7 +25,6 @@ use App\Http\Controllers\VariantController;
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
-Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
 
 // Route cho client
 Route::prefix('client')->group(function () {
@@ -35,7 +35,7 @@ Route::prefix('client')->group(function () {
     Route::view('/taikhoan', 'client.taikhoan.dashboard');
     Route::view('/giohang', 'client.giohang');
     Route::view('/gioithieu', 'client.gioithieu');
-    Route::view('/lienhe', 'client.lienhe');
+    Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
     Route::view('/thanhtoan', 'client.thanhtoan');
 });
 

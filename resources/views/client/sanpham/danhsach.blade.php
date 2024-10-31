@@ -77,7 +77,7 @@
                                             <div class="card-body">
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">New</span>
-                                                    <a href="single-product.html">
+                                                    <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                         <img class="first-img"
                                                             src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                             alt="thumbnail" />
@@ -155,7 +155,7 @@
                                                 <div class="media flex-column flex-md-row">
                                                     <div class="product-thumbnail position-relative">
                                                         <span class="badge badge-danger top-right">New</span>
-                                                        <a href="single-product.html">
+                                                        <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                                 alt="thumbnail" />

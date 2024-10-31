@@ -30,11 +30,12 @@ class HomeController extends Controller
             } else {
                 $sanPham->diem_trung_binh = 0; // Nếu không có đánh giá nào
             }
+            $title = "";
 
             return $sanPham;
         });
         $title = "Trang chủ";
-        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias','title'));
+        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'title'));
     }
     // Sản phẩm chi tiet
     public function chiTietSanPham($id)
@@ -59,23 +60,25 @@ class HomeController extends Controller
         // Lấy tất cả các size và màu sắc từ biến thể sản phẩm
         $sizes = $sanPhamCT->bien_the_san_phams->pluck('size')->unique('id'); // Lấy size duy nhất
         $colors = $sanPhamCT->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
+        $title = "";
 
-        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors'));
+        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title'));
     }
 
     // In Data Bai viet
     public function listBaiViet()
     {
         $baiviets = bai_viet::with('user')->latest('id')->paginate(4);
-
-        return view('client.baiviet.baiviet', compact('baiviets'));
+        $title = "";
+        return view('client.baiviet.baiviet', compact('baiviets', 'title'));
     }
     // In chi tiet bai viet
     public function chiTietBaiViet($id)
     {
         $baiViet = bai_viet::with('user')->findOrFail($id);
         $docThem = bai_viet::with('user')->where('id', '!=', $id)->orderBy('id', 'desc')->limit(3)->get();
-        return view('client.baiviet.baivietchitiet', compact('baiViet', 'docThem'));
+        $title = "";
+        return view('client.baiviet.baivietchitiet', compact('baiViet', 'docThem', 'title'));
     }
 
     public function lienhe()

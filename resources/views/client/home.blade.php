@@ -1697,7 +1697,7 @@
                 </div>
                 <div class="modal-body">
                     <h5 class="title">
-                        <i class="fa fa-check"></i> Product added to compare.
+                        <i class="fa fa-check"></i> Product added to compare shoppp.
                     </h5>
                 </div>
             </div>
@@ -1709,7 +1709,7 @@
             <div class="modal-content">
                 <div class="modal-header justify-content-center bg-dark">
                     <h5 class="modal-title" id="add-to-cartCenterTitle">
-                        Product successfully added to your shopping cart
+                        Product successfully
                     </h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

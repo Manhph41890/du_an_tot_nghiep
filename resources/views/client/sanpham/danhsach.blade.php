@@ -379,5 +379,60 @@
             </div>
         </div>
     </div>
+    <!-- second modal -->
+    <div class="modal fade style3" id="add-to-cart" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center bg-dark">
+                    <h5 class="modal-title" id="add-to-cartCenterTitle">
+                        Product successfully
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-5 divide-right">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="assets/img/modal/1.jpg" alt="img" />
+                                </div>
+                                <div class="col-md-6 mb-2 mb-md-0">
+                                    <h4 class="product-name">
+                                        New Balance Running Arishi trainers in triple
+                                    </h4>
+                                    <h5 class="price">$$29.00</h5>
+                                    <h6 class="color">
+                                        <strong>Dimension: </strong>: <span class="dmc">40x60cm</span>
+                                    </h6>
+                                    <h6 class="quantity"><strong>Quantity:</strong>&nbsp;1</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="modal-cart-content">
+                                <p class="cart-products-count">There is 1 item in your cart.</p>
+                                <p><strong>Total products:</strong>&nbsp;$123.72</p>
+                                <p><strong>Total shipping:</strong>&nbsp;$7.00</p>
+                                <p><strong>Taxes</strong>&nbsp;$0.00</p>
+                                <p><strong>Total:</strong>&nbsp;$130.72 (tax excl.)</p>
+                                <div class="cart-content-btn">
+                                    <button type="button" class="btn btn-dark btn--md mt-4" data-bs-dismiss="modal">
+                                        Continue shopping
+                                    </button>
+                                    <button class="btn btn-dark btn--md mt-4">
+                                        Proceed to checkout
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modals end -->
+
     <!-- product tab end -->
 @endsection

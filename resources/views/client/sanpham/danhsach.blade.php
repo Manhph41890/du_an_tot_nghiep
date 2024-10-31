@@ -82,7 +82,12 @@
                                                     </a>
                                                     <ul class="actions d-flex justify-content-center">
                                                         <li>
-                                                            <a class="action"
+                                                            <a class="action" href="#" data-bs-toggle="modal"
+                                                                data-bs-target="#quickview{{ $item->id }}">
+                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
+                                                                    title="Quick view" class="icon-magnifier"></span>
+                                                            </a>
+                                                            {{-- <a class="action"
                                                                 href="{{ route('client.quickview', $item->id) }}"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#quickview{{ $item->id }}">
@@ -90,8 +95,8 @@
                                                                     title="Quick view" class="icon-magnifier"></span>
                                                             </a>
                                                             @include('client.sanpham.quickview', [
-                                                                'quickview' => $item,
-                                                            ])
+                                                                'quick_view' => $item,
+                                                            ]) --}}
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -274,7 +279,7 @@
 
 
     <!-- first modal -->
-    <div class="modal fade theme1 style1" id="quickview" tabindex="-1" role="dialog">
+    <div class="modal fade theme1 style1" id="{{ $item->id }}" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

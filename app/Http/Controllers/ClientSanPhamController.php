@@ -26,7 +26,7 @@ class ClientSanPhamController extends Controller
         foreach ($size_sidebar as $sl_size_sb) {
             $sl_size_sb->sl_size = $sl_size_sb->bien_the_san_phams->count();
         }
-        
+
         // Lấy màu sắc biến thể có sản phẩm đổ ra sidebar
         $color_sidebar = color_san_pham::has('bien_the_san_phams')->with('bien_the_san_phams')->get();
         foreach ($color_sidebar as $sl_color_sb) {
@@ -35,7 +35,7 @@ class ClientSanPhamController extends Controller
 
         $query = san_pham::query();
         $soluongsanpham = $query->count();
-        $list_sanphams = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color', 'danh_gias'])->orderBy('id','DESC')->paginate(9);
+        $list_sanphams = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color', 'danh_gias'])->orderBy('id', 'DESC')->paginate(9);
         foreach ($list_sanphams as $sanpham) {
             // tính % giảm giá
             $sanpham->phantramgia = (($sanpham->gia_goc - $sanpham->gia_km) / $sanpham->gia_goc) * 100;
@@ -60,10 +60,11 @@ class ClientSanPhamController extends Controller
             }
         }
 
-        return view('client.sanpham.danhsach', compact('list_sanphams', 'title', 'danhmucs', 'soluongsanpham','size_sidebar','color_sidebar'));
+        return view('client.sanpham.danhsach', compact('list_sanphams', 'title', 'danhmucs', 'soluongsanpham', 'size_sidebar', 'color_sidebar'));
     }
 
-    public function quick_view($id){
+    public function quick_view($id)
+    {
 
         $quick_view = san_pham::with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color', 'danh_gias'])->findOrFail($id);
 
@@ -85,8 +86,6 @@ class ClientSanPhamController extends Controller
         // Lấy tất cả các size và màu sắc từ biến thể sản phẩm
         $sizes = $quick_view->bien_the_san_phams->pluck('size')->unique('id'); // Lấy size duy nhất
         $colors = $quick_view->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
-        return view('client.sanpham.quickview', compact('quick_view', 'sizes', 'colors'));
-
-
+        return view('client.sanpham.danhsach', compact('quick_view', 'sizes', 'colors'));
     }
 }

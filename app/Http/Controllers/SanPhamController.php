@@ -200,7 +200,7 @@ class SanPhamController extends Controller
             // Tìm sản phẩm theo ID
             $product = san_pham::findOrFail($id);
 
-            // Lấy dữ liệu xác thực từ request
+            //
             $data_san_phams = $request->except('product_variants');
 
             // Xử lý ảnh sản phẩm chính (nếu có)
@@ -226,8 +226,8 @@ class SanPhamController extends Controller
 
             if (!empty($bien_the_san_phamsTmp['size_san_pham']) && !empty($bien_the_san_phamsTmp['color_san_pham'])) {
                 foreach ($bien_the_san_phamsTmp['size_san_pham'] as $key => $size_san_pham) {
-                    $size_san_pham_id = $bien_the_san_phamsTmp['size_san_pham'][$key]; // ID từ dropdown kích thước
-                    $color_san_pham_id = $bien_the_san_phamsTmp['color_san_pham'][$key]; // ID từ dropdown màu sắc
+                    $size_san_pham_id = $bien_the_san_phamsTmp['size_san_pham'][$key];
+                    $color_san_pham_id = $bien_the_san_phamsTmp['color_san_pham'][$key];
 
                     // Kiểm tra ID có hợp lệ không
                     if (!$size_san_pham_id || !$color_san_pham_id) {
@@ -236,22 +236,25 @@ class SanPhamController extends Controller
 
                     // Lấy số lượng biến thể
                     $quantity = $bien_the_san_phamsTmp['so_luong'][$key] ?? 0;
-                    $totalQuantity += $quantity; // Cộng dồn số lượng biến thể
+                    $totalQuantity += $quantity;
 
                     // Giá biến thể
                     $giaBienThe = $bien_the_san_phamsTmp['gia'][$key] ?? 0;
 
-                    // Kiểm tra xem giá có hợp lệ không
+                    // Kiểm tra giá hợp lệ
                     if ($giaBienThe < 0) {
                         return back()->withErrors(['product_variants' => 'Giá biến thể không được nhỏ hơn 0']);
                     }
 
-                    // Xử lý file ảnh biến thể
-                    $anh_bien_the_path = null; // 
-
+                    // Xử lý file ảnh biến thể hoặc giữ lại ảnh cũ
+                    $anh_bien_the_path = $bien_the_san_phamsTmp['old_anh_bien_the'][$key] ?? null;
                     if ($request->hasFile("product_variants.anh_bien_the.$key")) {
                         $anh_bien_the_file = $request->file("product_variants.anh_bien_the.$key");
                         if ($anh_bien_the_file->isValid()) {
+                            // Xóa ảnh cũ nếu có
+                            if ($anh_bien_the_path) {
+                                Storage::disk('public')->delete($anh_bien_the_path);
+                            }
                             $filename = time() . '-' . $anh_bien_the_file->getClientOriginalName();
                             $anh_bien_the_path = $anh_bien_the_file->storeAs('sanphams', $filename, 'public');
                         } else {
@@ -283,6 +286,9 @@ class SanPhamController extends Controller
             return back()->withErrors('Đã xảy ra lỗi khi cập nhật sản phẩm. Vui lòng thử lại.');
         }
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.

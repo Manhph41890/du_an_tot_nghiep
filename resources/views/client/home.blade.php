@@ -559,7 +559,6 @@
                                                             <img
                                                                 src="{{ asset('/storage/' . $sanPhamGg->anh_san_pham) }}">
                                                         </a>
-
                                                         <!-- product links -->
                                                         <ul class="actions d-flex justify-content-center">
                                                             <li>

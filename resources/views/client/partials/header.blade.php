@@ -41,7 +41,7 @@
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Cửa hàng</span></a>
-                    <!-- <ul class="offcanvas-submenu">
+                    <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Shop Grid</span></a>
                             <ul class="offcanvas-submenu">
@@ -96,7 +96,7 @@
                                 <li><a href="wishlist.html">Wishlist Page</a></li>
                             </ul>
                         </li>
-                    </ul> -->
+                    </ul>
                 </li>
 
                 <li>

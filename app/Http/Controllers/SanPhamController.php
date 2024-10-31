@@ -203,7 +203,7 @@ class SanPhamController extends Controller
             //
             $data_san_phams = $request->except('product_variants');
 
-            // Xử lý ảnh sản phẩm chính (nếu có)
+            // Xử lý ảnh sản phẩm chính
             if ($request->hasFile('anh_san_pham')) {
                 $file = $request->file('anh_san_pham');
                 if ($file->isValid()) {

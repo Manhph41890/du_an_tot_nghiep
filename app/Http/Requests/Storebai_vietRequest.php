@@ -24,7 +24,6 @@ class Storebai_vietRequest extends FormRequest
     {
         return [
             'tieu_de_bai_viet' => 'required|max:255',
-            'ngay_dang' => 'required|date',
             'noi_dung' => 'required|string|max:5000',
             'anh_bai_viet' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active' => [Rule::in([0, 1])],
@@ -47,10 +46,6 @@ class Storebai_vietRequest extends FormRequest
 
             'noi_dung.required' => 'Nội dung là bắt buộc.',
             'noi_dung.max' => 'Nội dung không được vượt quá 5,000 ký tự.',
-
-            'user_id.exists' => 'Tác giả không tồn tại.',
-
-            'ngay_dang.date' => 'Ngày đăng phải là định dạng ngày hợp lệ.',
 
             'is_active.required' => 'Trạng thái là bắt buộc.',
             'is_active.in' => 'Trạng thái không hợp lệ.',

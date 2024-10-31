@@ -234,8 +234,9 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="{{ route('client.home') }}"><img
-                                src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
+                        <a href="{{ route('client.home') }}">
+                            <im src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" />
+                        </a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">

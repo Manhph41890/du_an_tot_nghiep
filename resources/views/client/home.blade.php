@@ -259,10 +259,23 @@
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <span class="product-price">{{ $item->gia_goc }}</span>
-                                                                <button class="pro-btn" data-bs-toggle="modal"
+                                                                {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                                     data-bs-target="#add-to-cart">
                                                                     <i class="icon-basket"></i>
-                                                                </button>
+                                                                </button> --}}
+                                                                <form action="{{ route('cart.add') }}" method="POST"
+                                                                    class="d-inline">
+                                                                    @csrf
+                                                                    <input type="hidden" name="san_pham_id"
+                                                                        value="{{ $item->id }}">
+                                                                    <input type="number" name="so_luong" value="1"
+                                                                        min="1" class="d-none">
+                                                                    <button type="submit" class="pro-btn">
+                                                                        <i class="icon-basket"></i>
+                                                                    </button>
+                                                                </form>
+
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1526,8 +1539,8 @@
 
 
     <!-- modals start -->
-    <!-- first modal -->
-    <div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">
+    <!-- modal giỏ hàng -->
+    {{-- <div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1685,8 +1698,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- second modal -->
+    </div> --}}
+    {{-- <!-- second modal -->
     <div class="modal fade style2" id="compare" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -1702,7 +1715,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- second modal -->
     <div class="modal fade style3" id="add-to-cart" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">

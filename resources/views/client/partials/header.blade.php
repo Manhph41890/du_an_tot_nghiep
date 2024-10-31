@@ -28,7 +28,16 @@
                     </ul> -->
                 </li>
                 <li>
-                    <a href="{{ route('client.gioithieu') }}"><span class="menu-text">Giới thiệu</span></a>
+                    <a href="#"><span class="menu-text">Giới thiệu</span></a>
+                    <ul class="offcanvas-submenu">
+                        <li><a href="about-us.html">About Page</a></li>
+                        <li><a href="cart.html">Cart Page</a></li>
+                        <li><a href="checkout.html">Checkout Page</a></li>
+                        <li><a href="compare.html">Compare Page</a></li>
+                        <li><a href="login.html">Login &amp; Register Page</a></li>
+                        <li><a href="myaccount.html">Account Page</a></li>
+                        <li><a href="wishlist.html">Wishlist Page</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Cửa hàng</span></a>
@@ -238,7 +247,7 @@
                             <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
                         </li>
                         <li>
-                            <a href="{{ route('client.gioithieu') }}">Giới thiệu <span class="menu-text"></span></a>
+                            <a href="#">Giới thiệu <i class="menu-text"></i></a>
                         </li>
                         <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>

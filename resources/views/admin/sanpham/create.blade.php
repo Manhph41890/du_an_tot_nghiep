@@ -347,40 +347,63 @@
             newVariant.innerHTML = `
                 <div class="col-lg-2">
                                                 <label for="size_san_pham" class="form-label">Size</label>
-                                                <input type="text" name="product_variants[size_san_pham][]"
-                                                    class="form-control" placeholder="Nhập size" id="sizeInput">
-                                                <span id="sizeError" class="color-error text-danger"
-                                                    style="display: none;">Kích thước không
-                                                    hợp lệ!</span>
+                                                <select name="product_variants[size_san_pham][]" class="form-control"
+                                                    id="sizeSelect">
+                                                    <option value="">Chọn kích thước</option>
+                                                    @foreach ($sizes as $size)
+                                                        <option value="{{ $size->id }}">{{ $size->ten_size }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @error('product_variants.*.size_san_pham')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="color_san_pham" class="form-label">Màu sắc</label>
-                                                <input type="text" name="product_variants[color_san_pham][]"
-                                                    class="form-control color-input" placeholder="Nhập màu sắc"
-                                                    value="{{ old('color_san_pham') }}" id="colorInput">
-                                                <span class="color-error text-danger" style="display: none;">Tên màu không
-                                                    hợp lệ!</span>
+                                                <select name="product_variants[color_san_pham][]" class="form-control"
+                                                    id="sizeSelect">
+                                                    <option value="">Chọn kích thước</option>
+                                                    @foreach ($colors as $color)
+                                                        <option value="{{ $color->id }}">{{ $color->ten_color }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @error('product_variants.*.color_san_pham')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="so_luong" class="form-label">Số lượng</label>
                                                 <input type="number" name="product_variants[so_luong][]"
-                                                    class="form-control" value="0" min="0">
+                                                    class="form-control" value="0" min="0" required>
+                                                @error('product_variants.*.so_luong')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="gia" class="form-label">Giá biến thể</label>
                                                 <input type="number" name="product_variants[gia][]" class="form-control"
-                                                    value="0" min="0">
+                                                    value="0">
+                                                @error('product_variants.*.gia')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
                                                 <input type="file" name="product_variants[anh_bien_the][]"
                                                     class="form-control">
+                                                @error('product_variants.*.anh_bien_the')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-1 d-flex align-items-end">
                                                 <button type="button"
                                                     class="btn btn-sm btn-danger remove-variant">Xóa</button>
-                                            </div>
-            `;
+                                            </div>`;
             variantContainer.appendChild(newVariant);
         });
 

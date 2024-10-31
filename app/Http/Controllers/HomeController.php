@@ -15,7 +15,7 @@ class HomeController extends Controller
         $sanPhamGiamGias = san_pham::with('danh_gias')->whereNotNull('gia_km')
             ->orderByDesc('id')
             ->paginate(3);
-
+        $sanPhamView = san_pham::orderByDesc('id')->latest('id')->paginate(6);
         // Tính phần trăm giảm giá
         $sanPhamGiamGias->getCollection()->transform(function ($sanPham) {
             if ($sanPham->gia_goc > 0 && $sanPham->gia_km > 0) {
@@ -30,12 +30,13 @@ class HomeController extends Controller
             } else {
                 $sanPham->diem_trung_binh = 0; // Nếu không có đánh giá nào
             }
+
             $title = "";
 
             return $sanPham;
         });
         $title = "Trang chủ";
-        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'title'));
+        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'sanPhamView', 'title'));
     }
     // Sản phẩm chi tiet
     public function chiTietSanPham($id)

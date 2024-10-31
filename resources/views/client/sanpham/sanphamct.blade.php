@@ -133,9 +133,9 @@
                                     <h4 class="title">Color</h4>
                                     <div class="d-flex check-box-wrap-list">
                                         @foreach ($colors as $color)
-                                            <div class="widget-check-box" style="background-color:white;">
+                                            <div class="widget-check-box">
                                                 <input type="checkbox" id="color-{{ $color->id }}" />
-                                                <label class="me-2"
+                                                <label class="me-2" style="background-color:{{ $color->ma_mau }};"
                                                     for="color-{{ $color->id }}">{{ $color->ten_color }}</label>
                                             </div>
                                         @endforeach

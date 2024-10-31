@@ -30,6 +30,8 @@ Route::get('/', [HomeController::class, 'index'])->name('client.home');
 Route::prefix('client')->group(function () {
     Route::view('/sanpham', 'client.sanpham.danhsach');
     Route::get('/sanphamchitiet/{id}', [HomeController::class, 'chiTietSanPham'])->name('sanpham.chitiet');
+    // trang cửa hàng
+    Route::get('/sanpham', [ClientSanPhamController::class, 'list'])->name('client.cuahang');
     Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
     Route::view('/taikhoan', 'client.taikhoan.dashboard');

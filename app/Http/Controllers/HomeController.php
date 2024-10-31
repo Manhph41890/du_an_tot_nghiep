@@ -33,7 +33,8 @@ class HomeController extends Controller
 
             return $sanPham;
         });
-        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias'));
+        $title = "Trang chủ";
+        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias','title'));
     }
 
     // In Data Bai viet

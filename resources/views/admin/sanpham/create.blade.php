@@ -356,8 +356,7 @@
                                             <div class="col-lg-1 d-flex align-items-end">
                                                 <button type="button"
                                                     class="btn btn-sm btn-danger remove-variant">Xóa</button>
-                                            </div>
-            `;
+                                            </div>`;
             variantContainer.appendChild(newVariant);
         });
 

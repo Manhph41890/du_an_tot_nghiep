@@ -85,4 +85,8 @@ class HomeController extends Controller
     {
         return view('client.lienhe');
     }
+    public function gioithieu()
+    {
+        return view('client.gioithieu');
+    }
 }

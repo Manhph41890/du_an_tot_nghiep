@@ -386,7 +386,7 @@
                                         <p>{{ $item?->mo_ta_san_pham }}</p>
                                     </div>
 
-                                    <form id="add-to-cart-form" method="POST" action="{{ route('cart.add') }}">
+                                    <form id="add-to-cart-form{{ $item->id }}" method="POST" action="{{ route('cart.add') }}">
                                         @csrf <!-- Thêm token CSRF để bảo mật -->
 
                                         <!-- Hidden field for san_pham_id -->
@@ -395,7 +395,7 @@
                                         <div class="d-flex mt-30">
                                             <div class="product-size col-3">
                                                 <h3 class="title">Size</h3>
-                                                <select class="mt-0" id="size_san_pham_id" name="size_san_pham_id">
+                                                <select class="mt-0" id="size_san_pham_id{{ $item->id }}" name="size_san_pham_id">
                                                     <option value="">Chọn</option>
                                                     <!-- Thêm tùy chọn "Chọn kích thước" -->
                                                     @foreach ($item->bien_the_san_phams as $bien_the)
@@ -403,7 +403,7 @@
                                                             {{ $bien_the->size->ten_size }}</option>
                                                     @endforeach
                                                 </select>
-                                                <span id="size-error" class="text-danger" style="display: none;">Vui lòng
+                                                <span id="size-error{{ $item->id }}" class="text-danger" style="display: none;">Vui lòng
                                                     chọn size!</span>
                                             </div>
                                             <div class="product-size col-3">
@@ -421,7 +421,7 @@
                                                         </div>
                                                     @endforeach
                                                 </div>
-                                                <span id="color-error" class="text-danger" style="display: none;">Vui
+                                                <span id="color-error{{ $item->id }}" class="text-danger" style="display: none;">Vui
                                                     lòng chọn màu!</span>
                                             </div>
                                         </div>
@@ -448,21 +448,19 @@
                                         </div>
                                     </form>
 
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
-                    const sizeSelect = document.getElementById('size_san_pham_id');
-                    const sizeError = document.getElementById('size-error');
-                    const colorError = document.getElementById('color-error');
+                document.getElementById('add-to-cart-form{{ $item->id }}').addEventListener('submit', function(event) {
+                    const sizeSelect = document.getElementById('size_san_pham_id{{ $item->id }}');
+                    const sizeError = document.getElementById('size-error{{ $item->id }}');
+                    const colorError = document.getElementById('color-error{{ $item->id }}');
                     let isValid = true;
 
                     // Kiểm tra size

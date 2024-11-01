@@ -55,11 +55,24 @@
                                         <input type="text" />
                                     </div>
                                 </div>
-                                <h3 class="title">Ma giam gia</h3>
+                                <h6 class="h6">Ma giam gia</h6>
                                 <div class="col-lg-12">
                                     <div class="billing-select mb-20px">
                                         <select id="inputState" class="form-select mb-3">
-                                            <option>Select a country</option>
+                                            <option>Chon ma giam gia</option>
+                                            <option>Azerbaijan</option>
+                                            <option>Bahamas</option>
+                                            <option>Bahrain</option>
+                                            <option>Bangladesh</option>
+                                            <option>Barbados</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <h6 class="h6">Phuong thuc van chuyen</h6>
+                                <div class="col-lg-12">
+                                    <div class="billing-select mb-20px">
+                                        <select id="inputState" class="form-select mb-3">
+                                            <option>Chon ma giam gia</option>
                                             <option>Azerbaijan</option>
                                             <option>Bahamas</option>
                                             <option>Bahrain</option>
@@ -100,71 +113,17 @@
                                         <li class="your-order-shipping">Shipping</li>
                                         <li>Free shipping</li>
                                     </ul>
+                                    <ul>
+                                        <li class="your-order-shipping">Shipping</li>
+                                        <li>Free shipping</li>
+                                    </ul>
                                 </div>
+
                                 <div class="your-order-total">
                                     <ul>
                                         <li class="order-total">Total</li>
                                         <li>$329</li>
                                     </ul>
-                                </div>
-                            </div>
-                            <div class="payment-method">
-                                <div class="payment-accordion element-mrg">
-                                    <div class="panel-group" id="accordion">
-                                        <div class="panel payment-accordion">
-                                            <div class="panel-heading" id="method-one">
-                                                <h4 class="panel-title">
-                                                    <a data-bs-toggle="collapse" data-parent="#accordion" href="#method1">
-                                                        Direct bank transfer
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="method1" class="panel-collapse collapse show">
-                                                <div class="panel-body">
-                                                    <p>
-                                                        Please send a check to Store Name, Store Street, Store
-                                                        Town, Store State / County, Store Postcode.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel payment-accordion">
-                                            <div class="panel-heading" id="method-two">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" data-bs-toggle="collapse" data-parent="#accordion"
-                                                        href="#method2">
-                                                        Check payments
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="method2" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <p>
-                                                        Please send a check to Store Name, Store Street, Store
-                                                        Town, Store State / County, Store Postcode.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel payment-accordion">
-                                            <div class="panel-heading" id="method-three">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" data-bs-toggle="collapse" data-parent="#accordion"
-                                                        href="#method3">
-                                                        Cash on delivery
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="method3" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <p>
-                                                        Please send a check to Store Name, Store Street, Store
-                                                        Town, Store State / County, Store Postcode.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

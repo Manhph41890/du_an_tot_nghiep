@@ -110,11 +110,11 @@
                                 </div>
                                 <div class="your-order-bottom">
                                     <ul>
-                                        <li class="your-order-shipping">Shipping</li>
+                                        <li class="your-order-shipping">Van chuyen</li>
                                         <li>Free shipping</li>
-                                    </ul>
+                                    </ul><br>
                                     <ul>
-                                        <li class="your-order-shipping">Shipping</li>
+                                        <li class="your-order-shipping">Max giam</li>
                                         <li>Free shipping</li>
                                     </ul>
                                 </div>

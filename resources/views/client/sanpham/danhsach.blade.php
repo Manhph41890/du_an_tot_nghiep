@@ -452,56 +452,54 @@
                                         </div>
                                     </form>
 
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('add-to-cart-form{{ $item->id }}').addEventListener('submit', function(
+                    event) {
+                    const sizeSelect = document.getElementById('size_san_pham_id{{ $item->id }}');
+                    const sizeError = document.getElementById('size-error{{ $item->id }}');
+                    const colorError = document.getElementById('color-error{{ $item->id }}');
+                    let isValid = true;
+
+                    // Kiểm tra size
+                    if (sizeSelect.value === "") {
+                        sizeError.style.display = 'block'; // Hiện thông báo lỗi cho size
+                        isValid = false;
+                    } else {
+                        sizeError.style.display = 'none'; // Ẩn thông báo lỗi cho size
+                    }
+
+                    // Kiểm tra nếu không có màu nào được chọn
+                    const colorRadios = document.querySelectorAll('input[name="color"]:checked');
+                    if (colorRadios.length === 0) {
+                        colorError.style.display = 'block'; // Hiện thông báo lỗi cho màu
+                        isValid = false;
+                    } else {
+                        colorError.style.display = 'none'; // Ẩn thông báo lỗi cho màu
+                    }
+
+                    // Nếu không hợp lệ, ngăn không cho gửi form
+                    if (!isValid) {
+                        event.preventDefault(); // Ngăn gửi form
+                    }
+                });
+            });
+
+
+            function showMainImage(imageUrl) {
+                // Tìm phần tử của ảnh chính
+                const mainImage = document.querySelector('.main-product .product-thumb img');
+                if (mainImage) {
+                    mainImage.src = imageUrl;
+                }
+            }
+        </script>
     @endforeach
 @endsection
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('add-to-cart-form{{ $item->id }}').addEventListener('submit', function(
-            event) {
-            const sizeSelect = document.getElementById('size_san_pham_id{{ $item->id }}');
-            const sizeError = document.getElementById('size-error{{ $item->id }}');
-            const colorError = document.getElementById('color-error{{ $item->id }}');
-            let isValid = true;
-
-            // Kiểm tra size
-            if (sizeSelect.value === "") {
-                sizeError.style.display = 'block'; // Hiện thông báo lỗi cho size
-                isValid = false;
-            } else {
-                sizeError.style.display = 'none'; // Ẩn thông báo lỗi cho size
-            }
-
-            // Kiểm tra nếu không có màu nào được chọn
-            const colorRadios = document.querySelectorAll('input[name="color"]:checked');
-            if (colorRadios.length === 0) {
-                colorError.style.display = 'block'; // Hiện thông báo lỗi cho màu
-                isValid = false;
-            } else {
-                colorError.style.display = 'none'; // Ẩn thông báo lỗi cho màu
-            }
-
-            // Nếu không hợp lệ, ngăn không cho gửi form
-            if (!isValid) {
-                event.preventDefault(); // Ngăn gửi form
-            }
-        });
-    });
-
-
-    function showMainImage(imageUrl) {
-        // Tìm phần tử của ảnh chính
-        const mainImage = document.querySelector('.main-product .product-thumb img');
-        if (mainImage) {
-            mainImage.src = imageUrl;
-        }
-    }
-</script>

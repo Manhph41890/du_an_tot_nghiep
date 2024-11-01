@@ -68,7 +68,8 @@
                                                     @csrf
                                                     <select name="size_id" class="size-select" required>
                                                         @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                                            <option value="{{ $variant->size->id }}">
+                                                            <option value="{{ $variant->size->id }}"
+                                                                {{ $variant->size->id == $item->size_san_pham_id ? 'selected' : '' }}>
                                                                 {{ $variant->size->ten_size }}
                                                             </option>
                                                         @endforeach
@@ -76,7 +77,8 @@
 
                                                     <select name="color_id" class="color-select" required>
                                                         @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                                            <option value="{{ $variant->color->id }}">
+                                                            <option value="{{ $variant->color->id }}"
+                                                                {{ $variant->color->id == $item->color_san_pham_id ? 'selected' : '' }}>
                                                                 {{ $variant->color->ten_color }}
                                                             </option>
                                                         @endforeach

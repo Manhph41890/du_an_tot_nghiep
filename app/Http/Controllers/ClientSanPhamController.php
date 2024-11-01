@@ -86,6 +86,8 @@ class ClientSanPhamController extends Controller
         // Lấy tất cả các size và màu sắc từ biến thể sản phẩm
         $sizes = $quick_view->bien_the_san_phams->pluck('size')->unique('id'); // Lấy size duy nhất
         $colors = $quick_view->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
+      
         return view('client.sanpham.quickview', compact('quick_view', 'sizes', 'colors'));
+
     }
 }

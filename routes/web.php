@@ -112,9 +112,12 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     // Route giỏ hàng
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-    // Route Đơn hàng 
-    Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+    Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
+
+
+
+    // 
 });
 
 // Route cho nhân viên (quản lý)

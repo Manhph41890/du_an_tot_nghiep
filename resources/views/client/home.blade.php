@@ -212,10 +212,10 @@
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
                                                         <span class="badge badge-danger top-right">New</span>
-                                                        <a href="single-product.html">
+                                                        <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                             <img class="first-img"
-                                                                src="{{ asset('/storage/' . $item->anh_san_pham) }}"
-                                                                alt="anh san pham" />
+                                                                src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                                alt="thumbnail" />
                                                         </a>
                                                         <!-- product links -->
                                                         <ul class="actions d-flex justify-content-center">
@@ -263,8 +263,7 @@
                                                                     data-bs-target="#add-to-cart">
                                                                     <i class="icon-basket"></i>
                                                                 </button> --}}
-                                                                {{-- add gio hang --}}
-                                                                <form action="{{ route('cart.add') }}" method="POST"
+                                                                {{-- <form action="{{ route('cart.add') }}" method="POST"
                                                                     class="d-inline">
                                                                     @csrf
                                                                     <input type="hidden" name="san_pham_id"
@@ -274,7 +273,7 @@
                                                                     <button type="submit" class="pro-btn">
                                                                         <i class="icon-basket"></i>
                                                                     </button>
-                                                                </form>
+                                                                </form> --}}
 
 
                                                             </div>
@@ -361,10 +360,10 @@
                                                                     <span
                                                                         class="text-decoration-line-through text-muted">{{ $sanPhamGg->gia_km }}</span>
                                                                 </div>
-                                                                <button class="pro-btn" data-bs-toggle="modal"
+                                                                {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                                     data-bs-target="#add-to-cart">
                                                                     <i class="icon-basket"></i>
-                                                                </button>
+                                                                </button> --}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -439,7 +438,7 @@
                                                                 data-bs-target="#add-to-cart">
                                                                 <i class="icon-basket"></i>
                                                             </button> --}}
-                                                                <form action="{{ route('cart.add') }}" method="POST"
+                                                                {{-- <form action="{{ route('cart.add') }}" method="POST"
                                                                     class="d-inline">
                                                                     @csrf
                                                                     <input type="hidden" name="san_pham_id"
@@ -449,7 +448,7 @@
                                                                     <button type="submit" class="pro-btn">
                                                                         <i class="icon-basket"></i>
                                                                     </button>
-                                                                </form>
+                                                                </form> --}}
 
 
                                                             </div>
@@ -476,11 +475,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <!-- section-title start -->
                     <div class="section-title text-center">
                         <h2 class="title pb-3 mb-3">Sản phẩm nhiều lượt xem</h2>
                     </div>
-                    <!-- section-title end -->
                     <div class="product-slider-init theme1 slick-nav">
                         @foreach ($sanPhamView as $sanphamview)
                             <div class="slider-item">
@@ -539,7 +536,7 @@
                                                     data-bs-target="#add-to-cart">
                                                     <i class="icon-basket"></i>
                                                 </button> --}}
-                                                        <form action="{{ route('cart.add') }}" method="POST"
+                                                        {{-- <form action="{{ route('cart.add') }}" method="POST"
                                                             class="d-inline">
                                                             @csrf
                                                             <input type="hidden" name="san_pham_id"
@@ -549,7 +546,7 @@
                                                             <button type="submit" class="pro-btn">
                                                                 <i class="icon-basket"></i>
                                                             </button>
-                                                        </form>
+                                                        </form> --}}
 
 
                                                     </div>

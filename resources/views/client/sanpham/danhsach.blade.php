@@ -208,15 +208,17 @@
                                 <div class="sidbar-widget mt-10">
                                     <h4 class="title">LỌC THEO</h4>
                                     <h4 class="sub-title pt-10">Danh mục</h4>
-                                    @foreach ($danhmucs as $item)
-                                        <div class="widget-check-box">
-                                            <input type="checkbox" id="danhmuc_{{ $item->id }}" name="danhmuc[]"
-                                                value="{{ $item->id }}"
-                                                @if (isset($request->danhmuc) && in_array($item->id, $request->danhmuc)) checked @endif />
-                                            <label for="danhmuc_{{ $item->id }}">{{ $item->ten_danh_muc }}
-                                                <span> ({{ $item->soluong_sp_dm }}) </span></label>
-                                        </div>
-                                    @endforeach
+                                    <div class="form-group">
+                                        @foreach ($danhmucs as $item)
+                                            <div class="widget-check-box">
+                                                <input type="checkbox" id="danhmuc_{{ $item->id }}" name="danhmuc[]"
+                                                    value="{{ $item->id }}"
+                                                    @if (isset($request->danhmuc) && in_array($item->id, $request->danhmuc)) checked @endif />
+                                                <label for="danhmuc_{{ $item->id }}">{{ $item->ten_danh_muc }}
+                                                    <span> ({{ $item->soluong_sp_dm }}) </span></label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="sidbar-widget mt-10">
                                     <h4 class="sub-title pt-10">Giá</h4>
@@ -243,29 +245,33 @@
                                 </div>
                                 <div class="sidbar-widget mt-10">
                                     <h4 class="sub-title">Size</h4>
-                                    @foreach ($size_sidebar as $item)
-                                        <div class="widget-check-box">
-                                            <input type="checkbox" id="size-{{ $item->id }}" name="size[]"
-                                                value="{{ $item->id }}"
-                                                @if (isset($request->size) && in_array($item->id, $request->size)) checked @endif />
-                                            <label for="size-{{ $item->id }}">{{ $item->ten_size }}
-                                                <span>({{ $item->sl_size }})</span></label>
-                                        </div>
-                                    @endforeach
+                                    <div class="form-group">
+                                        @foreach ($size_sidebar as $item)
+                                            <div class="widget-check-box">
+                                                <input type="checkbox" id="size-{{ $item->id }}" name="size[]"
+                                                    value="{{ $item->id }}"
+                                                    @if (isset($request->size) && in_array($item->id, $request->size)) checked @endif />
+                                                <label for="size-{{ $item->id }}">{{ $item->ten_size }}
+                                                    <span>({{ $item->sl_size }})</span></label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="sidbar-widget mt-10">
                                     <h4 class="sub-title">Color</h4>
-                                    @foreach ($color_sidebar as $item)
-                                        <div class="widget-check-box color-grey">
-                                            <input type="checkbox" id="color-{{ $item->id }}" name="color[]"
-                                                value="{{ $item->id }}"
-                                                @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
-                                            <label for="color-{{ $item->id }}"
-                                                style="background-color: {{ $item->ma_mau }} !important;">
-                                                {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
-                                            </label>
-                                        </div>
-                                    @endforeach
+                                    <div class="form-group">
+                                        @foreach ($color_sidebar as $item)
+                                            <div class="widget-check-box color-grey">
+                                                <input type="checkbox" id="color-{{ $item->id }}" name="color[]"
+                                                    value="{{ $item->id }}"
+                                                    @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
+                                                <label for="color-{{ $item->id }}"
+                                                    style="background-color: {{ $item->ma_mau }} !important;">
+                                                    {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Lọc</button>
                             </form>
@@ -284,7 +290,6 @@
             </div>
         </div>
     </div>
-
 
 
     <!-- Modal cho từng sản phẩm -->
@@ -446,5 +451,44 @@
                 </div>
             </div>
         </div>
+        <script>
+            document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+                // Kiểm tra nếu size chưa được chọn
+                const sizeSelect = document.getElementById('size_san_pham_id');
+                const sizeError = document.getElementById('size-error');
+                const colorError = document.getElementById('color-error');
+                let isValid = true;
+
+                // Kiểm tra size
+                if (sizeSelect.value === "") {
+                    sizeError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    sizeError.style.display = 'none';
+                }
+
+                // Kiểm tra nếu không có màu nào được chọn
+                const colorCheckboxes = document.querySelectorAll('input[name="color[]"]:checked');
+                if (colorCheckboxes.length === 0) {
+                    colorError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    colorError.style.display = 'none';
+                }
+
+                // Nếu không hợp lệ, ngăn không cho gửi form
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+
+            function showMainImage(imageUrl) {
+                // Tìm phần tử của ảnh chính
+                const mainImage = document.querySelector('.main-product .product-thumb img');
+                if (mainImage) {
+                    mainImage.src = imageUrl;
+                }
+            }
+        </script>
     @endforeach
 @endsection

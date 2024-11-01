@@ -226,7 +226,7 @@ class AuthController extends Controller
             case 'nhan_vien':
                 return redirect('/dashboard')->with('success', 'Đăng nhập thành công');
             case 'khach_hang':
-                return redirect('/customer')->with('success', 'Đăng nhập thành công');
+                return redirect('/')->with('success', 'Đăng nhập thành công');
             default:
                 Auth::logout();
                 return redirect()->route('auth.login')->withErrors(['error' => 'Chức vụ không tồn tại']);

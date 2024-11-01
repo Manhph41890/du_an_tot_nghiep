@@ -4,6 +4,7 @@ use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BaiVietController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\ClientSanPhamController;
@@ -28,10 +29,13 @@ Route::get('/', [HomeController::class, 'index'])->name('client.home');
 
 // Route cho client
 Route::prefix('client')->group(function () {
-    Route::view('/sanpham', 'client.sanpham.danhsach');
+
     Route::get('/sanphamchitiet/{id}', [HomeController::class, 'chiTietSanPham'])->name('sanpham.chitiet');
+
     // trang cửa hàng
     Route::get('/sanpham', [ClientSanPhamController::class, 'list'])->name('client.cuahang');
+    Route::get('/sanpham/{id}', [ClientSanPhamController::class, 'quick_view'])->name('client.quickview');
+
     Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
     Route::view('/taikhoan', 'client.taikhoan.dashboard');
@@ -105,6 +109,13 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::get('/sanpham/search', [SanPhamController::class, 'search'])->name('sanpham.search');
+    // Route giỏ hàng
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+
+
+    // 
 });
 
 // Route cho nhân viên (quản lý)

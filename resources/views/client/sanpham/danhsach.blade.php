@@ -300,27 +300,66 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-8 mx-auto col-lg-5 mb-5 mb-lg-0">
-                                <div class="product-sync-init mb-20">
-                                    <div class="single-product">
-                                        <div class="product-thumb">
-                                            <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
-                                                alt="product-thumb" />
+                                <div class="product-sync-init mb-20 slick-initialized slick-slider">
+                                    <div class="slick-list">
+                                        <div class="slick-track" style="opacity: 1; width: 1544px;">
+                                            <div class="single-product slick-slide slick-current slick-active"
+                                                data-slick-index="0" aria-hidden="false" tabindex="0"
+                                                style="width: 386px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;">
+                                                <div class="product-thumb">
+                                                    <a href="javascript:void(0)">
+                                                        <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
+                                                            alt="product-thumb" />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            @foreach ($item->bien_the_san_phams as $index => $bien_the)
+                                                <div class="single-product slick-slide"
+                                                    data-slick-index="{{ $index + 1 }}" aria-hidden="true"
+                                                    tabindex="-1"
+                                                    style="width: 386px; position: relative; left: -{{ ($index + 1) * 386 }}px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms;">
+                                                    <div class="product-thumb">
+                                                        <a href="javascript:void(0)">
+                                                            <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
+                                                                alt="product-thumb" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product-sync-nav">
-                                    @foreach ($item->bien_the_san_phams as $bien_the)
-                                        <div class="single-product">
-                                            <div class="product-thumb">
-                                                <a href="javascript:void(0)">
-                                                    <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
-                                                        alt="product-thumb" />
-                                                </a>
+                                <div class="product-sync-nav slick-initialized slick-slider">
+                                    <div class="slick-list">
+                                        <div class="slick-track"
+                                            style="opacity: 1; width: 388px; transform: translate3d(0px, 0px, 0px);">
+                                            <div class="single-product slick-slide slick-current slick-active"
+                                                data-slick-index="0" aria-hidden="false" tabindex="0"
+                                                style="width: 97px;">
+                                                <div class="product-thumb">
+                                                    <a href="javascript:void(0)">
+                                                        <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
+                                                            alt="product-thumb" />
+                                                    </a>
+                                                </div>
                                             </div>
+                                            @foreach ($item->bien_the_san_phams as $index => $bien_the)
+                                                <div class="single-product slick-slide"
+                                                    data-slick-index="{{ $index + 1 }}" aria-hidden="false"
+                                                    tabindex="0" style="width: 97px;">
+                                                    <div class="product-thumb">
+                                                        <a href="javascript:void(0)">
+                                                            <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
+                                                                alt="product-thumb" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                    @endforeach
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-7">
                                 <div class="modal-product-info">
                                     <div class="product-head">

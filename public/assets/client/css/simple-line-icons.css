@@ -830,9 +830,7 @@
 }
 
 .icon-magnifier:before {
-    font-family: 'Font Awesome 5 Free';
-    content: "\f06e";
-    font-weight: 900;
+    content: "\e090";
 }
 
 

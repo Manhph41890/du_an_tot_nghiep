@@ -59,11 +59,14 @@ class HomeController extends Controller
         }
 
         // Lấy tất cả các size và màu sắc từ biến thể sản phẩm
+        $uniqueColors = $sanPhamCT->bien_the_san_phams->pluck('color')->unique('id');
+
         $sizes = $sanPhamCT->bien_the_san_phams->pluck('size')->unique('id'); // Lấy size duy nhất
         $colors = $sanPhamCT->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
+        $sanLienQuan = san_pham::with('danh_muc')->where('id', '!=', $id)->orderByDesc('id')->get();
         $title = "";
 
-        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title'));
+        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title', 'uniqueColors', 'sanLienQuan'));
     }
 
     // In Data Bai viet

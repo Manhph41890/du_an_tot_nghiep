@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\ClientSanPhamController;
@@ -34,7 +35,7 @@ Route::prefix('client')->group(function () {
 
     // trang cửa hàng
     Route::get('/sanpham', [ClientSanPhamController::class, 'list'])->name('client.cuahang');
-    Route::get('/sanpham/{id}', [ClientSanPhamController::class, 'quick_view'])->name('client.quickview');
+    // Route::get('/sanpham/{id}', [ClientSanPhamController::class, 'quick_view'])->name('client.quickview');
 
     Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
@@ -42,7 +43,6 @@ Route::prefix('client')->group(function () {
     Route::view('/giohang', 'client.giohang');
     Route::view('/gioithieu', 'client.gioithieu');
     Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
-    Route::view('/thanhtoan', 'client.thanhtoan');
 });
 
 // Route đăng nhập
@@ -112,7 +112,9 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     // Route giỏ hàng
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
+
 
 
     // 

@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\ClientSanPhamController;
@@ -42,7 +43,6 @@ Route::prefix('client')->group(function () {
     Route::view('/giohang', 'client.giohang');
     Route::view('/gioithieu', 'client.gioithieu');
     Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
-    Route::view('/thanhtoan', 'client.thanhtoan');
 });
 
 // Route đăng nhập

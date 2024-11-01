@@ -12,7 +12,7 @@
                 <ul class="d-flex flex-wrap">
 
                     <li class="my-2 mx-2">
-                        <a class="search search-toggle" href="javascript:void(0)">
+                        <a class="search search-toggle" href="">
                             <i class="icon-magnifier"></i> Tìm kiếm</a>
                     </li>
                 </ul>
@@ -271,7 +271,8 @@
                                     <a class="offcanvas-toggle" href="#offcanvas-cart">
                                         <span class="position-relative">
                                             <i class="icon-bag"></i>
-                                            <span class="badge cbdg1">3</span>
+                                            <span class="badge cbdg1">{{ $cartItemsCount }}</span>
+                                            {{-- tổng số sản phẩm có trong giỏ hàng --}}
                                         </span>
                                     </a>
                                 </li>

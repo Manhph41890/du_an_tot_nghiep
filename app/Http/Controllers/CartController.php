@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\bien_the_san_pham;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\color_san_pham;
@@ -93,33 +94,40 @@ class CartController extends Controller
 
 
 
-    // Cập nhật số lượng sản phẩm trong giỏ hàng
-    // public function update(Request $request, $id)
-    // {
-    //     // Xác thực dữ liệu
-    //     $validatedData = $request->validate([
-    //         'size_san_pham_id' => 'nullable|exists:size_san_phams,id',
-    //         'color' => 'nullable|array',
-    //     ]);
+    public function update(Request $request, $id)
+    {
+        // Xác thực dữ liệu đầu vào
+        $request->validate([
+            'size_san_pham_id' => 'required|exists:size_san_phams,id',
+            'color_san_pham_id' => 'required|exists:color_san_phams,id', // Đã sửa tên trường
+            'quantity' => 'required|integer|min:1',
+        ]);
 
-    //     // Lấy thông tin sản phẩm trong giỏ hàng
-    //     $cartItem = CartItem::findOrFail($id);
+        // Tìm giỏ hàng dựa trên ID
+        $cartItem = CartItem::findOrFail($id);
+        $cartItem->size_san_pham_id = $request->size_san_pham_id;
+        $cartItem->color_san_pham_id = $request->color_san_pham_id; // Đã sửa tên trường
+        $cartItem->quantity = $request->quantity;
 
-    //     // Kiểm tra xem sản phẩm có thuộc giỏ hàng của người dùng hiện tại không
-    //     if ($cartItem->cart->user_id !== auth()->id()) {
-    //         return redirect()->route('cart.index')->with('error', 'Bạn không có quyền sửa đổi sản phẩm này trong giỏ hàng.');
-    //     }
+        // Tính toán lại giá nếu cần thiết
+        $variant = bien_the_san_pham::where('san_pham_id', $cartItem->san_pham_id)
+            ->where('size_san_pham_id', $request->size_san_pham_id)
+            ->where('color_san_pham_id', $request->color_san_pham_id) // Đã sửa tên trường
+            ->first();
 
-    //     // Cập nhật thông tin
-    //     $cartItem->size_san_pham_id = $validatedData['size_san_pham_id'];
-    //     $cartItem->color_san_pham_id = $validatedData['color_id'][0]; // Lấy màu đầu tiên
+        // Cập nhật giá
+        if ($variant) {
+            $cartItem->price = $variant->gia; // Giả sử giá của biến thể sản phẩm
+        } else {
+            return redirect()->route('cart.index')->with('error', 'Biến thể sản phẩm không tồn tại.');
+        }
 
-    //     // Lưu vào database
-    //     $cartItem->save();
+        // Lưu thay đổi
+        $cartItem->save();
 
-    //     // Chuyển hướng tới trang giỏ hàng với thông báo thành công
-    //     return redirect()->route('cart.index')->with('success', 'Cập nhật sản phẩm trong giỏ hàng thành công!');
-    // }
+        // Trả về với thông báo thành công
+        return redirect()->route('cart.index')->with('success', 'Giỏ hàng đã được cập nhật thành công!');
+    }
 
 
 

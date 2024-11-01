@@ -64,9 +64,12 @@
                                                 <span class="whish-title">{{ $item->san_pham->ten_san_pham }}</span>
                                             </td>
                                             <td class="text-center">
-                                                <form action="" method="" class="update-cart-form" data-id="">
+                                                {{-- form cập nhât đây nha --}}
+                                                <form action="{{ route('cart.update', $item->id) }}" method="POST"
+                                                    class="update-cart-form" data-id="{{ $item->id }}">
                                                     @csrf
-                                                    <select name="size_id" class="size-select" required>
+                                                    @method('PUT')
+                                                    <select name="size_san_pham_id" class="size-select" required>
                                                         @foreach ($item->san_pham->bien_the_san_phams as $variant)
                                                             <option value="{{ $variant->size->id }}"
                                                                 {{ $variant->size->id == $item->size_san_pham_id ? 'selected' : '' }}>
@@ -75,7 +78,7 @@
                                                         @endforeach
                                                     </select>
 
-                                                    <select name="color_id" class="color-select" required>
+                                                    <select name="color_san_pham_id" class="color-select" required>
                                                         @foreach ($item->san_pham->bien_the_san_phams as $variant)
                                                             <option value="{{ $variant->color->id }}"
                                                                 {{ $variant->color->id == $item->color_san_pham_id ? 'selected' : '' }}>
@@ -83,14 +86,13 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    <button type="submit" class="btn btn-primary update-cart-btn">Cập
-                                                        nhật</button>
+
+                                                    <input type="number" name="quantity" value="{{ $item->quantity }}"
+                                                        min="1" required class="quantity-input">
+
+                                                    <button type="submit" class="btn btn-primary btn-sm">Cập nhật</button>
                                                 </form>
                                             </td>
-
-
-
-
                                             <td class="text-center">
                                                 <span class="badge badge-danger position-static">Còn hàng</span>
                                             </td>
@@ -103,7 +105,6 @@
                                                     đ</span>
                                             </td>
                                             <td class="text-center">
-
                                                 <form action="{{ route('cart.removeFromCart', $item->id) }}" method="POST"
                                                     onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?');">
                                                     @csrf
@@ -111,12 +112,6 @@
                                                         <span class="trash"><i class="fas fa-trash-alt"></i> Xóa</span>
                                                     </button>
                                                 </form>
-                                                <form action="" method="" style="margin-top: 30px">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-success ms-2">Thanh toán</button>
-                                                </form>
-
-
                                             </td>
                                         </tr>
                                     @endforeach
@@ -152,7 +147,10 @@
                                         <li class="order-total">Tổng cộng</li>
                                         <li>
                                             @php
-                                                $totalPrice = $cartItems->sum('price'); // Tính tổng giá
+                                                $totalPrice = 0; // Khởi tạo biến tổng giá
+                                                foreach ($cartItems as $item) {
+                                                    $totalPrice += $item->price * $item->quantity; // Cộng dồn giá của từng sản phẩm
+                                                }
                                             @endphp
                                             {{ number_format($totalPrice, 0, ',', '.') . ' đ' }}
                                         </li>
@@ -169,6 +167,7 @@
             </div>
         </div>
     </div>
+
     <script>
         // 
         $('.remove-cart-item').on('click', function(e) {

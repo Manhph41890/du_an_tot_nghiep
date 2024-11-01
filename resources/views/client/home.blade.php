@@ -263,6 +263,7 @@
                                                                     data-bs-target="#add-to-cart">
                                                                     <i class="icon-basket"></i>
                                                                 </button> --}}
+                                                                {{-- add gio hang --}}
                                                                 <form action="{{ route('cart.add') }}" method="POST"
                                                                     class="d-inline">
                                                                     @csrf

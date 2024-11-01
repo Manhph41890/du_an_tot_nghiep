@@ -13,10 +13,12 @@ class CartController extends Controller
     public function index()
     {
         $cart = session()->get('cart', []);
-        return view('client.cart.index', compact('cart'));
+        $title = "";
+        return view('client.cart.index', compact('cart', 'title'));
     }
     // Thêm sản phẩm vào giỏ hàng
     public function add(Request $request)
+
     {
         $productId = $request->input('san_pham_id');
         $so_luong = $request->input('so_luong', 1);
@@ -40,6 +42,7 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'Thêm giỏ hàng thành công!');
     }
+
     public function remove(Request $request)
     {
         $productId = $request->input('san_pham_id');

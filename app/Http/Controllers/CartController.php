@@ -35,12 +35,21 @@ class CartController extends Controller
     // Thêm sản phẩm vào giỏ hàng
     public function add(Request $request)
     {
-        // Xác thực dữ liệu
+        // Xác thực dữ liệu đầu vào
         $validatedData = $request->validate([
             'san_pham_id' => 'required|exists:san_phams,id',
             'size_san_pham_id' => 'required|exists:size_san_phams,id',
-            'color' => 'required|array',
+            'color' => 'required|array|min:1',  // Yêu cầu ít nhất 1 màu được chọn
             'quantity' => 'required|integer|min:1|max:10',
+        ], [
+            'san_pham_id.required' => 'Sản phẩm không hợp lệ.',
+            'size_san_pham_id.required' => 'Vui lòng chọn size sản phẩm.',
+            'color.required' => 'Vui lòng chọn màu sản phẩm.',
+            'color.min' => 'Vui lòng chọn ít nhất một màu cho sản phẩm.',
+            'quantity.required' => 'Vui lòng nhập số lượng.',
+            'quantity.integer' => 'Số lượng phải là số nguyên.',
+            'quantity.min' => 'Số lượng tối thiểu là 1.',
+            'quantity.max' => 'Số lượng tối đa là 10.',
         ]);
 
         // Lấy thông tin sản phẩm
@@ -49,20 +58,11 @@ class CartController extends Controller
         // Lấy user_id của người dùng hiện tại
         $userId = auth()->id();
 
-        // Kiểm tra xem giỏ hàng có tồn tại hay không
-        $cart = Cart::where('user_id', $userId)->first();
-
-        if (!$cart) {
-            // Nếu không tồn tại giỏ hàng, tạo mới
-            $cart = new Cart();
-            $cart->user_id = $userId; // Gán user_id
-            $cart->save(); // Lưu giỏ hàng mới
-        }
-
-        $cartId = $cart->id;
+        // Kiểm tra xem giỏ hàng của người dùng hiện tại đã tồn tại chưa
+        $cart = Cart::firstOrCreate(['user_id' => $userId]);
 
         // Tạo hoặc cập nhật thông tin giỏ hàng
-        $cartItem = CartItem::where('cart_id', $cartId)
+        $cartItem = CartItem::where('cart_id', $cart->id)
             ->where('san_pham_id', $sanPham->id)
             ->where('size_san_pham_id', $validatedData['size_san_pham_id'])
             ->where('color_san_pham_id', $validatedData['color'][0]) // Lấy màu đầu tiên
@@ -74,21 +74,24 @@ class CartController extends Controller
         } else {
             // Nếu sản phẩm chưa tồn tại, tạo mới
             $cartItem = new CartItem();
-            $cartItem->cart_id = $cartId; // Thêm cart_id
+            $cartItem->cart_id = $cart->id;
             $cartItem->san_pham_id = $sanPham->id;
             $cartItem->size_san_pham_id = $validatedData['size_san_pham_id'];
-            $cartItem->color_san_pham_id = $validatedData['color'][0]; // Giả định lưu màu đầu tiên
+            $cartItem->color_san_pham_id = $validatedData['color'][0]; // Lưu màu đầu tiên
             $cartItem->quantity = $validatedData['quantity'];
             $cartItem->price = $sanPham->gia_km; // Thêm giá sản phẩm vào giỏ hàng
-
         }
 
-        // Lưu vào database
+        // Lưu CartItem vào database
         $cartItem->save();
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'redirect' => route('cart.index')]);
+        }
 
         // Chuyển hướng tới trang giỏ hàng với thông báo thành công
-        return redirect()->route('cart.index')->with('success', 'Product added to cart successfully!');
+        return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng thành công!');
     }
+
 
     // Cập nhật số lượng sản phẩm trong giỏ hàng
     // public function update(Request $request, $id)
@@ -142,5 +145,25 @@ class CartController extends Controller
         }
 
         return redirect()->route('cart.index')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng');
+    }
+    public function showCart()
+    {
+        // Lấy user_id của người dùng hiện tại
+        $userId = auth()->id();
+
+        // Lấy cart của người dùng hiện tại
+        $cart = Cart::where('user_id', $userId)->first();
+
+        // Nếu không có giỏ hàng, số lượng sản phẩm sẽ là 0
+        if (!$cart) {
+            $cartItemsCount = 0;
+        } else {
+            // Đếm số lượng sản phẩm khác nhau trong giỏ hàng
+            $cartItemsCount = CartItem::where('cart_id', $cart->id)
+                ->distinct('san_pham_id')
+                ->count('san_pham_id');
+        }
+
+        return view('client.partials.header', compact('cartItemsCount'));
     }
 }

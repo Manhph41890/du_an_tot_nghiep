@@ -123,19 +123,22 @@
                                 class="img-fluid" />
                         </div>
 
-                        <form action="{{ route('cart.add') }}" method="POST">
+                        <form id="add-to-cart-form" action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             <input type="hidden" name="san_pham_id" value="{{ $sanPhamCT->id }}">
                             <div class="product-footer">
                                 <div class="d-flex">
                                     <div class="product-size me-5">
                                         <h3 class="title">Size</h3>
-                                        <select name="size_san_pham_id" required>
+                                        <select name="size_san_pham_id" id="size_san_pham_id">
+                                            <option value="">--Chọn size--</option>
                                             @foreach ($sanPhamCT->bien_the_san_phams as $bienThe)
                                                 <option value="{{ $bienThe->size->id }}">{{ $bienThe->size->ten_size }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        <span id="size-error" class="text-danger" style="display: none;">Vui lòng chọn
+                                            size!</span>
                                     </div>
 
                                     <div class="check-box ms-5">
@@ -150,13 +153,16 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        <span id="color-error" class="text-danger" style="display: none;">Vui lòng chọn
+                                            màu!</span>
+
                                     </div>
 
                                 </div>
                                 <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-20">
                                     <div class="count d-flex">
-                                        <input type="number" name="quantity" min="1" max="10" step="1"
-                                            value="1" required />
+                                        <input type="number" name="quantity" min="1" max="10"
+                                            step="1" value="1" required />
                                         <div class="button-group">
                                             <button class="count-btn increment">
                                                 <i class="fas fa-chevron-up"></i>
@@ -636,6 +642,36 @@
         </div>
     </section>
     <script>
+        document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+            // Kiểm tra nếu size chưa được chọn
+            const sizeSelect = document.getElementById('size_san_pham_id');
+            const sizeError = document.getElementById('size-error');
+            const colorError = document.getElementById('color-error');
+            let isValid = true;
+
+            // Kiểm tra size
+            if (sizeSelect.value === "") {
+                sizeError.style.display = 'block';
+                isValid = false;
+            } else {
+                sizeError.style.display = 'none';
+            }
+
+            // Kiểm tra nếu không có màu nào được chọn
+            const colorCheckboxes = document.querySelectorAll('input[name="color[]"]:checked');
+            if (colorCheckboxes.length === 0) {
+                colorError.style.display = 'block';
+                isValid = false;
+            } else {
+                colorError.style.display = 'none';
+            }
+
+            // Nếu không hợp lệ, ngăn không cho gửi form
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
         function showMainImage(imageUrl) {
             // Tìm phần tử của ảnh chính
             const mainImage = document.querySelector('.main-product .product-thumb img');

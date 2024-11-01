@@ -109,6 +109,10 @@
                                                         <span class="trash"><i class="fas fa-trash-alt"></i> Xóa</span>
                                                     </button>
                                                 </form>
+                                                <form action="" method="" style="margin-top: 30px">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success ms-2">Thanh toán</button>
+                                                </form>
 
 
                                             </td>

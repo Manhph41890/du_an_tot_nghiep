@@ -234,8 +234,9 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="{{ route('client.home') }}"><img
-                                src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
+                        <a href="{{ route('client.home') }}">
+                            <im src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" />
+                        </a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
@@ -247,74 +248,8 @@
                             <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
                         </li>
                         <li>
-                            <a href="#">Giới thiệu <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="about-us.html">About Page</a></li>
-                                <li><a href="cart.html">Cart Page</a></li>
-                                <li><a href="checkout.html">Checkout Page</a></li>
-                                <li><a href="compare.html">Compare Page</a></li>
-                                <li><a href="login.html">Login &amp; Register Page</a></li>
-                                <li><a href="myaccount.html">Account Page</a></li>
-                                <li><a href="wishlist.html">Wishlist Page</a></li>
-                            </ul>
+                            <a href="#">Giới thiệu <i class="menu-text"></i></a>
                         </li>
-                        <li class="position-static">
-                            <a href="#">Danh mục <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="mega-menu row">
-                                <!-- Phần danh mục, chia thành các cột ngang -->
-                                <li class="col-md-6 col-lg-3">
-                                    <ul class="list-unstyled">
-                                        @foreach ($danhmucs->take(4) as $item)
-                                            <li><a href="{{ $item->id }}"
-                                                    class="text-decoration-none text-dark">{{ $item?->ten_danh_muc }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="col-md-6 col-lg-3">
-                                    <ul class="list-unstyled">
-                                        @foreach ($danhmucs->slice(4, 4) as $item)
-                                            <li><a href="{{ $item->id }}"
-                                                    class="text-decoration-none text-dark">{{ $item?->ten_danh_muc }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-
-                                <li class="col-md-6 col-lg-3">
-                                    <ul class="list-unstyled">
-                                        @foreach ($danhmucs->slice(8, 4) as $item)
-                                            <li><a href="{{ $item->id }}"
-                                                    class="text-decoration-none text-dark">{{ $item?->ten_danh_muc }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-
-                                <li class="col-md-6 col-lg-3">
-                                    <ul class="list-unstyled">
-                                        @foreach ($danhmucs->slice(12, 4) as $item)
-                                            <li><a href="{{ $item->id }}"
-                                                    class="text-decoration-none text-dark">{{ $item?->ten_danh_muc }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-
-                                <!-- Phần hình ảnh -->
-                                <li class="col-6 mt-4">
-                                    <a href="single-product.html" class="zoom-in overflow-hidden"><img
-                                            src="{{ asset('assets/client/images/mega-menu/1.jpg') }}"
-                                            alt="img"></a>
-                                </li>
-                                <li class="col-6 mt-4">
-                                    <a href="single-product.html" class="zoom-in overflow-hidden"><img
-                                            src="{{ asset('assets/client/images/mega-menu/2.jpg') }}"
-                                            alt="img"></a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>
                         </li>

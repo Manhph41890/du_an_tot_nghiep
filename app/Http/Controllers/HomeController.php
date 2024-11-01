@@ -12,12 +12,34 @@ class HomeController extends Controller
     //Sản phẩm Home
     public function index()
     {
+        // Lấy sản phẩm mới
         $sanPhamMois = san_pham::orderByDesc('id')->latest('id')->paginate(6);
+
+        // Tăng lượt xem cho sản phẩm mới nếu chưa xem
+        foreach ($sanPhamMois as $sanPham) {
+            if (!session()->has('viewed_products') || !in_array($sanPham->id, session('viewed_products'))) {
+                $sanPham->increment('views');
+                session()->push('viewed_products', $sanPham->id); // Ghi nhớ sản phẩm đã xem
+            }
+        }
+
+        // Lấy sản phẩm giảm giá
         $sanPhamGiamGias = san_pham::with('danh_gias')->whereNotNull('gia_km')
             ->orderByDesc('id')
             ->paginate(3);
-        $sanPhamView = san_pham::orderByDesc('id')->latest('id')->paginate(6);
-        // Tính phần trăm giảm giá
+
+        // Tăng lượt xem cho sản phẩm giảm giá nếu chưa xem
+        foreach ($sanPhamGiamGias as $sanPham) {
+            if (!session()->has('viewed_products') || !in_array($sanPham->id, session('viewed_products'))) {
+                $sanPham->increment('views');
+                session()->push('viewed_products', $sanPham->id); // Ghi nhớ sản phẩm đã xem
+            }
+        }
+
+        // Lấy sản phẩm xem nhiều
+        $sanPhamView = san_pham::orderByDesc('views', 'desc')->paginate(6);
+
+        // Tính phần trăm giảm giá cho sản phẩm giảm giá
         $sanPhamGiamGias->getCollection()->transform(function ($sanPham) {
             if ($sanPham->gia_goc > 0 && $sanPham->gia_km > 0) {
                 $sanPham->phan_tram_giam_gia = round((1 - ($sanPham->gia_km / $sanPham->gia_goc)) * 100);
@@ -33,9 +55,11 @@ class HomeController extends Controller
             }
             return $sanPham;
         });
+
         $title = "Trang chủ";
         $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
         $anhDMuc = danh_muc::all();
+
         return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }
     // Sản phẩm chi tiet

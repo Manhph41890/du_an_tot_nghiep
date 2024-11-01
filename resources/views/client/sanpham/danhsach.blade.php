@@ -386,55 +386,69 @@
                                         <p>{{ $item?->mo_ta_san_pham }}</p>
                                     </div>
 
-                                    <div class="d-flex mt-30">
-                                        <div class="product-size col-3">
-                                            <h3 class="title">Size</h3>
-                                            <select class="mt-0">
-                                                @foreach ($item->bien_the_san_phams as $bien_the)
-                                                    <option value="{{ $bien_the->size->id }}">
-                                                        {{ $bien_the->size->ten_size }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="product-size col-3">
-                                            <h3 class="title">Màu sắc</h3>
-                                            <div class="d-flex">
-                                                @foreach ($item->bien_the_san_phams as $bien_the)
-                                                    <div class="widget-check-box color-grey">
-                                                        <input type="radio"
-                                                            id="color-{{ $item->id }}-{{ $bien_the->id }}"
-                                                            name="color[{{ $item->id }}]"
-                                                            value="{{ $bien_the->color->id }}"
-                                                            @if (isset($request->color[$item->id]) && $request->color[$item->id] == $bien_the->color->id) checked @endif />
-                                                        <label for="color-{{ $item->id }}-{{ $bien_the->id }}">
-                                                            {{ $bien_the->color->ten_color }}
-                                                        </label>
-                                                    </div>
-                                                @endforeach
+                                    <form id="add-to-cart-form" method="POST" action="{{ route('cart.add') }}">
+                                        @csrf <!-- Thêm token CSRF để bảo mật -->
+
+                                        <!-- Hidden field for san_pham_id -->
+                                        <input type="hidden" name="san_pham_id" value="{{ $item->id }}">
+
+                                        <div class="d-flex mt-30">
+                                            <div class="product-size col-3">
+                                                <h3 class="title">Size</h3>
+                                                <select class="mt-0" id="size_san_pham_id" name="size_san_pham_id">
+                                                    <option value="">Chọn</option>
+                                                    <!-- Thêm tùy chọn "Chọn kích thước" -->
+                                                    @foreach ($item->bien_the_san_phams as $bien_the)
+                                                        <option value="{{ $bien_the->size->id }}">
+                                                            {{ $bien_the->size->ten_size }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span id="size-error" class="text-danger" style="display: none;">Vui lòng
+                                                    chọn size!</span>
+                                            </div>
+                                            <div class="product-size col-3">
+                                                <h3 class="title">Màu sắc</h3>
+                                                <div class="d-flex">
+                                                    @foreach ($item->bien_the_san_phams as $bien_the)
+                                                        <div class="widget-check-box color-grey">
+                                                            <input type="radio"
+                                                                id="color-{{ $item->id }}-{{ $bien_the->id }}"
+                                                                name="color" value="{{ $bien_the->color->id }}"
+                                                                @if (isset($request->color[$item->id]) && $request->color[$item->id] == $bien_the->color->id) checked @endif />
+                                                            <label for="color-{{ $item->id }}-{{ $bien_the->id }}">
+                                                                {{ $bien_the->color->ten_color }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <span id="color-error" class="text-danger" style="display: none;">Vui
+                                                    lòng chọn màu!</span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-footer">
-                                        <div class="product-count style d-flex flex-column flex-sm-row my-4">
-                                            <div class="count d-flex">
-                                                <input type="number" min="1" max="10" step="1"
-                                                    value="1" id="quantity-{{ $item->id }}" />
-                                                <div class="button-group">
-                                                    <button class="count-btn increment"><i
-                                                            class="fas fa-chevron-up"></i></button>
-                                                    <button class="count-btn decrement"><i
-                                                            class="fas fa-chevron-down"></i></button>
+                                        <div class="product-footer">
+                                            <div class="product-count style d-flex flex-column flex-sm-row my-4">
+                                                <div class="count d-flex">
+                                                    <input type="number" min="1" max="10" step="1"
+                                                        value="1" id="quantity-{{ $item->id }}"
+                                                        name="quantity" />
+                                                    <div class="button-group">
+                                                        <button type="button" class="count-btn increment"><i
+                                                                class="fas fa-chevron-up"></i></button>
+                                                        <button type="button" class="count-btn decrement"><i
+                                                                class="fas fa-chevron-down"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
+                                                        <span class="me-2"><i class="ion-android-add"></i></span>
+                                                        Thêm giỏ hàng
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <button class="btn btn-dark btn--xl mt-5 mt-sm-0"
-                                                    onclick="addToCart('{{ $item->id }}')">
-                                                    <span class="me-2"><i class="ion-android-add"></i></span>
-                                                    Thêm giỏ hàng
-                                                </button>
-                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
+
+
                                 </div>
                             </div>
                         </div>
@@ -444,35 +458,37 @@
             </div>
         </div>
         <script>
-            document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
-                // Kiểm tra nếu size chưa được chọn
-                const sizeSelect = document.getElementById('size_san_pham_id');
-                const sizeError = document.getElementById('size-error');
-                const colorError = document.getElementById('color-error');
-                let isValid = true;
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+                    const sizeSelect = document.getElementById('size_san_pham_id');
+                    const sizeError = document.getElementById('size-error');
+                    const colorError = document.getElementById('color-error');
+                    let isValid = true;
 
-                // Kiểm tra size
-                if (sizeSelect.value === "") {
-                    sizeError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    sizeError.style.display = 'none';
-                }
+                    // Kiểm tra size
+                    if (sizeSelect.value === "") {
+                        sizeError.style.display = 'block'; // Hiện thông báo lỗi cho size
+                        isValid = false;
+                    } else {
+                        sizeError.style.display = 'none'; // Ẩn thông báo lỗi cho size
+                    }
 
-                // Kiểm tra nếu không có màu nào được chọn
-                const colorCheckboxes = document.querySelectorAll('input[name="color[]"]:checked');
-                if (colorCheckboxes.length === 0) {
-                    colorError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    colorError.style.display = 'none';
-                }
+                    // Kiểm tra nếu không có màu nào được chọn
+                    const colorRadios = document.querySelectorAll('input[name="color"]:checked');
+                    if (colorRadios.length === 0) {
+                        colorError.style.display = 'block'; // Hiện thông báo lỗi cho màu
+                        isValid = false;
+                    } else {
+                        colorError.style.display = 'none'; // Ẩn thông báo lỗi cho màu
+                    }
 
-                // Nếu không hợp lệ, ngăn không cho gửi form
-                if (!isValid) {
-                    event.preventDefault();
-                }
+                    // Nếu không hợp lệ, ngăn không cho gửi form
+                    if (!isValid) {
+                        event.preventDefault(); // Ngăn gửi form
+                    }
+                });
             });
+
 
             function showMainImage(imageUrl) {
                 // Tìm phần tử của ảnh chính

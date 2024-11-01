@@ -19,4 +19,8 @@ class size_san_pham extends Model
     {
         return $this->hasMany(bien_the_san_pham::class);
     }
+    public function san_pham()
+    {
+        return $this->belongsTo(san_pham::class); // Quan hệ với model sản phẩm
+    }
 }

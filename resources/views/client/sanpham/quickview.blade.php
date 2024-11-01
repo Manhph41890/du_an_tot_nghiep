@@ -1,5 +1,5 @@
 <!-- first modal -->
-<div class="modal fade theme1 style1" id="quickview{{ $quickview->id }}" tabindex="-1" role="dialog">
+<div class="modal theme1 style1" id="quickview{{ $quick_view->id }}" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -72,7 +72,7 @@
                         <div class="modal-product-info">
                             <div class="product-head">
                                 <h2 class="title">
-                                    {{ $quickview->ten_san_pham }}
+                                    {{ $quick_view->ten_san_pham }}
                                 </h2>
                                 <h4 class="sub-title">Reference: demo_5
                                 </h4>

@@ -412,8 +412,7 @@
                                                             name="color[{{ $item->id }}]"
                                                             value="{{ $bien_the->color->id }}"
                                                             @if (isset($request->color[$item->id]) && $request->color[$item->id] == $bien_the->color->id) checked @endif />
-                                                        <label for="color-{{ $item->id }}-{{ $bien_the->id }}"
-                                                            style="background-color: {{ $bien_the->color->ma_mau }} !important;">
+                                                        <label for="color-{{ $item->id }}-{{ $bien_the->id }}">
                                                             {{ $bien_the->color->ten_color }}
                                                         </label>
                                                     </div>

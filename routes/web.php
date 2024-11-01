@@ -35,7 +35,7 @@ Route::prefix('client')->group(function () {
 
     // trang cửa hàng
     Route::get('/sanpham', [ClientSanPhamController::class, 'list'])->name('client.cuahang');
-    Route::get('/sanpham/{id}', [ClientSanPhamController::class, 'quick_view'])->name('client.quickview');
+    // Route::get('/sanpham/{id}', [ClientSanPhamController::class, 'quick_view'])->name('client.quickview');
 
     Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);

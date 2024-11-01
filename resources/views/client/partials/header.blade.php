@@ -235,7 +235,7 @@
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
                         <a href="{{ route('client.home') }}">
-                            <im src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" />
+                            <img src="{{ asset('assets/client/img/logo/logo_art.png') }}" alt="logo" />
                         </a>
                     </div>
                 </div>

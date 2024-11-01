@@ -305,66 +305,58 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-8 mx-auto col-lg-5 mb-5 mb-lg-0">
-                                <div class="product-sync-init mb-20 slick-initialized slick-slider">
-                                    <div class="slick-list">
-                                        <div class="slick-track" style="opacity: 1; width: 1544px;">
-                                            <div class="single-product slick-slide slick-current slick-active"
-                                                data-slick-index="0" aria-hidden="false" tabindex="0"
-                                                style="width: 386px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;">
+                                <div>
+                                    <div class="position-relative">
+                                        <span class="badge badge-danger top-right">{{ $item->phantramgia }}%</span>
+                                    </div>
+                                    <div class="product-sync-init mb-20">
+                                        <!-- Ảnh sản phẩm chính -->
+                                        <div class="single-product main-product">
+                                            <div class="product-thumb">
+                                                <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
+                                                    alt="Ảnh sản phẩm chính">
+                                            </div>
+                                        </div>
+
+                                        <!-- Ảnh các biến thể sản phẩm -->
+                                        @foreach ($item->bien_the_san_phams as $bien_the)
+                                            <div class="single-product variant-product">
                                                 <div class="product-thumb">
-                                                    <a href="javascript:void(0)">
-                                                        <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
-                                                            alt="product-thumb" />
-                                                    </a>
+                                                    <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
+                                                        alt="Ảnh biến thể sản phẩm">
                                                 </div>
                                             </div>
-                                            @foreach ($item->bien_the_san_phams as $index => $bien_the)
-                                                <div class="single-product slick-slide"
-                                                    data-slick-index="{{ $index + 1 }}" aria-hidden="true"
-                                                    tabindex="-1"
-                                                    style="width: 386px; position: relative; left: -{{ ($index + 1) * 386 }}px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms;">
-                                                    <div class="product-thumb">
-                                                        <a href="javascript:void(0)">
-                                                            <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
-                                                                alt="product-thumb" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                                <div class="product-sync-nav slick-initialized slick-slider">
-                                    <div class="slick-list">
-                                        <div class="slick-track"
-                                            style="opacity: 1; width: 388px; transform: translate3d(0px, 0px, 0px);">
-                                            <div class="single-product slick-slide slick-current slick-active"
-                                                data-slick-index="0" aria-hidden="false" tabindex="0"
-                                                style="width: 97px;">
-                                                <div class="product-thumb">
-                                                    <a href="javascript:void(0)">
-                                                        <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
-                                                            alt="product-thumb" />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            @foreach ($item->bien_the_san_phams as $index => $bien_the)
-                                                <div class="single-product slick-slide"
-                                                    data-slick-index="{{ $index + 1 }}" aria-hidden="false"
-                                                    tabindex="0" style="width: 97px;">
-                                                    <div class="product-thumb">
-                                                        <a href="javascript:void(0)">
-                                                            <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
-                                                                alt="product-thumb" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+
+                                <!-- Thanh điều hướng ảnh (thumbnail) -->
+                                <div class="product-sync-nav single-product">
+                                    <!-- Ảnh sản phẩm chính -->
+                                    <div class="single-product thumbnail">
+                                        <div class="product-thumb">
+                                            <a href="javascript:void(0)"
+                                                onclick="showMainImage('{{ asset('/storage/' . $item->anh_san_pham) }}')">
+                                                <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
+                                                    alt="Thumbnail sản phẩm chính">
+                                            </a>
                                         </div>
                                     </div>
+
+                                    <!-- Thumbnail ảnh biến thể sản phẩm -->
+                                    @foreach ($item->bien_the_san_phams as $bien_the)
+                                        <div class="single-product thumbnail">
+                                            <div class="product-thumb">
+                                                <a href="javascript:void(0)"
+                                                    onclick="showMainImage('{{ asset('/storage/' . $bien_the->anh_bien_the) }}')">
+                                                    <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
+                                                        alt="Thumbnail biến thể sản phẩm">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-
                             <div class="col-lg-7">
                                 <div class="modal-product-info">
                                     <div class="product-head">
@@ -383,6 +375,7 @@
                                             @endif
                                         </div>
                                     </div>
+
                                     <div class="product-body">
                                         <span class="product-price text-center">
                                             <p class="new-price">
@@ -390,8 +383,9 @@
                                                 <span class="ms-2">{{ $item?->gia_km }} VNĐ</span>
                                             </p>
                                         </span>
-                                        <p>{{ $item?->ma_ta_san_pham }}</p>
+                                        <p>{{ $item?->mo_ta_san_pham }}</p>
                                     </div>
+
                                     <div class="d-flex mt-30">
                                         <div class="product-size col-3">
                                             <h3 class="title">Size</h3>
@@ -412,8 +406,7 @@
                                                             name="color[{{ $item->id }}]"
                                                             value="{{ $bien_the->color->id }}"
                                                             @if (isset($request->color[$item->id]) && $request->color[$item->id] == $bien_the->color->id) checked @endif />
-                                                        <label for="color-{{ $item->id }}-{{ $bien_the->id }}"
-                                                            style="background-color: {{ $bien_the->color->ma_mau }} !important;">
+                                                        <label for="color-{{ $item->id }}-{{ $bien_the->id }}">
                                                             {{ $bien_the->color->ten_color }}
                                                         </label>
                                                     </div>
@@ -427,12 +420,10 @@
                                                 <input type="number" min="1" max="10" step="1"
                                                     value="1" id="quantity-{{ $item->id }}" />
                                                 <div class="button-group">
-                                                    <button class="count-btn increment">
-                                                        <i class="fas fa-chevron-up"></i>
-                                                    </button>
-                                                    <button class="count-btn decrement">
-                                                        <i class="fas fa-chevron-down"></i>
-                                                    </button>
+                                                    <button class="count-btn increment"><i
+                                                            class="fas fa-chevron-up"></i></button>
+                                                    <button class="count-btn decrement"><i
+                                                            class="fas fa-chevron-down"></i></button>
                                                 </div>
                                             </div>
                                             <div>
@@ -447,6 +438,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

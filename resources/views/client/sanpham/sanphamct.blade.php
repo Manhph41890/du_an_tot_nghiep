@@ -139,6 +139,7 @@
                                         </select>
                                         <span id="size-error" class="text-danger" style="display: none;">Vui lòng chọn
                                             size!</span>
+
                                     </div>
 
                                     <div class="check-box ms-5">
@@ -146,28 +147,31 @@
                                         <div class="d-flex check-box-wrap-list">
                                             @foreach ($uniqueColors as $color)
                                                 <div class="widget-check-box">
-                                                    <input type="checkbox" name="color[]" id="color-{{ $color->id }}"
-                                                        value="{{ $color->id }}" />
+                                                    <input type="radio" name="color" id="color-{{ $color->id }}"
+                                                        value="{{ $color->id }}" required />
                                                     <label class="me-2" style="background-color:{{ $color->ma_mau }};"
                                                         for="color-{{ $color->id }}">{{ $color->ten_color }}</label>
                                                 </div>
                                             @endforeach
+                                            <span id="color-error" class="text-danger" style="display: none;">Vui lòng
+                                                chọn màu!</span>
+
                                         </div>
-                                        <span id="color-error" class="text-danger" style="display: none;">Vui lòng chọn
-                                            màu!</span>
 
                                     </div>
-
                                 </div>
+
                                 <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-20">
                                     <div class="count d-flex">
                                         <input type="number" name="quantity" min="1" max="10"
                                             step="1" value="1" required />
                                         <div class="button-group">
-                                            <button class="count-btn increment">
+                                            <button type="button" class="count-btn increment"
+                                                onclick="incrementQuantity()">
                                                 <i class="fas fa-chevron-up"></i>
                                             </button>
-                                            <button class="count-btn decrement">
+                                            <button type="button" class="count-btn decrement"
+                                                onclick="decrementQuantity()">
                                                 <i class="fas fa-chevron-down"></i>
                                             </button>
                                         </div>
@@ -181,9 +185,9 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -393,36 +397,56 @@
             </div>
         </div>
     </section>
+
     <script>
-        document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
-            // Kiểm tra nếu size chưa được chọn
-            const sizeSelect = document.getElementById('size_san_pham_id');
-            const sizeError = document.getElementById('size-error');
-            const colorError = document.getElementById('color-error');
-            let isValid = true;
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+                const sizeSelect = document.getElementById('size_san_pham_id');
+                const sizeError = document.getElementById('size-error');
+                const colorError = document.getElementById('color-error');
+                let isValid = true;
 
-            // Kiểm tra size
-            if (sizeSelect.value === "") {
-                sizeError.style.display = 'block';
-                isValid = false;
-            } else {
-                sizeError.style.display = 'none';
-            }
+                // Kiểm tra size
+                if (sizeSelect.value === "") {
+                    sizeError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    sizeError.style.display = 'none';
+                }
 
-            // Kiểm tra nếu không có màu nào được chọn
-            const colorCheckboxes = document.querySelectorAll('input[name="color[]"]:checked');
-            if (colorCheckboxes.length === 0) {
-                colorError.style.display = 'block';
-                isValid = false;
-            } else {
-                colorError.style.display = 'none';
-            }
+                // Kiểm tra nếu không có màu nào được chọn
+                const colorRadios = document.querySelectorAll('input[name="color"]:checked');
+                if (colorRadios.length === 0) {
+                    colorError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    colorError.style.display = 'none';
+                }
 
-            // Nếu không hợp lệ, ngăn không cho gửi form
-            if (!isValid) {
-                event.preventDefault();
-            }
+                // Nếu không hợp lệ, ngăn không cho gửi form
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
         });
+
+        // Hàm tăng số lượng
+        function incrementQuantity() {
+            const quantityInput = document.querySelector('input[name="quantity"]');
+            let quantity = parseInt(quantityInput.value);
+            if (quantity < 10) {
+                quantityInput.value = quantity + 1;
+            }
+        }
+
+        // Hàm giảm số lượng
+        function decrementQuantity() {
+            const quantityInput = document.querySelector('input[name="quantity"]');
+            let quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
+            }
+        }
 
         function showMainImage(imageUrl) {
             // Tìm phần tử của ảnh chính
@@ -432,5 +456,8 @@
             }
         }
     </script>
+
+
+
     <!-- new arrival section end -->
 @endsection

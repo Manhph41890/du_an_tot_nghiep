@@ -263,12 +263,12 @@
                         <div class="cart-block-links theme1 d-none d-sm-block">
                             <ul class="d-flex">
                                 <li>
-                                    <a href="javascript:void(0)" class="search search-toggle">
+                                    <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
                                 <li class="mr-xl-0 cart-block position-relative">
-                                    <a class="offcanvas-toggle" href="#offcanvas-cart">
+                                    <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
                                             <i class="icon-bag"></i>
                                             <span class="badge cbdg1">{{ $cartItemsCount }}</span>
@@ -391,196 +391,15 @@
                                     </div>
                                 @else
                                     <li>
-                                        <a style="font-size: 16px;" href="javascript:void(0)" onclick="openLoginModal()">
+                                        <a style="font-size: 16px;" href="{{ route('auth.login') }}">
                                             Đăng Nhập
                                         </a>
                                     </li>
                                     <li>
-                                        <a style="font-size: 16px;" href="javascript:void(0)"
-                                            onclick="openRegisterModal()">
+                                        <a style="font-size: 16px;" href="{{ route('auth.register') }}">
                                             Đăng Ký
                                         </a>
                                     </li>
-                                    <!-- Modal đăng nhập -->
-                                    <div id="loginModal" class="modal-overlay">
-                                        <div class="modal-content form">
-                                            <!-- Nút đóng modal -->
-                                            <span class="close-button" onclick="closeLoginModal()">&times;</span>
-
-                                            <!-- Form đăng nhập -->
-                                            <form action="{{ route('auth.login') }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <div
-                                                    class="header-text mb-4 text-center d-flex flex-column justify-content-center align-items-center">
-                                                    <h2>Đăng Nhập</h2>
-                                                    <p>Chào mừng bạn quay trở lại với chúng tôi</p>
-                                                </div>
-
-                                                <!-- Input email -->
-                                                <div class="input-group mb-3">
-                                                    <input type="email"
-                                                        class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
-                                                        name="email" id="email" required
-                                                        placeholder="Email address" value="{{ old('email') }}">
-                                                    @error('email')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input password -->
-                                                <div class="input-group mb-1">
-                                                    <input type="password" name="password" id="password" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
-                                                        placeholder="Password" value="{{ old('password') }}">
-                                                    @error('password')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Nhớ mật khẩu và quên mật khẩu -->
-                                                <div class="input-group mb-5 d-flex justify-content-between">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" name="remember" class="form-check-input"
-                                                            id="formCheck">
-                                                        <label for="formCheck"
-                                                            class="form-check-label text-secondary"><small>Remember
-                                                                Me</small></label>
-                                                    </div>
-                                                    <div class="forgot">
-                                                        <small><a href="{{ route('auth.forgot_password') }}">Quên mật
-                                                                khẩu?</a></small>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Nút đăng nhập -->
-                                                <div class="input-group mb-3">
-                                                    <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>
-                                                </div>
-
-                                                <!-- Nút đăng nhập bằng Google và Facebook -->
-                                                <div class="input-group d-flex mb-3">
-                                                    <button class="btn btn-lg btn-light me-2 fs-6">
-                                                        <img src="{{ asset('images/google.png') }}" style="width: 20px;"
-                                                            class="me-2">
-                                                        Sign In with Google
-                                                    </button>
-                                                    <button class="btn btn-lg btn-light ms-2 fs-6">
-                                                        <img src="{{ asset('images/facebook.png') }}"
-                                                            style="width: 20px;" class="me-2">
-                                                        Sign In with Facebook
-                                                    </button>
-                                                </div>
-
-                                                <!-- Chuyển hướng đến đăng ký -->
-                                                <div class="row">
-                                                    <small>Bạn chưa có tài khoản? <a href="javascript:void(0)"
-                                                            onclick="switchToRegisterModal()">
-                                                            Đăng Kí
-                                                        </a></small>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- Modal đăng ký -->
-                                    <div id="registerModal" class="modal-overlay">
-                                        <div class="modal-content form">
-                                            <!-- Nút đóng modal -->
-                                            <span class="close-button" onclick="closeRegisterModal()">&times;</span>
-
-                                            <!-- Form đăng ký -->
-                                            <form action="{{ route('auth.register') }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <div
-                                                    class="header-text mb-4 text-center d-flex flex-column justify-content-center align-items-center">
-                                                    <h2>Đăng Kí</h2>
-                                                </div>
-
-                                                <!-- Input họ tên -->
-                                                <div class="input-group mb-3">
-                                                    <input type="text" id="ho_ten" name="ho_ten"
-                                                        value="{{ old('ho_ten') }}" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('ho_ten') is-invalid @enderror"
-                                                        placeholder="Họ Tên">
-                                                    @error('ho_ten')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input email -->
-                                                <div class="input-group mb-3">
-                                                    <input type="email" id="email" name="email"
-                                                        value="{{ old('email') }}" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
-                                                        placeholder="Email">
-                                                    @error('email')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input số điện thoại -->
-                                                <div class="input-group mb-3">
-                                                    <input type="number" id="so_dien_thoai" name="so_dien_thoai"
-                                                        value="{{ old('so_dien_thoai') }}" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('so_dien_thoai') is-invalid @enderror"
-                                                        placeholder="Số điện thoại">
-                                                    @error('so_dien_thoai')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input mật khẩu -->
-                                                <div class="input-group mb-3">
-                                                    <input type="password" id="password" name="password" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
-                                                        placeholder="Mật Khẩu">
-                                                    @error('password')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input xác nhận mật khẩu -->
-                                                <div class="input-group mb-3">
-                                                    <input type="password" id="password_confirmation"
-                                                        name="password_confirmation" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('password_confirmation') is-invalid @enderror"
-                                                        placeholder="Xác nhận mật khẩu">
-                                                    @error('password_confirmation')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Nút đăng ký -->
-                                                <div class="input-group mb-3">
-                                                    <button class="btn btn-lg btn-primary w-100 fs-6">Đăng Kí</button>
-                                                </div>
-
-                                                <!-- Nút đăng ký bằng Google và Facebook -->
-                                                <div class="input-group d-flex mb-3">
-                                                    <button class="btn btn-lg btn-light me-2 fs-6">
-                                                        <img src="{{ asset('images/google.png') }}" style="width: 20px;"
-                                                            class="me-2">
-                                                        Sign In with Google
-                                                    </button>
-
-                                                    <button class="btn btn-lg btn-light ms-2 fs-6">
-                                                        <img src="{{ asset('images/facebook.png') }}"
-                                                            style="width: 20px;" class="me-2">
-                                                        Sign In with Facebook
-                                                    </button>
-                                                </div>
-
-                                                <!-- Chuyển hướng đến đăng nhập -->
-                                                <div class="row">
-                                                    <small>Bạn đã có tài khoản? <a href="javascript:void(0)"
-                                                            onclick="switchToLoginModal()"> Đăng
-                                                            Nhập
-                                                        </a></small>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
                                 @endauth
                             </ul>
                         </div>
@@ -601,37 +420,6 @@
     @else
         var isAuthenticated = false;
     @endauth
-    // Hàm mở modal đăng nhập
-    function openLoginModal() {
-        document.getElementById("loginModal").style.display = "block";
-    }
-
-    // Hàm mở modal đăng ký
-    function openRegisterModal() {
-        document.getElementById("registerModal").style.display = "block";
-    }
-
-    // Hàm đóng modal đăng nhập
-    function closeLoginModal() {
-        document.getElementById("loginModal").style.display = "none";
-    }
-
-    // Hàm đóng modal đăng ký
-    function closeRegisterModal() {
-        document.getElementById("registerModal").style.display = "none";
-    }
-
-    // Chuyển từ đăng nhập sang đăng ký
-    function switchToRegisterModal() {
-        closeLoginModal();
-        openRegisterModal();
-    }
-
-    // Chuyển từ đăng ký sang đăng nhập
-    function switchToLoginModal() {
-        closeRegisterModal();
-        openLoginModal();
-    }
 </script>
 
 <style>
@@ -696,35 +484,6 @@
         z-index: 1000;
         /* Đặt modal lên trên cùng */
     }
-
-    /* Nội dung của modal (form đăng nhập) */
-    .form {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        width: 400px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        position: relative;
-        /* Để nút close nằm bên trong */
-        z-index: 1001;
-        /* Bên trong modal */
-    }
-
-    /* Nút đóng modal (X) */
-    .close-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        color: #333;
-    }
-
-    /* Hiển thị modal khi nó được kích hoạt */
-    .modal-overlay.active {
-        display: flex;
-        /* Hiển thị modal khi có class active */
-    }
 </style>
 
 <!-- JavaScript cho modal -->
@@ -783,38 +542,4 @@
             });
         });
     });
-    // Mở modal khi nhấn vào nút "Đăng Nhập"
-    function openLoginModal() {
-        document.getElementById('loginModal').classList.add('active');
-    }
-
-    // Đóng modal khi nhấn vào nút "X"
-    function closeLoginModal() {
-        document.getElementById('loginModal').classList.remove('active');
-    }
-
-    // Đóng modal khi nhấn vào bên ngoài form
-    window.onclick = function(event) {
-        const modal = document.getElementById('loginModal');
-        if (event.target === modal) {
-            modal.classList.remove('active');
-        }
-    }
-    // Mở modal khi nhấn vào nút "Đăng Kí"
-    function openRegisterModal() {
-        document.getElementById('registerModal').classList.add('active');
-    }
-
-    // Đóng modal khi nhấn vào nút "X"
-    function closeRegisterModal() {
-        document.getElementById('registerModal').classList.remove('active');
-    }
-
-    // Đóng modal khi nhấn vào bên ngoài form
-    window.onclick = function(event) {
-        const modal = document.getElementById('registerModal');
-        if (event.target === modal) {
-            modal.classList.remove('active');
-        }
-    }
 </script>

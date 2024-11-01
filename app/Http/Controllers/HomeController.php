@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bai_viet;
+use App\Models\danh_muc;
 use App\Models\san_pham;
 use Illuminate\Http\Request;
 
@@ -30,13 +31,12 @@ class HomeController extends Controller
             } else {
                 $sanPham->diem_trung_binh = 0; // Nếu không có đánh giá nào
             }
-
-            $title = "";
-
             return $sanPham;
         });
         $title = "Trang chủ";
-        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'sanPhamView', 'title'));
+        $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
+        $anhDMuc = danh_muc::all();
+        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }
     // Sản phẩm chi tiet
     public function chiTietSanPham($id)
@@ -72,8 +72,9 @@ class HomeController extends Controller
     public function listBaiViet()
     {
         $baiviets = bai_viet::with('user')->latest('id')->paginate(4);
+        $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
         $title = "";
-        return view('client.baiviet.baiviet', compact('baiviets', 'title'));
+        return view('client.baiviet.baiviet', compact('baiviets', 'baiVietMoi', 'title'));
     }
     // In chi tiet bai viet
     public function chiTietBaiViet($id)

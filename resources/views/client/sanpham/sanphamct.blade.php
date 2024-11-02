@@ -295,10 +295,19 @@
                                                             <i class="ion-android-star"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
+                                                    {{-- <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="rating-form-style form-submit">
                                                                 <textarea name="Your Review" placeholder="Message"></textarea>
+                                                                <input type="submit" value="Submit" />
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="rating-form-style form-submit">
+                                                                <textarea id="review" name="Your Review" placeholder="Message" maxlength="100"></textarea>
+                                                                <p id="charCount">0/100</p>
                                                                 <input type="submit" value="Submit" />
                                                             </div>
                                                         </div>
@@ -455,6 +464,20 @@
                 mainImage.src = imageUrl;
             }
         }
+        const reviewInput = document.getElementById("review");
+        const charCountDisplay = document.getElementById("charCount");
+
+        reviewInput.addEventListener("input", function() {
+            const currentLength = reviewInput.value.length;
+
+            // Cập nhật bộ đếm ký tự
+            charCountDisplay.textContent = `${currentLength}/100`;
+
+            // Nếu vượt quá 100 ký tự, cắt ngắn lại (phòng ngừa trường hợp maxlength không hoạt động trên một số trình duyệt)
+            if (currentLength > 100) {
+                reviewInput.value = reviewInput.value.substring(0, 100);
+            }
+        });
     </script>
 
 

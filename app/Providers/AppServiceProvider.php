@@ -38,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         // 
+        View::composer('*', function ($view) {
+            $view->with('globalSearchQuery', request()->query('search', ''));
+        });
+
+
+
         // Chia sẻ biến cartItemsCount với tất cả các view
         View::composer('*', function ($view) {
             $userId = auth()->id();

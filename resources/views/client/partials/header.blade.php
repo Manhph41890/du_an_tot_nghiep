@@ -411,6 +411,87 @@
         </div>
     </div>
     <!-- header-middle end -->
+
+
+
+
+
+    <div class="overlay">
+        <div class="scale"></div>
+        <form class="search-box" action="{{ url('/') }}" method="GET">
+            <input type="text" name="search" placeholder="Tìm kiếm ..." id="inputsearch" />
+            <button id="close" type="submit">
+                <i class="ion-ios-search-strong"></i>
+            </button>
+            <div class="product-grouped product-count style mt-3" id="product-search">
+
+            </div>
+        </form>
+
+        <button class="close"><i class="ion-android-close"></i></button>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#inputsearch').on('keyup', function() {
+                    var query = $(this).val();
+
+                    if (query.length > 1) {
+                        $.ajax({
+                            url: "{{ route('global.search') }}",
+                            type: "GET",
+                            data: {
+                                query: query
+                            },
+                            success: function(data) {
+                                $('#product-search').empty();
+                                if (data.products.length) {
+                                    data.products.forEach(function(product) {
+                                        $('#product-search').append(
+                                            '<div class="media flex-column flex-sm-row align-items-sm-center mb-4">' +
+                                            '<div class="media-body d-flex align-items-center">' +
+                                            '<div class="group-img me-4">' +
+                                            '<img src="' + product.image_url +
+                                            '" alt="' + product.ten_san_pham +
+                                            '" style="width: 100px; height: auto;">' +
+                                            '</div>' +
+                                            '<div>' +
+                                            '<h3 class="title text-white">' +
+                                            '<a href="{{ url('client/sanphamchitiet') }}/' +
+                                            product.id + '">' + 
+                                            product.ten_san_pham + '</a>' +
+                                            '</h3>' +
+                                            '<span>' + product.gia_km + ' VNĐ</span>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>'
+                                        );
+                                    });
+                                } else {
+                                    $('#product-search').append(
+                                        '<div class="suggestion-item">Không tìm thấy kết quả</div>'
+                                    );
+                                }
+                            }
+                        });
+                    } else {
+                        $('#product-search').empty();
+                    }
+                });
+
+                // Ẩn gợi ý khi nhấp bên ngoài
+                $(document).on('click', function(e) {
+                    if (!$(e.target).closest('#inputsearch').length) {
+                        $('#product-search').empty();
+                    }
+                });
+            });
+        </script>
+    </div>
+
+    </div>
+
+
 </header>
 <!-- header end -->
 <!-- CSS cho modal -->

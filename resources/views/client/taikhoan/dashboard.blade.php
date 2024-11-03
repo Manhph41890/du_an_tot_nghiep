@@ -7,13 +7,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">my account</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize">Thông tin tài khoản</h2>
                     </div>
                 </div>
                 <div class="col-12">
                     <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">my account</li>
+                        <li class="breadcrumb-item"><a href="{{ route('client.home') }}">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Thông tin tài khoản</li>
                     </ol>
                 </div>
             </div>
@@ -26,11 +26,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="title text-capitalize mb-30 pb-25">my account</h3>
+                    <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
                 </div>
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
+                        <a href="#account-info" data-bs-toggle="tab" class="active"><i class="fa fa-user"></i> Chi tiết tài
+                            khoản</a>
                         <a href="#dashboad" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
 
                         <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Orders</a>
@@ -41,8 +43,7 @@
 
                         <a href="#address-edit" data-bs-toggle="tab"><i class="fa fa-map-marker"></i> address</a>
 
-                        <a href="#account-info" data-bs-toggle="tab" class="active"><i class="fa fa-user"></i> Account
-                            Details</a>
+
 
                         <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
                     </div>
@@ -204,28 +205,91 @@
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade active show" id="account-info" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3>Account Details</h3>
+                                <h3>{{ $title }}</h3>
+                                <div class="align-items-center">
+                                    <div class="d-flex align-items-center">
+
+                                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
+                                            class="rounded-circle img-thumbnail float-start" alt="Profile Image"
+                                            style="width: 100px; height: 100px; object-fit: cover;">
+
+
+                                        <div class="overflow-hidden ms-4">
+                                            <h4 class="m-0 text-dark fs-20"> {{ Auth::user()->name }}</h4>
+
+                                            <a href="{{ route('taikhoan.dashboard', ['showForm' => 'true']) }}"
+                                                class="ml-4 font-semibold text-primary hover:text-blue-700 
+                                                           dark:text-gray-400 dark:hover:text-white focus:outline 
+                                                           focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                                                Thay đổi ảnh đại diện
+                                            </a>
+
+                                            @if ($showForm)
+                                                <div id="change-avatar-form">
+                                                    <form action="{{ route('taikhoan.dashboard.avatar') }}" method="POST"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <label for="anh_dai_dien">Hình đại diện</label>
+                                                            <input type="file" class="form-control" id="anh_dai_dien"
+                                                                name="anh_dai_dien">
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Cập
+                                                            nhật</button>
+                                                    </form>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
                                 <div class="account-details-form">
-                                    <form action="#">
+
+                                    <div class="align-items-center">
+
+                                    </div>
+                                    {{-- <form action="#">
                                         <div class="row">
+
+                                            <div class="col-12 mb-30">
+                                                <label for="ho_ten" class="mb-2 ">Họ tên</label>
+                                                <input id="ho_ten" disabled type="text"
+                                                    value="{{ $user->ho_ten }}" />
+                                            </div>
+                                            <div class="col-12 mb-30">
+                                                <label for="email" class="mb-2 ">Email</label>
+                                                <input id="email" disabled type="email"
+                                                    value="{{ $user->email }}" />
+                                            </div>
+                                            <div class="col-12 mb-30">
+                                                <label for="so_dien_thoai" class="mb-2 ">Số điện thoại</label>
+                                                <input id="so_dien_thoai" disabled type="number"
+                                                    value="{{ $user->so_dien_thoai }}" />
+                                            </div>
+
                                             <div class="col-lg-6 col-12 mb-30">
-                                                <input id="first-name" placeholder="First Name" type="text" />
+                                                <label for="ngay_sinh" class="mb-2 ">Ngày sinh</label>
+                                                <input id="ngay_sinh" name="ngay_sinh" placeholder="Ngày sinh"
+                                                    type="text" value="{{ $user->ngay_sinh }}" />
                                             </div>
 
                                             <div class="col-lg-6 col-12 mb-30">
-                                                <input id="last-name" placeholder="Last Name" type="text" />
+                                                <label for="gioi_tinh" class="mb-2 ">Giới tính</label>
+                                                <input id="gioi_tinh" name="gioi_tinh" placeholder="Giới tính"
+                                                    type="text" value="{{ $user->gioi_tinh }}" />
                                             </div>
 
                                             <div class="col-12 mb-30">
-                                                <input id="display-name" placeholder="Display Name" type="text" />
-                                            </div>
+                                                <label for="dia_chi" class="mb-2 ">Địa chỉ</label>
+                                                <input id="dia_chi" disabled placeholder="Địa chỉ" type="text"
+                                                    value="{{ $user->dia_chi }}" />
+                                            </div> --}}
 
-                                            <div class="col-12 mb-30">
-                                                <input id="email" placeholder="Email Address" type="email" />
-                                            </div>
 
-                                            <div class="col-12 mb-30">
+
+                                    {{-- <div class="col-12 mb-30">
                                                 <h4>Password change</h4>
                                             </div>
 
@@ -239,13 +303,82 @@
 
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <input id="confirm-pwd" placeholder="Confirm Password" type="password" />
+                                            </div> --}}
+
+                                    {{-- <div class="col-12">
+                                                <button class="btn btn-dark btn--md">Cập Nhật</button>
+                                            </div>
+                                        </div>
+                                    </form> --}}
+
+
+                                    <form action="{{ route('update_thongtin') }}" method="POST" id="user-info-form">
+                                        @csrf
+                                        @method('POST')
+
+                                        <div class="row">
+                                            <div class="col-12 mb-30">
+                                                <label for="ho_ten" class="mb-2">Họ tên</label>
+                                                <input id="ho_ten" name="ho_ten" type="text"
+                                                    value="{{ $user->ho_ten }}" disabled />
+                                            </div>
+
+                                            <div class="col-12 mb-30">
+                                                <label for="email" class="mb-2">Email</label>
+                                                <input id="email" name="email" type="email"
+                                                    value="{{ $user->email }}" disabled />
+                                            </div>
+
+                                            <div class="col-12 mb-30">
+                                                <label for="so_dien_thoai" class="mb-2">Số điện thoại</label>
+                                                <input id="so_dien_thoai" name="so_dien_thoai" type="number"
+                                                    value="{{ $user->so_dien_thoai }}" disabled />
+                                            </div>
+
+                                            {{-- <div class="col-lg-6 col-12 mb-30">
+                                                <label for="ngay_sinh" class="mb-2">Ngày sinh</label>
+                                                <input id="ngay_sinh" name="ngay_sinh" placeholder="Ngày sinh"
+                                                    type="date" value="{{ $user->ngay_sinh }}" disabled  />
+                                            </div> --}}
+                                            <div class="col-lg-6 col-12 mb-30">
+                                                <label for="ngay_sinh" class="mb-2">Ngày sinh</label>
+                                                <input 
+                                                    id="ngay_sinh" 
+                                                    name="ngay_sinh" 
+                                                    type="date" 
+                                                    class="form-control" 
+                                                    value="{{ $user->ngay_sinh }}" 
+                                                    disabled 
+                                                    style="background-color: #ffffff; color: #000000; cursor: not-allowed;   "
+                                                />
+                                            </div>
+                                            
+
+                                            <div class="col-lg-6 col-12 mb-30">
+                                                <label for="gioi_tinh" class="mb-2">Giới tính</label>
+                                                <input id="gioi_tinh" name="gioi_tinh" placeholder="Giới tính"
+                                                    type="text" value="{{ $user->gioi_tinh }}" disabled />
+                                            </div>
+
+                                            <div class="col-12 mb-30">
+                                                <label for="dia_chi" class="mb-2">Địa chỉ</label>
+                                                <input id="dia_chi" name="dia_chi" placeholder="Địa chỉ"
+                                                    type="text" value="{{ $user->dia_chi }}" disabled />
                                             </div>
 
                                             <div class="col-12">
-                                                <button class="btn btn-dark btn--md">Save Changes</button>
+                                                <!-- Initially, this button shows "Cập Nhật" (Update) -->
+                                                <button type="button" class="btn btn-dark btn--md" id="toggleEditBtn"
+                                                    onclick="toggleEdit()">Cập Nhật</button>
+                                                <!-- Hidden "Lưu" (Save) button that will submit the form -->
+                                                <button type="submit" class="btn btn-success btn--md" id="saveBtn"
+                                                    style="display: none;">Lưu</button>
                                             </div>
                                         </div>
                                     </form>
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -257,4 +390,48 @@
         </div>
     </div>
     <!-- product tab end -->
+@endsection
+
+
+@section('js')
+    <script>
+        document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+
+            fetch('{{ route('taikhoan.dashboard.avatar') }}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update the image src without reloading
+                        document.querySelector('img[alt="Profile Image"]').src = data.newAvatarUrl;
+                        // Hide the form
+                        document.getElementById('change-avatar-form').style.display = 'none';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+    <script>
+        function toggleEdit() {
+            const inputs = document.querySelectorAll('#user-info-form input');
+            const toggleEditBtn = document.getElementById('toggleEditBtn');
+            const saveBtn = document.getElementById('saveBtn');
+
+            // Toggle input disabled state
+            inputs.forEach(input => input.disabled = !input.disabled);
+
+            // Switch button visibility
+            if (saveBtn.style.display === 'none') {
+                saveBtn.style.display = 'inline-block';
+                toggleEditBtn.style.display = 'none';
+            }
+        }
+    </script>
 @endsection

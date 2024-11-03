@@ -25,6 +25,7 @@ class AuthController extends Controller
         $user = Auth::user();
         return view('auth.profile', compact('user')); // Đường dẫn tới view của bạn
     }
+    
     public function showFormRegister()
     {
         return view('auth.register');
@@ -96,7 +97,9 @@ class AuthController extends Controller
         Auth::login($user);
         Log::info('Đăng nhập tự động cho người dùng: ', ['user_id' => $user->id]);
 
-        return redirect()->route('customer')->with('notification', 'Đăng ký tài khoản thành công.' . ($existingUserWithVoucher ? ', nhưng bạn không nhận được voucher.' : ' và bạn đã nhận được voucher khuyến mãi!'));
+        //
+        $message = 'Đăng ký tài khoản thành công.' . ($existingUserWithVoucher ? ' Tuy nhiên, bạn không nhận được voucher.' : ' Bạn đã nhận được voucher khuyến mãi!');
+        return redirect()->route('customer')->with('notification', $message);
     }
 
     // Kiểm tra voucher
@@ -209,12 +212,12 @@ class AuthController extends Controller
             // Eager load quan hệ chuc_vu của người dùng
             $user = User::with('chuc_vu')->find(Auth::user()->id);
 
-            return $this->redirectToDashboardBasedOnRole($user);
+            return $this->redirectToDashboardBasedOnRole($user)->with('notification','Đăng nhập thành công !');
         }
 
         // Thất bại đăng nhập
         return redirect()->back()->withErrors([
-            'email' => 'Email hoặc mật khẩu không đúng',
+            'login_error' => 'Email hoặc mật khẩu không đúng',
         ]);
     }
 
@@ -226,7 +229,7 @@ class AuthController extends Controller
             case 'nhan_vien':
                 return redirect('/dashboard')->with('success', 'Đăng nhập thành công');
             case 'khach_hang':
-                return redirect('/customer')->with('success', 'Đăng nhập thành công');
+                return redirect('/')->with('success', 'Đăng nhập thành công');
             default:
                 Auth::logout();
                 return redirect()->route('auth.login')->withErrors(['error' => 'Chức vụ không tồn tại']);

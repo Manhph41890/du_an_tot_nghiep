@@ -21,6 +21,7 @@ use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariantController;
 
@@ -39,7 +40,13 @@ Route::prefix('client')->group(function () {
 
     Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
-    Route::view('/taikhoan', 'client.taikhoan.dashboard');
+    //tam thoi 
+    Route::get('/taikhoan', [TaiKhoanController::class, 'showAccountDetails'])->name('taikhoan.dashboard');
+    // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
+
+    Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard.avatar');
+    Route::post('/taikhoan/update', [TaiKhoanController::class, 'updateuser'])->name('update_thongtin');
+
     Route::view('/giohang', 'client.giohang');
     Route::view('/gioithieu', 'client.gioithieu');
     Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
@@ -60,6 +67,16 @@ Route::post('send-email', [ForgotPasswordController::class, 'sendResetLinkEmails
 Route::post('verify-code', [ForgotPasswordController::class, 'verifyCode'])->name('auth.verifycode');
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('auth.reset_password');
 Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('auth.update_password');
+
+
+
+
+
+
+
+
+
+
 
 // Route cho các chức năng quản lý (admin)
 Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
@@ -89,6 +106,12 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::get('variants/sizes/{id}/edit', [VariantController::class, 'editSize'])->name('variants.sizes.edit');
     Route::put('variants/sizes/{id}', [VariantController::class, 'updateSize'])->name('variants.sizes.update');
     Route::delete('variants/sizes/{id}', [VariantController::class, 'destroySize'])->name('variants.sizes.destroy');
+    // quản lý người dùng 
+    // Route cho quản lý người dùng
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
+    Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
+    Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
 
 
 
@@ -105,7 +128,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
-    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+    Route::get('/', [HomeController::class, 'index'])->name('client.home');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::get('/sanpham/search', [SanPhamController::class, 'search'])->name('sanpham.search');
@@ -132,10 +155,5 @@ Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
 });
 
-// Route cho quản lý người dùng
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
-Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
-Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');

@@ -29,7 +29,7 @@
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Giới thiệu</span></a>
-                    <ul class="offcanvas-submenu">
+                    {{-- <ul class="offcanvas-submenu">
                         <li><a href="about-us.html">About Page</a></li>
                         <li><a href="cart.html">Cart Page</a></li>
                         <li><a href="checkout.html">Checkout Page</a></li>
@@ -37,11 +37,11 @@
                         <li><a href="login.html">Login &amp; Register Page</a></li>
                         <li><a href="myaccount.html">Account Page</a></li>
                         <li><a href="wishlist.html">Wishlist Page</a></li>
-                    </ul>
+                    </ul> --}}
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Cửa hàng</span></a>
-                    <ul class="offcanvas-submenu">
+                    {{-- <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Shop Grid</span></a>
                             <ul class="offcanvas-submenu">
@@ -96,7 +96,7 @@
                                 <li><a href="wishlist.html">Wishlist Page</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </li>
 
                 <li>
@@ -308,7 +308,7 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end profile-dropdown">
                                             <!-- Tài khoản -->
-                                            <a class="dropdown-item notify-item" href="#" id="showUserProfile">
+                                            <a class="dropdown-item notify-item" href="{{route('taikhoan.dashboard')}}" id="showUserProfile">
                                                 <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
                                                 <span>Tài khoản</span>
                                             </a>
@@ -401,11 +401,15 @@
                                             Đăng Ký
                                         </a>
                                     </li>
+
+
+
                                     <!-- Modal đăng nhập -->
                                     <div id="loginModal" class="modal-overlay">
                                         <div class="modal-content form">
                                             <!-- Nút đóng modal -->
                                             <span class="close-button" onclick="closeLoginModal()">&times;</span>
+                                            
 
                                             <!-- Form đăng nhập -->
                                             <form action="{{ route('auth.login') }}" method="POST"
@@ -455,7 +459,8 @@
 
                                                 <!-- Nút đăng nhập -->
                                                 <div class="input-group mb-3">
-                                                    <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>
+                                                    <button class="btn btn-lg btn-primary w-100 fs-6"
+                                                        onclick="submitLoginForm()"> Login</button>
                                                 </div>
 
                                                 <!-- Nút đăng nhập bằng Google và Facebook -->
@@ -480,6 +485,7 @@
                                                         </a></small>
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                     <!-- Modal đăng ký -->
@@ -631,6 +637,58 @@
     function switchToLoginModal() {
         closeRegisterModal();
         openLoginModal();
+    }
+
+    function submitLoginForm() {
+        // Reset error messages
+        document.getElementById('email').textContent = '';
+        document.getElementById('password').textContent = '';
+        document.getElementById('notification').style.display = 'none';
+
+        // Get form data
+        let formData = new FormData(document.getElementById('loginForm'));
+
+        // Send AJAX request
+        fetch('{{ route('auth.login') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Display success message
+                    document.getElementById('notification').classList.add('alert-success');
+                    document.getElementById('notification').textContent = 'Đăng nhập thành công!';
+                    document.getElementById('notification').style.display = 'block';
+
+                    // Redirect to the dashboard after a delay
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                    }, 1000);
+                } else {
+                    // Display error messages
+                    if (data.errors) {
+                        if (data.errors.email) {
+                            document.getElementById('email').textContent = data.errors.email[0];
+                        }
+                        if (data.errors.password) {
+                            document.getElementById('password').textContent = data.errors.password[0];
+                        }
+                    }
+                    // Display general error message
+                    if (data.message) {
+                        document.getElementById('notification').classList.add('alert-danger');
+                        document.getElementById('notification').textContent = data.message;
+                        document.getElementById('notification').style.display = 'block';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 </script>
 

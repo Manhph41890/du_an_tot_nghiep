@@ -55,16 +55,12 @@
             <div class="row border rounded-5 p-3 bg-white shadow box-area">
 
                 <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
-                    style="background: #103cbe;">
+                    style="">
                     <div class="featured-image mb-3">
-                        <img src="https://gamek.mediacdn.vn/133514250583805952/2021/9/14/o2-16316213140271524293700.jpg"
-                            class="img-fluid" style="width: 250px;">
+                        <img src="{{ asset('assets/client/images/banner/bn1.jpg') }}" class="img-fluid"
+                            style="width: 500px;">
                     </div>
-                    <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Be
-                        Verified</p>
-                    <small class="text-white text-wrap text-center"
-                        style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join experienced Designers on
-                        this platform.</small>
+
                 </div>
 
                 <div class="col-md-6 right-box">

@@ -39,16 +39,14 @@ class CartController extends Controller
         $validatedData = $request->validate([
             'san_pham_id' => 'required|exists:san_phams,id',
             'size_san_pham_id' => 'required|exists:size_san_phams,id',
-            'color' => 'required|array|min:1',  // Yêu cầu ít nhất 1 màu được chọn
+            'color' => 'required|exists:color_san_phams,id',  // Yêu cầu một màu cụ thể
             'quantity' => 'required|integer|min:1|max:10',
         ], [
             'san_pham_id.required' => 'Sản phẩm không hợp lệ.',
             'size_san_pham_id.required' => 'Vui lòng chọn size sản phẩm.',
             'color.required' => 'Vui lòng chọn màu sản phẩm.',
-            'color.min' => 'Vui lòng chọn ít nhất một màu cho sản phẩm.',
             'quantity.required' => 'Vui lòng nhập số lượng.',
             'quantity.integer' => 'Số lượng phải là số nguyên.',
-            'quantity.min' => 'Số lượng tối thiểu là 1.',
             'quantity.max' => 'Số lượng tối đa là 10.',
         ]);
 
@@ -65,7 +63,7 @@ class CartController extends Controller
         $cartItem = CartItem::where('cart_id', $cart->id)
             ->where('san_pham_id', $sanPham->id)
             ->where('size_san_pham_id', $validatedData['size_san_pham_id'])
-            ->where('color_san_pham_id', $validatedData['color'][0]) // Lấy màu đầu tiên
+            ->where('color_san_pham_id', $validatedData['color']) // Chỉ truyền giá trị duy nhất của màu
             ->first();
 
         if ($cartItem) {
@@ -77,13 +75,14 @@ class CartController extends Controller
             $cartItem->cart_id = $cart->id;
             $cartItem->san_pham_id = $sanPham->id;
             $cartItem->size_san_pham_id = $validatedData['size_san_pham_id'];
-            $cartItem->color_san_pham_id = $validatedData['color'][0]; // Lưu màu đầu tiên
+            $cartItem->color_san_pham_id = $validatedData['color']; // Lưu giá trị màu duy nhất
             $cartItem->quantity = $validatedData['quantity'];
             $cartItem->price = $sanPham->gia_km; // Thêm giá sản phẩm vào giỏ hàng
         }
 
         // Lưu CartItem vào database
         $cartItem->save();
+
         if ($request->ajax()) {
             return response()->json(['success' => true, 'redirect' => route('cart.index')]);
         }
@@ -91,6 +90,7 @@ class CartController extends Controller
         // Chuyển hướng tới trang giỏ hàng với thông báo thành công
         return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng thành công!');
     }
+
 
 
     // Cập nhật số lượng sản phẩm trong giỏ hàng

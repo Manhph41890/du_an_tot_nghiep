@@ -263,12 +263,12 @@
                         <div class="cart-block-links theme1 d-none d-sm-block">
                             <ul class="d-flex">
                                 <li>
-                                    <a href="javascript:void(0)" class="search search-toggle">
+                                    <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
                                 <li class="mr-xl-0 cart-block position-relative">
-                                    <a class="offcanvas-toggle" href="#offcanvas-cart">
+                                    <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
                                             <i class="icon-bag"></i>
                                             <span class="badge cbdg1">{{ $cartItemsCount }}</span>
@@ -308,7 +308,8 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end profile-dropdown">
                                             <!-- Tài khoản -->
-                                            <a class="dropdown-item notify-item" href="{{route('taikhoan.dashboard')}}" id="showUserProfile">
+                                            <a class="dropdown-item notify-item" href="{{ route('taikhoan.dashboard') }}"
+                                                id="showUserProfile">
                                                 <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
                                                 <span>Tài khoản</span>
                                             </a>
@@ -391,13 +392,12 @@
                                     </div>
                                 @else
                                     <li>
-                                        <a style="font-size: 16px;" href="javascript:void(0)" onclick="openLoginModal()">
+                                        <a style="font-size: 16px;" href="{{ route('auth.login') }}">
                                             Đăng Nhập
                                         </a>
                                     </li>
                                     <li>
-                                        <a style="font-size: 16px;" href="javascript:void(0)"
-                                            onclick="openRegisterModal()">
+                                        <a style="font-size: 16px;" href="{{ route('auth.register') }}">
                                             Đăng Ký
                                         </a>
                                     </li>
@@ -409,7 +409,7 @@
                                         <div class="modal-content form">
                                             <!-- Nút đóng modal -->
                                             <span class="close-button" onclick="closeLoginModal()">&times;</span>
-                                            
+
 
                                             <!-- Form đăng nhập -->
                                             <form action="{{ route('auth.login') }}" method="POST"
@@ -598,6 +598,87 @@
         </div>
     </div>
     <!-- header-middle end -->
+
+
+
+
+
+    <div class="overlay">
+        <div class="scale"></div>
+        <form class="search-box" action="{{ url('/') }}" method="GET">
+            <input type="text" name="search" placeholder="Tìm kiếm ..." id="inputsearch" />
+            <button id="close" type="submit">
+                <i class="ion-ios-search-strong"></i>
+            </button>
+            <div class="product-grouped product-count style mt-3" id="product-search">
+
+            </div>
+        </form>
+
+        <button class="close"><i class="ion-android-close"></i></button>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#inputsearch').on('keyup', function() {
+                    var query = $(this).val();
+
+                    if (query.length > 1) {
+                        $.ajax({
+                            url: "{{ route('global.search') }}",
+                            type: "GET",
+                            data: {
+                                query: query
+                            },
+                            success: function(data) {
+                                $('#product-search').empty();
+                                if (data.products.length) {
+                                    data.products.forEach(function(product) {
+                                        $('#product-search').append(
+                                            '<div class="media flex-column flex-sm-row align-items-sm-center mb-4">' +
+                                            '<div class="media-body d-flex align-items-center">' +
+                                            '<div class="group-img me-4">' +
+                                            '<img src="' + product.image_url +
+                                            '" alt="' + product.ten_san_pham +
+                                            '" style="width: 100px; height: auto;">' +
+                                            '</div>' +
+                                            '<div>' +
+                                            '<h3 class="title text-white">' +
+                                            '<a href="{{ url('client/sanphamchitiet') }}/' +
+                                            product.id + '">' +
+                                            product.ten_san_pham + '</a>' +
+                                            '</h3>' +
+                                            '<span>' + product.gia_km + ' VNĐ</span>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>'
+                                        );
+                                    });
+                                } else {
+                                    $('#product-search').append(
+                                        '<div class="suggestion-item">Không tìm thấy kết quả</div>'
+                                    );
+                                }
+                            }
+                        });
+                    } else {
+                        $('#product-search').empty();
+                    }
+                });
+
+                // Ẩn gợi ý khi nhấp bên ngoài
+                $(document).on('click', function(e) {
+                    if (!$(e.target).closest('#inputsearch').length) {
+                        $('#product-search').empty();
+                    }
+                });
+            });
+        </script>
+    </div>
+
+    </div>
+
+
 </header>
 <!-- header end -->
 <!-- CSS cho modal -->
@@ -754,35 +835,6 @@
         z-index: 1000;
         /* Đặt modal lên trên cùng */
     }
-
-    /* Nội dung của modal (form đăng nhập) */
-    .form {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        width: 400px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        position: relative;
-        /* Để nút close nằm bên trong */
-        z-index: 1001;
-        /* Bên trong modal */
-    }
-
-    /* Nút đóng modal (X) */
-    .close-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        color: #333;
-    }
-
-    /* Hiển thị modal khi nó được kích hoạt */
-    .modal-overlay.active {
-        display: flex;
-        /* Hiển thị modal khi có class active */
-    }
 </style>
 
 <!-- JavaScript cho modal -->
@@ -841,38 +893,4 @@
             });
         });
     });
-    // Mở modal khi nhấn vào nút "Đăng Nhập"
-    function openLoginModal() {
-        document.getElementById('loginModal').classList.add('active');
-    }
-
-    // Đóng modal khi nhấn vào nút "X"
-    function closeLoginModal() {
-        document.getElementById('loginModal').classList.remove('active');
-    }
-
-    // Đóng modal khi nhấn vào bên ngoài form
-    window.onclick = function(event) {
-        const modal = document.getElementById('loginModal');
-        if (event.target === modal) {
-            modal.classList.remove('active');
-        }
-    }
-    // Mở modal khi nhấn vào nút "Đăng Kí"
-    function openRegisterModal() {
-        document.getElementById('registerModal').classList.add('active');
-    }
-
-    // Đóng modal khi nhấn vào nút "X"
-    function closeRegisterModal() {
-        document.getElementById('registerModal').classList.remove('active');
-    }
-
-    // Đóng modal khi nhấn vào bên ngoài form
-    window.onclick = function(event) {
-        const modal = document.getElementById('registerModal');
-        if (event.target === modal) {
-            modal.classList.remove('active');
-        }
-    }
 </script>

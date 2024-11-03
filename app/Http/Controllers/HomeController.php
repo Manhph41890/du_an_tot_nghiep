@@ -10,14 +10,20 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     //Sản phẩm Home
-    public function index()
+    public function index(Request $request)
     {
+        // Lấy sản phẩm mới
         $sanPhamMois = san_pham::orderByDesc('id')->latest('id')->paginate(6);
+
+        // Lấy sản phẩm giảm giá
         $sanPhamGiamGias = san_pham::with('danh_gias')->whereNotNull('gia_km')
             ->orderByDesc('id')
             ->paginate(3);
-        $sanPhamView = san_pham::orderByDesc('id')->latest('id')->paginate(6);
-        // Tính phần trăm giảm giá
+
+        // Lấy sản phẩm xem nhiều
+        $sanPhamView = san_pham::orderByDesc('views', 'desc')->paginate(6);
+
+        // Tính phần trăm giảm giá cho sản phẩm giảm giá
         $sanPhamGiamGias->getCollection()->transform(function ($sanPham) {
             if ($sanPham->gia_goc > 0 && $sanPham->gia_km > 0) {
                 $sanPham->phan_tram_giam_gia = round((1 - ($sanPham->gia_km / $sanPham->gia_goc)) * 100);
@@ -33,11 +39,15 @@ class HomeController extends Controller
             }
             return $sanPham;
         });
+
+
         $title = "Trang chủ";
         $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
         $anhDMuc = danh_muc::all();
+
         return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }
+
     // Sản phẩm chi tiet
     public function chiTietSanPham($id)
     {
@@ -63,9 +73,10 @@ class HomeController extends Controller
 
         $sizes = $sanPhamCT->bien_the_san_phams->pluck('size')->unique('id'); // Lấy size duy nhất
         $colors = $sanPhamCT->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
+        $sanLienQuan = san_pham::with('danh_muc')->where('id', '!=', $id)->orderByDesc('id')->get();
         $title = "";
 
-        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title', 'uniqueColors'));
+        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title', 'uniqueColors', 'sanLienQuan'));
     }
 
     // In Data Bai viet
@@ -84,6 +95,23 @@ class HomeController extends Controller
         $title = "";
         return view('client.baiviet.baivietchitiet', compact('baiViet', 'docThem', 'title'));
     }
+    // app/Http/Controllers/HomeController.php
+
+    public function incrementViews($id)
+    {
+        // Tìm sản phẩm theo ID
+        $sanPham = san_pham::find($id);
+
+        // Nếu sản phẩm tồn tại, tăng lượt xem
+        if ($sanPham) {
+            $sanPham->increment('views'); // Tăng lượt xem
+        }
+
+
+        // Chuyển hướng đến trang chi tiết sản phẩm
+        return redirect()->route('sanpham.chitiet', $id);
+    }
+
 
     public function lienhe()
     {

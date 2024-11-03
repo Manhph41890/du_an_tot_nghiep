@@ -15,9 +15,11 @@
                         <a class="search search-toggle" href="">
                             <i class="icon-magnifier"></i> Tìm kiếm</a>
                     </li>
+
                 </ul>
             </nav>
         </div>
+
         <nav class="offcanvas-menu">
             <ul>
                 <li>
@@ -261,12 +263,27 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
                         <div class="cart-block-links theme1 d-none d-sm-block">
-                            <ul class="d-flex">
-                                <li>
+                            <ul class="d-flex align-items-center gap-2">
+                                <!-- <li>
                                     <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
-                                </li>
+                                </li> -->
+                                    <div class="">
+                                        <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
+                                            <div class="my-2 mx-2">
+                                                <a class="search-toggle" id="searchIcon" role="button"  style="font-size: 20px;">
+                                                    <i class="icon-magnifier"></i>
+                                                </a>
+                                            </div>
+                                            <!-- Ô nhập liệu sẽ được thêm vào DOM bằng JavaScript -->
+                                        </div>
+                                    </div>
+
+
+
+
+
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
@@ -296,110 +313,110 @@
                         <div class="cart-block-links theme1 d-none d-sm-block">
                             <ul class="d-flex">
                                 @auth
-                                    <li class="dropdown notification-list topbar-dropdown">
-                                        <a class="nav-link dropdown-toggle nav-user me-0" href="#"
-                                            id="profileDropdown" role="button" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
-                                                alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
-                                            {{-- <span class="pro-user-name ms-1">
+                                <li class="dropdown notification-list topbar-dropdown">
+                                    <a class="nav-link dropdown-toggle nav-user me-0" href="#" style="width: 50px;"
+                                        id="profileDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
+                                            alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
+                                        {{-- <span class="pro-user-name ms-1">
                                                 {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
-                                            </span> --}}
+                                        </span> --}}
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end profile-dropdown">
+                                        <!-- Tài khoản -->
+                                        <a class="dropdown-item notify-item" href="#" id="showUserProfile">
+                                            <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
+                                            <span>Tài khoản</span>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-end profile-dropdown">
-                                            <!-- Tài khoản -->
-                                            <a class="dropdown-item notify-item" href="#" id="showUserProfile">
-                                                <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
-                                                <span>Tài khoản</span>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <!-- Đăng xuất -->
-                                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
+                                        <div class="dropdown-divider"></div>
+                                        <!-- Đăng xuất -->
+                                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item notify-item">
+                                                <i class="mdi mdi-location-exit fs-16 align-middle"></i>
+                                                <span>Đăng Xuất</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </li>
+
+                                <!-- Popup thông tin tài khoản -->
+                                <div id="userProfilePopup" class="user-profile-popup" style="display: none">
+                                    <div class="popup-content">
+                                        <div class="popup-header">
+                                            <h5>Thông tin tài khoản</h5>
+                                            <span class="close-popup" id="closeUserProfile">&times;</span>
+                                        </div>
+                                        <div class="popup-body">
+                                            @auth
+                                            <p><strong>Họ tên:</strong> {{ Auth::user()->ho_ten }}</p>
+                                            <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                                            <p><strong>Số điện thoại:</strong> {{ Auth::user()->so_dien_thoai }}</p>
+                                            <p><strong>Địa chỉ:</strong> {{ Auth::user()->dia_chi }}</p>
+                                            @else
+                                            <p>Vui lòng đăng nhập để xem thông tin tài khoản.</p>
+                                            @endauth
+                                        </div>
+                                        <div class="popup-footer">
+                                            <button class="btn btn-primary" id="editUserProfileBtn">Sửa</button>
+                                            <button class="btn btn-secondary" id="closeUserProfileBtn">Đóng</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Popup chỉnh sửa tài khoản -->
+                                <div id="editUserProfilePopup" class="user-profile-popup" style="display: none">
+                                    <div class="popup-content">
+                                        <div class="popup-header">
+                                            <h5>Chỉnh sửa tài khoản</h5>
+                                            <span class="close-popup" id="closeEditUserProfile">&times;</span>
+                                        </div>
+                                        <div class="popup-body">
+                                            <form id="editUserProfileForm" action="{{ route('user.update') }}"
+                                                method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <button type="submit" class="dropdown-item notify-item">
-                                                    <i class="mdi mdi-location-exit fs-16 align-middle"></i>
-                                                    <span>Đăng Xuất</span>
-                                                </button>
+                                                <div class="mb-3">
+                                                    <label for="hoTen" class="form-label">Họ tên</label>
+                                                    <input type="text" class="form-control" id="hoTen"
+                                                        name="ho_ten" value="{{ Auth::user()->ho_ten }}" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="anhDaiDien" class="form-label">Ảnh đại diện</label>
+                                                    <input type="file" class="form-control" id="anhDaiDien"
+                                                        name="anh_dai_dien">
+                                                    @if (Auth::user()->anh_dai_dien)
+                                                    <div class="mt-2">
+                                                        <label>Ảnh hiện tại:</label>
+                                                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
+                                                            alt="Ảnh hiện tại" class="rounded-circle"
+                                                            style="width: 100px; height: 100px;">
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="diaChi" class="form-label">Địa Chỉ</label>
+                                                    <input type="text" class="form-control" id="diaChi"
+                                                        name="dia_chi" value="{{ Auth::user()->dia_chi }}">
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Lưu</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    id="cancelEditProfile">Hủy</button>
                                             </form>
                                         </div>
-                                    </li>
-
-                                    <!-- Popup thông tin tài khoản -->
-                                    <div id="userProfilePopup" class="user-profile-popup" style="display: none">
-                                        <div class="popup-content">
-                                            <div class="popup-header">
-                                                <h5>Thông tin tài khoản</h5>
-                                                <span class="close-popup" id="closeUserProfile">&times;</span>
-                                            </div>
-                                            <div class="popup-body">
-                                                @auth
-                                                    <p><strong>Họ tên:</strong> {{ Auth::user()->ho_ten }}</p>
-                                                    <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-                                                    <p><strong>Số điện thoại:</strong> {{ Auth::user()->so_dien_thoai }}</p>
-                                                    <p><strong>Địa chỉ:</strong> {{ Auth::user()->dia_chi }}</p>
-                                                @else
-                                                    <p>Vui lòng đăng nhập để xem thông tin tài khoản.</p>
-                                                @endauth
-                                            </div>
-                                            <div class="popup-footer">
-                                                <button class="btn btn-primary" id="editUserProfileBtn">Sửa</button>
-                                                <button class="btn btn-secondary" id="closeUserProfileBtn">Đóng</button>
-                                            </div>
-                                        </div>
                                     </div>
-
-                                    <!-- Popup chỉnh sửa tài khoản -->
-                                    <div id="editUserProfilePopup" class="user-profile-popup" style="display: none">
-                                        <div class="popup-content">
-                                            <div class="popup-header">
-                                                <h5>Chỉnh sửa tài khoản</h5>
-                                                <span class="close-popup" id="closeEditUserProfile">&times;</span>
-                                            </div>
-                                            <div class="popup-body">
-                                                <form id="editUserProfileForm" action="{{ route('user.update') }}"
-                                                    method="POST" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="mb-3">
-                                                        <label for="hoTen" class="form-label">Họ tên</label>
-                                                        <input type="text" class="form-control" id="hoTen"
-                                                            name="ho_ten" value="{{ Auth::user()->ho_ten }}" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="anhDaiDien" class="form-label">Ảnh đại diện</label>
-                                                        <input type="file" class="form-control" id="anhDaiDien"
-                                                            name="anh_dai_dien">
-                                                        @if (Auth::user()->anh_dai_dien)
-                                                            <div class="mt-2">
-                                                                <label>Ảnh hiện tại:</label>
-                                                                <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
-                                                                    alt="Ảnh hiện tại" class="rounded-circle"
-                                                                    style="width: 100px; height: 100px;">
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="diaChi" class="form-label">Địa Chỉ</label>
-                                                        <input type="text" class="form-control" id="diaChi"
-                                                            name="dia_chi" value="{{ Auth::user()->dia_chi }}">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-success">Lưu</button>
-                                                    <button type="button" class="btn btn-secondary"
-                                                        id="cancelEditProfile">Hủy</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
                                 @else
-                                    <li>
-                                        <a style="font-size: 16px;" href="{{ route('auth.login') }}">
-                                            Đăng Nhập
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a style="font-size: 16px;" href="{{ route('auth.register') }}">
-                                            Đăng Ký
-                                        </a>
-                                    </li>
+                                <li>
+                                    <a style="font-size: 16px;" href="{{ route('auth.login') }}">
+                                        Đăng Nhập
+                                    </a>
+                                </li>
+                                <li>
+                                    <a style="font-size: 16px;" href="{{ route('auth.register') }}">
+                                        Đăng Ký
+                                    </a>
+                                </li>
                                 @endauth
                             </ul>
                         </div>
@@ -416,7 +433,7 @@
 
 
 
-    <div class="overlay">
+    <!-- <div class="overlay">
         <div class="scale"></div>
         <form class="search-box" action="{{ url('/') }}" method="GET">
             <input type="text" name="search" placeholder="Tìm kiếm ..." id="inputsearch" />
@@ -487,7 +504,7 @@
                 });
             });
         </script>
-    </div>
+    </div> -->
 
     </div>
 
@@ -499,11 +516,56 @@
     @auth
     var isAuthenticated = true;
     @else
-        var isAuthenticated = false;
+    var isAuthenticated = false;
     @endauth
 </script>
 
 <style>
+    /* Ẩn ô nhập liệu lúc đầu */
+    .search-input {
+        width: 0;
+        /* Không hiển thị lúc đầu */
+        opacity: 0;
+        /* Ẩn nội dung */
+        animation-duration: 0.5s;
+        /* Thời gian cho animation */
+        animation-fill-mode: forwards;
+        /* Để duy trì trạng thái cuối của animation */
+    }
+
+    /* Hiệu ứng trượt vào */
+    @keyframes slideIn {
+        0% {
+            width: 0;
+            opacity: 0;
+        }
+
+        100% {
+            width: 200px;
+            /* Độ rộng khi hiển thị */
+            opacity: 1;
+            /* Hiển thị nội dung */
+        }
+    }
+
+    /* Hiệu ứng trượt ra */
+    @keyframes slideOut {
+        0% {
+            width: 200px;
+            /* Độ rộng ban đầu */
+            opacity: 1;
+            /* Hiện tại */
+        }
+
+        100% {
+            width: 0;
+            /* Không hiển thị khi trượt ra */
+            opacity: 0;
+            /* Ẩn nội dung */
+        }
+    }
+
+
     .user-profile-popup {
         display: none;
         position: fixed;
@@ -569,6 +631,56 @@
 
 <!-- JavaScript cho modal -->
 <script>
+    document.getElementById("searchIcon").addEventListener("click", function() {
+    const mainMenu = document.querySelector(".main-menu");
+    
+    // Kiểm tra xem class justify-content-center có tồn tại không
+    if (mainMenu.classList.contains("justify-content-center")) {
+        mainMenu.classList.remove("justify-content-center"); // Xóa class justify-content-center
+        mainMenu.classList.add("justify-content-start"); // Thêm class justify-content-start
+    } else {
+        mainMenu.classList.remove("justify-content-start"); // Nếu đã là justify-content-start, quay về justify-content-center
+        mainMenu.classList.add("justify-content-center");
+    }
+});
+
+    // Lấy phần tử icon và container
+    const searchIcon = document.getElementById("searchIcon");
+    const searchContainer = document.getElementById("searchContainer");
+    let isSearchInputVisible = false; // Trạng thái hiển thị của ô nhập liệu
+
+    // Thêm sự kiện click vào icon để hiển thị/ẩn ô nhập liệu
+    searchIcon.addEventListener("click", function() {
+        const existingSearchInput = document.getElementById("searchInput");
+
+        if (!isSearchInputVisible) {
+            // Nếu ô nhập liệu chưa hiển thị, tạo và thêm nó vào DOM
+            const searchInputLi = document.createElement("div");
+            searchInputLi.id = "searchInput"; // Thêm ID cho ô nhập liệu
+            searchInputLi.classList.add("my-2", "mx-2", "search-input");
+
+            // Tạo nội dung của ô nhập liệu
+            searchInputLi.innerHTML = `
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Search">
+            </div>
+        `;
+
+            // Thêm ô nhập liệu ngay sau icon
+            searchContainer.appendChild(searchInputLi);
+            // Thêm hiệu ứng slide-in
+            searchInputLi.style.animationName = "slideIn";
+            isSearchInputVisible = true;
+        } else {
+            // Nếu ô nhập liệu đã hiển thị, thêm hiệu ứng slide-out
+            existingSearchInput.style.animationName = "slideOut"; // Bỏ hiệu ứng trước khi xóa
+            setTimeout(() => {
+                existingSearchInput.remove();
+            }, 500); // Đợi hết hiệu ứng trước khi xóa phần tử
+            isSearchInputVisible = false;
+        }
+    });
+
     $(document).ready(function() {
         // Hiển thị popup thông tin người dùng
         $('#showUserProfile').click(function(e) {

@@ -248,7 +248,9 @@
                                                         <div class="product-desc">
                                                             <h3 class="title">
                                                                 <a
-                                                                    href="shop-grid-4-column.html">{{ $item->ten_san_pham }}</a>
+                                                                    href="{{ route('san-phams.incrementViews', $item->id) }}">
+                                                                    {{ $item->ten_san_pham }}
+                                                                </a>
                                                             </h3>
                                                             <div class="star-rating">
                                                                 <span class="ion-ios-star"></span>
@@ -336,7 +338,9 @@
                                                         <div class="product-desc">
                                                             <h3 class="title">
                                                                 <a
-                                                                    href="{{ route('sanpham.chitiet', $sanPhamGg->id) }}">{{ $sanPhamGg->ten_san_pham }}</a>
+                                                                    href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
+                                                                    {{ $sanPhamGg->ten_san_pham }}
+                                                                </a>
                                                             </h3>
                                                             <div class="star-rating d-flex justify-content-around">
                                                                 @for ($i = 1; $i <= 5; $i++)
@@ -521,7 +525,9 @@
                                                 <div class="product-desc">
                                                     <h3 class="title">
                                                         <a
-                                                            href="shop-grid-4-column.html">{{ $sanphamview->ten_san_pham }}</a>
+                                                            href="{{ route('san-phams.incrementViews', $sanphamview->id) }}">
+                                                            {{ $sanphamview->ten_san_pham }}
+                                                        </a>
                                                     </h3>
                                                     <div class="star-rating">
                                                         <span class="ion-ios-star"></span>
@@ -866,16 +872,4 @@
     </div>
     <!-- modals end -->
 
-    <!-- search-box and overlay start -->
-    <div class="overlay">
-        <div class="scale"></div>
-        <form class="search-box" action="#">
-            <input type="text" name="search" placeholder="Search products..." />
-            <button id="close" type="submit">
-                <i class="ion-ios-search-strong"></i>
-            </button>
-        </form>
-        <button class="close"><i class="ion-android-close"></i></button>
-    </div>
-    <!-- search-box and overlay end -->
 @endsection

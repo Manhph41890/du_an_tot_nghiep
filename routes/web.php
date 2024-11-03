@@ -1,28 +1,29 @@
 <?php
 
-use App\Http\Controllers\DonHangController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BaiVietController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ChucVuController;
-use App\Http\Controllers\ClientSanPhamController;
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KhuyenMaiController;
+use App\Http\Controllers\DonHangController;
+use App\Http\Controllers\SanPhamController;
+use App\Http\Controllers\VariantController;
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KhuyenMaiController;
+use App\Http\Controllers\ClientSanPhamController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
-use App\Http\Controllers\SanPhamController;
-use App\Http\Controllers\StaffController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\VariantController;
 
 
 // Route trang chủ
@@ -105,7 +106,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
-    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+    Route::get('/', [HomeController::class, 'index'])->name('client.home');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::get('/sanpham/search', [SanPhamController::class, 'search'])->name('sanpham.search');
@@ -114,6 +115,9 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::post('/cart/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
+    // 
+    Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');
+
 
 
 
@@ -139,3 +143,6 @@ Route::post('/user/update', [UserController::class, 'update'])->name('user.updat
 Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
+
+
+Route::get('/global-search', [SearchController::class, 'search'])->name('global.search');

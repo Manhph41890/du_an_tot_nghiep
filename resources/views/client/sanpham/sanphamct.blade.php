@@ -31,7 +31,7 @@
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <div>
                         <div class="position-relative">
-                            <span class="badge badge-danger top-right">New</span>
+                            <span class="badge badge-danger top-right">Mới</span>
                         </div>
                         <div class="product-sync-init mb-20">
                             <!-- Ảnh sản phẩm chính -->
@@ -95,9 +95,9 @@
                                 @endfor
                                 <a href="#" id="write-comment"><span class="ms-2"><i
                                             class="far fa-comment-dots"></i></span>
-                                    Read reviews <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
+                                    Xem đánh giá <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span
-                                            class="edite"><i class="far fa-edit"></i></span> Write a review</a>
+                                            class="edite"><i class="far fa-edit"></i></span>Viết đánh giá</a>
                             </div>
                         </div>
                         <div class="product-body mb-40">
@@ -129,9 +129,9 @@
                             <div class="product-footer">
                                 <div class="d-flex">
                                     <div class="product-size me-5">
-                                        <h3 class="title">Size</h3>
+                                        <h3 class="title">Kích thước</h3>
                                         <select name="size_san_pham_id" id="size_san_pham_id">
-                                            <option value="">--Chọn size--</option>
+                                            <option value="">--Chọn--</option>
                                             @foreach ($sanPhamCT->bien_the_san_phams as $bienThe)
                                                 <option value="{{ $bienThe->size->id }}">{{ $bienThe->size->ten_size }}
                                                 </option>
@@ -143,7 +143,7 @@
                                     </div>
 
                                     <div class="check-box ms-5">
-                                        <h4 class="title">Color</h4>
+                                        <h4 class="title">Màu Sắc</h4>
                                         <div class="d-flex check-box-wrap-list">
                                             @foreach ($uniqueColors as $color)
                                                 <div class="widget-check-box">
@@ -179,7 +179,7 @@
                                     <div>
                                         <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
                                             <span class="me-2"><i class="ion-android-add"></i></span>
-                                            Add to cart
+                                            Thêm vào giỏ hàng
                                         </button>
                                     </div>
                                 </div>
@@ -204,17 +204,17 @@
                             <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home"
-                                        role="tab" aria-controls="pills-home" aria-selected="true">Description</a>
+                                        role="tab" aria-controls="pills-home" aria-selected="true">Mô tả</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false">Product Details</a>
+                                        aria-selected="false">Chi tiết Sản phẩm</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-contact-tab" data-bs-toggle="pill"
                                         href="#pills-contact" role="tab" aria-controls="pills-contact"
-                                        aria-selected="false">Reviews</a>
+                                        aria-selected="false">Đánh giá</a>
                                 </li>
                             </ul>
                         </nav>
@@ -282,11 +282,11 @@
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="ratting-form-wrapper">
-                                            <h3>Add a Review</h3>
+                                            <h3>Thêm đánh giá</h3>
                                             <div class="ratting-form">
                                                 <form action="#">
                                                     <div class="star-box">
-                                                        <span>Your rating:</span>
+                                                        <span>Đánh giá của bạn:</span>
                                                         <div class="rating-product">
                                                             <i class="ion-android-star"></i>
                                                             <i class="ion-android-star"></i>
@@ -295,11 +295,20 @@
                                                             <i class="ion-android-star"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
+                                                    {{-- <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="rating-form-style form-submit">
                                                                 <textarea name="Your Review" placeholder="Message"></textarea>
                                                                 <input type="submit" value="Submit" />
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="rating-form-style form-submit">
+                                                                <textarea id="review" name="Your Review" placeholder="Viết đánh giá" maxlength="100"></textarea>
+                                                                <p id="charCount">0/100</p>
+                                                                <input type="submit" value="Gửi" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -323,7 +332,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-3 mb-3">You might also like</h2>
+                        <h2 class="title pb-3 mb-3">Bạn cũng có thể thích</h2>
                         <p class="text mt-10">Add Related products to weekly line up</p>
                     </div>
                 </div>
@@ -455,6 +464,20 @@
                 mainImage.src = imageUrl;
             }
         }
+        const reviewInput = document.getElementById("review");
+        const charCountDisplay = document.getElementById("charCount");
+
+        reviewInput.addEventListener("input", function() {
+            const currentLength = reviewInput.value.length;
+
+            // Cập nhật bộ đếm ký tự
+            charCountDisplay.textContent = `${currentLength}/100`;
+
+            // Nếu vượt quá 100 ký tự, cắt ngắn lại (phòng ngừa trường hợp maxlength không hoạt động trên một số trình duyệt)
+            if (currentLength > 100) {
+                reviewInput.value = reviewInput.value.substring(0, 100);
+            }
+        });
     </script>
 
 

@@ -44,7 +44,7 @@ class UserController extends Controller
             });
         }
 
-        $title = "Nguoi dung";
+        $title = "Người Dùng";
         // $params = [];
         $params['title'] = $title;
         $params['title'] = $title;

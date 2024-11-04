@@ -169,8 +169,7 @@
                         <div class="section-title text-center">
                             <h2 class="title pb-3 mb-3">Sản phẩm của chúng tôi</h2>
                             <p class="text">
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                Perspiciatis, culpa?
+                                Vẽ sáng tạo - Tô hạnh phúc
                             </p>
                         </div>
                     </div>
@@ -211,7 +210,7 @@
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
-                                                        <span class="badge badge-danger top-right">New</span>
+                                                        <span class="badge badge-danger top-right">Mới</span>
                                                         <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -872,16 +871,4 @@
     </div>
     <!-- modals end -->
 
-    <!-- search-box and overlay start -->
-    <div class="overlay">
-        <div class="scale"></div>
-        <form class="search-box" action="#">
-            <input type="text" name="search" placeholder="Search products..." />
-            <button id="close" type="submit">
-                <i class="ion-ios-search-strong"></i>
-            </button>
-        </form>
-        <button class="close"><i class="ion-android-close"></i></button>
-    </div>
-    <!-- search-box and overlay end -->
 @endsection

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="description" content="{{ $description ?? 'Default description' }}" />
 
-    <title>Lol</title>
+    <title>ArtiCraft</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/favicon.ico') }}" />

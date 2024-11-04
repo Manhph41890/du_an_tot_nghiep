@@ -100,7 +100,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    {{-- <div class="billing-info-wrap">
+                    <div class="billing-info-wrap">
             <h3 class="title">calculate shipping</h3>
             <form class="personal-information" action="https://htmldemo.net/looki/looki/assets/php/contact.php">
               <div class="row">
@@ -151,7 +151,7 @@
                 </div>
               </div>
             </form>
-          </div> --}}
+          </div>
                 </div>
                 {{-- ----------------- thanh toan--------------------------- --}}
                 <div class="col-lg-5 mt-4 mt-lg-0">

@@ -51,7 +51,7 @@ Route::prefix('client')->group(function () {
     Route::post('/taikhoan/update', [TaiKhoanController::class, 'updateuser'])->name('update_thongtin');
 
     Route::view('/giohang', 'client.giohang');
-    Route::view('/gioithieu', 'client.gioithieu');
+    Route::get('/gioithieu', [HomeController::class, 'gioithieu'])->name('client.gioithieu');
     Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
 });
 

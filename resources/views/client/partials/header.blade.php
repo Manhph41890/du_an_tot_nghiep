@@ -447,63 +447,16 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Pages <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="about-us.html">About Page</a></li>
-                                <li><a href="cart.html">Cart Page</a></li>
-                                <li><a href="checkout.html">Checkout Page</a></li>
-                                <li><a href="compare.html">Compare Page</a></li>
-                                <li><a href="login.html">Login &amp; Register Page</a></li>
-                                <li><a href="myaccount.html">Account Page</a></li>
-                                <li><a href="wishlist.html">Wishlist Page</a></li>
-                            </ul>
+                            <a href="{{ route('client.gioithieu') }}">Giới thiệu <i class="menu-text"></i></a>
                         </li>
                         <li>
-                            <a href="blog-grid-3-column.html">Blog <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="blog-grid-3-column.html">Blog Grid</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="blog-grid-3-column.html">Blog Grid 3 column</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid-4-column.html">Blog Grid 4 column</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid-left-sidebar.html">Blog Grid Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid-right-sidebar.html">Blog Grid Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="blog-single-left-sidebar.html">Blog List</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="single-blog.html">Blog Single</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="single-blog.html">Single Blog</a></li>
-                                        <li>
-                                            <a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-single-right-sidebar.html">Blog Single Right Sidbar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
                         </li>
-                        <li><a href="contact.html">contact Us</a></li>
+                        
+                        <li>
+                            <a href="{{ url('client/baiviet') }}">Blog</a>
+                        </li>
+                        <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3 col-xl-2">

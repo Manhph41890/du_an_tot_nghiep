@@ -95,9 +95,9 @@
                                 @endfor
                                 <a href="#" id="write-comment"><span class="ms-2"><i
                                             class="far fa-comment-dots"></i></span>
-                                    Read reviews <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
+                                    Xem đánh giá <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span
-                                            class="edite"><i class="far fa-edit"></i></span> Write a review</a>
+                                            class="edite"><i class="far fa-edit"></i></span>Viết đánh giá</a>
                             </div>
                         </div>
                         <div class="product-body mb-40">
@@ -204,17 +204,17 @@
                             <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home"
-                                        role="tab" aria-controls="pills-home" aria-selected="true">Description</a>
+                                        role="tab" aria-controls="pills-home" aria-selected="true">Mô tả</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false">Product Details</a>
+                                        aria-selected="false">Chi tiết Sản phẩm</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-contact-tab" data-bs-toggle="pill"
                                         href="#pills-contact" role="tab" aria-controls="pills-contact"
-                                        aria-selected="false">Reviews</a>
+                                        aria-selected="false">Đánh giá</a>
                                 </li>
                             </ul>
                         </nav>
@@ -332,7 +332,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-3 mb-3">You might also like</h2>
+                        <h2 class="title pb-3 mb-3">Bạn cũng có thể thích</h2>
                         <p class="text mt-10">Add Related products to weekly line up</p>
                     </div>
                 </div>

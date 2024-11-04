@@ -20,7 +20,7 @@ class khuyen_mai extends Model
         'ngay_ket_thuc',
         'user_id',
         'is_active',
-        'danh_muc_id',
+        
     ];
 
     public function don_hangs()

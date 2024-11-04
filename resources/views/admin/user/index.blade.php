@@ -167,7 +167,9 @@
                     chuc_vu_id: chucVuId
                 },
                 success: function(response) {
-                    alert(response.message); // Thông báo thành công
+                    // alert(response.message); // Thông báo thành công
+                    alert('Thành công.');
+                    location.reload();     // Tự động tải lại trang
                 },
                 error: function(xhr) {
                     alert('Đã xảy ra lỗi khi cập nhật chức vụ.');

@@ -76,7 +76,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <span class="whish-list-price"> $38.24 </span>
+                                        <span class="whish-list-price"> $38 </span>
                                     </td>
                                     <td class="text-center">
                                         <a href="#">
@@ -112,7 +112,6 @@
                       <option>Bahamas</option>
                       <option>Bahrain</option>
                       <option>Bangladesh</option>
-                      <option>Barbados</option>
                     </select>
                   </div>
                 </div>
@@ -124,7 +123,6 @@
                       <option>Bahamas</option>
                       <option>Bahrain</option>
                       <option>Bangladesh</option>
-                      <option>Barbados</option>
                     </select>
                   </div>
                 </div>
@@ -139,7 +137,7 @@
                   </div>
                 </div>
                 <div class="col-12">
-                  <h3 class="coupon-title">Discount coupon Code</h3>
+                  <h3 class="coupon-title">Mã giảm giá</h3>
                 </div>
                 <div class="col-lg-6 col-md-6">
                   <div class="billing-info mb-20px">
@@ -162,7 +160,7 @@
                                 <div class="your-order-bottom">
                                     <ul>
                                         <li class="your-order-shipping">Thành tiền</li>
-                                        <li>??? VND</li>
+                                        <li>100000 VND</li>
                                     </ul>
                                 </div>
                                 <div class="your-order-total mb-0">

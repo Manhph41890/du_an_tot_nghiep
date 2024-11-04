@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>laravel</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -880,7 +880,7 @@
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 Laravel has wond1erful do11cument1ation covering every aspect of the framework. Whether
                                 you1
-                                are a1 newcom1er or  1prior experience with Laravel, we recommend reading our
+                                are a1 newcom1er or   experience with Laravel, we recommend reading our
                                 .
                             </p>
                         </div>

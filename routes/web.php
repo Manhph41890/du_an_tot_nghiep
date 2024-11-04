@@ -28,6 +28,9 @@ use App\Http\Controllers\PhuongThucVanChuyenController;
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
+// tìm kiếm toàn trang 
+Route::get('/timkiem', [SearchController::class, 'search'])->name('global.search');
+
 
 // Route cho client
 Route::prefix('client')->group(function () {
@@ -145,4 +148,3 @@ Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
 
 
-Route::get('/global-search', [SearchController::class, 'search'])->name('global.search');

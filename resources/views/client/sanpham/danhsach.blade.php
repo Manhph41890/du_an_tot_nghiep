@@ -206,7 +206,10 @@
                                 @csrf
                                 @method('GET')
                                 <div class="sidbar-widget mt-10">
-                                    <h4 class="title">LỌC THEO</h4>
+                                    <div class="header-sidebar d-flex justify-content-between">
+                                        <h4 class="title">LỌC THEO</h4>
+                                        <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button>
+                                    </div>
                                     <h4 class="sub-title pt-10">Danh mục</h4>
                                     <div class="form-group">
                                         @foreach ($danhmucs as $item)
@@ -273,7 +276,6 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Lọc</button>
                             </form>
                         </div>
                     </aside>
@@ -432,14 +434,17 @@
                                         <div class="product-footer">
                                             <div class="product-count style d-flex flex-column flex-sm-row my-4">
                                                 <div class="count d-flex">
-                                                    <input type="number" min="1" max="10" step="1"
-                                                        value="1" id="quantity-{{ $item->id }}"
-                                                        name="quantity" />
+                                                    <input type="number" name="quantity" min="1" max="10"
+                                                        step="1" value="1" required />
                                                     <div class="button-group">
-                                                        <button type="button" class="count-btn increment"><i
-                                                                class="fas fa-chevron-up"></i></button>
-                                                        <button type="button" class="count-btn decrement"><i
-                                                                class="fas fa-chevron-down"></i></button>
+                                                        <button type="button" class="count-btn increment"
+                                                            onclick="incrementQuantity()">
+                                                            <i class="fas fa-chevron-up"></i>
+                                                        </button>
+                                                        <button type="button" class="count-btn decrement"
+                                                            onclick="decrementQuantity()">
+                                                            <i class="fas fa-chevron-down"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                                 <div>
@@ -491,7 +496,24 @@
                     }
                 });
             });
+            
+            // Hàm tăng số lượng
+            function incrementQuantity() {
+                const quantityInput = document.querySelector('input[name="quantity"]');
+                let quantity = parseInt(quantityInput.value);
+                if (quantity < 10) {
+                    quantityInput.value = quantity + 1;
+                }
+            }
 
+            // Hàm giảm số lượng
+            function decrementQuantity() {
+                const quantityInput = document.querySelector('input[name="quantity"]');
+                let quantity = parseInt(quantityInput.value);
+                if (quantity > 1) {
+                    quantityInput.value = quantity - 1;
+                }
+            }
 
             function showMainImage(imageUrl) {
                 // Tìm phần tử của ảnh chính

@@ -133,8 +133,8 @@
             <div class="row">
                 <div class="col-md-6 mb-30">
                     <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/bottom_banner_3.jpg') }}" alt="banner-thumb-naile" />
+                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-jpghidden">
+                            <img src="{{ asset('assets/client/images/banner/bottom_banner_3.') }}" alt="banner-thumb-naile" />
                         </a>
                     </div>
                 </div>

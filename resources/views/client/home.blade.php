@@ -169,8 +169,7 @@
                         <div class="section-title text-center">
                             <h2 class="title pb-3 mb-3">Sản phẩm của chúng tôi</h2>
                             <p class="text">
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                Perspiciatis, culpa?
+                                Vẽ sáng tạo - Tô hạnh phúc
                             </p>
                         </div>
                     </div>

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="description" content="{{ $description ?? 'Default description' }}" />
 
-    <title>ArtiCraft</title>
+    <title>ArtiCraft Vẽ sáng tạo - Tô hạnh phúc</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/favicon.ico') }}" />

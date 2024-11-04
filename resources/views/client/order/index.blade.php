@@ -189,7 +189,7 @@
                                     <ul class="d-flex justify-content-between">
                                         <li class="order-total font-weight-bold">Tổng cộng</li>
                                         <li class="font-weight-bold"><span
-                                                id="total-price-display">{{ $totalAll }}</span></li>
+                                                id="total-price-display">{{ $total }}</span></li>
                                     </ul>
                                 </div>
                             </div>

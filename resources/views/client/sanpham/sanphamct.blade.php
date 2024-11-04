@@ -204,17 +204,17 @@
                             <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home"
-                                        role="tab" aria-controls="pills-home" aria-selected="true">Description</a>
+                                        role="tab" aria-controls="pills-home" aria-selected="true">Mô tả</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false">Product Details</a>
+                                        aria-selected="false">Chi tiết Sản phẩm</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-contact-tab" data-bs-toggle="pill"
                                         href="#pills-contact" role="tab" aria-controls="pills-contact"
-                                        aria-selected="false">Reviews</a>
+                                        aria-selected="false">Đánh giá</a>
                                 </li>
                             </ul>
                         </nav>

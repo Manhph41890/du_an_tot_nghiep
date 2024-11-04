@@ -46,7 +46,7 @@
                         </div>
                         <!-- footer-menu start -->
                         <ul class="footer-menu">
-                            <li><a href="about-us.html">Chính sách bảo mật</a></li>
+                            <li><a href="about-us.html">Chính Sách bảo mật</a></li>
                             <li><a href="#">Hình thức thanh toán</a></li>
                             <li><a href="contact.html">Chính sách giao hàng</a></li>
                             <li><a href="contact.html">Chính sách đổi trả</a></li>
@@ -84,7 +84,7 @@
                         <p class="text mb-20">
                             Nhà cung cấp hàng đầu các Họa cụ, Mô hình
                             kiến trúc, Văn phòng phẩm, Phụ kiện Handmade
-                            Bút doanh nhân,…với giá tốt nhất trên thị trường Việt Nam
+                            Bút doanh nhân,…với giá tốt nhất và chất lượng trên thị trường Việt Nam
                         </p>
                     </div>
                 </div>

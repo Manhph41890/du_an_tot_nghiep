@@ -42,7 +42,7 @@ Route::prefix('client')->group(function () {
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
     Route::view('/taikhoan', 'client.taikhoan.dashboard');
     Route::view('/giohang', 'client.giohang');
-    Route::view('/gioithieu', 'client.gioithieu');
+    Route::get('/gioithieu', [HomeController::class, 'gioithieu'])->name('client.gioithieu');
     Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
 });
 

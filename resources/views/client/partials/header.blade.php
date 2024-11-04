@@ -247,11 +247,12 @@
                             <a style="color: #333;" href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>
-                            <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
+                            <a href="{{ route('client.gioithieu') }}">Giới thiệu <i class="menu-text"></i></a>
                         </li>
                         <li>
-                            <a href="#">Giới thiệu <i class="menu-text"></i></a>
+                            <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
                         </li>
+                        
                         <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>
                         </li>

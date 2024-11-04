@@ -19526,3 +19526,6 @@ span.required {
 .pni div:first-child {
     display: none;
 }
+.sidebar-loc{
+    margin-bottom: 40px;
+}

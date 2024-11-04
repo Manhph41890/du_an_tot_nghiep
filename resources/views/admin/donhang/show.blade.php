@@ -58,26 +58,30 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><img src="{{ asset('/storage/' . $donhang->san_phams?->anh_san_pham) }}"
-                                                                width="50px"></td>
-                                                        <td>
-                                                            {{ $donhang->san_phams?->ten_san_pham }}<br>
-                                                            Màu:
-                                                            {{ $donhang->bien_the_san_pham?->color?->ten_color ?? 'N/A' }}<br>
-                                                            Size:
-                                                            {{ $donhang->bien_the_san_pham?->size?->ten_size ?? 'N/A' }}
-                                                        </td>
-
-                                                        <td>{{ $donhang->chi_tiet_don_hangs->first()?->so_luong ?? 'N/A' }}
-                                                        </td>
-                                                        <td>{{ number_format($donhang->chi_tiet_don_hangs->first()?->gia_tien ?? 0, 0, ',', '.') }}
-                                                            VND</td>
-                                                        <td>{{ number_format($donhang->chi_tiet_don_hangs->first()?->thanh_tien ?? 0, 0, ',', '.') }}
-                                                            VND</td>
-                                                    </tr>
+                                                    @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
+                                                        <tr>
+                                                            <td>
+                                                                <img src="{{ asset('/storage/' . optional($donhang->san_pham)->anh_san_pham) }}"
+                                                                    width="50px" alt="Product Image">
+                                                            </td>
+                                                            <td>
+                                                                {{ optional($donhang->san_pham)->ten_san_pham ?? 'N/A' }}<br>
+                                                                Màu:
+                                                                {{ optional($donhang->color_san_pham)->ten_color ?? 'N/A' }}<br>
+                                                                Size:
+                                                                {{ optional($donhang->size_san_pham)->ten_size ?? 'N/A' }}
+                                                            </td>
+                                                            <td>{{ $chi_tiet->so_luong }}</td>
+                                                            <td>{{ number_format($chi_tiet->gia_tien, 0, ',', '.') }}
+                                                                VND</td>
+                                                            <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
+                                                                VND</td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
+
+
                                         </div>
                                         <div class="mb-3">
                                             {{-- ----------- --}}

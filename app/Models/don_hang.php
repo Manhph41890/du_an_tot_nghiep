@@ -22,46 +22,63 @@ class don_hang extends Model
         'ngay_tao',
         'tong_tien',
         'trang_thai',
-        'bien_the_san_pham_id',
+        'color_san_pham_id', // Thêm mới
+        'size_san_pham_id',  // Thêm mới
     ];
+
     protected $casts = [
         'trang_thai' => 'string', // Chuyển đổi thành chuỗi
     ];
 
-
+    // Quan hệ với bảng User
     public function user()
     {
-        return $this->belongsTo(User::class, "user_id");
+        return $this->belongsTo(User::class, 'user_id');
     }
-    // public function san_phams()
-    // {
-    //     return $this->belongsTo(san_pham::class, "san_pham_id");
-    // }
-    // Lấy thông tin sản phẩm thông qua mối quan hệ bắc cầu qua biến thể sản phẩm
-    public function san_phams()
+
+    // Quan hệ với bảng san_pham
+    public function san_pham()
     {
-        return $this->hasOneThrough(san_pham::class, bien_the_san_pham::class, 'id', 'id', 'bien_the_san_pham_id', 'san_pham_id');
+        return $this->belongsTo(san_pham::class, 'san_pham_id');
     }
+
+    // Quan hệ với bảng khuyen_mai
     public function khuyen_mai()
     {
-        return $this->belongsTo(khuyen_mai::class);
+        return $this->belongsTo(khuyen_mai::class, 'khuyen_mai_id');
     }
+
+    // Quan hệ với bảng phuong_thuc_thanh_toan
     public function phuong_thuc_thanh_toan()
     {
-        return $this->belongsTo(phuong_thuc_thanh_toan::class);
+        return $this->belongsTo(phuong_thuc_thanh_toan::class, 'phuong_thuc_thanh_toan_id');
     }
+
+    // Quan hệ với bảng phuong_thuc_van_chuyen
     public function phuong_thuc_van_chuyen()
     {
-        return $this->belongsTo(phuong_thuc_van_chuyen::class);
+        return $this->belongsTo(phuong_thuc_van_chuyen::class, 'phuong_thuc_van_chuyen_id');
     }
+
+    // Quan hệ với bảng chi_tiet_don_hang
     public function chi_tiet_don_hangs()
     {
-        return $this->hasMany(chi_tiet_don_hang::class, "don_hang_id");
+        return $this->hasMany(chi_tiet_don_hang::class, 'don_hang_id');
     }
-    public function bien_the_san_pham()
+
+    // Quan hệ với bảng color_san_pham
+    public function color_san_pham()
     {
-        return $this->belongsTo(bien_the_san_pham::class, "bien_the_san_pham_id");
+        return $this->belongsTo(color_san_pham::class, 'color_san_pham_id');
     }
+
+    // Quan hệ với bảng size_san_pham
+    public function size_san_pham()
+    {
+        return $this->belongsTo(size_san_pham::class, 'size_san_pham_id');
+    }
+
+    // Tạo mã đơn hàng từ id
     public function getMaDonHangAttribute()
     {
         return 'DH-' . strtoupper(substr(md5($this->id), 0, 8)) . '-' . str_pad($this->id, 6, '0', STR_PAD_LEFT);

@@ -13,8 +13,7 @@ class ClientSanPhamController extends Controller
     //
     public function list(Request $request)
     {
-        $title = "Shop";
-
+        $title = "Cửa hàng";
         // lấy danh mục có sản phẩm đổ ra sidebar
         $danhmucs = danh_muc::has('san_phams')->with('san_phams')->where('is_active', '1')->get();
         foreach ($danhmucs as $danhmuc) {

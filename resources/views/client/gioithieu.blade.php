@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-12">
           <div class="section-title text-center">
-            <h2 class="title pb-4 text-dark text-capitalize">About Us</h2>
+            <h2 class="title pb-4 text-dark text-capitalize">Giới thiệu về Chúng tôi</h2>
           </div>
         </div>
         <div class="col-12">

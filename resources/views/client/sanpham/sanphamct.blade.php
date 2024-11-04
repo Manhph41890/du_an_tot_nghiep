@@ -129,9 +129,9 @@
                             <div class="product-footer">
                                 <div class="d-flex">
                                     <div class="product-size me-5">
-                                        <h3 class="title">Size</h3>
+                                        <h3 class="title">Kích thước</h3>
                                         <select name="size_san_pham_id" id="size_san_pham_id">
-                                            <option value="">--Chọn size--</option>
+                                            <option value="">--Chọn--</option>
                                             @foreach ($sanPhamCT->bien_the_san_phams as $bienThe)
                                                 <option value="{{ $bienThe->size->id }}">{{ $bienThe->size->ten_size }}
                                                 </option>
@@ -143,7 +143,7 @@
                                     </div>
 
                                     <div class="check-box ms-5">
-                                        <h4 class="title">Color</h4>
+                                        <h4 class="title">Màu Sắc</h4>
                                         <div class="d-flex check-box-wrap-list">
                                             @foreach ($uniqueColors as $color)
                                                 <div class="widget-check-box">
@@ -179,7 +179,7 @@
                                     <div>
                                         <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
                                             <span class="me-2"><i class="ion-android-add"></i></span>
-                                            Add to cart
+                                            Thêm vào giỏ hàng
                                         </button>
                                     </div>
                                 </div>

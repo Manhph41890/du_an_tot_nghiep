@@ -332,7 +332,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-3 mb-3">You might also like</h2>
+                        <h2 class="title pb-3 mb-3">Bạn cũng có thể thích</h2>
                         <p class="text mt-10">Add Related products to weekly line up</p>
                     </div>
                 </div>

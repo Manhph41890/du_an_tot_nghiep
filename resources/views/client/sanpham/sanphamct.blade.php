@@ -31,7 +31,7 @@
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <div>
                         <div class="position-relative">
-                            <span class="badge badge-danger top-right">New</span>
+                            <span class="badge badge-danger top-right">Mới</span>
                         </div>
                         <div class="product-sync-init mb-20">
                             <!-- Ảnh sản phẩm chính -->

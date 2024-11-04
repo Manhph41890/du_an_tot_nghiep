@@ -86,10 +86,22 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-
+                                                    @php
+                                                        // Giới hạn quantity <= số lượng sản phẩm
+                                                        $bienThe = $item->san_pham->bien_the_san_phams
+                                                            ->where('size_san_pham_id', $item->size_san_pham_id)
+                                                            ->where('color_san_pham_id', $item->color_san_pham_id)
+                                                            ->first();
+                                                        $maxQuantity = $bienThe ? $bienThe->so_luong : 1;
+                                                    @endphp
                                                     <input type="number" name="quantity" value="{{ $item->quantity }}"
-                                                        min="1" required class="quantity-input">
+                                                        min="1" max="{{ $maxQuantity }}" class="quantity-input">
 
+                                                    @if (
+                                                        $errors->has('quantity') &&
+                                                            $errors->first('quantity') == 'Số lượng không được vượt quá ' . $maxQuantity . ' sản phẩm.')
+                                                        <div class="text-danger">{{ $errors->first('quantity') }}</div>
+                                                    @endif
                                                     <button type="submit" class="btn btn-primary btn-sm">Cập nhật</button>
                                                 </form>
                                             </td>

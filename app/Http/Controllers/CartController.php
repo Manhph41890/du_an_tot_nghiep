@@ -115,6 +115,11 @@ class CartController extends Controller
             ->where('color_san_pham_id', $request->color_san_pham_id) // Đã sửa tên trường
             ->first();
 
+        // Kiểm tra nếu biến thể sản phẩm tồn tại và số lượng không vượt quá tồn kho
+        if ($request->quantity > $variant->so_luong) {
+            return back()->withErrors(['quantity' => 'Số lượng không được vượt quá ' . $variant->so_luong . ' sản phẩm.']);
+        }
+
         // Cập nhật giá
         if ($variant) {
             $cartItem->price = $variant->gia; // Giả sử giá của biến thể sản phẩm

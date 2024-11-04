@@ -122,8 +122,15 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger btn-sm">
                                                         <span class="trash"><i class="fas fa-trash-alt"></i> Xóa</span>
+
                                                     </button>
+
                                                 </form>
+                                                <button type="submit" class="btn btn-info btn-sm">
+                                                    <span class="trash"><i class="fa-solid fa-check"></i> Thanh
+                                                        Toán</span>
+
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach

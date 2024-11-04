@@ -133,34 +133,45 @@
                                         <select name="size_san_pham_id" id="size_san_pham_id{{ $sanPhamCT->id }}">
                                             <option value="">--Chọn size--</option>
                                             @foreach ($sanPhamCT->bien_the_san_phams as $bienThe)
-                                                <option value="{{ $bienThe->size->id }}">{{ $bienThe->size->ten_size }}</option>
+                                                <option value="{{ $bienThe->size->id }}">{{ $bienThe->size->ten_size }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        <span id="size-error{{ $sanPhamCT->id }}" class="text-danger" style="display: none;">Vui lòng chọn size!</span>
+                                        <span id="size-error" class="text-danger" style="display: none;">Vui lòng chọn
+                                            size!</span>
+
                                     </div>
-                        
+
                                     <div class="check-box ms-5">
                                         <h4 class="title">Màu Sắc</h4>
                                         <div class="d-flex check-box-wrap-list">
                                             @foreach ($uniqueColors as $color)
                                                 <div class="widget-check-box">
-                                                    <input type="radio" name="color" id="color-{{ $color->id }}" value="{{ $color->id }}" />
-                                                    <label class="me-2" style="background-color:{{ $color->ma_mau }};" for="color-{{ $color->id }}">{{ $color->ten_color }}</label>
+                                                    <input type="radio" name="color" id="color-{{ $color->id }}"
+                                                        value="{{ $color->id }}" required />
+                                                    <label class="me-2" style="background-color:{{ $color->ma_mau }};"
+                                                        for="color-{{ $color->id }}">{{ $color->ten_color }}</label>
                                                 </div>
                                             @endforeach
-                                            <span id="color-error{{ $sanPhamCT->id }}" class="text-danger" style="display: none;">Vui lòng chọn màu!</span>
+                                            <span id="color-error" class="text-danger" style="display: none;">Vui lòng
+                                                chọn màu!</span>
+
                                         </div>
                                     </div>
                                 </div>
-                        
+
                                 <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-20">
                                     <div class="count d-flex">
-                                        <input type="number" name="quantity" min="1" max="10" step="1" value="1" required />
+                                        <input type="number" name="quantity" min="1"
+                                            max="{{ $sanPhamCT->so_luong }}" value="1" required
+                                            id="quantity-input" />
                                         <div class="button-group">
-                                            <button type="button" class="count-btn increment" onclick="incrementQuantity('{{ $sanPhamCT->id }}')">
+                                            <button type="button" class="count-btn increment"
+                                                onclick="incrementQuantity()">
                                                 <i class="fas fa-chevron-up"></i>
                                             </button>
-                                            <button type="button" class="count-btn decrement" onclick="decrementQuantity('{{ $sanPhamCT->id }}')">
+                                            <button type="button" class="count-btn decrement"
+                                                onclick="decrementQuantity()">
                                                 <i class="fas fa-chevron-down"></i>
                                             </button>
                                         </div>
@@ -398,10 +409,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('add-to-cart-form{{ $sanPhamCT->id }}').addEventListener('submit', function(event) {
-                const sizeSelect = document.getElementById('size_san_pham_id{{ $sanPhamCT->id }}');
-                const sizeError = document.getElementById('size-error{{ $sanPhamCT->id }}');
-                const colorError = document.getElementById('color-error{{ $sanPhamCT->id }}');
+            document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+                const sizeSelect = document.getElementById('size_san_pham_id');
+                const sizeError = document.getElementById('size-error');
+                const colorError = document.getElementById('color-error');
                 let isValid = true;
 
                 // Kiểm tra size

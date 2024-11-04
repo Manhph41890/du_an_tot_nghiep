@@ -25,7 +25,7 @@ class AuthController extends Controller
         $user = Auth::user();
         return view('auth.profile', compact('user')); // Đường dẫn tới view của bạn
     }
-    
+
     public function showFormRegister()
     {
         return view('auth.register');
@@ -212,7 +212,7 @@ class AuthController extends Controller
             // Eager load quan hệ chuc_vu của người dùng
             $user = User::with('chuc_vu')->find(Auth::user()->id);
 
-            return $this->redirectToDashboardBasedOnRole($user)->with('notification','Đăng nhập thành công !');
+            return $this->redirectToDashboardBasedOnRole($user)->with('notification', 'Đăng nhập thành công !');
         }
 
         // Thất bại đăng nhập

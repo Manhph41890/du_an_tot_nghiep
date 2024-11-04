@@ -179,7 +179,7 @@
                                     <div>
                                         <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
                                             <span class="me-2"><i class="ion-android-add"></i></span>
-                                            Add to cart
+                                            Thêm vào giỏ hàng
                                         </button>
                                     </div>
                                 </div>

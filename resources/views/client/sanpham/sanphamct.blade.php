@@ -282,11 +282,11 @@
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="ratting-form-wrapper">
-                                            <h3>Add a Review</h3>
+                                            <h3>Thêm đánh giá</h3>
                                             <div class="ratting-form">
                                                 <form action="#">
                                                     <div class="star-box">
-                                                        <span>Your rating:</span>
+                                                        <span>Đánh giá của bạn:</span>
                                                         <div class="rating-product">
                                                             <i class="ion-android-star"></i>
                                                             <i class="ion-android-star"></i>
@@ -306,9 +306,9 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="rating-form-style form-submit">
-                                                                <textarea id="review" name="Your Review" placeholder="Message" maxlength="100"></textarea>
+                                                                <textarea id="review" name="Your Review" placeholder="Viết đánh giá" maxlength="100"></textarea>
                                                                 <p id="charCount">0/100</p>
-                                                                <input type="submit" value="Submit" />
+                                                                <input type="submit" value="Gửi" />
                                                             </div>
                                                         </div>
                                                     </div>

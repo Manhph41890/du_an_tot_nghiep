@@ -95,9 +95,9 @@
                                 @endfor
                                 <a href="#" id="write-comment"><span class="ms-2"><i
                                             class="far fa-comment-dots"></i></span>
-                                    Read reviews <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
+                                    Xem đánh giá <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span
-                                            class="edite"><i class="far fa-edit"></i></span> Write a review</a>
+                                            class="edite"><i class="far fa-edit"></i></span>Viết đánh giá</a>
                             </div>
                         </div>
                         <div class="product-body mb-40">

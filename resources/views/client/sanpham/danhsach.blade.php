@@ -1,1809 +1,500 @@
 @extends('client.layout')
 
 @section('content')
-<!-- breadcrumb-section start -->
-<nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="section-title text-center">
-            <h2 class="title pb-4 text-dark text-capitalize">
-              Beauty & Cosmetics
-            </h2>
-          </div>
+    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110 opacity-75">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title pb-4 text-dark text-uppercase">
+                            {{ $title }}
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
+                        <li class="breadcrumb-item"><a href="{{ route('client.home') }}">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ $title }}
+                        </li>
+                    </ol>
+                </div>
+            </div>
         </div>
-        <div class="col-12">
-          <ol
-            class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center"
-          >
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Beauty & Cosmetics
-            </li>
-          </ol>
+    </nav>
+    <div class="product-tab bg-white pt-80 pb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 mb-30">
+                    <div class="grid-nav-wraper bg-lighten2 mb-30">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6 mb-3 mb-md-0">
+                                <nav class="shop-grid-nav">
+                                    <ul class="nav nav-pills align-items-center" id="pills-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                                href="#pills-home" role="tab" aria-controls="pills-home"
+                                                aria-selected="true">
+                                                <i class="fa fa-th"></i>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item mr-0">
+                                            <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                                href="#pills-profile" role="tab" aria-controls="pills-profile"
+                                                aria-selected="false"><i class="fa fa-list"></i></a>
+                                        </li>
+                                        <li>
+                                            <span class="total-products text-capitalize ms-2">{{ $soluongsanpham }} sản
+                                                phẩm</span>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col-12 col-md-6 position-relative">
+                                <div class="shop-grid-button d-flex align-items-center justify-content-end">
+                                    <span class="sort-by">Sắp xếp:</span>
+                                    <form action="{{ route('client.cuahang') }}" method="post">
+                                        @csrf
+                                        @method('GET')
+                                        <select class="form-select custom-select" name="sort"
+                                            aria-label="Default select example" onchange="this.form.submit()">
+                                            <option value="" @if (request('sort') == '') selected @endif>Chọn
+                                            </option>
+                                            <option value="1" @if (request('sort') == '1') selected @endif>Sản
+                                                phẩm mới</option>
+                                            <option value="2" @if (request('sort') == '2') selected @endif>Giá
+                                                giảm dần</option>
+                                            <option value="3" @if (request('sort') == '3') selected @endif>Giá
+                                                tăng dần</option>
+                                            <option value="4" @if (request('sort') == '4') selected @endif>Xem
+                                                nhiều gần đây</option>
+                                        </select>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <div class="row grid-view theme1">
+                                @foreach ($list_sanphams as $item)
+                                    <div class="col-sm-6 col-lg-4 mb-30">
+                                        <div class="card product-card">
+                                            <div class="card-body">
+                                                <div class="product-thumbnail position-relative">
+                                                    <span
+                                                        class="badge badge-danger top-right">{{ $item->phantramgia }}%</span>
+                                                    <a href="{{ route('sanpham.chitiet', $item->id) }}">
+                                                        <img class="first-img"
+                                                            src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                            alt="thumbnail" />
+                                                    </a>
+                                                    <ul class="actions d-flex justify-content-center">
+                                                        <li>
+                                                            <a class="action" href="#" data-bs-toggle="modal"
+                                                                data-bs-target="#quickview{{ $item->id }}">
+                                                                <span data-bs-toggle="tooltip" data-placement="bottom"
+                                                                    title="Quick view" class="icon-magnifier"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="product-desc py-0 px-0">
+                                                    <h3 class="title">
+                                                        <a
+                                                            href="{{ route('sanpham.chitiet', $item->id) }}">{{ $item->ten_san_pham }}</a>
+                                                    </h3>
+                                                    <div class="star-rating">
+                                                        @if ($item->danh_gia > 0)
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= floor($item->danh_gia))
+                                                                    <span class="ion-ios-star"></span>
+                                                                @else
+                                                                    <span class="ion-ios-star-outline"></span>
+                                                                @endif
+                                                            @endfor
+                                                        @endif
+                                                    </div>
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <p class="product-price">
+                                                            <del class="text-secondary"> {{ $item->gia_goc }}</del>
+                                                            <span class="ms-2"> {{ $item?->gia_km }} đ</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- second tab-pane -->
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="row grid-view-list theme1">
+                                @foreach ($list_sanphams as $item)
+                                    <div class="col-12 mb-30">
+                                        <div class="card product-card">
+                                            <div class="card-body">
+                                                <div class="media flex-column flex-md-row">
+                                                    <div class="product-thumbnail position-relative">
+                                                        <span
+                                                            class="badge badge-danger top-right">{{ $item->phantramgia }}%</span>
+                                                        <a href="{{ route('sanpham.chitiet', $item->id) }}">
+                                                            <img class="first-img"
+                                                                src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                                alt="thumbnail" />
+                                                        </a>
+                                                        <ul class="actions d-flex justify-content-center">
+                                                            <li>
+                                                                <a class="action" href="#" data-bs-toggle="modal"
+                                                                    data-bs-target="#quickview{{ $item->id }}">
+                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
+                                                                        class="icon-magnifier" aria-label="Quick view"
+                                                                        data-bs-original-title="Quick view"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="media-body ps-md-4">
+                                                        <div class="product-desc py-0 px-0">
+                                                            <h3 class="title">
+                                                                <a
+                                                                    href="{{ route('sanpham.chitiet', $item->id) }}">{{ $item->ten_san_pham }}</a>
+                                                            </h3>
+                                                            <div class="star-rating mb-10">
+                                                                @if ($item->danh_gia > 0)
+                                                                    @for ($i = 1; $i <= 5; $i++)
+                                                                        @if ($i <= floor($item->danh_gia))
+                                                                            <span class="ion-ios-star"></span>
+                                                                        @else
+                                                                            <span class="ion-ios-star-outline"></span>
+                                                                        @endif
+                                                                    @endfor
+                                                                @endif
+
+                                                            </div>
+                                                            <p class="product-price">
+                                                                <del class="text-secondary"> {{ $item->gia_goc }}</del>
+                                                                <span class="ms-2"> {{ $item?->gia_km }} đ</span>
+                                                            </p>
+                                                        </div>
+                                                        <ul class="product-list-des">
+                                                            <li>
+                                                                {{ $item->ma_ta_san_pham }}
+                                                            </li>
+
+                                                        </ul>
+                                                        <div class="availability-list mb-20">
+                                                            <p>Còn lại: <span> {{ $item->so_luong }}</span> sản phẩm</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-30 order-lg-first">
+                    <aside class="left-sidebar theme1">
+                        <div class="search-filter">
+                            <form action="{{ route('client.cuahang') }}" method="post">
+                                @csrf
+                                @method('GET')
+                                <div class="sidbar-widget mt-10">
+                                    <h4 class="title">LỌC THEO</h4>
+                                    <h4 class="sub-title pt-10">Danh mục</h4>
+                                    <div class="form-group">
+                                        @foreach ($danhmucs as $item)
+                                            <div class="widget-check-box">
+                                                <input type="checkbox" id="danhmuc_{{ $item->id }}" name="danhmuc[]"
+                                                    value="{{ $item->id }}"
+                                                    @if (isset($request->danhmuc) && in_array($item->id, $request->danhmuc)) checked @endif />
+                                                <label for="danhmuc_{{ $item->id }}">{{ $item->ten_danh_muc }}
+                                                    <span> ({{ $item->soluong_sp_dm }}) </span></label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="sidbar-widget mt-10">
+                                    <h4 class="sub-title pt-10">Giá</h4>
+                                    <div class="widget-check-box">
+                                        <input type="checkbox" id="price1" name="price[]" value="0-100000"
+                                            @if (isset($request->price) && in_array('0-100000', $request->price)) checked @endif />
+                                        <label for="price1">0 - 100.000</label>
+                                    </div>
+                                    <div class="widget-check-box">
+                                        <input type="checkbox" id="price2" name="price[]" value="100000-500000"
+                                            @if (isset($request->price) && in_array('100000-500000', $request->price)) checked @endif />
+                                        <label for="price2">100.000 - 500.000</label>
+                                    </div>
+                                    <div class="widget-check-box">
+                                        <input type="checkbox" id="price3" name="price[]" value="500000-1000000"
+                                            @if (isset($request->price) && in_array('500000-1000000', $request->price)) checked @endif />
+                                        <label for="price3">500.000 - 1.000.000</label>
+                                    </div>
+                                    <div class="widget-check-box">
+                                        <input type="checkbox" id="price4" name="price[]" value="1000000+"
+                                            @if (isset($request->price) && in_array('1000000+', $request->price)) checked @endif />
+                                        <label for="price4">> 1.000.000</label>
+                                    </div>
+                                </div>
+                                <div class="sidbar-widget mt-10">
+                                    <h4 class="sub-title">Size</h4>
+                                    <div class="form-group">
+                                        @foreach ($size_sidebar as $item)
+                                            <div class="widget-check-box">
+                                                <input type="checkbox" id="size-{{ $item->id }}" name="size[]"
+                                                    value="{{ $item->id }}"
+                                                    @if (isset($request->size) && in_array($item->id, $request->size)) checked @endif />
+                                                <label for="size-{{ $item->id }}">{{ $item->ten_size }}
+                                                    <span>({{ $item->sl_size }})</span></label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="sidbar-widget mt-10">
+                                    <h4 class="sub-title">Color</h4>
+                                    <div class="form-group">
+                                        @foreach ($color_sidebar as $item)
+                                            <div class="widget-check-box color-grey">
+                                                <input type="checkbox" id="color-{{ $item->id }}" name="color[]"
+                                                    value="{{ $item->id }}"
+                                                    @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
+                                                <label for="color-{{ $item->id }}"
+                                                    style="background-color: {{ $item->ma_mau }} !important;">
+                                                    {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Lọc</button>
+                            </form>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-9 offset-lg-3">
+                    <nav class="pagination-section mt-30 mb-30">
+                        <ul class="pagination justify-content-center pni">
+                            {{ $list_sanphams->links() }}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </nav>
-  <!-- breadcrumb-section end -->
-  <!-- product tab start -->
-  <div class="product-tab bg-white pt-80 pb-50">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-9 mb-30">
-          <div class="grid-nav-wraper bg-lighten2 mb-30">
-            <div class="row align-items-center">
-              <div class="col-12 col-md-6 mb-3 mb-md-0">
-                <nav class="shop-grid-nav">
-                  <ul
-                    class="nav nav-pills align-items-center"
-                    id="pills-tab"
-                    role="tablist"
-                  >
-                    <li class="nav-item">
-                      <a
-                        class="nav-link active"
-                        id="pills-home-tab"
-                        data-bs-toggle="pill"
-                        href="#pills-home"
-                        role="tab"
-                        aria-controls="pills-home"
-                        aria-selected="true"
-                      >
-                        <i class="fa fa-th"></i>
-                      </a>
-                    </li>
-                    <li class="nav-item mr-0">
-                      <a
-                        class="nav-link"
-                        id="pills-profile-tab"
-                        data-bs-toggle="pill"
-                        href="#pills-profile"
-                        role="tab"
-                        aria-controls="pills-profile"
-                        aria-selected="false"
-                        ><i class="fa fa-list"></i
-                      ></a>
-                    </li>
-                    <li>
-                      <span class="total-products text-capitalize"
-                        >There are 13 products.</span
-                      >
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-              <div class="col-12 col-md-6 position-relative">
-                <div class="shop-grid-button d-flex align-items-center">
-                  <span class="sort-by">Sort by:</span>
-                  <select
-                    class="form-select custom-select"
-                    aria-label="Default select example"
-                  >
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
+
+
+    <!-- Modal cho từng sản phẩm -->
+    @foreach ($list_sanphams as $item)
+        <div class="modal fade theme1 style1" id="quickview{{ $item->id }}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8 mx-auto col-lg-5 mb-5 mb-lg-0">
+                                <div>
+                                    <div class="position-relative">
+                                        <span class="badge badge-danger top-right">{{ $item->phantramgia }}%</span>
+                                    </div>
+                                    <div class="product-sync-init mb-20">
+                                        <!-- Ảnh sản phẩm chính -->
+                                        <div class="single-product main-product">
+                                            <div class="product-thumb">
+                                                <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
+                                                    alt="Ảnh sản phẩm chính">
+                                            </div>
+                                        </div>
+
+                                        <!-- Ảnh các biến thể sản phẩm -->
+                                        @foreach ($item->bien_the_san_phams as $bien_the)
+                                            <div class="single-product variant-product">
+                                                <div class="product-thumb">
+                                                    <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
+                                                        alt="Ảnh biến thể sản phẩm">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <!-- Thanh điều hướng ảnh (thumbnail) -->
+                                <div class="product-sync-nav single-product">
+                                    <!-- Ảnh sản phẩm chính -->
+                                    <div class="single-product thumbnail">
+                                        <div class="product-thumb">
+                                            <a href="javascript:void(0)"
+                                                onclick="showMainImage('{{ asset('/storage/' . $item->anh_san_pham) }}')">
+                                                <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
+                                                    alt="Thumbnail sản phẩm chính">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Thumbnail ảnh biến thể sản phẩm -->
+                                    @foreach ($item->bien_the_san_phams as $bien_the)
+                                        <div class="single-product thumbnail">
+                                            <div class="product-thumb">
+                                                <a href="javascript:void(0)"
+                                                    onclick="showMainImage('{{ asset('/storage/' . $bien_the->anh_bien_the) }}')">
+                                                    <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
+                                                        alt="Thumbnail biến thể sản phẩm">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="modal-product-info">
+                                    <div class="product-head">
+                                        <h2 class="title">{{ $item->ten_san_pham }}</h2>
+                                        <h4 class="sub-title">Danh mục: {{ $item->danh_muc->ten_danh_muc }}</h4>
+                                        <div class="star-content mb-20">
+                                            @if ($item->danh_gia > 0)
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= floor($item->danh_gia))
+                                                        <span class="star-on"><i class="fas fa-star"></i></span>
+                                                    @else
+                                                        <span class="star-on de-selected"><i
+                                                                class="fas fa-star"></i></span>
+                                                    @endif
+                                                @endfor
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="product-body">
+                                        <span class="product-price text-center">
+                                            <p class="new-price">
+                                                <del class="text-secondary">{{ $item->gia_goc }}</del>
+                                                <span class="ms-2">{{ $item?->gia_km }} VNĐ</span>
+                                            </p>
+                                        </span>
+                                        <p>{{ $item?->mo_ta_san_pham }}</p>
+                                    </div>
+
+                                    <form id="add-to-cart-form{{ $item->id }}" method="POST" action="{{ route('cart.add') }}">
+                                        @csrf <!-- Thêm token CSRF để bảo mật -->
+
+                                        <!-- Hidden field for san_pham_id -->
+                                        <input type="hidden" name="san_pham_id" value="{{ $item->id }}">
+
+                                        <div class="d-flex mt-30">
+                                            <div class="product-size col-3">
+                                                <h3 class="title">Size</h3>
+                                                <select class="mt-0" id="size_san_pham_id{{ $item->id }}" name="size_san_pham_id">
+                                                    <option value="">Chọn</option>
+                                                    <!-- Thêm tùy chọn "Chọn kích thước" -->
+                                                    @foreach ($item->bien_the_san_phams as $bien_the)
+                                                        <option value="{{ $bien_the->size->id }}">
+                                                            {{ $bien_the->size->ten_size }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span id="size-error{{ $item->id }}" class="text-danger" style="display: none;">Vui lòng
+                                                    chọn size!</span>
+                                            </div>
+                                            <div class="product-size col-3">
+                                                <h3 class="title">Màu sắc</h3>
+                                                <div class="d-flex">
+                                                    @foreach ($item->bien_the_san_phams as $bien_the)
+                                                        <div class="widget-check-box color-grey">
+                                                            <input type="radio"
+                                                                id="color-{{ $item->id }}-{{ $bien_the->id }}"
+                                                                name="color" value="{{ $bien_the->color->id }}"
+                                                                @if (isset($request->color[$item->id]) && $request->color[$item->id] == $bien_the->color->id) checked @endif />
+                                                            <label for="color-{{ $item->id }}-{{ $bien_the->id }}">
+                                                                {{ $bien_the->color->ten_color }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <span id="color-error{{ $item->id }}" class="text-danger" style="display: none;">Vui
+                                                    lòng chọn màu!</span>
+                                            </div>
+                                        </div>
+                                        <div class="product-footer">
+                                            <div class="product-count style d-flex flex-column flex-sm-row my-4">
+                                                <div class="count d-flex">
+                                                    <input type="number" min="1" max="10" step="1"
+                                                        value="1" id="quantity-{{ $item->id }}"
+                                                        name="quantity" />
+                                                    <div class="button-group">
+                                                        <button type="button" class="count-btn increment"><i
+                                                                class="fas fa-chevron-up"></i></button>
+                                                        <button type="button" class="count-btn decrement"><i
+                                                                class="fas fa-chevron-down"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
+                                                        <span class="me-2"><i class="ion-android-add"></i></span>
+                                                        Thêm giỏ hàng
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <!-- product-tab-nav end -->
-          <div class="tab-content" id="pills-tabContent">
-            <!-- first tab-pane -->
-            <div
-              class="tab-pane fade show active"
-              id="pills-home"
-              role="tabpanel"
-              aria-labelledby="pills-home-tab"
-            >
-              <div class="row grid-view theme1">
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">New</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/1.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >All Natural Makeup Beauty Cosmetics...</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">$11.90</span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-success top-left">-10%</span>
-                        <span class="badge badge-danger top-right">onsale</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/6.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >On Trend Makeup and Beauty Cosmetics...</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">
-                            <del class="del">$23.90</del>
-                            <span class="onsale">$21.51</span>
-                          </span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">featured</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/2.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >New Balance Fresh Cream Kaymin from new zeland</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">$11.90</span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">New</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/7.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >orginal Kaval Windbreaker Winter cream</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">$11.90</span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">featured</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/3.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >Juicy Couture Tricot Logo Stripe Face Cream</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <h6 class="product-price">$21.51</h6>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">sale</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/8.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >orginal Kaval Windbreaker Winter Face Cream</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">$11.90</span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">New</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/4.png"
-                            alt="thumbnail"
-                          />
-                          <img
-                            class="second-img"
-                            src="assets/img/product/12.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >Juicy Couture Tricot Logo Stripe Face Cream</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">
-                            <del class="del">$23.90</del>
-                            <span class="onsale">$21.51</span>
-                          </span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">featured</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/9.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >orginal Kaval Windbreaker Winter Face Cream</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">$11.90</span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right"
-                          >new arrivals</span
-                        >
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/5.png"
-                            alt="thumbnail"
-                          />
-                          <img
-                            class="second-img"
-                            src="assets/img/product/12.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >All Natural Makeup Beauty Cosmetics</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">$11.90</span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">New</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/12.png"
-                            alt="thumbnail"
-                          />
-                          <img
-                            class="second-img"
-                            src="assets/img/product/5.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >orginal Kaval Windbreaker Winter Face Cream</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">$11.90</span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">onsale</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/10.png"
-                            alt="thumbnail"
-                          />
-                          <img
-                            class="second-img"
-                            src="assets/img/product/8.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >All Natural Makeup Beauty Cosmetics</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">
-                            <del class="del">$23.90</del>
-                            <span class="onsale">$21.51</span>
-                          </span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="product-thumbnail position-relative">
-                        <span class="badge badge-danger top-right">featured</span>
-                        <a href="single-product.html">
-                          <img
-                            class="first-img"
-                            src="assets/img/product/11.png"
-                            alt="thumbnail"
-                          />
-                          <img
-                            class="second-img"
-                            src="assets/img/product/5.png"
-                            alt="thumbnail"
-                          />
-                        </a>
-                        <!-- product links -->
-                        <ul class="actions d-flex justify-content-center">
-                          <li>
-                            <a class="action" href="wishlist.html">
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="add to wishlist"
-                                class="icon-heart"
-                              >
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#compare"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Add to compare"
-                                class="icon-shuffle"
-                              ></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              class="action"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#quick-view"
-                            >
-                              <span
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Quick view"
-                                class="icon-magnifier"
-                              ></span>
-                            </a>
-                          </li>
-                        </ul>
-                        <!-- product links end-->
-                      </div>
-                      <div class="product-desc py-0 px-0">
-                        <h3 class="title">
-                          <a href="shop-grid-4-column.html"
-                            >orginal Kaval Windbreaker Winter Face Cream</a
-                          >
-                        </h3>
-                        <div class="star-rating">
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star"></span>
-                          <span class="ion-ios-star de-selected"></span>
-                        </div>
-                        <div
-                          class="d-flex align-items-center justify-content-between"
-                        >
-                          <span class="product-price">$11.90</span>
-                          <button
-                            class="pro-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            <i class="icon-basket"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-              </div>
-            </div>
-            <!-- second tab-pane -->
-            <div
-              class="tab-pane fade"
-              id="pills-profile"
-              role="tabpanel"
-              aria-labelledby="pills-profile-tab"
-            >
-              <div class="row grid-view-list theme1">
-                <div class="col-12 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="media flex-column flex-md-row">
-                        <div class="product-thumbnail position-relative">
-                          <span class="badge badge-danger top-right">New</span>
-                          <a href="single-product.html">
-                            <img
-                              class="first-img"
-                              src="assets/img/product/1.png"
-                              alt="thumbnail"
-                            />
-                          </a>
-                          <!-- product links -->
-                          <ul class="actions d-flex justify-content-center">
-                            <li>
-                              <a class="action" href="wishlist.html">
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="add to wishlist"
-                                  class="icon-heart"
-                                >
-                                </span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                class="action"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#compare"
-                              >
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="Add to compare"
-                                  class="icon-shuffle"
-                                ></span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                class="action"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#quick-view"
-                              >
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="Quick view"
-                                  class="icon-magnifier"
-                                ></span>
-                              </a>
-                            </li>
-                          </ul>
-                          <!-- product links end-->
-                        </div>
-                        <div class="media-body ps-md-4">
-                          <div class="product-desc py-0 px-0">
-                            <h3 class="title">
-                              <a href="shop-grid-4-column.html"
-                                >All Natural Makeup Beauty Cosmetics</a
-                              >
-                            </h3>
-                            <div class="star-rating mb-10">
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star de-selected"></span>
-                            </div>
-                            <span class="product-price">$11.90</span>
-                          </div>
-                          <ul class="product-list-des">
-                            <li>
-                              Block out the haters with the fresh adidas®
-                              Originals Kaval Windbreaker Face Cream.
-                            </li>
-                            <li>Part of the Kaval Collection.</li>
-                            <li>
-                              Regular fit is eased, but not sloppy, and perfect
-                              for any activity.
-                            </li>
-                            <li>
-                              Plain-woven Face Cream specifically constructed for
-                              freedom of movement.
-                            </li>
-                          </ul>
-                          <div class="availability-list mb-20">
-                            <p>Availability: <span>1200 In Stock</span></p>
-                          </div>
-                          <button
-                            class="btn btn-dark btn--xl"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-12 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="media flex-column flex-md-row">
-                        <div class="product-thumbnail position-relative">
-                          <span class="badge badge-success top-left">-10%</span>
-                          <span class="badge badge-danger top-right">onsale</span>
-                          <a href="single-product.html">
-                            <img
-                              class="first-img"
-                              src="assets/img/product/6.png"
-                              alt="thumbnail"
-                            />
-                          </a>
-                          <!-- product links -->
-                          <ul class="actions d-flex justify-content-center">
-                            <li>
-                              <a class="action" href="wishlist.html">
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="add to wishlist"
-                                  class="icon-heart"
-                                >
-                                </span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                class="action"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#compare"
-                              >
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="Add to compare"
-                                  class="icon-shuffle"
-                                ></span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                class="action"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#quick-view"
-                              >
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="Quick view"
-                                  class="icon-magnifier"
-                                ></span>
-                              </a>
-                            </li>
-                          </ul>
-                          <!-- product links end-->
-                        </div>
-                        <div class="media-body ps-md-4">
-                          <div class="product-desc py-0 px-0">
-                            <h3 class="title">
-                              <a href="shop-grid-4-column.html"
-                                >On Trend Makeup and Beauty Cosmetics...</a
-                              >
-                            </h3>
-                            <div class="star-rating mb-10">
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star de-selected"></span>
-                            </div>
-                            <span class="product-price">
-                              <del class="del">$23.90</del>
-                              <span class="onsale">$21.51</span>
-                            </span>
-                          </div>
-  
-                          <ul class="product-list-des">
-                            <li>
-                              Block out the haters with the fresh adidas®
-                              Originals Kaval Windbreaker Face Cream.
-                            </li>
-                            <li>Part of the Kaval Collection.</li>
-                            <li>
-                              Regular fit is eased, but not sloppy, and perfect
-                              for any activity.
-                            </li>
-                            <li>
-                              Plain-woven Face Cream specifically constructed for
-                              freedom of movement.
-                            </li>
-                          </ul>
-                          <div class="availability-list mb-20">
-                            <p>Availability: <span>1200 In Stock</span></p>
-                          </div>
-                          <button
-                            class="btn btn-dark btn--xl"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-12 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="media flex-column flex-md-row">
-                        <div class="product-thumbnail position-relative">
-                          <span class="badge badge-danger top-right">New</span>
-                          <a href="single-product.html">
-                            <img
-                              class="first-img"
-                              src="assets/img/product/2.png"
-                              alt="thumbnail"
-                            />
-                          </a>
-                          <!-- product links -->
-                          <ul class="actions d-flex justify-content-center">
-                            <li>
-                              <a class="action" href="wishlist.html">
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="add to wishlist"
-                                  class="icon-heart"
-                                >
-                                </span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                class="action"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#compare"
-                              >
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="Add to compare"
-                                  class="icon-shuffle"
-                                ></span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                class="action"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#quick-view"
-                              >
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="Quick view"
-                                  class="icon-magnifier"
-                                ></span>
-                              </a>
-                            </li>
-                          </ul>
-                          <!-- product links end-->
-                        </div>
-                        <div class="media-body ps-md-4">
-                          <div class="product-desc py-0 px-0">
-                            <h3 class="title">
-                              <a href="shop-grid-4-column.html"
-                                >New Balance Fresh Cream Kaymin from new zeland</a
-                              >
-                            </h3>
-                            <div class="star-rating mb-10">
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star de-selected"></span>
-                            </div>
-                            <span class="product-price">$11.90</span>
-                          </div>
-                          <ul class="product-list-des">
-                            <li>
-                              Block out the haters with the fresh adidas®
-                              Originals Kaval Windbreaker Face Cream.
-                            </li>
-                            <li>Part of the Kaval Collection.</li>
-                            <li>
-                              Regular fit is eased, but not sloppy, and perfect
-                              for any activity.
-                            </li>
-                            <li>
-                              Plain-woven Face Cream specifically constructed for
-                              freedom of movement.
-                            </li>
-                          </ul>
-                          <div class="availability-list mb-20">
-                            <p>Availability: <span>1200 In Stock</span></p>
-                          </div>
-                          <button
-                            class="btn btn-dark btn--xl"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- product-list End -->
-                </div>
-                <div class="col-12 mb-30">
-                  <div class="card product-card">
-                    <div class="card-body">
-                      <div class="media flex-column flex-md-row">
-                        <div class="product-thumbnail position-relative">
-                          <span class="badge badge-danger top-right"
-                            >featured</span
-                          >
-                          <a href="single-product.html">
-                            <img
-                              class="first-img"
-                              src="assets/img/product/7.png"
-                              alt="thumbnail"
-                            />
-                          </a>
-                          <!-- product links -->
-                          <ul class="actions d-flex justify-content-center">
-                            <li>
-                              <a class="action" href="wishlist.html">
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="add to wishlist"
-                                  class="icon-heart"
-                                >
-                                </span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                class="action"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#compare"
-                              >
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="Add to compare"
-                                  class="icon-shuffle"
-                                ></span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                class="action"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#quick-view"
-                              >
-                                <span
-                                  data-bs-toggle="tooltip"
-                                  data-placement="bottom"
-                                  title="Quick view"
-                                  class="icon-magnifier"
-                                ></span>
-                              </a>
-                            </li>
-                          </ul>
-                          <!-- product links end-->
-                        </div>
-                        <div class="media-body ps-md-4">
-                          <div class="product-desc py-0 px-0">
-                            <h3 class="title">
-                              <a href="shop-grid-4-column.html"
-                                >orginal Kaval Windbreaker Winter cream</a
-                              >
-                            </h3>
-                            <div class="star-rating mb-10">
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star"></span>
-                              <span class="ion-ios-star de-selected"></span>
-                            </div>
-                            <span class="product-price">$11.90</span>
-                          </div>
-                          <ul class="product-list-des">
-                            <li>
-                              Block out the haters with the fresh adidas®
-                              Originals Kaval Windbreaker Face Cream.
-                            </li>
-                            <li>Part of the Kaval Collection.</li>
-                            <li>
-                              Regular fit is eased, but not sloppy, and perfect
-                              for any activity.
-                            </li>
-                            <li>
-                              Plain-woven Face Cream specifically constructed for
-                              freedom of movement.
-                            </li>
-                          </ul>
-                          <div class="availability-list mb-20">
-                            <p>Availability: <span>1200 In Stock</span></p>
-                          </div>
-                          <button
-                            class="btn btn-dark btn--xl"
-                            data-bs-toggle="modal"
-                            data-bs-target="#add-to-cart"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="col-lg-3 mb-30 order-lg-first">
-          <aside class="left-sidebar theme1">
-            <!-- search-filter start -->
-            <div class="search-filter">
-              <div class="sidbar-widget pt-0">
-                <h4 class="title">Beauty & Cosmetics</h4>
-              </div>
-            </div>
-  
-            <ul id="offcanvas-menu2" class="blog-ctry-menu">
-              <li>
-                <a href="javascript:void(0)">Shoes</a>
-                <ul class="category-sub-menu">
-                  <li><a href="#">Women Shoes</a></li>
-                  <li><a href="#">Men Shoes</a></li>
-                  <li><a href="#">Boots</a></li>
-                  <li><a href="#">Casual Shoes</a></li>
-                  <li><a href="#">Flip Flops</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="javascript:void(0)">Luggage &amp; Bags</a>
-                <ul class="category-sub-menu">
-                  <li><a href="#">Stylish Backpacks</a></li>
-                  <li><a href="#">Shoulder Bags</a></li>
-                  <li><a href="#">Crossbody Bags</a></li>
-                  <li><a href="#">Briefcases</a></li>
-                  <li><a href="#">Luggage &amp; Travel</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="javascript:void(0)">Accessories</a>
-                <ul class="category-sub-menu">
-                  <li><a href="#">Cosmetic Bags &amp; Cases</a></li>
-                  <li><a href="#">Wallets &amp; Card Holders</a></li>
-                  <li><a href="#">Luggage Covers</a></li>
-                  <li><a href="#">Passport Covers</a></li>
-                  <li><a href="#">Bag Parts &amp; Accessories</a></li>
-                </ul>
-              </li>
-            </ul>
-  
-            <div class="search-filter">
-              <form action="#">
-                <div class="sidbar-widget mt-10">
-                  <h4 class="title">Filter By</h4>
-                  <h4 class="sub-title pt-10">Categories</h4>
-                  <div class="widget-check-box">
-                    <input type="checkbox" id="20820" />
-                    <label for="20820">Digital Cameras <span>(13)</span></label>
-                  </div>
-                  <div class="widget-check-box">
-                    <input type="checkbox" id="20821" />
-                    <label for="20821">Camcorders <span>(13)</span></label>
-                  </div>
-                  <div class="widget-check-box">
-                    <input type="checkbox" id="20822" />
-                    <label for="20822">Camera Drones<span>(13)</span></label>
-                  </div>
-                </div>
-                <!-- sidbar-widget -->
-                <div class="sidbar-widget mt-10">
-                  <h4 class="sub-title">Price</h4>
-                  <div class="price-filter mt-10">
-                    <div class="price-slider-amount">
-                      <input
-                        type="text"
-                        id="amount"
-                        name="price"
-                        readonly
-                        placeholder="Add Your Price"
-                      />
-                    </div>
-                    <div id="slider-range"></div>
-                  </div>
-                </div>
-                <div class="sidbar-widget mt-10">
-                  <h4 class="sub-title">Size</h4>
-                  <div class="widget-check-box">
-                    <input type="checkbox" id="test9" />
-                    <label for="test9">s <span>(2)</span></label>
-                  </div>
-                  <div class="widget-check-box">
-                    <input type="checkbox" id="test10" />
-                    <label for="test10">m <span>(2)</span></label>
-                  </div>
-                  <div class="widget-check-box">
-                    <input type="checkbox" id="test11" />
-                    <label for="test11">l <span>(2)</span></label>
-                  </div>
-                  <div class="widget-check-box">
-                    <input type="checkbox" id="test12" />
-                    <label for="test12">xl <span>(2)</span></label>
-                  </div>
-                </div>
-                <!-- sidbar-widget -->
-                <div class="sidbar-widget mt-10">
-                  <h4 class="sub-title">color</h4>
-                  <div class="widget-check-box color-grey">
-                    <input type="checkbox" id="20826" />
-                    <label for="20826">grey <span>(4)</span></label>
-                  </div>
-                  <div class="widget-check-box color-white">
-                    <input type="checkbox" id="20827" />
-                    <label for="20827">white <span>(3)</span></label>
-                  </div>
-                  <div class="widget-check-box color-black">
-                    <input type="checkbox" id="20828" />
-                    <label for="20828">black <span>(6)</span></label>
-                  </div>
-                  <div class="widget-check-box color-camel">
-                    <input type="checkbox" id="20829" />
-                    <label for="20829">camel <span>(2)</span></label>
-                  </div>
-                </div>
-                <!-- sidbar-widget -->
-                <div class="sidbar-widget mt-10">
-                  <h4 class="sub-title">Brand</h4>
-                  <div class="widget-check-box">
-                    <input type="checkbox" id="20824" />
-                    <label for="20824">Graphic Corner<span>(5)</span></label>
-                  </div>
-                  <div class="widget-check-box">
-                    <input type="checkbox" id="20825" />
-                    <label for="20825">Studio Design<span>(8)</span></label>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <!-- search-filter end -->
-            <div class="product-widget mb-60 mt-30">
-              <h3 class="title">Product Tags</h3>
-              <ul class="product-tag d-flex flex-wrap">
-                <li><a href="#">shopping</a></li>
-                <li><a href="#">New products</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">sale</a></li>
-              </ul>
-            </div>
-            <!--second banner start-->
-            <div class="banner hover-animation position-relative overflow-hidden">
-              <a href="shop-grid-4-column.html" class="d-block">
-                <img src="assets/img/banner/2.jpg" alt="img" />
-              </a>
-            </div>
-            <!--second banner end-->
-          </aside>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 col-lg-9 offset-lg-3">
-          <nav class="pagination-section mt-30 mb-30">
-            <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#"><i class="ion-chevron-left"></i></a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#"
-                  ><i class="ion-chevron-right"></i
-                ></a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- product tab end -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('add-to-cart-form{{ $item->id }}').addEventListener('submit', function(event) {
+                    const sizeSelect = document.getElementById('size_san_pham_id{{ $item->id }}');
+                    const sizeError = document.getElementById('size-error{{ $item->id }}');
+                    const colorError = document.getElementById('color-error{{ $item->id }}');
+                    let isValid = true;
+
+                    // Kiểm tra size
+                    if (sizeSelect.value === "") {
+                        sizeError.style.display = 'block'; // Hiện thông báo lỗi cho size
+                        isValid = false;
+                    } else {
+                        sizeError.style.display = 'none'; // Ẩn thông báo lỗi cho size
+                    }
+
+                    // Kiểm tra nếu không có màu nào được chọn
+                    const colorRadios = document.querySelectorAll('input[name="color"]:checked');
+                    if (colorRadios.length === 0) {
+                        colorError.style.display = 'block'; // Hiện thông báo lỗi cho màu
+                        isValid = false;
+                    } else {
+                        colorError.style.display = 'none'; // Ẩn thông báo lỗi cho màu
+                    }
+
+                    // Nếu không hợp lệ, ngăn không cho gửi form
+                    if (!isValid) {
+                        event.preventDefault(); // Ngăn gửi form
+                    }
+                });
+            });
+
+
+            function showMainImage(imageUrl) {
+                // Tìm phần tử của ảnh chính
+                const mainImage = document.querySelector('.main-product .product-thumb img');
+                if (mainImage) {
+                    mainImage.src = imageUrl;
+                }
+            }
+        </script>
+    @endforeach
 @endsection

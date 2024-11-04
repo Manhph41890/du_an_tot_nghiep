@@ -1,50 +1,49 @@
 <?php
 
-use App\Http\Controllers\DonHangController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BaiVietController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ChucVuController;
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KhuyenMaiController;
-
-use App\Http\Controllers\PhuongThucThanhToanController;
-use App\Http\Controllers\PhuongThucVanChuyenController;
+use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\SanPhamController;
-use App\Http\Controllers\StaffController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariantController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-*/
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KhuyenMaiController;
+use App\Http\Controllers\ClientSanPhamController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\PhuongThucThanhToanController;
+use App\Http\Controllers\PhuongThucVanChuyenController;
+
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
-Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
 
 // Route cho client
 Route::prefix('client')->group(function () {
-    Route::view('/sanpham', 'client.sanpham.danhsach');
-    Route::view('/sanphamchitiet', 'client.sanpham.sanphamct');
+
+    Route::get('/sanphamchitiet/{id}', [HomeController::class, 'chiTietSanPham'])->name('sanpham.chitiet');
+
+    // trang cửa hàng
+    Route::get('/sanpham', [ClientSanPhamController::class, 'list'])->name('client.cuahang');
+    // Route::get('/sanpham/{id}', [ClientSanPhamController::class, 'quick_view'])->name('client.quickview');
+
     Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
     Route::view('/taikhoan', 'client.taikhoan.dashboard');
     Route::view('/giohang', 'client.giohang');
     Route::view('/gioithieu', 'client.gioithieu');
-    Route::view('/lienhe', 'client.lienhe');
-    Route::view('/thanhtoan', 'client.thanhtoan');
+    Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
 });
 
 // Route đăng nhập
@@ -80,21 +79,49 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::resource('/sanphams', SanPhamController::class);
     Route::resource('/khuyenmais', KhuyenMaiController::class);
 
+    // Quản lý biến thể
+    Route::get('variants', [VariantController::class, 'index'])->name('variants.index');
+    Route::post('variants/colors', [VariantController::class, 'storeColor'])->name('variants.colors.store');
+    Route::post('variants/sizes', [VariantController::class, 'storeSize'])->name('variants.sizes.store');
+    Route::get('variants/colors/{id}/edit', [VariantController::class, 'editColor'])->name('variants.colors.edit');
+    Route::put('variants/colors/{id}', [VariantController::class, 'updateColor'])->name('variants.colors.update');
+    Route::delete('variants/colors/{colorId}', [VariantController::class, 'destroyColor'])->name('variants.colors.destroy');
+
+    Route::get('variants/sizes/{id}/edit', [VariantController::class, 'editSize'])->name('variants.sizes.edit');
+    Route::put('variants/sizes/{id}', [VariantController::class, 'updateSize'])->name('variants.sizes.update');
+    Route::delete('variants/sizes/{id}', [VariantController::class, 'destroySize'])->name('variants.sizes.destroy');
+
+
+
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
     Route::resource('/donhangs', DonHangController::class);
     Route::post('/donhang/{id}/confirm', [DonHangController::class, 'confirmOrder'])->name('donhangs.confirm');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    // Route::get('/danhgia/create', [DanhGiaController::class, 'create'])->name('danhgia.create');
+    Route::post('/danhgia', [DanhGiaController::class, 'store'])->name('danhgia.store');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
-    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+    Route::get('/', [HomeController::class, 'index'])->name('client.home');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::get('/sanpham/search', [SanPhamController::class, 'search'])->name('sanpham.search');
+    // Route giỏ hàng
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
+    // 
+    Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');
+
+
+
+
+    // 
 });
 
 // Route cho nhân viên (quản lý)
@@ -116,3 +143,6 @@ Route::post('/user/update', [UserController::class, 'update'])->name('user.updat
 Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
+
+
+Route::get('/global-search', [SearchController::class, 'search'])->name('global.search');

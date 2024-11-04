@@ -12,16 +12,18 @@
                 <ul class="d-flex flex-wrap">
 
                     <li class="my-2 mx-2">
-                        <a class="search search-toggle" href="javascript:void(0)">
+                        <a class="search search-toggle" href="">
                             <i class="icon-magnifier"></i> Tìm kiếm</a>
                     </li>
+
                 </ul>
             </nav>
         </div>
+
         <nav class="offcanvas-menu">
             <ul>
                 <li>
-                    <a href="{{route('client.home')}}"><span class="menu-text">Trang chủ</span></a>
+                    <a href="{{ route('client.home') }}"><span class="menu-text">Trang chủ</span></a>
                     <!-- <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
@@ -29,7 +31,7 @@
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Giới thiệu</span></a>
-                    <!-- <ul class="offcanvas-submenu">
+                    <ul class="offcanvas-submenu">
                         <li><a href="about-us.html">About Page</a></li>
                         <li><a href="cart.html">Cart Page</a></li>
                         <li><a href="checkout.html">Checkout Page</a></li>
@@ -37,11 +39,11 @@
                         <li><a href="login.html">Login &amp; Register Page</a></li>
                         <li><a href="myaccount.html">Account Page</a></li>
                         <li><a href="wishlist.html">Wishlist Page</a></li>
-                    </ul> -->
+                    </ul>
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Cửa hàng</span></a>
-                    <!-- <ul class="offcanvas-submenu">
+                    <ul class="offcanvas-submenu">
                         <li>
                             <a href="#"><span class="menu-text">Shop Grid</span></a>
                             <ul class="offcanvas-submenu">
@@ -96,7 +98,7 @@
                                 <li><a href="wishlist.html">Wishlist Page</a></li>
                             </ul>
                         </li>
-                    </ul> -->
+                    </ul>
                 </li>
 
                 <li>
@@ -144,7 +146,7 @@
                         </li>
                     </ul> -->
                 </li>
-                <li><a href="{{route('client.lienhe')}}">Liên hệ</a></li>
+                <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
             </ul>
         </nav>
         <div class="offcanvas-social py-30">
@@ -187,24 +189,6 @@
                     <a href="#" class="remove">×</a>
                 </div>
             </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/5.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">On Trend Makeup and Beauty Cosmetics</a>
-                    <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/6.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
         </ul>
         <a href="wishlist.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block mt-30">view wishlist</a>
     </div>
@@ -212,7 +196,7 @@
 </div>
 <!-- OffCanvas Wishlist End -->
 
-<!-- Gio hang mini cart -->
+<!-- ----------------------------Gio hang mini cart--------------------------- -->
 <div id="offcanvas-cart" class="offcanvas offcanvas-cart theme1">
     <div class="inner">
         <div class="head d-flex flex-wrap justify-content-between">
@@ -225,25 +209,9 @@
                         alt="Cart product Image" /></a>
                 <div class="content">
                     <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/2.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">On Trend Makeup and Beauty Cosmetics</a>
-                    <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/client/images/mini-cart/3.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
+                    <span class="quantity-price">1 x <span class="amount">$1 00.00</span></span>
+                    <span class="size mb-1">Kích thước: ???</span><br>
+                    <span class="color mb-1">Màu sắc: ???</span>
                     <a href="#" class="remove">×</a>
                 </div>
             </li>
@@ -254,7 +222,6 @@
         </div>
         <a href="cart.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block me-sm-2">view cart</a>
         <a href="checkout.html" class="btn btn-dark btn--lg d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
-        <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
     </div>
 
 </div>
@@ -269,28 +236,26 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="{{route('client.home')}}"><img src="{{ asset('assets/client/images/logo/logo_art.png') }}"
-                                alt="logo" /></a>
+                        <a href="{{ route('client.home') }}">
+                            <img src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" />
+                        </a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="active ml-0">
-                            <a style="color: #333;" href="{{route('client.home')}}" class="ps-0">Trang chủ </a>
+                            <a style="color: #333;" href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>
-                            <a href="#">Giới thiệu</a>
-        
+                            <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
                         </li>
-                        <li class="position-static">
-                            <a href="shop-grid-3-column.html">Cửa hàng </a>
+                        <li>
+                            <a href="#">Giới thiệu <i class="menu-text"></i></a>
                         </li>
-
                         <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>
-                            
                         </li>
-                        <li><a href="{{route('client.lienhe')}}">Liên hệ</a></li>
+                        <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3 col-xl-2">
@@ -298,19 +263,33 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
                         <div class="cart-block-links theme1 d-none d-sm-block">
-                            <ul class="d-flex">
-                                <li>
-                                    <a href="javascript:void(0)" class="search search-toggle">
+                            <ul class="d-flex align-items-center gap-2">
+                                <!-- <li>
+                                    <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
-                                </li>
+                                </li> -->
+                                    <div class="">
+                                        <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
+                                            <div class="my-2 mx-2">
+                                                <a class="search-toggle" id="searchIcon" role="button"  style="font-size: 20px;">
+                                                    <i class="icon-magnifier"></i>
+                                                </a>
+                                            </div>
+                                            <!-- Ô nhập liệu sẽ được thêm vào DOM bằng JavaScript -->
+                                        </div>
+                                    </div>
+
+
+
 
 
                                 <li class="mr-xl-0 cart-block position-relative">
-                                    <a class="offcanvas-toggle" href="#offcanvas-cart">
+                                    <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
                                             <i class="icon-bag"></i>
-                                            <span class="badge cbdg1">3</span>
+                                            <span class="badge cbdg1">{{ $cartItemsCount }}</span>
+                                            {{-- tổng số sản phẩm có trong giỏ hàng --}}
                                         </span>
                                     </a>
                                 </li>
@@ -334,289 +313,110 @@
                         <div class="cart-block-links theme1 d-none d-sm-block">
                             <ul class="d-flex">
                                 @auth
-                                    <li class="dropdown notification-list topbar-dropdown">
-                                        <a class="nav-link dropdown-toggle nav-user me-0" href="#"
-                                            id="profileDropdown" role="button" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
-                                                alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
-                                            {{-- <span class="pro-user-name ms-1">
+                                <li class="dropdown notification-list topbar-dropdown">
+                                    <a class="nav-link dropdown-toggle nav-user me-0" href="#" style="width: 50px;"
+                                        id="profileDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
+                                            alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
+                                        {{-- <span class="pro-user-name ms-1">
                                                 {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
-                                            </span> --}}
+                                        </span> --}}
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end profile-dropdown">
+                                        <!-- Tài khoản -->
+                                        <a class="dropdown-item notify-item" href="#" id="showUserProfile">
+                                            <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
+                                            <span>Tài khoản</span>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-end profile-dropdown">
-                                            <!-- Tài khoản -->
-                                            <a class="dropdown-item notify-item" href="#" id="showUserProfile">
-                                                <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
-                                                <span>Tài khoản</span>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <!-- Đăng xuất -->
-                                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
+                                        <div class="dropdown-divider"></div>
+                                        <!-- Đăng xuất -->
+                                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item notify-item">
+                                                <i class="mdi mdi-location-exit fs-16 align-middle"></i>
+                                                <span>Đăng Xuất</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </li>
+
+                                <!-- Popup thông tin tài khoản -->
+                                <div id="userProfilePopup" class="user-profile-popup" style="display: none">
+                                    <div class="popup-content">
+                                        <div class="popup-header">
+                                            <h5>Thông tin tài khoản</h5>
+                                            <span class="close-popup" id="closeUserProfile">&times;</span>
+                                        </div>
+                                        <div class="popup-body">
+                                            @auth
+                                            <p><strong>Họ tên:</strong> {{ Auth::user()->ho_ten }}</p>
+                                            <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                                            <p><strong>Số điện thoại:</strong> {{ Auth::user()->so_dien_thoai }}</p>
+                                            <p><strong>Địa chỉ:</strong> {{ Auth::user()->dia_chi }}</p>
+                                            @else
+                                            <p>Vui lòng đăng nhập để xem thông tin tài khoản.</p>
+                                            @endauth
+                                        </div>
+                                        <div class="popup-footer">
+                                            <button class="btn btn-primary" id="editUserProfileBtn">Sửa</button>
+                                            <button class="btn btn-secondary" id="closeUserProfileBtn">Đóng</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Popup chỉnh sửa tài khoản -->
+                                <div id="editUserProfilePopup" class="user-profile-popup" style="display: none">
+                                    <div class="popup-content">
+                                        <div class="popup-header">
+                                            <h5>Chỉnh sửa tài khoản</h5>
+                                            <span class="close-popup" id="closeEditUserProfile">&times;</span>
+                                        </div>
+                                        <div class="popup-body">
+                                            <form id="editUserProfileForm" action="{{ route('user.update') }}"
+                                                method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <button type="submit" class="dropdown-item notify-item">
-                                                    <i class="mdi mdi-location-exit fs-16 align-middle"></i>
-                                                    <span>Đăng Xuất</span>
-                                                </button>
+                                                <div class="mb-3">
+                                                    <label for="hoTen" class="form-label">Họ tên</label>
+                                                    <input type="text" class="form-control" id="hoTen"
+                                                        name="ho_ten" value="{{ Auth::user()->ho_ten }}" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="anhDaiDien" class="form-label">Ảnh đại diện</label>
+                                                    <input type="file" class="form-control" id="anhDaiDien"
+                                                        name="anh_dai_dien">
+                                                    @if (Auth::user()->anh_dai_dien)
+                                                    <div class="mt-2">
+                                                        <label>Ảnh hiện tại:</label>
+                                                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
+                                                            alt="Ảnh hiện tại" class="rounded-circle"
+                                                            style="width: 100px; height: 100px;">
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="diaChi" class="form-label">Địa Chỉ</label>
+                                                    <input type="text" class="form-control" id="diaChi"
+                                                        name="dia_chi" value="{{ Auth::user()->dia_chi }}">
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Lưu</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    id="cancelEditProfile">Hủy</button>
                                             </form>
                                         </div>
-                                    </li>
-
-                                    <!-- Popup thông tin tài khoản -->
-                                    <div id="userProfilePopup" class="user-profile-popup" style="display: none">
-                                        <div class="popup-content">
-                                            <div class="popup-header">
-                                                <h5>Thông tin tài khoản</h5>
-                                                <span class="close-popup" id="closeUserProfile">&times;</span>
-                                            </div>
-                                            <div class="popup-body">
-                                                @auth
-                                                    <p><strong>Họ tên:</strong> {{ Auth::user()->ho_ten }}</p>
-                                                    <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-                                                    <p><strong>Số điện thoại:</strong> {{ Auth::user()->so_dien_thoai }}</p>
-                                                    <p><strong>Địa chỉ:</strong> {{ Auth::user()->dia_chi }}</p>
-                                                @else
-                                                    <p>Vui lòng đăng nhập để xem thông tin tài khoản.</p>
-                                                @endauth
-                                            </div>
-                                            <div class="popup-footer">
-                                                <button class="btn btn-primary" id="editUserProfileBtn">Sửa</button>
-                                                <button class="btn btn-secondary" id="closeUserProfileBtn">Đóng</button>
-                                            </div>
-                                        </div>
                                     </div>
-
-                                    <!-- Popup chỉnh sửa tài khoản -->
-                                    <div id="editUserProfilePopup" class="user-profile-popup" style="display: none">
-                                        <div class="popup-content">
-                                            <div class="popup-header">
-                                                <h5>Chỉnh sửa tài khoản</h5>
-                                                <span class="close-popup" id="closeEditUserProfile">&times;</span>
-                                            </div>
-                                            <div class="popup-body">
-                                                <form id="editUserProfileForm" action="{{ route('user.update') }}"
-                                                    method="POST" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="mb-3">
-                                                        <label for="hoTen" class="form-label">Họ tên</label>
-                                                        <input type="text" class="form-control" id="hoTen"
-                                                            name="ho_ten" value="{{ Auth::user()->ho_ten }}" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="anhDaiDien" class="form-label">Ảnh đại diện</label>
-                                                        <input type="file" class="form-control" id="anhDaiDien"
-                                                            name="anh_dai_dien">
-                                                        @if (Auth::user()->anh_dai_dien)
-                                                            <div class="mt-2">
-                                                                <label>Ảnh hiện tại:</label>
-                                                                <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
-                                                                    alt="Ảnh hiện tại" class="rounded-circle"
-                                                                    style="width: 100px; height: 100px;">
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="diaChi" class="form-label">Địa Chỉ</label>
-                                                        <input type="text" class="form-control" id="diaChi"
-                                                            name="dia_chi" value="{{ Auth::user()->dia_chi }}">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-success">Lưu</button>
-                                                    <button type="button" class="btn btn-secondary"
-                                                        id="cancelEditProfile">Hủy</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
                                 @else
-                                    <li>
-                                        <a style="font-size: 16px;" href="javascript:void(0)" onclick="openLoginModal()">
-                                            Đăng Nhập
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a style="font-size: 16px;" href="javascript:void(0)"
-                                            onclick="openRegisterModal()">
-                                            Đăng Ký
-                                        </a>
-                                    </li>
-                                    <!-- Modal đăng nhập -->
-                                    <div id="loginModal" class="modal-overlay">
-                                        <div class="modal-content">
-                                            <!-- Nút đóng modal -->
-                                            <span class="close-button" onclick="closeLoginModal()">&times;</span>
-
-                                            <!-- Form đăng nhập -->
-                                            <form action="{{ route('auth.login') }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <div
-                                                    class="header-text mb-4 text-center d-flex flex-column justify-content-center align-items-center">
-                                                    <h2>Đăng Nhập</h2>
-                                                    <p>Chào mừng bạn quay trở lại với chúng tôi</p>
-                                                </div>
-
-                                                <!-- Input email -->
-                                                <div class="input-group mb-3">
-                                                    <input type="email"
-                                                        class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
-                                                        name="email" id="email" required
-                                                        placeholder="Email address" value="{{ old('email') }}">
-                                                    @error('email')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input password -->
-                                                <div class="input-group mb-1">
-                                                    <input type="password" name="password" id="password" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
-                                                        placeholder="Password" value="{{ old('password') }}">
-                                                    @error('password')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Nhớ mật khẩu và quên mật khẩu -->
-                                                <div class="input-group mb-5 d-flex justify-content-between">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" name="remember" class="form-check-input"
-                                                            id="formCheck">
-                                                        <label for="formCheck"
-                                                            class="form-check-label text-secondary"><small>Remember
-                                                                Me</small></label>
-                                                    </div>
-                                                    <div class="forgot">
-                                                        <small><a href="{{ route('auth.forgot_password') }}">Quên mật
-                                                                khẩu?</a></small>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Nút đăng nhập -->
-                                                <div class="input-group mb-3">
-                                                    <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>
-                                                </div>
-
-                                                <!-- Nút đăng nhập bằng Google và Facebook -->
-                                                <div class="input-group d-flex mb-3">
-                                                    <button class="btn btn-lg btn-light me-2 fs-6">
-                                                        <img src="{{ asset('images/google.png') }}" style="width: 20px;"
-                                                            class="me-2">
-                                                        Sign In with Google
-                                                    </button>
-                                                    <button class="btn btn-lg btn-light ms-2 fs-6">
-                                                        <img src="{{ asset('images/facebook.png') }}"
-                                                            style="width: 20px;" class="me-2">
-                                                        Sign In with Facebook
-                                                    </button>
-                                                </div>
-
-                                                <!-- Chuyển hướng đến đăng ký -->
-                                                <div class="row">
-                                                    <small>Bạn chưa có tài khoản? <a href="{{ route('auth.register') }}">
-                                                            Đăng Kí
-                                                        </a></small>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- Modal đăng ký -->
-                                    <div id="registerModal" class="modal-overlay">
-                                        <div class="modal-content">
-                                            <!-- Nút đóng modal -->
-                                            <span class="close-button" onclick="closeRegisterModal()">&times;</span>
-
-                                            <!-- Form đăng ký -->
-                                            <form action="{{ route('auth.register') }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <div
-                                                    class="header-text mb-4 text-center d-flex flex-column justify-content-center align-items-center">
-                                                    <h2>Đăng Kí</h2>
-                                                </div>
-
-                                                <!-- Input họ tên -->
-                                                <div class="input-group mb-3">
-                                                    <input type="text" id="ho_ten" name="ho_ten"
-                                                        value="{{ old('ho_ten') }}" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('ho_ten') is-invalid @enderror"
-                                                        placeholder="Họ Tên">
-                                                    @error('ho_ten')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input email -->
-                                                <div class="input-group mb-3">
-                                                    <input type="email" id="email" name="email"
-                                                        value="{{ old('email') }}" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
-                                                        placeholder="Email">
-                                                    @error('email')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input số điện thoại -->
-                                                <div class="input-group mb-3">
-                                                    <input type="number" id="so_dien_thoai" name="so_dien_thoai"
-                                                        value="{{ old('so_dien_thoai') }}" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('so_dien_thoai') is-invalid @enderror"
-                                                        placeholder="Số điện thoại">
-                                                    @error('so_dien_thoai')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input mật khẩu -->
-                                                <div class="input-group mb-3">
-                                                    <input type="password" id="password" name="password" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
-                                                        placeholder="Mật Khẩu">
-                                                    @error('password')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Input xác nhận mật khẩu -->
-                                                <div class="input-group mb-3">
-                                                    <input type="password" id="password_confirmation"
-                                                        name="password_confirmation" required
-                                                        class="form-control form-control-lg bg-light fs-6 @error('password_confirmation') is-invalid @enderror"
-                                                        placeholder="Xác nhận mật khẩu">
-                                                    @error('password_confirmation')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Nút đăng ký -->
-                                                <div class="input-group mb-3">
-                                                    <button class="btn btn-lg btn-primary w-100 fs-6">Đăng Kí</button>
-                                                </div>
-
-                                                <!-- Nút đăng ký bằng Google và Facebook -->
-                                                <div class="input-group d-flex mb-3">
-                                                    <button class="btn btn-lg btn-light me-2 fs-6">
-                                                        <img src="{{ asset('images/google.png') }}" style="width: 20px;"
-                                                            class="me-2">
-                                                        Sign In with Google
-                                                    </button>
-
-                                                    <button class="btn btn-lg btn-light ms-2 fs-6">
-                                                        <img src="{{ asset('images/facebook.png') }}"
-                                                            style="width: 20px;" class="me-2">
-                                                        Sign In with Facebook
-                                                    </button>
-                                                </div>
-
-                                                <!-- Chuyển hướng đến đăng nhập -->
-                                                <div class="row">
-                                                    <small>Bạn đã có tài khoản? <a href="{{ route('auth.login') }}"> Đăng
-                                                            Nhập
-                                                        </a></small>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+                                <li>
+                                    <a style="font-size: 16px;" href="{{ route('auth.login') }}">
+                                        Đăng Nhập
+                                    </a>
+                                </li>
+                                <li>
+                                    <a style="font-size: 16px;" href="{{ route('auth.register') }}">
+                                        Đăng Ký
+                                    </a>
+                                </li>
                                 @endauth
                             </ul>
                         </div>
@@ -628,6 +428,87 @@
         </div>
     </div>
     <!-- header-middle end -->
+
+
+
+
+
+    <!-- <div class="overlay">
+        <div class="scale"></div>
+        <form class="search-box" action="{{ url('/') }}" method="GET">
+            <input type="text" name="search" placeholder="Tìm kiếm ..." id="inputsearch" />
+            <button id="close" type="submit">
+                <i class="ion-ios-search-strong"></i>
+            </button>
+            <div class="product-grouped product-count style mt-3" id="product-search">
+
+            </div>
+        </form>
+
+        <button class="close"><i class="ion-android-close"></i></button>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#inputsearch').on('keyup', function() {
+                    var query = $(this).val();
+
+                    if (query.length > 1) {
+                        $.ajax({
+                            url: "{{ route('global.search') }}",
+                            type: "GET",
+                            data: {
+                                query: query
+                            },
+                            success: function(data) {
+                                $('#product-search').empty();
+                                if (data.products.length) {
+                                    data.products.forEach(function(product) {
+                                        $('#product-search').append(
+                                            '<div class="media flex-column flex-sm-row align-items-sm-center mb-4">' +
+                                            '<div class="media-body d-flex align-items-center">' +
+                                            '<div class="group-img me-4">' +
+                                            '<img src="' + product.image_url +
+                                            '" alt="' + product.ten_san_pham +
+                                            '" style="width: 100px; height: auto;">' +
+                                            '</div>' +
+                                            '<div>' +
+                                            '<h3 class="title text-white">' +
+                                            '<a href="{{ url('client/sanphamchitiet') }}/' +
+                                            product.id + '">' + 
+                                            product.ten_san_pham + '</a>' +
+                                            '</h3>' +
+                                            '<span>' + product.gia_km + ' VNĐ</span>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>'
+                                        );
+                                    });
+                                } else {
+                                    $('#product-search').append(
+                                        '<div class="suggestion-item">Không tìm thấy kết quả</div>'
+                                    );
+                                }
+                            }
+                        });
+                    } else {
+                        $('#product-search').empty();
+                    }
+                });
+
+                // Ẩn gợi ý khi nhấp bên ngoài
+                $(document).on('click', function(e) {
+                    if (!$(e.target).closest('#inputsearch').length) {
+                        $('#product-search').empty();
+                    }
+                });
+            });
+        </script>
+    </div> -->
+
+    </div>
+
+
 </header>
 <!-- header end -->
 <!-- CSS cho modal -->
@@ -635,11 +516,56 @@
     @auth
     var isAuthenticated = true;
     @else
-        var isAuthenticated = false;
+    var isAuthenticated = false;
     @endauth
 </script>
 
 <style>
+    /* Ẩn ô nhập liệu lúc đầu */
+    .search-input {
+        width: 0;
+        /* Không hiển thị lúc đầu */
+        opacity: 0;
+        /* Ẩn nội dung */
+        animation-duration: 0.5s;
+        /* Thời gian cho animation */
+        animation-fill-mode: forwards;
+        /* Để duy trì trạng thái cuối của animation */
+    }
+
+    /* Hiệu ứng trượt vào */
+    @keyframes slideIn {
+        0% {
+            width: 0;
+            opacity: 0;
+        }
+
+        100% {
+            width: 200px;
+            /* Độ rộng khi hiển thị */
+            opacity: 1;
+            /* Hiển thị nội dung */
+        }
+    }
+
+    /* Hiệu ứng trượt ra */
+    @keyframes slideOut {
+        0% {
+            width: 200px;
+            /* Độ rộng ban đầu */
+            opacity: 1;
+            /* Hiện tại */
+        }
+
+        100% {
+            width: 0;
+            /* Không hiển thị khi trượt ra */
+            opacity: 0;
+            /* Ẩn nội dung */
+        }
+    }
+
+
     .user-profile-popup {
         display: none;
         position: fixed;
@@ -701,39 +627,60 @@
         z-index: 1000;
         /* Đặt modal lên trên cùng */
     }
-
-    /* Nội dung của modal (form đăng nhập) */
-    .modal-content {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        width: 400px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        position: relative;
-        /* Để nút close nằm bên trong */
-        z-index: 1001;
-        /* Bên trong modal */
-    }
-
-    /* Nút đóng modal (X) */
-    .close-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        color: #333;
-    }
-
-    /* Hiển thị modal khi nó được kích hoạt */
-    .modal-overlay.active {
-        display: flex;
-        /* Hiển thị modal khi có class active */
-    }
 </style>
 
 <!-- JavaScript cho modal -->
 <script>
+    document.getElementById("searchIcon").addEventListener("click", function() {
+    const mainMenu = document.querySelector(".main-menu");
+    
+    // Kiểm tra xem class justify-content-center có tồn tại không
+    if (mainMenu.classList.contains("justify-content-center")) {
+        mainMenu.classList.remove("justify-content-center"); // Xóa class justify-content-center
+        mainMenu.classList.add("justify-content-start"); // Thêm class justify-content-start
+    } else {
+        mainMenu.classList.remove("justify-content-start"); // Nếu đã là justify-content-start, quay về justify-content-center
+        mainMenu.classList.add("justify-content-center");
+    }
+});
+
+    // Lấy phần tử icon và container
+    const searchIcon = document.getElementById("searchIcon");
+    const searchContainer = document.getElementById("searchContainer");
+    let isSearchInputVisible = false; // Trạng thái hiển thị của ô nhập liệu
+
+    // Thêm sự kiện click vào icon để hiển thị/ẩn ô nhập liệu
+    searchIcon.addEventListener("click", function() {
+        const existingSearchInput = document.getElementById("searchInput");
+
+        if (!isSearchInputVisible) {
+            // Nếu ô nhập liệu chưa hiển thị, tạo và thêm nó vào DOM
+            const searchInputLi = document.createElement("div");
+            searchInputLi.id = "searchInput"; // Thêm ID cho ô nhập liệu
+            searchInputLi.classList.add("my-2", "mx-2", "search-input");
+
+            // Tạo nội dung của ô nhập liệu
+            searchInputLi.innerHTML = `
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Search">
+            </div>
+        `;
+
+            // Thêm ô nhập liệu ngay sau icon
+            searchContainer.appendChild(searchInputLi);
+            // Thêm hiệu ứng slide-in
+            searchInputLi.style.animationName = "slideIn";
+            isSearchInputVisible = true;
+        } else {
+            // Nếu ô nhập liệu đã hiển thị, thêm hiệu ứng slide-out
+            existingSearchInput.style.animationName = "slideOut"; // Bỏ hiệu ứng trước khi xóa
+            setTimeout(() => {
+                existingSearchInput.remove();
+            }, 500); // Đợi hết hiệu ứng trước khi xóa phần tử
+            isSearchInputVisible = false;
+        }
+    });
+
     $(document).ready(function() {
         // Hiển thị popup thông tin người dùng
         $('#showUserProfile').click(function(e) {
@@ -788,38 +735,4 @@
             });
         });
     });
-    // Mở modal khi nhấn vào nút "Đăng Nhập"
-    function openLoginModal() {
-        document.getElementById('loginModal').classList.add('active');
-    }
-
-    // Đóng modal khi nhấn vào nút "X"
-    function closeLoginModal() {
-        document.getElementById('loginModal').classList.remove('active');
-    }
-
-    // Đóng modal khi nhấn vào bên ngoài form
-    window.onclick = function(event) {
-        const modal = document.getElementById('loginModal');
-        if (event.target === modal) {
-            modal.classList.remove('active');
-        }
-    }
-    // Mở modal khi nhấn vào nút "Đăng Kí"
-    function openRegisterModal() {
-        document.getElementById('registerModal').classList.add('active');
-    }
-
-    // Đóng modal khi nhấn vào nút "X"
-    function closeRegisterModal() {
-        document.getElementById('registerModal').classList.remove('active');
-    }
-
-    // Đóng modal khi nhấn vào bên ngoài form
-    window.onclick = function(event) {
-        const modal = document.getElementById('registerModal');
-        if (event.target === modal) {
-            modal.classList.remove('active');
-        }
-    }
 </script>

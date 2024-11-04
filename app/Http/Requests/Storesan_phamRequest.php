@@ -27,18 +27,18 @@ class Storesan_phamRequest extends FormRequest
             'ten_san_pham' => 'required|string|max:255|unique:san_phams,ten_san_pham',
             'gia_goc' => 'required|min:0',
             'gia_km' => 'nullable|min:0|lte:gia_goc', // Giá khuyến mãi không được lớn hơn giá gốc
-            'gia_nhap' => 'nullable|min:0|lte:gia_goc', // Giá nhập không được lớn hơn giá gốc
-            'ma_ta_san_pham' => 'max:255',
+            'gia_nhap' => 'required|min:0|lte:gia_goc', // Giá nhập không được lớn hơn giá gốc
+            'ma_ta_san_pham' => 'required|max:255',
             'anh_san_pham' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
 
             'is_active' => [Rule::in([0, 1])],
 
-            // Thêm quy tắc cho biến thể sản phẩm
-            'product_variants.*.color_san_pham' => 'nullable|string',
-            'product_variants.*.size_san_pham' => 'nullable|string',
-            'product_variants.*.so_luong' => 'nullable|integer|min:0',
-            'product_variants.*.gia' => 'nullabble|numeric|min:0|gte:gia_km', // Giá biến thể là bắt buộc, không âm và phải lớn hơn hoặc bằng gia_km
-            'product_variants.*.anh_bien_the' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
+            // Thay đổi quy tắc cho biến thể sản phẩm
+            'product_variants.size_san_pham.*' => 'required|exists:size_san_phams,id', // Kiểm tra kích thước
+            'product_variants.color_san_pham.*' => 'required|exists:color_san_phams,id', // Kiểm tra màu sắc
+            'product_variants.so_luong.*' => 'required|integer|min:0',
+            'product_variants.gia.*' => 'required|numeric|min:0|', // Giá biến thể là bắt buộc, không âm và phải lớn hơn hoặc bằng gia_km
+            'product_variants.anh_bien_the.*' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 
@@ -63,19 +63,22 @@ class Storesan_phamRequest extends FormRequest
             'gia_nhap.required' => 'Giá nhập là bắt buộc.',
             'gia_nhap.min' => 'Giá nhập phải lớn hơn hoặc bằng 0.',
             'gia_nhap.lte' => 'Giá nhập không được lớn hơn giá gốc.',
+            'ma_ta_san_pham.required' => 'Mô tả sản phẩm là bắt buộc.',
             'ma_ta_san_pham.max' => 'Mô tả sản phẩm không được vượt quá :max ký tự.',
             'anh_san_pham.required' => 'Ảnh sản phẩm là bắt buộc.',
             'anh_san_pham.mimes' => 'Ảnh sản phẩm phải có định dạng: jpeg, png, jpg, gif.',
             'anh_san_pham.max' => 'Ảnh sản phẩm không được vượt quá :max kilobytes.',
             'is_active.in' => 'Trạng thái không hợp lệ.',
-            'product_variants.*.color_san_pham.nullable' => 'Màu có thể để trống.',
-            'product_variants.*.size_san_pham.nullable' => 'Kích thước có thể để trống.',
-            'product_variants.*.so_luong.nullable' => 'Số lượng có thể để trống.',
+            'product_variants.*.color_san_pham.required' => 'Màu không thể để trống.',
+            'product_variants.*.color_san_pham.exists' => 'Màu đã chọn không hợp lệ.',
+            'product_variants.*.size_san_pham.required' => 'Kích thước không thể để trống.',
+            'product_variants.*.size_san_pham.exists' => 'Kích thước đã chọn không hợp lệ.',
+            'product_variants.*.so_luong.required' => 'Số lượng không thể để trống.',
             'product_variants.*.so_luong.integer' => 'Số lượng phải là một số nguyên.',
-            // 'product_variants.*.gia.required' => 'Giá biến thể là bắt buộc.',
+            'product_variants.*.gia.required' => 'Giá biến thể là bắt buộc.',
             'product_variants.*.gia.numeric' => 'Giá biến thể phải là một số.',
             'product_variants.*.gia.min' => 'Giá biến thể phải lớn hơn hoặc bằng 0.',
-            'product_variants.*.gia.gte' => 'Giá biến thể không được nhỏ hơn giá khuyến mãi.',
+            'product_variants.*.anh_bien_the.required' => 'Ảnh biến thể là bắt buộc.',
             'product_variants.*.anh_bien_the.mimes' => 'Ảnh biến thể phải có định dạng: jpeg, png, jpg, gif.',
             'product_variants.*.anh_bien_the.max' => 'Ảnh biến thể không được vượt quá :max kilobytes.',
         ];

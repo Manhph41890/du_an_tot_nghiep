@@ -142,22 +142,36 @@
                                             <div class="row variant-item mb-3">
                                                 <div class="col-lg-2">
                                                     <label for="size_san_pham" class="form-label">Size</label>
-                                                    <input type="text" name="product_variants[size_san_pham][]"
-                                                        class="form-control"
-                                                        value="{{ old("product_variants.size_san_pham.$index", optional($variant->size)->ten_size) }}"
-                                                        required>
-                                                    <span id="sizeError" class="color-error text-danger"
-                                                        style="display: none;">Kích thước không hợp lệ!</span>
+                                                    <select name="product_variants[size_san_pham][]" class="form-control"
+                                                        id="sizeSelect">
+                                                        <option value="">Chọn kích thước</option>
+                                                        @foreach ($sizes as $size)
+                                                            <option value="{{ $size->id }}"
+                                                                @if (old("product_variants.size_san_pham.$index") == $size->id ||
+                                                                        (isset($variant) && $variant->size_san_pham_id == $size->id)) selected @endif>
+                                                                {{ $size->ten_size }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
 
                                                 <div class="col-lg-2">
                                                     <label for="color_san_pham" class="form-label">Màu sắc</label>
-                                                    <input type="text" name="product_variants[color_san_pham][]"
-                                                        class="form-control color-input"
-                                                        value="{{ old("product_variants.color_san_pham.$index", optional($variant->color)->ten_color) }}"
-                                                        required>
-                                                    <span class="color-error text-danger" style="display: none;">Tên màu
-                                                        không hợp lệ!</span>
+                                                    <select name="product_variants[color_san_pham][]" class="form-control"
+                                                        id="colorSelect">
+                                                        <option value="">Chọn màu sắc</option>
+                                                        @foreach ($colors as $color)
+                                                            <option value="{{ $color->id }}"
+                                                                @if (old("product_variants.color_san_pham.$index") == $color->id ||
+                                                                        (isset($variant) && $variant->color_san_pham_id == $color->id)) selected @endif>
+                                                                {{ $color->ten_color }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    @error('product_variants.*.color_san_pham')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="col-lg-2">
@@ -179,11 +193,22 @@
                                                     <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
                                                     <input type="file" name="product_variants[anh_bien_the][]"
                                                         class="form-control">
+
+                                                    <input type="hidden" name="product_variants[old_anh_bien_the][]"
+                                                        value="{{ $variant->anh_bien_the }}">
+
                                                     <div class="mt-2">
-                                                        <img src="{{ $variant->anh_bien_the ? asset('storage/' . $variant->anh_bien_the) : '#' }}"
-                                                            alt="Hình ảnh biến thể" style="width: 100px; display: block;">
+                                                        @if ($variant->anh_bien_the)
+                                                            <img id="imagePreview"
+                                                                src="{{ asset('storage/' . $variant->anh_bien_the) }}"
+                                                                alt="Hình ảnh" style="width: 200px; display: block;">
+                                                        @else
+                                                            <img id="imagePreview" src="#" alt="Hình ảnh"
+                                                                style="display: none;">
+                                                        @endif
                                                     </div>
                                                 </div>
+
 
                                                 <div class="col-lg-1 d-flex align-items-end">
                                                     <button type="button"
@@ -192,8 +217,8 @@
                                             </div>
                                         @endforeach
                                     </div>
-
                                 </div>
+
                             </div>
 
                             <div class="d-flex justify-content-center">
@@ -207,78 +232,6 @@
     </div>
 
     <script>
-        document.querySelector('form').addEventListener('submit', function(event) {
-            let colorSizePairs = [];
-            let isDuplicate = false;
-
-            document.querySelectorAll('.variant-item').forEach(function(item) {
-                const color = item.querySelector('.colorInput').value.trim();
-                const size = item.querySelector('.sizeInput').value.trim();
-                const colorSizePair = color + "-" + size;
-
-                if (colorSizePairs.includes(colorSizePair)) {
-                    isDuplicate = true;
-                    alert(
-                        `Bạn đã nhập trùng biến thể với màu ${color} và size ${size}. Vui lòng chọn biến thể khác.`
-                    );
-                    event.preventDefault(); // Ngăn không cho form submit
-                    return;
-                }
-
-                colorSizePairs.push(colorSizePair);
-            });
-
-            if (isDuplicate) {
-                return false; // Dừng việc submit nếu có trùng lặp
-            }
-        });
-
-        // 
-        const validSizes = ["S", "M", "L", "XL", "XXL", "36", "38", "40", "A1", "A2", "A0"]; // Danh sách kích thước hợp lệ
-
-        document.getElementById('sizeInput').addEventListener('input', function() {
-            const sizeInput = this.value.trim();
-            const sizeError = document.getElementById('sizeError');
-
-            if (!validSizes.includes(sizeInput)) {
-                sizeError.style.display = 'block'; // Hiện thông báo lỗi nếu kích thước không hợp lệ
-            } else {
-                sizeError.style.display = 'none'; // Ẩn thông báo lỗi nếu kích thước hợp lệ
-            }
-        });
-        // 
-        const vietnameseToCssColors = {
-            "đỏ": "red",
-            "xanh lá": "green",
-            "xanh dương": "blue",
-            "vàng": "yellow",
-            "đen": "black",
-            "trắng": "white",
-            "hồng": "pink",
-            "cam": "orange",
-            "tím": "purple",
-            "nâu": "brown",
-            "xám": "gray",
-            "bạc": "silver",
-            "vàng kim": "gold",
-            "chàm": "indigo",
-            "xanh ngọc": "aqua",
-            "xanh lục": "lime",
-            "xanh lá cây": "olive"
-        };
-
-        document.querySelectorAll('.color-input').forEach(function(input) {
-            input.addEventListener('input', function() {
-                const userInput = this.value.trim().toLowerCase();
-                const colorError = this.nextElementSibling;
-
-                if (!vietnameseToCssColors[userInput]) {
-                    colorError.style.display = 'block'; // Hiển thị lỗi nếu không hợp lệ
-                } else {
-                    colorError.style.display = 'none';
-                }
-            });
-        });
         document.addEventListener('DOMContentLoaded', function() {
             // Xem trước hình ảnh chính sản phẩm
             document.getElementById('anh_san_pham').addEventListener('change', function(event) {
@@ -300,37 +253,65 @@
                 const newVariant = document.createElement('div');
                 newVariant.classList.add('row', 'variant-item', 'mb-3');
                 newVariant.innerHTML = `
-                    <div class="col-lg-3">
-                        <label for="size_san_pham" class="form-label">Size</label>
-                        <select name="product_variants[size_san_pham][]" class="form-select" required>
-                            @foreach ($sizes as $size)
-                                <option value="{{ $size->id }}">{{ $size->ten_size }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-lg-3">
-                        <label for="color_san_pham" class="form-label">Màu sắc</label>
-                        <select name="product_variants[color_san_pham][]" class="form-select" required>
-                            @foreach ($colors as $color)
-                                <option value="{{ $color->id }}">{{ $color->ten_color }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     <div class="col-lg-2">
-                        <label for="so_luong" class="form-label">Số lượng</label>
-                        <input type="number" name="product_variants[so_luong][]" class="form-control" value="0" required>
-                    </div>
-                    <div class="col-lg-2">
-                        <label for="gia" class="form-label">Giá biến thể</label>
-                        <input type="number" name="product_variants[gia][]" class="form-control" value="0" required>
-                    </div>
-                    <div class="col-lg-3">
-                        <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
-                        <input type="file" name="product_variants[anh_bien_the][]" class="form-control">
-                    </div>
-                    <div class="col-lg-1 d-flex align-items-end">
-                        <button type="button" class="btn btn-sm btn-danger remove-variant">Xóa</button>
-                    </div>
+                                                <label for="size_san_pham" class="form-label">Size</label>
+                                                <select name="product_variants[size_san_pham][]" class="form-control"
+                                                    id="sizeSelect">
+                                                    <option value="">Chọn kích thước</option>
+                                                    @foreach ($sizes as $size)
+                                                        <option value="{{ $size->id }}">{{ $size->ten_size }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @error('product_variants.*.size_san_pham')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label for="color_san_pham" class="form-label">Màu sắc</label>
+                                                <select name="product_variants[color_san_pham][]" class="form-control"
+                                                    id="sizeSelect">
+                                                    <option value="">Chọn kích thước</option>
+                                                    @foreach ($colors as $color)
+                                                        <option value="{{ $color->id }}">{{ $color->ten_color }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @error('product_variants.*.color_san_pham')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label for="so_luong" class="form-label">Số lượng</label>
+                                                <input type="number" name="product_variants[so_luong][]"
+                                                    class="form-control" value="0" min="0" required>
+                                                @error('product_variants.*.so_luong')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label for="gia" class="form-label">Giá biến thể</label>
+                                                <input type="number" name="product_variants[gia][]" class="form-control"
+                                                    value="0">
+                                                @error('product_variants.*.gia')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
+                                                <input type="file" name="product_variants[anh_bien_the][]"
+                                                    class="form-control">
+                                                @error('product_variants.*.anh_bien_the')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-1 d-flex align-items-end">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-danger remove-variant">Xóa</button>
+                                            </div>
                 `;
                 variantContainer.appendChild(newVariant);
             });

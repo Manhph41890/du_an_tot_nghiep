@@ -211,7 +211,7 @@
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
-                                                        <span class="badge badge-danger top-right">New</span>
+                                                        <span class="badge badge-danger top-right">Mới</span>
                                                         <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"

@@ -285,7 +285,7 @@
                                             <h3>Add a Review</h3>
                                             <div class="ratting-form">
                                                 <form action="#">
-                                                    <div class="star-box">
+                                                    {{-- <div class="star-box">
                                                         <span>Your rating:</span>
                                                         <div class="rating-product">
                                                             <i class="ion-android-star"></i>
@@ -294,7 +294,18 @@
                                                             <i class="ion-android-star"></i>
                                                             <i class="ion-android-star"></i>
                                                         </div>
+                                                    </div> --}}
+                                                    <div class="star-box">
+                                                        <span>Your rating:</span>
+                                                        <div class="rating-product">
+                                                            <i class="ion-android-star" data-value="1"></i>
+                                                            <i class="ion-android-star" data-value="2"></i>
+                                                            <i class="ion-android-star" data-value="3"></i>
+                                                            <i class="ion-android-star" data-value="4"></i>
+                                                            <i class="ion-android-star" data-value="5"></i>
+                                                        </div>
                                                     </div>
+
                                                     {{-- <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="rating-form-style form-submit">
@@ -406,7 +417,7 @@
             </div>
         </div>
     </section>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
@@ -478,8 +489,37 @@
                 reviewInput.value = reviewInput.value.substring(0, 100);
             }
         });
-    </script>
+        $(document).ready(function() {
+            $('.rating-product i').on('click', function() {
+                console.log("Star clicked!"); // Check if this message appears in the console
+                var rating = $(this).data('value');
 
+                // Remove active class from all stars
+                $('.rating-product i').removeClass('active');
+
+                // Add active class to selected stars and those before it
+                $(this).addClass('active');
+                $(this).prevAll().addClass('active');
+
+                // Display the rating in the console or handle it as needed
+                console.log("Selected rating:", rating);
+            });
+        });
+    </script>
+    <style>
+        .rating-product i {
+            font-size: 24px;
+            color: #ccc;
+            /* Default color for unselected stars */
+            cursor: pointer;
+            /* Pointer cursor for clickable stars */
+        }
+
+        .rating-product i.active {
+            color: #ffcc00;
+            /* Highlight color for selected stars */
+        }
+    </style>
 
 
     <!-- new arrival section end -->

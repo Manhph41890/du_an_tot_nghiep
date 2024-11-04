@@ -28,6 +28,9 @@ use App\Http\Controllers\PhuongThucVanChuyenController;
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
+// tìm kiếm toàn trang 
+Route::get('/timkiem', [SearchController::class, 'search'])->name('global.search');
+
 
 // Route cho client
 Route::prefix('client')->group(function () {
@@ -106,14 +109,14 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
 
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('client.home');
+    // Route::get('/', [HomeController::class, 'index'])->name('client.home');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::get('/sanpham/search', [SanPhamController::class, 'search'])->name('sanpham.search');
     // Route giỏ hàng
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-    Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::post('/cart/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
     // 
     Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');
@@ -145,4 +148,3 @@ Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
 
 
-Route::get('/global-search', [SearchController::class, 'search'])->name('global.search');

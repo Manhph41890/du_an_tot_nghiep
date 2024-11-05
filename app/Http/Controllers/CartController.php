@@ -43,7 +43,7 @@ class CartController extends Controller
         $validatedData = $request->validate([
             'san_pham_id' => 'required|exists:san_phams,id',
             'size_san_pham_id' => 'required|exists:size_san_phams,id',
-            'color' => 'required|exists:color_san_phams,id',  // Yêu cầu một màu cụ thể
+            'color' => 'required|exists:color_san_phams,id',
             'quantity' => 'required|integer|min:1|max:10',
         ], [
             'san_pham_id.required' => 'Sản phẩm không hợp lệ.',
@@ -67,7 +67,7 @@ class CartController extends Controller
         $cartItem = CartItem::where('cart_id', $cart->id)
             ->where('san_pham_id', $sanPham->id)
             ->where('size_san_pham_id', $validatedData['size_san_pham_id'])
-            ->where('color_san_pham_id', $validatedData['color']) // Chỉ truyền giá trị duy nhất của màu
+            ->where('color_san_pham_id', $validatedData['color'])
             ->first();
 
         if ($cartItem) {
@@ -79,21 +79,18 @@ class CartController extends Controller
             $cartItem->cart_id = $cart->id;
             $cartItem->san_pham_id = $sanPham->id;
             $cartItem->size_san_pham_id = $validatedData['size_san_pham_id'];
-            $cartItem->color_san_pham_id = $validatedData['color']; // Lưu giá trị màu duy nhất
+            $cartItem->color_san_pham_id = $validatedData['color'];
             $cartItem->quantity = $validatedData['quantity'];
-            $cartItem->price = $sanPham->gia_km; // Thêm giá sản phẩm vào giỏ hàng
+            $cartItem->price = $sanPham->gia_km;
         }
 
         // Lưu CartItem vào database
         $cartItem->save();
 
-        if ($request->ajax()) {
-            return response()->json(['success' => true, 'redirect' => route('cart.index')]);
-        }
-
-        // Chuyển hướng tới trang giỏ hàng với thông báo thành công
-        return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng thành công!');
+        // Trả về phản hồi JSON với thông báo thành công
+        return response()->json(['success' => true, 'message' => 'Sản phẩm đã được thêm vào giỏ hàng!']);
     }
+
 
 
 

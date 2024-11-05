@@ -47,7 +47,7 @@
                                     <th class="text-center" scope="col">Tên sản phẩm</th>
                                     <th class="text-center" scope="col">Phân Loại</th>
                                     <th class="text-center" scope="col">Tình trạng</th>
-                                    <th class="text-center" scope="col">Số lượng</th>
+                                    {{-- <th class="text-center" scope="col">Số lượng</th> --}}
                                     <th class="text-center" scope="col">Giá</th>
                                     <th class="text-center" scope="col">Hành động</th>
                                 </tr>
@@ -69,6 +69,7 @@
                                                     class="update-cart-form" data-id="{{ $item->id }}">
                                                     @csrf
                                                     @method('PUT')
+                                                    <span>Size :</span>
                                                     <select name="size_san_pham_id" class="size-select" required>
                                                         @foreach ($item->san_pham->bien_the_san_phams as $variant)
                                                             <option value="{{ $variant->size->id }}"
@@ -77,7 +78,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-
+                                                    <span>Màu :</span>
                                                     <select name="color_san_pham_id" class="color-select" required>
                                                         @foreach ($item->san_pham->bien_the_san_phams as $variant)
                                                             <option value="{{ $variant->color->id }}"
@@ -94,6 +95,7 @@
                                                             ->first();
                                                         $maxQuantity = $bienThe ? $bienThe->so_luong : 1;
                                                     @endphp
+                                                    <span>Số Lượng : </span>
                                                     <input type="number" name="quantity" value="{{ $item->quantity }}"
                                                         min="1" max="{{ $maxQuantity }}" class="quantity-input">
 
@@ -108,9 +110,9 @@
                                             <td class="text-center">
                                                 <span class="badge badge-danger position-static">Còn hàng</span>
                                             </td>
-                                            <td class="text-center">
+                                            {{-- <td class="text-center">
                                                 <span class="whish-title">{{ $item->quantity }}</span>
-                                            </td>
+                                            </td> --}}
                                             <td class="text-center">
                                                 <span
                                                     class="whish-list-price">{{ number_format($item->price, 0, ',', '.') }}

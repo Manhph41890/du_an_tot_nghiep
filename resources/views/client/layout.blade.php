@@ -22,12 +22,12 @@
 
     <style>
         .bg-img1 {
-            background-image: url('./assets/client/images/banner/bn1.jpg');
+            background-image: url('./assets/client/images/banner/slider_1.jpg');
             width: 50%;
         }
 
         .bg-img2 {
-            background-image: url('./assets/client/images/slider/slide1.jpg');
+            background-image: url('./assets/client/images/banner/bottom_banner_1.jpg');
         }
 
         .bg-img3 {

@@ -22,8 +22,6 @@ class don_hang extends Model
         'ngay_tao',
         'tong_tien',
         'trang_thai',
-        'color_san_pham_id', // Thêm mới
-        'size_san_pham_id',  // Thêm mới
     ];
 
     protected $casts = [
@@ -64,18 +62,6 @@ class don_hang extends Model
     public function chi_tiet_don_hangs()
     {
         return $this->hasMany(chi_tiet_don_hang::class, 'don_hang_id');
-    }
-
-    // Quan hệ với bảng color_san_pham
-    public function color_san_pham()
-    {
-        return $this->belongsTo(color_san_pham::class, 'color_san_pham_id');
-    }
-
-    // Quan hệ với bảng size_san_pham
-    public function size_san_pham()
-    {
-        return $this->belongsTo(size_san_pham::class, 'size_san_pham_id');
     }
 
     // Tạo mã đơn hàng từ id

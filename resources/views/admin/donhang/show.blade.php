@@ -61,15 +61,15 @@
                                                     @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
                                                         <tr>
                                                             <td>
-                                                                <img src="{{ asset('/storage/' . optional($donhang->san_pham)->anh_san_pham) }}"
+                                                                <img src="{{ asset('/storage/' . optional($chi_tiet->san_pham)->anh_san_pham) }}"
                                                                     width="50px" alt="Product Image">
                                                             </td>
                                                             <td>
-                                                                {{ optional($donhang->san_pham)->ten_san_pham ?? 'N/A' }}<br>
+                                                                {{ optional($chi_tiet->san_pham)->ten_san_pham ?? 'N/A' }}<br>
                                                                 Màu:
-                                                                {{ optional($donhang->color_san_pham)->ten_color ?? 'N/A' }}<br>
+                                                                {{ optional($chi_tiet->color_san_pham)->ten_color ?? 'N/A' }}<br>
                                                                 Size:
-                                                                {{ optional($donhang->size_san_pham)->ten_size ?? 'N/A' }}
+                                                                {{ optional($chi_tiet->size_san_pham)->ten_size ?? 'N/A' }}
                                                             </td>
                                                             <td>{{ $chi_tiet->so_luong }}</td>
                                                             <td>{{ number_format($chi_tiet->gia_tien, 0, ',', '.') }}
@@ -80,11 +80,8 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-
-
                                         </div>
                                         <div class="mb-3">
-                                            {{-- ----------- --}}
                                             <p><strong>Mã khuyến mãi</strong>:
                                                 {{ $donhang->khuyen_mai?->ten_khuyen_mai }} -
                                                 {{ $donhang->khuyen_mai?->ma_khuyen_mai }}</p>
@@ -94,6 +91,7 @@
                                                 {{ $donhang->phuong_thuc_thanh_toan?->kieu_thanh_toan }}</p>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="card">

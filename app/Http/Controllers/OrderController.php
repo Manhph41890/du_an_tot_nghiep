@@ -29,7 +29,7 @@ class OrderController extends Controller
         ]);
 
         // Lấy giỏ hàng của người dùng hiện tại
-        $cart = Cart::with('cartItems.sanPham', 'cartItems.color', 'cartItems.size')
+        $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
             ->where('user_id', Auth::id())
             ->first();
 
@@ -37,8 +37,10 @@ class OrderController extends Controller
             return redirect()->route('client.cart.index')->with('error', 'Giỏ hàng của bạn đang trống.');
         }
 
-        // Tính tổng tiền và Áp dụng khuyến mãi nếu có mã
-        $total = $cart->cartItems->sum(fn($item) => $item->sanPham->gia_tien * $item->so_luong);
+        $total = 0; // Khởi tạo biến tổng
+        foreach ($cart->cartItems as $item) {
+            $total += $item->price * $item->quantity; // Cộng dồn giá trị cho mỗi mặt hàng
+        }
         $discount = 0;
 
         if ($validatedData['khuyen_mai']) {
@@ -55,27 +57,39 @@ class OrderController extends Controller
             }
         }
 
+        $shippingMethod = phuong_thuc_van_chuyen::find($validatedData['phuong_thuc_van_chuyen']);
+        $shippingCost = $shippingMethod ? $shippingMethod->gia_ship : 0;
+
+        // Trừ phí vận chuyển vào tổng tiền
+        $total += $shippingCost;
+
+
         // Tạo đơn hàng mới và lưu thông tin người dùng
         $order = new don_hang();
         $order->user_id = Auth::id();
+        $order->khuyen_mai_id = $validatedData['khuyen_mai'] ? $coupon->id : null;
         $order->ho_ten = $user->ho_ten ?? $validatedData['ho_ten'];
         $order->so_dien_thoai = $user->so_dien_thoai ?? $validatedData['so_dien_thoai'];
         $order->email = $user->email ?? $validatedData['email'];
         $order->dia_chi = $user->dia_chi ?? $validatedData['dia_chi'];
         $order->phuong_thuc_thanh_toan_id = $validatedData['phuong_thuc_thanh_toan'];
         $order->phuong_thuc_van_chuyen_id = $validatedData['phuong_thuc_van_chuyen'];
+        $order->ngay_tao = now();
         $order->tong_tien = $total;
-        $order->trang_thai = 'Đang xác nhận';
+        $order->trang_thai = 'Chờ xác nhận';
         $order->save();
 
-        // Lưu chi tiết đơn hàng từ các mục trong giỏ hàng
-        foreach ($cart->cartItems as $cartItem) {
-            $chiTietDonHang = new chi_tiet_don_hang();
-            $chiTietDonHang->don_hang_id = $order->id;
-            $chiTietDonHang->so_luong = $cartItem->so_luong;
-            $chiTietDonHang->gia_tien = $cartItem->sanPham->gia_tien;
-            $chiTietDonHang->thanh_tien = $cartItem->sanPham->gia_tien * $cartItem->so_luong;
-            $chiTietDonHang->save();
+        // Lưu chi tiết đơn hàng từ giỏ hàng
+        foreach ($cart->cartItems as $item) {
+            $orderDetail = new chi_tiet_don_hang();
+            $orderDetail->don_hang_id = $order->id; // Gán ID đơn hàng
+            $orderDetail->san_pham_id = $item->san_pham_id;
+            $orderDetail->color_san_pham_id = $item->color_san_pham_id; // Gán ID màu cho chi tiết đơn hàng
+            $orderDetail->size_san_pham_id = $item->size_san_pham_id; // Gán ID size cho chi tiết đơn hàng
+            $orderDetail->so_luong = $item->quantity; // Gán số lượng
+            $orderDetail->gia_tien = $item->price; // Gán giá tiền
+            $orderDetail->thanh_tien = $orderDetail->so_luong * $orderDetail->gia_tien; // Tính thành tiền
+            $orderDetail->save(); // Lưu chi tiết đơn hàng
         }
 
         // Xóa giỏ hàng sau khi đặt hàng thành công

@@ -72,14 +72,12 @@ class DonHangController extends Controller
     {
         $donhang = don_hang::with([
             'user',
-            'san_pham',
             'khuyen_mai',
             'phuong_thuc_thanh_toan',
             'phuong_thuc_van_chuyen',
-            'chi_tiet_don_hangs',
-            'color_san_pham',
-            'size_san_pham',
-            'san_pham.danh_gias'
+            'chi_tiet_don_hangs.san_pham',
+            'chi_tiet_don_hangs.color_san_pham',
+            'chi_tiet_don_hangs.size_san_pham'
         ])->findOrFail($id);
         // Trả về view cùng với dữ liệu đơn hàng
         return view('admin.donhang.show', compact('donhang'));

@@ -342,17 +342,17 @@
                             <li class="english">
                                 <a href="#" id="dropdown3" class="pe-0" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <img src="assets/img/logo/us-flag.jpg" alt="us flag" />
+                                    <img src="{{asset('assets/admin/images/logo/us-flag.jpg')}}" alt="us flag" />
                                     English
                                     <i class="ion ion-ios-arrow-down"></i>
                                 </a>
                                 <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown3">
                                     <li class="active">
-                                        <a href="#"><img src="assets/img/logo/us-flag.jpg" alt="us flag" />
+                                        <a href="#"><img src="{{asset('assets/admin/images/logo/us-flag.jpg')}}" alt="us flag" />
                                             English</a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="assets/img/logo/france.jpg" alt="france flag" />
+                                        <a href="#"><img src="{{asset('assets/admin/images/logo/france.jpg')}}" alt="france flag" />
                                             Français</a>
                                     </li>
                                 </ul>
@@ -370,16 +370,15 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="http://127.0.0.1:8000/"><img src="assets/client/img/logo/logo_art.png"
-                                alt="logo" /></a>
+                        <a href="{{route('client.home')}}"><img src="{{asset('assets/client/images/logo/logo_art.png')}}" alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="active ml-0">
-                            <a href="http://127.0.0.1:8000/" class="ps-0">Trang Chủ</a>
+                            <a href="{{route('client.home')}}" class="ps-0">Trang chủ </a>
                         </li>
-                        {{-- <li class="position-static">
+                        <!-- <li class="position-static">
                             <a href="shop-grid-3-column.html">Shop <i class="ion-ios-arrow-down"></i></a>
                             <ul class="mega-menu row">
                                 <li class="col-3">
@@ -442,7 +441,7 @@
                                             src="assets/img/mega-menu/2.jpg" alt="img" /></a>
                                 </li>
                             </ul>
-                        </li> --}}
+                        </li> -->
                         <li>
                             <a href="{{ route('client.gioithieu') }}">Giới thiệu <i class="menu-text"></i></a>
                         </li>
@@ -461,26 +460,33 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
                         <div class="cart-block-links theme1 d-none d-sm-block">
-                            <ul class="d-flex">
-                                <li>
-                                    <a href="javascript:void(0)" class="search search-toggle">
+                            <ul class="d-flex align-items-center gap-2">
+                                <!-- <li>
+                                    <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="compare.html">
-                                        <span class="position-relative">
-                                            <i class="icon-shuffle"></i>
-                                            <span class="badge cbdg1">1</span>
-                                        </span>
-                                    </a>
-                                </li>
+                                </li> -->
+                                    <div class="">
+                                        <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
+                                            <div class="my-2 mx-2">
+                                                <a class="search-toggle" id="searchIcon" role="button"  style="font-size: 20px;">
+                                                    <i class="icon-magnifier"></i>
+                                                </a>
+                                            </div>
+                                            <!-- Ô nhập liệu sẽ được thêm vào DOM bằng JavaScript -->
+                                        </div>
+                                    </div>
+
+
+
+
 
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
                                             <i class="icon-bag"></i>
                                             <span class="badge cbdg1">{{ $cartItemsCount }}</span>
+                                            {{-- tổng số sản phẩm có trong giỏ hàng --}}
                                         </span>
                                     </a>
                                 </li>

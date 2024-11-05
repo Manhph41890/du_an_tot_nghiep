@@ -64,11 +64,6 @@ class DonHangController extends Controller
     {
         //
     }
-    public function storet(Storedon_hangRequest $request)
-    {
-        $title = "Create a new resource";
-        return view('admin.donhang.chitiet', compact('title'));
-    }
 
     /**
      * Display the specified resource.
@@ -77,15 +72,13 @@ class DonHangController extends Controller
     {
         $donhang = don_hang::with([
             'user',
-            'san_phams',
             'khuyen_mai',
             'phuong_thuc_thanh_toan',
             'phuong_thuc_van_chuyen',
-            'chi_tiet_don_hangs',
-            'bien_the_san_pham',
-            'san_phams.danh_gias'
+            'chi_tiet_don_hangs.san_pham',
+            'chi_tiet_don_hangs.color_san_pham',
+            'chi_tiet_don_hangs.size_san_pham'
         ])->findOrFail($id);
-
         // Trả về view cùng với dữ liệu đơn hàng
         return view('admin.donhang.show', compact('donhang'));
     }

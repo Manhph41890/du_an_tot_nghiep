@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('assets/client/css/style.min.css') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 
     <style>
         body {
@@ -27,12 +29,12 @@
         }
 
         .bg-img1 {
-            background-image: url('./assets/client/images/banner/bn1.jpg');
+            background-image: url('./assets/client/images/banner/slider_1.jpg');
             width: 50%;
         }
 
         .bg-img2 {
-            background-image: url('./assets/client/images/slider/slide1.jpg');
+            background-image: url('./assets/client/images/banner/bottom_banner_1.jpg');
         }
 
         .bg-img3 {
@@ -56,6 +58,7 @@
 
     @include('client.partials.footer')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('assets/client/js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/client/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
     <script src="{{ asset('assets/client/js/vendor/modernizr-3.7.1.min.js') }}"></script>

@@ -6,6 +6,9 @@ use App\Models\bien_the_san_pham;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\color_san_pham;
+use App\Models\don_hang;
+use App\Models\phuong_thuc_thanh_toan;
+use App\Models\phuong_thuc_van_chuyen;
 use App\Models\san_pham;
 use App\Models\size_san_pham;
 use Illuminate\Http\Request;
@@ -178,5 +181,31 @@ class CartController extends Controller
         }
 
         return view('client.partials.header', compact('cartItemsCount'));
+    }
+
+    // Quá trình thanh toán
+    public function checkout(Request $request)
+    {
+        $user = Auth::user();
+
+        // Lấy danh sách phương thức thanh toán
+        $phuongThucThanhToans = phuong_thuc_thanh_toan::all();
+        // Lấy danh sách phương thức vận chuyển
+        $phuongThucVanChuyens = phuong_thuc_van_chuyen::all();
+
+        // Lấy giỏ hàng của người dùng
+        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if (!$cart) {
+            return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
+        }
+
+        $cartItems = $cart->cartItems;
+        $total = $cart->cartItems->sum(fn($item) => $item->price * $item->quantity);
+
+        // Chuyển hướng về trang xác nhận đơn hàng và truyền biến $user vào view
+        return view('client.order.index', compact('user', 'cart', 'total', 'phuongThucThanhToans', 'phuongThucVanChuyens'))->with('success', 'Đặt hàng thành công!');
     }
 }

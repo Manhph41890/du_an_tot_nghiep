@@ -179,7 +179,8 @@
                         </div>
                         <div class="Place-order mt-25">
                             <a class="btn btn--lg btn-primary me-3" href="#">Cập nhật giỏ hàng</a>
-                            <a class="btn btn--lg btn-primary my-2 my-sm-0" href="#">Thanh toán</a>
+                            <a class="btn btn--lg btn-primary my-2 my-sm-0" href="{{ route('cart.checkout') }}">Thanh
+                                toán</a>
                         </div>
                     </div>
                 </div>

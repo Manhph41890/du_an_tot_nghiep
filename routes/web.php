@@ -140,11 +140,15 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::post('/cart/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
-    // 
+
+    Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
+    Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
+    Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+    Route::post('/validate-coupon', [OrderController::class, 'validateCoupon'])->name('validate-coupon');
+
     Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');
-
-
-
 
     // 
 });
@@ -163,5 +167,3 @@ Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
 
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
-
-

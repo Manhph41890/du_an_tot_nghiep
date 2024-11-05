@@ -474,7 +474,7 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a class="offcanvas-toggle" href="#offcanvas-wishlist">
                                         <span class="position-relative">
                                             <i class="icon-heart"></i>
@@ -489,7 +489,7 @@
                                             <span class="badge cbdg1">3</span>
                                         </span>
                                     </a>
-                                </li>
+                                </li> -->
                                 <!-- cart block end -->
                             </ul>
                         </div>

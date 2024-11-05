@@ -23,6 +23,7 @@
             </div>
         </div>
     </nav>
+
     <!-- breadcrumb-section end -->
     <!-- product-single start -->
     <section class="product-single theme1 pt-60">
@@ -133,34 +134,45 @@
                                         <select name="size_san_pham_id" id="size_san_pham_id{{ $sanPhamCT->id }}">
                                             <option value="">--Chọn size--</option>
                                             @foreach ($sanPhamCT->bien_the_san_phams as $bienThe)
-                                                <option value="{{ $bienThe->size->id }}">{{ $bienThe->size->ten_size }}</option>
+                                                <option value="{{ $bienThe->size->id }}">{{ $bienThe->size->ten_size }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        <span id="size-error{{ $sanPhamCT->id }}" class="text-danger" style="display: none;">Vui lòng chọn size!</span>
+                                        <span id="size-error" class="text-danger" style="display: none;">Vui lòng chọn
+                                            size!</span>
+
                                     </div>
-                        
+
                                     <div class="check-box ms-5">
                                         <h4 class="title">Màu Sắc</h4>
                                         <div class="d-flex check-box-wrap-list">
                                             @foreach ($uniqueColors as $color)
                                                 <div class="widget-check-box">
-                                                    <input type="radio" name="color" id="color-{{ $color->id }}" value="{{ $color->id }}" />
-                                                    <label class="me-2" style="background-color:{{ $color->ma_mau }};" for="color-{{ $color->id }}">{{ $color->ten_color }}</label>
+                                                    <input type="radio" name="color" id="color-{{ $color->id }}"
+                                                        value="{{ $color->id }}" required />
+                                                    <label class="me-2" style="background-color:{{ $color->ma_mau }};"
+                                                        for="color-{{ $color->id }}">{{ $color->ten_color }}</label>
                                                 </div>
                                             @endforeach
-                                            <span id="color-error{{ $sanPhamCT->id }}" class="text-danger" style="display: none;">Vui lòng chọn màu!</span>
+                                            <span id="color-error" class="text-danger" style="display: none;">Vui lòng
+                                                chọn màu!</span>
+
                                         </div>
                                     </div>
                                 </div>
-                        
+
                                 <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-20">
                                     <div class="count d-flex">
-                                        <input type="number" name="quantity" min="1" max="10" step="1" value="1" required />
+                                        <input type="number" name="quantity" min="1"
+                                            max="{{ $sanPhamCT->so_luong }}" value="1" required
+                                            id="quantity-input" />
                                         <div class="button-group">
-                                            <button type="button" class="count-btn increment" onclick="incrementQuantity('{{ $sanPhamCT->id }}')">
+                                            <button type="button" class="count-btn increment"
+                                                onclick="incrementQuantity()">
                                                 <i class="fas fa-chevron-up"></i>
                                             </button>
-                                            <button type="button" class="count-btn decrement" onclick="decrementQuantity('{{ $sanPhamCT->id }}')">
+                                            <button type="button" class="count-btn decrement"
+                                                onclick="decrementQuantity()">
                                                 <i class="fas fa-chevron-down"></i>
                                             </button>
                                         </div>
@@ -274,8 +286,8 @@
                                             <h3>Thêm đánh giá</h3>
                                             <div class="ratting-form">
                                                 <form action="#">
-                                                    <div class="star-box">
-                                                        <span>Đánh giá của bạn:</span>
+                                                    {{-- <div class="star-box">
+                                                        <span>Your rating:</span>
                                                         <div class="rating-product">
                                                             <i class="ion-android-star"></i>
                                                             <i class="ion-android-star"></i>
@@ -283,7 +295,18 @@
                                                             <i class="ion-android-star"></i>
                                                             <i class="ion-android-star"></i>
                                                         </div>
+                                                    </div> --}}
+                                                    <div class="star-box">
+                                                        <span>Đánh giá của bạn:</span>
+                                                        <div class="rating-product">
+                                                            <i class="ion-android-star" data-value="1"></i>
+                                                            <i class="ion-android-star" data-value="2"></i>
+                                                            <i class="ion-android-star" data-value="3"></i>
+                                                            <i class="ion-android-star" data-value="4"></i>
+                                                            <i class="ion-android-star" data-value="5"></i>
+                                                        </div>
                                                     </div>
+
                                                     {{-- <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="rating-form-style form-submit">
@@ -395,38 +418,57 @@
             </div>
         </div>
     </section>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('add-to-cart-form{{ $sanPhamCT->id }}').addEventListener('submit', function(event) {
-                const sizeSelect = document.getElementById('size_san_pham_id{{ $sanPhamCT->id }}');
-                const sizeError = document.getElementById('size-error{{ $sanPhamCT->id }}');
-                const colorError = document.getElementById('color-error{{ $sanPhamCT->id }}');
-                let isValid = true;
+            document.querySelectorAll('form[id^="add-to-cart-form"]').forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Ngăn chặn hành động mặc định của form
 
-                // Kiểm tra size
-                if (sizeSelect.value === "") {
-                    sizeError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    sizeError.style.display = 'none';
-                }
+                    const formData = new FormData(form); // Lấy dữ liệu của form
+                    const url = form.getAttribute('action');
 
-                // Kiểm tra nếu không có màu nào được chọn
-                const colorRadios = document.querySelectorAll('input[name="color"]:checked');
-                if (colorRadios.length === 0) {
-                    colorError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    colorError.style.display = 'none';
-                }
-
-                // Nếu không hợp lệ, ngăn không cho gửi form
-                if (!isValid) {
-                    event.preventDefault();
-                }
+                    fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Accept': 'application/json' // Cấu hình để server hiểu đây là yêu cầu JSON
+                            },
+                            body: formData
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(
+                                'Network response was not ok'); // Kiểm tra phản hồi HTTP
+                            }
+                            return response.json(); // Xử lý phản hồi JSON
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                toastr.success(data.message); // Hiển thị thông báo thành công
+                            } else {
+                                toastr.error(data.message ||
+                                'Có lỗi xảy ra.'); // Hiển thị thông báo lỗi nếu có
+                            }
+                        })
+                        .catch(error => {
+                            toastr.error(
+                            'Có lỗi xảy ra. Vui lòng thử lại.'); // Thông báo lỗi chung
+                            console.error('Error:', error); // Để debug lỗi trên console
+                        });
+                });
             });
         });
+
+        // Cấu hình toastr
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+
+
 
         // Hàm tăng số lượng
         function incrementQuantity() {
@@ -435,16 +477,13 @@
             if (quantity < 10) {
                 quantityInput.value = quantity + 1;
             }
+        } // Hàm giảm số lượng function decrementQuantity() { const
+        quantityInput = document.querySelector('input[name="quantity" ]');
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {
+            quantityInput.value = quantity - 1;
         }
 
-        // Hàm giảm số lượng
-        function decrementQuantity() {
-            const quantityInput = document.querySelector('input[name="quantity"]');
-            let quantity = parseInt(quantityInput.value);
-            if (quantity > 1) {
-                quantityInput.value = quantity - 1;
-            }
-        }
 
         function showMainImage(imageUrl) {
             // Tìm phần tử của ảnh chính
@@ -467,8 +506,37 @@
                 reviewInput.value = reviewInput.value.substring(0, 100);
             }
         });
-    </script>
+        $(document).ready(function() {
+            $('.rating-product i').on('click', function() {
+                console.log("Star clicked!"); // Check if this message appears in the console
+                var rating = $(this).data('value');
 
+                // Remove active class from all stars
+                $('.rating-product i').removeClass('active');
+
+                // Add active class to selected stars and those before it
+                $(this).addClass('active');
+                $(this).prevAll().addClass('active');
+
+                // Display the rating in the console or handle it as needed
+                console.log("Selected rating:", rating);
+            });
+        });
+    </script>
+    <style>
+        .rating-product i {
+            font-size: 24px;
+            color: #ccc;
+            /* Default color for unselected stars */
+            cursor: pointer;
+            /* Pointer cursor for clickable stars */
+        }
+
+        .rating-product i.active {
+            color: #ffcc00;
+            /* Highlight color for selected stars */
+        }
+    </style>
 
 
     <!-- new arrival section end -->

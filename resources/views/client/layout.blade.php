@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="description" content="{{ $description ?? 'Default description' }}" />
 
-    <title>ArtiCraft Vẽ sáng tạo - Tô hạnh phúc</title>
+    <title>ArtiCraft</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/favicon.ico') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/img/logo/logo_art.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/fontawesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/ionicons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/simple-line-icons.css') }}" />
@@ -18,9 +18,16 @@
     <link rel="stylesheet" href="{{ asset('assets/client/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/plugins/plugins.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/style.min.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
         .bg-img1 {
             background-image: url('./assets/client/images/banner/slider_1.jpg');
             width: 50%;
@@ -41,6 +48,7 @@
             background-repeat: no-repeat;
         }
     </style>
+
 </head>
 
 <body>
@@ -50,6 +58,7 @@
 
     @include('client.partials.footer')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('assets/client/js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/client/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
     <script src="{{ asset('assets/client/js/vendor/modernizr-3.7.1.min.js') }}"></script>
@@ -66,6 +75,7 @@
             });
         });
     </script>
+    @yield('js')
 </body>
 
 </html>

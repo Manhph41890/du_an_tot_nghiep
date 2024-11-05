@@ -47,7 +47,7 @@
                                     <th class="text-center" scope="col">Tên sản phẩm</th>
                                     <th class="text-center" scope="col">Phân Loại</th>
                                     <th class="text-center" scope="col">Tình trạng</th>
-                                    <th class="text-center" scope="col">Số lượng</th>
+                                    {{-- <th class="text-center" scope="col">Số lượng</th> --}}
                                     <th class="text-center" scope="col">Giá</th>
                                     <th class="text-center" scope="col">Hành động</th>
                                 </tr>
@@ -64,57 +64,75 @@
                                                 <span class="whish-title">{{ $item->san_pham->ten_san_pham }}</span>
                                             </td>
                                             <td class="text-center">
-                                                <form action="" method="" class="update-cart-form" data-id="">
+                                                {{-- form cập nhât đây nha --}}
+                                                <form action="{{ route('cart.update', $item->id) }}" method="POST"
+                                                    class="update-cart-form" data-id="{{ $item->id }}">
                                                     @csrf
-                                                    <select name="size_id" class="size-select" required>
+                                                    @method('PUT')
+                                                    <span>Size :</span>
+                                                    <select name="size_san_pham_id" class="size-select" required>
                                                         @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                                            <option value="{{ $variant->size->id }}">
+                                                            <option value="{{ $variant->size->id }}"
+                                                                {{ $variant->size->id == $item->size_san_pham_id ? 'selected' : '' }}>
                                                                 {{ $variant->size->ten_size }}
                                                             </option>
                                                         @endforeach
                                                     </select>
-
-                                                    <select name="color_id" class="color-select" required>
+                                                    <span>Màu :</span>
+                                                    <select name="color_san_pham_id" class="color-select" required>
                                                         @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                                            <option value="{{ $variant->color->id }}">
+                                                            <option value="{{ $variant->color->id }}"
+                                                                {{ $variant->color->id == $item->color_san_pham_id ? 'selected' : '' }}>
                                                                 {{ $variant->color->ten_color }}
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    <button type="submit" class="btn btn-primary update-cart-btn">Cập
-                                                        nhật</button>
+                                                    @php
+                                                        // Giới hạn quantity <= số lượng sản phẩm
+                                                        $bienThe = $item->san_pham->bien_the_san_phams
+                                                            ->where('size_san_pham_id', $item->size_san_pham_id)
+                                                            ->where('color_san_pham_id', $item->color_san_pham_id)
+                                                            ->first();
+                                                        $maxQuantity = $bienThe ? $bienThe->so_luong : 1;
+                                                    @endphp
+                                                    <span>Số Lượng : </span>
+                                                    <input type="number" name="quantity" value="{{ $item->quantity }}"
+                                                        min="1" max="{{ $maxQuantity }}" class="quantity-input">
+
+                                                    @if (
+                                                        $errors->has('quantity') &&
+                                                            $errors->first('quantity') == 'Số lượng không được vượt quá ' . $maxQuantity . ' sản phẩm.')
+                                                        <div class="text-danger">{{ $errors->first('quantity') }}</div>
+                                                    @endif
+                                                    <button type="submit" class="btn btn-primary btn-sm">Cập nhật</button>
                                                 </form>
                                             </td>
-
-
-
-
                                             <td class="text-center">
                                                 <span class="badge badge-danger position-static">Còn hàng</span>
                                             </td>
-                                            <td class="text-center">
+                                            {{-- <td class="text-center">
                                                 <span class="whish-title">{{ $item->quantity }}</span>
-                                            </td>
+                                            </td> --}}
                                             <td class="text-center">
                                                 <span
                                                     class="whish-list-price">{{ number_format($item->price, 0, ',', '.') }}
                                                     đ</span>
                                             </td>
                                             <td class="text-center">
-
                                                 <form action="{{ route('cart.removeFromCart', $item->id) }}" method="POST"
                                                     onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?');">
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger btn-sm">
                                                         <span class="trash"><i class="fas fa-trash-alt"></i> Xóa</span>
+
                                                     </button>
-                                                </form>
-                                                <form action="" method="" style="margin-top: 30px">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-success ms-2">Thanh toán</button>
-                                                </form>
 
+                                                </form>
+                                                <button type="submit" class="btn btn-info btn-sm">
+                                                    <span class="trash"><i class="fa-solid fa-check"></i> Thanh
+                                                        Toán</span>
 
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -150,7 +168,10 @@
                                         <li class="order-total">Tổng cộng</li>
                                         <li>
                                             @php
-                                                $totalPrice = $cartItems->sum('price'); // Tính tổng giá
+                                                $totalPrice = 0; // Khởi tạo biến tổng giá
+                                                foreach ($cartItems as $item) {
+                                                    $totalPrice += $item->price * $item->quantity; // Cộng dồn giá của từng sản phẩm
+                                                }
                                             @endphp
                                             {{ number_format($totalPrice, 0, ',', '.') . ' đ' }}
                                         </li>
@@ -168,6 +189,7 @@
             </div>
         </div>
     </div>
+
     <script>
         // 
         $('.remove-cart-item').on('click', function(e) {

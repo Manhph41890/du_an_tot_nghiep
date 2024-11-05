@@ -496,7 +496,6 @@
                     }
                 });
             });
-            
             // Hàm tăng số lượng
             function incrementQuantity() {
                 const quantityInput = document.querySelector('input[name="quantity"]');

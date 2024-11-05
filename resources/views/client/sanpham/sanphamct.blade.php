@@ -23,6 +23,7 @@
             </div>
         </div>
     </nav>
+
     <!-- breadcrumb-section end -->
     <!-- product-single start -->
     <section class="product-single theme1 pt-60">
@@ -420,35 +421,54 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
-                const sizeSelect = document.getElementById('size_san_pham_id');
-                const sizeError = document.getElementById('size-error');
-                const colorError = document.getElementById('color-error');
-                let isValid = true;
+            document.querySelectorAll('form[id^="add-to-cart-form"]').forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Ngăn chặn hành động mặc định của form
 
-                // Kiểm tra size
-                if (sizeSelect.value === "") {
-                    sizeError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    sizeError.style.display = 'none';
-                }
+                    const formData = new FormData(form); // Lấy dữ liệu của form
+                    const url = form.getAttribute('action');
 
-                // Kiểm tra nếu không có màu nào được chọn
-                const colorRadios = document.querySelectorAll('input[name="color"]:checked');
-                if (colorRadios.length === 0) {
-                    colorError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    colorError.style.display = 'none';
-                }
-
-                // Nếu không hợp lệ, ngăn không cho gửi form
-                if (!isValid) {
-                    event.preventDefault();
-                }
+                    fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Accept': 'application/json' // Cấu hình để server hiểu đây là yêu cầu JSON
+                            },
+                            body: formData
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(
+                                'Network response was not ok'); // Kiểm tra phản hồi HTTP
+                            }
+                            return response.json(); // Xử lý phản hồi JSON
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                toastr.success(data.message); // Hiển thị thông báo thành công
+                            } else {
+                                toastr.error(data.message ||
+                                'Có lỗi xảy ra.'); // Hiển thị thông báo lỗi nếu có
+                            }
+                        })
+                        .catch(error => {
+                            toastr.error(
+                            'Có lỗi xảy ra. Vui lòng thử lại.'); // Thông báo lỗi chung
+                            console.error('Error:', error); // Để debug lỗi trên console
+                        });
+                });
             });
         });
+
+        // Cấu hình toastr
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+
+
 
         // Hàm tăng số lượng
         function incrementQuantity() {
@@ -457,16 +477,13 @@
             if (quantity < 10) {
                 quantityInput.value = quantity + 1;
             }
+        } // Hàm giảm số lượng function decrementQuantity() { const
+        quantityInput = document.querySelector('input[name="quantity" ]');
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {
+            quantityInput.value = quantity - 1;
         }
 
-        // Hàm giảm số lượng
-        function decrementQuantity() {
-            const quantityInput = document.querySelector('input[name="quantity"]');
-            let quantity = parseInt(quantityInput.value);
-            if (quantity > 1) {
-                quantityInput.value = quantity - 1;
-            }
-        }
 
         function showMainImage(imageUrl) {
             // Tìm phần tử của ảnh chính

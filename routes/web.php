@@ -163,5 +163,3 @@ Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
 
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
-
-

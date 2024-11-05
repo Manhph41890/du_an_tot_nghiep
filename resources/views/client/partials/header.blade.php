@@ -460,36 +460,36 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
                         <div class="cart-block-links theme1 d-none d-sm-block">
-                            <ul class="d-flex">
-                                <li>
-                                    <a href="javascript:void(0)" class="search search-toggle">
+                            <ul class="d-flex align-items-center gap-2">
+                                <!-- <li>
+                                    <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="compare.html">
-                                        <span class="position-relative">
-                                            <i class="icon-shuffle"></i>
-                                            <span class="badge cbdg1">1</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <!-- <li>
-                                    <a class="offcanvas-toggle" href="#offcanvas-wishlist">
-                                        <span class="position-relative">
-                                            <i class="icon-heart"></i>
-                                            <span class="badge cbdg1">3</span>
-                                        </span>
-                                    </a>
-                                </li>
+                                </li> -->
+                                    <div class="">
+                                        <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
+                                            <div class="my-2 mx-2">
+                                                <a class="search-toggle" id="searchIcon" role="button"  style="font-size: 20px;">
+                                                    <i class="icon-magnifier"></i>
+                                                </a>
+                                            </div>
+                                            <!-- Ô nhập liệu sẽ được thêm vào DOM bằng JavaScript -->
+                                        </div>
+                                    </div>
+
+
+
+
+
                                 <li class="mr-xl-0 cart-block position-relative">
-                                    <a class="offcanvas-toggle" href="#offcanvas-cart">
+                                    <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
                                             <i class="icon-bag"></i>
-                                            <span class="badge cbdg1">3</span>
+                                            <span class="badge cbdg1">{{ $cartItemsCount }}</span>
+                                            {{-- tổng số sản phẩm có trong giỏ hàng --}}
                                         </span>
                                     </a>
-                                </li> -->
+                                </li>
                                 <!-- cart block end -->
                             </ul>
                         </div>

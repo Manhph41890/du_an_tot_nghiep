@@ -46,7 +46,7 @@ class UserController extends Controller
 
         $title = "Người Dùng";
         // $params = [];
-        $params['title'] = $title;
+      
         $params['title'] = $title;
         $params['list'] = $query->get(); // Lấy danh sách người dùng
         return view('admin.user.index', $params   , compact('title'));
@@ -55,12 +55,25 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create() {
+        $title = "Thêm mới nhân viên";
+        $chuc_vus = chuc_vu::query()->pluck('ten_chuc_vu', 'id')->all();
+        return view('admin.user.create', compact('title', 'chuc_vus'));
+    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request) {
+        $params = $request->except('_token');
+        if($request->hasFile('anh_dai_dien')){
+            $img = $request->file('anh_dai_dien');
+            $path = $img->store('images', 'public');
+            $params['anh_dai_dien'] = $path;
+        }
+        User::create($params);
+        return redirect()->route('admin.user.index');
+    }
 
     /**
      * Display the specified resource.

@@ -41,7 +41,7 @@
                                 <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
 
-                                    <div class="form-group mb-3">
+                                    {{-- <div class="form-group mb-3">
                                         <label for="chuc_vu_id">Chức vụ</label>
                                         <input type="text" name="chuc_vu_id" value="{{ old('chuc_vu_id') }}"
                                             class="form-control @error('chuc_vu_id') is-invalid @enderror">
@@ -49,6 +49,22 @@
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
+                                        @enderror
+                                    </div> --}}
+
+                                    <div class="mb-3">
+                                        <label for="chuc_vu_id" class="form-label">Chức vụ</label>
+                                        <select class="form-select @error('chuc_vu_id') is-invalid @enderror"
+                                            name="chuc_vu_id" id="chuc_vu_id">
+                                            <option value="">Chọn danh mục</option>
+                                            @foreach ($chuc_vus as $id => $ten_chuc_vu)
+                                                <option value="{{ $id }}"
+                                                    {{ old('chuc_vu_id') == $id ? 'selected' : '' }}>
+                                                    {{ $ten_chuc_vu }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('chuc_vu_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
 

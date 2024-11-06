@@ -57,7 +57,8 @@ class UserController extends Controller
      */
     public function create() {
         $title = "Thêm mới nhân viên";
-        return view('admin.user.create', compact('title'));
+        $chuc_vus = chuc_vu::query()->pluck('ten_chuc_vu', 'id')->all();
+        return view('admin.user.create', compact('title', 'chuc_vus'));
     }
 
     /**

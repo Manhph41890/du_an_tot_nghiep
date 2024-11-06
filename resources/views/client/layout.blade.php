@@ -74,6 +74,22 @@
                 $(this).next('.dropdown-menu').toggle();
             });
         });
+        $(document).ready(function() {
+            @if (Session::has('success'))
+                toastr.success("{{ Session::get('success') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            @endif
+            @if (Session::has('error'))
+                toastr.error("{{ Session::get('error') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            @endif
+        });
     </script>
     @yield('js')
 </body>

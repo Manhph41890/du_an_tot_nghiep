@@ -133,31 +133,21 @@
                                         <h3 class="title">Size</h3>
                                         <select name="size_san_pham_id" id="size_san_pham_id{{ $sanPhamCT->id }}">
                                             <option value="">--Chọn size--</option>
-                                            @foreach ($sanPhamCT->bien_the_san_phams as $bienThe)
-                                                <option value="{{ $bienThe->size->id }}">{{ $bienThe->size->ten_size }}
-                                                </option>
+                                            @foreach ($sizes as $size)
+                                                <option value="{{ $size->id }}">{{ $size->ten_size }}</option>
                                             @endforeach
                                         </select>
                                         <span id="size-error" class="text-danger" style="display: none;">Vui lòng chọn
                                             size!</span>
-
                                     </div>
 
                                     <div class="check-box ms-5">
                                         <h4 class="title">Màu Sắc</h4>
-                                        <div class="d-flex check-box-wrap-list">
-                                            @foreach ($uniqueColors as $color)
-                                                <div class="widget-check-box">
-                                                    <input type="radio" name="color" id="color-{{ $color->id }}"
-                                                        value="{{ $color->id }}" required />
-                                                    <label class="me-2" style="background-color:{{ $color->ma_mau }};"
-                                                        for="color-{{ $color->id }}">{{ $color->ten_color }}</label>
-                                                </div>
-                                            @endforeach
-                                            <span id="color-error" class="text-danger" style="display: none;">Vui lòng
-                                                chọn màu!</span>
-
+                                        <div class="d-flex check-box-wrap-list" id="color-options">
+                                            <!-- Màu sắc sẽ được load sau khi chọn size -->
                                         </div>
+                                        <span id="color-error" class="text-danger" style="display: none;">Vui lòng chọn
+                                            màu!</span>
                                     </div>
                                 </div>
 
@@ -186,6 +176,7 @@
                                 </div>
                             </div>
                         </form>
+
 
                     </div>
                 </div>
@@ -420,6 +411,39 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // Hàm lọc màu sắc khi chọn size
+        document.getElementById('size_san_pham_id{{ $sanPhamCT->id }}').addEventListener('change', function() {
+            var sizeId = this.value;
+            var colorOptions = @json($colorsBySize);
+
+            var colorContainer = document.getElementById('color-options');
+            colorContainer.innerHTML = ''; // Clear previous colors
+
+            if (sizeId && colorOptions[sizeId]) {
+                colorOptions[sizeId].forEach(function(color) {
+                    var colorInput = document.createElement('input');
+                    colorInput.type = 'radio';
+                    colorInput.name = 'color';
+                    colorInput.id = 'color-' + color.id;
+                    colorInput.value = color.id;
+                    colorInput.required = true;
+
+                    var colorLabel = document.createElement('label');
+                    colorLabel.setAttribute('for', 'color-' + color.id);
+                    colorLabel.style.backgroundColor = color.ma_mau;
+                    colorLabel.classList.add('me-2');
+                    colorLabel.textContent = color.ten_color;
+
+                    var colorDiv = document.createElement('div');
+                    colorDiv.classList.add('widget-check-box');
+                    colorDiv.appendChild(colorInput);
+                    colorDiv.appendChild(colorLabel);
+
+                    colorContainer.appendChild(colorDiv);
+                });
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('form[id^="add-to-cart-form"]').forEach(form => {
                 form.addEventListener('submit', function(event) {
@@ -439,7 +463,7 @@
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error(
-                                'Network response was not ok'); // Kiểm tra phản hồi HTTP
+                                    'Network response was not ok'); // Kiểm tra phản hồi HTTP
                             }
                             return response.json(); // Xử lý phản hồi JSON
                         })
@@ -448,12 +472,12 @@
                                 toastr.success(data.message); // Hiển thị thông báo thành công
                             } else {
                                 toastr.error(data.message ||
-                                'Có lỗi xảy ra.'); // Hiển thị thông báo lỗi nếu có
+                                    'Có lỗi xảy ra.'); // Hiển thị thông báo lỗi nếu có
                             }
                         })
                         .catch(error => {
                             toastr.error(
-                            'Có lỗi xảy ra. Vui lòng thử lại.'); // Thông báo lỗi chung
+                                'Có lỗi xảy ra. Vui lòng thử lại.'); // Thông báo lỗi chung
                             console.error('Error:', error); // Để debug lỗi trên console
                         });
                 });

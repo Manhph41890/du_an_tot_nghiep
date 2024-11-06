@@ -128,7 +128,7 @@ class CartController extends Controller
             $discountedPrice = $product->gia_km ?? 0; // 
             $cartItem->price = ($variant->gia + $discountedPrice) * $request->quantity; // Tổng giá
         } else {
-            return redirect()->route('cart.index')->with('error', 'Biến thể sản phẩm không tồn tại.');
+            return back()->with('error', 'Biến thể sản phẩm không tồn tại.');
         }
 
         // Lưu thay đổi

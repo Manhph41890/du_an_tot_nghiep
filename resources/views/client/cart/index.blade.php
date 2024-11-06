@@ -170,7 +170,7 @@
                                             @php
                                                 $totalPrice = 0; // Khởi tạo biến tổng giá
                                                 foreach ($cartItems as $item) {
-                                                    $totalPrice += $item->price * $item->quantity; // Cộng dồn giá của từng sản phẩm
+                                                    $totalPrice += $item->price; // Cộng dồn giá của từng sản phẩm
                                                 }
                                             @endphp
                                             {{ number_format($totalPrice, 0, ',', '.') . ' đ' }}

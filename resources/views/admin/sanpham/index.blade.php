@@ -69,9 +69,7 @@
                                                 {{-- <th>Giá Gốc</th>
                                                 <th>Giá Khuyến Mãi</th> --}}
                                                 <th>Ảnh Sản Phẩm</th>
-
                                                 <th>Trạng Thái</th>
-
                                                 <th>Hành Động</th>
                                             </tr>
                                         </thead>
@@ -98,7 +96,6 @@
                                                             ? '<span class="badge bg-primary">Hiển Thị</span>'
                                                             : '<span class="badge bg-danger">Ẩn</span>' !!}
                                                     </td>
-
                                                     <td>
                                                         @if ($isAdmin)
                                                             <a href="{{ route('sanphams.show', $item->id) }}"
@@ -139,6 +136,21 @@
                                                                             <p><strong>Giá Khuyến Mãi:</strong>
                                                                                 {{ number_format($item->gia_km, 0, ',', '.') }}
                                                                                 VND</p>
+                                                                            <p><strong>Số Lượng:</strong>
+                                                                                {{ $item->so_luong }}</p>
+                                                                            <p><strong>Đánh giá:</strong>
+                                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                                    @if ($i <= $item->danhGia)
+                                                                                        <i
+                                                                                            class="mdi mdi-star text-warning"></i>
+                                                                                        <!-- Ngôi sao đầy -->
+                                                                                    @else
+                                                                                        <i
+                                                                                            class="mdi mdi-star-outline text-muted"></i>
+                                                                                        <!-- Ngôi sao rỗng -->
+                                                                                    @endif
+                                                                                @endfor
+                                                                            </p>
                                                                             <p><strong>Số Lượng:</strong>
                                                                                 {{ $item->so_luong }}</p>
                                                                             <p><strong>Trạng Thái:</strong>

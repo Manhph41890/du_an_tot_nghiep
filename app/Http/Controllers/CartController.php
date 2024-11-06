@@ -207,7 +207,12 @@ class CartController extends Controller
         $cartItems = $cart->cartItems;
         $total = $cart->cartItems->sum(fn($item) => $item->price * $item->quantity);
 
+        $shippingCost = 30000; // 30,000 VND
+
+        // Trừ phí vận chuyển vào tổng tiền
+        $totall = $total + $shippingCost;
+
         // Chuyển hướng về trang xác nhận đơn hàng và truyền biến $user vào view
-        return view('client.order.index', compact('user', 'cart', 'total', 'phuongThucThanhToans', 'phuongThucVanChuyens'))->with('success', 'Đặt hàng thành công!');
+        return view('client.order.index', compact('user', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens'))->with('success', 'Đặt hàng thành công!');
     }
 }

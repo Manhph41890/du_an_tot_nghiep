@@ -114,7 +114,7 @@
 
                                     <div class="form-group mb-3">
                                         <label for="ngay_sinh">Ngày sinh</label>
-                                        <input type="text" name="ngay_sinh" value="{{ old('ngay_sinh') }}"
+                                        <input type="date" name="ngay_sinh" value="{{ old('ngay_sinh') }}"
                                             class="form-control @error('ngay_sinh') is-invalid @enderror">
                                         @error('ngay_sinh')
                                             <div class="invalid-feedback">

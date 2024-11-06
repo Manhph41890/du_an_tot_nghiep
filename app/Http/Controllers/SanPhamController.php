@@ -34,9 +34,13 @@ class SanPhamController extends Controller
         if ($request->has('status') && $request->status != '') {
             $query->where('is_active', $request->status);
         }
+        // Lấy điểm số cao nhất cho mỗi sản phẩm
 
         $data = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color'])->paginate(10);
         $title = 'Danh sách sản phẩm';
+        foreach ($data as $item) {
+            $item->danhGia = $item->danh_gias()->avg('diem_so'); // Lấy điểm số cao nhất từ bảng danh_gias
+        }
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
         return view('admin.sanpham.index', compact('data', 'title', 'isAdmin'));
     }
@@ -63,6 +67,7 @@ class SanPhamController extends Controller
         try {
             // Lấy dữ liệu xác thực từ request
             $data_san_phams = $request->except('product_variants');
+
             // Xử lý ảnh sản phẩm chính
             if ($request->hasFile('anh_san_pham')) {
                 $file = $request->file('anh_san_pham');
@@ -73,8 +78,7 @@ class SanPhamController extends Controller
                     return back()->withErrors(['anh_san_pham' => 'File không hợp lệ']);
                 }
             } else {
-                // Nếu không có ảnh sản phẩm, set ảnh sản phẩm là null
-                $data_san_phams['anh_san_pham'] = null;
+                $data_san_phams['anh_san_pham'] = null;  // Nếu không có ảnh sản phẩm
             }
 
             // Tạo sản phẩm chính
@@ -82,35 +86,48 @@ class SanPhamController extends Controller
 
             // Xử lý biến thể sản phẩm và tổng số lượng
             $bien_the_san_phamsTmp = $request->input('product_variants', []);
-            $totalQuantity = 0; // 
+            $totalQuantity = 0;
+
+            // Tạo mảng để lưu trữ các cặp (size, color) đã kiểm tra
+            $checkedVariants = [];
 
             if (!empty($bien_the_san_phamsTmp['size_san_pham']) && !empty($bien_the_san_phamsTmp['color_san_pham'])) {
                 foreach ($bien_the_san_phamsTmp['size_san_pham'] as $key => $size_san_pham) {
-                    // Lấy kích thước từ form (ID đã được chọn từ dropdown)
-                    $size_san_pham_id = $bien_the_san_phamsTmp['size_san_pham'][$key]; // ID từ dropdown kích thước
+                    $size_san_pham_id = $bien_the_san_phamsTmp['size_san_pham'][$key];
+                    $color_san_pham_id = $bien_the_san_phamsTmp['color_san_pham'][$key];
 
-                    // Lấy màu sắc từ form (ID đã được chọn từ dropdown)
-                    $color_san_pham_id = $bien_the_san_phamsTmp['color_san_pham'][$key]; // ID từ dropdown màu sắc
-
-                    // Kiểm tra xem ID có hợp lệ không
                     if (!$size_san_pham_id || !$color_san_pham_id) {
                         return back()->withErrors(['product_variants' => 'Kích thước hoặc màu sắc không hợp lệ.']);
                     }
 
-                    // Lấy số lượng biến thể
+                    // Kiểm tra nếu cặp (size, color) đã tồn tại
+                    if (in_array([$size_san_pham_id, $color_san_pham_id], $checkedVariants)) {
+                        return back()->with('error', 'Biến thể với màu và kích thước không được trùng nhau.');
+                    }
+
+                    // Thêm cặp (size, color) vào mảng đã kiểm tra
+                    $checkedVariants[] = [$size_san_pham_id, $color_san_pham_id];
+
+                    // Kiểm tra trùng lặp biến thể theo size và color trong cơ sở dữ liệu
+                    $existingVariant = bien_the_san_pham::where('san_pham_id', $product->id)
+                        ->where('size_san_pham_id', $size_san_pham_id)
+                        ->where('color_san_pham_id', $color_san_pham_id)
+                        ->exists();
+
+                    if ($existingVariant) {
+                        return back()->withErrors(['product_variants' => 'Biến thể với màu và kích thước này đã tồn tại.']);
+                    }
+
                     $quantity = $bien_the_san_phamsTmp['so_luong'][$key] ?? 0;
-                    $totalQuantity += $quantity; // Cộng dồn số lượng biến thể
-                    // giá biến thể
+                    $totalQuantity += $quantity;
+
                     $giaBienThe = $bien_the_san_phamsTmp['gia'][$key] ?? 0;
 
-                    // Kiểm tra xem giá có hợp lệ không
                     if ($giaBienThe < 0) {
                         return back()->withErrors(['product_variants' => 'Giá biến thể không được nhỏ hơn 0']);
                     }
 
-                    // Xử lý file ảnh biến thể
-                    $anh_bien_the_path = null; // 
-
+                    $anh_bien_the_path = null;
                     if ($request->hasFile("product_variants.anh_bien_the.$key")) {
                         $anh_bien_the_file = $request->file("product_variants.anh_bien_the.$key");
                         if ($anh_bien_the_file->isValid()) {
@@ -121,7 +138,6 @@ class SanPhamController extends Controller
                         }
                     }
 
-                    // Tạo biến thể sản phẩm
                     bien_the_san_pham::create([
                         'san_pham_id' => $product->id,
                         'size_san_pham_id' => $size_san_pham_id,
@@ -133,12 +149,11 @@ class SanPhamController extends Controller
                 }
             }
 
-            // Cập nhật 
+            // Cập nhật số lượng sản phẩm
             $product->so_luong = $totalQuantity;
             $product->save();
 
             DB::commit();
-            // Chuyển hướng về trang create với thông báo thành công
             return redirect()->route('sanphams.create')->with('success', 'Sản phẩm đã được thêm thành công. Bạn có muốn thêm sản phẩm khác không?');
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -146,6 +161,9 @@ class SanPhamController extends Controller
             return back()->withErrors('Đã xảy ra lỗi khi thêm sản phẩm. Vui lòng thử lại.');
         }
     }
+
+
+
     private function handleImageUpload($request, $imageField)
     {
         if ($request->hasFile($imageField)) {

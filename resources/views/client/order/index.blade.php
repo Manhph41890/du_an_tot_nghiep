@@ -181,7 +181,7 @@
                             <div class="your-order-product-info">
                                 <ul class="d-flex justify-content-between">
                                     <li class="your-order-shipping">Tiền sản phẩm</li>
-                                    <li>{{ $total }}</li>
+                                    <li>{{ number_format($total)  }}</li>
                                 </ul>
                                 <hr>
                                 <ul class="d-flex justify-content-between">
@@ -200,7 +200,7 @@
                                     <ul class="d-flex justify-content-between">
                                         <li class="order-total font-weight-bold">Tổng cộng</li>
                                         <li class="font-weight-bold"><span
-                                                id="total-price-display">{{ $total }}</span></li>
+                                                id="total-price-display">{{ number_format($total)  }}</span></li>
                                     </ul>
                                 </div>
                             </div>

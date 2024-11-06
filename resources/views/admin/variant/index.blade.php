@@ -258,17 +258,17 @@
         </div>
     </div>
     <script>
-        // Lấy danh sách màu sắc và kích thước đã có từ server (ở đây là PHP Blade)
-        var existingColors = @json($colors->pluck('ma_mau'));
+        // Lấy danh sách màu sắc và kích thước đã có từ db
+        var existingColors = @json($colors->pluck('ten_color'));
         var existingSizes = @json($sizes->pluck('ten_size'));
 
         // Kiểm tra màu sắc trùng
         document.querySelector('form[action="{{ route('variants.colors.store') }}"]').addEventListener('submit', function(
             event) {
-            var newColor = document.querySelector('input[name="ma_mau"]').value;
+            var newColor = document.querySelector('input[name="ten_color"]').value;
             if (existingColors.includes(newColor)) {
                 event.preventDefault();
-                alert('Màu này đã tồn tại! Vui lòng nhập mã màu khác.');
+                alert('Màu này đã tồn tại! Vui lòng nhập màu khác.');
             }
         });
 

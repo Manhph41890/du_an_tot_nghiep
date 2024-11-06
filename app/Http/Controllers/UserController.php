@@ -65,8 +65,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+
+    public function store(Request $request) {
+        // dd($request);
         $params = $request->except('_token');
         if ($request->hasFile('anh_dai_dien')) {
             $img = $request->file('anh_dai_dien');

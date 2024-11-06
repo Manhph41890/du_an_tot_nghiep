@@ -77,9 +77,10 @@ class OrderController extends Controller
         $order->save();
 
         // Lưu chi tiết đơn hàng từ giỏ hàng
+        $orderId = $order->id; // Gán ID đơn hàng
         foreach ($cart->cartItems as $item) {
             $orderDetail = new chi_tiet_don_hang();
-            $orderDetail->don_hang_id = $order->id; // Gán ID đơn hàng
+            $orderDetail->don_hang_id = $orderId;
             $orderDetail->san_pham_id = $item->san_pham_id;
             $orderDetail->color_san_pham_id = $item->color_san_pham_id; // Gán ID màu cho chi tiết đơn hàng
             $orderDetail->size_san_pham_id = $item->size_san_pham_id; // Gán ID size cho chi tiết đơn hàng

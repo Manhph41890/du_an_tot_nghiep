@@ -129,7 +129,6 @@
                                     </div>
                                 </div>
 
-
                                 <!-- Phương thức thanh toán -->
                                 <div class="d-flex mt-25">
                                     <div class="">

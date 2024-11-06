@@ -58,10 +58,8 @@ class OrderController extends Controller
 
         $shippingCost = 30000; // 30,000 VND
 
-
         // Trừ phí vận chuyển vào tổng tiền
         $total += $shippingCost;
-
 
         // Tạo đơn hàng mới và lưu thông tin người dùng
         $order = new don_hang();

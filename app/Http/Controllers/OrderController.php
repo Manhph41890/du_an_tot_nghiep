@@ -24,7 +24,6 @@ class OrderController extends Controller
             'email' => 'required|email',
             'dia_chi' => 'required|string|max:255',
             'phuong_thuc_thanh_toan' => 'required|integer|exists:phuong_thuc_thanh_toans,id',
-            'phuong_thuc_van_chuyen' => 'required|integer|exists:phuong_thuc_van_chuyens,id',
             'khuyen_mai' => 'nullable|string|max:255',
         ]);
 
@@ -57,8 +56,8 @@ class OrderController extends Controller
             }
         }
 
-        $shippingMethod = phuong_thuc_van_chuyen::find($validatedData['phuong_thuc_van_chuyen']);
-        $shippingCost = $shippingMethod ? $shippingMethod->gia_ship : 0;
+        $shippingCost = 30000; // 30,000 VND
+
 
         // Trừ phí vận chuyển vào tổng tiền
         $total += $shippingCost;
@@ -73,7 +72,7 @@ class OrderController extends Controller
         $order->email = $user->email ?? $validatedData['email'];
         $order->dia_chi = $user->dia_chi ?? $validatedData['dia_chi'];
         $order->phuong_thuc_thanh_toan_id = $validatedData['phuong_thuc_thanh_toan'];
-        $order->phuong_thuc_van_chuyen_id = $validatedData['phuong_thuc_van_chuyen'];
+        $order->phuong_thuc_van_chuyen_id = 9;
         $order->ngay_tao = now();
         $order->tong_tien = $total;
         $order->trang_thai = 'Chờ xác nhận';

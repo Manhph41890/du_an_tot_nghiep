@@ -148,21 +148,7 @@
                                         @endforeach
                                     </div>
                                     <div class="ms-5">
-                                        <h6 class="font-weight-bold">Phương thức vận chuyển</h6>
-                                        @foreach ($phuongThucVanChuyens as $phuongThucVanChuyen)
-                                            <div class="form-check">
-                                                <input type="radio"
-                                                    id="shipping-{{ $phuongThucVanChuyen->kieu_van_chuyen }}"
-                                                    name="phuong_thuc_van_chuyen" class="form-check-input"
-                                                    value="{{ $phuongThucVanChuyen->id }}"
-                                                    {{ old('phuong_thuc_van_chuyen') == $phuongThucVanChuyen->id ? 'checked' : '' }}>
-                                                <label for="shipping-{{ $phuongThucVanChuyen->kieu_van_chuyen }}"
-                                                    class="form-check-label">
-                                                    {{ $phuongThucVanChuyen->kieu_van_chuyen }}
 
-                                                </label>
-                                            </div>
-                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -183,11 +169,12 @@
                                     <li class="your-order-shipping">Tiền sản phẩm</li>
                                     <li>{{ $total }}</li>
                                 </ul>
+
                                 <hr>
                                 <ul class="d-flex justify-content-between">
                                     <li class="your-order-shipping">Tiền vận chuyển</li>
                                     <li>
-
+                                        30.000
                                     </li>
                                 </ul>
                                 <ul class="d-flex justify-content-between">
@@ -200,7 +187,7 @@
                                     <ul class="d-flex justify-content-between">
                                         <li class="order-total font-weight-bold">Tổng cộng</li>
                                         <li class="font-weight-bold"><span
-                                                id="total-price-display">{{ $total }}</span></li>
+                                                id="total-price-display">{{ $totall }}</span></li>
                                     </ul>
                                 </div>
                             </div>

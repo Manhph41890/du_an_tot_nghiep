@@ -202,4 +202,12 @@
 @endsection
 
 @section('js')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputNgaySinh = document.querySelector("input[name='ngay_sinh']");
+        const today = new Date();
+        const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+        inputNgaySinh.max = eighteenYearsAgo.toISOString().split("T")[0];
+    });
+</script>
 @endsection

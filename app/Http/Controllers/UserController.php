@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\chuc_vu;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      */
     public function create() {
-    
+        
         $title = "Thêm mới nhân viên";
         $chuc_vus = chuc_vu::query()->pluck('ten_chuc_vu', 'id')->all();
         return view('admin.user.create', compact('title', 'chuc_vus'));
@@ -65,8 +66,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
-        // dd($request);
+    public function store(UserRequest $request) {
+        $request->validate([
+            'ngay_sinh' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->toDateString()],
+        ]);        
         $params = $request->except('_token');
         if($request->hasFile('anh_dai_dien')){
             $img = $request->file('anh_dai_dien');

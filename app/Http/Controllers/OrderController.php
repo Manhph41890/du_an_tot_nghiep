@@ -233,10 +233,4 @@ class OrderController extends Controller
 
         return view('client.order.success');
     }
-
-    public function myOrder()
-    {
-        $orders = Auth::user()->don_hangs;
-        return view('client.order.my_order', compact('orders'));
-    }
 }

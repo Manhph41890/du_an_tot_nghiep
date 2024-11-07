@@ -67,6 +67,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $params = $request->except('_token');
         if ($request->hasFile('anh_dai_dien')) {
             $img = $request->file('anh_dai_dien');

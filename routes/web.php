@@ -72,15 +72,6 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showRese
 Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('auth.update_password');
 
 
-
-
-
-
-
-
-
-
-
 // Route cho các chức năng quản lý (admin)
 Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     // Thống kê
@@ -146,7 +137,6 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
     Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
-    Route::post('/validate-coupon', [OrderController::class, 'validateCoupon'])->name('validate-coupon');
 
     Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');
 

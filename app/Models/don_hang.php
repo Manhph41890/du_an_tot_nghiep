@@ -21,7 +21,8 @@ class don_hang extends Model
         'so_dien_thoai',
         'ngay_tao',
         'tong_tien',
-        'trang_thai',
+        'trang_thai_don_hang',
+        'trang_thai_thanh_toan'
     ];
 
     protected $casts = [

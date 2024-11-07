@@ -38,11 +38,11 @@ class DonHangController extends Controller
 
         // Lọc theo trạng thái đơn hàng từ tab hiện tại
         if ($request->has('status') && !empty($request->status)) {
-            $query->where('trang_thai', $request->status);
+            $query->where('trang_thai_don_hang', $request->status);
         }
 
         // Lấy danh sách đơn hàng sau khi áp dụng bộ lọc
-        $donhangs = $query->get();
+        $donhangs = $query->latest('id')->paginate(6);
         $title = "Danh sách đơn hàng";
 
         return view('admin.donhang.index', compact('donhangs', 'title'));
@@ -88,7 +88,7 @@ class DonHangController extends Controller
         $donhang = don_hang::findOrFail($id);
 
         // Cập nhật trạng thái đơn hàng sang "Đã xác nhận"
-        $donhang->trang_thai = 'Đã xác nhận';
+        $donhang->trang_thai_don_hang = 'Đã xác nhận';
         $donhang->save();
 
         return redirect()->route('donhangs.index')->with('success', 'Đơn hàng đã được xác nhận thành công.');

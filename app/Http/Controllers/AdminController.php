@@ -448,7 +448,7 @@ class AdminController extends Controller
 
                 // lấy chi phí từ giá nhập
                 $tong_gia_nhap_tang = don_hang::whereMonth('ngay_tao', $thang)
-                    ->join('san_phams', 'don_hangs.san_pham_id', '=', 'san_phams.id')
+                    ->join('san_phams', 'don_hang.chi_tiet_don_hangs', '=', 'san_phams.id')
                     ->sum('san_phams.gia_nhap');
 
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang;

@@ -52,7 +52,7 @@
                                         @enderror
                                     </div> --}}
 
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label for="chuc_vu_id" class="form-label">Chức vụ</label>
                                         <select class="form-select @error('chuc_vu_id') is-invalid @enderror"
                                             name="chuc_vu_id" id="chuc_vu_id">
@@ -66,7 +66,17 @@
                                         @error('chuc_vu_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
-                                    </div>
+                                    </div> --}}
+
+                                    <div class="mb-3">
+                                        <label for="chuc_vu_id" class="form-label">Chức vụ</label>
+                                        <select class="form-select @error('chuc_vu_id') is-invalid @enderror" name="chuc_vu_id" id="chuc_vu_id">
+                                            <option value="3" selected>Nhân viên</option>
+                                        </select>
+                                        @error('chuc_vu_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>                                    
 
                                     <div class="form-group mb-3">
                                         <label for="ho_ten">Họ và tên</label>

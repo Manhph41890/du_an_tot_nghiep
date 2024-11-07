@@ -74,7 +74,7 @@ class UserController extends Controller
             $params['anh_dai_dien'] = $path;
         }
         User::create($params);
-        return redirect()->route('admin.user.index');
+        return redirect()->route('user.index');
     }
 
     /**

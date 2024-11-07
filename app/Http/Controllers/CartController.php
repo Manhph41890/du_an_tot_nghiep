@@ -44,18 +44,27 @@ class CartController extends Controller
             'san_pham_id' => 'required|exists:san_phams,id',
             'size_san_pham_id' => 'required|exists:size_san_phams,id',
             'color' => 'required|exists:color_san_phams,id',
-            'quantity' => 'required|integer|min:1|max:10',
+            'quantity' => 'required|integer|min:1|',
         ], [
             'san_pham_id.required' => 'Sản phẩm không hợp lệ.',
             'size_san_pham_id.required' => 'Vui lòng chọn size sản phẩm.',
             'color.required' => 'Vui lòng chọn màu sản phẩm.',
             'quantity.required' => 'Vui lòng nhập số lượng.',
             'quantity.integer' => 'Số lượng phải là số nguyên.',
-            'quantity.max' => 'Số lượng tối đa là 10.',
         ]);
 
         // Lấy thông tin sản phẩm
         $sanPham = san_pham::findOrFail($validatedData['san_pham_id']);
+
+        // Lấy thông tin biến thể sản phẩm
+        $variant = bien_the_san_pham::where('san_pham_id', $sanPham->id)
+            ->where('size_san_pham_id', $validatedData['size_san_pham_id'])
+            ->where('color_san_pham_id', $validatedData['color'])
+            ->first();
+
+        if (!$variant) {
+            return response()->json(['success' => false, 'message' => 'Biến thể sản phẩm không hợp lệ.']);
+        }
 
         // Lấy user_id của người dùng hiện tại
         $userId = auth()->id();
@@ -81,66 +90,62 @@ class CartController extends Controller
             $cartItem->size_san_pham_id = $validatedData['size_san_pham_id'];
             $cartItem->color_san_pham_id = $validatedData['color'];
             $cartItem->quantity = $validatedData['quantity'];
-            $cartItem->price = $sanPham->gia_km;
         }
+
+        // Tính giá cho sản phẩm khi thêm vào giỏ hàng
+        $discountedPrice = $sanPham->gia_km;  // Lấy giá khuyến mãi của sản phẩm
+        $variantPrice = $variant->gia;  // Lấy giá của biến thể sản phẩm
+
+        // Tính tổng giá cho sản phẩm (giá khuyến mãi + giá biến thể) * số lượng
+        $totalPrice = ($discountedPrice + $variantPrice) * $cartItem->quantity;
+        $cartItem->price = $totalPrice;
 
         // Lưu CartItem vào database
         $cartItem->save();
 
         // Trả về phản hồi JSON với thông báo thành công
-        return response()->json(['success' => true, 'message' => 'Sản phẩm đã được thêm vào giỏ hàng!']);
+        return response()->json(['success' => true, 'message' => 'Sản phẩm đã được thêm vào giỏ hàng!', 'total_price' => $totalPrice]);
     }
+
+
 
 
 
 
     public function update(Request $request, $id)
     {
-        // Xác thực dữ liệu đầu vào
         $request->validate([
             'size_san_pham_id' => 'required|exists:size_san_phams,id',
             'color_san_pham_id' => 'required|exists:color_san_phams,id',
             'quantity' => 'required|integer|min:1',
         ]);
 
-        // Tìm giỏ hàng dựa trên ID
         $cartItem = CartItem::findOrFail($id);
         $cartItem->size_san_pham_id = $request->size_san_pham_id;
         $cartItem->color_san_pham_id = $request->color_san_pham_id;
         $cartItem->quantity = $request->quantity;
 
-        // Tìm biến thể sản phẩm dựa trên các thông tin
         $variant = bien_the_san_pham::where('san_pham_id', $cartItem->san_pham_id)
             ->where('size_san_pham_id', $request->size_san_pham_id)
             ->where('color_san_pham_id', $request->color_san_pham_id)
             ->first();
 
-        // Kiểm tra nếu biến thể sản phẩm tồn tại và số lượng không vượt quá tồn kho
         if ($variant) {
             if ($request->quantity > $variant->so_luong) {
                 return back()->withErrors(['quantity' => 'Số lượng không được vượt quá ' . $variant->so_luong . ' sản phẩm.']);
             }
 
-            // Lấy thông tin sản phẩm từ bảng san_phams
             $product = san_pham::find($cartItem->san_pham_id);
-
-            // Cập nhật giá bằng giá biến thể cộng với giá khuyến mãi từ sản phẩm
-            $discountedPrice = $product->gia_km ?? 0; // 
-            $cartItem->price = ($variant->gia + $discountedPrice) * $request->quantity; // Tổng giá
+            $discountedPrice = $product->gia_km ?? 0;
+            $cartItem->price = ($variant->gia + $discountedPrice) * $request->quantity;
         } else {
             return back()->with('error', 'Biến thể sản phẩm không tồn tại.');
         }
 
-        // Lưu thay đổi
         $cartItem->save();
 
-        // Trả về với thông báo thành công
-        return redirect()->route('cart.index')->with('success', 'Giỏ hàng đã được cập nhật thành công!');
+        return redirect()->back()->with('success', 'Giỏ hàng đã được cập nhật thành công!');
     }
-
-
-
-
     // Xóa sản phẩm khỏi giỏ hàng
     public function removeFromCart($id)
     {

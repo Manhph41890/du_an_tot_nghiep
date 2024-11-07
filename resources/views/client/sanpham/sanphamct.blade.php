@@ -103,8 +103,11 @@
                         </div>
                         <div class="product-body mb-40">
                             <div class="d-flex align-items-center mb-30">
-                                <span class="product-price me-2"><del class="del">{{ $sanPhamCT->gia_goc }}</del>
-                                    <span class="onsale">{{ $sanPhamCT->gia_km }}</span></span>
+                                <div class="product-price me-2">
+                                    <del class="del">{{ $sanPhamCT->gia_goc }}</del>
+                                    <span id="new-price" class="onsale">{{ $sanPhamCT->gia_km }}</span>
+                                    <!-- Giá cập nhật sẽ được hiển thị ở đây -->
+                                </div>
                                 <span class="badge position-static bg-dark rounded-0">Giảm
                                     {{ $sanPhamCT->phan_tram_giam_gia }}%</span>
                             </div>
@@ -168,10 +171,17 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
-                                            <span class="me-2"><i class="ion-android-add"></i></span>
-                                            Thêm vào giỏ hàng
-                                        </button>
+                                        @auth
+                                            <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
+                                                <span class="me-2"><i class="ion-android-add"></i></span> Thêm vào giỏ hàng
+                                            </button>
+                                        @endauth
+                                        @guest
+                                            <button type="button" class="btn btn-dark btn--xl mt-5 mt-sm-0"
+                                                onclick="promptLogin()">
+                                                <span class="me-2"><i class="ion-android-add"></i></span> Thêm vào giỏ hàng
+                                            </button>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
@@ -409,7 +419,6 @@
             </div>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Hàm lọc màu sắc khi chọn size
         document.getElementById('size_san_pham_id{{ $sanPhamCT->id }}').addEventListener('change', function() {
@@ -451,7 +460,6 @@
 
                     const formData = new FormData(form); // Lấy dữ liệu của form
                     const url = form.getAttribute('action');
-
                     fetch(url, {
                             method: 'POST',
                             headers: {
@@ -477,22 +485,13 @@
                         })
                         .catch(error => {
                             toastr.error(
-                                'Có lỗi xảy ra. Vui lòng thử lại.'); // Thông báo lỗi chung
+                                'Đã xảy ra lỗi khi thêm vào giỏ hàng. Vui lòng kiểm tra lại.'
+                            ); // Thông báo lỗi chung
                             console.error('Error:', error); // Để debug lỗi trên console
                         });
                 });
             });
         });
-
-        // Cấu hình toastr
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "timeOut": "3000"
-        };
-
-
 
         // Hàm tăng số lượng
         function incrementQuantity() {
@@ -546,6 +545,20 @@
                 console.log("Selected rating:", rating);
             });
         });
+
+        function promptLogin() {
+            // toastr.options = {
+            //     "closeButton": true,
+            //     "progressBar": true,
+            //     "positionClass": "toast-top-right",
+            //     "timeOut": "3000",
+            // };
+            toastr.warning("Bạn cần đăng nhập hoặc đăng ký để thêm sản phẩm vào giỏ hàng.");
+
+            // setTimeout(function() {
+            //     window.location.href = "{{ route('auth.login') }}";
+            // }, 1000);
+        }
     </script>
     <style>
         .rating-product i {

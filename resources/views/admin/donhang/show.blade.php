@@ -96,8 +96,12 @@
 
                                 <div class="card">
                                     <div class="card-body">
+                                        <p><strong class="pe-1">Tổng tiền sản phẩm</strong>
+                                            {{ number_format($donhang->chi_tiet_don_hangs->sum('thanh_tien'), 0, ',', '.') }}
+                                            VND
+                                        </p>
                                         <p><strong class="pe-1">Giảm
-                                                giá:</strong>-
+                                                giá:</strong>
                                             {{ number_format($donhang->khuyen_mai?->gia_tri_khuyen_mai ?? 0, 0, ',', '.') }}VND
                                         </p>
                                         <p><strong class="pe-1">Vận

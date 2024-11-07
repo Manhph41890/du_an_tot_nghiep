@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\chuc_vu;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-         $title = "Quản lý User";
+        $title = "Quản lý User";
         $query = User::with('chuc_vu'); // Nạp dữ liệu chức vụ cùng với người dùng
         $params['chucVus'] = chuc_vu::all();
         // Lọc trạng thái nếu có
@@ -46,16 +47,16 @@ class UserController extends Controller
 
         $title = "Người Dùng";
         // $params = [];
-      
+
         $params['title'] = $title;
         $params['list'] = $query->get(); // Lấy danh sách người dùng
-        return view('admin.user.index', $params   , compact('title'));
+        return view('admin.user.index', $params, compact('title'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
+    public function create() { 
         $title = "Thêm mới nhân viên";
         $chuc_vus = chuc_vu::query()->pluck('ten_chuc_vu', 'id')->all();
         return view('admin.user.create', compact('title', 'chuc_vus'));
@@ -64,15 +65,16 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
+    public function store(UserRequest $request) {
+              
         $params = $request->except('_token');
-        if($request->hasFile('anh_dai_dien')){
+        if ($request->hasFile('anh_dai_dien')) {
             $img = $request->file('anh_dai_dien');
             $path = $img->store('images', 'public');
             $params['anh_dai_dien'] = $path;
         }
         User::create($params);
-        return redirect()->route('admin.user.index');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -99,7 +101,7 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-    {   
+    {
         // Validate dữ liệu từ form
         $request->validate([
             'ho_ten' => 'required|string|max:255',
@@ -137,7 +139,8 @@ class UserController extends Controller
         // Trả về phản hồi thành công
         return response()->json(['success' => 'Cập nhật thành công']);
     }
-    public function updatechucvu(Request $request, $userId){
+    public function updatechucvu(Request $request, $userId)
+    {
         $request->validate([
             'chuc_vu_id' => 'required|string|max:255'
         ]);

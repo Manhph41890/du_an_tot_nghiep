@@ -338,7 +338,7 @@ class AdminController extends Controller
             for ($thang = 1; $thang <= 12; $thang++) {
                 // Tính tổng tiền của đơn hàng theo tháng
                 $tt_dh_tang = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
-                    ->whereMonth('ngay_tao', $thang)->where('trang_thai','=','Thành công')->sum('tong_tien');
+                    ->whereMonth('ngay_tao', $thang)->where('trang_thai', '=', 'Thành công')->sum('tong_tien');
 
                 // Lấy chi phí từ giá nhập
                 $tong_gia_nhap_tang = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
@@ -348,8 +348,6 @@ class AdminController extends Controller
                     ->sum('san_phams.gia_nhap');
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang;
             }
-
-            
         } else if ($request->isMethod('get') && $request->input('loc_ngay_thang_quy_nam_bieudo')) {
 
             // Biểu đồ DOANH THU-------------------
@@ -381,17 +379,16 @@ class AdminController extends Controller
             $loi_nhuan_theo_thang = [];
             for ($thang = 1; $thang <= 12; $thang++) {
                 // Tính tổng tiền của đơn hàng theo tháng
-                $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)->where('trang_thai','=','Thành công')->sum('tong_tien');
+                $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)->where('trang_thai', '=', 'Thành công')->sum('tong_tien');
 
                 // lấy chi phí từ giá nhập
                 $tong_gia_nhap_tang = don_hang::whereMonth('ngay_tao', $thang)
-                ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
-                ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
-                ->sum('san_phams.gia_nhap');
+                    ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
+                    ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
+                    ->sum('san_phams.gia_nhap');
 
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang;
             }
-
         } else {
             // Biểu đồ DOANH THU-------------------
             $tongTienThang = [];
@@ -413,7 +410,7 @@ class AdminController extends Controller
             $loi_nhuan_theo_thang = [];
             for ($thang = 1; $thang <= 12; $thang++) {
                 // Tính tổng tiền của đơn hàng theo tháng
-                $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)->where('trang_thai','=','Thành công')->sum('tong_tien');
+                $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)->where('trang_thai', '=', 'Thành công')->sum('tong_tien');
 
                 // lấy chi phí từ giá nhập
                 $tong_gia_nhap_tang = don_hang::whereMonth('ngay_tao', $thang)
@@ -427,17 +424,21 @@ class AdminController extends Controller
 
 
         // Đơn hàng mới
-        $donhangs = don_hang::query()->orderBy('id', 'desc')->paginate(5);
+        $donhangs = don_hang::query()
+            ->whereDate('ngay_tao', Carbon::today())
+            ->orderBy('id', 'desc')
+            ->paginate(4);
         foreach ($donhangs as $item) {
             $item->ngay_tao = Carbon::parse($item->ngay_tao)->format('d-m-Y');
+            $item->tong_tien = number_format($item->tong_tien, 0, ',', '.');
         }
 
 
         // Sản phẩm sắp hết hàng
-        $sanphams_saphet = san_pham::query()->where('so_luong', '<', '10')->get();
+        $sanphams_saphet = san_pham::query()->where('so_luong', '<', '10')->paginate(4);
         // Lấy 5 sản phẩm có lượt xem nhiều nhất
         $query = san_pham::query();
-        $views_product = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color'])->orderBy('views', 'desc')->paginate(5);
+        $views_product = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color'])->orderBy('views', 'desc')->paginate(4);
 
         if (intval($tong_tien_tat_ca_don_hang) == $tong_tien_tat_ca_don_hang || intval($tongtien_donhangs_new) == $tongtien_donhangs_new) {
             // Nếu tổng tiền là số nguyên (không có phần thập phân), hiển thị dạng không có phần thập phân

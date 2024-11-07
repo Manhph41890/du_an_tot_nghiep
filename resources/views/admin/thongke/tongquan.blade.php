@@ -480,7 +480,7 @@
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                         <i data-feather="tablet" class="widgets-icons"></i>
                                     </div>
-                                    <h5 class="card-title mb-0">Đơn hàng mới nhất</h5>
+                                    <h5 class="card-title mb-0">Đơn hàng mới nhất hôm nay</h5>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -494,43 +494,41 @@
                                                 <th scope="col">Địa chỉ giao hàng</th>
                                                 <th scope="col">Ngày tạo đơn hàng</th>
                                                 <th scope="col">Tổng tiền</th>
+                                                <th scope="col">Trạng thái</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($donhangs as $item)
+                                            @if ($donhangs->count() > 0)
+                                                @foreach ($donhangs as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
+                                                        <td>{{ $item->so_dien_thoai }}</td>
+                                                        <td>{{ $item->dia_chi }}</td>
+                                                        <td>{{ $item->ngay_tao }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $item->tong_tien }}
+                                                            Vnđ
+                                                        </td>
+                                                        <td>{{ $item->trang_thai }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
                                                 <tr>
-                                                    <td>{{ $item->id }}</td>
-                                                    <td>{{ $item->user?->ho_ten }}</td>
-                                                    <td>{{ $item->so_dien_thoai }}</td>
-                                                    <td>{{ $item->dia_chi }}</td>
-                                                    <td>{{ $item->ngay_tao }}</td>
-                                                    <td>
-                                                        @php
-                                                            $tong_tien = $item->tong_tien;
-                                                            if (intval($tong_tien) == $tong_tien) {
-                                                                // Nếu tổng tiền là số nguyên
-                                                                echo number_format($tong_tien, 0, ',', '.');
-                                                            } elseif (floor($tong_tien) == $tong_tien) {
-                                                                // Nếu tổng tiền có dạng như 200000.00
-                                                                echo number_format($tong_tien, 0, ',', '.');
-                                                            } else {
-                                                                // Nếu tổng tiền có phần thập phân khác .00
-                                                                echo number_format($tong_tien, 2, ',', '.');
-                                                            }
-                                                        @endphp
-                                                        Vnđ
-                                                    </td>
+                                                    <td colspan="8" class="text-center">Chưa có đơn hàng nào</td>
                                                 </tr>
-                                            @endforeach
+                                            @endif
+
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            {{ $donhangs->links() }}
                         </div>
                     </div>
                     <div class="col-md-12 col-xl-12">
                         <div class="card">
-
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
@@ -581,7 +579,7 @@
                                     </tbody>
                                 </table>
                             </div>
-
+                            {{ $views_product->links() }}
                         </div>
                     </div>
                 </div>
@@ -640,7 +638,7 @@
                                     </tbody>
                                 </table>
                             </div>
-
+                            {{ $sanphams_saphet->links() }}
                         </div>
                     </div>
                 </div>

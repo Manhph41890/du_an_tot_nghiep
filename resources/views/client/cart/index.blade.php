@@ -114,8 +114,7 @@
                                                 <span class="whish-title">{{ $item->quantity }}</span>
                                             </td> --}}
                                             <td class="text-center">
-                                                <span
-                                                    class="whish-list-price">{{ number_format($item->price)}}
+                                                <span class="whish-list-price">{{ number_format($item->price) }}
                                                     đ</span>
                                             </td>
                                             <td class="text-center">

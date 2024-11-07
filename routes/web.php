@@ -73,14 +73,6 @@ Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']
 
 
 
-
-
-
-
-
-
-
-
 // Route cho các chức năng quản lý (admin)
 Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     // Thống kê

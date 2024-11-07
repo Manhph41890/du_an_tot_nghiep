@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bai_viet;
+use App\Models\bien_the_san_pham;
 use App\Models\danh_muc;
 use App\Models\san_pham;
 use Illuminate\Http\Request;
@@ -82,6 +83,7 @@ class HomeController extends Controller
 
         // Lấy các sản phẩm liên quan
         $sanLienQuan = san_pham::with('danh_muc')->where('id', '!=', $id)->orderByDesc('id')->get();
+
 
         // Tiêu đề trang
         $title = $sanPhamCT->ten_san_pham;

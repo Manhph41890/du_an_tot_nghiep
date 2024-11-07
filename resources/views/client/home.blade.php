@@ -246,8 +246,7 @@
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a
-                                                                    href="{{ route('san-phams.incrementViews', $item->id) }}">
+                                                                <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                                     {{ $item->ten_san_pham }}
                                                                 </a>
                                                             </h3>
@@ -259,7 +258,8 @@
                                                                 <span class="ion-ios-star de-selected"></span>
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span class="product-price">{{number_format($item-> gia_goc)  }}</span>
+                                                                <span
+                                                                    class="product-price">{{ number_format($item->gia_goc) }}</span>
                                                                 {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                                     data-bs-target="#add-to-cart">
                                                                     <i class="icon-basket"></i>
@@ -359,9 +359,9 @@
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <div class="price-wrapper">
                                                                     <span
-                                                                        class="product-price me-2">{{ number_format($sanPhamGg->gia_goc)  }}</span>
+                                                                        class="product-price me-2">{{ number_format($sanPhamGg->gia_goc) }}</span>
                                                                     <span
-                                                                        class="text-decoration-line-through text-muted">{{ number_format($sanPhamGg->gia_km)  }}</span>
+                                                                        class="text-decoration-line-through text-muted">{{ number_format($sanPhamGg->gia_km) }}</span>
                                                                 </div>
                                                                 {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                                     data-bs-target="#add-to-cart">
@@ -436,7 +436,7 @@
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <span
-                                                                    class="product-price">{{ number_format($sanphamview->gia_goc)  }}</span>
+                                                                    class="product-price">{{ number_format($sanphamview->gia_goc) }}</span>
                                                                 {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                                 data-bs-target="#add-to-cart">
                                                                 <i class="icon-basket"></i>
@@ -536,7 +536,8 @@
                                                         <span class="ion-ios-star de-selected"></span>
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span class="product-price">{{ number_format($sanphamview->gia_goc)  }}</span>
+                                                        <span
+                                                            class="product-price">{{ number_format($sanphamview->gia_goc) }}</span>
                                                         {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                     data-bs-target="#add-to-cart">
                                                     <i class="icon-basket"></i>
@@ -870,5 +871,4 @@
         </div>
     </div>
     <!-- modals end -->
-
 @endsection

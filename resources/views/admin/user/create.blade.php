@@ -41,33 +41,6 @@
                                 <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
 
-                                    {{-- <div class="form-group mb-3">
-                                        <label for="chuc_vu_id">Chức vụ</label>
-                                        <input type="text" name="chuc_vu_id" value="{{ old('chuc_vu_id') }}"
-                                            class="form-control @error('chuc_vu_id') is-invalid @enderror">
-                                        @error('chuc_vu_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div> --}}
-
-                                    {{-- <div class="mb-3">
-                                        <label for="chuc_vu_id" class="form-label">Chức vụ</label>
-                                        <select class="form-select @error('chuc_vu_id') is-invalid @enderror"
-                                            name="chuc_vu_id" id="chuc_vu_id">
-                                            <option value="">Chọn danh mục</option>
-                                            @foreach ($chuc_vus as $id => $ten_chuc_vu)
-                                                <option value="{{ $id }}"
-                                                    {{ old('chuc_vu_id') == $id ? 'selected' : '' }}>
-                                                    {{ $ten_chuc_vu }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('chuc_vu_id')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div> --}}
-
                                     <div class="mb-3">
                                         <label for="chuc_vu_id" class="form-label">Chức vụ</label>
                                         <select class="form-select @error('chuc_vu_id') is-invalid @enderror" name="chuc_vu_id" id="chuc_vu_id">
@@ -167,26 +140,28 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="is_active">Trạng thái</label>
-                                        <div class="d-flex gap-2">
+                                        <label for="trang_thai" class="form-label">Trạng thái</label>
+                                        <div class="col-sm-10 mb-3 d-flex gap-2">
                                             <div class="form-check">
-                                                <input class="form-check-input @error('is_active') is-invalid @enderror"
-                                                    type="radio" name="is_active" value="0"
-                                                    {{ old('is_active') == 0 ? 'checked' : '' }}>
-                                                <label for="is_active">Hiển thị</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input @error('is_active') is-invalid @enderror"
-                                                    type="radio" name="is_active" value="1"
+                                                <input class="form-check-input" type="radio" name="is_active"
+                                                    id="trang_thai_show" value="1"
                                                     {{ old('is_active') == 1 ? 'checked' : '' }}>
-                                                <label for="is_active">Ẩn</label>
+                                                <label class="form-check-label text-success" for="trang_thai_show">Hiển
+                                                    thị</label>
                                             </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="is_active"
+                                                    value="0" id="trang_thai_hide"
+                                                    {{ old('is_active') == 0 ? 'checked' : '' }}>
+                                                <label class="form-check-label text-danger"
+                                                    for="trang_thai_hide">Ẩn</label>
+                                            </div>
+                                            @error('is_active')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
-                                        @error('is_active')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Thêm</button>
@@ -202,12 +177,5 @@
 @endsection
 
 @section('js')
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const inputNgaySinh = document.querySelector("input[name='ngay_sinh']");
-        const today = new Date();
-        const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-        inputNgaySinh.max = eighteenYearsAgo.toISOString().split("T")[0];
-    });
-</script>
+
 @endsection

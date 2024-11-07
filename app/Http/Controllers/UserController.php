@@ -67,9 +67,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(UserRequest $request) {
-        $request->validate([
-            'ngay_sinh' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->toDateString()],
-        ]);        
+              
         $params = $request->except('_token');
         if($request->hasFile('anh_dai_dien')){
             $img = $request->file('anh_dai_dien');

@@ -137,6 +137,7 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
     Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+    Route::get('/order/myorder', [OrderController::class, 'myorder'])->name('order.myorder');
 
     Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');
 

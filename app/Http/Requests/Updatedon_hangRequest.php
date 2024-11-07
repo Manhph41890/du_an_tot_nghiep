@@ -34,7 +34,7 @@ class Updatedon_hangRequest extends FormRequest
             'email' => 'nullable|email|max:255',
             'so_dien_thoai' => 'nullable|string|max:15',
             'dia_chi' => 'nullable|string|max:255',
-            'trang_thai' => 'nullable|in:Chờ xác nhận,Đã xác nhận,Đang chuẩn bị hàng,Đang vận chuyển,Đã giao,Thành công,Đã hủy',
+            'trang_thai_don_hang' => 'nullable|in:Chờ xác nhận,Đã xác nhận,Đang chuẩn bị hàng,Đang vận chuyển,Đã giao,Thành công,Đã hủy',
         ];
     }
 }

@@ -109,7 +109,6 @@ class DonHangController extends Controller
      */
     public function update(Updatedon_hangRequest $request, don_hang $don_hang, $id)
     {
-        // dd($request->all());
         DB::beginTransaction();
         try {
             $donhang = don_hang::findOrFail($id);
@@ -117,14 +116,20 @@ class DonHangController extends Controller
             // Lấy toàn bộ dữ liệu từ form dưới dạng mảng
             $data_don_hang = $request->all();
 
-            // Tạo bản ghi mới trong bảng bai_viet
+            // Kiểm tra nếu `trang_thai_don_hang` là "thành công"
+            if (isset($data_don_hang['trang_thai_don_hang']) && $data_don_hang['trang_thai_don_hang'] === 'Thành công') {
+                // Cập nhật `trang_thai_thanh_toan` thành "Đã thanh toán"
+                $data_don_hang['trang_thai_thanh_toan'] = 'Đã thanh toán';
+            }
+
+            // Cập nhật bản ghi trong bảng don_hang
             $donhang->update($data_don_hang);
 
             DB::commit();
             return redirect()->route('donhangs.index')->with('success', 'Đơn hàng đã được cập nhật thành công.');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Đã xảy ra lỗi khi thêm bai viet.');
+            return back()->with('error', 'Đã xảy ra lỗi khi cập nhật đơn hàng.');
         }
     }
     /**

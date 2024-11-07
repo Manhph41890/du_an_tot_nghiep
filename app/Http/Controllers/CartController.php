@@ -209,7 +209,7 @@ class CartController extends Controller
 
         $shippingCost = 30000; // 30,000 VND
 
-        // Trừ phí vận chuyển vào tổng tiền
+        // Trừ phí vận chuyển vào tổng tiền 
         $totall = $total + $shippingCost;
 
         // Chuyển hướng về trang xác nhận đơn hàng và truyền biến $user vào view

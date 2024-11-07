@@ -131,6 +131,9 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="page mt-3">
+                                {{ $donhangs->links() }}
+                            </div>
                         </div>
                     </div>
                 </div> <!-- container-fluid -->

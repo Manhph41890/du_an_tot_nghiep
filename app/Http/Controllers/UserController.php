@@ -56,7 +56,8 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() { 
+    public function create()
+    {
         $title = "Thêm mới nhân viên";
         $chuc_vus = chuc_vu::query()->pluck('ten_chuc_vu', 'id')->all();
         return view('admin.user.create', compact('title', 'chuc_vus'));
@@ -65,8 +66,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request) {
-              
+    public function store(UserRequest $request)
+    {
+
         $params = $request->except('_token');
         if ($request->hasFile('anh_dai_dien')) {
             $img = $request->file('anh_dai_dien');

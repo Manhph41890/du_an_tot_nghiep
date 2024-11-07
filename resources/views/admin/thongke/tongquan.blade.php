@@ -210,16 +210,8 @@
                                                 <input type="radio" class="form-check-input" id="radio1"
                                                     name="optradio" value="option1" checked
                                                     onclick="showTab('home');hideMonthInput();">Doanh
-                                                thu
+                                                thu & lợi nhuận
                                                 <label class="form-check-label" for="radio1"></label>
-                                            </div>
-                                        </div>
-                                        <div class="me-3">
-                                            <div class="form-check">
-                                                <input type="radio" class="form-check-input" id="radio2"
-                                                    name="optradio" value="option2"
-                                                    onclick="showTab('menu1');hideMonthInput();">Lợi nhuận
-                                                <label class="form-check-label" for="radio2"></label>
                                             </div>
                                         </div>
                                         <div class="me-0">
@@ -275,146 +267,150 @@
 
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div class="tab-pane container active" id="home" style="opacity: 1;">
-                                    <div class="card-body">
-                                        <canvas id="myChart1"></canvas>
-                                        <script>
-                                            var ctx = document.getElementById('myChart1').getContext('2d');
-                                            var myChart = new Chart(ctx, {
-                                                type: 'bar',
-                                                data: {
-                                                    labels: [
+                                <div class="tab-pane active" id="home" style="opacity: 1;">
+                                    <div class="row">
+                                        <div class="col-6 container">
+                                            <div class="card-body">
+                                                <canvas id="myChart1"></canvas>
+                                                <script>
+                                                    var ctx = document.getElementById('myChart1').getContext('2d');
+                                                    var myChart = new Chart(ctx, {
+                                                        type: 'bar',
+                                                        data: {
+                                                            labels: [
+                                                                @foreach ($labels as $label)
+                                                                    '{{ $label }}',
+                                                                @endforeach
+                                                            ],
+                                                            datasets: [{
+                                                                label: 'Doanh thu',
+                                                                data: [
+                                                                    @foreach ($tongTienThang as $tongTien)
+                                                                        {{ $tongTien }},
+                                                                    @endforeach
+                                                                ],
+                                                                backgroundColor: [
+                                                                    'rgba(255, 99, 132, 0.2)'
+                                                                ],
+                                                                borderColor: [
+                                                                    'rgba(255, 99, 132, 1)'
+                                                                ],
+                                                                borderWidth: 2,
+                                                                fill: false
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            scales: {
+                                                                y: {
+                                                                    beginAtZero: true
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 container">
+                                            <div class="card-body">
+                                                <canvas id="myChart3"></canvas>
+
+                                                <script>
+                                                    var ctx = document.getElementById('myChart3').getContext('2d');
+
+                                                    var profitData = [
+                                                        @foreach ($loi_nhuan_theo_thang as $ln)
+                                                            {{ $ln }}{{ !$loop->last ? ',' : '' }}
+                                                        @endforeach
+                                                    ];
+
+                                                    var labels = [
                                                         @foreach ($labels as $label)
                                                             '{{ $label }}',
                                                         @endforeach
-                                                    ],
-                                                    datasets: [{
-                                                        label: 'Doanh thu',
-                                                        data: [
-                                                            @foreach ($tongTienThang as $tongTien)
-                                                                {{ $tongTien }},
-                                                            @endforeach
-                                                        ],
-                                                        backgroundColor: [
-                                                            'rgba(255, 99, 132, 0.2)'
-                                                        ],
-                                                        borderColor: [
-                                                            'rgba(255, 99, 132, 1)'
-                                                        ],
-                                                        borderWidth: 2,
-                                                        fill: false
-                                                    }]
-                                                },
-                                                options: {
-                                                    scales: {
-                                                        y: {
-                                                            beginAtZero: true
-                                                        }
-                                                    }
-                                                }
-                                            });
-                                        </script>
-                                    </div>
-                                </div>
-                                <div class="tab-pane container fade" id="menu1" style="opacity: 1;">
-                                    <div class="card-body">
-                                        <canvas id="myChart3"></canvas>
+                                                    ];
 
-                                        <script>
-                                            var ctx = document.getElementById('myChart3').getContext('2d');
-
-                                            var profitData = [
-                                                @foreach ($loi_nhuan_theo_thang as $ln)
-                                                    {{ $ln }}{{ !$loop->last ? ',' : '' }}
-                                                @endforeach
-                                            ];
-
-                                            var labels = [
-                                                @foreach ($labels as $label)
-                                                    '{{ $label }}',
-                                                @endforeach
-                                            ];
-
-                                            var myChart = new Chart(ctx, {
-                                                type: 'line',
-                                                data: {
-                                                    labels: labels,
-                                                    datasets: [{
-                                                        label: function(context) {
-                                                            let data = context.raw;
-                                                            return data >= 0 ? 'Lãi' : 'Âm';
-                                                        },
-                                                        data: profitData,
-                                                        borderWidth: 2,
-                                                        fill: false,
-                                                        pointBackgroundColor: function(context) {
-                                                            var value = context.dataset.data[context.dataIndex];
-                                                            return value >= 0 ? '#00FF00' :
-                                                                '#FF0000';
-                                                        },
-                                                        pointBorderColor: function(context) {
-                                                            var value = context.dataset.data[context.dataIndex];
-                                                            return value >= 0 ? '#00FF00' :
-                                                                '#FF0000';
-                                                        },
-                                                        pointRadius: 5,
-                                                        pointHoverRadius: 7,
-                                                        borderColor: function(context) {
-                                                            var value = context.dataset.data[context.dataIndex];
-                                                            return value >= 0 ? '#00FF00' :
-                                                                '#FF0000';
-                                                        },
-                                                        segment: {
-                                                            borderColor: ctx => {
-                                                                const index = ctx.p0DataIndex;
-                                                                const value = ctx.chart.data.datasets[0].data[index];
-                                                                return value >= 0 ? '#00FF00' : '#FF0000';
-                                                            }
-                                                        }
-                                                    }]
-                                                },
-                                                options: {
-                                                    scales: {
-                                                        y: {
-                                                            beginAtZero: true
-                                                        }
-                                                    },
-                                                    elements: {
-                                                        point: {
-                                                            radius: 5
-                                                        }
-                                                    },
-                                                    plugins: {
-                                                        tooltip: {
-                                                            callbacks: {
+                                                    var myChart = new Chart(ctx, {
+                                                        type: 'line',
+                                                        data: {
+                                                            labels: labels,
+                                                            datasets: [{
                                                                 label: function(context) {
-                                                                    let value = context.raw;
-                                                                    return value >= 0 ? `Lãi: ${value}` : `Âm: ${value}`;
+                                                                    let data = context.raw;
+                                                                    return data >= 0 ? 'Lãi' : 'Âm';
+                                                                },
+                                                                data: profitData,
+                                                                borderWidth: 2,
+                                                                fill: false,
+                                                                pointBackgroundColor: function(context) {
+                                                                    var value = context.dataset.data[context.dataIndex];
+                                                                    return value >= 0 ? '#00FF00' :
+                                                                        '#FF0000';
+                                                                },
+                                                                pointBorderColor: function(context) {
+                                                                    var value = context.dataset.data[context.dataIndex];
+                                                                    return value >= 0 ? '#00FF00' :
+                                                                        '#FF0000';
+                                                                },
+                                                                pointRadius: 5,
+                                                                pointHoverRadius: 7,
+                                                                borderColor: function(context) {
+                                                                    var value = context.dataset.data[context.dataIndex];
+                                                                    return value >= 0 ? '#00FF00' :
+                                                                        '#FF0000';
+                                                                },
+                                                                segment: {
+                                                                    borderColor: ctx => {
+                                                                        const index = ctx.p0DataIndex;
+                                                                        const value = ctx.chart.data.datasets[0].data[index];
+                                                                        return value >= 0 ? '#00FF00' : '#FF0000';
+                                                                    }
                                                                 }
-                                                            }
+                                                            }]
                                                         },
-                                                        legend: {
-                                                            display: true,
-                                                            labels: {
-                                                                generateLabels: function(chart) {
-                                                                    return [{
-                                                                        text: 'Lãi',
-                                                                        fillStyle: '#00FF00',
-                                                                        strokeStyle: '#00FF00'
-                                                                    }, {
-                                                                        text: 'Âm',
-                                                                        fillStyle: '#FF0000',
-                                                                        strokeStyle: '#FF0000'
-                                                                    }];
+                                                        options: {
+                                                            scales: {
+                                                                y: {
+                                                                    beginAtZero: true
+                                                                }
+                                                            },
+                                                            elements: {
+                                                                point: {
+                                                                    radius: 5
+                                                                }
+                                                            },
+                                                            plugins: {
+                                                                tooltip: {
+                                                                    callbacks: {
+                                                                        label: function(context) {
+                                                                            let value = context.raw;
+                                                                            return value >= 0 ? `Lãi: ${value}` : `Âm: ${value}`;
+                                                                        }
+                                                                    }
+                                                                },
+                                                                legend: {
+                                                                    display: true,
+                                                                    labels: {
+                                                                        generateLabels: function(chart) {
+                                                                            return [{
+                                                                                text: 'Lãi',
+                                                                                fillStyle: '#00FF00',
+                                                                                strokeStyle: '#00FF00'
+                                                                            }, {
+                                                                                text: 'Âm',
+                                                                                fillStyle: '#FF0000',
+                                                                                strokeStyle: '#FF0000'
+                                                                            }];
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }
-                                                    }
-                                                }
-                                            });
-                                        </script>
+                                                    });
+                                                </script>
 
 
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane container fade p-3" id="menu2" style="opacity: 1;">
@@ -484,7 +480,7 @@
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                         <i data-feather="tablet" class="widgets-icons"></i>
                                     </div>
-                                    <h5 class="card-title mb-0">Đơn hàng mới nhất</h5>
+                                    <h5 class="card-title mb-0">Đơn hàng mới nhất hôm nay</h5>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -498,43 +494,41 @@
                                                 <th scope="col">Địa chỉ giao hàng</th>
                                                 <th scope="col">Ngày tạo đơn hàng</th>
                                                 <th scope="col">Tổng tiền</th>
+                                                <th scope="col">Trạng thái</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($donhangs as $item)
+                                            @if ($donhangs->count() > 0)
+                                                @foreach ($donhangs as $item)
+                                                    <tr>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->user?->ho_ten }}</td>
+                                                        <td>{{ $item->so_dien_thoai }}</td>
+                                                        <td>{{ $item->dia_chi }}</td>
+                                                        <td>{{ $item->ngay_tao }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $item->tong_tien }}
+                                                            Vnđ
+                                                        </td>
+                                                        <td>{{ $item->trang_thai }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
                                                 <tr>
-                                                    <td>{{ $item->id }}</td>
-                                                    <td>{{ $item->user?->ho_ten }}</td>
-                                                    <td>{{ $item->so_dien_thoai }}</td>
-                                                    <td>{{ $item->dia_chi }}</td>
-                                                    <td>{{ $item->ngay_tao }}</td>
-                                                    <td>
-                                                        @php
-                                                            $tong_tien = $item->tong_tien;
-                                                            if (intval($tong_tien) == $tong_tien) {
-                                                                // Nếu tổng tiền là số nguyên
-                                                                echo number_format($tong_tien, 0, ',', '.');
-                                                            } elseif (floor($tong_tien) == $tong_tien) {
-                                                                // Nếu tổng tiền có dạng như 200000.00
-                                                                echo number_format($tong_tien, 0, ',', '.');
-                                                            } else {
-                                                                // Nếu tổng tiền có phần thập phân khác .00
-                                                                echo number_format($tong_tien, 2, ',', '.');
-                                                            }
-                                                        @endphp
-                                                        Vnđ
-                                                    </td>
+                                                    <td colspan="8" class="text-center">Chưa có đơn hàng nào</td>
                                                 </tr>
-                                            @endforeach
+                                            @endif
+
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            {{ $donhangs->links() }}
                         </div>
                     </div>
                     <div class="col-md-12 col-xl-12">
                         <div class="card">
-
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
@@ -585,7 +579,7 @@
                                     </tbody>
                                 </table>
                             </div>
-
+                            {{ $views_product->links() }}
                         </div>
                     </div>
                 </div>
@@ -644,7 +638,7 @@
                                     </tbody>
                                 </table>
                             </div>
-
+                            {{ $sanphams_saphet->links() }}
                         </div>
                     </div>
                 </div>

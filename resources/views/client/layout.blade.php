@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
     <style>
         body {
@@ -52,6 +54,27 @@
 </head>
 
 <body>
+
+
+    <script>
+        $(document).ready(function() {
+            @if (Session::has('success'))
+                toastr.success("{{ Session::get('success') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            @endif
+            @if (Session::has('error'))
+                toastr.error("{{ Session::get('error') }}", "Thông báo", {
+                    progressBar: true,
+                    closeButton: true,
+                    timeOut: 3000
+                });
+            @endif
+        });
+    </script>
+
     @include('client.partials.header')
 
     @yield('content')
@@ -67,6 +90,9 @@
     <script src="{{ asset('assets/client/js/plugins/plugins.js') }}"></script>
     <script src="{{ asset('assets/client/js/plugins/ajax-contact.js') }}"></script>
     <script src="{{ asset('assets/client/js/main.js') }}"></script>
+
+    {{-- toastr --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
         $(document).ready(function() {

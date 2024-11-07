@@ -433,7 +433,6 @@ class AdminController extends Controller
             $item->tong_tien = number_format($item->tong_tien, 0, ',', '.');
         }
 
-
         // Sản phẩm sắp hết hàng
         $sanphams_saphet = san_pham::query()->where('so_luong', '<', '10')->paginate(4);
         // Lấy 5 sản phẩm có lượt xem nhiều nhất

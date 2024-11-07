@@ -115,7 +115,7 @@
                                             </td> --}}
                                             <td class="text-center">
                                                 <span
-                                                    class="whish-list-price">{{ number_format($item->price, 0, ',', '.') }}
+                                                    class="whish-list-price">{{ number_format($item->price)}}
                                                     đ</span>
                                             </td>
                                             <td class="text-center">
@@ -170,10 +170,10 @@
                                             @php
                                                 $totalPrice = 0; // Khởi tạo biến tổng giá
                                                 foreach ($cartItems as $item) {
-                                                    $totalPrice += $item->price * $item->quantity; // Cộng dồn giá của từng sản phẩm
+                                                    $totalPrice += $item->price; // Cộng dồn giá của từng sản phẩm
                                                 }
                                             @endphp
-                                            {{ number_format($totalPrice, 0, ',', '.') . ' đ' }}
+                                            {{ number_format($totalPrice) . ' đ' }}
                                         </li>
                                     </ul>
                                 </div>

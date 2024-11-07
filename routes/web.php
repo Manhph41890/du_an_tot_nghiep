@@ -112,11 +112,11 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     // quản lý người dùng 
     // Route cho quản lý người dùng
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
     Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
     Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
-
-
 
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);

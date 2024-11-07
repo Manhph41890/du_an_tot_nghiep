@@ -874,7 +874,7 @@
                                 .ten_san_pham +
                                 '" style="width: 40px; height: auto;" class="me-3">' +
                                 '<div class="flex-column d-flex">'+
-                                '<span class="text-truncate" style="max-width: 200px;">' +
+                                '<span class="text-truncate" style="max-width: 120px;">' +
                                 product.ten_san_pham + '</span>' +
                                 '<span class="ms-auto">' + product.gia_km +
                                 ' VNĐ</span>' +

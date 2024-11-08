@@ -286,21 +286,32 @@
                                         <div class="ratting-form-wrapper">
                                             <h3>Thêm đánh giá</h3>
                                             <div class="ratting-form">
-                                                <form action="#">
+                                                <form action="{{ route('danhgia.store', ['sanPhamid' => $sanPhamCT->id]) }}" method="post">
+                                                    @csrf
                                                     <div class="star-box">
                                                         <span>Đánh giá của bạn:</span>
-                                                        <div class="rating-product">
-                                                            <i class="ion-android-star" data-value="1"></i>
-                                                            <i class="ion-android-star" data-value="2"></i>
-                                                            <i class="ion-android-star" data-value="3"></i>
-                                                            <i class="ion-android-star" data-value="4"></i>
-                                                            <i class="ion-android-star" data-value="5"></i>
+                                                        {{-- <div class="rating-product">
+                                                            <i class="ion-android-star" data-value="1" value="1"></i>
+                                                            <i class="ion-android-star" data-value="2" value="2"></i>
+                                                            <i class="ion-android-star" data-value="3" value="3"></i>
+                                                            <i class="ion-android-star" data-value="4" value="4"></i>
+                                                            <i class="ion-android-star" data-value="5" value="5"></i>
                                                         </div>
+                                                        <!-- Hidden input to store the rating -->
+                                                        <input type="hidden" id="rating" name="diem_so" value=""> --}}
+                                                        <input type="hidden" id="san_pham_id" name="san_pham_id" value="{{ $sanPhamCT->id }}">
+                                                        <select name="diem_so" id="diem_so">
+                                                            <option value="1"> <i class="ion-android-star" data-value="1"></i></option>
+                                                            <option value="2"> <i class="ion-android-star" data-value="2"></i></option>
+                                                            <option value="3"> <i class="ion-android-star" data-value="3"></i></option>
+                                                            <option value="4"> <i class="ion-android-star" data-value="4"></i></option>
+                                                            <option value="5"> <i class="ion-android-star" data-value="5"></i></option>
+                                                        </select>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="rating-form-style form-submit">
-                                                                <textarea id="review" name="Your Review" placeholder="Viết đánh giá" maxlength="100"></textarea>
+                                                                <textarea id="review" name="binh_luan" placeholder="Viết đánh giá" maxlength="100"></textarea>
                                                                 <p id="charCount">0/100</p>
                                                                 <input type="submit" value="Gửi" />
                                                             </div>
@@ -309,7 +320,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
@@ -542,20 +553,6 @@
             // }, 1000);
         }
     </script>
-    <style>
-        .rating-product i {
-            font-size: 24px;
-            color: #ccc;
-            /* Default color for unselected stars */
-            cursor: pointer;
-            /* Pointer cursor for clickable stars */
-        }
-
-        .rating-product i.active {
-            color: #ffcc00;
-            /* Highlight color for selected stars */
-        }
-    </style>
 
 
     <!-- new arrival section end -->

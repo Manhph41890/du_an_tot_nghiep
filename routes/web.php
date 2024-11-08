@@ -116,7 +116,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::post('/donhang/{id}/confirm', [DonHangController::class, 'confirmOrder'])->name('donhangs.confirm');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     // Route::get('/danhgia/create', [DanhGiaController::class, 'create'])->name('danhgia.create');
-    Route::post('/danhgia', [DanhGiaController::class, 'store'])->name('danhgia.store');
+    Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 

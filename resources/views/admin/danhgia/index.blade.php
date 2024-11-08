@@ -80,7 +80,6 @@
                                                 <td>{{ $item->san_phams?->ten_san_pham }}</td>
                                                 <td>{{ $item->users?->ho_ten }}</td>
                                                 <td>{{ $item->ngay_danh_gia }}</td>
-                                                {{-- <td>{{ $item->diem_so }}</td> --}}
                                                 <td>
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @if ($i <= $item->diem_so)

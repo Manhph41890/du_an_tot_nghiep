@@ -53,7 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($cartItems->isNotEmpty())
+                                @if (!empty($cartItems))
                                     @foreach ($cartItems as $item)
                                         <tr>
                                             <th class="text-center" scope="row">

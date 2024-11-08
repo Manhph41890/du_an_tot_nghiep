@@ -138,6 +138,9 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
     Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
 
+    Route::post('/apply-coupon', [OrderController::class, 'applyCoupon'])->name('apply.coupon');
+
+
 
     // 
 });

@@ -128,9 +128,7 @@
 
                                                 </form>
                                                 <button type="submit" class="btn btn-info btn-sm">
-                                                    <span class="trash"><i class="fa-solid fa-check"></i> Thanh
-                                                        Toán</span>
-
+                                                    <span><i class="fa-solid fa-coins"></i> Thanh Toán</span>
                                                 </button>
                                             </td>
                                         </tr>

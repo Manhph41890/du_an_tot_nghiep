@@ -164,72 +164,98 @@
                                     <button type="button" class="btn btn-success" id="add-variant">Thêm biến
                                         thể</button>
                                 </div>
+
+                                <!-- Hiển thị lỗi chung cho product_variants -->
+                                @if ($errors->has('product_variants'))
+                                    <div class="alert alert-danger">
+                                        {{ $errors->first('product_variants') }}
+                                    </div>
+                                @endif
+
                                 <div class="card-body">
                                     <div id="variant-container">
-                                        <div class="row variant-item mb-3">
-                                            <div class="col-lg-2">
-                                                <label for="size_san_pham" class="form-label">Size</label>
-                                                <select name="product_variants[size_san_pham][]" class="form-control"
-                                                    id="sizeSelect">
-                                                    <option value="">Chọn kích thước</option>
-                                                    @foreach ($sizes as $size)
-                                                        <option value="{{ $size->id }}">{{ $size->ten_size }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                        <!-- Lặp qua các biến thể đã chọn trong dữ liệu cũ (old data) nếu có -->
+                                        @foreach (old('product_variants.size_san_pham', []) as $index => $size)
+                                            <div class="row variant-item mb-3">
+                                                <div class="col-lg-2">
+                                                    <label for="size_san_pham_{{ $index }}"
+                                                        class="form-label">Size</label>
+                                                    <select name="product_variants[size_san_pham][]" class="form-control"
+                                                        id="sizeSelect_{{ $index }}">
+                                                        <option value="">Chọn kích thước</option>
+                                                        @foreach ($sizes as $sizeOption)
+                                                            <option value="{{ $sizeOption->id }}"
+                                                                {{ old('product_variants.size_san_pham.' . $index) == $sizeOption->id ? 'selected' : '' }}>
+                                                                {{ $sizeOption->ten_size }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('product_variants.*.size_san_pham.' . $index)
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
 
-                                                @error('product_variants.*.size_san_pham')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                                <div class="col-lg-2">
+                                                    <label for="color_san_pham_{{ $index }}"
+                                                        class="form-label">Màu sắc</label>
+                                                    <select name="product_variants[color_san_pham][]" class="form-control"
+                                                        id="colorSelect_{{ $index }}">
+                                                        <option value="">Chọn màu sắc</option>
+                                                        @foreach ($colors as $color)
+                                                            <option value="{{ $color->id }}"
+                                                                {{ old('product_variants.color_san_pham.' . $index) == $color->id ? 'selected' : '' }}>
+                                                                {{ $color->ten_color }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('product_variants.*.color_san_pham.' . $index)
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
 
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <label for="color_san_pham" class="form-label">Màu sắc</label>
-                                                <select name="product_variants[color_san_pham][]" class="form-control"
-                                                    id="sizeSelect">
-                                                    <option value="">Chọn kích thước</option>
-                                                    @foreach ($colors as $color)
-                                                        <option value="{{ $color->id }}">{{ $color->ten_color }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                                <div class="col-lg-2">
+                                                    <label for="so_luong_{{ $index }}" class="form-label">Số
+                                                        lượng</label>
+                                                    <input type="number" name="product_variants[so_luong][]"
+                                                        class="form-control"
+                                                        value="{{ old('product_variants.so_luong.' . $index, 0) }}"
+                                                        min="0" required>
+                                                    @error('product_variants.*.so_luong.' . $index)
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
 
-                                                @error('product_variants.*.color_san_pham')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                                <div class="col-lg-2">
+                                                    <label for="gia_{{ $index }}" class="form-label">Giá biến
+                                                        thể</label>
+                                                    <input type="number" name="product_variants[gia][]"
+                                                        class="form-control"
+                                                        value="{{ old('product_variants.gia.' . $index, 0) }}">
+                                                    @error('product_variants.*.gia.' . $index)
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-lg-3">
+                                                    <label for="anh_bien_the_{{ $index }}" class="form-label">Hình
+                                                        ảnh biến thể</label>
+                                                    <input type="file" name="product_variants[anh_bien_the][]"
+                                                        class="form-control">
+                                                    @error('product_variants.*.anh_bien_the.' . $index)
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-lg-1 d-flex align-items-end">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-danger remove-variant">Xóa</button>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-2">
-                                                <label for="so_luong" class="form-label">Số lượng</label>
-                                                <input type="number" name="product_variants[so_luong][]"
-                                                    class="form-control" value="0" min="0" required>
-                                                @error('product_variants.*.so_luong')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <label for="gia" class="form-label">Giá biến thể</label>
-                                                <input type="number" name="product_variants[gia][]" class="form-control"
-                                                    value="0">
-                                                @error('product_variants.*.gia')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <label for="anh_bien_the" class="form-label">Hình ảnh biến thể</label>
-                                                <input type="file" name="product_variants[anh_bien_the][]"
-                                                    class="form-control">
-                                                @error('product_variants.*.anh_bien_the')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col-lg-1 d-flex align-items-end">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-danger remove-variant">Xóa</button>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="text-end">
                                 <button type="submit" class="btn btn-primary">Lưu sản phẩm</button>

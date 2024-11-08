@@ -142,7 +142,6 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
     Route::post('/validate-coupon', [OrderController::class, 'validateCoupon'])->name('validate-coupon');
 
-    Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');
 
     // 
 });
@@ -161,3 +160,4 @@ Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
 
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
+Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');

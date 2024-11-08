@@ -282,36 +282,6 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    {{-- <div class="col-lg-5">
-                                        <div class="ratting-form-wrapper">
-                                            <h3>Thêm đánh giá</h3>
-                                            <div class="ratting-form">
-                                                <form action="{{ route('danhgia.store', ['sanPhamid' => $sanPhamCT->id]) }}" method="post">
-                                                    @csrf
-                                                    <div class="star-box">
-                                                        <span>Đánh giá của bạn:</span>
-                                                        <input type="hidden" id="san_pham_id" name="san_pham_id" value="{{ $sanPhamCT->id }}">
-                                                        <select name="diem_so" id="diem_so">
-                                                            <option value="1"> <i class="ion-android-star" data-value="1"></i></option>
-                                                            <option value="2"> <i class="ion-android-star" data-value="2"></i></option>
-                                                            <option value="3"> <i class="ion-android-star" data-value="3"></i></option>
-                                                            <option value="4"> <i class="ion-android-star" data-value="4"></i></option>
-                                                            <option value="5"> <i class="ion-android-star" data-value="5"></i></option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="rating-form-style form-submit">
-                                                                <textarea id="review" name="binh_luan" placeholder="Viết đánh giá" maxlength="100"></textarea>
-                                                                <p id="charCount">0/100</p>
-                                                                <input type="submit" value="Gửi" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>                                     --}}
                                     <div class="col-lg-5">
                                         <div class="ratting-form-wrapper">
                                             <h3>Thêm đánh giá</h3>

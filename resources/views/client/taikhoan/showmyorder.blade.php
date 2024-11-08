@@ -81,11 +81,14 @@
                                                                     width="50px" alt="Product Image">
                                                             </td>
                                                             <td>
-                                                                {{ optional($chi_tiet->san_pham)->ten_san_pham ?? 'N/A' }}<br>
-                                                                Màu:
-                                                                {{ optional($chi_tiet->color_san_pham)->ten_color ?? 'N/A' }}<br>
-                                                                Size:
-                                                                {{ optional($chi_tiet->size_san_pham)->ten_size ?? 'N/A' }}
+                                                                <a class="ct-sanpham hover-effect"
+                                                                    href="{{ route('sanpham.chitiet', $chi_tiet->san_pham?->id) }}">
+                                                                    {{ optional($chi_tiet->san_pham)->ten_san_pham ?? 'N/A' }}<br>
+                                                                    Màu:
+                                                                    {{ optional($chi_tiet->color_san_pham)->ten_color ?? 'N/A' }}<br>
+                                                                    Size:
+                                                                    {{ optional($chi_tiet->size_san_pham)->ten_size ?? 'N/A' }}
+                                                                </a>
                                                             </td>
                                                             <td>{{ $chi_tiet->so_luong }}</td>
                                                             <td>{{ number_format($chi_tiet->gia_tien, 0, ',', '.') }}
@@ -235,5 +238,14 @@
 
     .complete-button:hover {
         background-color: #218838;
+    }
+
+    .hover-effect {
+        background-color: #f5f5f5;
+        transition: background-color 0.3s ease;
+    }
+
+    .hover-effect:hover {
+        background-color: #e0e0e0;
     }
 </style>

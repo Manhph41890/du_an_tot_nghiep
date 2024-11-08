@@ -124,7 +124,7 @@
                                     <input type="text" id="coupon-code" name="khuyen_mai" class="form-control"
                                         placeholder="Nhập mã giảm giá">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-success ms-3" id="apply-coupon" type="">Áp
+                                        <button class="btn btn-outline-success ms-3" id="apply-coupon" type="button">Áp
                                             dụng</button>
                                     </div>
                                 </div>
@@ -194,16 +194,18 @@
                                 <ul class="d-flex justify-content-between">
                                     <li class="your-order-shipping">Tiền giảm giá khuyến mại</li>
                                     <li>
-
+                                        <span id="discount-amount">0₫</span>
                                     </li>
                                 </ul>
                                 <div class="your-order-total">
                                     <ul class="d-flex justify-content-between">
                                         <li class="order-total font-weight-bold">Tổng cộng</li>
-                                        <li class="font-weight-bold"><span
-                                                id="total-price-display">{{ $totall }}</span></li>
+                                        <li class="font-weight-bold"><span id="total_amount"
+                                                data-total="{{ $totall }}">{{ number_format($totall, 2) }}₫</span>
+                                        </li>
                                     </ul>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -218,6 +220,38 @@
         }
     </style>
     <script>
+        $(document).ready(function() {
+            $('#apply-coupon').on('click', function() {
+                var couponCode = $('#coupon-code').val(); // Lấy mã khuyến mãi
+                var totalAmount = parseFloat($('#total_amount').data(
+                    'total')); // Lấy tổng tiền trước khi áp dụng mã khuyến mãi
+
+                $.ajax({
+                    url: "{{ route('apply.coupon') }}", // Route xử lý mã giảm giá
+                    type: "POST",
+                    data: {
+                        coupon_code: couponCode,
+                        totall: totalAmount,
+                        _token: "{{ csrf_token() }}" // CSRF token cho bảo mật
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Cập nhật giá trị tổng tiền sau khi áp dụng mã khuyến mãi
+                            $('#total_amount').text(response.newTotal + '₫');
+                            $('#discount-amount').text(response.discountAmount + '₫');
+
+                        } else {
+                            alert(response
+                                .message); // Hiển thị thông báo nếu mã khuyến mãi không hợp lệ
+                        }
+                    },
+                    error: function() {
+                        alert('Đã xảy ra lỗi. Vui lòng thử lại sau.');
+                    }
+                });
+            });
+        });
+
         function toggleOrderButton(paymentType) {
             const codButton = document.getElementById('place-order-cod');
             const onlineButton = document.getElementById('place-order-online');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\don_hang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -16,8 +17,38 @@ class TaiKhoanController extends Controller
         $avatar = $user->anh_dai_dien ? Storage::url($user->anh_dai_dien) : asset('assets/client/images/avatar.png');
         $showForm = $request->query('showForm') === 'true';
 
-        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm'));
+        $myOrders = don_hang::where('user_id', $user->id)->latest()->paginate(4);
+
+        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders'));
     }
+
+    public function showMyOrder(don_hang $don_hang, $id)
+    {
+        $donhang = don_hang::with([
+            'user',
+            'khuyen_mai',
+            'phuong_thuc_thanh_toan',
+            'phuong_thuc_van_chuyen',
+            'chi_tiet_don_hangs.san_pham',
+            'chi_tiet_don_hangs.color_san_pham',
+            'chi_tiet_don_hangs.size_san_pham'
+        ])->findOrFail($id);
+        $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
+        // Trả về view cùng với dữ liệu đơn hàng
+        return view('client.taikhoan.showmyorder', compact('donhang'));
+    }
+
+    public function cancel($id)
+    {
+        $donhang = don_hang::findOrFail($id);
+
+        // Cập nhật trạng thái đơn hàng sang "Đã hủy"
+        $donhang->trang_thai_don_hang = 'Đã hủy';
+        $donhang->save();
+
+        return redirect()->route('taikhoan.dashboard')->with('success', 'Đơn hàng đã được hủy.');
+    }
+
     public function updateAvatar(Request $request)
     {
         if ($request->isMethod('post')) {

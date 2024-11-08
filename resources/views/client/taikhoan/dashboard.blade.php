@@ -33,19 +33,22 @@
                     <div class="myaccount-tab-menu nav" role="tablist">
                         <a href="#account-info" data-bs-toggle="tab" class="active"><i class="fa fa-user"></i> Chi tiết tài
                             khoản</a>
-                        <a href="#dashboad" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        @if ($user->chuc_vu_id === 1 || $user->chuc_vu_id === 3)
+                            <a href="#dashboad" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Vào trang quản
+                                trị</a>
+                        @endif
+                        <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng của bạn</a>
 
-                        <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                        <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh
+                            toán</a>
 
-                        <a href="#download" data-bs-toggle="tab"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item notify-item">
+                                <i class="mdi mdi-location-exit fs-16 align-middle"><a type="submit">Đăng Xuất</a></i>
+                            </button>
+                        </form>
 
-                        <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Payment Method</a>
-
-                        <a href="#address-edit" data-bs-toggle="tab"><i class="fa fa-map-marker"></i> address</a>
-
-
-
-                        <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
                     </div>
                 </div>
                 <!-- My Account Tab Menu End -->
@@ -56,20 +59,14 @@
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="dashboad" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3>Dashboard</h3>
+                                <h3>Quản trị</h3>
 
-                                <div class="welcome mb-20">
-                                    <p>
-                                        Hello, <strong>Alex Tuntuni</strong> (If Not
-                                        <strong>Tuntuni !</strong><a href="login-register.html" class="logout"> Logout</a>)
-                                    </p>
+                                <div class="welcome mb-20 d-flex">
+                                    <h5><strong>Vào trang quản trị với chức vụ là:<h4 class="badge bg-primary ms-3 h3">
+                                                {{ $user->chuc_vu?->ten_chuc_vu }}</h4></strong></h5>
                                 </div>
+                                <a href="{{ route('thong_ke_chung') }}" class="btn btn-success">Vào quản trị</a>
 
-                                <p class="mb-0">
-                                    From your account dashboard. you can easily check &amp; view
-                                    your recent orders, manage your shipping and billing addresses
-                                    and edit your password and account details.
-                                </p>
                             </div>
                         </div>
                         <!-- Single Tab Content End -->
@@ -77,127 +74,108 @@
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="orders" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3>Orders</h3>
+                                <h3>Đơn hàng của bạn</h3>
 
                                 <div class="myaccount-table table-responsive text-center">
-                                    <table class="table table-bordered">
+                                    <table class="table table-hover">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>No</th>
-                                                <th>Name</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Total</th>
+                                                <th>Mã đơn hàng</th>
+                                                <th>Ngày tạo đơn hàng</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Trạng thái đơn hàng</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Mostarizing Oil</td>
-                                                <td>Aug 22, 2023</td>
-                                                <td>Pending</td>
-                                                <td>$45</td>
-                                                <td>
-                                                    <a href="shopping-cart.html" class="ht-btn black-btn">View</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Katopeno Altuni</td>
-                                                <td>July 22, 2023</td>
-                                                <td>Approved</td>
-                                                <td>$100</td>
-                                                <td>
-                                                    <a href="shopping-cart.html" class="ht-btn black-btn">View</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Murikhete Paris</td>
-                                                <td>June 12, 2023</td>
-                                                <td>On Hold</td>
-                                                <td>$99</td>
-                                                <td>
-                                                    <a href="shopping-cart.html" class="ht-btn black-btn">View</a>
-                                                </td>
-                                            </tr>
+                                            @foreach ($myOrders as $myOrder)
+                                                <tr>
+                                                    <td>{{ $myOrder->ma_don_hang }}</td>
+                                                    <td>{{ $myOrder->ngay_tao }}</td>
+                                                    <td>{{ $myOrder->tong_tien }}</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center mb-30">
+                                                            @php
+                                                                $statusClasses = [
+                                                                    'Chờ xác nhận' => 'bg-warning',
+                                                                    'Đã xác nhận' => 'bg-info',
+                                                                    'Đang chuẩn bị hàng' => 'bg-info',
+                                                                    'Đang vận chuyển' => 'bg-info',
+                                                                    'Đã giao' => 'bg-success',
+                                                                    'Thành công' => 'bg-success',
+                                                                    'Đã hủy' => 'bg-danger',
+                                                                ];
+                                                                $class =
+                                                                    $statusClasses[$myOrder->trang_thai_don_hang] ??
+                                                                    'bg-secondary';
+                                                            @endphp
+
+                                                            <span class="badge {{ $class }}">
+                                                                {{ $myOrder->trang_thai_don_hang }}
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('taikhoan.myorder', $myOrder->id) }}"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#allmyModalfororder{{ $myOrder->id }}">
+                                                            <i
+                                                                class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                        </a>
+
+                                                        <!-- The Modal -->
+                                                        <div class="modal" id="allmyModalfororder{{ $myOrder->id }}">
+                                                            @include('client.taikhoan.showmyorder', [
+                                                                'donhang' => $myOrder,
+                                                            ])
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
                                         </tbody>
                                     </table>
+                                    {{ $myOrders->links() }}
                                 </div>
                             </div>
                         </div>
-                        <!-- Single Tab Content End -->
-
-                        <!-- Single Tab Content Start -->
-                        <div class="tab-pane fade" id="download" role="tabpanel">
-                            <div class="myaccount-content">
-                                <h3>Downloads</h3>
-
-                                <div class="myaccount-table table-responsive text-center">
-                                    <table class="table table-bordered">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Date</th>
-                                                <th>Expire</th>
-                                                <th>Download</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            <tr>
-                                                <td>Mostarizing Oil</td>
-                                                <td>Aug 22, 2023</td>
-                                                <td>Yes</td>
-                                                <td>
-                                                    <a href="#" class="ht-btn black-btn">Download File</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Katopeno Altuni</td>
-                                                <td>Sep 12, 2023</td>
-                                                <td>Never</td>
-                                                <td>
-                                                    <a href="#" class="ht-btn black-btn">Download File</a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Tab Content End -->
-
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="payment-method" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3>Payment Method</h3>
+                                <h3 class="text-center mb-4">Thông tin ví thanh toán điện tử</h3>
+                                <div class="card-container">
+                                    <!-- Logo của ngân hàng -->
+                                    <div class="bank-logo">
+                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png" width="50px"
+                                            alt="NCB Logo">
+                                    </div>
 
-                                <p class="saved-message">
-                                    You Can't Saved Your Payment Method yet.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Single Tab Content End -->
+                                    <!-- Chip thẻ -->
+                                    <div class="chip"></div>
 
-                        <!-- Single Tab Content Start -->
-                        <div class="tab-pane fade" id="address-edit" role="tabpanel">
-                            <div class="myaccount-content">
-                                <h3>Billing Address</h3>
+                                    <!-- Số thẻ -->
+                                    <div class="card-number">
+                                        9704 1985 2619 1432 198
+                                    </div>
 
-                                <address>
-                                    <p><strong>Alex Tuntuni</strong></p>
-                                    <p>
-                                        1355 Market St, Suite 900 <br />
-                                        San Francisco, CA 94103
-                                    </p>
-                                    <p>Mobile: (123) 456-7890</p>
-                                </address>
+                                    <!-- Thông tin khác của thẻ -->
+                                    <div class="card-info">
+                                        <div>
+                                            <div> NGUYEN VAN A</div>
+                                        </div>
+                                        <div>
+                                            <div>07/15</div>
+                                        </div>
+                                    </div>
+                                    <!-- Logo Visa -->
+                                    <div class="visa-logo">
+                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
+                                            alt="Visa Logo">
+                                    </div>
+                                </div>
 
-                                <a href="#" class="ht-btn black-btn d-inline-block edit-address-btn"><i
-                                        class="fa fa-edit"></i>Edit Address</a>
+                                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                             </div>
                         </div>
                         <!-- Single Tab Content End -->
@@ -342,17 +320,11 @@
                                             </div> --}}
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="ngay_sinh" class="mb-2">Ngày sinh</label>
-                                                <input 
-                                                    id="ngay_sinh" 
-                                                    name="ngay_sinh" 
-                                                    type="date" 
-                                                    class="form-control" 
-                                                    value="{{ $user->ngay_sinh }}" 
-                                                    disabled 
-                                                    style="background-color: #ffffff; color: #000000; cursor: not-allowed;   "
-                                                />
+                                                <input id="ngay_sinh" name="ngay_sinh" type="date"
+                                                    class="form-control" value="{{ $user->ngay_sinh }}" disabled
+                                                    style="background-color: #ffffff; color: #000000; cursor: not-allowed;   " />
                                             </div>
-                                            
+
 
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="gioi_tinh" class="mb-2">Giới tính</label>
@@ -376,8 +348,6 @@
                                             </div>
                                         </div>
                                     </form>
-
-
 
                                 </div>
                             </div>

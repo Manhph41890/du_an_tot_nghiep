@@ -26,7 +26,7 @@ class don_hang extends Model
     ];
 
     protected $casts = [
-        'trang_thai' => 'string', // Chuyển đổi thành chuỗi
+        'trang_thai_don_hang' => 'string', // Chuyển đổi thành chuỗi
     ];
 
     // Quan hệ với bảng User

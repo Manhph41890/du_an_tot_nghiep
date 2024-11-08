@@ -32,34 +32,19 @@ class OrderController extends Controller
         $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
             ->where('user_id', Auth::id())
             ->first();
-        dd($cart);
 
-        if (!$cart || $cart->cartItems->isEmpty()) {
-            return redirect()->route('client.cart.index')->with('error', 'Giỏ hàng của bạn đang trống.');
-        }
+        $total = $cart->cartItems->sum(fn($item) => $item->price);
 
-        $total = 0;
-        foreach ($cart->cartItems as $item) {
-            $total += $item->price * $item->quantity;
-        }
-        $discount = 0;
 
-        if ($validatedData['khuyen_mai']) {
-            $coupon = khuyen_mai::where('ma_khuyen_mai', $validatedData['khuyen_mai'])
-                ->where('ngay_bat_dau', '<=', now())
-                ->where('ngay_ket_thuc', '>=', now())
-                ->first();
+        $coupon = khuyen_mai::where('ma_khuyen_mai', $validatedData['khuyen_mai'])
+            ->where('ngay_bat_dau', '<=', now())
+            ->where('ngay_ket_thuc', '>=', now())
+            ->first();
 
-            if ($coupon) {
-                $discount = $coupon->gia_tri_khuyen_mai;
-                $total -= $discount;
-            } else {
-                return redirect()->back()->with('error', 'Mã khuyến mãi không hợp lệ hoặc đã hết hạn.');
-            }
-        }
+
+
 
         $shippingCost = 30000;
-        $total += $shippingCost;
         $totall = $total + $shippingCost;
 
         // Lấy phương thức thanh toán từ request
@@ -209,6 +194,7 @@ class OrderController extends Controller
             $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
                 ->where('user_id', Auth::id())
                 ->first();
+            dd($cart);
             foreach ($cart->cartItems as $item) {
                 $orderDetail = new chi_tiet_don_hang();
                 $orderDetail->don_hang_id = $orderId;
@@ -220,7 +206,6 @@ class OrderController extends Controller
                 $orderDetail->thanh_tien = $orderDetail->so_luong * $orderDetail->gia_tien;
                 $orderDetail->save();
             }
-
             // Xóa giỏ hàng sau khi đặt hàng thành công
             $cart->cartItems()->delete();
             $cart->delete();
@@ -244,6 +229,7 @@ class OrderController extends Controller
 
         // Giả sử bạn có bảng coupon trong cơ sở dữ liệu hoặc một cách khác để kiểm tra mã giảm giá
         $coupon = khuyen_mai::where('ma_khuyen_mai', $couponCode)->first();
+        $giakm = $coupon->gia_tri_khuyen_mai;
 
         if ($coupon) {
             // Giả sử mã giảm giá có thể là phần trăm giảm
@@ -253,9 +239,13 @@ class OrderController extends Controller
         }
 
         // Tính tổng tiền sau khi giảm giá
-        $newTotal = $totalAmount - $discount;
+        $newTotal =  $discount;
 
         // Trả về tổng tiền mới
-        return response()->json(['success' => true, 'newTotal' => number_format($newTotal, 2)]);
+        return response()->json([
+            'success' => true,
+            'newTotal' => number_format($newTotal, 2), // Định dạng số tiền
+            'discountAmount' => number_format($giakm, 2) // Trả về số tiền giảm giá
+        ]);
     }
 }

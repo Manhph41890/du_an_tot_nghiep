@@ -116,7 +116,7 @@ class HomeController extends Controller
         $sanPham = san_pham::find($id);
 
         // Nếu sản phẩm tồn tại, tăng lượt xem
-        if ($sanPham) {
+        if ($sanPham && auth()->check()) {
             $sanPham->increment('views'); // Tăng lượt xem
         }
 

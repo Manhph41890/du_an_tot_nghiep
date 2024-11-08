@@ -432,7 +432,7 @@
 
                     var colorLabel = document.createElement('label');
                     colorLabel.setAttribute('for', 'color-' + color.id);
-                    colorLabel.style.backgroundColor = color.ma_mau;
+                    // colorLabel.style.backgroundColor = color.ma_mau;
                     colorLabel.classList.add('me-2');
                     colorLabel.textContent = color.ten_color;
 

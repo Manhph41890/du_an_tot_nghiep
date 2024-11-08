@@ -39,7 +39,8 @@
                         @endif
                         <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng của bạn</a>
 
-                        <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Payment Method</a>
+                        <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh
+                            toán</a>
 
                         <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
                     </div>
@@ -136,11 +137,38 @@
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="payment-method" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3>Payment Method</h3>
+                                <h3 class="text-center mb-4">Thông tin thẻ ngân hàng</h3>
+                                <div class="card-container">
+                                    <!-- Logo của ngân hàng -->
+                                    <div class="bank-logo">
+                                        <img src="" width="50px" alt="NCB Logo">
+                                    </div>
 
-                                <p class="saved-message">
-                                    You Can't Saved Your Payment Method yet.
-                                </p>
+                                    <!-- Chip thẻ -->
+                                    <div class="chip"></div>
+
+                                    <!-- Số thẻ -->
+                                    <div class="card-number">
+                                        9704 1985 2619 1432 198
+                                    </div>
+
+                                    <!-- Thông tin khác của thẻ -->
+                                    <div class="card-info">
+                                        <div>
+                                            <div> NGUYEN VAN A</div>
+                                        </div>
+                                        <div>
+                                            <div>07/15</div>
+                                        </div>
+                                    </div>
+                                    <!-- Logo Visa -->
+                                    <div class="visa-logo">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+                                            alt="Visa Logo">
+                                    </div>
+                                </div>
+
+                                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                             </div>
                         </div>
                         <!-- Single Tab Content End -->

@@ -513,22 +513,6 @@
                 reviewInput.value = reviewInput.value.substring(0, 100);
             }
         });
-        $(document).ready(function() {
-            $('.rating-product i').on('click', function() {
-                console.log("Star clicked!"); // Check if this message appears in the console
-                var rating = $(this).data('value');
-
-                // Remove active class from all stars
-                $('.rating-product i').removeClass('active');
-
-                // Add active class to selected stars and those before it
-                $(this).addClass('active');
-                $(this).prevAll().addClass('active');
-
-                // Display the rating in the console or handle it as needed
-                console.log("Selected rating:", rating);
-            });
-        });
 
         function promptLogin() {
             // toastr.options = {

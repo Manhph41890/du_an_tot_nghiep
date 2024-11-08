@@ -419,8 +419,8 @@
             var colorOptions = @json($colorsBySize);
 
             var colorContainer = document.getElementById('color-options');
-            colorContainer.innerHTML = ''; // Clear previous colors
-
+            colorContainer.innerHTML = ''; 
+            
             if (sizeId && colorOptions[sizeId]) {
                 colorOptions[sizeId].forEach(function(color) {
                     var colorInput = document.createElement('input');

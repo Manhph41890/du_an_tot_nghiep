@@ -307,15 +307,6 @@
                                                             <i class="ion-android-star" data-value="5"></i>
                                                         </div>
                                                     </div>
-
-                                                    {{-- <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="rating-form-style form-submit">
-                                                                <textarea name="Your Review" placeholder="Message"></textarea>
-                                                                <input type="submit" value="Submit" />
-                                                            </div>
-                                                        </div>
-                                                    </div> --}}
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="rating-form-style form-submit">

@@ -287,16 +287,6 @@
                                             <h3>Thêm đánh giá</h3>
                                             <div class="ratting-form">
                                                 <form action="#">
-                                                    {{-- <div class="star-box">
-                                                        <span>Your rating:</span>
-                                                        <div class="rating-product">
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                        </div>
-                                                    </div> --}}
                                                     <div class="star-box">
                                                         <span>Đánh giá của bạn:</span>
                                                         <div class="rating-product">

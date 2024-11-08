@@ -210,7 +210,7 @@ class CartController extends Controller
         }
 
         $cartItems = $cart->cartItems;
-        $total = $cart->cartItems->sum(fn($item) => $item->price * $item->quantity);
+        $total = $cart->cartItems->sum(fn($item) => $item->price);
 
         $shippingCost = 30000; // 30,000 VND
 

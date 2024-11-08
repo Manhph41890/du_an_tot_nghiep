@@ -42,7 +42,13 @@
                         <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh
                             toán</a>
 
-                        <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item notify-item">
+                                <i class="mdi mdi-location-exit fs-16 align-middle"><a type="submit">Đăng Xuất</a></i>
+                            </button>
+                        </form>
+
                     </div>
                 </div>
                 <!-- My Account Tab Menu End -->
@@ -137,11 +143,12 @@
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="payment-method" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3 class="text-center mb-4">Thông tin thẻ ngân hàng</h3>
+                                <h3 class="text-center mb-4">Thông tin ví thanh toán điện tử</h3>
                                 <div class="card-container">
                                     <!-- Logo của ngân hàng -->
                                     <div class="bank-logo">
-                                        <img src="" width="50px" alt="NCB Logo">
+                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png" width="50px"
+                                            alt="NCB Logo">
                                     </div>
 
                                     <!-- Chip thẻ -->
@@ -163,7 +170,7 @@
                                     </div>
                                     <!-- Logo Visa -->
                                     <div class="visa-logo">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
                                             alt="Visa Logo">
                                     </div>
                                 </div>

@@ -33,14 +33,9 @@ class OrderController extends Controller
             ->where('user_id', Auth::id())
             ->first();
 
-        if (!$cart || $cart->cartItems->isEmpty()) {
-            return redirect()->route('client.cart.index')->with('error', 'Giỏ hàng của bạn đang trống.');
-        }
+        $cartItems = $cart->cartItems;
+        $total = $cart->cartItems->sum(fn($item) => $item->price);
 
-        $total = 0;
-        foreach ($cart->cartItems as $item) {
-            $total += $item->price * $item->quantity;
-        }
         $discount = 0;
 
         if ($validatedData['khuyen_mai']) {

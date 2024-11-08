@@ -389,7 +389,7 @@
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
                                                         <span class="badge badge-danger top-right">New</span>
-                                                        <a href="single-product.html">
+                                                        <a href="{{ route('sanpham.chitiet', $sanphamview->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
                                                                 alt="anh san pham" />
@@ -425,7 +425,7 @@
                                                         <div class="product-desc">
                                                             <h3 class="title">
                                                                 <a
-                                                                    href="shop-grid-4-column.html">{{ $sanphamview->ten_san_pham }}</a>
+                                                                    href="{{ route('sanpham.chitiet', $sanphamview->id) }}">{{ $sanphamview->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
                                                                 <span class="ion-ios-star"></span>
@@ -489,7 +489,7 @@
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
                                                 <span class="badge badge-danger top-right">New</span>
-                                                <a href="single-product.html">
+                                                <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
                                                         alt="anh san pham" />
@@ -589,20 +589,20 @@
                             <div class="slider-item">
                                 <div class="single-blog">
                                     <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
-                                        href="blog-grid-left-sidebar.html">
+                                        href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">
                                         <img src="{{ asset('/storage/' . $baivietmoi->anh_bai_viet) }}"
                                             alt="blog-thumb-naile" />
                                     </a>
                                     <div class="blog-post-content">
                                         <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
-                                            href="https://themeforest.net/user/hastech">{{ $baivietmoi->user?->ho_ten }}</a>
+                                            href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->user?->ho_ten }}</a>
                                         <h3 class="title mb-15">
                                             <a href="single-blog.html">{{ $baivietmoi->tieu_de_bai_viet }}</a>
                                         </h3>
                                         <p class="sub-title">
                                             Ngày đăng
                                             <a class="theme-color d-inline-block mx-1"
-                                                href="https://themeforest.net/user/hastech"></a>
+                                                href="{{ url('client/baivietchitiet', $baivietmoi->id) }}"></a>
                                             {{ $baivietmoi->ngay_dang }}
                                         </p>
                                     </div>

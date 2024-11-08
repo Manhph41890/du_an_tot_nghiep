@@ -31,7 +31,7 @@
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
-                        <a href="#account-info" data-bs-toggle="tab" class="active"><i class="fa fa-user"></i> Chi tiết tài
+                        <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i> Chi tiết tài
                             khoản</a>
                         @if ($user->chuc_vu_id === 1 || $user->chuc_vu_id === 3)
                             <a href="#dashboad" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Vào trang quản

@@ -41,11 +41,16 @@ class OrderController extends Controller
             ->where('ngay_ket_thuc', '>=', now())
             ->first();
 
-
+        if (!$cart || $cart->cartItems->isEmpty()) {
+            return redirect()->back()->withErrors(['error' => 'Giỏ hàng trống hoặc không tồn tại']);
+        }
 
 
         $shippingCost = 30000;
         $totall = $total + $shippingCost;
+
+        // Tính `newTotal` sau khi áp dụng giảm giá
+        $newTotal = $coupon ? ($totall - $coupon->gia_tri_khuyen_mai) : $totall;
 
         // Lấy phương thức thanh toán từ request
         $paymentMethodId = $validatedData['phuong_thuc_thanh_toan'];
@@ -130,40 +135,6 @@ class OrderController extends Controller
             // Redirect to VNPay for payment
             return redirect($vnp_Url);
         } else { // Thanh toán khi nhận hàng
-            // Tạo đơn hàng mới và lưu thông tin người dùng
-            $order = new don_hang();
-            $order->user_id = Auth::id();
-            $order->khuyen_mai_id = $validatedData['khuyen_mai'] ? $coupon->id : null;
-            $order->ho_ten = $user->ho_ten ?? $validatedData['ho_ten'];
-            $order->so_dien_thoai = $user->so_dien_thoai ?? $validatedData['so_dien_thoai'];
-            $order->email = $user->email ?? $validatedData['email'];
-            $order->dia_chi = $user->dia_chi ?? $validatedData['dia_chi'];
-            $order->phuong_thuc_thanh_toan_id = $validatedData['phuong_thuc_thanh_toan'];
-            $order->phuong_thuc_van_chuyen_id = 9;
-            $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
-            $order->tong_tien = $total;
-            $order->trang_thai_don_hang = 'Chờ xác nhận';
-            $order->trang_thai_thanh_toan = 'Chưa thanh toán';
-            $order->save();
-
-            // Lưu chi tiết đơn hàng từ giỏ hàng
-            $orderId = $order->id;
-            foreach ($cart->cartItems as $item) {
-                $orderDetail = new chi_tiet_don_hang();
-                $orderDetail->don_hang_id = $orderId;
-                $orderDetail->san_pham_id = $item->san_pham_id;
-                $orderDetail->color_san_pham_id = $item->color_san_pham_id;
-                $orderDetail->size_san_pham_id = $item->size_san_pham_id;
-                $orderDetail->so_luong = $item->quantity;
-                $orderDetail->gia_tien = $item->price;
-                $orderDetail->thanh_tien = $orderDetail->so_luong * $orderDetail->gia_tien;
-                $orderDetail->save();
-            }
-
-            // Xóa giỏ hàng sau khi đặt hàng thành công
-            $cart->cartItems()->delete();
-            $cart->delete();
-
             return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
         }
     }

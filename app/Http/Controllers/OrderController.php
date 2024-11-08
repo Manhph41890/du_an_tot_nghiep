@@ -183,6 +183,7 @@ class OrderController extends Controller
 
         return view('client.order.success');
     }
+
     public function applyCoupon(Request $request)
     {
         $couponCode = $request->input('coupon_code');

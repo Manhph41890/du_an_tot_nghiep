@@ -290,15 +290,6 @@
                                                     @csrf
                                                     <div class="star-box">
                                                         <span>Đánh giá của bạn:</span>
-                                                        {{-- <div class="rating-product">
-                                                            <i class="ion-android-star" data-value="1" value="1"></i>
-                                                            <i class="ion-android-star" data-value="2" value="2"></i>
-                                                            <i class="ion-android-star" data-value="3" value="3"></i>
-                                                            <i class="ion-android-star" data-value="4" value="4"></i>
-                                                            <i class="ion-android-star" data-value="5" value="5"></i>
-                                                        </div>
-                                                        <!-- Hidden input to store the rating -->
-                                                        <input type="hidden" id="rating" name="diem_so" value=""> --}}
                                                         <input type="hidden" id="san_pham_id" name="san_pham_id" value="{{ $sanPhamCT->id }}">
                                                         <select name="diem_so" id="diem_so">
                                                             <option value="1"> <i class="ion-android-star" data-value="1"></i></option>

@@ -56,6 +56,9 @@ class OrderController extends Controller
         $total += $shippingCost;
         $totall = $total + $shippingCost;
 
+        // Tính `newTotal` sau khi áp dụng giảm giá
+        $newTotal = $coupon ? ($totall - $coupon->gia_tri_khuyen_mai) : $totall;
+
         // Lấy phương thức thanh toán từ request
         $paymentMethodId = $validatedData['phuong_thuc_thanh_toan'];
 

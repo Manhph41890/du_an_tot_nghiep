@@ -59,29 +59,29 @@ class DanhGiaController extends Controller
      */
     public function store(Storedanh_giaRequest $request)
     {
-        
+
         $request->validate([
             'diem_so' => 'required|integer|min:1|max:5',
             'binh_luan' => 'required|string|max:100',
         ]);
-           
-            // danh_gia::create([
-            //     'san_pham_id' => $request->san_pham_id,
-            //     'user_id' => Auth::id(), // If the user is logged in
-            //     'ngay_danh_gia' => now(),
-            //     'diem_so' => $request->diem_so,
-            //     'binh_luan' => $request->binh_luan,
-            // ]);
 
-            $danhGia = new danh_gia();
-            $danhGia->san_pham_id = $request->san_pham_id;
-            $danhGia->user_id = auth()->user()->id; 
-            $danhGia->ngay_danh_gia = now(); 
-            $danhGia->diem_so = $request->diem_so;
-            $danhGia->binh_luan = $request->binh_luan;
-            $danhGia->save();
+        // danh_gia::create([
+        //     'san_pham_id' => $request->san_pham_id,
+        //     'user_id' => Auth::id(), // If the user is logged in
+        //     'ngay_danh_gia' => now(),
+        //     'diem_so' => $request->diem_so,
+        //     'binh_luan' => $request->binh_luan,
+        // ]);
 
-            return redirect()->back()->with('success', 'Review submitted successfully');
+        $danhGia = new danh_gia();
+        $danhGia->san_pham_id = $request->san_pham_id;
+        $danhGia->user_id = auth()->user()->id;
+        $danhGia->ngay_danh_gia = now();
+        $danhGia->diem_so = $request->diem_so;
+        $danhGia->binh_luan = $request->binh_luan;
+        $danhGia->save();
+
+        return redirect()->back()->with('success', 'Đánh giá thành công!');
     }
 
     /**

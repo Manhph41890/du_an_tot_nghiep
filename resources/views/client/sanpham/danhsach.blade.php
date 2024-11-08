@@ -264,12 +264,11 @@
                                     <h4 class="sub-title">Color</h4>
                                     <div class="form-group">
                                         @foreach ($color_sidebar as $item)
-                                            <div class="widget-check-box color-grey">
+                                            <div class="widget-check-box">
                                                 <input type="checkbox" id="color-{{ $item->id }}" name="color[]"
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
-                                                <label for="color-{{ $item->id }}"
-                                                    style="background-color: {{ $item->ma_mau }} !important;">
+                                                <label for="color-{{ $item->id }}">
                                                     {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
                                                 </label>
                                             </div>

@@ -282,7 +282,7 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    <div class="col-lg-5">
+                                    {{-- <div class="col-lg-5">
                                         <div class="ratting-form-wrapper">
                                             <h3>Thêm đánh giá</h3>
                                             <div class="ratting-form">
@@ -311,7 +311,46 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>                                    
+                                    </div>                                     --}}
+                                    <div class="col-lg-5">
+                                        <div class="ratting-form-wrapper">
+                                            <h3>Thêm đánh giá</h3>
+                                            <div class="ratting-form">
+                                                <form action="{{ route('danhgia.store', ['sanPhamid' => $sanPhamCT->id]) }}" method="post">
+                                                    @csrf
+                                                    <div class="star-box">
+                                                        <span>Đánh giá của bạn:</span>
+                                                        <input type="hidden" id="san_pham_id" name="san_pham_id" value="{{ $sanPhamCT->id }}">
+                                                        <!-- Hidden select dropdown to store rating -->
+                                                        <select name="diem_so" id="diem_so" style="display: none;">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                        <!-- Star icons -->
+                                                        <div class="rating-product">
+                                                            <i class="ion-android-star" data-value="1"></i>
+                                                            <i class="ion-android-star" data-value="2"></i>
+                                                            <i class="ion-android-star" data-value="3"></i>
+                                                            <i class="ion-android-star" data-value="4"></i>
+                                                            <i class="ion-android-star" data-value="5"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="rating-form-style form-submit">
+                                                                <textarea id="review" name="binh_luan" placeholder="Viết đánh giá" maxlength="100"></textarea>
+                                                                <p id="charCount">0/100</p>
+                                                                <input type="submit" value="Gửi" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -402,6 +441,7 @@
             </div>
         </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Hàm lọc màu sắc khi chọn size
         document.getElementById('size_san_pham_id{{ $sanPhamCT->id }}').addEventListener('change', function() {
@@ -527,7 +567,35 @@
             //     window.location.href = "{{ route('auth.login') }}";
             // }, 1000);
         }
+        $(document).ready(function() {
+        // Handle star click
+        $('.rating-product i').on('click', function() {
+            var rating = $(this).data('value'); // Get the value of the clicked star
+            
+            // Update the hidden select input value with the selected rating
+            $('#diem_so').val(rating);
+
+            // Update the stars to show which ones are selected
+            $('.rating-product i').removeClass('active'); // Remove active class from all stars
+            $(this).addClass('active'); // Add active class to clicked star
+            $(this).prevAll().addClass('active'); // Add active class to previous stars
+
+            // Optionally, display the rating in the console
+            console.log("Selected rating:", rating);
+        });
+    });
     </script>
+    <style>
+          /* Style for active stars */
+    .rating-product i {
+        font-size: 30px;
+        color: #ccc; /* Default color (gray) */
+    }
+
+    .rating-product i.active {
+        color: gold; /* Highlighted color when active (gold) */
+    }
+    </style>
 
 
     <!-- new arrival section end -->

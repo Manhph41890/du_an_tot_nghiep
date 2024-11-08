@@ -53,7 +53,6 @@ class OrderController extends Controller
         }
 
         $shippingCost = 30000;
-        $total += $shippingCost;
         $totall = $total + $shippingCost;
 
         // Tính `newTotal` sau khi áp dụng giảm giá

@@ -130,23 +130,6 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-
-                                <!-- Kiểm tra nếu trạng thái đơn hàng là 'Chờ xác nhận' -->
-                                @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <h5>Xác nhận đơn hàng</h5>
-                                            <p>Xác nhận đơn hàng để chuẩn bị hàng</p>
-                                            <form action="{{ route('donhangs.confirm', $donhang->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                <button type="submit" class="complete-button btn btn-primary">Xác nhận
-                                                    đơn hàng</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                @endif
-
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <h5>Thông tin khách hàng</h5>
@@ -159,7 +142,25 @@
                                         <p><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
                                     </div>
                                 </div>
+                                @if ($donhang->trang_thai_thanh_toan == 'Chưa thanh toán' || $donhang->trang_thai_don_hang == 'Chờ xác nhận')
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5>Hủy nhận đơn hàng này</h5>
+                                            <form action="{{ route('taikhoan.cancel', $donhang->id) }}" method="POST"
+                                                onsubmit="return confirmCancel()">
+                                                @csrf
+                                                <button type="submit" class="btn btn-secondary mt-2">Hủy
+                                                    nhận hàng</button>
+                                            </form>
 
+                                            <script>
+                                                function confirmCancel() {
+                                                    return confirm("Bạn có chắc chắn muốn hủy nhận đơn hàng này không?");
+                                                }
+                                            </script>
+                                        </div>
+                                    </div>
+                                @endif
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
                                 @if ($donhang->trang_thai_don_hang == 'Thành công')
                                     <div class="card">

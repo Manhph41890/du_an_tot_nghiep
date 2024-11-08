@@ -38,6 +38,17 @@ class TaiKhoanController extends Controller
         return view('client.taikhoan.showmyorder', compact('donhang'));
     }
 
+    public function cancel($id)
+    {
+        $donhang = don_hang::findOrFail($id);
+
+        // Cập nhật trạng thái đơn hàng sang "Đã hủy"
+        $donhang->trang_thai_don_hang = 'Đã hủy';
+        $donhang->save();
+
+        return redirect()->route('taikhoan.dashboard')->with('success', 'Đơn hàng đã được hủy.');
+    }
+
     public function updateAvatar(Request $request)
     {
         if ($request->isMethod('post')) {

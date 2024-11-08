@@ -70,7 +70,6 @@
                                                 <th scope="col">Tên người dùng</th>
                                                 <th scope="col">Ngày đánh giá</th>
                                                 <th scope="col">Đánh giá</th>
-                                                {{-- <th scope="col">Bình luận</th> --}}
                                                 <th scope="col">Thao tác</th>
                                             </tr>
                                         </thead>
@@ -81,7 +80,6 @@
                                                 <td>{{ $item->san_phams?->ten_san_pham }}</td>
                                                 <td>{{ $item->users?->ho_ten }}</td>
                                                 <td>{{ $item->ngay_danh_gia }}</td>
-                                                {{-- <td>{{ $item->diem_so }}</td> --}}
                                                 <td>
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @if ($i <= $item->diem_so)
@@ -104,10 +102,6 @@
                                                         <div class="modal fade" id="myModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $item->id }}" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
-                                                                    {{-- <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel{{ $item->id }}">Chi tiết đánh giá</h5>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div> --}}
                                                                     <div class="modal-body">
                                                                         @include('admin.danhgia.show', ['post' => $item])
                                                                     </div>

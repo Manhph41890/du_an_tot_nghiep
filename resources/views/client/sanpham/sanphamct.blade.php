@@ -209,11 +209,6 @@
                                         role="tab" aria-controls="pills-home" aria-selected="true">Mô tả</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                        href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false">Chi tiết Sản phẩm</a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link active" id="pills-contact-tab" data-bs-toggle="pill"
                                         href="#pills-contact" role="tab" aria-controls="pills-contact"
                                         aria-selected="false">Đánh giá</a>
@@ -286,11 +281,14 @@
                                         <div class="ratting-form-wrapper">
                                             <h3>Thêm đánh giá</h3>
                                             <div class="ratting-form">
-                                                <form action="{{ route('danhgia.store', ['sanPhamid' => $sanPhamCT->id]) }}" method="post">
+                                                <form
+                                                    action="{{ route('danhgia.store', ['sanPhamid' => $sanPhamCT->id]) }}"
+                                                    method="post">
                                                     @csrf
                                                     <div class="star-box">
                                                         <span>Đánh giá của bạn:</span>
-                                                        <input type="hidden" id="san_pham_id" name="san_pham_id" value="{{ $sanPhamCT->id }}">
+                                                        <input type="hidden" id="san_pham_id" name="san_pham_id"
+                                                            value="{{ $sanPhamCT->id }}">
                                                         <!-- Hidden select dropdown to store rating -->
                                                         <select name="diem_so" id="diem_so" style="display: none;">
                                                             <option value="1">1</option>
@@ -387,12 +385,12 @@
                                                         <a
                                                             href="shop-grid-4-column.html">{{ $sanphamlq->ten_san_pham }}</a>
                                                     </h3>
-                                                    <div class="star-rating">
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star de-selected"></span>
+                                                    <div class="rating">
+                                                        <span class="ion-android-star"></span>
+                                                        <span class="ion-android-star"></span>
+                                                        <span class="ion-android-star"></span>
+                                                        <span class="ion-android-star"></span>
+                                                        <span class="ion-android-star de-selected"></span>
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <span class="product-price">{{ $sanphamlq->gia_goc }}</span>
@@ -419,8 +417,8 @@
             var colorOptions = @json($colorsBySize);
 
             var colorContainer = document.getElementById('color-options');
-            colorContainer.innerHTML = ''; 
-            
+            colorContainer.innerHTML = '';
+
             if (sizeId && colorOptions[sizeId]) {
                 colorOptions[sizeId].forEach(function(color) {
                     var colorInput = document.createElement('input');
@@ -538,33 +536,35 @@
             // }, 1000);
         }
         $(document).ready(function() {
-        // Handle star click
-        $('.rating-product i').on('click', function() {
-            var rating = $(this).data('value'); // Get the value of the clicked star
-            
-            // Update the hidden select input value with the selected rating
-            $('#diem_so').val(rating);
+            // Handle star click
+            $('.rating-product i').on('click', function() {
+                var rating = $(this).data('value'); // Get the value of the clicked star
 
-            // Update the stars to show which ones are selected
-            $('.rating-product i').removeClass('active'); // Remove active class from all stars
-            $(this).addClass('active'); // Add active class to clicked star
-            $(this).prevAll().addClass('active'); // Add active class to previous stars
+                // Update the hidden select input value with the selected rating
+                $('#diem_so').val(rating);
 
-            // Optionally, display the rating in the console
-            console.log("Selected rating:", rating);
+                // Update the stars to show which ones are selected
+                $('.rating-product i').removeClass('active'); // Remove active class from all stars
+                $(this).addClass('active'); // Add active class to clicked star
+                $(this).prevAll().addClass('active'); // Add active class to previous stars
+
+                // Optionally, display the rating in the console
+                console.log("Selected rating:", rating);
+            });
         });
-    });
     </script>
     <style>
-          /* Style for active stars */
-    .rating-product i {
-        font-size: 30px;
-        color: #ccc; /* Default color (gray) */
-    }
+        /* Style for active stars */
+        .rating-product i {
+            font-size: 30px;
+            color: #ccc;
+            /* Default color (gray) */
+        }
 
-    .rating-product i.active {
-        color: gold; /* Highlighted color when active (gold) */
-    }
+        .rating-product i.active {
+            color: gold;
+            /* Highlighted color when active (gold) */
+        }
     </style>
 
 

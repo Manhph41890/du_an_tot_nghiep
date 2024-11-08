@@ -194,7 +194,6 @@ class OrderController extends Controller
             $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
                 ->where('user_id', Auth::id())
                 ->first();
-            dd($cart);
             foreach ($cart->cartItems as $item) {
                 $orderDetail = new chi_tiet_don_hang();
                 $orderDetail->don_hang_id = $orderId;

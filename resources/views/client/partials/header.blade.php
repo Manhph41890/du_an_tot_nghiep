@@ -526,6 +526,10 @@
                                                 <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
                                                 <span>Tài khoản</span>
                                             </a>
+                                            <hr>
+                                            <a class="" href="{{ route('taikhoan.dashboard') }}" id="">
+                                                <span>Thông tin tài khoản</span>
+                                            </a>
                                             <div class="dropdown-divider"></div>
                                             <!-- Đăng xuất -->
                                             <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
@@ -751,37 +755,47 @@
 
 
     /* search  */
-  #product-search {
-    position: absolute;       /* Đặt vị trí tuyệt đối để nó không bị che khuất */
-    top: 100%;                /* Đảm bảo nó sẽ xuất hiện ngay dưới ô input */
-    left: 0;
-    right: 0;                 /* Để dropdown bao phủ chiều ngang của ô input */
-    max-height: 300px;        /* Giới hạn chiều cao */
-    background-color: #fff;   /* Màu nền trắng */
-    border: 1px solid #ddd;   /* Viền mờ để dễ nhìn */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Để dropdown có bóng đổ */
-    width: 100%;              /* Đảm bảo chiều rộng của dropdown bằng với ô input */
-    z-index: 9999;            /* Đảm bảo dropdown hiển thị lên trên tất cả các phần tử khác */
-    display: none;            /* Ẩn mặc định */
-    border-radius: 5px;       /* Bo góc */
-}
-
-#product-search .dropdown-item {
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #333;
-}
-
-#product-search .dropdown-item:hover {
-    background-color: #f1f1f1; /* Màu nền khi hover */
-    color: #007bff; /* Đổi màu chữ khi hover */
-}
-
-#product-search .suggestion-ite
-
+    #product-search {
+        position: absolute;
+        /* Đặt vị trí tuyệt đối để nó không bị che khuất */
+        top: 100%;
+        /* Đảm bảo nó sẽ xuất hiện ngay dưới ô input */
+        left: 0;
+        right: 0;
+        /* Để dropdown bao phủ chiều ngang của ô input */
+        max-height: 300px;
+        /* Giới hạn chiều cao */
+        background-color: #fff;
+        /* Màu nền trắng */
+        border: 1px solid #ddd;
+        /* Viền mờ để dễ nhìn */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Để dropdown có bóng đổ */
+        width: 100%;
+        /* Đảm bảo chiều rộng của dropdown bằng với ô input */
+        z-index: 9999;
+        /* Đảm bảo dropdown hiển thị lên trên tất cả các phần tử khác */
+        display: none;
+        /* Ẩn mặc định */
+        border-radius: 5px;
+        /* Bo góc */
+    }
 
     #product-search .dropdown-item {
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+    }
+
+    #product-search .dropdown-item:hover {
+        background-color: #f1f1f1;
+        /* Màu nền khi hover */
+        color: #007bff;
+        /* Đổi màu chữ khi hover */
+    }
+
+    #product-search .suggestion-ite #product-search .dropdown-item {
         padding: 8px 12px;
         cursor: pointer;
     }
@@ -873,12 +887,12 @@
                                 '<img src="' + product.image_url + '" alt="' + product
                                 .ten_san_pham +
                                 '" style="width: 40px; height: auto;" class="me-3">' +
-                                '<div class="flex-column d-flex">'+
+                                '<div class="flex-column d-flex">' +
                                 '<span class="text-truncate" style="max-width: 120px;">' +
                                 product.ten_san_pham + '</span>' +
                                 '<span class="ms-auto">' + product.gia_km +
                                 ' VNĐ</span>' +
-                                '</div>'+
+                                '</div>' +
                                 '</a>' +
                                 '</div>'
                             );

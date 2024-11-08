@@ -70,7 +70,6 @@
                                                 <th scope="col">Tên người dùng</th>
                                                 <th scope="col">Ngày đánh giá</th>
                                                 <th scope="col">Đánh giá</th>
-                                                {{-- <th scope="col">Bình luận</th> --}}
                                                 <th scope="col">Thao tác</th>
                                             </tr>
                                         </thead>

@@ -34,11 +34,28 @@
                                                         'Thành công' => 'bg-success',
                                                         'Đã hủy' => 'bg-danger',
                                                     ];
-                                                    $class = $statusClasses[$donhang->trang_thai] ?? 'bg-secondary';
+                                                    $class =
+                                                        $statusClasses[$donhang->trang_thai_don_hang] ?? 'bg-secondary';
                                                 @endphp
 
                                                 <span class="badge {{ $class }}">
-                                                    {{ $donhang->trang_thai }}
+                                                    {{ $donhang->trang_thai_don_hang }}
+                                                </span>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-3">
+                                                <p class="mb-0 me-2">Trạng thái Thanh toán:</p>
+                                                @php
+                                                    $statusClasses = [
+                                                        'Đã thanh toán' => 'bg-success',
+                                                        'Chưa thanh toán' => 'bg-danger',
+                                                    ];
+                                                    $class =
+                                                        $statusClasses[$donhang->trang_thai_thanh_toan] ??
+                                                        'bg-secondary';
+                                                @endphp
+
+                                                <span class="badge {{ $class }}">
+                                                    {{ $donhang->trang_thai_thanh_toan }}
                                                 </span>
                                             </div>
                                         </div>
@@ -96,8 +113,12 @@
 
                                 <div class="card">
                                     <div class="card-body">
+                                        <p><strong class="pe-1">Tổng tiền sản phẩm</strong>
+                                            {{ number_format($donhang->chi_tiet_don_hangs->sum('thanh_tien'), 0, ',', '.') }}
+                                            VND
+                                        </p>
                                         <p><strong class="pe-1">Giảm
-                                                giá:</strong>-
+                                                giá:</strong>
                                             {{ number_format($donhang->khuyen_mai?->gia_tri_khuyen_mai ?? 0, 0, ',', '.') }}VND
                                         </p>
                                         <p><strong class="pe-1">Vận
@@ -112,7 +133,7 @@
                             <div class="col-lg-3">
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Chờ xác nhận' -->
-                                @if ($donhang->trang_thai == 'Chờ xác nhận')
+                                @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
                                     <div class="card mb-3">
                                         <div class="card-body">
                                             <h5>Xác nhận đơn hàng</h5>
@@ -141,7 +162,7 @@
                                 </div>
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if ($donhang->trang_thai == 'Thành công')
+                                @if ($donhang->trang_thai_don_hang == 'Thành công')
                                     <div class="card">
                                         <div class="card-body">
                                             <h5>Đánh giá của khách hàng</h5>

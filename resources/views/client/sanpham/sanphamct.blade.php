@@ -487,6 +487,7 @@
                             toastr.error(
                                 'Đã xảy ra lỗi khi thêm vào giỏ hàng. Vui lòng kiểm tra lại.'
                             ); // Thông báo lỗi chung
+
                             console.error('Error:', error); // Để debug lỗi trên console
                         });
                 });

@@ -84,12 +84,11 @@ class HomeController extends Controller
         // Lấy các sản phẩm liên quan
         $sanLienQuan = san_pham::with('danh_muc')->where('id', '!=', $id)->orderByDesc('id')->get();
 
-        $bienTheSanPhams = bien_the_san_pham::where('san_pham_id', $sanPhamCT)->get();
 
         // Tiêu đề trang
         $title = $sanPhamCT->ten_san_pham;
 
-        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title', 'colorsBySize', 'sanLienQuan', 'bienTheSanPhams'));
+        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title', 'colorsBySize', 'sanLienQuan'));
     }
 
 

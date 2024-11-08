@@ -129,7 +129,6 @@
                                     </div>
                                 </div>
 
-
                                 <!-- Phương thức thanh toán -->
                                 <div class="d-flex mt-25">
                                     <div class="">
@@ -139,35 +138,36 @@
                                                 <input type="radio" id="payment-{{ $phuongThucThanhToan->id }}"
                                                     name="phuong_thuc_thanh_toan" class="form-check-input"
                                                     value="{{ $phuongThucThanhToan->id }}"
-                                                    {{ old('phuong_thuc_thanh_toan') == $phuongThucThanhToan->id ? 'checked' : '' }}>
+                                                    {{ old('phuong_thuc_thanh_toan') == $phuongThucThanhToan->id ? 'checked' : '' }}
+                                                    onchange="toggleOrderButton('{{ $phuongThucThanhToan->kieu_thanh_toan }}')">
                                                 <label for="payment-{{ $phuongThucThanhToan->id }}"
                                                     class="form-check-label">
                                                     {{ $phuongThucThanhToan->kieu_thanh_toan }}
                                                 </label>
+                                                {{-- Hiển thị logo VNPay nếu kieu_thanh_toan là "thanh toán online" --}}
+                                                @if ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán online')
+                                                    <div class="vnpay-logo ms-2">
+                                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
+                                                            alt="VNPay Logo">
+                                                    </div>
+                                                @endif
                                             </div>
                                         @endforeach
                                     </div>
                                     <div class="ms-5">
-                                        <h6 class="font-weight-bold">Phương thức vận chuyển</h6>
-                                        @foreach ($phuongThucVanChuyens as $phuongThucVanChuyen)
-                                            <div class="form-check">
-                                                <input type="radio"
-                                                    id="shipping-{{ $phuongThucVanChuyen->kieu_van_chuyen }}"
-                                                    name="phuong_thuc_van_chuyen" class="form-check-input"
-                                                    value="{{ $phuongThucVanChuyen->id }}"
-                                                    {{ old('phuong_thuc_van_chuyen') == $phuongThucVanChuyen->id ? 'checked' : '' }}>
-                                                <label for="shipping-{{ $phuongThucVanChuyen->kieu_van_chuyen }}"
-                                                    class="form-check-label">
-                                                    {{ $phuongThucVanChuyen->kieu_van_chuyen }}
 
-                                                </label>
-                                            </div>
-                                        @endforeach
                                     </div>
                                 </div>
                             </div>
-                            <div class="place-order mt-25">
+                            {{-- <div class="place-order mt-25">
                                 <button type="submit" class="btn btn--xl btn-block btn-primary">Đặt Hàng</button>
+                            </div> --}}
+                            <div class="place-order mt-25" id="place-order-cod" style="display: none;">
+                                <button type="submit" class="btn btn--xl btn-block btn-primary">Đặt Hàng</button>
+                            </div>
+                            <div class="place-order mt-25" id="place-order-online" style="display: none;">
+                                <button type="submit" class="btn btn--xl btn-block btn-danger" name="redirect">Thanh
+                                    toán ngay</button>
                             </div>
                         </form>
                     </div>
@@ -181,13 +181,14 @@
                             <div class="your-order-product-info">
                                 <ul class="d-flex justify-content-between">
                                     <li class="your-order-shipping">Tiền sản phẩm</li>
-                                    <li>{{ number_format($total)  }}</li>
+                                    <li>{{ $total }}</li>
                                 </ul>
+
                                 <hr>
                                 <ul class="d-flex justify-content-between">
                                     <li class="your-order-shipping">Tiền vận chuyển</li>
                                     <li>
-
+                                        30.000
                                     </li>
                                 </ul>
                                 <ul class="d-flex justify-content-between">
@@ -200,7 +201,7 @@
                                     <ul class="d-flex justify-content-between">
                                         <li class="order-total font-weight-bold">Tổng cộng</li>
                                         <li class="font-weight-bold"><span
-                                                id="total-price-display">{{ number_format($total)  }}</span></li>
+                                                id="total-price-display">{{ $totall }}</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -216,5 +217,28 @@
             display: block;
         }
     </style>
+    <script>
+        function toggleOrderButton(paymentType) {
+            const codButton = document.getElementById('place-order-cod');
+            const onlineButton = document.getElementById('place-order-online');
+
+            // Kiểm tra loại thanh toán để hiển thị nút tương ứng
+            if (paymentType === 'Thanh toán khi nhận hàng') {
+                codButton.style.display = 'block';
+                onlineButton.style.display = 'none';
+            } else if (paymentType === 'Thanh toán online') {
+                codButton.style.display = 'none';
+                onlineButton.style.display = 'block';
+            }
+        }
+
+        // Hiển thị nút mặc định nếu đã có lựa chọn trước đó
+        document.addEventListener("DOMContentLoaded", function() {
+            const selectedPaymentType = document.querySelector('input[name="phuong_thuc_thanh_toan"]:checked');
+            if (selectedPaymentType) {
+                toggleOrderButton(selectedPaymentType.value);
+            }
+        });
+    </script>
     <!-- khu vực thanh toán kết thúc -->
 @endsection

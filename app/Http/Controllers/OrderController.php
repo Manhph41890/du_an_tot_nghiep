@@ -33,31 +33,17 @@ class OrderController extends Controller
             ->where('user_id', Auth::id())
             ->first();
 
-        $cartItems = $cart->cartItems;
         $total = $cart->cartItems->sum(fn($item) => $item->price);
 
-        $discount = 0;
 
-        if ($validatedData['khuyen_mai']) {
-            $coupon = khuyen_mai::where('ma_khuyen_mai', $validatedData['khuyen_mai'])
-                ->where('ngay_bat_dau', '<=', now())
-                ->where('ngay_ket_thuc', '>=', now())
-                ->first();
+        $coupon = khuyen_mai::where('ma_khuyen_mai', $validatedData['khuyen_mai'])
+            ->where('ngay_bat_dau', '<=', now())
+            ->where('ngay_ket_thuc', '>=', now())
+            ->first();
 
-            if ($coupon) {
-                $discount = $coupon->gia_tri_khuyen_mai;
-                $total -= $discount;
-            } else {
-                return redirect()->back()->with('error', 'Mã khuyến mãi không hợp lệ hoặc đã hết hạn.');
-            }
-        }
 
         $shippingCost = 30000;
-        $total += $shippingCost;
         $totall = $total + $shippingCost;
-
-        // Tính `newTotal` sau khi áp dụng giảm giá
-        $newTotal = $coupon ? ($totall - $coupon->gia_tri_khuyen_mai) : $totall;
 
         // Lấy phương thức thanh toán từ request
         $paymentMethodId = $validatedData['phuong_thuc_thanh_toan'];
@@ -142,40 +128,6 @@ class OrderController extends Controller
             // Redirect to VNPay for payment
             return redirect($vnp_Url);
         } else { // Thanh toán khi nhận hàng
-            // Tạo đơn hàng mới và lưu thông tin người dùng
-            $order = new don_hang();
-            $order->user_id = Auth::id();
-            $order->khuyen_mai_id = $validatedData['khuyen_mai'] ? $coupon->id : null;
-            $order->ho_ten = $user->ho_ten ?? $validatedData['ho_ten'];
-            $order->so_dien_thoai = $user->so_dien_thoai ?? $validatedData['so_dien_thoai'];
-            $order->email = $user->email ?? $validatedData['email'];
-            $order->dia_chi = $user->dia_chi ?? $validatedData['dia_chi'];
-            $order->phuong_thuc_thanh_toan_id = $validatedData['phuong_thuc_thanh_toan'];
-            $order->phuong_thuc_van_chuyen_id = 9;
-            $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
-            $order->tong_tien = $total;
-            $order->trang_thai_don_hang = 'Chờ xác nhận';
-            $order->trang_thai_thanh_toan = 'Chưa thanh toán';
-            $order->save();
-
-            // Lưu chi tiết đơn hàng từ giỏ hàng
-            $orderId = $order->id;
-            foreach ($cart->cartItems as $item) {
-                $orderDetail = new chi_tiet_don_hang();
-                $orderDetail->don_hang_id = $orderId;
-                $orderDetail->san_pham_id = $item->san_pham_id;
-                $orderDetail->color_san_pham_id = $item->color_san_pham_id;
-                $orderDetail->size_san_pham_id = $item->size_san_pham_id;
-                $orderDetail->so_luong = $item->quantity;
-                $orderDetail->gia_tien = $item->price;
-                $orderDetail->thanh_tien = $item->price;
-                $orderDetail->save();
-            }
-
-            // Xóa giỏ hàng sau khi đặt hàng thành công
-            $cart->cartItems()->delete();
-            $cart->delete();
-
             return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
         }
     }
@@ -183,6 +135,7 @@ class OrderController extends Controller
     public function success(Request $request)
     {
         $orderDetails = Session::get('order_details');
+        $newTotal = Session::get('new_total');
 
         if ($orderDetails) {
             // Tạo đơn hàng mới
@@ -196,7 +149,7 @@ class OrderController extends Controller
             $order->phuong_thuc_thanh_toan_id = $orderDetails['phuong_thuc_thanh_toan_id'];
             $order->phuong_thuc_van_chuyen_id = $orderDetails['phuong_thuc_van_chuyen_id'];
             $order->ngay_tao = $orderDetails['ngay_tao'];
-            $order->tong_tien = $orderDetails['tong_tien'];
+            $order->tong_tien = $newTotal; // Sử dụng newTotal
             $order->trang_thai_don_hang = 'Chờ xác nhận';
             $order->trang_thai_thanh_toan = 'Đã thanh toán';
             $order->save();
@@ -214,10 +167,9 @@ class OrderController extends Controller
                 $orderDetail->size_san_pham_id = $item->size_san_pham_id;
                 $orderDetail->so_luong = $item->quantity;
                 $orderDetail->gia_tien = $item->price;
-                $orderDetail->thanh_tien = $item->price;
+                $orderDetail->thanh_tien = $orderDetail->so_luong * $orderDetail->gia_tien;
                 $orderDetail->save();
             }
-
             // Xóa giỏ hàng sau khi đặt hàng thành công
             $cart->cartItems()->delete();
             $cart->delete();
@@ -230,5 +182,34 @@ class OrderController extends Controller
         }
 
         return view('client.order.success');
+    }
+    public function applyCoupon(Request $request)
+    {
+        $couponCode = $request->input('coupon_code');
+        $totalAmount = $request->input('totall'); // Tổng tiền trước khi áp mã
+
+        // Kiểm tra mã giảm giá và tính toán tổng tiền mới
+        $discount = 0;
+
+        // Giả sử bạn có bảng coupon trong cơ sở dữ liệu hoặc một cách khác để kiểm tra mã giảm giá
+        $coupon = khuyen_mai::where('ma_khuyen_mai', $couponCode)->first();
+        $giakm = $coupon->gia_tri_khuyen_mai;
+
+        if ($coupon) {
+            // Giả sử mã giảm giá có thể là phần trăm giảm
+            $discount = $totalAmount - $coupon->gia_tri_khuyen_mai;
+        } else {
+            return response()->json(['success' => false, 'message' => 'Mã giảm giá không hợp lệ!']);
+        }
+
+        // Tính tổng tiền sau khi giảm giá
+        $newTotal =  $discount;
+
+        // Trả về tổng tiền mới
+        return response()->json([
+            'success' => true,
+            'newTotal' => number_format($newTotal, 2), // Định dạng số tiền
+            'discountAmount' => number_format($giakm, 2) // Trả về số tiền giảm giá
+        ]);
     }
 }

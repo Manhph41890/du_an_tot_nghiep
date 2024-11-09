@@ -1706,6 +1706,7 @@ hr {
     font-size: 24px;
     font-size: 1.5rem;
     margin: 0 0 5px 0;
+    color: #5a5ac9 ;
 }
 
 .breadcrumbs {
@@ -4850,14 +4851,14 @@ body.modal-open .mm-slideout {
 
 .search-input input[type='text'] {
     width: 100%;
-    height: 50px;
+    height: 36px;
     border: 0;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     border-radius: 3px;
     background-color: #eeeeee;
-    padding: 15px;
+    padding: 8px 15px;
 }
 
 .search-input input[type='text']:focus {

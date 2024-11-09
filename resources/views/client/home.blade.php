@@ -211,43 +211,19 @@
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
                                                         <span class="badge badge-danger top-right">Mới</span>
-                                                        <a href="{{ route('sanpham.chitiet', $item->id) }}">
+                                                        <a href="{{ route('san-phams.incrementViews', $item->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                                 alt="thumbnail" />
                                                         </a>
                                                         <!-- product links -->
-                                                        <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#quick-view">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                                        
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a
-                                                                    href="{{ route('san-phams.incrementViews', $item->id) }}">
+                                                                <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                                     {{ $item->ten_san_pham }}
                                                                 </a>
                                                             </h3>
@@ -259,7 +235,8 @@
                                                                 <span class="ion-ios-star de-selected"></span>
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span class="product-price">{{number_format($item-> gia_goc)  }}</span>
+                                                                <span
+                                                                    class="product-price">{{ number_format($item->gia_goc) }}</span>
                                                                 {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                                     data-bs-target="#add-to-cart">
                                                                     <i class="icon-basket"></i>
@@ -307,30 +284,7 @@
                                                                 src="{{ asset('/storage/' . $sanPhamGg->anh_san_pham) }}">
                                                         </a>
                                                         <!-- product links -->
-                                                        <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#quick-view">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                                        
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
@@ -359,9 +313,9 @@
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <div class="price-wrapper">
                                                                     <span
-                                                                        class="product-price me-2">{{ number_format($sanPhamGg->gia_goc)  }}</span>
+                                                                        class="product-price me-2">{{ number_format($sanPhamGg->gia_goc) }}</span>
                                                                     <span
-                                                                        class="text-decoration-line-through text-muted">{{ number_format($sanPhamGg->gia_km)  }}</span>
+                                                                        class="text-decoration-line-through text-muted">{{ number_format($sanPhamGg->gia_km) }}</span>
                                                                 </div>
                                                                 {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                                     data-bs-target="#add-to-cart">
@@ -389,43 +343,20 @@
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
                                                         <span class="badge badge-danger top-right">New</span>
-                                                        <a href="single-product.html">
+                                                        <a href="{{ route('sanpham.chitiet', $sanphamview->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
                                                                 alt="anh san pham" />
                                                         </a>
                                                         <!-- product links -->
-                                                        <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#quick-view">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                                        
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
                                                                 <a
-                                                                    href="shop-grid-4-column.html">{{ $sanphamview->ten_san_pham }}</a>
+                                                                    href="{{ route('sanpham.chitiet', $sanphamview->id) }}">{{ $sanphamview->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
                                                                 <span class="ion-ios-star"></span>
@@ -436,7 +367,7 @@
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <span
-                                                                    class="product-price">{{ number_format($sanphamview->gia_goc)  }}</span>
+                                                                    class="product-price">{{ number_format($sanphamview->gia_goc) }}</span>
                                                                 {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                                 data-bs-target="#add-to-cart">
                                                                 <i class="icon-basket"></i>
@@ -489,7 +420,7 @@
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
                                                 <span class="badge badge-danger top-right">New</span>
-                                                <a href="single-product.html">
+                                                <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
                                                         alt="anh san pham" />
@@ -536,7 +467,8 @@
                                                         <span class="ion-ios-star de-selected"></span>
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span class="product-price">{{ number_format($sanphamview->gia_goc)  }}</span>
+                                                        <span
+                                                            class="product-price">{{ number_format($sanphamview->gia_goc) }}</span>
                                                         {{-- <button class="pro-btn" data-bs-toggle="modal"
                                                     data-bs-target="#add-to-cart">
                                                     <i class="icon-basket"></i>
@@ -588,20 +520,20 @@
                             <div class="slider-item">
                                 <div class="single-blog">
                                     <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
-                                        href="blog-grid-left-sidebar.html">
+                                        href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">
                                         <img src="{{ asset('/storage/' . $baivietmoi->anh_bai_viet) }}"
                                             alt="blog-thumb-naile" />
                                     </a>
                                     <div class="blog-post-content">
                                         <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
-                                            href="https://themeforest.net/user/hastech">{{ $baivietmoi->user?->ho_ten }}</a>
+                                            href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->user?->ho_ten }}</a>
                                         <h3 class="title mb-15">
                                             <a href="single-blog.html">{{ $baivietmoi->tieu_de_bai_viet }}</a>
                                         </h3>
                                         <p class="sub-title">
                                             Ngày đăng
                                             <a class="theme-color d-inline-block mx-1"
-                                                href="https://themeforest.net/user/hastech"></a>
+                                                href="{{ url('client/baivietchitiet', $baivietmoi->id) }}"></a>
                                             {{ $baivietmoi->ngay_dang }}
                                         </p>
                                     </div>
@@ -870,5 +802,4 @@
         </div>
     </div>
     <!-- modals end -->
-
 @endsection

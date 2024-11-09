@@ -53,7 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($cartItems->isNotEmpty())
+                                @if (!empty($cartItems))
                                     @foreach ($cartItems as $item)
                                         <tr>
                                             <th class="text-center" scope="row">
@@ -114,8 +114,7 @@
                                                 <span class="whish-title">{{ $item->quantity }}</span>
                                             </td> --}}
                                             <td class="text-center">
-                                                <span
-                                                    class="whish-list-price">{{ number_format($item->price)}}
+                                                <span class="whish-list-price">{{ number_format($item->price) }}
                                                     đ</span>
                                             </td>
                                             <td class="text-center">
@@ -129,9 +128,7 @@
 
                                                 </form>
                                                 <button type="submit" class="btn btn-info btn-sm">
-                                                    <span class="trash"><i class="fa-solid fa-check"></i> Thanh
-                                                        Toán</span>
-
+                                                    <span><i class="fa-solid fa-coins"></i> Thanh Toán</span>
                                                 </button>
                                             </td>
                                         </tr>

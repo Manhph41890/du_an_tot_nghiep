@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bai_viet;
+use App\Models\bien_the_san_pham;
 use App\Models\danh_muc;
 use App\Models\san_pham;
 use Illuminate\Http\Request;
@@ -51,6 +52,7 @@ class HomeController extends Controller
     // Sản phẩm chi tiet
     public function chiTietSanPham($id)
     {
+        // Lấy thông tin chi tiết sản phẩm và các mối quan hệ liên quan
         $sanPhamCT = san_pham::with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color', 'danh_gias'])->findOrFail($id);
 
         // Tính phần trăm giảm giá
@@ -68,16 +70,27 @@ class HomeController extends Controller
             $sanPhamCT->diem_trung_binh = 0;
         }
 
-        // Lấy tất cả các size và màu sắc từ biến thể sản phẩm
-        $uniqueColors = $sanPhamCT->bien_the_san_phams->pluck('color')->unique('id');
 
+
+        // Truyền thông tin màu sắc theo size vào view
+        $colorsBySize = [];
+        foreach ($sanPhamCT->bien_the_san_phams as $bienThe) {
+            $colorsBySize[$bienThe->size->id][] = $bienThe->color;
+        }
+        // Lấy danh sách size và màu sắc
         $sizes = $sanPhamCT->bien_the_san_phams->pluck('size')->unique('id'); // Lấy size duy nhất
         $colors = $sanPhamCT->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
-        $sanLienQuan = san_pham::with('danh_muc')->where('id', '!=', $id)->orderByDesc('id')->get();
-        $title = "";
 
-        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title', 'uniqueColors', 'sanLienQuan'));
+        // Lấy các sản phẩm liên quan
+        $sanLienQuan = san_pham::with('danh_muc')->where('id', '!=', $id)->orderByDesc('id')->get();
+
+
+        // Tiêu đề trang
+        $title = $sanPhamCT->ten_san_pham;
+
+        return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title', 'colorsBySize', 'sanLienQuan'));
     }
+
 
     // In Data Bai viet
     public function listBaiViet()
@@ -103,7 +116,7 @@ class HomeController extends Controller
         $sanPham = san_pham::find($id);
 
         // Nếu sản phẩm tồn tại, tăng lượt xem
-        if ($sanPham) {
+        if ($sanPham && auth()->check()) {
             $sanPham->increment('views'); // Tăng lượt xem
         }
 

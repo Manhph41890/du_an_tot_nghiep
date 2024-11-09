@@ -102,20 +102,19 @@
                                                     </ul>
                                                 </div>
                                                 <div class="product-desc py-0 px-0">
-                                                    <h3 class="title">
+                                                    <h3 class="title min_h">
                                                         <a
                                                             href="{{ route('sanpham.chitiet', $item->id) }}">{{ $item->ten_san_pham }}</a>
                                                     </h3>
                                                     <div class="star-rating">
-                                                        @if ($item->danh_gia > 0)
-                                                            @for ($i = 1; $i <= 5; $i++)
-                                                                @if ($i <= floor($item->danh_gia))
-                                                                    <span class="ion-ios-star"></span>
-                                                                @else
-                                                                    <span class="ion-ios-star-outline"></span>
-                                                                @endif
-                                                            @endfor
-                                                        @endif
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($item->danh_gia > 0 && $i <= floor($item->danh_gia))
+                                                                <span class="ion-ios-star"></span> <!-- Sao có màu -->
+                                                            @else
+                                                                <span class="ion-ios-star-outline"></span>
+                                                                <!-- Sao không màu -->
+                                                            @endif
+                                                        @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <p class="product-price">
@@ -135,7 +134,7 @@
                             <div class="row grid-view-list theme1">
                                 @foreach ($list_sanphams as $item)
                                     <div class="col-12 mb-30">
-                                        <div class="card product-card">
+                                        <div class="card product-card minh">
                                             <div class="card-body">
                                                 <div class="media flex-column flex-md-row">
                                                     <div class="product-thumbnail position-relative">
@@ -264,12 +263,11 @@
                                     <h4 class="sub-title">Color</h4>
                                     <div class="form-group">
                                         @foreach ($color_sidebar as $item)
-                                            <div class="widget-check-box color-grey">
+                                            <div class="widget-check-box">
                                                 <input type="checkbox" id="color-{{ $item->id }}" name="color[]"
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
-                                                <label for="color-{{ $item->id }}"
-                                                    style="background-color: {{ $item->ma_mau }} !important;">
+                                                <label for="color-{{ $item->id }}">
                                                     {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
                                                 </label>
                                             </div>
@@ -464,6 +462,16 @@
                 </div>
             </div>
         </div>
+        <style>
+            .min_h {
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                /* Số dòng */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('add-to-cart-form{{ $item->id }}').addEventListener('submit', function(

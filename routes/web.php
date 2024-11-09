@@ -45,6 +45,8 @@ Route::prefix('client')->group(function () {
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
     //tam thoi 
     Route::get('/taikhoan', [TaiKhoanController::class, 'showAccountDetails'])->name('taikhoan.dashboard');
+    Route::get('/taikhoan/myorder/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.myorder');
+    Route::post('/taikhoan/cancel/{id}', [TaiKhoanController::class, 'cancel'])->name('taikhoan.cancel');
     // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
 
     Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard.avatar');
@@ -70,15 +72,6 @@ Route::post('send-email', [ForgotPasswordController::class, 'sendResetLinkEmails
 Route::post('verify-code', [ForgotPasswordController::class, 'verifyCode'])->name('auth.verifycode');
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('auth.reset_password');
 Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('auth.update_password');
-
-
-
-
-
-
-
-
-
 
 
 // Route cho các chức năng quản lý (admin)
@@ -118,8 +111,6 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
     Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
 
-
-
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
@@ -127,7 +118,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::post('/donhang/{id}/confirm', [DonHangController::class, 'confirmOrder'])->name('donhangs.confirm');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     // Route::get('/danhgia/create', [DanhGiaController::class, 'create'])->name('danhgia.create');
-    Route::post('/danhgia', [DanhGiaController::class, 'store'])->name('danhgia.store');
+    Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
 
@@ -148,9 +139,9 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
     Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
-    Route::post('/validate-coupon', [OrderController::class, 'validateCoupon'])->name('validate-coupon');
+    Route::get('/order/success_nhanhang', [OrderController::class, 'success_nhanhang'])->name('order.success_nhanhang');
 
-    Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');
+    Route::post('/apply-coupon', [OrderController::class, 'applyCoupon'])->name('apply.coupon');
 
     // 
 });
@@ -169,3 +160,5 @@ Route::middleware(['auth', 'role:nhan_vien'])->group(function () {
 
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');
+// 
+Route::get('/san-phams/increment-views/{id}', [HomeController::class, 'incrementViews'])->name('san-phams.incrementViews');

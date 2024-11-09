@@ -5342,7 +5342,7 @@ span.title {
 
 .about-content .title {
     font-weight: 600;
-    color: #111;
+    color: #5a5ac9;
     text-transform: capitalize;
     font-size: 30px;
     max-width: 900px;
@@ -5352,7 +5352,8 @@ span.title {
 
 @media screen and (max-width:767px) {
     .about-content .title {
-        font-size: 25px
+        font-size: 25px;
+        color: #5a5ac9;
     }
 }
 
@@ -11850,7 +11851,7 @@ span.title {
 
 .about-content .title {
     font-weight: 600;
-    color: #111;
+    color: #5a5ac9;
     text-transform: capitalize;
     font-size: 30px;
     max-width: 900px;
@@ -11860,7 +11861,8 @@ span.title {
 
 @media screen and (max-width:767px) {
     .about-content .title {
-        font-size: 25px
+        font-size: 25px;
+        color: #5a5ac9;
     }
 }
 
@@ -18358,7 +18360,7 @@ span.title {
 
 .about-content .title {
     font-weight: 600;
-    color: #111;
+    color: #5a5ac9;
     text-transform: capitalize;
     font-size: 30px;
     max-width: 900px;
@@ -18368,7 +18370,8 @@ span.title {
 
 @media screen and (max-width:767px) {
     .about-content .title {
-        font-size: 25px
+        font-size: 25px;
+        color: #5a5ac9;
     }
 }
 

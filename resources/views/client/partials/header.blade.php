@@ -1,3 +1,4 @@
+
 <!-- offcanvas-overlay start -->
 <div class="offcanvas-overlay"></div>
 <!-- offcanvas-overlay end -->
@@ -398,13 +399,13 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
                         <div class="cart-block-links theme1 d-none d-sm-block">
-                            <ul class="d-flex align-items-center gap-2">
+                            <ul class="d-flex align-items-center gap-2" style="transform: translateY(3px);">
                                 <!-- <li>
                                     <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li> -->
-                                <form class="search-box" action="{{ url('/') }}" method="post">
+                                <form class="search-box" style="margin: 0;" action="{{ url('/') }}" method="post">
                                     @csrf
                                     @method('get')
                                     <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">

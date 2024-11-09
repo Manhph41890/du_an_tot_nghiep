@@ -55,6 +55,9 @@ class CartController extends Controller
 
         // Lấy thông tin sản phẩm
         $sanPham = san_pham::findOrFail($validatedData['san_pham_id']);
+        // Giảm số lượng của sản phẩm trong bảng san_pham
+        $sanPham->so_luong -= $validatedData['quantity']; // Giảm số lượng tương ứng
+        $sanPham->save(); // Lưu lại thay đổi
 
         // Lấy thông tin biến thể sản phẩm
         $variant = bien_the_san_pham::where('san_pham_id', $sanPham->id)
@@ -107,34 +110,42 @@ class CartController extends Controller
         return response()->json(['success' => true, 'message' => 'Sản phẩm đã được thêm vào giỏ hàng!', 'total_price' => $totalPrice]);
     }
 
-
-
-
-
-
+    // Cập nhật giỏ hàng
     public function update(Request $request, $id)
     {
+        // Validate input
         $request->validate([
             'size_san_pham_id' => 'required|exists:size_san_phams,id',
             'color_san_pham_id' => 'required|exists:color_san_phams,id',
             'quantity' => 'required|integer|min:1',
         ]);
 
+        // Lấy thông tin sản phẩm trong giỏ hàng
         $cartItem = CartItem::findOrFail($id);
+        $oldQuantity = $cartItem->quantity;  // Số lượng cũ
+
+        // Cập nhật size và màu trong giỏ hàng
         $cartItem->size_san_pham_id = $request->size_san_pham_id;
         $cartItem->color_san_pham_id = $request->color_san_pham_id;
         $cartItem->quantity = $request->quantity;
 
+        // Lấy biến thể sản phẩm tương ứng
         $variant = bien_the_san_pham::where('san_pham_id', $cartItem->san_pham_id)
             ->where('size_san_pham_id', $request->size_san_pham_id)
             ->where('color_san_pham_id', $request->color_san_pham_id)
             ->first();
 
         if ($variant) {
-            if ($request->quantity > $variant->so_luong) {
+            // Kiểm tra số lượng có đủ không
+            if ($request->quantity > $variant->so_luong + $oldQuantity) {
                 return back()->withErrors(['quantity' => 'Số lượng không được vượt quá ' . $variant->so_luong . ' sản phẩm.']);
             }
 
+            // Cập nhật số lượng trong kho: tăng/giảm tùy theo số lượng mới và cũ
+            $variant->so_luong += $oldQuantity - $request->quantity;  // Điều chỉnh số lượng trong kho
+            $variant->save();
+
+            // Cập nhật giá cho sản phẩm trong giỏ hàng
             $product = san_pham::find($cartItem->san_pham_id);
             $discountedPrice = $product->gia_km ?? 0;
             $cartItem->price = ($variant->gia + $discountedPrice) * $request->quantity;
@@ -142,10 +153,19 @@ class CartController extends Controller
             return back()->with('error', 'Biến thể sản phẩm không tồn tại.');
         }
 
+        // Lưu lại thông tin giỏ hàng
         $cartItem->save();
+
+        // Cập nhật số lượng trong bảng san_pham (sản phẩm gốc)
+        $product = san_pham::find($cartItem->san_pham_id);
+        $product->so_luong -= ($request->quantity - $oldQuantity);  // Tăng hoặc giảm số lượng sản phẩm trong bảng san_pham
+        $product->save();
 
         return redirect()->back()->with('success', 'Giỏ hàng đã được cập nhật thành công!');
     }
+
+
+
     // Xóa sản phẩm khỏi giỏ hàng
     public function removeFromCart($id)
     {
@@ -161,7 +181,27 @@ class CartController extends Controller
         $cart = Cart::where('user_id', Auth::id())->first();
 
         if ($cart && $cart->id === $cartItem->cart_id) {
-            // Nếu thuộc về giỏ hàng của người dùng, xóa mục
+            // Lấy thông tin biến thể sản phẩm
+            $variant = bien_the_san_pham::where('san_pham_id', $cartItem->san_pham_id)
+                ->where('size_san_pham_id', $cartItem->size_san_pham_id)
+                ->where('color_san_pham_id', $cartItem->color_san_pham_id)
+                ->first();
+
+            // Nếu biến thể sản phẩm tồn tại, cập nhật lại số lượng sản phẩm trong kho
+            if ($variant) {
+                // Cộng lại số lượng vào bảng `bien_the_san_pham`
+                $variant->so_luong += $cartItem->quantity;
+                $variant->save();
+            }
+
+            // Cập nhật lại số lượng trong bảng `san_pham` (nếu cần)
+            $product = san_pham::find($cartItem->san_pham_id);
+            if ($product) {
+                $product->so_luong += $cartItem->quantity;  // Cộng lại số lượng trong bảng `san_pham`
+                $product->save();
+            }
+
+            // Xóa sản phẩm khỏi giỏ hàng
             $cartItem->delete();
 
             return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng');
@@ -169,6 +209,8 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng');
     }
+
+
     public function showCart()
     {
         // Lấy user_id của người dùng hiện tại

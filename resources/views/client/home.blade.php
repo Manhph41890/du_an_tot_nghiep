@@ -217,30 +217,7 @@
                                                                 alt="thumbnail" />
                                                         </a>
                                                         <!-- product links -->
-                                                        <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#quick-view">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                                        
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
@@ -307,30 +284,7 @@
                                                                 src="{{ asset('/storage/' . $sanPhamGg->anh_san_pham) }}">
                                                         </a>
                                                         <!-- product links -->
-                                                        <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#quick-view">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                                        
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
@@ -395,30 +349,7 @@
                                                                 alt="anh san pham" />
                                                         </a>
                                                         <!-- product links -->
-                                                        <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#quick-view">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+                                                        
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">

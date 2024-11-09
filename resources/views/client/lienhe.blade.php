@@ -34,15 +34,15 @@
                 <div class="col-lg-6 col-12 mb-30">
                     <!--  contact page side content  -->
                     <div class="contact-page-side-content">
-                        <h3 class="contact-page-title">Liên hệ</h3>
+                        <h3 class="contact-page-title style_primary" >Liên hệ</h3>
                         <p class="contact-page-message mb-30">
                             ARTICRAFT
                         <p>Vẽ sáng tạo - Tô hạnh phúc</p>
                         </p>
                         <!--  single contact block  -->
 
-                        <div class="single-contact-block">
-                            <h4><i class="fa fa-fax"></i> Địa chỉ</h4>
+                        <div class="single-contact-block ">
+                            <h4 class="style_primary"><i class="fa fa-fax" style="margin-right: 8px;"></i> Địa chỉ</h4>
                             <p>P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội </p>
                         </div>
 
@@ -51,7 +51,7 @@
                         <!--  single contact block -->
 
                         <div class="single-contact-block">
-                            <h4><i class="fa fa-phone"></i> SĐT</h4>
+                            <h4 class="style_primary"><i class="fa fa-phone" style="margin-right: 8px;"></i> SĐT</h4>
                             <p>
                                 <a href="tel:123456789">Mobile: 0394338046 </a>
                             </p>
@@ -63,7 +63,7 @@
                         <!--  single contact block -->
 
                         <div class="single-contact-block">
-                            <h4><i class="fas fa-envelope"></i> Email</h4>
+                            <h4 class="style_primary "><i class="fas fa-envelope " style="margin-right: 8px;"></i> Email</h4>
                             <p>
                                 <a href="mailto:yourmail@domain.com">articraft@gmail.com</a>
                             </p>
@@ -77,28 +77,28 @@
                 <div class="col-lg-6 col-12 mb-30">
                     <!--  contact form content -->
                     <div class="contact-form-content">
-                        <h3 class="contact-page-title">Tư Vấn Thêm</h3>
+                        <h3 class="contact-page-title style_primary" >Tư Vấn Thêm</h3>
                         <div class="contact-form">
                             <form id="contact-form" action="https://htmldemo.net/looki/looki/assets/php/contact.php"
                                 method="POST">
                                 <div class="form-group">
-                                    <label>Your Name <span class="required">*</span></label>
-                                    <input type="text" name="name" id="name" />
+                                    <label class="style_primary">Họ và tên <span class="required">*</span></label>
+                                    <input type="text" name="name" placeholder="Nhập tên của bạn..." id="name" />
                                 </div>
                                 <div class="form-group">
-                                    <label>Your Email <span class="required">*</span></label>
-                                    <input type="email" name="email" id="email" />
+                                    <label class="style_primary">Email <span class="required">*</span></label>
+                                    <input type="email" name="email" placeholder="Nhập email..." id="email" />
                                 </div>
                                 <div class="form-group">
-                                    <label>Subject</label>
-                                    <input type="text" name="subject" id="subject" />
+                                    <label class="style_primary">Đối tượng</label>
+                                    <input type="text" name="subject" placeholder="Nhập đối tượng..." id="subject" />
                                 </div>
                                 <div class="form-group">
-                                    <label>Your Message</label>
-                                    <textarea name="contactMessage" class="pb-10" id="contactMessage"></textarea>
+                                    <label class="style_primary">Nội dung</label>
+                                    <textarea name="contactMessage" class="pb-10" placeholder="Nhập nội dung..." id="contactMessage"></textarea>
                                 </div>
-                                <div class="form-group mb-0">
-                                    <button type="submit" value="submit" id="submit" class="btn btn-dark btn--lg"
+                                <div class="form-group my-3">
+                                    <button type="submit" value="submit" id="submit" class="btn btn-dark btn--lg button_submit"
                                         name="submit">
                                         submit
                                     </button>
@@ -114,3 +114,24 @@
     </section>
     <!-- contact-section end -->
 @endsection
+<style>
+    .style_primary{
+        color: #5a5ac9 !important;
+    }
+    .form-group{
+        height: auto !important;
+        margin-bottom: 0px !important;
+    }
+    .button_submit{
+        color: #5a5ac9 !important;
+        background: #fff !important;
+        border-color: #5a5ac9 !important;
+        border-radius: 4px !important;
+        padding: 12px 28px !important;
+    }
+    .button_submit:hover{
+        color: #fff !important;
+        background: #5a5ac9 !important;
+       
+    }
+</style>

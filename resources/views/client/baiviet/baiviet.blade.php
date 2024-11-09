@@ -46,7 +46,7 @@
                                 </div>
                                 <h3 class="title mb-15 mt-15">
                                     <a
-                                        href="{{ url('client/baivietchitiet', $baiviet->id) }}">{{ $baiviet->tieu_de_bai_viet }}</a>
+                                        style='color: #5a5ac9;'  href="{{ url('client/baivietchitiet', $baiviet->id) }}">{{ $baiviet->tieu_de_bai_viet }}</a>
                                 </h3>
                                 <p class="text">
                                     {{ Str::limit($baiviet->noi_dung, 100, '...') }}

@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-12">
                     <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('client.home')}}">Trang chủ</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Blog
                         </li>

@@ -1357,7 +1357,8 @@ button.close:hover {
     position: relative;
     font-size: 30px;
     font-weight: 700;
-    text-transform: capitalize
+    text-transform: capitalize;
+    color: #5a5ac9 !important;
 }
 
 @media screen and (max-width:480px) {
@@ -3121,7 +3122,8 @@ body.offcanvas-open {
 }
 
 .slider-content .title span {
-    opacity: 0
+    opacity: 0;
+    color: #5a5ac9 !important;
 }
 
 @media screen and (min-width:1200px) and (max-width:1600px) {
@@ -3150,7 +3152,7 @@ body.offcanvas-open {
 
 .slider-content .text {
     font-size: 20px;
-    color: #111;
+    color: #5a5ac9 !important;
     text-transform: uppercase;
     margin-bottom: 15px;
     opacity: 0
@@ -3158,13 +3160,16 @@ body.offcanvas-open {
 
 @media screen and (min-width:768px) and (max-width:991px) {
     .slider-content .text {
-        font-size: 16px
+        font-size: 16px;
+        color: #5a5ac9 !important;
     }
 }
 
 @media screen and (max-width:767px) {
     .slider-content .text {
-        font-size: 18px
+        font-size: 18px;
+        color: #5a5ac9 !important;
+        
     }
 }
 
@@ -9626,7 +9631,8 @@ body.offcanvas-open {
 }
 
 .slider-content .title span {
-    opacity: 0
+    opacity: 0;
+    color: #5a5ac9 !important;
 }
 
 @media screen and (min-width:1200px) and (max-width:1600px) {
@@ -9655,7 +9661,7 @@ body.offcanvas-open {
 
 .slider-content .text {
     font-size: 20px;
-    color: #111;
+    color: #5a5ac9 !important;
     text-transform: uppercase;
     margin-bottom: 15px;
     opacity: 0
@@ -9663,13 +9669,15 @@ body.offcanvas-open {
 
 @media screen and (min-width:768px) and (max-width:991px) {
     .slider-content .text {
-        font-size: 16px
+        font-size: 16px;
+        color: #5a5ac9 !important;
     }
 }
 
 @media screen and (max-width:767px) {
     .slider-content .text {
-        font-size: 18px
+        font-size: 18px;
+        color: #5a5ac9 !important;
     }
 }
 
@@ -16131,7 +16139,8 @@ body.offcanvas-open {
 }
 
 .slider-content .title span {
-    opacity: 0
+    opacity: 0;
+    color: #5a5ac9 !important;
 }
 
 @media screen and (min-width:1200px) and (max-width:1600px) {
@@ -16160,7 +16169,7 @@ body.offcanvas-open {
 
 .slider-content .text {
     font-size: 20px;
-    color: #111;
+    color: #5a5ac9 !important;
     text-transform: uppercase;
     margin-bottom: 15px;
     opacity: 0
@@ -16168,13 +16177,15 @@ body.offcanvas-open {
 
 @media screen and (min-width:768px) and (max-width:991px) {
     .slider-content .text {
-        font-size: 16px
+        font-size: 16px;
+        color: #5a5ac9 !important;
     }
 }
 
 @media screen and (max-width:767px) {
     .slider-content .text {
-        font-size: 18px
+        font-size: 18px;
+        color: #5a5ac9 !important;
     }
 }
 

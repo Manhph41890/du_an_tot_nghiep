@@ -9,17 +9,17 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300">
+                                <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
                                     ArtiCraft
                                 </p>
                                 <h2 class="title animated">
-                                    <span class="animated d-block" data-animation-in="fadeInLeft" data-delay-in=".800">Vẽ
+                                    <span class="animated d-block main_text tex" style=" color: #5a5ac9 !important;" data-animation-in="fadeInLeft" data-delay-in=".800">Vẽ
                                         sáng tạo - Tô hạnh phúc</span>
-                                    <span class="animated font-weight-bold" data-animation-in="fadeInRight"
+                                    <span class="animated font-weight-bold text_sale" style=" color: #5a5ac9 !important;" data-animation-in="fadeInRight"
                                         data-delay-in="1.5">Sale 30% Off</span>
                                 </h2>
                                 <ngay href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</ngay>
                             </div>
                         </div>
@@ -32,18 +32,18 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
                                 </p>
 
                                 <h2 class="title">
-                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
+                                    <span class="animated d-block main_text tex" data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
                                         sáng tạo - Tô hạnh phúc</span>
-                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp"
+                                    <span class="animated font-weight-bold text_sale" data-animation-in="fadeInUp"
                                         data-delay-in="1.5">Sale 30% Off</span>
                                 </h2>
                                 <Nga href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
                             </div>
                         </div>
@@ -56,17 +56,17 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
                                 </p>
                                 <h2 class="title">
-                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
+                                    <span class="animated d-block main_text " data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
                                         sáng tạo - Tô hạnh phúc</span>
-                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp"
+                                    <span class="animated font-weight-bold text_sale" data-animation-in="fadeInUp"
                                         data-delay-in="1.5">Sale 30% Off</span>
                                 </h2>
                                 <a href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</a>
                             </div>
                         </div>
@@ -803,3 +803,19 @@
     </div>
     <!-- modals end -->
 @endsection
+<style>
+    .text-slider,
+    .text_sale,
+    .main_text{
+        color: #5a5ac9 !important;
+    }
+    .button_primary{
+        color: #5a5ac9 !important;
+        border-color: #5a5ac9 !important;
+    }
+    .button_primary:hover{
+        color: #fff !important;
+        border-color: #5a5ac9 !important;
+        background: #5a5ac9 !important;
+    }
+</style>

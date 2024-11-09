@@ -37,7 +37,7 @@
                     <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
-                    </ul> -->
+                    </ul> 
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Giới thiệu</span></a>
@@ -469,7 +469,7 @@
                                             </a>
                                             <!-- <div class="dropdown-divider"></div> -->
                                             <!-- Đăng xuất -->
-                                            <form id="logout-form" class="notify-item notify-item__form" action="{{ route('auth.logout') }}" method="POST">
+                                            <form id="logout-form" class="notify-item notify-item__form" style="margin-bottom: 0;" action="{{ route('auth.logout') }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="dropdown-item notify-item__button">
                                                     <i class="mdi mdi-location-exit fs-16 align-middle"></i>
@@ -741,7 +741,7 @@
         background-color: #f8f8f8;
     }
     .profile-dropdown__info{
-        display: flex !important;
+        /* display: flex ; */
         align-items: flex-start;
         flex-direction: column;
         padding: 0;

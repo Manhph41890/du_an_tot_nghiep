@@ -150,7 +150,7 @@
                                                 <div class="widget-check-box">
                                                     <input type="radio" name="color" id="color-{{ $color->id }}"
                                                         value="{{ $color->id }}" required />
-                                                    <label class="me-2" style="background-color:{{ $color->ma_mau }};"
+                                                    <label class="me-2" style="background-color:{{ $color->ma_mau }}"
                                                         for="color-{{ $color->id }}">{{ $color->ten_color }}</label>
                                                 </div>
                                             @endforeach

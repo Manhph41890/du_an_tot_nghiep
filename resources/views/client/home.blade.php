@@ -203,7 +203,8 @@
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a href="{{ route('sanpham.chitiet', $item->id) }}">
+                                                                <a class="min_h"
+                                                                    href="{{ route('sanpham.chitiet', $item->id) }}">
                                                                     {{ $item->ten_san_pham }}
                                                                 </a>
                                                             </h3>
@@ -270,7 +271,7 @@
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a
+                                                                <a class="min_h"
                                                                     href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
                                                                     {{ $sanPhamGg->ten_san_pham }}
                                                                 </a>
@@ -335,7 +336,7 @@
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a
+                                                                <a class="min_h"
                                                                     href="{{ route('sanpham.chitiet', $sanphamview->id) }}">{{ $sanphamview->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
@@ -405,36 +406,12 @@
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
                                                         alt="anh san pham" />
                                                 </a>
-                                                <!-- product links -->
-                                                <ul class="actions d-flex justify-content-center">
-                                                    <li>
-                                                        <a class="action" href="wishlist.html">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="add to wishlist" class="icon-heart">
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="action" href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#compare">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="Add to compare" class="icon-shuffle"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="action" href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="Quick view" class="icon-magnifier"></span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
                                                 <!-- product links end-->
                                             </div>
                                             <div class="media-body">
                                                 <div class="product-desc">
                                                     <h3 class="title">
-                                                        <a
+                                                        <a class="min_h"
                                                             href="{{ route('san-phams.incrementViews', $sanphamview->id) }}">
                                                             {{ $sanphamview->ten_san_pham }}
                                                         </a>
@@ -464,8 +441,6 @@
                                                                 <i class="icon-basket"></i>
                                                             </button>
                                                         </form> --}}
-
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -549,7 +524,18 @@
         </div>
     </div>
 
-
+    <style>
+        .min_h {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Số dòng muốn hiển thị */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 3em;
+            /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+        }
+    </style>
     <!-- modals start -->
     <!-- modal giỏ hàng -->
     {{-- <div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">

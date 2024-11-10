@@ -1,4 +1,3 @@
-
 @extends('client.layout')
 
 @section('content')
@@ -203,7 +202,7 @@
 
             /* Nếu bạn muốn thay đổi cả màu nền cho các ô thẻ <th> */
             .custom-thead th {
-                background-color: #5a5ac9  !important;
+                background-color: #5a5ac9 !important;
                 /* Nền của các thẻ <th> */
                 color: #fff !important;
                 /* Màu chữ của các thẻ <th> */
@@ -229,14 +228,14 @@
                                 // Cập nhật giá trị tổng tiền sau khi áp dụng mã khuyến mãi
                                 $('#total_amount').text(response.newTotal + '₫');
                                 $('#discount-amount').text(response.discountAmount + '₫');
-
+                                toastr.success('Mã giảm giá đã được áp dụng thành công!');
                             } else {
-                                alert(response
+                                toastr.error(response
                                     .message); // Hiển thị thông báo nếu mã khuyến mãi không hợp lệ
                             }
                         },
                         error: function() {
-                            alert('Đã xảy ra lỗi. Vui lòng thử lại sau.');
+                            toastr.error('Đã xảy ra lỗi. Vui lòng thử lại sau.');
                         }
                     });
                 });

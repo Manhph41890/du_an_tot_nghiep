@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-12">
                     <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                        <li class="breadcrumb-item"><a href="{{route('client.home')}}">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('client.home') }}">Trang chủ</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Chi tiết sản phẩm
                         </li>
@@ -104,8 +104,8 @@
                         <div class="product-body mb-40">
                             <div class="d-flex align-items-center mb-30">
                                 <div class="product-price me-2">
-                                    <del class="del">{{ number_format( $sanPhamCT->gia_goc) }}</del>
-                                    <span id="new-price" class="onsale">{{ number_format($sanPhamCT->gia_km)  }}</span>
+                                    <del class="del">{{ number_format($sanPhamCT->gia_goc) }}</del>
+                                    <span id="new-price" class="onsale">{{ number_format($sanPhamCT->gia_km) }}</span>
                                     <!-- Giá cập nhật sẽ được hiển thị ở đây -->
                                 </div>
                                 <span class="badge position-static bg-dark rounded-0">Giảm
@@ -175,6 +175,9 @@
                                             <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
                                                 <span class="me-2"></span> Thêm vào giỏ hàng
                                             </button>
+                                            <span style="font-size: 17px">Còn {{ $sanPhamCT->so_luong }} sản phẩm trong
+                                                kho</span>
+
                                         @endauth
                                         @guest
                                             <button type="button" class="btn btn-dark btn--xl mt-5 mt-sm-0"
@@ -336,7 +339,7 @@
                 <div class="col-12">
                     <div class="section-title text-center">
                         <h2 class="title pb-3 mb-3">Bạn cũng có thể thích</h2>
-                        
+
                     </div>
                 </div>
                 <div class="col-12">
@@ -393,7 +396,8 @@
                                                         <span class="ion-android-star de-selected"></span>
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span class="product-price">{{ number_format($sanphamlq->gia_goc) }}</span>
+                                                        <span
+                                                            class="product-price">{{ number_format($sanphamlq->gia_goc) }}</span>
                                                     </div>
                                                 </div>
                                             </div>

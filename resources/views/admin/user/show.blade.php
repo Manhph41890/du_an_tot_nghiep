@@ -12,9 +12,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        {{-- <div class="card-header">
-                            <h5 class="card-title mb-0"></h5>
-                        </div><!-- end card header --> --}}
 
                         <div class="card-body">
                             <form>

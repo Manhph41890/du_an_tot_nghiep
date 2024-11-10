@@ -1,3 +1,5 @@
+
+
 @extends('client.layout')
 
 @section('content')
@@ -25,7 +27,7 @@
     <div class="product-tab bg-white pt-80 pb-50">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 mb-30">
+                <div class="col-lg-10 mb-30">
                     <div class="grid-nav-wraper bg-lighten2 mb-30">
                         <div class="row align-items-center">
                             <div class="col-12 col-md-6 mb-3 mb-md-0">
@@ -102,20 +104,19 @@
                                                     </ul>
                                                 </div>
                                                 <div class="product-desc py-0 px-0">
-                                                    <h3 class="title">
+                                                    <h3 class="title min_h">
                                                         <a
                                                             href="{{ route('sanpham.chitiet', $item->id) }}">{{ $item->ten_san_pham }}</a>
                                                     </h3>
                                                     <div class="star-rating">
-                                                        @if ($item->danh_gia > 0)
-                                                            @for ($i = 1; $i <= 5; $i++)
-                                                                @if ($i <= floor($item->danh_gia))
-                                                                    <span class="ion-ios-star"></span>
-                                                                @else
-                                                                    <span class="ion-ios-star-outline"></span>
-                                                                @endif
-                                                            @endfor
-                                                        @endif
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($item->danh_gia > 0 && $i <= floor($item->danh_gia))
+                                                                <span class="ion-ios-star"></span> <!-- Sao có màu -->
+                                                            @else
+                                                                <span class="ion-ios-star-outline"></span>
+                                                                <!-- Sao không màu -->
+                                                            @endif
+                                                        @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <p class="product-price">
@@ -135,7 +136,7 @@
                             <div class="row grid-view-list theme1">
                                 @foreach ($list_sanphams as $item)
                                     <div class="col-12 mb-30">
-                                        <div class="card product-card">
+                                        <div class="card product-card minh">
                                             <div class="card-body">
                                                 <div class="media flex-column flex-md-row">
                                                     <div class="product-thumbnail position-relative">
@@ -199,15 +200,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-30 order-lg-first">
+                <div class="col-lg-2 mb-30 order-lg-first">
                     <aside class="left-sidebar theme1">
                         <div class="search-filter">
                             <form action="{{ route('client.cuahang') }}" method="post">
                                 @csrf
                                 @method('GET')
-                                <div class="sidbar-widget mt-10">
-                                    <h4 class="title">LỌC THEO</h4>
-                                    <h4 class="sub-title pt-10">Danh mục</h4>
+                                <div class="">
+                                    <div class="header-sidebar d-flex justify-content-between">
+                                        <h5 class="title" style="font-size: 20px;">LỌC THEO</h5>
+                                        <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button>
+                                    </div>
+                                    <h4 class="sub-title pt-10" style="font-size: 18px;">Danh mục</h4>
                                     <div class="form-group">
                                         @foreach ($danhmucs as $item)
                                             <div class="widget-check-box">
@@ -220,8 +224,8 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                <div class="sidbar-widget mt-10">
-                                    <h4 class="sub-title pt-10">Giá</h4>
+                                <div class="">
+                                    <h4 class="sub-title pt-10" >Giá</h4>
                                     <div class="widget-check-box">
                                         <input type="checkbox" id="price1" name="price[]" value="0-100000"
                                             @if (isset($request->price) && in_array('0-100000', $request->price)) checked @endif />
@@ -243,7 +247,7 @@
                                         <label for="price4">> 1.000.000</label>
                                     </div>
                                 </div>
-                                <div class="sidbar-widget mt-10">
+                                <div class="">
                                     <h4 class="sub-title">Size</h4>
                                     <div class="form-group">
                                         @foreach ($size_sidebar as $item)
@@ -257,23 +261,21 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                <div class="sidbar-widget mt-10">
+                                <div class="">
                                     <h4 class="sub-title">Color</h4>
                                     <div class="form-group">
                                         @foreach ($color_sidebar as $item)
-                                            <div class="widget-check-box color-grey">
+                                            <div class="widget-check-box">
                                                 <input type="checkbox" id="color-{{ $item->id }}" name="color[]"
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
-                                                <label for="color-{{ $item->id }}"
-                                                    style="background-color: {{ $item->ma_mau }} !important;">
+                                                <label for="color-{{ $item->id }}">
                                                     {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
                                                 </label>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Lọc</button>
                             </form>
                         </div>
                     </aside>
@@ -386,7 +388,8 @@
                                         <p>{{ $item?->mo_ta_san_pham }}</p>
                                     </div>
 
-                                    <form id="add-to-cart-form{{ $item->id }}" method="POST" action="{{ route('cart.add') }}">
+                                    <form id="add-to-cart-form{{ $item->id }}" method="POST"
+                                        action="{{ route('cart.add') }}">
                                         @csrf <!-- Thêm token CSRF để bảo mật -->
 
                                         <!-- Hidden field for san_pham_id -->
@@ -395,7 +398,8 @@
                                         <div class="d-flex mt-30">
                                             <div class="product-size col-3">
                                                 <h3 class="title">Size</h3>
-                                                <select class="mt-0" id="size_san_pham_id{{ $item->id }}" name="size_san_pham_id">
+                                                <select class="mt-0" id="size_san_pham_id{{ $item->id }}"
+                                                    name="size_san_pham_id">
                                                     <option value="">Chọn</option>
                                                     <!-- Thêm tùy chọn "Chọn kích thước" -->
                                                     @foreach ($item->bien_the_san_phams as $bien_the)
@@ -403,7 +407,8 @@
                                                             {{ $bien_the->size->ten_size }}</option>
                                                     @endforeach
                                                 </select>
-                                                <span id="size-error{{ $item->id }}" class="text-danger" style="display: none;">Vui lòng
+                                                <span id="size-error{{ $item->id }}" class="text-danger"
+                                                    style="display: none;">Vui lòng
                                                     chọn size!</span>
                                             </div>
                                             <div class="product-size col-3">
@@ -421,21 +426,25 @@
                                                         </div>
                                                     @endforeach
                                                 </div>
-                                                <span id="color-error{{ $item->id }}" class="text-danger" style="display: none;">Vui
+                                                <span id="color-error{{ $item->id }}" class="text-danger"
+                                                    style="display: none;">Vui
                                                     lòng chọn màu!</span>
                                             </div>
                                         </div>
                                         <div class="product-footer">
                                             <div class="product-count style d-flex flex-column flex-sm-row my-4">
                                                 <div class="count d-flex">
-                                                    <input type="number" min="1" max="10" step="1"
-                                                        value="1" id="quantity-{{ $item->id }}"
-                                                        name="quantity" />
+                                                    <input type="number" name="quantity" min="1" max="10"
+                                                        step="1" value="1" required />
                                                     <div class="button-group">
-                                                        <button type="button" class="count-btn increment"><i
-                                                                class="fas fa-chevron-up"></i></button>
-                                                        <button type="button" class="count-btn decrement"><i
-                                                                class="fas fa-chevron-down"></i></button>
+                                                        <button type="button" class="count-btn increment"
+                                                            onclick="incrementQuantity()">
+                                                            <i class="fas fa-chevron-up"></i>
+                                                        </button>
+                                                        <button type="button" class="count-btn decrement"
+                                                            onclick="decrementQuantity()">
+                                                            <i class="fas fa-chevron-down"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                                 <div>
@@ -455,9 +464,23 @@
                 </div>
             </div>
         </div>
+        <style>
+            .min_h {
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                /* Số dòng */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .sub-title{
+                font-size: 18px;
+            }
+        </style>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('add-to-cart-form{{ $item->id }}').addEventListener('submit', function(event) {
+                document.getElementById('add-to-cart-form{{ $item->id }}').addEventListener('submit', function(
+                    event) {
                     const sizeSelect = document.getElementById('size_san_pham_id{{ $item->id }}');
                     const sizeError = document.getElementById('size-error{{ $item->id }}');
                     const colorError = document.getElementById('color-error{{ $item->id }}');
@@ -486,7 +509,23 @@
                     }
                 });
             });
+            // Hàm tăng số lượng
+            function incrementQuantity() {
+                const quantityInput = document.querySelector('input[name="quantity"]');
+                let quantity = parseInt(quantityInput.value);
+                if (quantity < 10) {
+                    quantityInput.value = quantity + 1;
+                }
+            }
 
+            // Hàm giảm số lượng
+            function decrementQuantity() {
+                const quantityInput = document.querySelector('input[name="quantity"]');
+                let quantity = parseInt(quantityInput.value);
+                if (quantity > 1) {
+                    quantityInput.value = quantity - 1;
+                }
+            }
 
             function showMainImage(imageUrl) {
                 // Tìm phần tử của ảnh chính

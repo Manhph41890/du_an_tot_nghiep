@@ -34,11 +34,28 @@
                                                         'Thành công' => 'bg-success',
                                                         'Đã hủy' => 'bg-danger',
                                                     ];
-                                                    $class = $statusClasses[$donhang->trang_thai] ?? 'bg-secondary';
+                                                    $class =
+                                                        $statusClasses[$donhang->trang_thai_don_hang] ?? 'bg-secondary';
                                                 @endphp
 
                                                 <span class="badge {{ $class }}">
-                                                    {{ $donhang->trang_thai }}
+                                                    {{ $donhang->trang_thai_don_hang }}
+                                                </span>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-3">
+                                                <p class="mb-0 me-2">Trạng thái Thanh toán:</p>
+                                                @php
+                                                    $statusClasses = [
+                                                        'Đã thanh toán' => 'bg-success',
+                                                        'Chưa thanh toán' => 'bg-danger',
+                                                    ];
+                                                    $class =
+                                                        $statusClasses[$donhang->trang_thai_thanh_toan] ??
+                                                        'bg-secondary';
+                                                @endphp
+
+                                                <span class="badge {{ $class }}">
+                                                    {{ $donhang->trang_thai_thanh_toan }}
                                                 </span>
                                             </div>
                                         </div>
@@ -58,29 +75,31 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><img src="{{ asset('/storage/' . $donhang->san_phams?->anh_san_pham) }}"
-                                                                width="50px"></td>
-                                                        <td>
-                                                            {{ $donhang->san_phams?->ten_san_pham }}<br>
-                                                            Màu:
-                                                            {{ $donhang->bien_the_san_pham?->color?->ten_color ?? 'N/A' }}<br>
-                                                            Size:
-                                                            {{ $donhang->bien_the_san_pham?->size?->ten_size ?? 'N/A' }}
-                                                        </td>
+                                                    @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
+                                                        <tr>
+                                                            <td>
+                                                                <img src="{{ asset('/storage/' . optional($chi_tiet->san_pham)->anh_san_pham) }}"
+                                                                    width="50px" alt="Product Image">
+                                                            </td>
+                                                            <td>
+                                                                {{ optional($chi_tiet->san_pham)->ten_san_pham ?? 'N/A' }}<br>
+                                                                Màu:
+                                                                {{ optional($chi_tiet->color_san_pham)->ten_color ?? 'N/A' }}<br>
+                                                                Size:
+                                                                {{ optional($chi_tiet->size_san_pham)->ten_size ?? 'N/A' }}
+                                                            </td>
+                                                            <td>{{ number_format($chi_tiet->gia_tien, 0, ',', '.') }}
+                                                                VND</td>
+                                                            <td>{{ $chi_tiet->so_luong }}</td>
 
-                                                        <td>{{ $donhang->chi_tiet_don_hangs->first()?->so_luong ?? 'N/A' }}
-                                                        </td>
-                                                        <td>{{ number_format($donhang->chi_tiet_don_hangs->first()?->gia_tien ?? 0, 0, ',', '.') }}
-                                                            VND</td>
-                                                        <td>{{ number_format($donhang->chi_tiet_don_hangs->first()?->thanh_tien ?? 0, 0, ',', '.') }}
-                                                            VND</td>
-                                                    </tr>
+                                                            <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
+                                                                VND</td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="mb-3">
-                                            {{-- ----------- --}}
                                             <p><strong>Mã khuyến mãi</strong>:
                                                 {{ $donhang->khuyen_mai?->ten_khuyen_mai }} -
                                                 {{ $donhang->khuyen_mai?->ma_khuyen_mai }}</p>
@@ -90,12 +109,17 @@
                                                 {{ $donhang->phuong_thuc_thanh_toan?->kieu_thanh_toan }}</p>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="card">
                                     <div class="card-body">
+                                        <p><strong class="pe-1">Tổng tiền sản phẩm</strong>
+                                            {{ number_format($donhang->chi_tiet_don_hangs->sum('thanh_tien'), 0, ',', '.') }}
+                                            VND
+                                        </p>
                                         <p><strong class="pe-1">Giảm
-                                                giá:</strong>-
+                                                giá:</strong>
                                             {{ number_format($donhang->khuyen_mai?->gia_tri_khuyen_mai ?? 0, 0, ',', '.') }}VND
                                         </p>
                                         <p><strong class="pe-1">Vận
@@ -110,7 +134,7 @@
                             <div class="col-lg-3">
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Chờ xác nhận' -->
-                                @if ($donhang->trang_thai == 'Chờ xác nhận')
+                                @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
                                     <div class="card mb-3">
                                         <div class="card-body">
                                             <h5>Xác nhận đơn hàng</h5>
@@ -139,7 +163,7 @@
                                 </div>
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if ($donhang->trang_thai == 'Thành công')
+                                @if ($donhang->trang_thai_don_hang == 'Thành công')
                                     <div class="card">
                                         <div class="card-body">
                                             <h5>Đánh giá của khách hàng</h5>

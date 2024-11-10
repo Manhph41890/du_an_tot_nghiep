@@ -15,21 +15,34 @@ class ClientSanPhamController extends Controller
     {
         $title = "Cửa hàng";
         // lấy danh mục có sản phẩm đổ ra sidebar
-        $danhmucs = danh_muc::has('san_phams')->with('san_phams')->get();
+        $danhmucs = danh_muc::has('san_phams')->with('san_phams')->where('is_active', '1')->get();
         foreach ($danhmucs as $danhmuc) {
             $danhmuc->soluong_sp_dm = $danhmuc->san_phams()->count();
         }
 
-        // Lấy size biến thể có sản phẩm đổ ra sidebar
-        $size_sidebar = size_san_pham::has('bien_the_san_phams')->with('bien_the_san_phams')->get();
+        // Lấy size biến thể có sản phẩm đổ ra sidebar, chỉ lấy những size có sản phẩm đang hoạt động
+        $size_sidebar = size_san_pham::whereHas('bien_the_san_phams.san_pham', function ($query) {
+            $query->where('is_active', 1);
+        })->with(['bien_the_san_phams.san_pham' => function ($query) {
+            $query->where('is_active', 1);
+        }])->get();
         foreach ($size_sidebar as $sl_size_sb) {
-            $sl_size_sb->sl_size = $sl_size_sb->bien_the_san_phams->count();
+            $sl_size_sb->sl_size = $sl_size_sb->bien_the_san_phams->filter(function ($bien_the) {
+                return $bien_the->san_pham && $bien_the->san_pham->is_active == 1;
+            })->count();
         }
 
+
         // Lấy màu sắc biến thể có sản phẩm đổ ra sidebar
-        $color_sidebar = color_san_pham::has('bien_the_san_phams')->with('bien_the_san_phams')->get();
+        $color_sidebar = color_san_pham::whereHas('bien_the_san_phams.san_pham', function ($query) {
+            $query->where('is_active', 1);
+        })->with(['bien_the_san_phams.san_pham' => function ($query) {
+            $query->where('is_active', 1);
+        }])->get();
         foreach ($color_sidebar as $sl_color_sb) {
-            $sl_color_sb->sl_color = $sl_color_sb->bien_the_san_phams->count();
+            $sl_color_sb->sl_color = $sl_color_sb->bien_the_san_phams->filter(function ($bien_the) {
+                return $bien_the->san_pham && $bien_the->san_pham->is_active == 1;
+            })->count();
         }
 
         $query = san_pham::query();
@@ -39,16 +52,16 @@ class ClientSanPhamController extends Controller
         if ($request->has('sort')) {
             switch ($request->sort) {
                 case '1':
-                    $query->orderBy('created_at', 'DESC'); 
+                    $query->orderBy('created_at', 'DESC');
                     break;
                 case '2':
-                    $query->orderBy('gia_km', 'DESC'); 
+                    $query->orderBy('gia_km', 'DESC');
                     break;
                 case '3':
-                    $query->orderBy('gia_km', 'ASC'); 
+                    $query->orderBy('gia_km', 'ASC');
                     break;
                 case '4':
-                    $query->orderBy('views', 'DESC'); 
+                    $query->orderBy('views', 'DESC');
                     break;
             }
         } else {
@@ -63,14 +76,16 @@ class ClientSanPhamController extends Controller
 
         // Lọc theo giá
         if ($request->has('price')) {
-            foreach ($request->price as $priceRange) {
-                if ($priceRange == '1000000+') {
-                    $query->orWhere('gia_km', '>', 1000000);
-                } else {
-                    list($min, $max) = explode('-', $priceRange);
-                    $query->orWhereBetween('gia_km', [(int)$min, (int)$max]);
+            $query->where(function ($q) use ($request) {
+                foreach ($request->price as $priceRange) {
+                    if ($priceRange == '1000000+') {
+                        $q->orWhere('gia_km', '>', 1000000);
+                    } else {
+                        list($min, $max) = explode('-', $priceRange);
+                        $q->orWhereBetween('gia_km', [(int)$min, (int)$max]);
+                    }
                 }
-            }
+            });
         }
 
         // Lọc theo size
@@ -88,9 +103,10 @@ class ClientSanPhamController extends Controller
         }
 
 
-        $soluongsanpham = $query->count();
+
+        $soluongsanpham = $query->where('is_active', '1')->count();
         $list_sanphams = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color', 'danh_gias'])
-            ->orderBy('id', 'DESC')
+            ->where('is_active', '1')
             ->paginate(9);
 
         foreach ($list_sanphams as $sanpham) {
@@ -105,6 +121,6 @@ class ClientSanPhamController extends Controller
             $sanpham->danh_gia = $sanpham->danh_gias->isNotEmpty() ? $sanpham->danh_gias->pluck('diem_so')->avg() : 0;
         }
 
-        return view('client.sanpham.danhsach', compact('list_sanphams', 'title', 'danhmucs', 'soluongsanpham', 'size_sidebar', 'color_sidebar'));
+        return view('client.sanpham.danhsach', compact('list_sanphams', 'title', 'danhmucs', 'soluongsanpham', 'size_sidebar', 'color_sidebar', 'request'));
     }
 }

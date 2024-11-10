@@ -112,6 +112,7 @@
                     <div class="collapse" id="user">
                         <ul class="nav-second-level">
                             <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
+                            <li><a class="tp-link" href="{{ route('user.create') }}">Thêm nhân viên</a></li>
                         </ul>
                     </div>
                 </li>

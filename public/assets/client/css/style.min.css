@@ -1,8 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700&display=swap');
 body {
     background: #fff;
-    font-family: Poppins;
+    font-family: "Itim", cursive;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.75;
@@ -22,7 +21,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Raleway;
+    font-family: "Itim", cursive;
     margin: 0;
     line-height: 1.25;
     color: #111
@@ -1132,7 +1131,7 @@ button.close:hover {
 }
 
 .btn {
-    font-family: Raleway;
+    font-family: "Itim", cursive;
     font-size: 14px;
     font-weight: 500;
     line-height: 1;
@@ -1358,7 +1357,8 @@ button.close:hover {
     position: relative;
     font-size: 30px;
     font-weight: 700;
-    text-transform: capitalize
+    text-transform: capitalize;
+    color: #5a5ac9 !important;
 }
 
 @media screen and (max-width:480px) {
@@ -1860,7 +1860,7 @@ button.close:hover {
 
 .cart-block-links li a {
     font-size: 20px;
-    font-family: Raleway;
+    font-family: "Itim", cursive;
     font-weight: 500;
     text-align: center;
     line-height: 25px
@@ -3122,7 +3122,8 @@ body.offcanvas-open {
 }
 
 .slider-content .title span {
-    opacity: 0
+    opacity: 0;
+    color: #5a5ac9 !important;
 }
 
 @media screen and (min-width:1200px) and (max-width:1600px) {
@@ -3151,7 +3152,7 @@ body.offcanvas-open {
 
 .slider-content .text {
     font-size: 20px;
-    color: #111;
+    color: #5a5ac9 !important;
     text-transform: uppercase;
     margin-bottom: 15px;
     opacity: 0
@@ -3159,13 +3160,16 @@ body.offcanvas-open {
 
 @media screen and (min-width:768px) and (max-width:991px) {
     .slider-content .text {
-        font-size: 16px
+        font-size: 16px;
+        color: #5a5ac9 !important;
     }
 }
 
 @media screen and (max-width:767px) {
     .slider-content .text {
-        font-size: 18px
+        font-size: 18px;
+        color: #5a5ac9 !important;
+        
     }
 }
 
@@ -5338,7 +5342,7 @@ span.title {
 
 .about-content .title {
     font-weight: 600;
-    color: #111;
+    color: #5a5ac9;
     text-transform: capitalize;
     font-size: 30px;
     max-width: 900px;
@@ -5348,7 +5352,8 @@ span.title {
 
 @media screen and (max-width:767px) {
     .about-content .title {
-        font-size: 25px
+        font-size: 25px;
+        color: #5a5ac9;
     }
 }
 
@@ -6504,11 +6509,10 @@ span.required {
     border: 0
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700&display=swap');
 body {
     background: #fff;
-    font-family: Poppins;
+    font-family: "Itim", cursive;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.75;
@@ -6528,7 +6532,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Raleway;
+    font-family: "Itim", cursive;
     margin: 0;
     line-height: 1.25;
     color: #111
@@ -7638,7 +7642,7 @@ button.close:hover {
 }
 
 .btn {
-    font-family: Raleway;
+    font-family: "Itim", cursive;
     font-size: 14px;
     font-weight: 500;
     line-height: 1;
@@ -8366,7 +8370,7 @@ button.close:hover {
 
 .cart-block-links li a {
     font-size: 20px;
-    font-family: Raleway;
+    font-family: "Itim", cursive;
     font-weight: 500;
     text-align: center;
     line-height: 25px
@@ -9628,7 +9632,8 @@ body.offcanvas-open {
 }
 
 .slider-content .title span {
-    opacity: 0
+    opacity: 0;
+    color: #5a5ac9 !important;
 }
 
 @media screen and (min-width:1200px) and (max-width:1600px) {
@@ -9657,7 +9662,7 @@ body.offcanvas-open {
 
 .slider-content .text {
     font-size: 20px;
-    color: #111;
+    color: #5a5ac9 !important;
     text-transform: uppercase;
     margin-bottom: 15px;
     opacity: 0
@@ -9665,13 +9670,15 @@ body.offcanvas-open {
 
 @media screen and (min-width:768px) and (max-width:991px) {
     .slider-content .text {
-        font-size: 16px
+        font-size: 16px;
+        color: #5a5ac9 !important;
     }
 }
 
 @media screen and (max-width:767px) {
     .slider-content .text {
-        font-size: 18px
+        font-size: 18px;
+        color: #5a5ac9 !important;
     }
 }
 
@@ -11844,7 +11851,7 @@ span.title {
 
 .about-content .title {
     font-weight: 600;
-    color: #111;
+    color: #5a5ac9;
     text-transform: capitalize;
     font-size: 30px;
     max-width: 900px;
@@ -11854,7 +11861,8 @@ span.title {
 
 @media screen and (max-width:767px) {
     .about-content .title {
-        font-size: 25px
+        font-size: 25px;
+        color: #5a5ac9;
     }
 }
 
@@ -13013,7 +13021,7 @@ span.required {
 /*# sourceMappingURL=style.min.css.map */
 body {
     background: #fff;
-    font-family: Poppins;
+    font-family: "Itim", cursive;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.75;
@@ -13033,7 +13041,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Raleway;
+    font-family: "Itim", cursive;
     margin: 0;
     line-height: 1.25;
     color: #111
@@ -14143,7 +14151,7 @@ button.close:hover {
 }
 
 .btn {
-    font-family: Raleway;
+    font-family: "Itim", cursive;
     font-size: 14px;
     font-weight: 500;
     line-height: 1;
@@ -14871,7 +14879,7 @@ button.close:hover {
 
 .cart-block-links li a {
     font-size: 20px;
-    font-family: Raleway;
+    font-family: "Itim", cursive;
     font-weight: 500;
     text-align: center;
     line-height: 25px
@@ -16133,7 +16141,8 @@ body.offcanvas-open {
 }
 
 .slider-content .title span {
-    opacity: 0
+    opacity: 0;
+    color: #5a5ac9 !important;
 }
 
 @media screen and (min-width:1200px) and (max-width:1600px) {
@@ -16162,7 +16171,7 @@ body.offcanvas-open {
 
 .slider-content .text {
     font-size: 20px;
-    color: #111;
+    color: #5a5ac9 !important;
     text-transform: uppercase;
     margin-bottom: 15px;
     opacity: 0
@@ -16170,13 +16179,15 @@ body.offcanvas-open {
 
 @media screen and (min-width:768px) and (max-width:991px) {
     .slider-content .text {
-        font-size: 16px
+        font-size: 16px;
+        color: #5a5ac9 !important;
     }
 }
 
 @media screen and (max-width:767px) {
     .slider-content .text {
-        font-size: 18px
+        font-size: 18px;
+        color: #5a5ac9 !important;
     }
 }
 
@@ -18349,7 +18360,7 @@ span.title {
 
 .about-content .title {
     font-weight: 600;
-    color: #111;
+    color: #5a5ac9;
     text-transform: capitalize;
     font-size: 30px;
     max-width: 900px;
@@ -18359,7 +18370,8 @@ span.title {
 
 @media screen and (max-width:767px) {
     .about-content .title {
-        font-size: 25px
+        font-size: 25px;
+        color: #5a5ac9;
     }
 }
 
@@ -19527,4 +19539,7 @@ span.required {
 
 .pni div:first-child {
     display: none;
+}
+.sidebar-loc{
+    margin-bottom: 40px;
 }

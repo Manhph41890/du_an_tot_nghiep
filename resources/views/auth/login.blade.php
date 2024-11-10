@@ -1,10 +1,9 @@
 @extends('auth.layout')
 
 @section('css')
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700&display=swap');
     body {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Itim", cursive;
     background: #ececec;
     }
 

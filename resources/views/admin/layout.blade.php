@@ -19,6 +19,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha384-..." crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
@@ -29,7 +31,7 @@
     {{-- biểu đồ  --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <style>
+    {{-- <style>
         h4 {
             color: white;
             text-transform: uppercase;
@@ -38,6 +40,8 @@
 
         body {
             position: relative;
+            font-family: "Itim", cursive;
+
         }
 
         body::before {
@@ -55,11 +59,10 @@
             z-index: -1;
             /* Keep the blurred background behind other content */
         }
-    </style>
+    </style> --}}
 </head>
 
-<body data-menu-color="light" data-sidebar="default"
-    style=" background-image: url('assets/admin/images/bg.png');background-size: cover;background-position: center;">
+<body data-menu-color="light" data-sidebar="default">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

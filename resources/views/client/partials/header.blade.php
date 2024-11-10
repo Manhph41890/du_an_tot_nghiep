@@ -377,21 +377,20 @@
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
-                        <li class="{{ request()->routeIs('client.home') ? 'active' : '' }} ml-0">
-                            <a href="{{ route('client.home') }}" class="ps-0">Trang chủ</a>
+                        <li class="active ml-0">
+                            <a href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
-                        <li class="{{ request()->routeIs('client.gioithieu') ? 'active' : '' }}">
+                        <li>
                             <a href="{{ route('client.gioithieu') }}">Giới thiệu <i class="menu-text"></i></a>
                         </li>
-                        <li class="{{ request()->routeIs('client.cuahang') ? 'active' : '' }}">
+                        <li>
                             <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
                         </li>
-                        <li class="{{ request()->is('client/baiviet') ? 'active' : '' }}">
+
+                        <li>
                             <a href="{{ url('client/baiviet') }}">Blog</a>
                         </li>
-                        <li class="{{ request()->routeIs('client.lienhe') ? 'active' : '' }}">
-                            <a href="{{ route('client.lienhe') }}">Liên hệ</a>
-                        </li>
+                        <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3 col-xl-2">

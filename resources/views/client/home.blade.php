@@ -11,16 +11,22 @@
                             <div class="slider-content">
                                 <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
                                     ArtiCraft
+                                <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300"
+                                    style="color: #5C5BCA">
                                 </p>
                                 <h2 class="title animated">
-                                    <span class="animated d-block main_text tex" style=" color: #5a5ac9 !important;" data-animation-in="fadeInLeft" data-delay-in=".800">Vẽ
-                                        sáng tạo - Tô hạnh phúc</span>
-                                    <span class="animated font-weight-bold text_sale" style=" color: #5a5ac9 !important;" data-animation-in="fadeInRight"
-                                        data-delay-in="1.5">Sale 30% Off</span>
+                                    <span class="animated d-block" data-animation-in="fadeInLeft" data-delay-in=".800"
+                                        style="color: #5C5BCA">Khơi
+                                        nguồn đam mê nghệ thuật</span>
+                                    <span class="animated font-weight-bold" data-animation-in="fadeInRight"
+                                        data-delay-in="1.5" style="color: #5C5BCA" style="color: #5C5BCA">Ưu đãi 20%</span>
                                 </h2>
                                 <ngay href="shop-grid-4-column.html"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</ngay>
+                                <a href="{{ route('client.cuahang') }}"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a>
                             </div>
                         </div>
                     </div>
@@ -34,16 +40,22 @@
                             <div class="slider-content">
                                 <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
+                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
+                                    style="color: #5C5BCA">
+                                    Nghệ thuật cho mọi người
                                 </p>
 
                                 <h2 class="title">
-                                    <span class="animated d-block main_text tex" data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
-                                        sáng tạo - Tô hạnh phúc</span>
-                                    <span class="animated font-weight-bold text_sale" data-animation-in="fadeInUp"
-                                        data-delay-in="1.5">Sale 30% Off</span>
+                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800"
+                                        style="color: #5C5BCA">
+                                        Sáng tạo không giới hạn</span>
+                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
+                                        style="color: #5C5BCA">Giảm giá 40%</span>
                                 </h2>
                                 <Nga href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary" <a
+                                    href="{{ route('client.cuahang') }}"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
                             </div>
                         </div>
@@ -58,16 +70,25 @@
                             <div class="slider-content">
                                 <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
+                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
+                                    style="color: #5C5BCA">
+                                    Sản phẩm mới - Cảm hứng bất tận
                                 </p>
                                 <h2 class="title">
-                                    <span class="animated d-block main_text " data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
+                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800"
+                                        style="color: #5C5BCA">Vẽ
                                         sáng tạo - Tô hạnh phúc</span>
                                     <span class="animated font-weight-bold text_sale" data-animation-in="fadeInUp"
                                         data-delay-in="1.5">Sale 30% Off</span>
+                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
+                                        style="color: #5C5BCA">Sản phẩm mới</span>
                                 </h2>
                                 <a href="shop-grid-4-column.html"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</a>
+                                <a href="{{ route('client.cuahang') }}"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>
                             </div>
                         </div>
                     </div>
@@ -130,32 +151,7 @@
     <!-- common banner  start -->
     <div class="common-banner bg-white">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-30">
-                    <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/bottom_banner_3.jpg') }}"
-                                alt="banner-thumb-naile" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-30">
-                    <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/right_banner_1.jpg') }}"
-                                alt="banner-thumb-naile" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-30">
-                    <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/right_banner_1.jpg') }}"
-                                alt="banner-thumb-naile" />
-                        </a>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <!-- common banner  end -->
@@ -217,13 +213,14 @@
                                                                 alt="thumbnail" />
                                                         </a>
                                                         <!-- product links -->
-                                                        
+
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a href="{{ route('sanpham.chitiet', $item->id) }}">
+                                                                <a class="min_h"
+                                                                    href="{{ route('sanpham.chitiet', $item->id) }}">
                                                                     {{ $item->ten_san_pham }}
                                                                 </a>
                                                             </h3>
@@ -284,13 +281,13 @@
                                                                 src="{{ asset('/storage/' . $sanPhamGg->anh_san_pham) }}">
                                                         </a>
                                                         <!-- product links -->
-                                                        
+
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a
+                                                                <a class="min_h"
                                                                     href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
                                                                     {{ $sanPhamGg->ten_san_pham }}
                                                                 </a>
@@ -349,13 +346,13 @@
                                                                 alt="anh san pham" />
                                                         </a>
                                                         <!-- product links -->
-                                                        
+
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a
+                                                                <a class="min_h"
                                                                     href="{{ route('sanpham.chitiet', $sanphamview->id) }}">{{ $sanphamview->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
@@ -425,36 +422,12 @@
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
                                                         alt="anh san pham" />
                                                 </a>
-                                                <!-- product links -->
-                                                <ul class="actions d-flex justify-content-center">
-                                                    <!-- <li>
-                                                        <a class="action" href="wishlist.html">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="add to wishlist" class="icon-heart">
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="action" href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#compare">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="Add to compare" class="icon-shuffle"></span>
-                                                        </a>
-                                                    </li> -->
-                                                    <li>
-                                                        <a class="action" href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="Quick view" class="icon-magnifier"></span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
                                                 <!-- product links end-->
                                             </div>
                                             <div class="media-body">
                                                 <div class="product-desc">
                                                     <h3 class="title">
-                                                        <a
+                                                        <a class="min_h"
                                                             href="{{ route('san-phams.incrementViews', $sanphamview->id) }}">
                                                             {{ $sanphamview->ten_san_pham }}
                                                         </a>
@@ -484,8 +457,6 @@
                                                                 <i class="icon-basket"></i>
                                                             </button>
                                                         </form> --}}
-
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -569,7 +540,18 @@
         </div>
     </div>
 
-
+    <style>
+        .min_h {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Số dòng muốn hiển thị */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 3em;
+            /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+        }
+    </style>
     <!-- modals start -->
     <!-- modal giỏ hàng -->
     {{-- <div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">
@@ -803,22 +785,3 @@
     </div>
     <!-- modals end -->
 @endsection
-<style>
-    .text-slider,
-    .text_sale,
-    .main_text{
-        color: #5a5ac9 !important;
-    }
-    .button_primary{
-        color: #5a5ac9 !important;
-        border-color: #5a5ac9 !important;
-    }
-    .button_primary:hover{
-        color: #fff !important;
-        border-color: #5a5ac9 !important;
-        background: #5a5ac9 !important;
-    }
-    .padding_box{
-        padding: 24px 30px;
-    }
-</style>

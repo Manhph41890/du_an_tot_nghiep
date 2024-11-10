@@ -157,9 +157,7 @@
             <div class="single-service">
               <h3 class="title text-capitalize mb-20">Giới thiệu</h3>
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto
+                Tại Articraft, chúng tôi cung cấp đa dạng các loại dụng cụ mỹ thuật chất lượng cao, từ cọ vẽ, màu nước, màu acrylic đến giấy vẽ và nhiều sản phẩm khác. Với sứ mệnh mang đến nguồn cảm hứng và hỗ trợ tối đa cho các nghệ sĩ, chúng tôi cam kết cung cấp sản phẩm tốt nhất với giá cả hợp lý. Hãy khám phá và thỏa sức sáng tạo cùng Articraft!
               </p>
             </div>
           </div>

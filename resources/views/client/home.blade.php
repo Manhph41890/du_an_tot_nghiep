@@ -9,18 +9,19 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300">
-                                    ArtiCraft
+                                <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300"
+                                    style="color: #5C5BCA">
                                 </p>
                                 <h2 class="title animated">
-                                    <span class="animated d-block" data-animation-in="fadeInLeft" data-delay-in=".800">Vẽ
-                                        sáng tạo - Tô hạnh phúc</span>
+                                    <span class="animated d-block" data-animation-in="fadeInLeft" data-delay-in=".800"
+                                        style="color: #5C5BCA">Khơi
+                                        nguồn đam mê nghệ thuật</span>
                                     <span class="animated font-weight-bold" data-animation-in="fadeInRight"
-                                        data-delay-in="1.5">Sale 30% Off</span>
+                                        data-delay-in="1.5" style="color: #5C5BCA" style="color: #5C5BCA">Ưu đãi 20%</span>
                                 </h2>
-                                <ngay href="shop-grid-4-column.html"
+                                <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</ngay>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a>
                             </div>
                         </div>
                     </div>
@@ -32,17 +33,19 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300">
-                                    ArtiCraft
+                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
+                                    style="color: #5C5BCA">
+                                    Nghệ thuật cho mọi người
                                 </p>
 
                                 <h2 class="title">
-                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
-                                        sáng tạo - Tô hạnh phúc</span>
-                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp"
-                                        data-delay-in="1.5">Sale 30% Off</span>
+                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800"
+                                        style="color: #5C5BCA">
+                                        Sáng tạo không giới hạn</span>
+                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
+                                        style="color: #5C5BCA">Giảm giá 40%</span>
                                 </h2>
-                                <Nga href="shop-grid-4-column.html"
+                                <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
                             </div>
@@ -56,18 +59,20 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300">
-                                    ArtiCraft
+                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
+                                    style="color: #5C5BCA">
+                                    Sản phẩm mới - Cảm hứng bất tận
                                 </p>
                                 <h2 class="title">
-                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
+                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800"
+                                        style="color: #5C5BCA">Vẽ
                                         sáng tạo - Tô hạnh phúc</span>
-                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp"
-                                        data-delay-in="1.5">Sale 30% Off</span>
+                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
+                                        style="color: #5C5BCA">Sản phẩm mới</span>
                                 </h2>
-                                <a href="shop-grid-4-column.html"
+                                <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>
                             </div>
                         </div>
                     </div>
@@ -130,32 +135,7 @@
     <!-- common banner  start -->
     <div class="common-banner bg-white">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-30">
-                    <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/bottom_banner_3.jpg') }}"
-                                alt="banner-thumb-naile" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-30">
-                    <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/right_banner_1.jpg') }}"
-                                alt="banner-thumb-naile" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-30">
-                    <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/right_banner_1.jpg') }}"
-                                alt="banner-thumb-naile" />
-                        </a>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <!-- common banner  end -->
@@ -217,7 +197,7 @@
                                                                 alt="thumbnail" />
                                                         </a>
                                                         <!-- product links -->
-                                                        
+
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
@@ -284,7 +264,7 @@
                                                                 src="{{ asset('/storage/' . $sanPhamGg->anh_san_pham) }}">
                                                         </a>
                                                         <!-- product links -->
-                                                        
+
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
@@ -349,7 +329,7 @@
                                                                 alt="anh san pham" />
                                                         </a>
                                                         <!-- product links -->
-                                                        
+
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">

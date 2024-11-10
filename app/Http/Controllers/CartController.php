@@ -149,7 +149,6 @@ class CartController extends Controller
             ->where('color_san_pham_id', $request->color_san_pham_id)
             ->first();
 
-
         if ($variant) {
             // Kiểm tra số lượng có đủ không
             $newQuantity = $request->quantity;
@@ -160,7 +159,7 @@ class CartController extends Controller
             }
 
             // Cập nhật giá cho sản phẩm trong giỏ hàng
-            $product = san_pham::find(id: $cartItem->san_pham_id);
+            $product = san_pham::find($cartItem->san_pham_id);
             $discountedPrice = $product->gia_km ?? 0;
             $cartItem->price = ($variant->gia + $discountedPrice) * $newQuantity;
         } else {
@@ -172,14 +171,16 @@ class CartController extends Controller
 
         // Cập nhật số lượng trong bảng san_pham (sản phẩm gốc)
         $product = san_pham::find($cartItem->san_pham_id);
-        $product->so_luong -= ($request->quantity - $oldQuantity);  // Tăng hoặc giảm số lượng sản phẩm trong bảng san_pham
-        $product->save();
+
+
+
 
         return response()->json([
             'success' => true,
             'message' => 'Cập nhật thành công'
         ]);
     }
+
 
 
 

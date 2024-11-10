@@ -67,9 +67,15 @@
                                         @endforeach
                                     </select>
                                     <span>Số Lượng:</span>
+
                                     <input type="number" name="quantity" value="{{ $item->quantity }}" min="1"
-                                        max="{{ $item->san_pham->so_luong }}" class="quantity-input"
+                                        max="{{ $variant->so_luong }}" class="quantity-input"
                                         data-item-id="{{ $item->id }}">
+                                    @if (isset($insufficientStockItems[$item->id]))
+                                        <span class="alert-warning" style="color: red;">
+                                            Chỉ còn {{ $insufficientStockItems[$item->id]['quantity'] }} sản phẩm.
+                                        </span>
+                                    @endif
                                     <button type="button" class="btn btn-primary btn-sm update-cart-btn"
                                         data-id="{{ $item->id }}">
                                         Cập nhật
@@ -105,11 +111,13 @@
                     </ul>
                     <form action="{{ route('cart.checkout') }}" method="GET">
                         <input type="hidden" name="remove_items[]" id="selected-items">
-                        <button type="submit" class="btn_1 full-width cart"
-                            style="color: #fff; font-size: 20px; background-color: #5252e1; border: none;margin-bottom: 30px; border-radius: 8px; padding: 9px 17px; transition: all 0.3s ease;">
+                        <button id="checkout-button" class="btn btn-success"
+                            @if (
+                                $cartItems->contains(fn($item) => $item->quantity >
+                                        optional(
+                                            $item->san_pham->bien_the_san_phams->firstWhere('size_san_pham_id', $item->size_san_pham_id)->firstWhere('color_san_pham_id', $item->color_san_pham_id))->so_luong)) disabled @endif>
                             Thanh toán ngay
                         </button>
-
                     </form>
                 </div>
             </div>
@@ -123,7 +131,36 @@
             const totalPriceEl = document.getElementById('total-price');
             const removeButton = document.getElementById('remove-selected-items');
             const removeMultipleForm = document.getElementById('remove-multiple-form');
+            // Hàm kiểm tra số lượng
+            function checkStock() {
+                let isStockSufficient = true;
 
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    const itemId = input.getAttribute('data-item-id');
+                    const quantity = parseInt(input.value);
+                    const maxQuantity = parseInt(input.getAttribute('max'));
+
+                    // Kiểm tra nếu số lượng đặt hàng vượt quá số lượng tối đa
+                    if (quantity > maxQuantity) {
+                        isStockSufficient = false;
+                        const errorMsg = document.createElement('span');
+                        errorMsg.classList.add('text-danger', 'stock-error');
+                        errorMsg.textContent = 'Số lượng không đủ!';
+
+                        // Hiển thị thông báo lỗi nếu chưa có
+                        if (!input.parentNode.querySelector('.stock-error')) {
+                            input.parentNode.appendChild(errorMsg);
+                        }
+                    } else {
+                        // Xóa thông báo lỗi nếu số lượng hợp lệ
+                        const errorMsg = input.parentNode.querySelector('.stock-error');
+                        if (errorMsg) errorMsg.remove();
+                    }
+                });
+
+                // Vô hiệu hóa nút thanh toán nếu không đủ hàng
+                checkoutButton.disabled = !isStockSufficient;
+            }
             // Hàm tính tổng tiền và cập nhật form xóa
             function calculateTotal() {
                 let totalPrice = 0;

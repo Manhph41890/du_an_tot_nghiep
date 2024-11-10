@@ -56,7 +56,7 @@
                                     @endif
                                 </td>
                                 <td class="text-center">{{ $item->quantity }}</td>
-                                <td class="text-center"><strong>${{ number_format($item->price, 2) }}</strong></td>
+                                <td class="text-center"><strong>{{ number_format($item->price, 2) }}đ</strong></td>
                             </tr>
                         @endforeach
                     </tbody>

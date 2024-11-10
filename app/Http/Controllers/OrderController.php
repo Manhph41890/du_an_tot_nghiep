@@ -18,6 +18,9 @@ class OrderController extends Controller
     public function add(Request $request)
     {
         $user = Auth::user();
+
+        // Khởi tạo biến coupon là null
+        $coupon = null;
         // Kiểm tra và xác thực các trường cần thiết
         $validatedData = $request->validate([
             'ho_ten' => 'required|string|max:255',

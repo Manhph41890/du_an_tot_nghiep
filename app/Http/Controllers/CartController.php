@@ -33,6 +33,23 @@ class CartController extends Controller
 
         return view('client.cart.index', compact('cartItems'));
     }
+    public function backup()
+    {
+        // Lấy giỏ hàng của người dùng hiện tại cùng với cart items và quan hệ màu sắc và kích thước
+        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')
+            ->where('user_id', Auth::id())
+            ->first();
+
+        // Nếu không có cart, bạn có thể xử lý như sau
+        if (!$cart) {
+            return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
+        }
+
+        // Lấy cart items dựa trên cart_id
+        $cartItems = $cart->cartItems;
+
+        return view('client.cart.backup', compact('cartItems'));
+    }
 
 
 
@@ -161,54 +178,57 @@ class CartController extends Controller
         $product->so_luong -= ($request->quantity - $oldQuantity);  // Tăng hoặc giảm số lượng sản phẩm trong bảng san_pham
         $product->save();
 
-        return redirect()->back()->with('success', 'Giỏ hàng đã được cập nhật thành công!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Cập nhật thành công'
+        ]);
     }
 
 
 
     // Xóa sản phẩm khỏi giỏ hàng
-    public function removeFromCart($id)
-    {
-        // Tìm mục trong giỏ hàng theo ID
-        $cartItem = CartItem::find($id);
+    // public function removeFromCart($id)
+    // {
+    //     // Tìm mục trong giỏ hàng theo ID
+    //     $cartItem = CartItem::find($id);
 
-        // Kiểm tra xem có tìm thấy mục không
-        if (!$cartItem) {
-            return redirect()->route('cart.index')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng');
-        }
+    //     // Kiểm tra xem có tìm thấy mục không
+    //     if (!$cartItem) {
+    //         return redirect()->route('cart.index')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng');
+    //     }
 
-        // Kiểm tra xem mục này có thuộc về giỏ hàng của người dùng hiện tại không
-        $cart = Cart::where('user_id', Auth::id())->first();
+    //     // Kiểm tra xem mục này có thuộc về giỏ hàng của người dùng hiện tại không
+    //     $cart = Cart::where('user_id', Auth::id())->first();
 
-        if ($cart && $cart->id === $cartItem->cart_id) {
-            // Lấy thông tin biến thể sản phẩm
-            $variant = bien_the_san_pham::where('san_pham_id', $cartItem->san_pham_id)
-                ->where('size_san_pham_id', $cartItem->size_san_pham_id)
-                ->where('color_san_pham_id', $cartItem->color_san_pham_id)
-                ->first();
+    //     if ($cart && $cart->id === $cartItem->cart_id) {
+    //         // Lấy thông tin biến thể sản phẩm
+    //         $variant = bien_the_san_pham::where('san_pham_id', $cartItem->san_pham_id)
+    //             ->where('size_san_pham_id', $cartItem->size_san_pham_id)
+    //             ->where('color_san_pham_id', $cartItem->color_san_pham_id)
+    //             ->first();
 
-            // Nếu biến thể sản phẩm tồn tại, cập nhật lại số lượng sản phẩm trong kho
-            if ($variant) {
-                // Cộng lại số lượng vào bảng `bien_the_san_pham`
-                $variant->so_luong += $cartItem->quantity;
-                $variant->save();
-            }
+    //         // Nếu biến thể sản phẩm tồn tại, cập nhật lại số lượng sản phẩm trong kho
+    //         if ($variant) {
+    //             // Cộng lại số lượng vào bảng `bien_the_san_pham`
+    //             $variant->so_luong += $cartItem->quantity;
+    //             $variant->save();
+    //         }
 
-            // Cập nhật lại số lượng trong bảng `san_pham` (nếu cần)
-            $product = san_pham::find($cartItem->san_pham_id);
-            if ($product) {
-                $product->so_luong += $cartItem->quantity;  // Cộng lại số lượng trong bảng `san_pham`
-                $product->save();
-            }
+    //         // Cập nhật lại số lượng trong bảng `san_pham` (nếu cần)
+    //         $product = san_pham::find($cartItem->san_pham_id);
+    //         if ($product) {
+    //             $product->so_luong += $cartItem->quantity;  // Cộng lại số lượng trong bảng `san_pham`
+    //             $product->save();
+    //         }
 
-            // Xóa sản phẩm khỏi giỏ hàng
-            $cartItem->delete();
+    //         // Xóa sản phẩm khỏi giỏ hàng
+    //         $cartItem->delete();
 
-            return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng');
-        }
+    //         return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng');
+    //     }
 
-        return redirect()->route('cart.index')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng');
-    }
+    //     return redirect()->route('cart.index')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng');
+    // }
 
 
     public function showCart()
@@ -261,5 +281,44 @@ class CartController extends Controller
 
         // Chuyển hướng về trang xác nhận đơn hàng và truyền biến $user vào view
         return view('client.order.index', compact('user', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens'))->with('success', 'Đặt hàng thành công!');
+    }
+    public function updateMultiple(Request $request)
+    {
+        // Lấy tất cả các id sản phẩm mà người dùng đã chọn
+        $selectedItems = $request->input('selected_items', []);
+
+        // Nếu không có sản phẩm nào được chọn
+        if (empty($selectedItems)) {
+            return redirect()->route('cart.index')->with('message', 'Bạn chưa chọn sản phẩm nào.');
+        }
+
+        // Lấy giỏ hàng của người dùng
+        $cart = Cart::where('user_id', Auth::id())->first();
+
+        // Lấy tất cả các cart items
+        $cartItems = CartItem::whereIn('id', $selectedItems)
+            ->where('cart_id', $cart->id)
+            ->get();
+
+        // Tính tổng tiền của các sản phẩm đã chọn
+        $totalPrice = 0;
+        foreach ($cartItems as $item) {
+            $totalPrice += $item->price * $item->quantity; // Bạn có thể điều chỉnh cách tính tổng nếu cần
+        }
+
+        // Trả về view giỏ hàng cùng với tổng tiền
+        return redirect()->route('cart.index')->with('totalPrice', $totalPrice);
+    }
+    public function removeMultiple(Request $request)
+    {
+        // Kiểm tra nếu không có sản phẩm nào được chọn
+        if (!$request->has('remove_items') || empty($request->remove_items)) {
+            return redirect()->route('cart.index')->with('error', 'Không có sản phẩm nào được chọn để xóa.');
+        }
+
+        // Xóa tất cả các sản phẩm được chọn
+        CartItem::whereIn('id', $request->remove_items)->delete();
+
+        return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
     }
 }

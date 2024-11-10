@@ -142,7 +142,7 @@
               <img src="{{ asset('assets/client/images/service/2.jpg')}}" alt="single-thumb-naile" />
             </div>
             <div class="single-service">
-              <h3 class="title text-capitalize mb-20">Our Mission</h3>
+              <h3 class="title text-capitalize mb-20">Sứ mệnh của chúng tôi</h3>
               <p>
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem
                 accusantium doloremque laudantium, totam rem aperiam, eaque ipsa

@@ -1,3 +1,4 @@
+
 @extends('client.layout')
 
 @section('content')
@@ -202,7 +203,7 @@
 
             /* Nếu bạn muốn thay đổi cả màu nền cho các ô thẻ <th> */
             .custom-thead th {
-                background-color: #333 !important;
+                background-color: #5a5ac9  !important;
                 /* Nền của các thẻ <th> */
                 color: #fff !important;
                 /* Màu chữ của các thẻ <th> */

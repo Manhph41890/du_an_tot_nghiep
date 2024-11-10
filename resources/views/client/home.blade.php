@@ -9,6 +9,8 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
+                                <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
+                                    ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300"
                                     style="color: #5C5BCA">
                                 </p>
@@ -19,6 +21,9 @@
                                     <span class="animated font-weight-bold" data-animation-in="fadeInRight"
                                         data-delay-in="1.5" style="color: #5C5BCA" style="color: #5C5BCA">Ưu đãi 20%</span>
                                 </h2>
+                                <ngay href="shop-grid-4-column.html"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</ngay>
                                 <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a>
@@ -33,6 +38,8 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
+                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                    ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
                                     style="color: #5C5BCA">
                                     Nghệ thuật cho mọi người
@@ -45,7 +52,9 @@
                                     <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
                                         style="color: #5C5BCA">Giảm giá 40%</span>
                                 </h2>
-                                <a href="{{ route('client.cuahang') }}"
+                                <Nga href="shop-grid-4-column.html"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary" <a
+                                    href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
                             </div>
@@ -59,6 +68,8 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
+                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                    ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
                                     style="color: #5C5BCA">
                                     Sản phẩm mới - Cảm hứng bất tận
@@ -67,9 +78,14 @@
                                     <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800"
                                         style="color: #5C5BCA">Vẽ
                                         sáng tạo - Tô hạnh phúc</span>
+                                    <span class="animated font-weight-bold text_sale" data-animation-in="fadeInUp"
+                                        data-delay-in="1.5">Sale 30% Off</span>
                                     <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
                                         style="color: #5C5BCA">Sản phẩm mới</span>
                                 </h2>
+                                <a href="shop-grid-4-column.html"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</a>
                                 <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>
@@ -85,7 +101,7 @@
     <!-- staic media start -->
     <section class="static-media-section py-80 bg-white">
         <div class="container">
-            <div class="static-media-wrap theme-bg">
+            <div class="static-media-wrap theme-bg padding_box">
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
@@ -93,7 +109,7 @@
                                 src="{{ asset('assets/client/images/icon/2.png') }}" alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Miễn phí vận chuyển</h4>
-                                <p class="text">Tất cả đơn hàng trên 50.000d</p>
+                                <p class="text">Đơn hàng trên 50.000d</p>
                             </div>
                         </div>
                     </div>
@@ -112,8 +128,8 @@
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
                                 src="{{ asset('assets/client/images/icon/4.png') }}" alt="icon" />
                             <div class="media-body">
-                                <h4 class="title">Thanh toán an toàn 100%</h4>
-                                <p class="text">Thanh toán của bạn sẽ an toàn với chúng tôi</p>
+                                <h4 class="title">Bảo mật an toàn 100%</h4>
+                                <p class="text">Bảo mật thông tin</p>
                             </div>
                         </div>
                     </div>
@@ -123,7 +139,7 @@
                                 src="{{ asset('assets/client/images/icon/5.png') }}" alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Hỗ trợ 24/7</h4>
-                                <p class="text">Liên hệ với chúng tôi 24h/7</p>
+                                <p class="text">Hỗ trợ khách hàng 24/7</p>
                             </div>
                         </div>
                     </div>

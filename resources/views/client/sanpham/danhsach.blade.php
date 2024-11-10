@@ -1,3 +1,5 @@
+
+
 @extends('client.layout')
 
 @section('content')
@@ -25,7 +27,7 @@
     <div class="product-tab bg-white pt-80 pb-50">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 mb-30">
+                <div class="col-lg-10 mb-30">
                     <div class="grid-nav-wraper bg-lighten2 mb-30">
                         <div class="row align-items-center">
                             <div class="col-12 col-md-6 mb-3 mb-md-0">
@@ -198,18 +200,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-30 order-lg-first">
+                <div class="col-lg-2 mb-30 order-lg-first">
                     <aside class="left-sidebar theme1">
                         <div class="search-filter">
                             <form action="{{ route('client.cuahang') }}" method="post">
                                 @csrf
                                 @method('GET')
-                                <div class="sidbar-widget mt-10">
+                                <div class="">
                                     <div class="header-sidebar d-flex justify-content-between">
-                                        <h4 class="title">LỌC THEO</h4>
+                                        <h5 class="title" style="font-size: 20px;">LỌC THEO</h5>
                                         <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button>
                                     </div>
-                                    <h4 class="sub-title pt-10">Danh mục</h4>
+                                    <h4 class="sub-title pt-10" style="font-size: 18px;">Danh mục</h4>
                                     <div class="form-group">
                                         @foreach ($danhmucs as $item)
                                             <div class="widget-check-box">
@@ -222,8 +224,8 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                <div class="sidbar-widget mt-10">
-                                    <h4 class="sub-title pt-10">Giá</h4>
+                                <div class="">
+                                    <h4 class="sub-title pt-10" >Giá</h4>
                                     <div class="widget-check-box">
                                         <input type="checkbox" id="price1" name="price[]" value="0-100000"
                                             @if (isset($request->price) && in_array('0-100000', $request->price)) checked @endif />
@@ -245,7 +247,7 @@
                                         <label for="price4">> 1.000.000</label>
                                     </div>
                                 </div>
-                                <div class="sidbar-widget mt-10">
+                                <div class="">
                                     <h4 class="sub-title">Size</h4>
                                     <div class="form-group">
                                         @foreach ($size_sidebar as $item)
@@ -259,7 +261,7 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                <div class="sidbar-widget mt-10">
+                                <div class="">
                                     <h4 class="sub-title">Color</h4>
                                     <div class="form-group">
                                         @foreach ($color_sidebar as $item)
@@ -470,6 +472,9 @@
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 text-overflow: ellipsis;
+            }
+            .sub-title{
+                font-size: 18px;
             }
         </style>
         <script>

@@ -1,3 +1,4 @@
+
 <!-- offcanvas-overlay start -->
 <div class="offcanvas-overlay"></div>
 <!-- offcanvas-overlay end -->
@@ -37,7 +38,7 @@
                     <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
-                    </ul> -->
+                    </ul> 
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Giới thiệu</span></a>
@@ -397,13 +398,13 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
                         <div class="cart-block-links theme1 d-none d-sm-block">
-                            <ul class="d-flex align-items-center gap-2">
+                            <ul class="d-flex align-items-center gap-2" style="transform: translateY(3px);">
                                 <!-- <li>
                                     <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li> -->
-                                <form class="search-box" action="{{ url('/') }}" method="post">
+                                <form class="search-box" style="margin: 0;" action="{{ url('/') }}" method="post">
                                     @csrf
                                     @method('get')
                                     <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
@@ -447,30 +448,30 @@
                             <ul class="d-flex">
                                 @auth
                                     <li class="dropdown notification-list topbar-dropdown">
-                                        <a class="nav-link dropdown-toggle nav-user me-0" href="#"
+                                        <a class="nav-link dropdown-toggle nav-user me-0 avatar_box" href="#"
                                             style="width: 50px;" id="profileDropdown" role="button"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
-                                                alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
+                                                alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
                                             {{-- <span class="pro-user-name ms-1">
                                                 {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
                                         </span> --}}
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-end profile-dropdown">
+                                        <div class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
                                             <!-- Tài khoản -->
                                             <a class="dropdown-item notify-item" href="#" id="showUserProfile">
                                                 <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
                                                 <span>Tài khoản</span>
                                             </a>
-                                            <hr>
-                                            <a class="" href="{{ route('taikhoan.dashboard') }}" id="">
-                                                <span>Thông tin tài khoản</span>
+                                            <!-- <hr> -->
+                                            <a class="notify-item notify-item__form" href="{{ route('taikhoan.dashboard') }}" id="">
+                                            <i class="far fa-user"></i> <span>Thông tin tài khoản</span>
                                             </a>
-                                            <div class="dropdown-divider"></div>
+                                            <!-- <div class="dropdown-divider"></div> -->
                                             <!-- Đăng xuất -->
-                                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
+                                            <form id="logout-form" class="notify-item notify-item__form" style="margin-bottom: 0;" action="{{ route('auth.logout') }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="dropdown-item notify-item">
+                                                <button type="submit" class="dropdown-item notify-item__button">
                                                     <i class="mdi mdi-location-exit fs-16 align-middle"></i>
                                                     <span>Đăng Xuất</span>
                                                 </button>
@@ -739,6 +740,34 @@
     #product-search .dropdown-item:hover {
         background-color: #f8f8f8;
     }
+    .profile-dropdown__info{
+        /* display: flex ; */
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0;
+    }
+    .profile-dropdown__info a {
+        text-align: justify !important;
+    }
+    .notify-item{
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        color: #515151 !important;
+        width: 100%;
+        display: block;
+        border-bottom: 1px solid #ccc !important;
+        padding: 8px 12px;
+    }
+    .notify-item__form:hover{
+        background: #e9ecef;
+    }
+    .notify-item__button{
+        padding: 0;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        color: #515151 !important;
+    }
+
 </style>
 
 <!-- JavaScript cho modal -->

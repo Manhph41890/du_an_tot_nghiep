@@ -43,7 +43,6 @@ class OrderController extends Controller
                 ->where('ngay_bat_dau', '<=', now())
                 ->where('ngay_ket_thuc', '>=', now())
                 ->first();
-
             if ($coupon) {
                 $discount = $coupon->gia_tri_khuyen_mai;
                 $total -= $discount;

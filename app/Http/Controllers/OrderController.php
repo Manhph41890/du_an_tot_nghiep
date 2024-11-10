@@ -46,7 +46,6 @@ class OrderController extends Controller
                 ->where('ngay_bat_dau', '<=', now())
                 ->where('ngay_ket_thuc', '>=', now())
                 ->first();
-
             if ($coupon) {
                 $discount = $coupon->gia_tri_khuyen_mai;
                 $total -= $discount;
@@ -56,7 +55,6 @@ class OrderController extends Controller
         }
 
         $shippingCost = 30000;
-        $total += $shippingCost;
         $totall = $total + $shippingCost;
 
         // Tính `newTotal` sau khi áp dụng giảm giá
@@ -81,7 +79,7 @@ class OrderController extends Controller
                 'phuong_thuc_thanh_toan_id' => $validatedData['phuong_thuc_thanh_toan'],
                 'phuong_thuc_van_chuyen_id' => 9,
                 'ngay_tao' => now()->timezone('Asia/Ho_Chi_Minh'),
-                'tong_tien' => $total,
+                'tong_tien' => $totall,
                 'trang_thai_don_hang' => 'Chờ xác nhận',
                 'trang_thai_thanh_toan' => 'Đã thanh toán'
             ]);
@@ -156,7 +154,7 @@ class OrderController extends Controller
             $order->phuong_thuc_thanh_toan_id = $validatedData['phuong_thuc_thanh_toan'];
             $order->phuong_thuc_van_chuyen_id = 9;
             $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
-            $order->tong_tien = $total;
+            $order->tong_tien = $totall;
             $order->trang_thai_don_hang = 'Chờ xác nhận';
             $order->trang_thai_thanh_toan = 'Chưa thanh toán';
             $order->save();
@@ -179,7 +177,7 @@ class OrderController extends Controller
             $cart->cartItems()->delete();
             $cart->delete();
 
-            return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
+            return redirect()->route('order.success_nhanhang')->with('success', 'Đặt hàng thành công!');
         }
     }
 
@@ -232,6 +230,10 @@ class OrderController extends Controller
             return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
         }
 
+        return view('client.order.success');
+    }
+    public function success_nhanhang()
+    {
         return view('client.order.success');
     }
 

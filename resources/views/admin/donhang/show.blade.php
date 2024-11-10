@@ -88,9 +88,10 @@
                                                                 Size:
                                                                 {{ optional($chi_tiet->size_san_pham)->ten_size ?? 'N/A' }}
                                                             </td>
-                                                            <td>{{ $chi_tiet->so_luong }}</td>
                                                             <td>{{ number_format($chi_tiet->gia_tien, 0, ',', '.') }}
                                                                 VND</td>
+                                                            <td>{{ $chi_tiet->so_luong }}</td>
+
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
                                                                 VND</td>
                                                         </tr>

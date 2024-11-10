@@ -32,16 +32,16 @@
         }
 
         .bg-img1 {
-            background-image: url('./assets/client/images/banner/slider_1.jpg');
+            background-image: url('./assets/client/images/banner/Banner1@2x.png');
             width: 50%;
         }
 
         .bg-img2 {
-            background-image: url('./assets/client/images/banner/bottom_banner_1.jpg');
+            background-image: url('./assets/client/images/banner/Banner2.png');
         }
 
         .bg-img3 {
-            background-image: url('./assets/client/images/slider/banner_3.jpg');
+            background-image: url('./assets/client/images/banner/Banner3.png');
         }
 
         .breadcrumb-section {

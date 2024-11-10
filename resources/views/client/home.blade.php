@@ -9,18 +9,24 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300">
+                                <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
                                     ArtiCraft
+                                <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300"
+                                    style="color: #5C5BCA">
                                 </p>
                                 <h2 class="title animated">
-                                    <span class="animated d-block" data-animation-in="fadeInLeft" data-delay-in=".800">Vẽ
-                                        sáng tạo - Tô hạnh phúc</span>
+                                    <span class="animated d-block" data-animation-in="fadeInLeft" data-delay-in=".800"
+                                        style="color: #5C5BCA">Khơi
+                                        nguồn đam mê nghệ thuật</span>
                                     <span class="animated font-weight-bold" data-animation-in="fadeInRight"
-                                        data-delay-in="1.5">Sale 30% Off</span>
+                                        data-delay-in="1.5" style="color: #5C5BCA" style="color: #5C5BCA">Ưu đãi 20%</span>
                                 </h2>
                                 <ngay href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</ngay>
+                                <a href="{{ route('client.cuahang') }}"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a>
                             </div>
                         </div>
                     </div>
@@ -32,17 +38,23 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
+                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
+                                    style="color: #5C5BCA">
+                                    Nghệ thuật cho mọi người
                                 </p>
 
                                 <h2 class="title">
-                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
-                                        sáng tạo - Tô hạnh phúc</span>
-                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp"
-                                        data-delay-in="1.5">Sale 30% Off</span>
+                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800"
+                                        style="color: #5C5BCA">
+                                        Sáng tạo không giới hạn</span>
+                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
+                                        style="color: #5C5BCA">Giảm giá 40%</span>
                                 </h2>
                                 <Nga href="shop-grid-4-column.html"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary" <a
+                                    href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
                             </div>
@@ -56,18 +68,27 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
+                                <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
+                                    style="color: #5C5BCA">
+                                    Sản phẩm mới - Cảm hứng bất tận
                                 </p>
                                 <h2 class="title">
-                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800">Vẽ
+                                    <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800"
+                                        style="color: #5C5BCA">Vẽ
                                         sáng tạo - Tô hạnh phúc</span>
-                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp"
+                                    <span class="animated font-weight-bold text_sale" data-animation-in="fadeInUp"
                                         data-delay-in="1.5">Sale 30% Off</span>
+                                    <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
+                                        style="color: #5C5BCA">Sản phẩm mới</span>
                                 </h2>
                                 <a href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</a>
+                                <a href="{{ route('client.cuahang') }}"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>
                             </div>
                         </div>
                     </div>
@@ -80,7 +101,7 @@
     <!-- staic media start -->
     <section class="static-media-section py-80 bg-white">
         <div class="container">
-            <div class="static-media-wrap theme-bg">
+            <div class="static-media-wrap theme-bg padding_box">
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 py-3">
                         <div class="d-flex static-media2 flex-column flex-sm-row">
@@ -88,7 +109,7 @@
                                 src="{{ asset('assets/client/images/icon/2.png') }}" alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Miễn phí vận chuyển</h4>
-                                <p class="text">Tất cả đơn hàng trên 50.000d</p>
+                                <p class="text">Đơn hàng trên 50.000d</p>
                             </div>
                         </div>
                     </div>
@@ -107,8 +128,8 @@
                             <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
                                 src="{{ asset('assets/client/images/icon/4.png') }}" alt="icon" />
                             <div class="media-body">
-                                <h4 class="title">Thanh toán an toàn 100%</h4>
-                                <p class="text">Thanh toán của bạn sẽ an toàn với chúng tôi</p>
+                                <h4 class="title">Bảo mật an toàn 100%</h4>
+                                <p class="text">Bảo mật thông tin</p>
                             </div>
                         </div>
                     </div>
@@ -118,7 +139,7 @@
                                 src="{{ asset('assets/client/images/icon/5.png') }}" alt="icon" />
                             <div class="media-body">
                                 <h4 class="title">Hỗ trợ 24/7</h4>
-                                <p class="text">Liên hệ với chúng tôi 24h/7</p>
+                                <p class="text">Hỗ trợ khách hàng 24/7</p>
                             </div>
                         </div>
                     </div>
@@ -130,32 +151,7 @@
     <!-- common banner  start -->
     <div class="common-banner bg-white">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-30">
-                    <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/bottom_banner_3.jpg') }}"
-                                alt="banner-thumb-naile" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-30">
-                    <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/right_banner_1.jpg') }}"
-                                alt="banner-thumb-naile" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-30">
-                    <div class="banner-thumb">
-                        <a href="shop-grid-4-column.html" class="zoom-in d-block overflow-hidden">
-                            <img src="{{ asset('assets/client/images/banner/right_banner_1.jpg') }}"
-                                alt="banner-thumb-naile" />
-                        </a>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <!-- common banner  end -->
@@ -217,36 +213,14 @@
                                                                 alt="thumbnail" />
                                                         </a>
                                                         <!-- product links -->
-                                                        <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#quick-view">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a href="{{ route('sanpham.chitiet', $item->id) }}">
+                                                                <a class="min_h"
+                                                                    href="{{ route('sanpham.chitiet', $item->id) }}">
                                                                     {{ $item->ten_san_pham }}
                                                                 </a>
                                                             </h3>
@@ -307,36 +281,13 @@
                                                                 src="{{ asset('/storage/' . $sanPhamGg->anh_san_pham) }}">
                                                         </a>
                                                         <!-- product links -->
-                                                        <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#quick-view">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a
+                                                                <a class="min_h"
                                                                     href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
                                                                     {{ $sanPhamGg->ten_san_pham }}
                                                                 </a>
@@ -395,36 +346,13 @@
                                                                 alt="anh san pham" />
                                                         </a>
                                                         <!-- product links -->
-                                                        <ul class="actions d-flex justify-content-center">
-                                                            <li>
-                                                                <a class="action" href="wishlist.html">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="add to wishlist" class="icon-heart">
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#compare">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Add to compare"
-                                                                        class="icon-shuffle"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="action" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#quick-view">
-                                                                    <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                        title="Quick view" class="icon-magnifier"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+
                                                         <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
                                                             <h3 class="title">
-                                                                <a
+                                                                <a class="min_h"
                                                                     href="{{ route('sanpham.chitiet', $sanphamview->id) }}">{{ $sanphamview->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
@@ -494,36 +422,12 @@
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
                                                         alt="anh san pham" />
                                                 </a>
-                                                <!-- product links -->
-                                                <ul class="actions d-flex justify-content-center">
-                                                    <li>
-                                                        <a class="action" href="wishlist.html">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="add to wishlist" class="icon-heart">
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="action" href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#compare">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="Add to compare" class="icon-shuffle"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="action" href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="Quick view" class="icon-magnifier"></span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
                                                 <!-- product links end-->
                                             </div>
                                             <div class="media-body">
                                                 <div class="product-desc">
                                                     <h3 class="title">
-                                                        <a
+                                                        <a class="min_h"
                                                             href="{{ route('san-phams.incrementViews', $sanphamview->id) }}">
                                                             {{ $sanphamview->ten_san_pham }}
                                                         </a>
@@ -553,8 +457,6 @@
                                                                 <i class="icon-basket"></i>
                                                             </button>
                                                         </form> --}}
-
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -638,7 +540,18 @@
         </div>
     </div>
 
-
+    <style>
+        .min_h {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Số dòng muốn hiển thị */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 3em;
+            /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+        }
+    </style>
     <!-- modals start -->
     <!-- modal giỏ hàng -->
     {{-- <div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">

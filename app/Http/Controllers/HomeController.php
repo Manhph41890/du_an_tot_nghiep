@@ -75,7 +75,11 @@ class HomeController extends Controller
         // Truyền thông tin màu sắc theo size vào view
         $colorsBySize = [];
         foreach ($sanPhamCT->bien_the_san_phams as $bienThe) {
-            $colorsBySize[$bienThe->size->id][] = $bienThe->color;
+            $colorsBySize[$bienThe->size->id][] = [
+                'id' => $bienThe->color->id,
+                'ten_color' => $bienThe->color->ten_color,
+                'so_luong' => $bienThe->so_luong // Thêm số lượng vào mảng
+            ];
         }
         // Lấy danh sách size và màu sắc
         $sizes = $sanPhamCT->bien_the_san_phams->pluck('size')->unique('id'); // Lấy size duy nhất

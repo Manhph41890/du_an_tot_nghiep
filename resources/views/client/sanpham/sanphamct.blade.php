@@ -434,19 +434,41 @@
 
                     var colorLabel = document.createElement('label');
                     colorLabel.setAttribute('for', 'color-' + color.id);
-                    // colorLabel.style.backgroundColor = color.ma_mau;
                     colorLabel.classList.add('me-2');
-                    colorLabel.textContent = color.ten_color;
+                    colorLabel.textContent = `${color.ten_color} (Tồn kho: ${color.so_luong})`;
 
                     var colorDiv = document.createElement('div');
                     colorDiv.classList.add('widget-check-box');
                     colorDiv.appendChild(colorInput);
                     colorDiv.appendChild(colorLabel);
 
+                    colorInput.addEventListener('change', function() {
+                        // Cập nhật số lượng tồn kho khi chọn màu
+                        var quantityInput = document.getElementById('quantity-input');
+                        var addToCartButton = document.querySelector(
+                            `#add-to-cart-form{{ $sanPhamCT->id }} button[type="submit"]`);
+
+                        quantityInput.max = color.so_luong;
+                        quantityInput.value = 1; // Đặt lại số lượng về 1 khi chọn màu mới
+
+                        // Kiểm tra số lượng tồn kho
+                        if (color.so_luong === 0) {
+                            addToCartButton.textContent = "Đã hết hàng";
+                            addToCartButton.disabled = true; // Vô hiệu hóa nút
+                            quantityInput.disabled = true; // Vô hiệu hóa ô nhập số lượng
+                        } else {
+                            addToCartButton.textContent = "Thêm vào giỏ hàng";
+                            addToCartButton.disabled = false; // Kích hoạt lại nút
+                            quantityInput.disabled = false; // Kích hoạt lại ô nhập số lượng
+                        }
+                    });
+
                     colorContainer.appendChild(colorDiv);
                 });
             }
         });
+
+
 
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('form[id^="add-to-cart-form"]').forEach(form => {

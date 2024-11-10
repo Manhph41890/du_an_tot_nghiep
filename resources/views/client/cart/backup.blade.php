@@ -24,7 +24,7 @@
                         <th>Giá</th>
                         <th>Phân loại</th>
                         <th>Tổng Tiền</th>
-                        {{-- <th>Hành Động</th> --}}
+                        <th>Hành Động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,7 +77,7 @@
                                     <strong><span class="whish-list-price">{{ number_format($item->price) }}
                                             đ</span></strong>
                                 </td>
-                                {{-- <td class="options">
+                                <td class="options">
                                     <form action="{{ route('cart.removeFromCart', $item->id) }}" method="POST"
                                         onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?');">
                                         @csrf
@@ -85,7 +85,7 @@
                                             <span class="trash"><i class="fas fa-trash-alt"></i> Xóa</span>
                                         </button>
                                     </form>
-                                </td> --}}
+                                </td>
                             </tr>
                         @endforeach
                     @else
@@ -176,7 +176,7 @@
                     // Kiểm tra nếu các phần tử không tồn tại
                     if (!sizeSelect || !colorSelect || !quantityInput) {
                         console.error("Không thể tìm thấy các phần tử của sản phẩm với ID:",
-                            itemId);
+                        itemId);
                         return;
                     }
 
@@ -201,20 +201,17 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                toastr.success(data.message, {
-                                    positionClass: 'toast-top-right',
-                                    timeOut: 3000,
-                                });
+                                alert(data.message);
                                 location.reload(); // reload trang để cập nhật lại giỏ hàng
                             } else {
-                                toastr.success(data.message);
+                                alert(data.message);
                             }
                         })
                         .catch(error => console.error('Error:', error));
                 });
             });
 
-            // sự kiện thay đổi trạng thái checkbox
+            // Lắng nghe sự kiện thay đổi trạng thái checkbox
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', calculateTotal);
             });

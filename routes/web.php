@@ -130,9 +130,15 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::get('/sanpham/search', [SanPhamController::class, 'search'])->name('sanpham.search');
     // Route giỏ hàng
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/cart/backup', [CartController::class, 'backup'])->name('cart.backup');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-    Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::post('/cart/removeFromCart/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
+    Route::post('/cart/update-multiple', [CartController::class, 'updateMultiple'])->name('cart.updateMultiple');
+    Route::post('cart/remove-multiple', [CartController::class, 'removeMultiple'])->name('cart.removeMultiple');
+    Route::post('/cart/update-price', [CartController::class, 'updatePrice'])->name('cart.updatePrice');
+
+
 
     Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
     Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');

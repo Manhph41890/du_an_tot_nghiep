@@ -149,17 +149,20 @@ class CartController extends Controller
             ->where('color_san_pham_id', $request->color_san_pham_id)
             ->first();
 
+
         if ($variant) {
             // Kiểm tra số lượng có đủ không
-            if ($request->quantity > $variant->so_luong + $oldQuantity) {
-                return back()->withErrors(['quantity' => 'Số lượng không được vượt quá ' . $variant->so_luong . ' sản phẩm.']);
+            $newQuantity = $request->quantity;
+            $availableQuantity = $variant->so_luong; // Tổng số lượng hiện có (bao gồm số lượng cũ đã có trong giỏ)
+
+            if ($newQuantity > $availableQuantity) {
+                return back()->withErrors(['quantity' => 'Số lượng không được vượt quá ' . $variant->so_luong . ' sản phẩm còn lại.']);
             }
 
-
             // Cập nhật giá cho sản phẩm trong giỏ hàng
-            $product = san_pham::find($cartItem->san_pham_id);
+            $product = san_pham::find(id: $cartItem->san_pham_id);
             $discountedPrice = $product->gia_km ?? 0;
-            $cartItem->price = ($variant->gia + $discountedPrice) * $request->quantity;
+            $cartItem->price = ($variant->gia + $discountedPrice) * $newQuantity;
         } else {
             return back()->with('error', 'Biến thể sản phẩm không tồn tại.');
         }
@@ -236,15 +239,42 @@ class CartController extends Controller
         // Nếu không có giỏ hàng, số lượng sản phẩm sẽ là 0
         if (!$cart) {
             $cartItemsCount = 0;
+            $insufficientStockItems = [];
         } else {
             // Đếm số lượng sản phẩm khác nhau trong giỏ hàng
             $cartItemsCount = CartItem::where('cart_id', $cart->id)
                 ->distinct('san_pham_id')
                 ->count('san_pham_id');
+
+            // Lấy tất cả các sản phẩm trong giỏ hàng của người dùng
+            $cartItems = CartItem::where('cart_id', $cart->id)->get();
+
+            // Kiểm tra số lượng tồn kho của từng sản phẩm
+            $insufficientStockItems = [];
+
+            foreach ($cartItems as $item) {
+                // Lấy biến thể sản phẩm dựa trên màu sắc và kích thước
+                $variant = $item->san_pham->bien_the_san_phams
+                    ->where('color_san_pham_id', $item->color_san_pham_id)
+                    ->where('size_san_pham_id', $item->size_san_pham_id)
+                    ->first();
+
+                // Kiểm tra nếu biến thể sản phẩm không đủ hàng
+                if ($variant && $variant->so_luong < $item->quantity) {
+                    $insufficientStockItems[] = [
+                        'id' => $item->id,
+                        'name' => $item->san_pham->ten_san_pham,
+                        'size' => $item->size->ten_size,
+                        'color' => $item->color->ten_color,
+                        'quantity' => $variant->so_luong,
+                    ];
+                }
+            }
         }
 
-        return view('client.partials.header', compact('cartItemsCount'));
+        return view('client.partials.header', compact('cartItemsCount', 'insufficientStockItems'));
     }
+
 
     // Quá trình thanh toán
     public function checkout(Request $request)

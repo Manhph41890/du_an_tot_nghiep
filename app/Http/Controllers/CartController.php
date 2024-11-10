@@ -72,9 +72,6 @@ class CartController extends Controller
 
         // Lấy thông tin sản phẩm
         $sanPham = san_pham::findOrFail($validatedData['san_pham_id']);
-        // Giảm số lượng của sản phẩm trong bảng san_pham
-        $sanPham->so_luong -= $validatedData['quantity']; // Giảm số lượng tương ứng
-        $sanPham->save(); // Lưu lại thay đổi
 
         // Lấy thông tin biến thể sản phẩm
         $variant = bien_the_san_pham::where('san_pham_id', $sanPham->id)
@@ -158,9 +155,6 @@ class CartController extends Controller
                 return back()->withErrors(['quantity' => 'Số lượng không được vượt quá ' . $variant->so_luong . ' sản phẩm.']);
             }
 
-            // Cập nhật số lượng trong kho: tăng/giảm tùy theo số lượng mới và cũ
-            $variant->so_luong += $oldQuantity - $request->quantity;  // Điều chỉnh số lượng trong kho
-            $variant->save();
 
             // Cập nhật giá cho sản phẩm trong giỏ hàng
             $product = san_pham::find($cartItem->san_pham_id);

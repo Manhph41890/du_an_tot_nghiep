@@ -265,7 +265,11 @@ class OrderController extends Controller
         // Kiểm tra mã giảm giá trong bảng khuyen_mais
         $coupon = khuyen_mai::where('ma_khuyen_mai', $couponCode)
             ->where('ngay_bat_dau', '<=', now()) // Mã giảm giá đã bắt đầu có hiệu lực
-            ->where('ngay_ket_thuc', '>=', now()) // Mã giảm giá còn hiệu lực
+            ->where('ngay_ket_thuc', '>=', now())
+            ->where(function ($query) use ($userId) {
+                $query->whereNull('user_id')
+                    ->orWhere('user_id', $userId);
+            })
             ->first();
 
         if ($coupon) {

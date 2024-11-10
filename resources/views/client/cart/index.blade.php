@@ -113,9 +113,10 @@
                         <input type="hidden" name="remove_items[]" id="selected-items">
                         <button id="checkout-button" class="btn btn-success"
                             @if (
-                                $cartItems->contains(fn($item) => $item->quantity >
-                                        optional(
-                                            $item->san_pham->bien_the_san_phams->firstWhere('size_san_pham_id', $item->size_san_pham_id)->firstWhere('color_san_pham_id', $item->color_san_pham_id))->so_luong)) disabled @endif>
+                                !empty($cartItems) &&
+                                    collect($cartItems)->contains(fn($item) => $item->quantity >
+                                            optional(
+                                                $item->san_pham->bien_the_san_phams->firstWhere('size_san_pham_id', $item->size_san_pham_id)->firstWhere('color_san_pham_id', $item->color_san_pham_id))->so_luong)) disabled @endif>
                             Thanh toán ngay
                         </button>
                     </form>

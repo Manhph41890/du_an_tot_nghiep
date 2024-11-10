@@ -109,7 +109,6 @@ class TaiKhoanController extends Controller
         $user->save();
 
         // Redirect back with dddda success message
-        // dieuf huong aaaaa
 
         return redirect()->route('client.taikhoan.dashboard')->with('success', 'Thông tin tài khoản đã được cập nhật thành công.');
     }

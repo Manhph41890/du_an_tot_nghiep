@@ -98,6 +98,8 @@
                                 </div>
 
                                 <div class="account-details-form">
+                                    <div class="align-items-center">
+                                    </div>
 
                                     <form action="{{ route('update_thongtin') }}" method="POST" id="user-info-form">
                                         @csrf

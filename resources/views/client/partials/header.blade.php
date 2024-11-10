@@ -1,3 +1,4 @@
+
 <!-- offcanvas-overlay start -->
 <div class="offcanvas-overlay"></div>
 <!-- offcanvas-overlay end -->
@@ -37,7 +38,7 @@
                     <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
-                    </ul> -->
+                    </ul> 
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Giới thiệu</span></a>
@@ -108,7 +109,7 @@
                                 <li><a href="wishlist.html">Wishlist Page</a></li>
                             </ul>
                         </li>
-                    </ul> --}}
+                    </ul>
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Pages</span></a>
@@ -234,7 +235,7 @@
 <!-- OffCanvas Wishlist End -->
 
 <!-- OffCanvas Cart Start -->
-<div id="offcanvas-cart" class="offcanvas offcanvas-cart theme1">
+{{-- <div id="offcanvas-cart" class="offcanvas offcanvas-cart theme1">
     <div class="inner">
         <div class="head d-flex flex-wrap justify-content-between">
             <span class="title">Cart</span>
@@ -277,13 +278,13 @@
         <a href="checkout.html" class="btn btn-dark btn--lg d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
         <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
     </div>
-</div>
+</div> --}}
 <!-- OffCanvas Cart End -->
 
 <!-- header start -->
 <header>
     <!-- header top start -->
-    <div class="header-top theme1 bg-dark py-15">
+    {{-- <div class="header-top theme1 bg-dark py-15">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-sm-6 order-last order-sm-first">
@@ -342,17 +343,17 @@
                             <li class="english">
                                 <a href="#" id="dropdown3" class="pe-0" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <img src="assets/img/logo/us-flag.jpg" alt="us flag" />
+                                    <img src="{{asset('assets/admin/images/logo/us-flag.jpg')}}" alt="us flag" />
                                     English
                                     <i class="ion ion-ios-arrow-down"></i>
                                 </a>
                                 <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown3">
                                     <li class="active">
-                                        <a href="#"><img src="assets/img/logo/us-flag.jpg" alt="us flag" />
+                                        <a href="#"><img src="{{asset('assets/admin/images/logo/us-flag.jpg')}}" alt="us flag" />
                                             English</a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="assets/img/logo/france.jpg" alt="france flag" />
+                                        <a href="#"><img src="{{asset('assets/admin/images/logo/france.jpg')}}" alt="france flag" />
                                             Français</a>
                                     </li>
                                 </ul>
@@ -362,7 +363,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- header top end -->
     <!-- header-middle satrt -->
     <div id="sticky" class="header-middle theme1 py-15 py-lg-0">
@@ -370,140 +371,26 @@
             <div class="row align-items-center">
                 <div class="col-6 col-lg-2 col-xl-2">
                     <div class="logo">
-                        <a href="index.html"><img src="assets/client/img/logo/logo.png" alt="logo" /></a>
+                        <a href="{{ route('client.home') }}"><img
+                                src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="active ml-0">
-                            <a href="index.html" class="ps-0">Home <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="index.html">Home 1</a></li>
-                                <li><a href="index-2.html">Home 2</a></li>
-                            </ul>
-                        </li>
-                        <li class="position-static">
-                            <a href="shop-grid-3-column.html">Shop <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="mega-menu row">
-                                <li class="col-3">
-                                    <ul>
-                                        <li class="mega-menu-title"><a href="#">Shop Grid</a></li>
-                                        <li>
-                                            <a href="shop-grid-3-column.html">Shop Grid 3 Column</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-4-column.html">Shop Grid 4 Column</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-left-sidebar.html">Shop Grid Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right-sidebar.html">Shop Grid Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="col-3">
-                                    <ul>
-                                        <li class="mega-menu-title"><a href="#">Shop List</a></li>
-                                        <li><a href="shop-grid-list.html">Shop List</a></li>
-                                        <li>
-                                            <a href="shop-grid-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="col-3">
-                                    <ul>
-                                        <li class="mega-menu-title"><a href="#">Shop Single</a></li>
-                                        <li><a href="single-product.html">Shop Single</a></li>
-                                        <li>
-                                            <a href="single-product-configurable.html">Shop Variable</a>
-                                        </li>
-                                        <li>
-                                            <a href="single-product-affiliate.html">Shop Affiliate</a>
-                                        </li>
-                                        <li><a href="single-product-group.html">Shop Group</a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-3">
-                                    <ul>
-                                        <li class="mega-menu-title"><a href="#">other pages</a></li>
-                                        <li><a href="about-us.html">About Page</a></li>
-                                        <li><a href="cart.html">Cart Page</a></li>
-                                        <li><a href="checkout.html">Checkout Page</a></li>
-                                        <li><a href="compare.html">Compare Page</a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-6 mt-4">
-                                    <a href="single-product.html" class="zoom-in overflow-hidden"><img
-                                            src="assets/img/mega-menu/1.jpg" alt="img" /></a>
-                                </li>
-                                <li class="col-6 mt-4">
-                                    <a href="single-product.html" class="zoom-in overflow-hidden"><img
-                                            src="assets/img/mega-menu/2.jpg" alt="img" /></a>
-                                </li>
-                            </ul>
+                            <a href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>
-                            <a href="#">Pages <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="about-us.html">About Page</a></li>
-                                <li><a href="cart.html">Cart Page</a></li>
-                                <li><a href="checkout.html">Checkout Page</a></li>
-                                <li><a href="compare.html">Compare Page</a></li>
-                                <li><a href="login.html">Login &amp; Register Page</a></li>
-                                <li><a href="myaccount.html">Account Page</a></li>
-                                <li><a href="wishlist.html">Wishlist Page</a></li>
-                            </ul>
+                            <a href="{{ route('client.gioithieu') }}">Giới thiệu <i class="menu-text"></i></a>
                         </li>
                         <li>
-                            <a href="blog-grid-3-column.html">Blog <i class="ion-ios-arrow-down"></i></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="blog-grid-3-column.html">Blog Grid</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="blog-grid-3-column.html">Blog Grid 3 column</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid-4-column.html">Blog Grid 4 column</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid-left-sidebar.html">Blog Grid Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid-right-sidebar.html">Blog Grid Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="blog-single-left-sidebar.html">Blog List</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="single-blog.html">Blog Single</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="single-blog.html">Single Blog</a></li>
-                                        <li>
-                                            <a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-single-right-sidebar.html">Blog Single Right Sidbar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <a href="{{ route('client.cuahang') }}">Cửa hàng</a>
                         </li>
-                        <li><a href="contact.html">contact Us</a></li>
+
+                        <li>
+                            <a href="{{ url('client/baiviet') }}">Blog</a>
+                        </li>
+                        <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-3 col-xl-2">
@@ -511,33 +398,32 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
                         <div class="cart-block-links theme1 d-none d-sm-block">
-                            <ul class="d-flex">
-                                <li>
-                                    <a href="javascript:void(0)" class="search search-toggle">
+                            <ul class="d-flex align-items-center gap-2" style="transform: translateY(3px);">
+                                <!-- <li>
+                                    <a href="{{ route('cart.index') }}" class="search search-toggle">
                                         <i class="icon-magnifier"></i>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="compare.html">
-                                        <span class="position-relative">
-                                            <i class="icon-shuffle"></i>
-                                            <span class="badge cbdg1">1</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="offcanvas-toggle" href="#offcanvas-wishlist">
-                                        <span class="position-relative">
-                                            <i class="icon-heart"></i>
-                                            <span class="badge cbdg1">3</span>
-                                        </span>
-                                    </a>
-                                </li>
+                                </li> -->
+                                <form class="search-box" style="margin: 0;" action="{{ url('/') }}" method="post">
+                                    @csrf
+                                    @method('get')
+                                    <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
+                                        <div class="my-2 mx-2">
+                                            <a class="search-toggle" id="searchIcon" role="button"
+                                                style="font-size: 20px;">
+                                                <i class="icon-magnifier"></i>
+                                            </a>
+                                        </div>
+                                        <!-- Ô nhập liệu sẽ được thêm vào DOM bằng JavaScript -->
+                                    </div>
+                                </form>
+
                                 <li class="mr-xl-0 cart-block position-relative">
-                                    <a class="offcanvas-toggle" href="#offcanvas-cart">
+                                    <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
                                             <i class="icon-bag"></i>
-                                            <span class="badge cbdg1">3</span>
+                                            <span class="badge cbdg1">{{ $cartItemsCount }}</span>
+                                            {{-- tổng số sản phẩm có trong giỏ hàng --}}
                                         </span>
                                     </a>
                                 </li>
@@ -561,110 +447,114 @@
                         <div class="cart-block-links theme1 d-none d-sm-block">
                             <ul class="d-flex">
                                 @auth
-                                <li class="dropdown notification-list topbar-dropdown">
-                                    <a class="nav-link dropdown-toggle nav-user me-0" href="#" style="width: 50px;"
-                                        id="profileDropdown" role="button" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
-                                            alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
-                                        {{-- <span class="pro-user-name ms-1">
+                                    <li class="dropdown notification-list topbar-dropdown">
+                                        <a class="nav-link dropdown-toggle nav-user me-0 avatar_box" href="#"
+                                            style="width: 50px;" id="profileDropdown" role="button"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
+                                                alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
+                                            {{-- <span class="pro-user-name ms-1">
                                                 {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
                                         </span> --}}
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end profile-dropdown">
-                                        <!-- Tài khoản -->
-                                        <a class="dropdown-item notify-item" href="#" id="showUserProfile">
-                                            <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
-                                            <span>Tài khoản</span>
                                         </a>
-                                        <div class="dropdown-divider"></div>
-                                        <!-- Đăng xuất -->
-                                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item notify-item">
-                                                <i class="mdi mdi-location-exit fs-16 align-middle"></i>
-                                                <span>Đăng Xuất</span>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </li>
-
-                                <!-- Popup thông tin tài khoản -->
-                                <div id="userProfilePopup" class="user-profile-popup" style="display: none">
-                                    <div class="popup-content">
-                                        <div class="popup-header">
-                                            <h5>Thông tin tài khoản</h5>
-                                            <span class="close-popup" id="closeUserProfile">&times;</span>
-                                        </div>
-                                        <div class="popup-body">
-                                            @auth
-                                            <p><strong>Họ tên:</strong> {{ Auth::user()->ho_ten }}</p>
-                                            <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-                                            <p><strong>Số điện thoại:</strong> {{ Auth::user()->so_dien_thoai }}</p>
-                                            <p><strong>Địa chỉ:</strong> {{ Auth::user()->dia_chi }}</p>
-                                            @else
-                                            <p>Vui lòng đăng nhập để xem thông tin tài khoản.</p>
-                                            @endauth
-                                        </div>
-                                        <div class="popup-footer">
-                                            <button class="btn btn-primary" id="editUserProfileBtn">Sửa</button>
-                                            <button class="btn btn-secondary" id="closeUserProfileBtn">Đóng</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Popup chỉnh sửa tài khoản -->
-                                <div id="editUserProfilePopup" class="user-profile-popup" style="display: none">
-                                    <div class="popup-content">
-                                        <div class="popup-header">
-                                            <h5>Chỉnh sửa tài khoản</h5>
-                                            <span class="close-popup" id="closeEditUserProfile">&times;</span>
-                                        </div>
-                                        <div class="popup-body">
-                                            <form id="editUserProfileForm" action="{{ route('user.update') }}"
-                                                method="POST" enctype="multipart/form-data">
+                                        <div class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
+                                            <!-- Tài khoản -->
+                                            <a class="dropdown-item notify-item" href="#" id="showUserProfile">
+                                                <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
+                                                <span>Tài khoản</span>
+                                            </a>
+                                            <!-- <hr> -->
+                                            <a class="notify-item notify-item__form" href="{{ route('taikhoan.dashboard') }}" id="">
+                                            <i class="far fa-user"></i> <span>Thông tin tài khoản</span>
+                                            </a>
+                                            <!-- <div class="dropdown-divider"></div> -->
+                                            <!-- Đăng xuất -->
+                                            <form id="logout-form" class="notify-item notify-item__form" style="margin-bottom: 0;" action="{{ route('auth.logout') }}" method="POST">
                                                 @csrf
-                                                <div class="mb-3">
-                                                    <label for="hoTen" class="form-label">Họ tên</label>
-                                                    <input type="text" class="form-control" id="hoTen"
-                                                        name="ho_ten" value="{{ Auth::user()->ho_ten }}" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="anhDaiDien" class="form-label">Ảnh đại diện</label>
-                                                    <input type="file" class="form-control" id="anhDaiDien"
-                                                        name="anh_dai_dien">
-                                                    @if (Auth::user()->anh_dai_dien)
-                                                    <div class="mt-2">
-                                                        <label>Ảnh hiện tại:</label>
-                                                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
-                                                            alt="Ảnh hiện tại" class="rounded-circle"
-                                                            style="width: 100px; height: 100px;">
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="diaChi" class="form-label">Địa Chỉ</label>
-                                                    <input type="text" class="form-control" id="diaChi"
-                                                        name="dia_chi" value="{{ Auth::user()->dia_chi }}">
-                                                </div>
-                                                <button type="submit" class="btn btn-success">Lưu</button>
-                                                <button type="button" class="btn btn-secondary"
-                                                    id="cancelEditProfile">Hủy</button>
+                                                <button type="submit" class="dropdown-item notify-item__button">
+                                                    <i class="mdi mdi-location-exit fs-16 align-middle"></i>
+                                                    <span>Đăng Xuất</span>
+                                                </button>
                                             </form>
                                         </div>
+                                    </li>
+
+                                    <!-- Popup thông tin tài khoản -->
+                                    <div id="userProfilePopup" class="user-profile-popup" style="display: none">
+                                        <div class="popup-content">
+                                            <div class="popup-header">
+                                                <h5>Thông tin tài khoản</h5>
+                                                <span class="close-popup" id="closeUserProfile">&times;</span>
+                                            </div>
+                                            <div class="popup-body">
+                                                @auth
+                                                    <p><strong>Họ tên:</strong> {{ Auth::user()->ho_ten }}</p>
+                                                    <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                                                    <p><strong>Số điện thoại:</strong> {{ Auth::user()->so_dien_thoai }}</p>
+                                                    <p><strong>Địa chỉ:</strong> {{ Auth::user()->dia_chi }}</p>
+                                                @else
+                                                    <p>Vui lòng đăng nhập để xem thông tin tài khoản.</p>
+                                                @endauth
+                                            </div>
+                                            <div class="popup-footer">
+                                                <button class="btn btn-primary" id="editUserProfileBtn">Sửa</button>
+                                                <button class="btn btn-secondary" id="closeUserProfileBtn">Đóng</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+
+                                    <!-- Popup chỉnh sửa tài khoản -->
+                                    <div id="editUserProfilePopup" class="user-profile-popup" style="display: none">
+                                        <div class="popup-content">
+                                            <div class="popup-header">
+                                                <h5>Chỉnh sửa tài khoản</h5>
+                                                <span class="close-popup" id="closeEditUserProfile">&times;</span>
+                                            </div>
+                                            <div class="popup-body">
+                                                <form id="editUserProfileForm" action="{{ route('user.update') }}"
+                                                    method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="mb-3">
+                                                        <label for="hoTen" class="form-label">Họ tên</label>
+                                                        <input type="text" class="form-control" id="hoTen"
+                                                            name="ho_ten" value="{{ Auth::user()->ho_ten }}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="anhDaiDien" class="form-label">Ảnh đại diện</label>
+                                                        <input type="file" class="form-control" id="anhDaiDien"
+                                                            name="anh_dai_dien">
+                                                        @if (Auth::user()->anh_dai_dien)
+                                                            <div class="mt-2">
+                                                                <label>Ảnh hiện tại:</label>
+                                                                <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
+                                                                    alt="Ảnh hiện tại" class="rounded-circle"
+                                                                    style="width: 100px; height: 100px;">
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="diaChi" class="form-label">Địa Chỉ</label>
+                                                        <input type="text" class="form-control" id="diaChi"
+                                                            name="dia_chi" value="{{ Auth::user()->dia_chi }}">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-success">Lưu</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        id="cancelEditProfile">Hủy</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @else
-                                <li>
-                                    <a style="font-size: 16px;" href="{{ route('auth.login') }}">
-                                        Đăng Nhập
-                                    </a>
-                                </li>
-                                <li>
-                                    <a style="font-size: 16px;" href="{{ route('auth.register') }}">
-                                        Đăng Ký
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a style="font-size: 16px;" href="{{ route('auth.login') }}">
+                                            Đăng Nhập
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a style="font-size: 16px;" href="{{ route('auth.register') }}">
+                                            Đăng Ký
+                                        </a>
+                                    </li>
                                 @endauth
                             </ul>
                         </div>
@@ -678,82 +568,6 @@
     <!-- header-middle end -->
 
 
-
-
-
-    <!-- <div class="overlay">
-        <div class="scale"></div>
-        <form class="search-box" action="{{ url('/') }}" method="GET">
-            <input type="text" name="search" placeholder="Tìm kiếm ..." id="inputsearch" />
-            <button id="close" type="submit">
-                <i class="ion-ios-search-strong"></i>
-            </button>
-            <div class="product-grouped product-count style mt-3" id="product-search">
-
-            </div>
-        </form>
-
-        <button class="close"><i class="ion-android-close"></i></button>
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#inputsearch').on('keyup', function() {
-                    var query = $(this).val();
-
-                    if (query.length > 1) {
-                        $.ajax({
-                            url: "{{ route('global.search') }}",
-                            type: "GET",
-                            data: {
-                                query: query
-                            },
-                            success: function(data) {
-                                $('#product-search').empty();
-                                if (data.products.length) {
-                                    data.products.forEach(function(product) {
-                                        $('#product-search').append(
-                                            '<div class="media flex-column flex-sm-row align-items-sm-center mb-4">' +
-                                            '<div class="media-body d-flex align-items-center">' +
-                                            '<div class="group-img me-4">' +
-                                            '<img src="' + product.image_url +
-                                            '" alt="' + product.ten_san_pham +
-                                            '" style="width: 100px; height: auto;">' +
-                                            '</div>' +
-                                            '<div>' +
-                                            '<h3 class="title text-white">' +
-                                            '<a href="{{ url('client/sanphamchitiet') }}/' +
-                                            product.id + '">' + 
-                                            product.ten_san_pham + '</a>' +
-                                            '</h3>' +
-                                            '<span>' + product.gia_km + ' VNĐ</span>' +
-                                            '</div>' +
-                                            '</div>' +
-                                            '</div>'
-                                        );
-                                    });
-                                } else {
-                                    $('#product-search').append(
-                                        '<div class="suggestion-item">Không tìm thấy kết quả</div>'
-                                    );
-                                }
-                            }
-                        });
-                    } else {
-                        $('#product-search').empty();
-                    }
-                });
-
-                // Ẩn gợi ý khi nhấp bên ngoài
-                $(document).on('click', function(e) {
-                    if (!$(e.target).closest('#inputsearch').length) {
-                        $('#product-search').empty();
-                    }
-                });
-            });
-        </script>
-    </div> -->
-
     </div>
 
 
@@ -764,7 +578,7 @@
     @auth
     var isAuthenticated = true;
     @else
-    var isAuthenticated = false;
+        var isAuthenticated = false;
     @endauth
 </script>
 
@@ -875,22 +689,103 @@
         z-index: 1000;
         /* Đặt modal lên trên cùng */
     }
+
+
+    /* search  */
+    #product-search {
+        position: absolute;
+        /* Đặt vị trí tuyệt đối để nó không bị che khuất */
+        top: 100%;
+        /* Đảm bảo nó sẽ xuất hiện ngay dưới ô input */
+        left: 0;
+        right: 0;
+        /* Để dropdown bao phủ chiều ngang của ô input */
+        max-height: 300px;
+        /* Giới hạn chiều cao */
+        background-color: #fff;
+        /* Màu nền trắng */
+        border: 1px solid #ddd;
+        /* Viền mờ để dễ nhìn */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Để dropdown có bóng đổ */
+        width: 100%;
+        /* Đảm bảo chiều rộng của dropdown bằng với ô input */
+        z-index: 9999;
+        /* Đảm bảo dropdown hiển thị lên trên tất cả các phần tử khác */
+        display: none;
+        /* Ẩn mặc định */
+        border-radius: 5px;
+        /* Bo góc */
+    }
+
+    #product-search .dropdown-item {
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+    }
+
+    #product-search .dropdown-item:hover {
+        background-color: #f1f1f1;
+        /* Màu nền khi hover */
+        color: #007bff;
+        /* Đổi màu chữ khi hover */
+    }
+
+    #product-search .suggestion-ite #product-search .dropdown-item {
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    #product-search .dropdown-item:hover {
+        background-color: #f8f8f8;
+    }
+    .profile-dropdown__info{
+        /* display: flex ; */
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0;
+    }
+    .profile-dropdown__info a {
+        text-align: justify !important;
+    }
+    .notify-item{
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        color: #515151 !important;
+        width: 100%;
+        display: block;
+        border-bottom: 1px solid #ccc !important;
+        padding: 8px 12px;
+    }
+    .notify-item__form:hover{
+        background: #e9ecef;
+    }
+    .notify-item__button{
+        padding: 0;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        color: #515151 !important;
+    }
+
 </style>
 
 <!-- JavaScript cho modal -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     document.getElementById("searchIcon").addEventListener("click", function() {
-    const mainMenu = document.querySelector(".main-menu");
-    
-    // Kiểm tra xem class justify-content-center có tồn tại không
-    if (mainMenu.classList.contains("justify-content-center")) {
-        mainMenu.classList.remove("justify-content-center"); // Xóa class justify-content-center
-        mainMenu.classList.add("justify-content-start"); // Thêm class justify-content-start
-    } else {
-        mainMenu.classList.remove("justify-content-start"); // Nếu đã là justify-content-start, quay về justify-content-center
-        mainMenu.classList.add("justify-content-center");
-    }
-});
+        const mainMenu = document.querySelector(".main-menu");
+
+        // Kiểm tra xem class justify-content-center có tồn tại không
+        if (mainMenu.classList.contains("justify-content-center")) {
+            mainMenu.classList.remove("justify-content-center"); // Xóa class justify-content-center
+            mainMenu.classList.add("justify-content-start"); // Thêm class justify-content-start
+        } else {
+            mainMenu.classList.remove(
+                "justify-content-start"); // Nếu đã là justify-content-start, quay về justify-content-center
+            mainMenu.classList.add("justify-content-center");
+        }
+    });
 
     // Lấy phần tử icon và container
     const searchIcon = document.getElementById("searchIcon");
@@ -899,9 +794,10 @@
 
     // Thêm sự kiện click vào icon để hiển thị/ẩn ô nhập liệu
     searchIcon.addEventListener("click", function() {
+        // Kiểm tra xem phần tử tìm kiếm đã tồn tại chưa
         const existingSearchInput = document.getElementById("searchInput");
 
-        if (!isSearchInputVisible) {
+        if (!existingSearchInput) {
             // Nếu ô nhập liệu chưa hiển thị, tạo và thêm nó vào DOM
             const searchInputLi = document.createElement("div");
             searchInputLi.id = "searchInput"; // Thêm ID cho ô nhập liệu
@@ -909,9 +805,11 @@
 
             // Tạo nội dung của ô nhập liệu
             searchInputLi.innerHTML = `
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Search" id="inputsearch">
+            <div class="product-grouped product-count style " id="product-search" style="position: absolute; width: 100%;top:100%; background: white; z-index: 100; display: none;">
             </div>
+        </div>
         `;
 
             // Thêm ô nhập liệu ngay sau icon
@@ -928,6 +826,65 @@
             isSearchInputVisible = false;
         }
     });
+
+    // Lắng nghe sự kiện 'keyup' trên input search
+    $(document).on('keyup', '#inputsearch', function() {
+        var query = $(this).val();
+
+        // Kiểm tra nếu có ít nhất 2 ký tự thì bắt đầu gọi AJAX tìm kiếm
+        if (query.length > 1) {
+            $.ajax({
+                url: "{{ route('global.search') }}", // Đảm bảo route này đúng
+                type: "GET",
+                data: {
+                    query: query
+                },
+                success: function(data) {
+                    $('#product-search').empty();
+                    if (data.products.length) {
+                        $('#product-search').show(); // Hiển thị dropdown
+
+                        data.products.forEach(function(product) {
+                            $('#product-search').append(
+                                '<div class="dropdown-item">' +
+                                '<a href="{{ url('client/sanphamchitiet') }}/' +
+                                product.id + '" class="d-flex align-items-center">' +
+                                '<img src="' + product.image_url + '" alt="' + product
+                                .ten_san_pham +
+                                '" style="width: 40px; height: auto;" class="me-3">' +
+                                '<div class="flex-column d-flex">' +
+                                '<span class="text-truncate" style="max-width: 120px;">' +
+                                product.ten_san_pham + '</span>' +
+                                '<span class="ms-auto">' + product.gia_km +
+                                ' VNĐ</span>' +
+                                '</div>' +
+                                '</a>' +
+                                '</div>'
+                            );
+                        });
+                    } else {
+                        $('#product-search').append(
+                            '<div class="suggestion-item">Không tìm thấy kết quả</div>'
+                        );
+                    }
+                }
+            });
+        } else {
+            $('#product-search').empty(); // Xóa gợi ý khi không có từ khóa tìm kiếm
+            $('#product-search').hide(); // Ẩn dropdown
+        }
+    });
+
+    // Ẩn gợi ý khi nhấp bên ngoài
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('#inputsearch').length) {
+            $('#product-search').empty(); // Xóa kết quả tìm kiếm
+            $('#product-search').hide(); // Ẩn dropdown
+        }
+    });
+
+
+
 
     $(document).ready(function() {
         // Hiển thị popup thông tin người dùng

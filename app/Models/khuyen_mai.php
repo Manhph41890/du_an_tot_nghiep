@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class khuyen_mai extends Model
 {
-    use HasFactory; 
-    protected $table ='khuyen_mais';
+    use HasFactory;
+    protected $table = 'khuyen_mais';
 
 
     protected $fillable = [
@@ -38,7 +38,9 @@ class khuyen_mai extends Model
     {
         return $this->belongsTo(danh_muc::class, 'danh_muc_id');
     }
-    
-
-
+    public function scopeActive($query)
+    {
+        return $query->where('ngay_bat_dau', '<=', now())
+            ->where('ngay_ket_thuc', '>=', now());
+    }
 }

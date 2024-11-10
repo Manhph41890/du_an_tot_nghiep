@@ -99,7 +99,7 @@ class AuthController extends Controller
 
         //
         $message = 'Đăng ký tài khoản thành công.' . ($existingUserWithVoucher ? ' Tuy nhiên, bạn không nhận được voucher.' : ' Bạn đã nhận được voucher khuyến mãi!');
-        return redirect()->route('customer')->with('notification', $message);
+        return redirect()->route('client.home')->with('notification', $message);
     }
 
     // Kiểm tra voucher

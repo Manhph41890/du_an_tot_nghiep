@@ -142,11 +142,9 @@
               <img src="{{ asset('assets/client/images/service/2.jpg')}}" alt="single-thumb-naile" />
             </div>
             <div class="single-service">
-              <h3 class="title text-capitalize mb-20">Our Mission</h3>
+              <h3 class="title text-capitalize mb-20">Sứ mệnh của chúng tôi</h3>
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto
+                Nhưng để bạn có thể thấy rằng tất cả những sai lầm bẩm sinh này là niềm vui của những người buộc tội và nỗi đau của những người khen ngợi, tôi sẽ kể lại toàn bộ vấn đề, và chính những điều được tạo ra bởi người phát hiện ra sự thật và như nó. là kiến ​​trúc sư
               </p>
             </div>
           </div>
@@ -159,9 +157,7 @@
             <div class="single-service">
               <h3 class="title text-capitalize mb-20">Giới thiệu</h3>
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto
+                Tại Articraft, chúng tôi cung cấp đa dạng các loại dụng cụ mỹ thuật chất lượng cao, từ cọ vẽ, màu nước, màu acrylic đến giấy vẽ và nhiều sản phẩm khác. Với sứ mệnh mang đến nguồn cảm hứng và hỗ trợ tối đa cho các nghệ sĩ, chúng tôi cam kết cung cấp sản phẩm tốt nhất với giá cả hợp lý. Hãy khám phá và thỏa sức sáng tạo cùng Articraft!
               </p>
             </div>
           </div>

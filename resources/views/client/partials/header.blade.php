@@ -1,4 +1,3 @@
-
 <!-- offcanvas-overlay start -->
 <div class="offcanvas-overlay"></div>
 <!-- offcanvas-overlay end -->
@@ -38,7 +37,7 @@
                     <ul class="offcanvas-submenu">
                         <li><a href="index.html">Home 1</a></li>
                         <li><a href="index-2.html">Home 2</a></li>
-                    </ul> 
+                    </ul>
                 </li>
                 <li>
                     <a href="#"><span class="menu-text">Giới thiệu</span></a>
@@ -404,7 +403,8 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li> -->
-                                <form class="search-box" style="margin: 0;" action="{{ url('/') }}" method="post">
+                                <form class="search-box" style="margin: 0;" action="{{ url('/') }}"
+                                    method="post">
                                     @csrf
                                     @method('get')
                                     <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
@@ -457,19 +457,18 @@
                                                 {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
                                         </span> --}}
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
-                                            <!-- Tài khoản -->
-                                            <a class="dropdown-item notify-item" href="#" id="showUserProfile">
-                                                <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
-                                                <span>Tài khoản</span>
-                                            </a>
+                                        <div
+                                            class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
                                             <!-- <hr> -->
-                                            <a class="notify-item notify-item__form" href="{{ route('taikhoan.dashboard') }}" id="">
-                                            <i class="far fa-user"></i> <span>Thông tin tài khoản</span>
+                                            <a class="notify-item notify-item__form"
+                                                href="{{ route('taikhoan.dashboard') }}" id="">
+                                                <i class="far fa-user"></i> <span>Thông tin tài khoản</span>
                                             </a>
                                             <!-- <div class="dropdown-divider"></div> -->
                                             <!-- Đăng xuất -->
-                                            <form id="logout-form" class="notify-item notify-item__form" style="margin-bottom: 0;" action="{{ route('auth.logout') }}" method="POST">
+                                            <form id="logout-form" class="notify-item notify-item__form"
+                                                style="margin-bottom: 0;" action="{{ route('auth.logout') }}"
+                                                method="POST">
                                                 @csrf
                                                 <button type="submit" class="dropdown-item notify-item__button">
                                                     <i class="mdi mdi-location-exit fs-16 align-middle"></i>
@@ -478,72 +477,6 @@
                                             </form>
                                         </div>
                                     </li>
-
-                                    <!-- Popup thông tin tài khoản -->
-                                    <div id="userProfilePopup" class="user-profile-popup" style="display: none">
-                                        <div class="popup-content">
-                                            <div class="popup-header">
-                                                <h5>Thông tin tài khoản</h5>
-                                                <span class="close-popup" id="closeUserProfile">&times;</span>
-                                            </div>
-                                            <div class="popup-body">
-                                                @auth
-                                                    <p><strong>Họ tên:</strong> {{ Auth::user()->ho_ten }}</p>
-                                                    <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-                                                    <p><strong>Số điện thoại:</strong> {{ Auth::user()->so_dien_thoai }}</p>
-                                                    <p><strong>Địa chỉ:</strong> {{ Auth::user()->dia_chi }}</p>
-                                                @else
-                                                    <p>Vui lòng đăng nhập để xem thông tin tài khoản.</p>
-                                                @endauth
-                                            </div>
-                                            <div class="popup-footer">
-                                                <button class="btn btn-primary" id="editUserProfileBtn">Sửa</button>
-                                                <button class="btn btn-secondary" id="closeUserProfileBtn">Đóng</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Popup chỉnh sửa tài khoản -->
-                                    <div id="editUserProfilePopup" class="user-profile-popup" style="display: none">
-                                        <div class="popup-content">
-                                            <div class="popup-header">
-                                                <h5>Chỉnh sửa tài khoản</h5>
-                                                <span class="close-popup" id="closeEditUserProfile">&times;</span>
-                                            </div>
-                                            <div class="popup-body">
-                                                <form id="editUserProfileForm" action="{{ route('user.update') }}"
-                                                    method="POST" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="mb-3">
-                                                        <label for="hoTen" class="form-label">Họ tên</label>
-                                                        <input type="text" class="form-control" id="hoTen"
-                                                            name="ho_ten" value="{{ Auth::user()->ho_ten }}" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="anhDaiDien" class="form-label">Ảnh đại diện</label>
-                                                        <input type="file" class="form-control" id="anhDaiDien"
-                                                            name="anh_dai_dien">
-                                                        @if (Auth::user()->anh_dai_dien)
-                                                            <div class="mt-2">
-                                                                <label>Ảnh hiện tại:</label>
-                                                                <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
-                                                                    alt="Ảnh hiện tại" class="rounded-circle"
-                                                                    style="width: 100px; height: 100px;">
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="diaChi" class="form-label">Địa Chỉ</label>
-                                                        <input type="text" class="form-control" id="diaChi"
-                                                            name="dia_chi" value="{{ Auth::user()->dia_chi }}">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-success">Lưu</button>
-                                                    <button type="button" class="btn btn-secondary"
-                                                        id="cancelEditProfile">Hủy</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                 @else
                                     <li>
                                         <a style="font-size: 16px;" href="{{ route('auth.login') }}">
@@ -740,16 +673,19 @@
     #product-search .dropdown-item:hover {
         background-color: #f8f8f8;
     }
-    .profile-dropdown__info{
+
+    .profile-dropdown__info {
         /* display: flex ; */
         align-items: flex-start;
         flex-direction: column;
         padding: 0;
     }
+
     .profile-dropdown__info a {
         text-align: justify !important;
     }
-    .notify-item{
+
+    .notify-item {
         font-size: 14px !important;
         font-weight: 400 !important;
         color: #515151 !important;
@@ -758,16 +694,17 @@
         border-bottom: 1px solid #ccc !important;
         padding: 8px 12px;
     }
-    .notify-item__form:hover{
+
+    .notify-item__form:hover {
         background: #e9ecef;
     }
-    .notify-item__button{
+
+    .notify-item__button {
         padding: 0;
         font-size: 14px !important;
         font-weight: 400 !important;
         color: #515151 !important;
     }
-
 </style>
 
 <!-- JavaScript cho modal -->

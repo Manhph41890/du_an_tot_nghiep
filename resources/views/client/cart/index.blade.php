@@ -66,8 +66,16 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    <span>Số Lượng:</span>
+
                                     <input type="number" name="quantity" value="{{ $item->quantity }}" min="1"
-                                        max="100" class="quantity-input" data-item-id="{{ $item->id }}">
+                                        max="{{ $variant->so_luong }}" class="quantity-input"
+                                        data-item-id="{{ $item->id }}">
+                                    @if (isset($insufficientStockItems[$item->id]))
+                                        <span class="alert-warning" style="color: red;">
+                                            Chỉ còn {{ $insufficientStockItems[$item->id]['quantity'] }} sản phẩm.
+                                        </span>
+                                    @endif
                                     <button type="button" class="btn btn-primary btn-sm update-cart-btn"
                                         data-id="{{ $item->id }}">
                                         Cập nhật
@@ -77,15 +85,6 @@
                                     <strong><span class="whish-list-price">{{ number_format($item->price) }}
                                             đ</span></strong>
                                 </td>
-                                {{-- <td class="options">
-                                    <form action="{{ route('cart.removeFromCart', $item->id) }}" method="POST"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?');">
-                                        @csrf
-                                        <button type="submit" class="btn btn-secondary btn-sm">
-                                            <span class="trash"><i class="fas fa-trash-alt"></i> Xóa</span>
-                                        </button>
-                                    </form>
-                                </td> --}}
                             </tr>
                         @endforeach
                     @else
@@ -110,8 +109,17 @@
                             <strong><span>Tổng Tiền: </span><span id="total-price">0</span></strong>
                         </li>
                     </ul>
-                    <a href="{{ route('cart.checkout') }}" class="btn_1 full-width cart"
-                        style="color: rgb(82, 82, 225); font-size: 20px">Thanh toán ngay</a>
+                    <form action="{{ route('cart.checkout') }}" method="GET">
+                        <input type="hidden" name="remove_items[]" id="selected-items">
+                        <button id="checkout-button" class="btn btn-success"
+                            @if (
+                                !empty($cartItems) &&
+                                    collect($cartItems)->contains(fn($item) => $item->quantity >
+                                            optional(
+                                                $item->san_pham->bien_the_san_phams->firstWhere('size_san_pham_id', $item->size_san_pham_id)->firstWhere('color_san_pham_id', $item->color_san_pham_id))->so_luong)) disabled @endif>
+                            Thanh toán ngay
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -124,12 +132,42 @@
             const totalPriceEl = document.getElementById('total-price');
             const removeButton = document.getElementById('remove-selected-items');
             const removeMultipleForm = document.getElementById('remove-multiple-form');
+            // Hàm kiểm tra số lượng
+            function checkStock() {
+                let isStockSufficient = true;
 
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    const itemId = input.getAttribute('data-item-id');
+                    const quantity = parseInt(input.value);
+                    const maxQuantity = parseInt(input.getAttribute('max'));
+
+                    // Kiểm tra nếu số lượng đặt hàng vượt quá số lượng tối đa
+                    if (quantity > maxQuantity) {
+                        isStockSufficient = false;
+                        const errorMsg = document.createElement('span');
+                        errorMsg.classList.add('text-danger', 'stock-error');
+                        errorMsg.textContent = 'Số lượng không đủ!';
+
+                        // Hiển thị thông báo lỗi nếu chưa có
+                        if (!input.parentNode.querySelector('.stock-error')) {
+                            input.parentNode.appendChild(errorMsg);
+                        }
+                    } else {
+                        // Xóa thông báo lỗi nếu số lượng hợp lệ
+                        const errorMsg = input.parentNode.querySelector('.stock-error');
+                        if (errorMsg) errorMsg.remove();
+                    }
+                });
+
+                // Vô hiệu hóa nút thanh toán nếu không đủ hàng
+                checkoutButton.disabled = !isStockSufficient;
+            }
             // Hàm tính tổng tiền và cập nhật form xóa
             function calculateTotal() {
                 let totalPrice = 0;
                 const selectedItems = [];
 
+                // Lặp qua các checkbox và tính tổng tiền cho sản phẩm được chọn
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const price = parseInt(checkbox.getAttribute('data-price'));
@@ -138,8 +176,10 @@
                     }
                 });
 
+                // Hiển thị tổng tiền
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
 
+                // Cập nhật form xóa nếu có sản phẩm được chọn
                 if (selectedItems.length > 0) {
                     selectedItems.forEach(itemId => {
                         let hiddenInput = document.createElement('input');
@@ -151,10 +191,12 @@
                     removeButton.disabled = false;
                 } else {
                     removeButton.disabled = true;
+                    // Loại bỏ các input ẩn khi không có sản phẩm nào được chọn
                     document.querySelectorAll('input[name="remove_items[]"]').forEach(input => input.remove());
                 }
             }
 
+            // Xử lý sự kiện nhấn nút cập nhật giỏ hàng
             updateBtns.forEach(button => {
                 button.addEventListener('click', function(e) {
                     const itemId = this.getAttribute('data-id'); // Lấy giá trị data-id
@@ -162,7 +204,7 @@
                     // Kiểm tra nếu data-id không tồn tại
                     if (!itemId) {
                         console.error("Không tìm thấy data-id của button.");
-                        return; // Nếu không có data-id, dừng lại
+                        return;
                     }
 
                     // Kiểm tra sự tồn tại của các phần tử trước khi lấy giá trị
@@ -184,7 +226,7 @@
                     const colorId = colorSelect.value;
                     const quantity = quantityInput.value;
 
-                    // Gửi yêu cầu AJAX
+                    // Gửi yêu cầu AJAX để cập nhật giỏ hàng
                     fetch(`/cart/update/${itemId}`, {
                             method: 'POST',
                             headers: {
@@ -201,20 +243,21 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                toastr.success(data.message, {
-                                    positionClass: 'toast-top-right',
-                                    timeOut: 3000,
-                                });
+                                toastr.success(data.message);
                                 location.reload(); // reload trang để cập nhật lại giỏ hàng
                             } else {
-                                toastr.success(data.message);
+                                toastr.error(data.message); // thông báo lỗi nếu có
                             }
                         })
-                        .catch(error => console.error('Error:', error));
+                        .catch(error => {
+                            toastr.error(
+                                'Có lỗi xảy ra khi cập nhật giỏ hàng. Vui lòng thử lại.');
+                            console.error('Error:', error);
+                        });
                 });
             });
 
-            // sự kiện thay đổi trạng thái checkbox
+            // Sự kiện thay đổi trạng thái checkbox
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', calculateTotal);
             });

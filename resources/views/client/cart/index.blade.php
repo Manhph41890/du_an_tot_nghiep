@@ -11,7 +11,7 @@
     </style>
     <div class="container margin_30">
         <div class="page_header">
-            <h1>Giỏ Hàng</h1>
+            <h1 class="text-center my-3" style="color:#5a5ac9">Giỏ Hàng</h1>
         </div>
 
         <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">

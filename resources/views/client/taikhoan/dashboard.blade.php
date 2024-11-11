@@ -45,9 +45,11 @@
                         <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="dropdown-item notify-item">
-                                <i class="mdi mdi-location-exit fs-16 align-middle"><a type="submit">Đăng Xuất</a></i>
+                                <a type="submit"> <i class="mdi mdi-location-exit fs-16 align-middle"> </i> Đăng Xuất</a>
                             </button>
                         </form>
+
+
 
                     </div>
                 </div>
@@ -81,15 +83,15 @@
                                                     Thay đổi ảnh đại diện
                                                 </a>
                                                 <!-- Avatar Form (Initially hidden) -->
-                                                
-                                                    <div id="change-avatar-form" style="display: none;">
-                                                        <div class="form-group">
-                                                            <label for="anh_dai_dien">Hình đại diện</label>
-                                                            <input type="file" class="form-control" id="anh_dai_dien"
-                                                                name="anh_dai_dien">
-                                                        </div>
+
+                                                <div id="change-avatar-form" style="display: none;">
+                                                    <div class="form-group">
+                                                        <label for="anh_dai_dien">Hình đại diện</label>
+                                                        <input type="file" class="form-control" id="anh_dai_dien"
+                                                            name="anh_dai_dien">
                                                     </div>
-                                               
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -119,8 +121,8 @@
                                             </div>
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="ngay_sinh" class="mb-2">Ngày sinh</label>
-                                                <input id="ngay_sinh" name="ngay_sinh" type="date"
-                                                    class="form-control" value="{{ $user->ngay_sinh }}" disabled />
+                                                <input id="ngay_sinh" name="ngay_sinh" type="date" class="form-control"
+                                                    value="{{ $user->ngay_sinh }}" disabled />
                                             </div>
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="gioi_tinh" class="mb-2">Giới tính</label>
@@ -247,5 +249,4 @@
             }
         }
     </script>
-
 @endsection

@@ -345,8 +345,12 @@ class AdminController extends Controller
                     ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
                     ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
                     ->join('phuong_thuc_van_chuyens', 'don_hangs.phuong_thuc_van_chuyen_id', '=', 'phuong_thuc_van_chuyens.id')
-                    ->selectRaw('SUM(san_phams.gia_nhap) AS tong_gia_nhap, SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship')
+                    ->selectRaw('
+    SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) AS tong_gia_nhap,
+    SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship
+')
                     ->first(); // Lấy ra tổng giá nhập và tổng chi phí vận chuyển cho tháng
+
 
                 // Tính lợi nhuận theo tháng: tổng tiền của đơn hàng - tổng giá nhập - tổng chi phí vận chuyển
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang->tong_gia_nhap - $tong_gia_nhap_tang->tong_gia_ship;
@@ -389,8 +393,12 @@ class AdminController extends Controller
                     ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
                     ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
                     ->join('phuong_thuc_van_chuyens', 'don_hangs.phuong_thuc_van_chuyen_id', '=', 'phuong_thuc_van_chuyens.id')
-                    ->selectRaw('SUM(san_phams.gia_nhap) AS tong_gia_nhap, SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship')
+                    ->selectRaw('
+    SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) AS tong_gia_nhap,
+    SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship
+')
                     ->first(); // Lấy ra tổng giá nhập và tổng chi phí vận chuyển cho tháng
+
 
                 // Tính lợi nhuận theo tháng: tổng tiền của đơn hàng - tổng giá nhập - tổng chi phí vận chuyển
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang->tong_gia_nhap - $tong_gia_nhap_tang->tong_gia_ship;
@@ -425,8 +433,12 @@ class AdminController extends Controller
                     ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
                     ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
                     ->join('phuong_thuc_van_chuyens', 'don_hangs.phuong_thuc_van_chuyen_id', '=', 'phuong_thuc_van_chuyens.id')
-                    ->selectRaw('SUM(san_phams.gia_nhap) AS tong_gia_nhap, SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship')
+                    ->selectRaw('
+    SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) AS tong_gia_nhap,
+    SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship
+')
                     ->first(); // Lấy ra tổng giá nhập và tổng chi phí vận chuyển cho tháng
+
 
                 // Tính lợi nhuận theo tháng: tổng tiền của đơn hàng - tổng giá nhập - tổng chi phí vận chuyển
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang->tong_gia_nhap - $tong_gia_nhap_tang->tong_gia_ship;

@@ -42,14 +42,7 @@
                         <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh
                             toán</a>
 
-                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item notify-item">
-                                <a type="submit"> <i class="mdi mdi-location-exit fs-16 align-middle"> </i> Đăng Xuất</a>
-                            </button>
-                        </form>
-
-
+                        <a href="#logout-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng xuất</a>
 
                     </div>
                 </div>
@@ -95,8 +88,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <!-- Main Form for User Info & Avatar Update -->
 
                                     <input type="hidden" name="_method" value="POST" />

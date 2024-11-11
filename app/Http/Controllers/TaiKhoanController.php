@@ -83,9 +83,6 @@ class TaiKhoanController extends Controller
         }
     }
     //set
-
-
-
     // public function updateThongtin(Request $request)
     // {
     //     // Get the currently authenticated user

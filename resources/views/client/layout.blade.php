@@ -45,10 +45,11 @@
         }
 
         .breadcrumb-section {
-            background-image: url('/assets/client/images/banner/slider_1.jpg');
+            background-image: url('/assets/client/images/banner/snapedit_1731338470382.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            max-height: 200px;
         }
     </style>
 

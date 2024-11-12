@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\chi_tiet_don_hang;
 use App\Models\don_hang;
 use App\Models\khuyen_mai;
+use App\Models\lich_su_thanh_toan;
 use App\Models\phuong_thuc_thanh_toan;
 use App\Models\phuong_thuc_van_chuyen;
 use Illuminate\Http\Request;
@@ -91,9 +92,10 @@ class OrderController extends Controller
             $vnp_HashSecret = "SDOLTO3JSO8WXIMDIIIFMSUL9NSR39BD"; // Chuỗi bí mật
 
             $vnp_TxnRef = rand(00, 9999);
+            Session::put('vnp_TxnRef', $vnp_TxnRef); // Lưu vào session
             $vnp_OrderInfo = 'Nội dung thanh toán';
             $vnp_OrderType = 'bill payment';
-            $vnp_Amount = $totall * 100;
+            $vnp_Amount = round($totall * 100);
             $vnp_Locale = 'vn';
             $vnp_BankCode = 'NCB';
             $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -207,6 +209,17 @@ class OrderController extends Controller
             $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
                 ->where('user_id', Auth::id())
                 ->first();
+
+            $vnp_TxnRef = Session::get('vnp_TxnRef');
+            // Thêm thông tin vào bảng lich_su_thanh_toan
+            $lichSuThanhToan = new lich_su_thanh_toan();
+            $lichSuThanhToan->don_hang_id = $order->id;
+            $lichSuThanhToan->vnp_TxnRef_id = $vnp_TxnRef;
+            $lichSuThanhToan->vnp_ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
+            $lichSuThanhToan->vnp_tong_tien = $order->tong_tien;
+            $lichSuThanhToan->trang_thai = 'Thanh toán thành công';
+            $lichSuThanhToan->save();
+
             foreach ($cart->cartItems as $item) {
                 $orderDetail = new chi_tiet_don_hang();
                 $orderDetail->don_hang_id = $orderId;

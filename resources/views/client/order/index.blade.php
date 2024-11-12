@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- breadcrumb-section start -->
-    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
+    <nav class="breadcrumb-section theme1 bg-lighten2 pt-80 pb-80">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -28,12 +28,12 @@
                 <div class="page_header">
                     <h1>Thông tin đơn hàng</h1>
                 </div>
-                <table class="table table-hover cart-list">
+                <table class="table table-hover cart-list mb-45">
                     <thead class="table-light custom-thead">
                         <tr>
                             <th class="text-center" style="width: 15%;">Ảnh sản phẩm</th>
                             <th class="text-center" style="width: 30%;">Tên sản phẩm</th>
-                            <th class="text-center" style="width: 20%;">Biến thể</th>
+                            <th class="text-center" style="width: 20%;">Phân loại</th>
                             <th class="text-center" style="width: 10%;">Số lượng</th>
                             <th class="text-center" style="width: 15%;">Giá</th>
                         </tr>
@@ -121,23 +121,15 @@
                                         @if ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán online')
                                             <div class="vnpay-logo ms-2">
                                                 <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                                    alt="VNPay Logo">
+                                                    alt="VNPay Logo" height="auto">
                                             </div>
                                         @endif
                                     </li>
                                 @endforeach
                             </ul>
                             <div class="">
-                                <div class="step">
-                                    <h3>Nhập mã giảm giá để nhận ưu đãi</h3>
-                                </div>
                                 <div class="row">
-                                    <div class="input-group">
-                                        <input type="text" id="coupon-code" name="khuyen_mai" class="form-control"
-                                            placeholder="Nhập mã giảm giá">
-                                        <button class="btn btn-outline-success" id="apply-coupon" type="button">Áp
-                                            dụng</button>
-                                    </div>
+
                                 </div>
                             </div>
 
@@ -149,6 +141,12 @@
                         <div class="step last">
                             <h3>3. Thanh toán</h3>
                             <div class="box_general summary">
+                                <div class="input-group mb-15">
+                                    <input type="text" id="coupon-code" name="khuyen_mai" class="form-control"
+                                        placeholder="Nhập mã giảm giá">
+                                    <button class="btn btn-outline-success" id="apply-coupon" type="button">Áp
+                                        dụng</button>
+                                </div>
                                 <ul>
                                     <li class="clearfix"><em><strong>Tiền sản phẩm</strong></em>
                                         <span>{{ $total }}</span>
@@ -185,8 +183,13 @@
         </div>
         <style>
             .vnpay-logo {
-                width: 80px;
+                width: 200px;
                 display: block;
+            }
+
+            .vnpay-logo img {
+                width: 190px;
+
             }
 
             .custom-thead {

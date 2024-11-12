@@ -219,7 +219,7 @@
                                                             <i
                                                                 class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                         </a>
-                                                       
+
 
                                                         <!-- The Modal -->
                                                         <div class="modal" id="allmyModalfororder{{ $myOrder->id }}">

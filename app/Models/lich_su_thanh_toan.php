@@ -18,6 +18,11 @@ class lich_su_thanh_toan extends Model
 
     public function don_hang()
     {
-        return $this->belongsTo(don_hang::class, 'don_hang_id');
+        return $this->belongsTo(don_hang::class, 'don_hang_id', 'id');
+    }
+
+    public function getMaGiaoDichAttribute()
+    {
+        return 'GD-' . strtoupper(substr(md5($this->vnp_TxnRef_id), 0, 4)) . '-' . str_pad($this->vnp_TxnRef_id, 6, '0', STR_PAD_LEFT);
     }
 }

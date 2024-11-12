@@ -151,28 +151,28 @@
                             </div>
 
 
-                    
+
                         </div>
-                    
+
                         <div class="tab-pane fade" id="dashboad" role="tabpanel">
                             <div class="myaccount-content">
                                 <h3>Quản trị</h3>
-    
+
                                 <div class="welcome mb-20 d-flex">
                                     <h5><strong>Vào trang quản trị với chức vụ là:<h4 class="badge bg-primary ms-3 h3">
                                                 {{ $user->chuc_vu?->ten_chuc_vu }}</h4></strong></h5>
                                 </div>
                                 <a href="{{ route('thong_ke_chung') }}" class="btn btn-success">Vào quản trị</a>
-    
+
                             </div>
                         </div>
                         <!-- Single Tab Content End -->
-    
+
                         <!-- Single Tab  -->
                         <div class="tab-pane fade" id="orders" role="tabpanel">
                             <div class="myaccount-content">
                                 <h3>Đơn hàng của bạn</h3>
-    
+
                                 <div class="myaccount-table table-responsive text-center">
                                     <table class="table table-hover">
                                         <thead class="thead-light">
@@ -206,7 +206,7 @@
                                                                     $statusClasses[$myOrder->trang_thai_don_hang] ??
                                                                     'bg-secondary';
                                                             @endphp
-    
+
                                                             <span class="badge {{ $class }}">
                                                                 {{ $myOrder->trang_thai_don_hang }}
                                                             </span>
@@ -219,18 +219,19 @@
                                                             <i
                                                                 class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                         </a>
-    
+                                                       
+
                                                         <!-- The Modal -->
                                                         <div class="modal" id="allmyModalfororder{{ $myOrder->id }}">
                                                             @include('client.taikhoan.showmyorder', [
                                                                 'donhang' => $myOrder,
                                                             ])
                                                         </div>
-    
+
                                                     </td>
                                                 </tr>
                                             @endforeach
-    
+
                                         </tbody>
                                     </table>
                                     {{ $myOrders->links() }}
@@ -244,18 +245,18 @@
                                 <div class="card-container">
                                     <!-- Logo của ngân hàng -->
                                     <div class="bank-logo">
-                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png" width="50px"
-                                            alt="NCB Logo">
+                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
+                                            width="50px" alt="NCB Logo">
                                     </div>
-    
+
                                     <!-- Chip thẻ -->
                                     <div class="chip"></div>
-    
+
                                     <!-- Số thẻ -->
                                     <div class="card-number">
                                         9704 1985 2619 1432 198
                                     </div>
-    
+
                                     <!-- Thông tin khác của thẻ -->
                                     <div class="card-info">
                                         <div>
@@ -267,10 +268,11 @@
                                     </div>
                                     <!-- Logo Visa -->
                                     <div class="visa-logo">
-                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png" alt="Visa Logo">
+                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
+                                            alt="Visa Logo">
                                     </div>
                                 </div>
-    
+
                                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                             </div>
                         </div>

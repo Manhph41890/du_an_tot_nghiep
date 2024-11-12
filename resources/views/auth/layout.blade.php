@@ -35,7 +35,7 @@
         }
 
         .breadcrumb-section {
-            background-image: url('/assets/client/images/banner/slider_1.jpg');
+            background-image: url('/assets/client/images/banner/banner_0.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;

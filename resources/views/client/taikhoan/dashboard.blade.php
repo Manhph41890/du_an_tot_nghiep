@@ -168,7 +168,7 @@
                         </div>
                         <!-- Single Tab Content End -->
     
-                        <!-- Single Tab Content Start -->
+                        <!-- Single Tab Conte-->
                         <div class="tab-pane fade" id="orders" role="tabpanel">
                             <div class="myaccount-content">
                                 <h3>Đơn hàng của bạn</h3>

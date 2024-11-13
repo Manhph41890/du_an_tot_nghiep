@@ -481,7 +481,7 @@
                                         <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
                                             href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->user?->ho_ten }}</a>
                                         <h3 class="title mb-15">
-                                            <a href="single-blog.html">{{ $baivietmoi->tieu_de_bai_viet }}</a>
+                                            <a href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->tieu_de_bai_viet }}</a>
                                         </h3>
                                         <p class="sub-title">
                                             Ngày đăng
@@ -506,6 +506,7 @@
                 <div class="col-12">
                     <div class="brand-init border-top py-35 slick-nav-brand">
                         @foreach ($anhDMuc as $anhdm)
+
                             <div class="slider-item">
                                 <div class="single-brand">
                                     <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
@@ -516,6 +517,9 @@
                                     </a>
                                     <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
                                 </div>
+                                <div class="single-service">
+                                    <h5 class="text-capitalize mb-20"> {{ $anhdm->ten_danh_muc }}</h5>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -523,9 +527,6 @@
             </div>
         </div>
     </div>
-
-
-
     <style>
         .min_h {
             display: -webkit-box;

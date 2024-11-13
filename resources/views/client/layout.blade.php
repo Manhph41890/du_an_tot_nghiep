@@ -51,6 +51,175 @@
             background-repeat: no-repeat;
             height: 568px;
         }
+
+        .discount-codes {
+            padding: 50px 0;
+            background-color: #f9f9f9;
+        }
+
+        .discount-codes .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .discount-codes .section-title {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .discount-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .discount-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .discount-item:hover {
+            transform: scale(1.05);
+        }
+
+        .discount-code {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #5C5BCA;
+            margin-bottom: 15px;
+        }
+
+        .discount-description {
+            font-size: 1em;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .copy-btn {
+            background-color: #5C5BCA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #4a4db3;
+        }
+
+        /* Thêm phần tử HOT */
+        .hot-tag {
+            display: inline-block;
+            background-color: #FF5733;
+            /* Màu nền nổi bật */
+            color: #fff;
+            font-weight: bold;
+            padding: 5px 10px;
+            margin-left: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            animation: bounce 1s infinite;
+            /* Áp dụng hiệu ứng chuyển động */
+        }
+
+        /* Hiệu ứng chuyển động của chữ HOT */
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+                /* Di chuyển lên */
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .discount-item {
+            position: relative;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .discount-code {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Hiệu ứng cho button sao chép */
+        .copy-btn {
+            margin-top: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Mặc định ẩn modal */
+        .copy-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        /* Chỉnh sửa nội dung modal */
+        .modal-content {
+            text-align: center;
+        }
+
+        /* Thêm hiệu ứng chuyển động cho modal */
+        .copy-modal.show {
+            display: block;
+            animation: fadeInOut 3s forwards;
+        }
+
+        /* Hiệu ứng fade in và fade out */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
     </style>
 
 </head>

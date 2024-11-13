@@ -26,7 +26,7 @@ class Storesan_phamRequest extends FormRequest
             'gia_goc' => 'required|min:0',
             'gia_km' => 'nullable|min:0|lte:gia_goc',
             'gia_nhap' => 'required|min:0|lte:gia_goc',
-            'ma_ta_san_pham' => 'required|max:255',
+            'ma_ta_san_pham' => 'required',
             'anh_san_pham' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active' => [Rule::in([0, 1])],
 

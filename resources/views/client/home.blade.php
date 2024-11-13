@@ -1,6 +1,43 @@
 @extends('client.layout')
 
 @section('content')
+    <style>
+        /* Đảm bảo mỗi phần tử brand có kích thước phù hợp */
+        .single-brand {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .brand-image {
+            width: 120px;
+            /* Thay đổi kích thước ảnh theo ý muốn */
+            height: 120px;
+            border-radius: 50%;
+            /* Để ảnh hình tròn */
+            object-fit: cover;
+            /* Cắt ảnh để vừa với khung */
+            margin-bottom: 10px;
+            /* Khoảng cách giữa ảnh và tên danh mục */
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            margin-top: 5px;
+            /* Khoảng cách giữa tên và các phần tử khác */
+        }
+    </style>
     <!-- main slider start -->
     <section class="bg-light">
         <div class="main-slider dots-style theme1">
@@ -177,11 +214,6 @@
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
                                         aria-selected="false">Đang giảm giá</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                                        href="#pills-contact" role="tab" aria-controls="pills-contact"
-                                        aria-selected="false">Sắp ra mắt</a>
-                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -324,71 +356,6 @@
                                 <!-- slider-item end -->
                             </div>
                         </div>
-                        <!-- third tab-pane -->
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                            aria-labelledby="pills-contact-tab">
-                            <div class="product-slider-init theme1 slick-nav">
-                                @foreach ($sanPhamView as $sanphamview)
-                                    <div class="slider-item">
-                                        <div class="card product-card">
-                                            <div class="card-body p-0">
-                                                <div class="media flex-column">
-                                                    <div class="product-thumbnail position-relative">
-                                                        <span class="badge badge-danger top-right">New</span>
-                                                        <a href="{{ route('sanpham.chitiet', $sanphamview->id) }}">
-                                                            <img class="first-img"
-                                                                src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
-                                                                alt="anh san pham" />
-                                                        </a>
-                                                        <!-- product links -->
-
-                                                        <!-- product links end-->
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div class="product-desc">
-                                                            <h3 class="title">
-                                                                <a class="min_h"
-                                                                    href="{{ route('sanpham.chitiet', $sanphamview->id) }}">{{ $sanphamview->ten_san_pham }}</a>
-                                                            </h3>
-                                                            <div class="star-rating">
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star de-selected"></span>
-                                                            </div>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <span
-                                                                    class="product-price">{{ number_format($sanphamview->gia_goc) }}</span>
-                                                                {{-- <button class="pro-btn" data-bs-toggle="modal"
-                                                                data-bs-target="#add-to-cart">
-                                                                <i class="icon-basket"></i>
-                                                            </button> --}}
-                                                                {{-- <form action="{{ route('cart.add') }}" method="POST"
-                                                                    class="d-inline">
-                                                                    @csrf
-                                                                    <input type="hidden" name="san_pham_id"
-                                                                        value="{{ $sanphamview->id }}">
-                                                                    <input type="number" name="so_luong" value="1"
-                                                                        min="1" class="d-none">
-                                                                    <button type="submit" class="pro-btn">
-                                                                        <i class="icon-basket"></i>
-                                                                    </button>
-                                                                </form> --}}
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-                                <!-- slider-item end -->
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -437,21 +404,6 @@
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <span
                                                             class="product-price">{{ number_format($sanphamview->gia_goc) }}</span>
-                                                        {{-- <button class="pro-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#add-to-cart">
-                                                    <i class="icon-basket"></i>
-                                                </button> --}}
-                                                        {{-- <form action="{{ route('cart.add') }}" method="POST"
-                                                            class="d-inline">
-                                                            @csrf
-                                                            <input type="hidden" name="san_pham_id"
-                                                                value="{{ $sanphamview->id }}">
-                                                            <input type="number" name="so_luong" value="1"
-                                                                min="1" class="d-none">
-                                                            <button type="submit" class="pro-btn">
-                                                                <i class="icon-basket"></i>
-                                                            </button>
-                                                        </form> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -521,19 +473,23 @@
                         @foreach ($anhDMuc as $anhdm)
                             <div class="slider-item">
                                 <div class="single-brand">
-                                    <a href="{{ route('client.cuahang') }}" class="brand-thumb">
-                                        <img src="{{ asset('/storage/' . $anhdm->anh_danh_muc) }}" />
+                                    <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
+                                    <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
+                                        <!-- Hiển thị ảnh hình tròn -->
+                                        <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
+                                            class="brand-image" />
                                     </a>
+                                    <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
                                 </div>
                             </div>
                         @endforeach
-
-                        <!-- slider-item end -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 
     <style>
         .min_h {
@@ -547,184 +503,6 @@
             /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
         }
     </style>
-    <!-- modals start -->
-    <!-- modal giỏ hàng -->
-    {{-- <div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-8 mx-auto col-lg-5 mb-5 mb-lg-0">
-                            <div class="product-sync-init mb-20">
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="assets/img/slider/thumb/1.jpg" alt="product-thumb" />
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="assets/img/slider/thumb/2.jpg" alt="product-thumb" />
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="assets/img/slider/thumb/3.jpg" alt="product-thumb" />
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="assets/img/slider/thumb/4.jpg" alt="product-thumb" />
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                            </div>
-
-                            <div class="product-sync-nav">
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)">
-                                            <img src="assets/img/slider/thumb/1.1.jpg" alt="product-thumb" /></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)">
-                                            <img src="assets/img/slider/thumb/2.1.jpg" alt="product-thumb" /></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)"><img src="assets/img/slider/thumb/3.1.jpg"
-                                                alt="product-thumb" /></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)"><img src="assets/img/slider/thumb/4.1.jpg"
-                                                alt="product-thumb" /></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="modal-product-info">
-                                <div class="product-head">
-                                    <h2 class="title">
-                                        New Balance Running Arishi trainers in triple
-                                    </h2>
-                                    <h4 class="sub-title">Reference: demo_5</h4>
-                                    <div class="star-content mb-20">
-                                        <span class="star-on"><i class="fas fa-star"></i> </span>
-                                        <span class="star-on"><i class="fas fa-star"></i> </span>
-                                        <span class="star-on"><i class="fas fa-star"></i> </span>
-                                        <span class="star-on"><i class="fas fa-star"></i> </span>
-                                        <span class="star-on de-selected"><i class="fas fa-star"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="product-body">
-                                    <span class="product-price text-center">
-                                        <span class="new-price">$29.00</span>
-                                    </span>
-                                    <p>
-                                        Break old records and make new goals in the New Balance®
-                                        Arishi Sport v1.
-                                    </p>
-                                    <ul>
-                                        <li>Predecessor: None.</li>
-                                        <li>Support Type: Neutral.</li>
-                                        <li>Cushioning: High energizing cushioning.</li>
-                                    </ul>
-                                </div>
-                                <div class="d-flex mt-30">
-                                    <div class="product-size">
-                                        <h3 class="title">Dimension</h3>
-                                        <select>
-                                            <option value="0">40x60cm</option>
-                                            <option value="1">60x90cm</option>
-                                            <option value="2">80x120cm</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="product-footer">
-                                    <div class="product-count style d-flex flex-column flex-sm-row my-4">
-                                        <div class="count d-flex">
-                                            <input type="number" min="1" max="10" step="1"
-                                                value="1" />
-                                            <div class="button-group">
-                                                <button class="count-btn increment">
-                                                    <i class="fas fa-chevron-up"></i>
-                                                </button>
-                                                <button class="count-btn decrement">
-                                                    <i class="fas fa-chevron-down"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <button class="btn btn-dark btn--xl mt-5 mt-sm-0">
-                                                <span class="me-2"><i class="ion-android-add"></i></span>
-                                                Add to cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="addto-whish-list">
-                                        <a href="#"><i class="icon-heart"></i> Add to wishlist</a>
-                                        <a href="#"><i class="icon-shuffle"></i> Add to compare</a>
-                                    </div>
-                                    <div class="pro-social-links mt-10">
-                                        <ul class="d-flex align-items-center">
-                                            <li class="share">Share</li>
-                                            <li>
-                                                <a href="#"><i class="ion-social-facebook"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="ion-social-twitter"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="ion-social-google"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="ion-social-pinterest"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    {{-- <!-- second modal -->
-    <div class="modal fade style2" id="compare" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5 class="title">
-                        <i class="fa fa-check"></i> Product added to compare shoppp.
-                    </h5>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     <!-- second modal -->
     <div class="modal fade style3" id="add-to-cart" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">

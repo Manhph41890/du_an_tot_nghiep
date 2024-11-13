@@ -219,7 +219,8 @@
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->danhmuc) && in_array($item->id, $request->danhmuc)) checked @endif />
                                                 <label for="danhmuc_{{ $item->id }}">{{ $item->ten_danh_muc }}
-                                                    <span> ({{ $item->soluong_sp_dm }}) </span></label>
+                                                    {{-- <span> ({{ $item->soluong_sp_dm }}) </span> --}}
+                                                </label>
                                             </div>
                                         @endforeach
                                     </div>
@@ -256,7 +257,8 @@
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->size) && in_array($item->id, $request->size)) checked @endif />
                                                 <label for="size-{{ $item->id }}">{{ $item->ten_size }}
-                                                    <span>({{ $item->sl_size }})</span></label>
+                                                    {{-- <span>({{ $item->sl_size }})</span> --}}
+                                                </label>
                                             </div>
                                         @endforeach
                                     </div>
@@ -270,7 +272,10 @@
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
                                                 <label for="color-{{ $item->id }}">
-                                                    {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
+                                                    {{ $item->ten_color }} 
+                                                    {{-- <span>({{ $item->sl_color }})
+
+                                                    </span> --}}
                                                 </label>
                                             </div>
                                         @endforeach

@@ -494,7 +494,7 @@
                                         <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
                                             href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->user?->ho_ten }}</a>
                                         <h3 class="title mb-15">
-                                            <a href="single-blog.html">{{ $baivietmoi->tieu_de_bai_viet }}</a>
+                                            <a href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->tieu_de_bai_viet }}</a>
                                         </h3>
                                         <p class="sub-title">
                                             Ngày đăng
@@ -519,22 +519,22 @@
                 <div class="col-12">
                     <div class="brand-init border-top py-35 slick-nav-brand">
                         @foreach ($anhDMuc as $anhdm)
-                            <div class="slider-item">
-                                <div class="single-brand">
+                            <div class="single-blog slider-item">
+                                <div class="single-thumb mb-25 zoom-in d-block overflow-hidden single-brand">
                                     <a href="{{ route('client.cuahang') }}" class="brand-thumb">
                                         <img src="{{ asset('/storage/' . $anhdm->anh_danh_muc) }}" />
                                     </a>
                                 </div>
+                                <div class="single-service">
+                                    <h5 class="text-capitalize mb-20"> {{ $anhdm->ten_danh_muc }}</h5>
+                                </div>
                             </div>
                         @endforeach
-
-                        <!-- slider-item end -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <style>
         .min_h {
             display: -webkit-box;
@@ -547,6 +547,7 @@
             /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
         }
     </style>
+    
     <!-- modals start -->
     <!-- modal giỏ hàng -->
     {{-- <div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">

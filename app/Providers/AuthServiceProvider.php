@@ -4,6 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Models\bai_viet;
 use App\Models\chuc_vu;
 use App\Models\danh_gia;
 use App\Models\danh_muc;
@@ -12,6 +13,7 @@ use App\Models\phuong_thuc_thanh_toan;
 use App\Models\phuong_thuc_van_chuyen;
 use App\Models\san_pham;
 use App\Models\User;
+use App\Policies\BaiVietPolicy;
 use App\Policies\ChucVuPolicy;
 use App\Policies\DanhGiaPolicy;
 use App\Policies\DanhMucPolicy;
@@ -39,6 +41,7 @@ class AuthServiceProvider extends ServiceProvider
         phuong_thuc_thanh_toan::class => PhuongThucThanhToanPolicy::class,
         phuong_thuc_van_chuyen::class => PhuongThucVanChuyenPolicy::class,
         User::class => UserPolicy::class,
+        bai_viet::class => BaiVietPolicy::class,
         
     ];
 

@@ -2,6 +2,41 @@
 
 @section('content')
     <style>
+        .main-slider {
+            max-height: 500px;
+            display: flex;
+
+        }
+
+        .slider-item {
+            max-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Ensures no content overflows */
+        }
+
+        .slider-content {
+            margin-bottom: 50px;
+            text-align: center;
+
+        }
+
+        .text {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            margin-top: 10px;
+        }
+
+        .btn {
+            margin-top: 20px;
+        }
+
+
         .product-card {
             height: 450px;
             /* Thiết lập chiều cao cố định cho thẻ sản phẩm */
@@ -481,7 +516,8 @@
                                         <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
                                             href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->user?->ho_ten }}</a>
                                         <h3 class="title mb-15">
-                                            <a href="single-blog.html">{{ $baivietmoi->tieu_de_bai_viet }}</a>
+                                            <a
+                                                href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->tieu_de_bai_viet }}</a>
                                         </h3>
                                         <p class="sub-title">
                                             Ngày đăng
@@ -516,6 +552,7 @@
                                     </a>
                                     <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
                                 </div>
+
                             </div>
                         @endforeach
                     </div>
@@ -523,9 +560,6 @@
             </div>
         </div>
     </div>
-
-
-
     <style>
         .min_h {
             display: -webkit-box;

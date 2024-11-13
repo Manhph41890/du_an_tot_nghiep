@@ -374,7 +374,7 @@
                                 src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
                     </div>
                 </div>
-                <div class="col-xl-8 col-lg-7 d-none d-lg-block">
+                <div class="col-xl-7 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="active ml-0">
                             <a href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
@@ -392,7 +392,7 @@
                         <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
-                <div class="col-6 col-lg-3 col-xl-2">
+                <div class="col-6 col-lg-3 col-xl-3">
                     <!-- search-form end -->
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->

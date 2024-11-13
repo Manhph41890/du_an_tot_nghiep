@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         // Lấy sản phẩm mới
-        $sanPhamMois = san_pham::orderByDesc('id')->latest('id')->paginate(6);
+        $sanPhamMois = san_pham::orderByDesc('id')->latest('id')->where('is_active','1')->paginate(6);
 
         // Lấy sản phẩm giảm giá
         $sanPhamGiamGias = san_pham::with('danh_gias')->whereNotNull('gia_km')

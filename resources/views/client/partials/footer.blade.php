@@ -1,6 +1,6 @@
-<!-- footer strat -->
+<!-- footer stt -->
 <footer class="bg-light theme1 position-relative">
-    <!-- footer bottom start -->
+    <!-- footer bottom sart -->
     <div class="footer-bottom pt-40 pb-30">
         <div class="container">
             <div class="row">

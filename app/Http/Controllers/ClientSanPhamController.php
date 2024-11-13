@@ -16,9 +16,9 @@ class ClientSanPhamController extends Controller
         $title = "Cửa hàng";
         // lấy danh mục có sản phẩm đổ ra sidebar
         $danhmucs = danh_muc::has('san_phams')->with('san_phams')->where('is_active', '1')->get();
-        foreach ($danhmucs as $danhmuc) {
-            $danhmuc->soluong_sp_dm = $danhmuc->san_phams()->count();
-        }
+        // foreach ($danhmucs as $danhmuc) {
+        //     $danhmuc->soluong_sp_dm = $danhmuc->san_phams()->count();
+        // }
 
         // Lấy size biến thể có sản phẩm đổ ra sidebar, chỉ lấy những size có sản phẩm đang hoạt động
         $size_sidebar = size_san_pham::whereHas('bien_the_san_phams.san_pham', function ($query) {
@@ -26,11 +26,11 @@ class ClientSanPhamController extends Controller
         })->with(['bien_the_san_phams.san_pham' => function ($query) {
             $query->where('is_active', 1);
         }])->get();
-        foreach ($size_sidebar as $sl_size_sb) {
-            $sl_size_sb->sl_size = $sl_size_sb->bien_the_san_phams->filter(function ($bien_the) {
-                return $bien_the->san_pham && $bien_the->san_pham->is_active == 1;
-            })->count();
-        }
+        // foreach ($size_sidebar as $sl_size_sb) {
+        //     $sl_size_sb->sl_size = $sl_size_sb->bien_the_san_phams->filter(function ($bien_the) {
+        //         return $bien_the->san_pham && $bien_the->san_pham->is_active == 1;
+        //     })->count();
+        // }
 
 
         // Lấy màu sắc biến thể có sản phẩm đổ ra sidebar
@@ -39,11 +39,11 @@ class ClientSanPhamController extends Controller
         })->with(['bien_the_san_phams.san_pham' => function ($query) {
             $query->where('is_active', 1);
         }])->get();
-        foreach ($color_sidebar as $sl_color_sb) {
-            $sl_color_sb->sl_color = $sl_color_sb->bien_the_san_phams->filter(function ($bien_the) {
-                return $bien_the->san_pham && $bien_the->san_pham->is_active == 1;
-            })->count();
-        }
+        // foreach ($color_sidebar as $sl_color_sb) {
+        //     $sl_color_sb->sl_color = $sl_color_sb->bien_the_san_phams->filter(function ($bien_the) {
+        //         return $bien_the->san_pham && $bien_the->san_pham->is_active == 1;
+        //     })->count();
+        // }
 
         $query = san_pham::query();
 

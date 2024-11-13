@@ -144,7 +144,7 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
 
 
     Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
-    Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
     Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');

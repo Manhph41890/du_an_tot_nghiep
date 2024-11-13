@@ -32,12 +32,25 @@ class OrderController extends Controller
             'khuyen_mai' => 'nullable|string|max:255',
         ]);
 
-        // Lấy giỏ hàng của người dùng hiện tại
-        $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
+        // Lấy danh sách sản phẩm được chọn từ request
+        $selectedProductIds = $request->input('selected_products', []);
+
+        // Lấy giỏ hàng của người dùng và lọc các sản phẩm được chọn
+        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')
             ->where('user_id', Auth::id())
             ->first();
 
-        $cartItems = $cart->cartItems;
+        if (!$cart) {
+            return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
+        }
+
+        // Lọc các sản phẩm được chọn dựa trên selectedProductIds
+        $cartItems = $cart->cartItems->filter(function ($item) use ($selectedProductIds) {
+            return in_array($item->id, $selectedProductIds);
+        });
+
+
+
         $total = $cart->cartItems->sum(fn($item) => $item->price);
 
         $discount = 0;

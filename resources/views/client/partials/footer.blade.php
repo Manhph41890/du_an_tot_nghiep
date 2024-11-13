@@ -1,4 +1,4 @@
-<!-- footer t-->
+<!-- foo t-->
 <footer class="bg-light theme1 position-relative">
     <!-- footer bottom sart -->
     <div class="footer-bottom pt-40 pb-30">

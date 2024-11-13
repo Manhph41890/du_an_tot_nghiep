@@ -124,9 +124,12 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ma_ta_san_pham" class="form-label">Mô tả sản phẩm</label>
-                                                <input type="text" id="ma_ta_san_pham" name="ma_ta_san_pham"
+                                                <!-- <input type="text" id="ma_ta_san_pham" name="ma_ta_san_pham"
                                                     class="form-control @error('ma_ta_san_pham') is-invalid @enderror"
-                                                    value="{{ old('ma_ta_san_pham') }}">
+                                                    value="{{ old('ma_ta_san_pham') }}"> -->
+                                                    <textarea rows="5" id="ma_ta_san_pham" name="ma_ta_san_pham" class="form-control @error('ma_ta_san_pham') is-invalid @enderror">
+                                                    {{ old('ma_ta_san_pham') }}
+                                                    </textarea>
                                                 @error('ma_ta_san_pham')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

@@ -54,6 +54,8 @@ Route::prefix('client')->group(function () {
     Route::get('/taikhoan/lichsugd/{id}', [TaiKhoanController::class, 'history'])->name('taikhoan.lichsugd');
     // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
 
+    //danh mục
+    Route::get('/danh-muc/{danhMucId}', [HomeController::class, 'showByCategory'])->name('client.showByCategory');
 
     Route::view('/giohang', 'client.giohang');
     Route::get('/gioithieu', [HomeController::class, 'gioithieu'])->name('client.gioithieu');

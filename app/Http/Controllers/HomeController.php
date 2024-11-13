@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\bai_viet;
 use App\Models\bien_the_san_pham;
 use App\Models\danh_muc;
+use App\Models\khuyen_mai;
 use App\Models\san_pham;
 use Illuminate\Http\Request;
 
@@ -40,13 +41,19 @@ class HomeController extends Controller
             }
             return $sanPham;
         });
+        $discounts = khuyen_mai::where('is_active', 1)
+            ->where('so_luong_ma', '>', 0) // Thêm điều kiện so_luong_ma > 0
+            ->orderBy('created_at', 'desc') // Sắp xếp theo ngày tạo mới nhất
+            ->take(4) // Lấy 4 mã giảm giá
+            ->get();
+
 
 
         $title = "Trang chủ";
         $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
         $anhDMuc = danh_muc::all();
 
-        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
+        return view('client.home', compact('sanPhamMois', 'discounts', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }
     public function showByCategory($danhMucId)
     {

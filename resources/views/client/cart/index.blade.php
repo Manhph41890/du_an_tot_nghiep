@@ -110,7 +110,7 @@
                         </li>
                     </ul>
                     <form action="{{ route('cart.checkout') }}" method="GET">
-                        <input type="hidden" name="remove_items[]" id="selected-items">
+                        <input type="hidden" name="checkout_items[]" id="selected-items">
                         <button id="checkout-button" class="btn btn-success"
                             @if (
                                 !empty($cartItems) &&
@@ -127,47 +127,42 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const updateBtns = document.querySelectorAll('.update-cart-btn');
+            const checkoutButton = document.getElementById('checkout-button');
             const checkboxes = document.querySelectorAll('.item-checkbox');
             const totalPriceEl = document.getElementById('total-price');
-            const removeButton = document.getElementById('remove-selected-items');
-            const removeMultipleForm = document.getElementById('remove-multiple-form');
+            const checkoutForm = document.querySelector('form[action="{{ route('cart.checkout') }}"]');
+
             // Hàm kiểm tra số lượng
             function checkStock() {
                 let isStockSufficient = true;
 
                 document.querySelectorAll('.quantity-input').forEach(input => {
-                    const itemId = input.getAttribute('data-item-id');
                     const quantity = parseInt(input.value);
                     const maxQuantity = parseInt(input.getAttribute('max'));
 
-                    // Kiểm tra nếu số lượng đặt hàng vượt quá số lượng tối đa
                     if (quantity > maxQuantity) {
                         isStockSufficient = false;
                         const errorMsg = document.createElement('span');
                         errorMsg.classList.add('text-danger', 'stock-error');
                         errorMsg.textContent = 'Số lượng không đủ!';
 
-                        // Hiển thị thông báo lỗi nếu chưa có
                         if (!input.parentNode.querySelector('.stock-error')) {
                             input.parentNode.appendChild(errorMsg);
                         }
                     } else {
-                        // Xóa thông báo lỗi nếu số lượng hợp lệ
                         const errorMsg = input.parentNode.querySelector('.stock-error');
                         if (errorMsg) errorMsg.remove();
                     }
                 });
 
-                // Vô hiệu hóa nút thanh toán nếu không đủ hàng
                 checkoutButton.disabled = !isStockSufficient;
             }
-            // Hàm tính tổng tiền và cập nhật form xóa
+
+            // Hàm tính tổng tiền và cập nhật danh sách sản phẩm được chọn vào `checkout_items[]`
             function calculateTotal() {
                 let totalPrice = 0;
                 const selectedItems = [];
 
-                // Lặp qua các checkbox và tính tổng tiền cho sản phẩm được chọn
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const price = parseInt(checkbox.getAttribute('data-price'));
@@ -176,93 +171,29 @@
                     }
                 });
 
-                // Hiển thị tổng tiền
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
 
-                // Cập nhật form xóa nếu có sản phẩm được chọn
+                // Cập nhật input hidden `checkout_items[]` trong form thanh toán
+                checkoutForm.querySelectorAll('input[name="checkout_items[]"]').forEach(input => input.remove());
+
                 if (selectedItems.length > 0) {
                     selectedItems.forEach(itemId => {
                         let hiddenInput = document.createElement('input');
                         hiddenInput.type = 'hidden';
-                        hiddenInput.name = 'remove_items[]';
+                        hiddenInput.name = 'checkout_items[]';
                         hiddenInput.value = itemId;
-                        removeMultipleForm.appendChild(hiddenInput);
+                        checkoutForm.appendChild(hiddenInput);
                     });
-                    removeButton.disabled = false;
+                    checkoutButton.disabled = false;
                 } else {
-                    removeButton.disabled = true;
-                    // Loại bỏ các input ẩn khi không có sản phẩm nào được chọn
-                    document.querySelectorAll('input[name="remove_items[]"]').forEach(input => input.remove());
+                    checkoutButton.disabled = true;
                 }
             }
 
-            // Xử lý sự kiện nhấn nút cập nhật giỏ hàng
-            updateBtns.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const itemId = this.getAttribute('data-id'); // Lấy giá trị data-id
-
-                    // Kiểm tra nếu data-id không tồn tại
-                    if (!itemId) {
-                        console.error("Không tìm thấy data-id của button.");
-                        return;
-                    }
-
-                    // Kiểm tra sự tồn tại của các phần tử trước khi lấy giá trị
-                    const sizeSelect = document.querySelector(
-                        `select[name="size_san_pham_id"][data-item-id="${itemId}"]`);
-                    const colorSelect = document.querySelector(
-                        `select[name="color_san_pham_id"][data-item-id="${itemId}"]`);
-                    const quantityInput = document.querySelector(
-                        `input[name="quantity"][data-item-id="${itemId}"]`);
-
-                    // Kiểm tra nếu các phần tử không tồn tại
-                    if (!sizeSelect || !colorSelect || !quantityInput) {
-                        console.error("Không thể tìm thấy các phần tử của sản phẩm với ID:",
-                            itemId);
-                        return;
-                    }
-
-                    const sizeId = sizeSelect.value;
-                    const colorId = colorSelect.value;
-                    const quantity = quantityInput.value;
-
-                    // Gửi yêu cầu AJAX để cập nhật giỏ hàng
-                    fetch(`/cart/update/${itemId}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector(
-                                    'meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            body: JSON.stringify({
-                                size_san_pham_id: sizeId,
-                                color_san_pham_id: colorId,
-                                quantity: quantity
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                toastr.success(data.message);
-                                location.reload(); // reload trang để cập nhật lại giỏ hàng
-                            } else {
-                                toastr.error(data.message); // thông báo lỗi nếu có
-                            }
-                        })
-                        .catch(error => {
-                            toastr.error(
-                                'Có lỗi xảy ra khi cập nhật giỏ hàng. Vui lòng thử lại.');
-                            console.error('Error:', error);
-                        });
-                });
-            });
-
-            // Sự kiện thay đổi trạng thái checkbox
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', calculateTotal);
             });
 
-            // Tính tổng tiền ban đầu
             calculateTotal();
         });
     </script>

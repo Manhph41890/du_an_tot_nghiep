@@ -282,31 +282,50 @@ class CartController extends Controller
     {
         $user = Auth::user();
 
+        // Kiểm tra nếu không có sản phẩm nào được chọn
+        if (!$request->has('checkout_items') || empty($request->checkout_items)) {
+            return redirect()->route('cart.index')->with('error', 'Không có sản phẩm nào được chọn để thanh toán.');
+        }
+
         // Lấy danh sách phương thức thanh toán
         $phuongThucThanhToans = phuong_thuc_thanh_toan::all();
         // Lấy danh sách phương thức vận chuyển
         $phuongThucVanChuyens = phuong_thuc_van_chuyen::all();
 
-        // Lấy giỏ hàng của người dùng
-        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')
+        // Lấy giỏ hàng của người dùng và chỉ lấy các sản phẩm được chọn
+        $cart = Cart::with(['cartItems' => function ($query) use ($request) {
+            $query->whereIn('id', $request->checkout_items);
+        }, 'cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color'])
             ->where('user_id', Auth::id())
             ->first();
 
-        if (!$cart) {
-            return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
+        // Kiểm tra nếu giỏ hàng trống hoặc không có sản phẩm được chọn
+        if (!$cart || $cart->cartItems->isEmpty()) {
+            return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống hoặc không có sản phẩm nào được chọn.']);
         }
 
         $cartItems = $cart->cartItems;
-        $total = $cart->cartItems->sum(fn($item) => $item->price);
 
+        // Kiểm tra số lượng hàng còn lại trước khi thanh toán
+        foreach ($cartItems as $item) {
+            $availableStock = optional($item->san_pham->bien_the_san_phams->firstWhere('size_san_pham_id', $item->size_san_pham_id)
+                ->firstWhere('color_san_pham_id', $item->color_san_pham_id))->so_luong;
+            if ($item->quantity > $availableStock) {
+                return redirect()->route('cart.index')->with('error', 'Một hoặc nhiều sản phẩm trong giỏ hàng có số lượng không đủ.');
+            }
+        }
+
+        // Tính tổng tiền của các sản phẩm đã chọn
+        $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
         $shippingCost = 30000; // 30,000 VND
-
-        // Trừ phí vận chuyển vào tổng tiền 
         $totall = $total + $shippingCost;
 
-        // Chuyển hướng về trang xác nhận đơn hàng và truyền biến $user vào view
-        return view('client.order.index', compact('user', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens'))->with('success', 'Đặt hàng thành công!');
+        // Chuyển hướng về trang xác nhận đơn hàng và truyền biến vào view
+        return view('client.order.index', compact('user', 'cartItems', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens'))
+            ->with('success', 'Vui lòng xác nhận thông tin đặt hàng!');
     }
+
+
     public function updateMultiple(Request $request)
     {
         // Lấy tất cả các id sản phẩm mà người dùng đã chọn

@@ -48,6 +48,23 @@ class HomeController extends Controller
 
         return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }
+    public function showByCategory($danhMucId)
+    {
+        // Lấy danh mục theo ID
+        $danhMuc = danh_muc::find($danhMucId);
+
+        // Kiểm tra nếu không tìm thấy danh mục
+        if (!$danhMuc) {
+            return redirect()->route('client.cuahang')->with('error', 'Danh mục không tồn tại.');
+        }
+
+        // Lấy sản phẩm thuộc danh mục
+        $sanPhams = san_pham::where('danh_muc_id', $danhMucId)->get();
+
+        // Trả về view sản phẩm của danh mục
+        return view('client.danhmuc_sanpham', compact('danhMuc', 'sanPhams'));
+    }
+
 
     // Sản phẩm chi tiet
     public function chiTietSanPham($id)

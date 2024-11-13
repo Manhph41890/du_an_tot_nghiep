@@ -229,8 +229,9 @@
                         <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="single-product-desc">
                                 <p>
-                                    {{ $sanPhamCT->ma_ta_san_pham }}
+                                    {!! $sanPhamCT->ma_ta_san_pham !!}
                                 </p>
+
                             </div>
                         </div>
                         <!-- second tab-pane -->
@@ -519,7 +520,5 @@
             //     window.location.href = "{{ route('auth.login') }}";
             // }, 1000);
         }
-
     </script>
-
 @endsection

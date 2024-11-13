@@ -90,8 +90,8 @@
                                                     <td>{{ $baiviet->ngay_dang }}</td>
                                                     <td>{{ $baiviet->user?->ho_ten }}</td>
                                                     <td
-                                                        class="{{ $baiviet->is_active == 0 ? 'text-success' : 'text-danger' }}">
-                                                        {{ $baiviet->is_active == 0 ? 'Hiển Thị' : 'Ẩn' }}
+                                                        class="{{ $baiviet->is_active == 1 ? 'text-success' : 'text-danger' }}">
+                                                        {{ $baiviet->is_active == 1 ? 'Hiển Thị' : 'Ẩn' }}
                                                     </td>
                                                     <td>
                                                         <div>

@@ -57,7 +57,8 @@
                                 </td>
                                 <td class="text-center" style="font-size:16px;">{{ $item->quantity }}</td>
                                 <td class="text-center" style="font-size:16px;">
-                                    <strong>{{ number_format($item->price, 2) }}đ</strong></td>
+                                    <span>{{ number_format($item->price, 0, ',', '.') }}₫</span>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -138,7 +139,7 @@
                             <div class="box_general summary">
                                 <ul>
                                     <li class="clearfix"><em><strong>Tiền sản phẩm</strong></em>
-                                        <span>{{ $total }}</span>
+                                        <span>{{ number_format($total, 0, ',', '.') }}₫</span>
                                     </li>
                                 </ul>
                                 <ul>
@@ -156,7 +157,7 @@
                                     <li class="clearfix"><em><strong>Số tiền được giảm</strong></em> <span> 0</span>
                                 </ul>
                                 <ul style="border-bottom: 1px solid #ededed !important;">
-                                    <li class="clearfix"><em><strong>Tiền vận chuyển</strong></em> <span> 30.000</span>
+                                    <li class="clearfix"><em><strong>Tiền vận chuyển</strong></em> <span> 30.000 đ</span>
                                     </li>
                                     <li class="clearfix"><em><strong>Tiền giảm giá khuyến mại</strong></em> <span
                                             id="discount-amount">0₫</span></li>

@@ -100,7 +100,7 @@
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
                                                                 VND</td>
                                                             <td>
-                                                                @if ($donhang->trang_thai_don_hang == 'Thành công')
+                                                                @if ($donhang->trang_thai_don_hang == 'Thành công' && !$chi_tiet->san_pham->danh_gias()->where('user_id', auth()->user()->id)->exists())
                                                                     <div class="col-lg-12">
                                                                         <!-- Nút Viết Đánh Giá -->
                                                                         <a class="btn danhgia"

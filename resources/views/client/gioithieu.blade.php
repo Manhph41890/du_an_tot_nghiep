@@ -132,7 +132,7 @@
               <p>
                  ut perspiciatis unde omnis iste natus ror sit voluptatem
                 accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritats et quasi architec
+                quae ab illo inventore veritats et quasi archite
               </p>
             </div>
           </div>

@@ -271,12 +271,12 @@ class OrderController extends Controller
         // Kiểm tra mã giảm giá và tính toán tổng tiền mới
         $discount = 0;
 
-        // 
+        // Giả sử bạn có bảng coupon trong cơ sở dữ liệu hoặc một cách khác để kiểm tra mã giảm giá
         $coupon = khuyen_mai::where('ma_khuyen_mai', $couponCode)->first();
         $giakm = $coupon->gia_tri_khuyen_mai;
 
         if ($coupon) {
-            // 
+            // Giả sử mã giảm giá có thể là phần trăm giảm
             $discount = $totalAmount - $coupon->gia_tri_khuyen_mai;
         } else {
             return response()->json(['success' => false, 'message' => 'Mã giảm giá không hợp lệ!']);
@@ -288,8 +288,8 @@ class OrderController extends Controller
         // Trả về tổng tiền mới
         return response()->json([
             'success' => true,
-            'newTotal' => number_format($newTotal, 2), // 
-            'discountAmount' => number_format($giakm, 2) // 
+            'newTotal' => number_format($newTotal, 2), // Định dạng số tiền
+            'discountAmount' => number_format($giakm, 2) // Trả về số tiền giảm giá
         ]);
     }
 }

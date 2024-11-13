@@ -102,6 +102,24 @@
             margin-top: 5px;
             /* Khoảng cách giữa tên và các phần tử khác */
         }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .badge-danger {
+            background-color: red;
+            color: white;
+            animation: blink 1s infinite;
+        }
     </style>
     <!-- main slider start -->
     <section class="bg-light">
@@ -253,12 +271,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                         href="#pills-home" role="tab" aria-controls="pills-home"
-                                        aria-selected="true">Sản phẩm mới</a>
+                                        aria-selected="true" style="font-size: 20px">Sản phẩm mới</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false">Đang giảm giá</a>
+                                        aria-selected="false" style="font-size: 20px">Đang giảm giá</a>
                                 </li>
                             </ul>
                         </nav>
@@ -292,15 +310,32 @@
                                                                     href="{{ route('sanpham.chitiet', $item->id) }}">{{ $item->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star de-selected"></span>
+                                                                @php
+                                                                    $diemTrungBinh = $item->diem_trung_binh; // Điểm trung bình của sản phẩm
+                                                                    $fullStars = floor($diemTrungBinh); // Số sao đầy đủ
+                                                                    $halfStar =
+                                                                        $diemTrungBinh - $fullStars >= 0.5 ? 1 : 0; // Kiểm tra sao nửa
+                                                                    $emptyStars = 5 - $fullStars - $halfStar; // Số sao trống
+                                                                @endphp
+
+                                                                <!-- Hiển thị các sao đầy đủ -->
+                                                                @for ($i = 0; $i < $fullStars; $i++)
+                                                                    <span class="ion-ios-star"></span>
+                                                                @endfor
+
+                                                                <!-- Hiển thị sao nửa nếu có -->
+                                                                @if ($halfStar)
+                                                                    <span class="ion-ios-star-half"></span>
+                                                                @endif
+
+                                                                <!-- Hiển thị các sao trống -->
+                                                                @for ($i = 0; $i < $emptyStars; $i++)
+                                                                    <span class="ion-ios-star de-selected"></span>
+                                                                @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span
-                                                                    class="product-price">{{ number_format($item->gia_goc) }}</span>
+                                                                <p>Giá: {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -309,6 +344,7 @@
                                         </div>
                                     </div>
                                 @endforeach
+
                             </div>
                         </div>
                         <!-- second tab-pane -->

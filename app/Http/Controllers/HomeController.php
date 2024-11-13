@@ -17,13 +17,20 @@ class HomeController extends Controller
         // Lấy sản phẩm mới
         $sanPhamMois = san_pham::orderByDesc('id')->latest('id')->paginate(6);
 
+        // Tính điểm trung bình cho các sản phẩm mới
+        $sanPhamMois->getCollection()->transform(function ($sanPham) {
+            if ($sanPham->danh_gias->count() > 0) {
+                $sanPham->diem_trung_binh = round($sanPham->danh_gias->avg('diem_so'), 1); // Lấy giá trị trung bình điểm
+            } else {
+                $sanPham->diem_trung_binh = 0; // Nếu không có đánh giá nào
+            }
+            return $sanPham;
+        });
+
         // Lấy sản phẩm giảm giá
         $sanPhamGiamGias = san_pham::with('danh_gias')->whereNotNull('gia_km')
             ->orderByDesc('id')
             ->paginate(3);
-
-        // Lấy sản phẩm xem nhiều
-        $sanPhamView = san_pham::orderByDesc('views', 'desc')->paginate(6);
 
         // Tính phần trăm giảm giá cho sản phẩm giảm giá
         $sanPhamGiamGias->getCollection()->transform(function ($sanPham) {
@@ -33,7 +40,7 @@ class HomeController extends Controller
                 $sanPham->phan_tram_giam_gia = 0;
             }
 
-            // Tính trung bình điểm đánh giá
+            // Tính điểm trung bình cho sản phẩm giảm giá
             if ($sanPham->danh_gias->count() > 0) {
                 $sanPham->diem_trung_binh = round($sanPham->danh_gias->avg('diem_so'), 1); // Lấy giá trị trung bình điểm
             } else {
@@ -41,13 +48,16 @@ class HomeController extends Controller
             }
             return $sanPham;
         });
+
+        // Lấy sản phẩm xem nhiều
+        $sanPhamView = san_pham::orderByDesc('views', 'desc')->paginate(6);
+
+        // Lấy khuyến mãi
         $discounts = khuyen_mai::where('is_active', 1)
             ->where('so_luong_ma', '>', 0) // Thêm điều kiện so_luong_ma > 0
             ->orderBy('created_at', 'desc') // Sắp xếp theo ngày tạo mới nhất
             ->take(4) // Lấy 4 mã giảm giá
             ->get();
-
-
 
         $title = "Trang chủ";
         $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
@@ -55,6 +65,7 @@ class HomeController extends Controller
 
         return view('client.home', compact('sanPhamMois', 'discounts', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }
+
     public function showByCategory($danhMucId)
     {
         // Lấy danh mục theo ID

@@ -2,6 +2,45 @@
 
 @section('content')
     <style>
+        .card-body:hover {
+            border: 1px solid black;
+        }
+
+        .main-slider {
+            max-height: 500px;
+            display: flex;
+
+        }
+
+        .slider-item {
+            max-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Ensures no content overflows */
+        }
+
+        .slider-content {
+            margin-bottom: 50px;
+            text-align: center;
+
+        }
+
+        .text {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            margin-top: 10px;
+        }
+
+        .btn {
+            margin-top: 20px;
+        }
+
+
         .product-card {
             /* height: 450px; */
             /* Thiết lập chiều cao cố định cho thẻ sản phẩm */
@@ -169,8 +208,8 @@
                                     <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
                                         style="color: #5C5BCA">Giảm giá 40%</span>
                                 </h2>
-                                <Nga href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary" <a
+                                <a href="shop-grid-4-column.html"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
@@ -311,7 +350,7 @@
                                                             </h3>
                                                             <div class="star-rating">
                                                                 @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($item->danh_gia > 0 && $i <= floor($item->danh_gia))
+                                                                    @if ($item->diem_trung_binh > 0 && $i <= floor($item->diem_trung_binh))
                                                                         <span class="ion-ios-star"></span>
                                                                         <!-- Sao có màu -->
                                                                     @else
@@ -321,7 +360,11 @@
                                                                 @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <p>Giá: {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                <p>Giá: </p>
+                                                                <p style="color: red">
+                                                                    <del
+                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
+                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -474,7 +517,8 @@
                                     </a>
                                     <div class="blog-post-content">
                                         <a class="blog-link theme-color d-inline-block mb-10"
-                                            href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">Tác giả: {{ $baivietmoi->user?->ho_ten }}</a>
+                                            href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">Tác giả:
+                                            {{ $baivietmoi->user?->ho_ten }}</a>
                                         <h3 class="title mb-15">
                                             <a
                                                 href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->tieu_de_bai_viet }}</a>

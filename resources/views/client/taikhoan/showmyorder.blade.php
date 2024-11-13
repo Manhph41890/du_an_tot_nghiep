@@ -2,8 +2,9 @@
     <div class="modal-content">
 
         <!-- Modal Header -->
-        <div class="modal-header">
+        <div class="modal-header w-100">
             <h3 class="modal-title">Chi tiết đơn hàng</h3>
+
         </div>
 
         <!-- Modal Body -->
@@ -40,6 +41,7 @@
                                                 <span class="badge {{ $class }}">
                                                     {{ $donhang->trang_thai_don_hang }}
                                                 </span>
+
                                             </div>
                                             <div class="mt-3">
                                                 <p class="mb-0 me-2">Trạng thái Thanh toán:</p>
@@ -71,6 +73,7 @@
                                                         <th>Số Lượng</th>
                                                         <th>Giá</th>
                                                         <th>Thành Tiền</th>
+                                                        <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -89,12 +92,88 @@
                                                                     Size:
                                                                     {{ optional($chi_tiet->size_san_pham)->ten_size ?? 'N/A' }}
                                                                 </a>
+
                                                             </td>
                                                             <td>{{ $chi_tiet->so_luong }}</td>
                                                             <td>{{ number_format($chi_tiet->gia_tien, 0, ',', '.') }}
                                                                 VND</td>
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
                                                                 VND</td>
+                                                            <td>
+                                                                @if ($donhang->trang_thai_don_hang == 'Thành công' && !$chi_tiet->san_pham->danh_gias()->where('user_id', auth()->user()->id)->exists())
+                                                                    <div class="col-lg-12">
+                                                                        <!-- Nút Viết Đánh Giá -->
+                                                                        <a class="btn danhgia"
+                                                                            id="openReviewForm{{ $chi_tiet->san_pham->id }}">
+                                                                            @if ($donhang->trang_thai_don_hang == 'Thành công')
+                                                                                Viết đánh giá
+                                                                            @endif
+                                                                        </a>
+
+                                                                        <!-- Form Đánh Giá -->
+                                                                        <div class="ratting-form-wrapper"
+                                                                            id="reviewForm{{ $chi_tiet->san_pham->id }}">
+                                                                            <span class="close-btn"
+                                                                                id="closeReviewForm{{ $chi_tiet->san_pham->id }}">&times;</span>
+                                                                            <h3>Thêm đánh giá</h3>
+                                                                            <div class="ratting-form">
+                                                                                <form
+                                                                                    action="{{ route('danhgia.store', ['sanPhamid' => $chi_tiet->san_pham->id]) }}"
+                                                                                    method="post">
+                                                                                    @csrf
+                                                                                    <div class="star-box">
+                                                                                        <span>Đánh giá của bạn:</span>
+                                                                                        <input type="hidden"
+                                                                                            id="san_pham_id"
+                                                                                            name="san_pham_id"
+                                                                                            value="{{ $chi_tiet->san_pham->id }}">
+                                                                                        <select name="diem_so"
+                                                                                            id="diem_so{{ $chi_tiet->san_pham->id }}"
+                                                                                            style="display: none;">
+                                                                                            <option value="1">1
+                                                                                            </option>
+                                                                                            <option value="2">2
+                                                                                            </option>
+                                                                                            <option value="3">3
+                                                                                            </option>
+                                                                                            <option value="4">4
+                                                                                            </option>
+                                                                                            <option value="5">5
+                                                                                            </option>
+                                                                                        </select>
+                                                                                        <div class="rating-product">
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="1"></i>
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="2"></i>
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="3"></i>
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="4"></i>
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="5"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-12">
+                                                                                            <div
+                                                                                                class="rating-form-style form-submit">
+                                                                                                <textarea id="review{{ $chi_tiet->san_pham->id }}" name="binh_luan" placeholder="Viết đánh giá" maxlength="100"></textarea>
+                                                                                                <p
+                                                                                                    id="charCount{{ $chi_tiet->san_pham->id }}">
+                                                                                                    0/100
+                                                                                                </p>
+                                                                                                <input type="submit"
+                                                                                                    value="Gửi" />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -161,43 +240,31 @@
                                                     return confirm("Bạn có chắc chắn muốn hủy nhận đơn hàng này không?");
                                                 }
                                             </script>
+
                                         </div>
                                     </div>
                                 @endif
-                                <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if ($donhang->trang_thai_don_hang == 'Thành công')
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5>Đánh giá của khách hàng</h5>
-                                            @if ($donhang->san_phams?->danh_gias->isNotEmpty())
 
-                                                @foreach ($donhang->san_phams?->danh_gias as $danhGia)
-                                                    <div class="d-flex justify-content-between">
-                                                        <h6></h6>
-                                                        <strong>{{ $danhGia->user?->ho_ten }}</strong>
-                                                        <small><em>Đánh giá:
-                                                                @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($i <= $danhGia->diem_so)
-                                                                        <i class="mdi mdi-star text-warning"></i>
-                                                                        <!-- Ngôi sao đầy -->
-                                                                    @else
-                                                                        <i class="mdi mdi-star-outline text-muted"></i>
-                                                                        <!-- Ngôi sao rỗng -->
-                                                                    @endif
-                                                                @endfor
-                                                            </em></small>
-                                                    </div>
-                                                    <h6>Bình luận:</h6>
-                                                    <textarea class="form-control" rows="3" readonly>{{ $danhGia->binh_luan }}</textarea>
-                                                    <p class="text-muted">Ngày đánh giá:
-                                                        {{ $danhGia->ngay_danh_gia }}</p>
-                                                    </li>
+                                <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
+                                @if ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán online')
+                                    @if ($donhang->lich_su_thanh_toans->isNotEmpty())
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5>Lịch sử giao dịch</h5>
+                                                @foreach ($donhang->lich_su_thanh_toans as $history)
+                                                    <p>Mã giao dịch: {{ $history->ma_giao_dich }}</p>
+                                                    <a href="{{ route('taikhoan.lichsugd', $history->id) }}">
+
+                                                        <button class="btn btn-info btn-sm">
+                                                            <i class="fas fa-eye"></i> Xem
+                                                        </button>
+                                                    </a>
                                                 @endforeach
-                                                </ul>
-                                            @else
-                                                <p>Chưa có đánh giá nào.</p>
-                                            @endif
+                                            </div>
                                         </div>
+                                    @else
+                                        <p>Không có lịch sử giao dịch cho đơn hàng này.</p>
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -213,8 +280,50 @@
 
 </div>
 </div>
-
 <style>
+    .rating-product i {
+        font-size: 30px;
+        color: #ccc;
+    }
+
+    .rating-product i.active {
+        color: gold;
+    }
+
+    .ratting-form-wrapper {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #ddd;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .danhgia {
+        background-color: #ff5722;
+        color: white;
+        padding: 5px 10px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    /* CSS cho nút đóng */
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: #333;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
     .order-status {
         background-color: #d4edda;
         color: #155724;
@@ -249,3 +358,65 @@
         background-color: #e0e0e0;
     }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
+            (function() {
+                const productId = "{{ $chi_tiet->san_pham->id }}";
+                const openReviewForm = document.getElementById("openReviewForm" + productId);
+                const reviewForm = document.getElementById("reviewForm" + productId);
+                const closeReviewForm = document.getElementById("closeReviewForm" + productId);
+                const ratingStars = document.querySelectorAll(`#reviewForm${productId} .rating-product i`);
+                const ratingInput = document.getElementById("diem_so" + productId);
+                const reviewInput = document.getElementById("review" + productId);
+                const charCountDisplay = document.getElementById("charCount" + productId);
+
+                // hiển thị form khi clcik vào viết đán giá 
+                openReviewForm.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    reviewForm.style.display = "block";
+                });
+
+                // clcik button clóe đóng form
+                closeReviewForm.addEventListener("click", function() {
+                    reviewForm.style.display = "none";
+                });
+
+                // click ra ngoài đóng form
+                window.addEventListener("click", function(event) {
+                    if (event.target === reviewForm) {
+                        reviewForm.style.display = "none";
+                    }
+                });
+
+                // click ngôi sao
+                ratingStars.forEach(star => {
+                    star.addEventListener("click", function() {
+                        const rating = this.getAttribute("data-value");
+                        ratingInput.value = rating;
+                        ratingStars.forEach(s => s.classList.remove("active"));
+                        this.classList.add("active");
+                        let prevSibling = this.previousElementSibling;
+                        while (prevSibling) {
+                            prevSibling.classList.add("active");
+                            prevSibling = prevSibling.previousElementSibling;
+                        }
+
+                        // console.log("Selected rating for product", productId, ":", rating);
+                    });
+                });
+
+                // hiển thị số lượng từ theo số lần nhập
+                reviewInput.addEventListener("input", function() {
+                    const currentLength = reviewInput.value.length;
+                    charCountDisplay.textContent = `${currentLength}/100`;
+
+                    // giới hạn 100 từ
+                    if (currentLength > 100) {
+                        reviewInput.value = reviewInput.value.substring(0, 100);
+                    }
+                });
+            })();
+        @endforeach
+    });
+</script>

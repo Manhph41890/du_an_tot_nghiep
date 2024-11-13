@@ -11,6 +11,7 @@ use App\Models\khuyen_mai;
 use App\Models\phuong_thuc_thanh_toan;
 use App\Models\phuong_thuc_van_chuyen;
 use App\Models\san_pham;
+use App\Models\User;
 use App\Policies\ChucVuPolicy;
 use App\Policies\DanhGiaPolicy;
 use App\Policies\DanhMucPolicy;
@@ -18,6 +19,7 @@ use App\Policies\KhuyenMaiPolicy;
 use App\Policies\PhuongThucThanhToanPolicy;
 use App\Policies\PhuongThucVanChuyenPolicy;
 use App\Policies\SanPhamPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -36,6 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         danh_gia::class => DanhGiaPolicy::class,
         phuong_thuc_thanh_toan::class => PhuongThucThanhToanPolicy::class,
         phuong_thuc_van_chuyen::class => PhuongThucVanChuyenPolicy::class,
+        User::class => UserPolicy::class,
         
     ];
 

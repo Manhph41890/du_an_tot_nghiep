@@ -176,7 +176,7 @@
                     // Kiểm tra nếu các phần tử không tồn tại
                     if (!sizeSelect || !colorSelect || !quantityInput) {
                         console.error("Không thể tìm thấy các phần tử của sản phẩm với ID:",
-                        itemId);
+                            itemId);
                         return;
                     }
 

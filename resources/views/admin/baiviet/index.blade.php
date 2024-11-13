@@ -29,8 +29,10 @@
                         <div class="card-header ">
                             <div class="row">
                                 <div class="col-2">
+                                    @if($isAdmin)
                                     <a href="{{ route('baiviets.create') }}" class="btn btn-success">Thêm bài viết
                                     </a>
+                                    @endif
                                 </div>
                                 <div class="col-6">
                                     <form action="{{ route('baiviets.index') }}" method="GET" id="filter-form-km">

@@ -64,15 +64,13 @@ class DanhGiaController extends Controller
             'diem_so' => 'required|integer|min:1|max:5',
             'binh_luan' => 'required|string|max:100',
         ]);
-
-        // danh_gia::create([
-        //     'san_pham_id' => $request->san_pham_id,
-        //     'user_id' => Auth::id(), // If the user is logged in
-        //     'ngay_danh_gia' => now(),
-        //     'diem_so' => $request->diem_so,
-        //     'binh_luan' => $request->binh_luan,
-        // ]);
-
+        // Kiểm tra xem người dùng đã đánh giá sản phẩm này chưa
+        $da_danh_gia_sp_id = danh_gia::where('san_pham_id', $request->san_pham_id)
+            ->where('user_id', auth()->user()->id)
+            ->first();
+        if ($da_danh_gia_sp_id) {
+            return redirect()->back()->with('error', 'Bạn chỉ được đánh giá sản phẩm này một lần.');
+        }
         $danhGia = new danh_gia();
         $danhGia->san_pham_id = $request->san_pham_id;
         $danhGia->user_id = auth()->user()->id;

@@ -85,7 +85,7 @@
                                                         @if ($i <= $item->diem_so)
                                                             <i class="mdi mdi-star text-warning"></i> 
                                                         @else
-                                                            <i class="mdi mdi-star-outline text-muted"></i> <!-- Ngôi sao rỗng -->
+                                                            <i class="mdi mdi-star-outline text-muted"></i> 
                                                         @endif
                                                     @endfor
                                                 </td>

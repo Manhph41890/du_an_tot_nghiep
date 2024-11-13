@@ -93,7 +93,7 @@
                                                             src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                             alt="thumbnail" />
                                                     </a>
-                                                    <ul class="actions d-flex justify-content-center">
+                                                    {{-- <ul class="actions d-flex justify-content-center">
                                                         <li>
                                                             <a class="action" href="#" data-bs-toggle="modal"
                                                                 data-bs-target="#quickview{{ $item->id }}">
@@ -101,7 +101,7 @@
                                                                     title="Quick view" class="icon-magnifier"></span>
                                                             </a>
                                                         </li>
-                                                    </ul>
+                                                    </ul> --}}
                                                 </div>
                                                 <div class="product-desc py-0 px-0">
                                                     <h3 class="title min_h">
@@ -147,7 +147,7 @@
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                                 alt="thumbnail" />
                                                         </a>
-                                                        <ul class="actions d-flex justify-content-center">
+                                                        {{-- <ul class="actions d-flex justify-content-center">
                                                             <li>
                                                                 <a class="action" href="#" data-bs-toggle="modal"
                                                                     data-bs-target="#quickview{{ $item->id }}">
@@ -156,7 +156,7 @@
                                                                         data-bs-original-title="Quick view"></span>
                                                                 </a>
                                                             </li>
-                                                        </ul>
+                                                        </ul> --}}
                                                     </div>
                                                     <div class="media-body ps-md-4">
                                                         <div class="product-desc py-0 px-0">
@@ -219,7 +219,8 @@
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->danhmuc) && in_array($item->id, $request->danhmuc)) checked @endif />
                                                 <label for="danhmuc_{{ $item->id }}">{{ $item->ten_danh_muc }}
-                                                    <span> ({{ $item->soluong_sp_dm }}) </span></label>
+                                                    {{-- <span> ({{ $item->soluong_sp_dm }}) </span> --}}
+                                                </label>
                                             </div>
                                         @endforeach
                                     </div>
@@ -256,7 +257,8 @@
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->size) && in_array($item->id, $request->size)) checked @endif />
                                                 <label for="size-{{ $item->id }}">{{ $item->ten_size }}
-                                                    <span>({{ $item->sl_size }})</span></label>
+                                                    {{-- <span>({{ $item->sl_size }})</span> --}}
+                                                </label>
                                             </div>
                                         @endforeach
                                     </div>
@@ -270,7 +272,10 @@
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
                                                 <label for="color-{{ $item->id }}">
-                                                    {{ $item->ten_color }} <span>({{ $item->sl_color }})</span>
+                                                    {{ $item->ten_color }} 
+                                                    {{-- <span>({{ $item->sl_color }})
+
+                                                    </span> --}}
                                                 </label>
                                             </div>
                                         @endforeach
@@ -295,7 +300,7 @@
 
 
     <!-- Modal cho từng sản phẩm -->
-    @foreach ($list_sanphams as $item)
+    {{-- @foreach ($list_sanphams as $item)
         <div class="modal fade theme1 style1" id="quickview{{ $item->id }}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -535,5 +540,5 @@
                 }
             }
         </script>
-    @endforeach
+    @endforeach --}}
 @endsection

@@ -8,10 +8,22 @@
             padding: 5px;
             font-size: 14px;
         }
+
+        #checkout-button {
+            color: #5a5ac9;
+            background: #fff;
+            border-color: #5a5ac9;
+        }
+
+        #checkout-button:hover {
+            color: #fff;
+            background: #5a5ac9;
+            border-color: #5a5ac9;
+        }
     </style>
     <div class="container margin_30">
         <div class="page_header">
-            <h1>Giỏ Hàng</h1>
+            <h1 class="text-center my-3" style="color:#5a5ac9">Giỏ Hàng</h1>
         </div>
 
         <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
@@ -23,7 +35,7 @@
                         <th>Sản Phẩm</th>
                         <th>Giá</th>
                         <th>Phân loại</th>
-                        <th>Tổng Tiền</th>
+                        <th>Thành Tiền</th>
                         {{-- <th>Hành Động</th> --}}
                     </tr>
                 </thead>
@@ -170,6 +182,7 @@
                         totalPrice += price;
                     }
                 });
+                console.log(totalPrice);
 
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
 

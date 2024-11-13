@@ -21,9 +21,6 @@
                                     <span class="animated font-weight-bold" data-animation-in="fadeInRight"
                                         data-delay-in="1.5" style="color: #5C5BCA" style="color: #5C5BCA">Ưu đãi 20%</span>
                                 </h2>
-                                <ngay href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</ngay>
                                 <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a>
@@ -83,9 +80,7 @@
                                     <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
                                         style="color: #5C5BCA">Sản phẩm mới</span>
                                 </h2>
-                                <a href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua ngay</a>
+
                                 <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>

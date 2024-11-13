@@ -3,45 +3,50 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\bai_viet;
 use Illuminate\Auth\Access\Response;
 
-class BaiVietPolicy
+class UserPolicy
 {
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
+        //
         return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
-     * Determine whether the user can view the danh muc.
+     * Determine whether the user can view the model.
      */
-    public function view(User $user, bai_viet $bai_viet)
+    public function view(User $user): bool
     {
+        //
         return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
-     * Determine whether the user can create danh muc.
+     * Determine whether the user can create models.
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
+        //
         return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 
     /**
-     * Determine whether the user can update the danh muc.
+     * Determine whether the user can update the model.
      */
-    public function update(User $user, bai_viet $bai_viet)
+    public function update(User $user): bool
     {
+        //
         return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 
     /**
-     * Determine whether the user can delete the danh muc.
+     * Determine whether the user can delete the model.
      */
-    public function delete(User $user, bai_viet $bai_viet)
+    public function delete(User $user): bool
     {
+        //
         return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\don_hang;
+use App\Models\lich_su_thanh_toan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -31,9 +32,11 @@ class TaiKhoanController extends Controller
             'phuong_thuc_van_chuyen',
             'chi_tiet_don_hangs.san_pham',
             'chi_tiet_don_hangs.color_san_pham',
-            'chi_tiet_don_hangs.size_san_pham'
+            'chi_tiet_don_hangs.size_san_pham',
+            'lich_su_thanh_toans'
         ])->findOrFail($id);
         $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
+
         // Trả về view cùng với dữ liệu đơn hàng
         return view('client.taikhoan.showmyorder', compact('donhang'));
     }
@@ -48,6 +51,16 @@ class TaiKhoanController extends Controller
 
         return redirect()->route('taikhoan.dashboard')->with('success', 'Đơn hàng đã được hủy.');
     }
+
+    public function history($id)
+    {
+        $user = Auth::user();
+        $history = lich_su_thanh_toan::findOrFail($id);
+        $donhang = $history->don_hang;
+        $title = "Lịch sử đơn hàng ";
+        return view('client.taikhoan.history', compact('user', 'title', 'history', 'donhang'));
+    }
+
 
     public function updateAvatar(Request $request)
     {
@@ -84,47 +97,46 @@ class TaiKhoanController extends Controller
     }
 
     public function updateThongtin(Request $request)
-{
-    // Get the currently authenticated user
-    $user = Auth::user();
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
 
-    // Validate the input data
-    $request->validate([
-        'ho_ten' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email,' . $user->id,
-        'so_dien_thoai' => 'nullable|string|max:15',
-        'ngay_sinh' => 'nullable|date',
-        'gioi_tinh' => 'nullable|string|max:10',
-        'dia_chi' => 'nullable|string|max:255',
-        'anh_dai_dien' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+        // Validate the input data
+        $request->validate([
+            'ho_ten' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'so_dien_thoai' => 'nullable|string|max:15',
+            'ngay_sinh' => 'nullable|date',
+            'gioi_tinh' => 'nullable|string|max:10',
+            'dia_chi' => 'nullable|string|max:255',
+            'anh_dai_dien' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    // Prepare data for updating
-    $params = $request->except('_token', 'anh_dai_dien');
+        // Prepare data for updating
+        $params = $request->except('_token', 'anh_dai_dien');
 
-    // Process avatar if uploaded
-    if ($request->hasFile('anh_dai_dien')) {
-        // Delete old avatar
-        if ($user->anh_dai_dien) {
-            Storage::disk('public')->delete($user->anh_dai_dien);
+        // Process avatar if uploaded
+        if ($request->hasFile('anh_dai_dien')) {
+            // Delete old avatar
+            if ($user->anh_dai_dien) {
+                Storage::disk('public')->delete($user->anh_dai_dien);
+            }
+
+            // Save new avatar
+            $filepath = $request->file('anh_dai_dien')->store('uploads/avatars', 'public');
+            $params['anh_dai_dien'] = $filepath;
+        } else {
+            // Keep existing avatar if none uploaded
+            $params['anh_dai_dien'] = $user->anh_dai_dien;
         }
 
-        // Save new avatar
-        $filepath = $request->file('anh_dai_dien')->store('uploads/avatars', 'public');
-        $params['anh_dai_dien'] = $filepath;
-    } else {
-        // Keep existing avatar if none uploaded
-        $params['anh_dai_dien'] = $user->anh_dai_dien;
+        try {
+            // Update user profile with all params
+            $user->update($params);
+
+            return redirect()->route('taikhoan.dashboard')->with('success', 'Thông tin tài khoản đã được cập nhật thành công.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+        }
     }
-
-    try {
-        // Update user profile with all params
-        $user->update($params);
-
-        return redirect()->route('taikhoan.dashboard')->with('success', 'Thông tin tài khoản đã được cập nhật thành công.');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
-    }
-}
-
 }

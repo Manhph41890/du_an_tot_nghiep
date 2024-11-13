@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\bien_the_san_pham;
 use App\Models\Cart;
 use App\Models\chi_tiet_don_hang;
 use App\Models\don_hang;
 use App\Models\khuyen_mai;
+use App\Models\lich_su_thanh_toan;
 use App\Models\phuong_thuc_thanh_toan;
 use App\Models\phuong_thuc_van_chuyen;
-use App\Models\san_pham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -33,24 +32,41 @@ class OrderController extends Controller
             'khuyen_mai' => 'nullable|string|max:255',
         ]);
 
-        // Lấy giỏ hàng của người dùng hiện tại
-        $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
+        // Lấy danh sách sản phẩm được chọn từ request
+        $selectedProductIds = $request->input('selected_products', []);
+
+        // Lấy giỏ hàng của người dùng và lọc các sản phẩm được chọn
+        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')
             ->where('user_id', Auth::id())
             ->first();
 
-        $cartItems = $cart->cartItems;
+        if (!$cart) {
+            return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
+        }
+
+        // Lọc các sản phẩm được chọn dựa trên selectedProductIds
+        $cartItems = $cart->cartItems->filter(function ($item) use ($selectedProductIds) {
+            return in_array($item->id, $selectedProductIds);
+        });
+
+
+
         $total = $cart->cartItems->sum(fn($item) => $item->price);
 
         $discount = 0;
 
         if ($validatedData['khuyen_mai']) {
-            // Lấy mã khuyến mãi
             $coupon = khuyen_mai::where('ma_khuyen_mai', $validatedData['khuyen_mai'])
                 ->where('ngay_bat_dau', '<=', now())
                 ->where('ngay_ket_thuc', '>=', now())
                 ->first();
+            if ($coupon) {
+                $discount = $coupon->gia_tri_khuyen_mai;
+                $total -= $discount;
+            } else {
+                return redirect()->back()->with('error', 'Mã khuyến mãi không hợp lệ hoặc đã hết hạn.');
+            }
         }
-
 
         $shippingCost = 30000;
         $totall = $total + $shippingCost;
@@ -89,9 +105,10 @@ class OrderController extends Controller
             $vnp_HashSecret = "SDOLTO3JSO8WXIMDIIIFMSUL9NSR39BD"; // Chuỗi bí mật
 
             $vnp_TxnRef = rand(00, 9999);
+            Session::put('vnp_TxnRef', $vnp_TxnRef); // Lưu vào session
             $vnp_OrderInfo = 'Nội dung thanh toán';
             $vnp_OrderType = 'bill payment';
-            $vnp_Amount = $totall * 100;
+            $vnp_Amount = round($totall * 100);
             $vnp_Locale = 'vn';
             $vnp_BankCode = 'NCB';
             $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -157,11 +174,6 @@ class OrderController extends Controller
             $order->trang_thai_thanh_toan = 'Chưa thanh toán';
             $order->save();
 
-            if ($coupon) {
-                $coupon->so_luong_ma -= 1; // Giảm 1 lượt sử dụng
-                $coupon->save(); // Lưu lại thay đổi vào cơ sở dữ liệu
-            }
-
             // Lưu chi tiết đơn hàng từ giỏ hàng
             $orderId = $order->id;
             foreach ($cart->cartItems as $item) {
@@ -174,22 +186,6 @@ class OrderController extends Controller
                 $orderDetail->gia_tien = $item->price;
                 $orderDetail->thanh_tien = $item->price;
                 $orderDetail->save();
-
-                // Cập nhật số lượng của biến thể trong bảng bien_the_san_phams
-                $variant = bien_the_san_pham::where('san_pham_id', $item->san_pham_id)
-                    ->where('color_san_pham_id', $item->color_san_pham_id)
-                    ->where('size_san_pham_id', $item->size_san_pham_id)
-                    ->first();
-                $sanPham = san_pham::where('id', $item->san_pham_id)->first();
-
-                if ($sanPham) {
-                    $sanPham->so_luong -= $item->quantity;  // Trừ số lượng đã mua
-                    $sanPham->save();  // Lưu lại thay đổi
-                }
-                if ($variant) {
-                    $variant->so_luong -= $item->quantity;  // Trừ số lượng đã mua
-                    $variant->save();  // Lưu lại thay đổi
-                }
             }
 
             // Xóa giỏ hàng sau khi đặt hàng thành công
@@ -226,6 +222,17 @@ class OrderController extends Controller
             $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
                 ->where('user_id', Auth::id())
                 ->first();
+
+            $vnp_TxnRef = Session::get('vnp_TxnRef');
+            // Thêm thông tin vào bảng lich_su_thanh_toan
+            $lichSuThanhToan = new lich_su_thanh_toan();
+            $lichSuThanhToan->don_hang_id = $order->id;
+            $lichSuThanhToan->vnp_TxnRef_id = $vnp_TxnRef;
+            $lichSuThanhToan->vnp_ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
+            $lichSuThanhToan->vnp_tong_tien = $order->tong_tien;
+            $lichSuThanhToan->trang_thai = 'Thanh toán thành công';
+            $lichSuThanhToan->save();
+
             foreach ($cart->cartItems as $item) {
                 $orderDetail = new chi_tiet_don_hang();
                 $orderDetail->don_hang_id = $orderId;
@@ -260,42 +267,29 @@ class OrderController extends Controller
     {
         $couponCode = $request->input('coupon_code');
         $totalAmount = $request->input('totall'); // Tổng tiền trước khi áp mã
-        $userId = auth()->id();
 
-        // Kiểm tra mã giảm giá trong bảng khuyen_mais
-        $coupon = khuyen_mai::where('ma_khuyen_mai', $couponCode)
-            ->where('ngay_bat_dau', '<=', now()) // Mã giảm giá đã bắt đầu có hiệu lực
-            ->where('ngay_ket_thuc', '>=', now())
-            ->where(function ($query) use ($userId) {
-                $query->whereNull('user_id')
-                    ->orWhere('user_id', $userId);
-            })
-            ->first();
+        // Kiểm tra mã giảm giá và tính toán tổng tiền mới
+        $discount = 0;
+
+        // Giả sử bạn có bảng coupon trong cơ sở dữ liệu hoặc một cách khác để kiểm tra mã giảm giá
+        $coupon = khuyen_mai::where('ma_khuyen_mai', $couponCode)->first();
+        $giakm = $coupon->gia_tri_khuyen_mai;
 
         if ($coupon) {
-            // Kiểm tra số lượng mã giảm giá còn lại
-            if ($coupon->so_luong_ma <= 0) {
-                return response()->json(['success' => false, 'message' => 'Mã khuyến mãi đã hết lượt sử dụng.']);
-            }
-
             // Giả sử mã giảm giá có thể là phần trăm giảm
-            $discountAmount = $coupon->gia_tri_khuyen_mai; // Giá trị giảm giá (số tiền hoặc phần trăm)
-
-            // Tính toán tổng tiền sau khi áp dụng mã giảm giá
-            $newTotal = $totalAmount - $discountAmount;
-            if ($newTotal < 0) {
-                $newTotal = 0; // Nếu tổng tiền sau giảm giá là âm, gán lại bằng 0
-            }
-
-
-            // Trả về tổng tiền mới và giá trị giảm giá
-            return response()->json([
-                'success' => true,
-                'newTotal' => number_format($newTotal, 2), // Định dạng số tiền
-                'discountAmount' => number_format($discountAmount, 2) // Trả về số tiền giảm giá
-            ]);
+            $discount = $totalAmount - $coupon->gia_tri_khuyen_mai;
         } else {
-            return response()->json(['success' => false, 'message' => 'Mã giảm giá không hợp lệ hoặc đã hết hạn.']);
+            return response()->json(['success' => false, 'message' => 'Mã giảm giá không hợp lệ!']);
         }
+
+        // Tính tổng tiền sau khi giảm giá
+        $newTotal =  $discount;
+
+        // Trả về tổng tiền mới
+        return response()->json([
+            'success' => true,
+            'newTotal' => number_format($newTotal, 2), // Định dạng số tiền
+            'discountAmount' => number_format($giakm, 2) // Trả về số tiền giảm giá
+        ]);
     }
 }

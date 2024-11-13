@@ -31,22 +31,22 @@
                 <table class="table table-hover cart-list">
                     <thead class="table-light custom-thead">
                         <tr>
-                            <th class="text-center" style="width: 15%;">Ảnh sản phẩm</th>
-                            <th class="text-center" style="width: 30%;">Tên sản phẩm</th>
-                            <th class="text-center" style="width: 20%;">Biến thể</th>
-                            <th class="text-center" style="width: 10%;">Số lượng</th>
-                            <th class="text-center" style="width: 15%;">Giá</th>
+                            <th class="text-center" style="width: 15%; font-size:18px">Ảnh sản phẩm</th>
+                            <th class="text-center" style="width: 30%; font-size:18px">Tên sản phẩm</th>
+                            <th class="text-center" style="width: 20%; font-size:18px">Phân loại</th>
+                            <th class="text-center" style="width: 10%; font-size:18px">Số lượng</th>
+                            <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($cart->cartItems as $item)
                             <tr>
-                                <td class="text-center">
+                                <td class="text-center" style="font-size:16px;">
                                     <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}" alt="Ảnh sản phẩm"
                                         class="img-fluid" style="max-width: 80px; max-height: 80px;">
                                 </td>
-                                <td class="text-center">{{ $item->san_pham->ten_san_pham }}</td>
-                                <td class="text-center">
+                                <td class="text-center" style="font-size:16px;">{{ $item->san_pham->ten_san_pham }}</td>
+                                <td class="text-center" style="font-size:16px;">
                                     @if ($item->size && $item->color)
                                         <span>Size: {{ $item->size->ten_size }}</span>
                                         <br>
@@ -55,8 +55,9 @@
                                         <span class="text-muted">Không có thông tin kích thước hoặc màu sắc</span>
                                     @endif
                                 </td>
-                                <td class="text-center">{{ $item->quantity }}</td>
-                                <td class="text-center"><strong>{{ number_format($item->price, 2) }}đ</strong></td>
+                                <td class="text-center" style="font-size:16px;">{{ $item->quantity }}</td>
+                                <td class="text-center" style="font-size:16px;">
+                                    <strong>{{ number_format($item->price, 2) }}đ</strong></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -66,7 +67,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
                         <div class="step first">
-                            <h3>1. Thông tin nhận hàng</h3>
+                            <h3 style="font-size:18px">1. Thông tin nhận hàng</h3>
 
                             <div class="tab-content checkout">
                                 <div class="tab-pane fade show active" id="tab_1" role="tabpanel"
@@ -102,7 +103,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="step middle payments">
-                            <h3>2. Thông tin thanh toán</h3>
+                            <h3 style="font-size:18px">2. Thông tin thanh toán</h3>
                             <ul>
                                 @foreach ($phuongThucThanhToans as $phuongThucThanhToan)
                                     <li>
@@ -127,27 +128,13 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            <div class="">
-                                <div class="step">
-                                    <h3>Nhập mã giảm giá để nhận ưu đãi</h3>
-                                </div>
-                                <div class="row">
-                                    <div class="input-group">
-                                        <input type="text" id="coupon-code" name="khuyen_mai" class="form-control"
-                                            placeholder="Nhập mã giảm giá">
-                                        <button class="btn btn-outline-success" id="apply-coupon" type="button">Áp
-                                            dụng</button>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                         <!-- /step -->
 
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="step last">
-                            <h3>3. Thanh toán</h3>
+                            <h3 style="font-size:18px">3. Thanh toán</h3>
                             <div class="box_general summary">
                                 <ul>
                                     <li class="clearfix"><em><strong>Tiền sản phẩm</strong></em>
@@ -155,6 +142,20 @@
                                     </li>
                                 </ul>
                                 <ul>
+                                    <li>
+                                        <div class="row">
+                                            <div class="input-group">
+                                                <input type="text" id="coupon-code" name="khuyen_mai"
+                                                    class="form-control" placeholder="Nhập mã giảm giá">
+                                                <button class="btn btn-outline-success" id="apply-coupon"
+                                                    type="button">Áp
+                                                    dụng</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix"><em><strong>Số tiền được giảm</strong></em> <span> 0</span>
+                                </ul>
+                                <ul style="border-bottom: 1px solid #ededed !important;">
                                     <li class="clearfix"><em><strong>Tiền vận chuyển</strong></em> <span> 30.000</span>
                                     </li>
                                     <li class="clearfix"><em><strong>Tiền giảm giá khuyến mại</strong></em> <span
@@ -206,6 +207,38 @@
                 /* Nền của các thẻ <th> */
                 color: #fff !important;
                 /* Màu chữ của các thẻ <th> */
+            }
+
+            #apply-coupon {
+                color: #5a5ac9;
+                background: #fff;
+                border-color: #5a5ac9;
+            }
+
+            #apply-coupon:hover {
+                color: #fff;
+                background: #5a5ac9;
+                border-color: #5a5ac9;
+            }
+
+            .box_general.summary ul {
+                border-bottom: none !important;
+            }
+
+            .input-group {
+                padding: 0 !important;
+            }
+
+            .container_radio {
+                font-size: 16px !important;
+            }
+
+            .box_general.summary ul li {
+                font-size: 16px !important;
+            }
+
+            #tab_1 {
+                font-size: 16px !important;
             }
         </style>
         <script>

@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <ul class="footer-menu">
-                            <li><a href="#">  Cổng số 1, Tòa nhà FPT Polytechnic, 13 phố Trịnh Văn Bô, phường Phương Canh, quận Nam Từ Liêm, TP Hà Nội</a></li>
+                            <li><a href="#">  Cổng số 1, Tòa nhà FPT Polytechnic, 13 Trịnh Văn Bô, phường Phương Canh, quận Nam Từ Liêm, TP Hà Nội</a></li>
                             <li><a href="#"> (024) 8582 0808</a></li>
                         </ul>
                     </div>

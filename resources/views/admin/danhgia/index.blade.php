@@ -90,7 +90,6 @@
                                                     @endfor
                                                 </td>
                                                 
-                                                {{-- <td>{{ $item->binh_luan }}</td> --}}
                                                 <td>
                                                     <div>
                                                         <!-- Thay đổi data-bs-target để tương ứng với ID của item -->

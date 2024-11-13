@@ -49,7 +49,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 568px;
+            /* height: 568px; */
         }
     </style>
 

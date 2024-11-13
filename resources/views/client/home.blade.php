@@ -207,9 +207,6 @@
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                                 alt="thumbnail" />
                                                         </a>
-                                                        <!-- product links -->
-
-                                                        <!-- product links end-->
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
@@ -535,18 +532,7 @@
             </div>
         </div>
     </div>
-    <style>
-        .min_h {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            /* Số dòng muốn hiển thị */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            min-height: 3em;
-            /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
-        }
-    </style>
+  
     
     <!-- modals start -->
     <!-- modal giỏ hàng -->

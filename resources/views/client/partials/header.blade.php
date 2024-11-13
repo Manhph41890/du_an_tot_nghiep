@@ -376,7 +376,7 @@
                 </div>
                 <div class="col-xl-7 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
-                        <li class="active ml-0">
+                        <li class="ml-0">
                             <a href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>

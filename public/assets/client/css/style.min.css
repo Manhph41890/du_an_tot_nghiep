@@ -38,6 +38,19 @@ button {
     color: inherit
 }
 
+.min_h {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Số dòng muốn hiển thị */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3em;
+    /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+}
+.w-300{
+    width: 300px;
+}
 button {
     background: transparent;
     border: 0;

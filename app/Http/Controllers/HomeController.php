@@ -15,7 +15,10 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         // Lấy sản phẩm mới
-        $sanPhamMois = san_pham::orderByDesc('id')->latest('id')->paginate(6);
+        $sanPhamMois = san_pham::where('is_active', 1) // Thêm điều kiện lọc
+            ->orderByDesc('id')
+            ->latest('id')
+            ->paginate(10);
 
         // Tính điểm trung bình cho các sản phẩm mới
         $sanPhamMois->getCollection()->transform(function ($sanPham) {
@@ -28,9 +31,11 @@ class HomeController extends Controller
         });
 
         // Lấy sản phẩm giảm giá
-        $sanPhamGiamGias = san_pham::with('danh_gias')->whereNotNull('gia_km')
+        $sanPhamGiamGias = san_pham::with('danh_gias')
+            ->whereNotNull('gia_km')
+            ->where('is_active', 1) // Thêm điều kiện lọc
             ->orderByDesc('id')
-            ->paginate(3);
+            ->paginate(5);
 
         // Tính phần trăm giảm giá cho sản phẩm giảm giá
         $sanPhamGiamGias->getCollection()->transform(function ($sanPham) {
@@ -50,8 +55,9 @@ class HomeController extends Controller
         });
 
         // Lấy sản phẩm xem nhiều
-        $sanPhamView = san_pham::orderByDesc('views', 'desc')->paginate(6);
-
+        $sanPhamView = san_pham::where('is_active', 1) // Thêm điều kiện lọc
+            ->orderByDesc('views', 'desc')
+            ->paginate(6);
         // Lấy khuyến mãi
         $discounts = khuyen_mai::where('is_active', 1)
             ->where('so_luong_ma', '>', 0) // Thêm điều kiện so_luong_ma > 0

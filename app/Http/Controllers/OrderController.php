@@ -245,6 +245,8 @@ class OrderController extends Controller
                 $orderDetail->save();
             }
 
+
+
             // Xóa giỏ hàng sau khi đặt hàng thành công
             $cart->cartItems()->delete();
             $cart->delete();

@@ -65,6 +65,11 @@ class don_hang extends Model
         return $this->hasMany(chi_tiet_don_hang::class, 'don_hang_id');
     }
 
+    public function lich_su_thanh_toans()
+    {
+        return $this->hasMany(lich_su_thanh_toan::class, 'don_hang_id', 'id');
+    }
+
     // Tạo mã đơn hàng từ id
     public function getMaDonHangAttribute()
     {

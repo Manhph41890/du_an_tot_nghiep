@@ -246,39 +246,25 @@
                                 @endif
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if ($donhang->trang_thai_don_hang == 'Thành công')
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5>Đánh giá của khách hàng</h5>
-                                            @if ($donhang->san_phams?->danh_gias->isNotEmpty())
+                                @if ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán online')
+                                    @if ($donhang->lich_su_thanh_toans->isNotEmpty())
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5>Lịch sử giao dịch</h5>
+                                                @foreach ($donhang->lich_su_thanh_toans as $history)
+                                                    <p>Mã giao dịch: {{ $history->ma_giao_dich }}</p>
+                                                    <a href="{{ route('taikhoan.lichsugd', $history->id) }}">
 
-                                                @foreach ($donhang->san_phams?->danh_gias as $danhGia)
-                                                    <div class="d-flex justify-content-between">
-                                                        <h6></h6>
-                                                        <strong>{{ $danhGia->user?->ho_ten }}</strong>
-                                                        <small><em>Đánh giá:
-                                                                @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($i <= $danhGia->diem_so)
-                                                                        <i class="mdi mdi-star text-warning"></i>
-                                                                        <!-- Ngôi sao đầy -->
-                                                                    @else
-                                                                        <i class="mdi mdi-star-outline text-muted"></i>
-                                                                        <!-- Ngôi sao rỗng -->
-                                                                    @endif
-                                                                @endfor
-                                                            </em></small>
-                                                    </div>
-                                                    <h6>Bình luận:</h6>
-                                                    <textarea class="form-control" rows="3" readonly>{{ $danhGia->binh_luan }}</textarea>
-                                                    <p class="text-muted">Ngày đánh giá:
-                                                        {{ $danhGia->ngay_danh_gia }}</p>
-                                                    </li>
+                                                        <button class="btn btn-info btn-sm">
+                                                            <i class="fas fa-eye"></i> Xem
+                                                        </button>
+                                                    </a>
                                                 @endforeach
-                                                </ul>
-                                            @else
-                                                <p>Chưa có đánh giá nào.</p>
-                                            @endif
+                                            </div>
                                         </div>
+                                    @else
+                                        <p>Không có lịch sử giao dịch cho đơn hàng này.</p>
+                                    @endif
                                 @endif
                             </div>
                         </div>

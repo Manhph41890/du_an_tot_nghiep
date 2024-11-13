@@ -83,7 +83,7 @@
                                                 <td>
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @if ($i <= $item->diem_so)
-                                                            <i class="mdi mdi-star text-warning"></i> <!-- Ngôi sao đầy -->
+                                                            <i class="mdi mdi-star text-warning"></i> 
                                                         @else
                                                             <i class="mdi mdi-star-outline text-muted"></i> <!-- Ngôi sao rỗng -->
                                                         @endif

@@ -369,7 +369,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-3 mb-3">Sản phẩm nhiều lượt xem</h2>
+                        <h2 class="title pb-3 mb-3">Sản phẩm được quan tâm</h2>
                     </div>
                     <div class="product-slider-init theme1 slick-nav">
                         @foreach ($sanPhamView as $sanphamview)

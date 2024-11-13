@@ -511,7 +511,25 @@
                                                             {{ $item->tong_tien }}
                                                             Vnđ
                                                         </td>
-                                                        <td>{{ $item->trang_thai }}</td>
+                                                        <td> @php
+                                                            $statusClasses = [
+                                                                'Chờ xác nhận' => 'bg-warning',
+                                                                'Đã xác nhận' => 'bg-info',
+                                                                'Đang chuẩn bị hàng' => 'bg-info',
+                                                                'Đang vận chuyển' => 'bg-info',
+                                                                'Đã giao' => 'bg-success',
+                                                                'Thành công' => 'bg-success',
+                                                                'Đã hủy' => 'bg-danger',
+                                                            ];
+                                                            $class =
+                                                                $statusClasses[$item->trang_thai_don_hang] ??
+                                                                'bg-secondary';
+                                                        @endphp
+
+                                                            <span class="badge {{ $class }}">
+                                                                {{ $item->trang_thai_don_hang }}
+                                                            </span>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             @else

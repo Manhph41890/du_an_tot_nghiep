@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\bai_viet;
 use App\Models\bien_the_san_pham;
 use App\Models\danh_muc;
+use App\Models\don_hang;
 use App\Models\khuyen_mai;
 use App\Models\san_pham;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
     //Sản phẩm Home
     public function index(Request $request)
     {
@@ -69,7 +71,7 @@ class HomeController extends Controller
         $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
         $anhDMuc = danh_muc::query()->where('is_active', '1')->get();
 
-        return view('client.home', compact('sanPhamMois', 'discounts', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
+        return view('client.home', compact('sanPhamMois',  'discounts', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }
 
     public function showByCategory($danhMucId)

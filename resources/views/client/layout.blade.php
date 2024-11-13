@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{{ asset('assets/client/css/style.min.css') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha384-dyB8oeAf6iLs/n8TYqyeK1zwy6/iDVB+P5vDXR1RylsNcsSD5T3U7Kbk4WV0bv+W" crossorigin="anonymous">
+
 
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
@@ -98,7 +101,7 @@
         }
 
         .discount-description {
-            font-size: 1em;
+            font-size: 1.3em;
             color: #777;
             margin-bottom: 15px;
         }
@@ -106,7 +109,7 @@
         .copy-btn {
             background-color: #5C5BCA;
             color: white;
-            padding: 10px 20px;
+            padding: 15px 25px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -288,8 +291,12 @@
                 });
             @endif
         });
+        window.addEventListener('scroll', function(e) {
+            // Nội dung sự kiện cuộn
+        }, {
+            passive: true
+        });
     </script>
-    @yield('js')
 </body>
 
 </html>

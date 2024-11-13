@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmationMail;
 use App\Models\Cart;
 use App\Models\chi_tiet_don_hang;
 use App\Models\don_hang;
@@ -12,6 +13,7 @@ use App\Models\phuong_thuc_van_chuyen;
 use App\Models\san_pham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller

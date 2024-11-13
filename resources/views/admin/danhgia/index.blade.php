@@ -53,7 +53,7 @@
 
                             </div>
 
-                        </div><!-- end card header -->
+                        </div>
 
 
 

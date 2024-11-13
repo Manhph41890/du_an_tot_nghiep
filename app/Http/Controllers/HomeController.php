@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         // Lấy sản phẩm mới
-        $sanPhamMois = san_pham::orderByDesc('id')->latest('id')->paginate(6);
+        $sanPhamMois = san_pham::orderByDesc('id')->latest('id')->where('is_active', '1')->paginate(6);
 
         // Tính điểm trung bình cho các sản phẩm mới
         $sanPhamMois->getCollection()->transform(function ($sanPham) {
@@ -29,6 +29,7 @@ class HomeController extends Controller
 
         // Lấy sản phẩm giảm giá
         $sanPhamGiamGias = san_pham::with('danh_gias')->whereNotNull('gia_km')
+            ->where('is_active', '1')
             ->orderByDesc('id')
             ->paginate(3);
 
@@ -50,7 +51,7 @@ class HomeController extends Controller
         });
 
         // Lấy sản phẩm xem nhiều
-        $sanPhamView = san_pham::orderByDesc('views', 'desc')->paginate(6);
+        $sanPhamView = san_pham::orderByDesc('views', 'desc')->where('is_active','1')->paginate(6);
 
         // Lấy khuyến mãi
         $discounts = khuyen_mai::where('is_active', 1)
@@ -60,7 +61,7 @@ class HomeController extends Controller
             ->get();
 
         $title = "Trang chủ";
-        $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
+        $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->where('is_active','1')->paginate(6);
         $anhDMuc = danh_muc::query()->where('is_active', '1')->get();
 
         return view('client.home', compact('sanPhamMois', 'discounts', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));

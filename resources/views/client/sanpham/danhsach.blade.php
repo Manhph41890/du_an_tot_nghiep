@@ -137,7 +137,7 @@
                                         <div class="card product-card minh">
                                             <div class="card-body">
                                                 <div class="media flex-column flex-md-row">
-                                                    <div class="product-thumbnail position-relative">
+                                                    <div class="product-thumbnail position-relative  w-300">
                                                         <span
                                                             class="badge badge-danger top-right">{{ $item->phantramgia }}%</span>
                                                         <a href="{{ route('sanpham.chitiet', $item->id) }}">
@@ -158,7 +158,7 @@
                                                     </div>
                                                     <div class="media-body ps-md-4">
                                                         <div class="product-desc py-0 px-0">
-                                                            <h3 class="title">
+                                                            <h3 class="title min_h">
                                                                 <a
                                                                     href="{{ route('sanpham.chitiet', $item->id) }}">{{ $item->ten_san_pham }}</a>
                                                             </h3>
@@ -176,7 +176,7 @@
                                                             </div>
                                                             <p class="product-price">
                                                                 <del class="text-secondary"> {{ $item->gia_goc }}</del>
-                                                                <span class="ms-2"> {{ $item?->gia_km }} đ</span>
+                                                                <span class="ms-2"> {{ $item?->gia_km }} VNĐ</span>
                                                             </p>
                                                         </div>
                                                         <ul class="product-list-des">
@@ -206,10 +206,10 @@
                                 @method('GET')
                                 <div class="">
                                     <div class="header-sidebar d-flex justify-content-between">
-                                        <h5 class="title" style="font-size: 20px;">LỌC THEO</h5>
+                                        <h5 class="title">LỌC THEO</h5>
                                         {{-- <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button> --}}
                                     </div>
-                                    <h4 class="sub-title pt-10" style="font-size: 18px;">Danh mục</h4>
+                                    <h6 class="sub-title mt-30 mb-2 ">Danh mục</h6>
                                     <div class="form-group">
                                         @foreach ($danhmucs as $item)
                                             <div class="widget-check-box">
@@ -223,7 +223,7 @@
                                     </div>
                                 </div>
                                 <div class="">
-                                    <h4 class="sub-title pt-10">Giá</h4>
+                                    <h6 class="sub-title mt-30  mb-2 fs-15">Giá</h6>
                                     <div class="widget-check-box">
                                         <input type="checkbox" id="price1" name="price[]" value="0-100000"  onchange="this.form.submit()"
                                             @if (isset($request->price) && in_array('0-100000', $request->price)) checked @endif />
@@ -245,8 +245,8 @@
                                         <label for="price4">> 1.000.000</label>
                                     </div>
                                 </div>
-                                <div class="">
-                                    <h4 class="sub-title">Size</h4>
+                                <div class=""> 
+                                    <h6 class="sub-title mt-30  mb-2 fs-15">Size</h6>
                                     <div class="form-group">
                                         @foreach ($size_sidebar as $item)
                                             <div class="widget-check-box">
@@ -261,7 +261,7 @@
                                     </div>
                                 </div>
                                 <div class="">
-                                    <h4 class="sub-title">Color</h4>
+                                    <h6 class="sub-title mt-30  mb-2 fs-15">Color</h6>
                                     <div class="form-group">
                                         @foreach ($color_sidebar as $item)
                                             <div class="widget-check-box">

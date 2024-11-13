@@ -3,7 +3,7 @@
 @section('content')
     <style>
         .product-card {
-            height: 450px;
+            /* height: 450px; */
             /* Thiết lập chiều cao cố định cho thẻ sản phẩm */
             display: flex;
             flex-direction: column;
@@ -305,32 +305,19 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <div class="product-desc">
-                                                            <h3 class="title">
-                                                                <a class="min_h"
+                                                            <h3 class="title min_h">
+                                                                <a class=""
                                                                     href="{{ route('sanpham.chitiet', $item->id) }}">{{ $item->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
-                                                                @php
-                                                                    $diemTrungBinh = $item->diem_trung_binh; // Điểm trung bình của sản phẩm
-                                                                    $fullStars = floor($diemTrungBinh); // Số sao đầy đủ
-                                                                    $halfStar =
-                                                                        $diemTrungBinh - $fullStars >= 0.5 ? 1 : 0; // Kiểm tra sao nửa
-                                                                    $emptyStars = 5 - $fullStars - $halfStar; // Số sao trống
-                                                                @endphp
-
-                                                                <!-- Hiển thị các sao đầy đủ -->
-                                                                @for ($i = 0; $i < $fullStars; $i++)
-                                                                    <span class="ion-ios-star"></span>
-                                                                @endfor
-
-                                                                <!-- Hiển thị sao nửa nếu có -->
-                                                                @if ($halfStar)
-                                                                    <span class="ion-ios-star-half"></span>
-                                                                @endif
-
-                                                                <!-- Hiển thị các sao trống -->
-                                                                @for ($i = 0; $i < $emptyStars; $i++)
-                                                                    <span class="ion-ios-star de-selected"></span>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($item->danh_gia > 0 && $i <= floor($item->danh_gia))
+                                                                        <span class="ion-ios-star"></span>
+                                                                        <!-- Sao có màu -->
+                                                                    @else
+                                                                        <span class="ion-ios-star-outline"></span>
+                                                                        <!-- Sao không màu -->
+                                                                    @endif
                                                                 @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
@@ -364,22 +351,26 @@
                                                                 alt="thumbnail" />
                                                         </a>
                                                     </div>
-                                                    <div class="media-body">
+                                                    <div class="media-body w-100">
                                                         <div class="product-desc">
-                                                            <h3 class="title">
-                                                                <a class="min_h"
+                                                            <h3 class="title min_h">
+                                                                <a class=""
                                                                     href="{{ route('sanpham.chitiet', $sanPhamGg->id) }}">{{ $sanPhamGg->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star de-selected"></span>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($sanPhamGg->danh_gia > 0 && $i <= floor($sanPhamGg->danh_gia))
+                                                                        <span class="ion-ios-star"></span>
+                                                                        <!-- Sao có màu -->
+                                                                    @else
+                                                                        <span class="ion-ios-star-outline"></span>
+                                                                        <!-- Sao không màu -->
+                                                                    @endif
+                                                                @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span
-                                                                    class="product-price">{{ number_format($sanPhamGg->gia_goc) }}</span>
+                                                                <span class="product-price">Giá:
+                                                                    {{ number_format($sanPhamGg->gia_km) }} VNĐ</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -421,24 +412,28 @@
                                                 </a>
                                                 <!-- product links end-->
                                             </div>
-                                            <div class="media-body">
+                                            <div class="media-body w-100">
                                                 <div class="product-desc">
-                                                    <h3 class="title">
-                                                        <a class="min_h"
+                                                    <h3 class="title min_h">
+                                                        <a class=""
                                                             href="{{ route('san-phams.incrementViews', $sanphamview->id) }}">
                                                             {{ $sanphamview->ten_san_pham }}
                                                         </a>
                                                     </h3>
                                                     <div class="star-rating">
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star de-selected"></span>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($sanphamview->danh_gia > 0 && $i <= floor($sanphamview->danh_gia))
+                                                                <span class="ion-ios-star"></span>
+                                                                <!-- Sao có màu -->
+                                                            @else
+                                                                <span class="ion-ios-star-outline"></span>
+                                                                <!-- Sao không màu -->
+                                                            @endif
+                                                        @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span
-                                                            class="product-price">{{ number_format($sanphamview->gia_goc) }}</span>
+                                                        <span class="product-price">Giá:
+                                                            {{ number_format($sanphamview->gia_km) }} VNĐ</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -472,22 +467,21 @@
                         @foreach ($baiVietMoi as $baivietmoi)
                             <div class="slider-item">
                                 <div class="single-blog">
-                                    <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
+                                    <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden height-200"
                                         href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">
                                         <img src="{{ asset('/storage/' . $baivietmoi->anh_bai_viet) }}"
                                             alt="blog-thumb-naile" />
                                     </a>
                                     <div class="blog-post-content">
-                                        <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
-                                            href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->user?->ho_ten }}</a>
+                                        <a class="blog-link theme-color d-inline-block mb-10"
+                                            href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">Tác giả: {{ $baivietmoi->user?->ho_ten }}</a>
                                         <h3 class="title mb-15">
-                                            <a href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->tieu_de_bai_viet }}</a>
+                                            <a
+                                                href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->tieu_de_bai_viet }}</a>
                                         </h3>
                                         <p class="sub-title">
-                                            Ngày đăng
-                                            <a class="theme-color d-inline-block mx-1"
-                                                href="{{ url('client/baivietchitiet', $baivietmoi->id) }}"></a>
-                                            {{ $baivietmoi->ngay_dang }}
+                                            Ngày đăng:
+                                            {{ date('d/m/Y', strtotime($baivietmoi->ngay_dang)) }}
                                         </p>
                                     </div>
                                 </div>
@@ -506,7 +500,6 @@
                 <div class="col-12">
                     <div class="brand-init border-top py-35 slick-nav-brand">
                         @foreach ($anhDMuc as $anhdm)
-
                             <div class="slider-item">
                                 <div class="single-brand">
                                     <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
@@ -516,9 +509,6 @@
                                             class="brand-image" />
                                     </a>
                                     <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
-                                </div>
-                                <div class="single-service">
-                                    <h5 class="text-capitalize mb-20"> {{ $anhdm->ten_danh_muc }}</h5>
                                 </div>
                             </div>
                         @endforeach
@@ -539,59 +529,6 @@
             /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
         }
     </style>
-    <!-- second modal -->
-    <div class="modal fade style3" id="add-to-cart" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center bg-dark">
-                    <h5 class="modal-title" id="add-to-cartCenterTitle">
-                        Product successfully
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-5 divide-right">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="assets/img/modal/1.jpg" alt="img" />
-                                </div>
-                                <div class="col-md-6 mb-2 mb-md-0">
-                                    <h4 class="product-name">
-                                        New Balance Running Arishi trainers in triple
-                                    </h4>
-                                    <h5 class="price">$$29.00</h5>
-                                    <h6 class="color">
-                                        <strong>Dimension: </strong>: <span class="dmc">40x60cm</span>
-                                    </h6>
-                                    <h6 class="quantity"><strong>Quantity:</strong>&nbsp;1</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="modal-cart-content">
-                                <p class="cart-products-count">There is 1 item in your cart.</p>
-                                <p><strong>Total products:</strong>&nbsp;$123.72</p>
-                                <p><strong>Total shipping:</strong>&nbsp;$7.00</p>
-                                <p><strong>Taxes</strong>&nbsp;$0.00</p>
-                                <p><strong>Total:</strong>&nbsp;$130.72 (tax excl.)</p>
-                                <div class="cart-content-btn">
-                                    <button type="button" class="btn btn-dark btn--md mt-4" data-bs-dismiss="modal">
-                                        Continue shopping
-                                    </button>
-                                    <button class="btn btn-dark btn--md mt-4">
-                                        Proceed to checkout
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
         function copyCode(code) {
             var tempInput = document.createElement("input");

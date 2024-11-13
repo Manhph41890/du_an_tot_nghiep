@@ -88,11 +88,10 @@
                             @enderror
                         </div>
 
-                        <div class="input-group mb-5 d-flex justify-content-between">
+                        <div class="input-group mb-3 d-flex justify-content-between">
                             <div class="form-check">
                                 <input type="checkbox" name="remember" class="form-check-input" id="formCheck">
-                                <label for="formCheck" class="form-check-label text-secondary"><small>Remember
-                                        Me</small></label>
+                                <label for="formCheck" class="form-check-label text-secondary"><small>Ghi nhớ</small></label>
                             </div>
 
                             <div class="forgot">
@@ -101,9 +100,9 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>
+                            <button class="btn btn-lg btn-primary w-100 fs-6">ĐĂNG NHẬP</button>
                         </div>
-
+{{-- 
                         <div class="input-group d-flex mb-3">
                             <button class="btn btn-lg btn-light me-2 fs-6">
                                 <img src="{{ asset('images/google.png') }}" style="width: 20px;" class="me-2">
@@ -114,7 +113,7 @@
                                 <img src="{{ asset('images/facebook.png') }}" style="width: 20px;" class="me-2">
                                 Sign In with Facebook
                             </button>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <small>Bạn chưa có tài khoản? <a href="{{ route('auth.register') }}"> Đăng Kí </a></small>

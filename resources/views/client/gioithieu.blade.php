@@ -130,7 +130,7 @@
               <h3 class="title text-capitalize mb-20">Chúng ta làm gì?
               </h3>
               <p>
-              Nhưng để bạn có thể thấy rằng tất cả những sai lầm  này là niềm vui của những người buộc tội và nỗi đau của những người khen ngợi, tôi sẽ kể lại toàn bộ vấn đề, và chính những điều được tạo ra bởi người phát hiện ra sự thật và như nó. là kiến ​​trúc sư
+              Nhưng để bạn có thể thấy rằng tất cả những sai lầm bẩm sinh này là niềm vui của những người buộc tội và nỗi đau của những người khen ngợi, tôi sẽ kể lại toàn bộ vấn đề, và chính những điều được tạo ra bởi người phát hiện ra sự thật và như nó. là kiến ​​trúc sư
 
               </p>
             </div>

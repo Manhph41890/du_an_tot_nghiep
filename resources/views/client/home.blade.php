@@ -494,7 +494,7 @@
                                         <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
                                             href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->user?->ho_ten }}</a>
                                         <h3 class="title mb-15">
-                                            <a href="single-blog.html">{{ $baivietmoi->tieu_de_bai_viet }}</a>
+                                            <a href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->tieu_de_bai_viet }}</a>
                                         </h3>
                                         <p class="sub-title">
                                             Ngày đăng

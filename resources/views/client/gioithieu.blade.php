@@ -130,9 +130,9 @@
               <h3 class="title text-capitalize mb-20">Chúng ta làm gì?
               </h3>
               <p>
-                 ut perspiciatis unde omnis iste natus error sit voluptatem
+                 ut perspiciatis unde omnis iste natus ror sit voluptatem
                 accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore veritatis et quasi architecto
+                quae ab illo inventore veritats et quasi architec
               </p>
             </div>
           </div>

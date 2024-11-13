@@ -265,10 +265,13 @@
                             <span class="code">{{ $item->ma_khuyen_mai }}</span>
                         </div>
                         <div class="discount-description">
-                            <p>Giảm {{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }} VNĐ cho tất cả các sản phẩm.
+                            <p>Giảm <span
+                                    class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
+                                VNĐ cho tất cả các sản phẩm.
                             </p>
                         </div>
-                        <button class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao chép mã</button>
+                        <button style="font-size: 1em" class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
+                            chép mã</button>
                     </div>
                 @endforeach
 

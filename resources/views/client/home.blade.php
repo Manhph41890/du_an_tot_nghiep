@@ -2,8 +2,13 @@
 
 @section('content')
     <style>
-        .card-body:hover {
-            border: 1px solid black;
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .main-slider {
@@ -159,6 +164,29 @@
             color: white;
             animation: blink 1s infinite;
         }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            font-size: 1em;
+            color: #ffffff;
+            opacity: 0.9;
+            user-select: none;
+            pointer-events: none;
+            animation: fall 10s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px) translateX(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0.3;
+            }
+        }
     </style>
     <!-- main slider start -->
     <section class="bg-light">
@@ -256,7 +284,7 @@
     {{-- mã giảm giá 'voucher' --}}
     <section class="discount-codes">
         <div class="container">
-            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span> <!-- Thêm chữ HOT -->
+            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span></h2>
             </h2>
             <div class="discount-list">
                 @foreach ($discounts as $item)
@@ -577,6 +605,30 @@
         }
     </style>
     <script>
+        const maxSnowflakes = 20;
+
+        function createSnowflake() {
+            if (document.querySelectorAll('.snowflake').length < maxSnowflakes) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerText = '❄️';
+
+
+                snowflake.style.left = `${Math.random() * 100}%`;
+                snowflake.style.fontSize = `${Math.random() * 1.5 + 0.5}em`;
+
+                document.querySelector('.discount-codes').appendChild(snowflake);
+
+                snowflake.addEventListener('animationend', () => {
+                    snowflake.remove();
+                });
+            }
+        }
+
+        // Tạo bông tuyết mới mỗi 500ms
+        setInterval(createSnowflake, 500);
+
+
         function copyCode(code) {
             var tempInput = document.createElement("input");
             tempInput.value = code;

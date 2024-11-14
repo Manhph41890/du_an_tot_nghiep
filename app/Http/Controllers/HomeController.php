@@ -44,7 +44,7 @@ class HomeController extends Controller
 
         $title = "Trang chủ";
         $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
-        $anhDMuc = danh_muc::all();
+        $anhDMuc = danh_muc::query()->where('is_active', '1')->get();
 
         return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }

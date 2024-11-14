@@ -192,6 +192,11 @@
         font-size: 12px;
         margin-top: 5px;
     }
+
+    input.form-control {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 </style>
 
 <body>

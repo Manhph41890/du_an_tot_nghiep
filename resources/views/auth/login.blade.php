@@ -88,11 +88,10 @@
                             @enderror
                         </div>
 
-                        <div class="input-group mb-5 d-flex justify-content-between">
+                        <div class="input-group mb-3 d-flex justify-content-between">
                             <div class="form-check">
                                 <input type="checkbox" name="remember" class="form-check-input" id="formCheck">
-                                <label for="formCheck" class="form-check-label text-secondary"><small>Remember
-                                        Me</small></label>
+                                <label for="formCheck" class="form-check-label text-secondary"><small>Ghi nhớ</small></label>
                             </div>
 
                             <div class="forgot">
@@ -101,7 +100,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>
+                            <button class="btn btn-lg btn-primary w-100 fs-6">ĐĂNG NHẬP</button>
                         </div>
 
                         <div class="input-group d-flex mb-3">

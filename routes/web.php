@@ -24,6 +24,7 @@ use App\Http\Controllers\ClientSanPhamController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TaiKhoanController;
 
 // Route trang chủ
@@ -54,6 +55,8 @@ Route::prefix('client')->group(function () {
     Route::get('/taikhoan/lichsugd/{id}', [TaiKhoanController::class, 'history'])->name('taikhoan.lichsugd');
     // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
 
+    //danh mục
+    Route::get('/danh-muc/{danhMucId}', [HomeController::class, 'showByCategory'])->name('client.showByCategory');
 
     Route::view('/giohang', 'client.giohang');
     Route::get('/gioithieu', [HomeController::class, 'gioithieu'])->name('client.gioithieu');
@@ -68,6 +71,12 @@ Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
+// Login gg fb
+Route::get('auth/google', [SocialController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
+
+Route::get('auth/facebook', [SocialController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('auth/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
 
 // Route quên mật khẩu
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('auth.forgot_password');
@@ -147,7 +156,7 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
-    Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+    Route::post('/order/success', [OrderController::class, 'success'])->name('order.success');
     Route::get('/order/success_nhanhang', [OrderController::class, 'success_nhanhang'])->name('order.success_nhanhang');
 
     Route::post('/apply-coupon', [OrderController::class, 'applyCoupon'])->name('apply.coupon');

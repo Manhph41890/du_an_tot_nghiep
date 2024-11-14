@@ -290,10 +290,10 @@
                                                                     @endforeach
                                                                 ],
                                                                 backgroundColor: [
-                                                                    'rgba(255, 99, 132, 0.2)'
+                                                                    '#00FF00'
                                                                 ],
                                                                 borderColor: [
-                                                                    'rgba(255, 99, 132, 1)'
+                                                                    '#00FF00'
                                                                 ],
                                                                 borderWidth: 2,
                                                                 fill: false
@@ -509,7 +509,7 @@
                                                         </td>
                                                         <td>
                                                             {{ $item->tong_tien }}
-                                                            Vnđ
+                                                            VNĐ
                                                         </td>
                                                         <td> @php
                                                             $statusClasses = [
@@ -560,11 +560,11 @@
                                 <table class="table table-traffic mb-0">
                                     <thead>
                                         <tr>
+                                            <th>#ID</th>
                                             <th>Ảnh</th>
                                             <th>Tên sản phẩm</th>
                                             <th>Giá gốc</th>
                                             <th>Giá khuyến mãi</th>
-                                            <th>Ảnh</th>
                                             <th>Trạng thái</th>
                                         </tr>
                                     </thead>
@@ -572,10 +572,6 @@
                                         @foreach ($views_product as $index => $item)
                                             <tr>
                                                 <th scope="row">{{ $index + 1 }}</th>
-                                                {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
-                                                <td>{{ $item->ten_san_pham }}</td>
-                                                <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
-                                                <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
                                                 <td>
                                                     @if ($item->anh_san_pham)
                                                         <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -585,6 +581,11 @@
                                                             alt="Không có ảnh" width="50px">
                                                     @endif
                                                 </td>
+                                                {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
+                                                <td>{{ $item->ten_san_pham }}</td>
+                                                <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                               
 
                                                 <td>
                                                     {!! $item->is_active
@@ -596,8 +597,8 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                {{ $views_product->links() }}
                             </div>
-                            {{ $views_product->links() }}
                         </div>
                     </div>
                 </div>
@@ -619,11 +620,11 @@
                                 <table class="table table-traffic mb-0">
                                     <thead>
                                         <tr>
+                                            <th>#ID</th>
                                             <th>Ảnh</th>
                                             <th>Tên sản phẩm</th>
                                             <th>Giá gốc</th>
                                             <th>Giá khuyến mãi</th>
-                                            <th>Ảnh</th>
                                             <th>Trạng thái</th>
                                         </tr>
                                     </thead>
@@ -631,10 +632,6 @@
                                         @foreach ($sanphams_saphet as $index => $item)
                                             <tr>
                                                 <th scope="row">{{ $index + 1 }}</th>
-                                                {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
-                                                <td>{{ $item->ten_san_pham }}</td>
-                                                <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
-                                                <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
                                                 <td>
                                                     @if ($item->anh_san_pham)
                                                         <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -644,6 +641,11 @@
                                                             alt="Không có ảnh" width="50px">
                                                     @endif
                                                 </td>
+                                                {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
+                                                <td>{{ $item->ten_san_pham }}</td>
+                                                <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                             
 
                                                 <td>
                                                     {!! $item->is_active

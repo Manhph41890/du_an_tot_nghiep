@@ -38,7 +38,14 @@ button {
     text-decoration: none;
     color: inherit
 }
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 .min_h {
     display: -webkit-box;
     -webkit-line-clamp: 2;

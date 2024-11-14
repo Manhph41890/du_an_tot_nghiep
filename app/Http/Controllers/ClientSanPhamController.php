@@ -65,7 +65,7 @@ class ClientSanPhamController extends Controller
                     break;
             }
         } else {
-            $query->orderBy('id', 'DESC'); // Mặc định
+            // $query->orderBy('id', 'DESC'); // Mặc định
         }
 
 
@@ -107,7 +107,7 @@ class ClientSanPhamController extends Controller
         $soluongsanpham = $query->where('is_active', '1')->count();
         $list_sanphams = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color', 'danh_gias'])
             ->where('is_active', '1')
-            ->paginate(9);
+            ->paginate(12);
 
         foreach ($list_sanphams as $sanpham) {
             // tính % giảm giá

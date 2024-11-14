@@ -80,7 +80,7 @@
                             aria-labelledby="pills-home-tab">
                             <div class="row grid-view theme1">
                                 @foreach ($list_sanphams as $item)
-                                    <div class="col-sm-6 col-lg-4 mb-30">
+                                    <div class="col-6 col-sm-4 col-lg-3 mb-30">
                                         <div class="card product-card">
                                             <div class="card-body">
                                                 <div class="product-thumbnail position-relative">

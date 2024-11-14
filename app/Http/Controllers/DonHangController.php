@@ -77,7 +77,8 @@ class DonHangController extends Controller
             'phuong_thuc_van_chuyen',
             'chi_tiet_don_hangs.san_pham',
             'chi_tiet_don_hangs.color_san_pham',
-            'chi_tiet_don_hangs.size_san_pham'
+            'chi_tiet_don_hangs.size_san_pham',
+            'chi_tiet_don_hangs.san_pham.danh_gias.user'
         ])->findOrFail($id);
         $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
         // Trả về view cùng với dữ liệu đơn hàng

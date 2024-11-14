@@ -121,7 +121,7 @@
         }
 
         .hot-tag {
-            color: #0d0653;
+            color: #fd0000;
             /* Màu tuyết */
             font-weight: bold;
             position: relative;

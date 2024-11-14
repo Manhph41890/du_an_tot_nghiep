@@ -368,13 +368,13 @@
     <div id="sticky" class="header-middle theme1 py-15 py-lg-0">
         <div class="container position-relative">
             <div class="row align-items-center">
-                <div class="col-6 col-lg-2 col-xl-2">
+                <div class="col-xl-2 col-lg-2 col-6  ">
                     <div class="logo">
                         <a href="{{ route('client.home') }}"><img
                                 src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
                     </div>
                 </div>
-                <div class="col-xl-7 col-lg-7 d-none d-lg-block">
+                <div class="col-xl-6 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="ml-0">
                             <a href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
@@ -392,7 +392,7 @@
                         <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
-                <div class="col-6 col-lg-3 col-xl-3">
+                <div class="col-xl-4 col-lg-3 col-6 ">
                     <!-- search-form end -->
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
@@ -403,7 +403,7 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li> -->
-                                <li class="mr-xl-0 cart-block position-relative">
+                                <li class="mr-xl-0 cart-block position-relative me-1">
                                     <form class="search-box" style="margin: 0;" action="{{ url('/') }}"
                                         method="post">
                                         @csrf
@@ -420,7 +420,13 @@
                                     </form>
                                 </li>
 
-
+                                <li class="mr-xl-0 cart-block position-relative me-1">
+                                    <a id="notification-icon" href="javascript:void(0);">
+                                        <span class="position-relative">
+                                            <i class="icon-bell"></i>
+                                        </span>
+                                    </a>
+                                </li>
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
@@ -430,13 +436,7 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="mr-xl-0 cart-block position-relative">
-                                    <a id="notification-icon" href="javascript:void(0);">
-                                        <span class="position-relative">
-                                            <i class="icon-bell"></i>
-                                        </span>
-                                    </a>
-                                </li>
+                               
                                 <!-- cart block end -->
                             </ul>
                             <!-- Modal thông báo -->
@@ -514,11 +514,6 @@
                                     <li>
                                         <a style="font-size: 16px;" href="{{ route('auth.login') }}">
                                             Đăng Nhập
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a style="font-size: 16px;" href="{{ route('auth.register') }}">
-                                            Đăng Ký
                                         </a>
                                     </li>
                                 @endauth

@@ -20,13 +20,15 @@ class SocialController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->user();
-        dd($user); 
+        // dd($user); 
         return $this->loginOrCreateUser($user, 'google');
     }
 
     public function redirectToFacebook()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')
+        ->scopes(['email', 'public_profile']) // Đảm bảo rằng các phạm vi này có trong ứng dụng của bạn
+        ->redirect();
     }
 
     public function handleFacebookCallback()

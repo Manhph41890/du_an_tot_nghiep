@@ -2,9 +2,7 @@
 
 @section('content')
     <style>
-        .card-body:hover {
-            border: 1px solid black;
-        }
+
 
         .main-slider {
             max-height: 500px;
@@ -142,22 +140,29 @@
             /* Khoảng cách giữa tên và các phần tử khác */
         }
 
-        @keyframes blink {
 
-            0%,
-            100% {
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            font-size: 1em;
+            color: #ffffff;
+            opacity: 0.9;
+            user-select: none;
+            pointer-events: none;
+            animation: fall 10s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px) translateX(0);
                 opacity: 1;
             }
 
-            50% {
-                opacity: 0;
+            100% {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0.3;
             }
-        }
-
-        .badge-danger {
-            background-color: red;
-            color: white;
-            animation: blink 1s infinite;
         }
     </style>
     <!-- main slider start -->
@@ -256,7 +261,7 @@
     {{-- mã giảm giá 'voucher' --}}
     <section class="discount-codes">
         <div class="container">
-            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span> <!-- Thêm chữ HOT -->
+            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span></h2>
             </h2>
             <div class="discount-list">
                 @foreach ($discounts as $item)
@@ -345,7 +350,7 @@
                                                                 alt="thumbnail" />
                                                         </a>
                                                     </div>
-                                                    <div class="media-body">
+                                                    <div class="media-body w-100">
                                                         <div class="product-desc">
                                                             <h3 class="title min_h">
                                                                 <a class=""
@@ -577,6 +582,30 @@
         }
     </style>
     <script>
+        const maxSnowflakes = 20;
+
+        function createSnowflake() {
+            if (document.querySelectorAll('.snowflake').length < maxSnowflakes) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerText = '❄️';
+
+
+                snowflake.style.left = `${Math.random() * 100}%`;
+                snowflake.style.fontSize = `${Math.random() * 1.5 + 0.5}em`;
+
+                document.querySelector('.discount-codes').appendChild(snowflake);
+
+                snowflake.addEventListener('animationend', () => {
+                    snowflake.remove();
+                });
+            }
+        }
+
+        // Tạo bông tuyết mới mỗi 500ms
+        setInterval(createSnowflake, 500);
+
+
         function copyCode(code) {
             var tempInput = document.createElement("input");
             tempInput.value = code;

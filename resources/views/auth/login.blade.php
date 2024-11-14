@@ -19,6 +19,8 @@
         position: relative;
     }
 
+
+
     .form-contain {
         display: flex;
         justify-content: center;
@@ -193,9 +195,52 @@
         margin-top: 5px;
     }
 
-    input.form-control {
-        padding-left: 15px;
-        padding-right: 15px;
+    /* Style the div container */
+    .nut-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        /* Add space above the button */
+        width: 100%;
+        /* Ensure the container stretches to full width */
+    }
+
+    /* Style the submit button */
+    .nut-button input[type="submit"] {
+        padding: 12px 25px;
+        /* Add padding inside the button */
+        background-color: #1da8ff;
+        /* Green color for the button */
+        color: white;
+        border: none;
+        border-radius: 30px;
+        /* Rounded corners */
+        font-size: 16px;
+        /* Set font size for button text */
+        cursor: pointer;
+        width: 100%;
+        /* Make the button fill the container */
+        max-width: 300px;
+        /* Optional: limit the width */
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        /* Smooth transitions */
+    }
+
+    /* Hover effect for the button */
+    .nut-button input[type="submit"]:hover {
+        background-color: #1658b5;
+        /* Darker green on hover */
+        transform: scale(1.05);
+        /* Slightly grow the button on hover */
+    }
+
+    /* Focus effect for better accessibility */
+    .nut-button input[type="submit"]:focus {
+        outline: none;
+        /* Remove default outline */
+        box-shadow: 0 0 5px rgba(15, 47, 255, 0.5);
+        /* Green shadow when focused */
     }
 </style>
 
@@ -222,7 +267,7 @@
             </div>
 
             <div class="titre-login" style="margin-top: 50px">
-                <h2>Đăng Nhập</h2>
+              
                 <p>Chào mừng bạn đến với Articaft. Hãy Đăng Nhập ngay !</p>
                 <button class="btn-register">Đăng Ký</button>
             </div>
@@ -232,6 +277,7 @@
         <div class="form-list">
             <form class="login" action="{{ route('auth.login') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <h2>Đăng Nhập</h2>
                 <div class="input-group mb-3">
                     <input type="email" id="email" name="email" value="{{ old('email') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
@@ -249,9 +295,23 @@
                     @endif
 
                 </div>
-                <div class="input-group mb-3">
+                
+                <div class="nut-button">
                     <input type="submit" value="Đăng Nhập">
                 </div>
+                <div class="row">
+                    <small> <a href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
+                </div>
+                <div class="input-group d-flex mb-3 ">
+                    <a href="{{ route('auth.google') }}" style=" margin-right: 40px;  text-decoration: none;">
+                        <img src="{{ asset('assets/client/images/icon/icons8-google-48.png') }}" class="social-icon">
+                    </a>
+
+                    <a href="{{ route('auth.facebook') }}" style=" margin-left: 0px;  text-decoration: none;">
+                        <img src="{{ asset('assets/client/images/icon/icons8-facebook-48.png') }}" class="social-icon">
+                    </a>
+                </div>
+                
             </form>
         </div>
 
@@ -301,19 +361,25 @@
                     @error('password_confirmation')
                         <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
                     @enderror
+
+
+
+
                 </div>
-                <div class="input-group mb-3">
-                    <input type="submit" value="Đăng ký" style="margin-bottom: 60px">
+                <div class="nut-button">
+                    <input type="submit" value="Đăng Ký">
                 </div>
-            </form>
         </div>
 
-        <svg class="wave-svg" width="732" height="136" viewBox="0 0 732 136" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M0 8.45888V109C0 123.912 12.0883 136 27 136H704.938C726.424 136 739.186 112.207 726.912 94.5719C712.116 73.3129 694.835 49.4713 683.965 37.7334C661.789 13.7871 602.805 -0.265669 539.433 15.6257C476.061 31.517 439.194 53.2459 393.889 69.1733C336.766 89.2556 288.703 90.1814 232.182 69.1733C191.945 54.2179 191.297 22.9896 150.781 8.45888C97.7137 -10.5736 0 8.45888 0 8.45888Z"
-                fill="white" />
-        </svg>
+        </form>
+    </div>
+
+    <svg class="wave-svg" width="732" height="136" viewBox="0 0 732 136" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M0 8.45888V109C0 123.912 12.0883 136 27 136H704.938C726.424 136 739.186 112.207 726.912 94.5719C712.116 73.3129 694.835 49.4713 683.965 37.7334C661.789 13.7871 602.805 -0.265669 539.433 15.6257C476.061 31.517 439.194 53.2459 393.889 69.1733C336.766 89.2556 288.703 90.1814 232.182 69.1733C191.945 54.2179 191.297 22.9896 150.781 8.45888C97.7137 -10.5736 0 8.45888 0 8.45888Z"
+            fill="white" />
+    </svg>
     </div>
 </body>
 <script>

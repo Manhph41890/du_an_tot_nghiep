@@ -354,7 +354,14 @@
                                         <a class="nav-link dropdown-toggle nav-user me-0 avatar_box" href="#"
                                             style="width: 50px;" id="profileDropdown" role="button"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
+                                            @php
+                                                $avatar = Auth::user()->anh_dai_dien;
+
+                                                // Check if 'anh_dai_dien' is a URL or a storage path
+                                                $isUrl = filter_var($avatar, FILTER_VALIDATE_URL) !== false;
+                                            @endphp
+
+                                            <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
                                                 alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
                                             {{-- <span class="pro-user-name ms-1">
                                                 {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>

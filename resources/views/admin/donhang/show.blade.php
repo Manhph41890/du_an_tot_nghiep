@@ -167,34 +167,50 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5>Đánh giá của khách hàng</h5>
-                                            @if ($donhang->san_phams?->danh_gias->isNotEmpty())
+                                            @if ($donhang->chi_tiet_don_hangs->isNotEmpty())
+                                                @php
+                                                    $hasRatings = false;
+                                                @endphp
 
-                                                @foreach ($donhang->san_phams?->danh_gias as $danhGia)
-                                                    <div class="d-flex justify-content-between">
-                                                        <h6></h6>
-                                                        <strong>{{ $danhGia->user?->ho_ten }}</strong>
-                                                        <small><em>Đánh giá:
-                                                                @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($i <= $danhGia->diem_so)
-                                                                        <i class="mdi mdi-star text-warning"></i>
-                                                                        <!-- Ngôi sao đầy -->
-                                                                    @else
-                                                                        <i class="mdi mdi-star-outline text-muted"></i>
-                                                                        <!-- Ngôi sao rỗng -->
-                                                                    @endif
-                                                                @endfor
-                                                            </em></small>
-                                                    </div>
-                                                    <h6>Bình luận:</h6>
-                                                    <textarea class="form-control" rows="3" readonly>{{ $danhGia->binh_luan }}</textarea>
-                                                    <p class="text-muted">Ngày đánh giá:
-                                                        {{ $danhGia->ngay_danh_gia }}</p>
-                                                    </li>
+                                                @foreach ($donhang->chi_tiet_don_hangs as $chiTiet)
+                                                    @if ($chiTiet->san_pham && $chiTiet->san_pham->danh_gias->isNotEmpty())
+                                                        @foreach ($chiTiet->san_pham->danh_gias as $danhGia)
+                                                            @php
+                                                                $hasRatings = true;
+                                                            @endphp
+                                                            <div class="d-flex justify-content-between">
+                                                                <strong> <img src="{{ asset('/storage/' . $danhGia->users?->anh_dai_dien) }}"
+                                                                    width="50px"></strong>
+                                                                <small><em>Đánh giá:
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $danhGia->diem_so)
+                                                                                <i
+                                                                                    class="mdi mdi-star text-warning"></i>
+                                                                            @else
+                                                                                <i
+                                                                                    class="mdi mdi-star-outline text-muted"></i>
+                                                                            @endif
+                                                                        @endfor
+                                                                    </em></small>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between">
+                                                                <h6 class="me-3">{{ $danhGia->users?->ho_ten }}</h6>
+                                                                <textarea class="form-control" rows="2"  readonly>{{ $danhGia->binh_luan }}</textarea>
+                                                            </div>
+                                                            <p class="text-muted text-end">
+                                                                {{ date('d/m/Y', strtotime($danhGia->ngay_danh_gia)) }}
+                                                            </p>
+                                                        @endforeach
+                                                    @endif
                                                 @endforeach
-                                                </ul>
+
+                                                @if (!$hasRatings)
+                                                    <p>Chưa có đánh giá nào.</p>
+                                                @endif
                                             @else
                                                 <p>Chưa có đánh giá nào.</p>
                                             @endif
+
                                         </div>
                                 @endif
                             </div>

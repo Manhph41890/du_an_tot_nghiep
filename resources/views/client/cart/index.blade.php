@@ -8,22 +8,10 @@
             padding: 5px;
             font-size: 14px;
         }
-
-        #checkout-button {
-            color: #5a5ac9;
-            background: #fff;
-            border-color: #5a5ac9;
-        }
-
-        #checkout-button:hover {
-            color: #fff;
-            background: #5a5ac9;
-            border-color: #5a5ac9;
-        }
     </style>
     <div class="container margin_30">
         <div class="page_header">
-            <h1 class="text-center my-3" style="color:#5a5ac9">Giỏ Hàng</h1>
+            <h1>Giỏ Hàng</h1>
         </div>
 
         <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
@@ -35,8 +23,8 @@
                         <th>Sản Phẩm</th>
                         <th>Giá</th>
                         <th>Phân loại</th>
-                        <th>Thành Tiền</th>
-                        {{-- <th>Hành Động</th> --}}
+                        <th>Tổng Tiền</th>
+                        <th>Hành Động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,16 +66,8 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <span>Số Lượng:</span>
-
                                     <input type="number" name="quantity" value="{{ $item->quantity }}" min="1"
-                                        max="{{ $variant->so_luong }}" class="quantity-input"
-                                        data-item-id="{{ $item->id }}">
-                                    @if (isset($insufficientStockItems[$item->id]))
-                                        <span class="alert-warning" style="color: red;">
-                                            Chỉ còn {{ $insufficientStockItems[$item->id]['quantity'] }} sản phẩm.
-                                        </span>
-                                    @endif
+                                        max="100" class="quantity-input" data-item-id="{{ $item->id }}">
                                     <button type="button" class="btn btn-primary btn-sm update-cart-btn"
                                         data-id="{{ $item->id }}">
                                         Cập nhật
@@ -96,6 +76,15 @@
                                 <td>
                                     <strong><span class="whish-list-price">{{ number_format($item->price) }}
                                             đ</span></strong>
+                                </td>
+                                <td class="options">
+                                    <form action="{{ route('cart.removeFromCart', $item->id) }}" method="POST"
+                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?');">
+                                        @csrf
+                                        <button type="submit" class="btn btn-secondary btn-sm">
+                                            <span class="trash"><i class="fas fa-trash-alt"></i> Xóa</span>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -121,17 +110,14 @@
                             <strong><span>Tổng Tiền: </span><span id="total-price">0</span></strong>
                         </li>
                     </ul>
-                    <form action="{{ route('cart.checkout') }}" method="GET">
+                    <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
+                        @csrf
                         <input type="hidden" name="checkout_items[]" id="selected-items">
-                        <button id="checkout-button" class="btn btn-success"
-                            @if (
-                                !empty($cartItems) &&
-                                    collect($cartItems)->contains(fn($item) => $item->quantity >
-                                            optional(
-                                                $item->san_pham->bien_the_san_phams->firstWhere('size_san_pham_id', $item->size_san_pham_id)->firstWhere('color_san_pham_id', $item->color_san_pham_id))->so_luong)) disabled @endif>
+                        <button id="checkout-button" class="btn btn-success">
                             Thanh toán ngay
                         </button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -139,38 +125,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const checkoutButton = document.getElementById('checkout-button');
             const checkboxes = document.querySelectorAll('.item-checkbox');
             const totalPriceEl = document.getElementById('total-price');
-            const checkoutForm = document.querySelector('form[action="{{ route('cart.checkout') }}"]');
+            const removeButton = document.getElementById('remove-selected-items');
+            const checkoutForm = document.getElementById('checkout-form');
+            const removeMultipleForm = document.getElementById('remove-multiple-form');
 
-            // Hàm kiểm tra số lượng
-            function checkStock() {
-                let isStockSufficient = true;
-
-                document.querySelectorAll('.quantity-input').forEach(input => {
-                    const quantity = parseInt(input.value);
-                    const maxQuantity = parseInt(input.getAttribute('max'));
-
-                    if (quantity > maxQuantity) {
-                        isStockSufficient = false;
-                        const errorMsg = document.createElement('span');
-                        errorMsg.classList.add('text-danger', 'stock-error');
-                        errorMsg.textContent = 'Số lượng không đủ!';
-
-                        if (!input.parentNode.querySelector('.stock-error')) {
-                            input.parentNode.appendChild(errorMsg);
-                        }
-                    } else {
-                        const errorMsg = input.parentNode.querySelector('.stock-error');
-                        if (errorMsg) errorMsg.remove();
-                    }
-                });
-
-                checkoutButton.disabled = !isStockSufficient;
-            }
-
-            // Hàm tính tổng tiền và cập nhật danh sách sản phẩm được chọn vào `checkout_items[]`
             function calculateTotal() {
                 let totalPrice = 0;
                 const selectedItems = [];
@@ -182,25 +142,28 @@
                         totalPrice += price;
                     }
                 });
-                console.log(totalPrice);
 
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
+                removeButton.disabled = selectedItems.length === 0;
 
-                // Cập nhật input hidden `checkout_items[]` trong form thanh toán
+                // Xóa các input hidden trước khi thêm mới
+                removeMultipleForm.querySelectorAll('input[name="remove_items[]"]').forEach(input => input
+                    .remove());
                 checkoutForm.querySelectorAll('input[name="checkout_items[]"]').forEach(input => input.remove());
 
-                if (selectedItems.length > 0) {
-                    selectedItems.forEach(itemId => {
-                        let hiddenInput = document.createElement('input');
-                        hiddenInput.type = 'hidden';
-                        hiddenInput.name = 'checkout_items[]';
-                        hiddenInput.value = itemId;
-                        checkoutForm.appendChild(hiddenInput);
-                    });
-                    checkoutButton.disabled = false;
-                } else {
-                    checkoutButton.disabled = true;
-                }
+                selectedItems.forEach(itemId => {
+                    let removeInput = document.createElement('input');
+                    removeInput.type = 'hidden';
+                    removeInput.name = 'remove_items[]';
+                    removeInput.value = itemId;
+                    removeMultipleForm.appendChild(removeInput);
+
+                    let checkoutInput = document.createElement('input');
+                    checkoutInput.type = 'hidden';
+                    checkoutInput.name = 'checkout_items[]';
+                    checkoutInput.value = itemId;
+                    checkoutForm.appendChild(checkoutInput);
+                });
             }
 
             checkboxes.forEach(checkbox => {

@@ -110,8 +110,14 @@
                             <strong><span>Tổng Tiền: </span><span id="total-price">0</span></strong>
                         </li>
                     </ul>
-                    <a href="{{ route('cart.checkout') }}" class="btn_1 full-width cart"
-                        style="color: rgb(82, 82, 225); font-size: 20px">Thanh toán ngay</a>
+                    <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
+                        @csrf
+                        <input type="hidden" name="checkout_items[]" id="selected-items">
+                        <button id="checkout-button" class="btn btn-success">
+                            Thanh toán ngay
+                        </button>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -119,13 +125,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const updateBtns = document.querySelectorAll('.update-cart-btn');
             const checkboxes = document.querySelectorAll('.item-checkbox');
             const totalPriceEl = document.getElementById('total-price');
             const removeButton = document.getElementById('remove-selected-items');
+            const checkoutForm = document.getElementById('checkout-form');
             const removeMultipleForm = document.getElementById('remove-multiple-form');
 
-            // Hàm tính tổng tiền và cập nhật form xóa
             function calculateTotal() {
                 let totalPrice = 0;
                 const selectedItems = [];
@@ -139,84 +144,32 @@
                 });
 
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
+                removeButton.disabled = selectedItems.length === 0;
 
-                if (selectedItems.length > 0) {
-                    selectedItems.forEach(itemId => {
-                        let hiddenInput = document.createElement('input');
-                        hiddenInput.type = 'hidden';
-                        hiddenInput.name = 'remove_items[]';
-                        hiddenInput.value = itemId;
-                        removeMultipleForm.appendChild(hiddenInput);
-                    });
-                    removeButton.disabled = false;
-                } else {
-                    removeButton.disabled = true;
-                    document.querySelectorAll('input[name="remove_items[]"]').forEach(input => input.remove());
-                }
+                // Xóa các input hidden trước khi thêm mới
+                removeMultipleForm.querySelectorAll('input[name="remove_items[]"]').forEach(input => input
+            .remove());
+                checkoutForm.querySelectorAll('input[name="checkout_items[]"]').forEach(input => input.remove());
+
+                selectedItems.forEach(itemId => {
+                    let removeInput = document.createElement('input');
+                    removeInput.type = 'hidden';
+                    removeInput.name = 'remove_items[]';
+                    removeInput.value = itemId;
+                    removeMultipleForm.appendChild(removeInput);
+
+                    let checkoutInput = document.createElement('input');
+                    checkoutInput.type = 'hidden';
+                    checkoutInput.name = 'checkout_items[]';
+                    checkoutInput.value = itemId;
+                    checkoutForm.appendChild(checkoutInput);
+                });
             }
 
-            updateBtns.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const itemId = this.getAttribute('data-id'); // Lấy giá trị data-id
-
-                    // Kiểm tra nếu data-id không tồn tại
-                    if (!itemId) {
-                        console.error("Không tìm thấy data-id của button.");
-                        return; // Nếu không có data-id, dừng lại
-                    }
-
-                    // Kiểm tra sự tồn tại của các phần tử trước khi lấy giá trị
-                    const sizeSelect = document.querySelector(
-                        `select[name="size_san_pham_id"][data-item-id="${itemId}"]`);
-                    const colorSelect = document.querySelector(
-                        `select[name="color_san_pham_id"][data-item-id="${itemId}"]`);
-                    const quantityInput = document.querySelector(
-                        `input[name="quantity"][data-item-id="${itemId}"]`);
-
-                    // Kiểm tra nếu các phần tử không tồn tại
-                    if (!sizeSelect || !colorSelect || !quantityInput) {
-                        console.error("Không thể tìm thấy các phần tử của sản phẩm với ID:",
-                            itemId);
-                        return;
-                    }
-
-                    const sizeId = sizeSelect.value;
-                    const colorId = colorSelect.value;
-                    const quantity = quantityInput.value;
-
-                    // Gửi yêu cầu AJAX
-                    fetch(`/cart/update/${itemId}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector(
-                                    'meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            body: JSON.stringify({
-                                size_san_pham_id: sizeId,
-                                color_san_pham_id: colorId,
-                                quantity: quantity
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                alert(data.message);
-                                location.reload(); // reload trang để cập nhật lại giỏ hàng
-                            } else {
-                                alert(data.message);
-                            }
-                        })
-                        .catch(error => console.error('Error:', error));
-                });
-            });
-
-            // Lắng nghe sự kiện thay đổi trạng thái checkbox
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', calculateTotal);
             });
 
-            // Tính tổng tiền ban đầu
             calculateTotal();
         });
     </script>

@@ -5,24 +5,39 @@ namespace App\Http\Controllers;
 use App\Models\bai_viet;
 use App\Models\bien_the_san_pham;
 use App\Models\danh_muc;
+use App\Models\don_hang;
+use App\Models\khuyen_mai;
 use App\Models\san_pham;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
     //Sản phẩm Home
     public function index(Request $request)
     {
         // Lấy sản phẩm mới
-        $sanPhamMois = san_pham::orderByDesc('id')->latest('id')->paginate(6);
+        $sanPhamMois = san_pham::where('is_active', 1) // Thêm điều kiện lọc
+            ->orderByDesc('id')
+            ->latest('id')
+            ->paginate(10);
+
+        // Tính điểm trung bình cho các sản phẩm mới
+        $sanPhamMois->getCollection()->transform(function ($sanPham) {
+            if ($sanPham->danh_gias->count() > 0) {
+                $sanPham->diem_trung_binh = round($sanPham->danh_gias->avg('diem_so'), 1); // Lấy giá trị trung bình điểm
+            } else {
+                $sanPham->diem_trung_binh = 0; // Nếu không có đánh giá nào
+            }
+            return $sanPham;
+        });
 
         // Lấy sản phẩm giảm giá
-        $sanPhamGiamGias = san_pham::with('danh_gias')->whereNotNull('gia_km')
+        $sanPhamGiamGias = san_pham::with('danh_gias')
+            ->whereNotNull('gia_km')
+            ->where('is_active', 1) // Thêm điều kiện lọc
             ->orderByDesc('id')
-            ->paginate(3);
-
-        // Lấy sản phẩm xem nhiều
-        $sanPhamView = san_pham::orderByDesc('views', 'desc')->paginate(6);
+            ->paginate(5);
 
         // Tính phần trăm giảm giá cho sản phẩm giảm giá
         $sanPhamGiamGias->getCollection()->transform(function ($sanPham) {
@@ -32,7 +47,7 @@ class HomeController extends Controller
                 $sanPham->phan_tram_giam_gia = 0;
             }
 
-            // Tính trung bình điểm đánh giá
+            // Tính điểm trung bình cho sản phẩm giảm giá
             if ($sanPham->danh_gias->count() > 0) {
                 $sanPham->diem_trung_binh = round($sanPham->danh_gias->avg('diem_so'), 1); // Lấy giá trị trung bình điểm
             } else {
@@ -41,13 +56,24 @@ class HomeController extends Controller
             return $sanPham;
         });
 
+        // Lấy sản phẩm xem nhiều
+        $sanPhamView = san_pham::where('is_active', 1) // Thêm điều kiện lọc
+            ->orderByDesc('views', 'desc')
+            ->paginate(6);
+        // Lấy khuyến mãi
+        $discounts = khuyen_mai::where('is_active', 1)
+            ->where('so_luong_ma', '>', 0) // Thêm điều kiện so_luong_ma > 0
+            ->orderBy('created_at', 'desc') // Sắp xếp theo ngày tạo mới nhất
+            ->take(4) // Lấy 4 mã giảm giá
+            ->get();
 
         $title = "Trang chủ";
         $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
         $anhDMuc = danh_muc::query()->where('is_active', '1')->get();
 
-        return view('client.home', compact('sanPhamMois', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
+        return view('client.home', compact('sanPhamMois',  'discounts', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }
+
     public function showByCategory($danhMucId)
     {
         // Lấy danh mục theo ID

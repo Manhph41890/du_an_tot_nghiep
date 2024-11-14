@@ -29,8 +29,10 @@
                         <div class="card-header ">
                             <div class="row">
                                 <div class="col-2">
+                                    @if($isAdmin)
                                     <a href="{{ route('baiviets.create') }}" class="btn btn-success">Thêm bài viết
                                     </a>
+                                    @endif
                                 </div>
                                 <div class="col-6">
                                     <form action="{{ route('baiviets.index') }}" method="GET" id="filter-form-km">
@@ -88,8 +90,8 @@
                                                     <td>{{ $baiviet->ngay_dang }}</td>
                                                     <td>{{ $baiviet->user?->ho_ten }}</td>
                                                     <td
-                                                        class="{{ $baiviet->is_active == 0 ? 'text-success' : 'text-danger' }}">
-                                                        {{ $baiviet->is_active == 0 ? 'Hiển Thị' : 'Ẩn' }}
+                                                        class="{{ $baiviet->is_active == 1 ? 'text-success' : 'text-danger' }}">
+                                                        {{ $baiviet->is_active == 1 ? 'Hiển Thị' : 'Ẩn' }}
                                                     </td>
                                                     <td>
                                                         <div>

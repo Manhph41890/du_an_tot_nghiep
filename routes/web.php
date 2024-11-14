@@ -54,6 +54,8 @@ Route::prefix('client')->group(function () {
     Route::get('/taikhoan/lichsugd/{id}', [TaiKhoanController::class, 'history'])->name('taikhoan.lichsugd');
     // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
 
+    //danh mục
+    Route::get('/danh-muc/{danhMucId}', [HomeController::class, 'showByCategory'])->name('client.showByCategory');
 
     Route::view('/giohang', 'client.giohang');
     Route::get('/gioithieu', [HomeController::class, 'gioithieu'])->name('client.gioithieu');
@@ -147,7 +149,7 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
-    Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+    Route::post('/order/success', [OrderController::class, 'success'])->name('order.success');
     Route::get('/order/success_nhanhang', [OrderController::class, 'success_nhanhang'])->name('order.success_nhanhang');
 
     Route::post('/apply-coupon', [OrderController::class, 'applyCoupon'])->name('apply.coupon');

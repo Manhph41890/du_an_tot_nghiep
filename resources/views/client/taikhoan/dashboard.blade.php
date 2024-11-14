@@ -168,7 +168,7 @@
                         </div>
                         <!-- Single Tab Content End -->
 
-                        <!-- Single Tab  -->
+                        <!-- Single Tab ssss -->
                         <div class="tab-pane fade" id="orders" role="tabpanel">
                             <div class="myaccount-content">
                                 <h3>Đơn hàng của bạn</h3>
@@ -189,7 +189,7 @@
                                                 <tr>
                                                     <td>{{ $myOrder->ma_don_hang }}</td>
                                                     <td>{{ $myOrder->ngay_tao }}</td>
-                                                    <td>{{ $myOrder->tong_tien }}</td>
+                                                    <td>{{ number_format($myOrder->tong_tien, 0, ',', '.') }} VNĐ</td>
                                                     <td>
                                                         <div class="d-flex justify-content-center mb-30">
                                                             @php

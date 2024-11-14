@@ -112,7 +112,9 @@
                     <div class="collapse" id="user">
                         <ul class="nav-second-level">
                             <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
+                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                             <li><a class="tp-link" href="{{ route('user.create') }}">Thêm nhân viên</a></li>
+                            @endif
                         </ul>
                     </div>
                 </li>

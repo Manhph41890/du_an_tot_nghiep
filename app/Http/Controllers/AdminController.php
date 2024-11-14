@@ -320,6 +320,7 @@ class AdminController extends Controller
                 $tongTien = don_hang::whereMonth('ngay_tao', $thang)
                     ->whereYear('ngay_tao', Carbon::now()->year)
                     ->whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->where('trang_thai_don_hang', 'Thành công')
                     ->sum('tong_tien');
                 $tongTienThang[$thang] = $tongTien ?: 0;
             }
@@ -362,6 +363,7 @@ class AdminController extends Controller
             for ($thang = 1; $thang <= 12; $thang++) {
                 $tongTien = don_hang::whereMonth('ngay_tao', $thang)
                     ->whereYear('ngay_tao', Carbon::now()->year)
+                    ->where('trang_thai_don_hang', 'Thành công')
                     ->sum('tong_tien');
                 $tongTienThang[] = $tongTien;
             }
@@ -409,6 +411,7 @@ class AdminController extends Controller
             for ($thang = 1; $thang <= 12; $thang++) {
                 $tongTien = don_hang::whereMonth('ngay_tao', $thang)
                     ->whereYear('ngay_tao', Carbon::now()->year)
+                    ->where('trang_thai_don_hang', 'Thành công')
                     ->sum('tong_tien');
                 $tongTienThang[] = $tongTien;
             }

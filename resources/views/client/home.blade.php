@@ -1,6 +1,170 @@
 @extends('client.layout')
 
 @section('content')
+    <style>
+
+
+        .main-slider {
+            max-height: 500px;
+            display: flex;
+
+        }
+
+        .slider-item {
+            max-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Ensures no content overflows */
+        }
+
+        .slider-content {
+            margin-bottom: 50px;
+            text-align: center;
+
+        }
+
+        .text {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            margin-top: 10px;
+        }
+
+        .btn {
+            margin-top: 20px;
+        }
+
+
+        .product-card {
+            /* height: 450px; */
+            /* Thiết lập chiều cao cố định cho thẻ sản phẩm */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-thumbnail {
+            height: 250px;
+            /* Thiết lập chiều cao cố định cho phần hình ảnh sản phẩm */
+            overflow: hidden;
+        }
+
+        .product-desc {
+            flex-grow: 1;
+        }
+
+        .title {
+            height: 40px;
+            /* Thiết lập chiều cao cố định cho tiêu đề sản phẩm */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .product-tab .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .product-tab .col-12 {
+            flex: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-tab .col-md-4 {
+            flex: 1 1 33.33333%;
+        }
+
+        .product-tab .col-lg-2 {
+            flex: 1 1 20%;
+        }
+
+        .product-card {
+            /* Add your styling here */
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        .product-thumbnail img {
+            width: 100%;
+        }
+
+        /* Đảm bảo mỗi phần tử brand có kích thước phù hợp */
+        .single-brand {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .brand-image {
+            width: 120px;
+            /* Thay đổi kích thước ảnh theo ý muốn */
+            height: 120px;
+            border-radius: 50%;
+            /* Để ảnh hình tròn */
+            object-fit: cover;
+            /* Cắt ảnh để vừa với khung */
+            margin-bottom: 10px;
+            /* Khoảng cách giữa ảnh và tên danh mục */
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            margin-top: 5px;
+            /* Khoảng cách giữa tên và các phần tử khác */
+        }
+
+
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            font-size: 1em;
+            color: #ffffff;
+            opacity: 0.9;
+            user-select: none;
+            pointer-events: none;
+            animation: fall 10s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px) translateX(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0.3;
+            }
+        }
+    </style>
     <!-- main slider start -->
     <section class="bg-light">
         <div class="main-slider dots-style theme1">
@@ -49,8 +213,8 @@
                                     <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
                                         style="color: #5C5BCA">Giảm giá 40%</span>
                                 </h2>
-                                <Nga href="shop-grid-4-column.html"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary" <a
+                                <a href="shop-grid-4-column.html"
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
                                     data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
@@ -93,55 +257,41 @@
         </div>
     </section>
     <!-- main slider end -->
-    <!-- staic media start -->
-    <section class="static-media-section py-80 bg-white">
+
+    {{-- mã giảm giá 'voucher' --}}
+    <section class="discount-codes">
         <div class="container">
-            <div class="static-media-wrap theme-bg padding_box">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6 py-3">
-                        <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                                src="{{ asset('assets/client/images/icon/2.png') }}" alt="icon" />
-                            <div class="media-body">
-                                <h4 class="title">Miễn phí vận chuyển</h4>
-                                <p class="text">Đơn hàng trên 50.000d</p>
-                            </div>
+            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span></h2>
+            </h2>
+            <div class="discount-list">
+                @foreach ($discounts as $item)
+                    <div class="discount-item">
+                        <div class="discount-code">
+                            <span class="code">{{ $item->ma_khuyen_mai }}</span>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 py-3">
-                        <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                                src="{{ asset('assets/client/images/icon/3.png') }}" alt="icon" />
-                            <div class="media-body">
-                                <h4 class="title">Trả hàng miễn phí</h4>
-                                <p class="text">Trong vòng 9 ngày</p>
-                            </div>
+                        <div class="discount-description">
+                            <p>Giảm <span
+                                    class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
+                                VNĐ cho tất cả các sản phẩm.
+                            </p>
                         </div>
+                        <button style="font-size: 1em" class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
+                            chép mã</button>
                     </div>
-                    <div class="col-lg-3 col-sm-6 py-3">
-                        <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                                src="{{ asset('assets/client/images/icon/4.png') }}" alt="icon" />
-                            <div class="media-body">
-                                <h4 class="title">Bảo mật an toàn 100%</h4>
-                                <p class="text">Bảo mật thông tin</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 py-3">
-                        <div class="d-flex static-media2 flex-column flex-sm-row">
-                            <img class="align-self-center mb-2 mb-sm-0 me-auto me-sm-3"
-                                src="{{ asset('assets/client/images/icon/5.png') }}" alt="icon" />
-                            <div class="media-body">
-                                <h4 class="title">Hỗ trợ 24/7</h4>
-                                <p class="text">Hỗ trợ khách hàng 24/7</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
+
+                <!-- Thêm các mã giảm giá khác ở đây -->
+            </div>
+        </div>
+        <!-- Modal -->
+        <div id="copyModal" class="copy-modal">
+            <div class="modal-content">
+                <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
             </div>
         </div>
     </section>
+    {{-- end --}}
     <!-- staic media end -->
     <!-- common banner  start -->
     <div class="common-banner bg-white">
@@ -156,47 +306,39 @@
         <div class="container">
             <div class="product-tab-nav mb-50">
                 <div class="row align-items-center">
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <div class="section-title text-center">
                             <h2 class="title pb-3 mb-3">Sản phẩm của chúng tôi</h2>
-                            <p class="text">
-                                Vẽ sáng tạo - Tô hạnh phúc
-                            </p>
+                            <p class="text">Vẽ sáng tạo - Tô hạnh phúc</p>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-12">
                         <nav class="product-tab-menu theme1">
                             <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                         href="#pills-home" role="tab" aria-controls="pills-home"
-                                        aria-selected="true">Sản phẩm mới</a>
+                                        aria-selected="true" style="font-size: 20px">Sản phẩm mới</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false">Đang giảm giá</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                                        href="#pills-contact" role="tab" aria-controls="pills-contact"
-                                        aria-selected="false">Sắp ra mắt</a>
+                                        aria-selected="false" style="font-size: 20px">Đang giảm giá</a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
                 </div>
             </div>
-            <!-- product-tab-nav end -->
             <div class="row">
                 <div class="col-12">
                     <div class="tab-content" id="pills-tabContent">
                         <!-- first tab-pane -->
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab">
-                            <div class="product-slider-init theme1 slick-nav">
+                            <div class="row">
                                 @foreach ($sanPhamMois as $item)
-                                    <div class="slider-item">
+                                    <div class="col-12 col-md-4 col-lg-2 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
@@ -207,45 +349,31 @@
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
                                                                 alt="thumbnail" />
                                                         </a>
-                                                        <!-- product links -->
-
-                                                        <!-- product links end-->
                                                     </div>
-                                                    <div class="media-body">
+                                                    <div class="media-body w-100">
                                                         <div class="product-desc">
-                                                            <h3 class="title">
-                                                                <a class="min_h"
-                                                                    href="{{ route('sanpham.chitiet', $item->id) }}">
-                                                                    {{ $item->ten_san_pham }}
-                                                                </a>
+                                                            <h3 class="title min_h">
+                                                                <a class=""
+                                                                    href="{{ route('sanpham.chitiet', $item->id) }}">{{ $item->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star de-selected"></span>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($item->diem_trung_binh > 0 && $i <= floor($item->diem_trung_binh))
+                                                                        <span class="ion-ios-star"></span>
+                                                                        <!-- Sao có màu -->
+                                                                    @else
+                                                                        <span class="ion-ios-star-outline"></span>
+                                                                        <!-- Sao không màu -->
+                                                                    @endif
+                                                                @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span
-                                                                    class="product-price">{{ number_format($item->gia_goc) }}</span>
-                                                                {{-- <button class="pro-btn" data-bs-toggle="modal"
-                                                                    data-bs-target="#add-to-cart">
-                                                                    <i class="icon-basket"></i>
-                                                                </button> --}}
-                                                                {{-- <form action="{{ route('cart.add') }}" method="POST"
-                                                                    class="d-inline">
-                                                                    @csrf
-                                                                    <input type="hidden" name="san_pham_id"
-                                                                        value="{{ $item->id }}">
-                                                                    <input type="number" name="so_luong" value="1"
-                                                                        min="1" class="d-none">
-                                                                    <button type="submit" class="pro-btn">
-                                                                        <i class="icon-basket"></i>
-                                                                    </button>
-                                                                </form> --}}
-
-
+                                                                <p>Giá: </p>
+                                                                <p style="color: red">
+                                                                    <del
+                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
+                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -255,128 +383,45 @@
                                     </div>
                                 @endforeach
 
-
                             </div>
                         </div>
                         <!-- second tab-pane -->
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                            aria-labelledby="pills-profile-tab">
-                            <div class="product-slider-init theme1 slick-nav">
-                                <!-- slider-item end -->
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="row">
                                 @foreach ($sanPhamGiamGias as $sanPhamGg)
-                                    <div class="slider-item">
+                                    <div class="col-12 col-md-4 col-lg-2 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
                                                         <span
                                                             class=" bg-danger badge badge-danger top-right p-2">-{{ $sanPhamGg->phan_tram_giam_gia }}%</span>
-                                                        <a href="{{ route('sanpham.chitiet', $sanPhamGg->id) }}">
-                                                            <img
-                                                                src="{{ asset('/storage/' . $sanPhamGg->anh_san_pham) }}">
-                                                        </a>
-                                                        <!-- product links -->
-
-                                                        <!-- product links end-->
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div class="product-desc">
-                                                            <h3 class="title">
-                                                                <a class="min_h"
-                                                                    href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
-                                                                    {{ $sanPhamGg->ten_san_pham }}
-                                                                </a>
-                                                            </h3>
-                                                            <div class="star-rating d-flex justify-content-around">
-                                                                @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($i <= $sanPhamGg->diem_trung_binh)
-                                                                        <i class="mdi mdi-star text-warning"
-                                                                            style="font-size: 2.3em;"></i>
-                                                                        <!-- Ngôi sao đầy -->
-                                                                    @else
-                                                                        <i class="mdi mdi-star-outline text-muted"
-                                                                            style="font-size: 2.3em;"></i>
-                                                                        <!-- Ngôi sao rỗng -->
-                                                                    @endif
-                                                                @endfor
-                                                                <span
-                                                                    class="ms-2 small">({{ $sanPhamGg->diem_trung_binh }})</span>
-                                                            </div>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <div class="price-wrapper">
-                                                                    <span
-                                                                        class="product-price me-2">{{ number_format($sanPhamGg->gia_goc) }}</span>
-                                                                    <span
-                                                                        class="text-decoration-line-through text-muted">{{ number_format($sanPhamGg->gia_km) }}</span>
-                                                                </div>
-                                                                {{-- <button class="pro-btn" data-bs-toggle="modal"
-                                                                    data-bs-target="#add-to-cart">
-                                                                    <i class="icon-basket"></i>
-                                                                </button> --}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                                <!-- slider-item end -->
-                            </div>
-                        </div>
-                        <!-- third tab-pane -->
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                            aria-labelledby="pills-contact-tab">
-                            <div class="product-slider-init theme1 slick-nav">
-                                @foreach ($sanPhamView as $sanphamview)
-                                    <div class="slider-item">
-                                        <div class="card product-card">
-                                            <div class="card-body p-0">
-                                                <div class="media flex-column">
-                                                    <div class="product-thumbnail position-relative">
-                                                        <span class="badge badge-danger top-right">New</span>
-                                                        <a href="{{ route('sanpham.chitiet', $sanphamview->id) }}">
+                                                        <a href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
                                                             <img class="first-img"
-                                                                src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
-                                                                alt="anh san pham" />
+                                                                src="{{ asset('storage/' . $sanPhamGg->anh_san_pham) }}"
+                                                                alt="thumbnail" />
                                                         </a>
-                                                        <!-- product links -->
-
-                                                        <!-- product links end-->
                                                     </div>
-                                                    <div class="media-body">
+                                                    <div class="media-body w-100">
                                                         <div class="product-desc">
-                                                            <h3 class="title">
-                                                                <a class="min_h"
-                                                                    href="{{ route('sanpham.chitiet', $sanphamview->id) }}">{{ $sanphamview->ten_san_pham }}</a>
+                                                            <h3 class="title min_h">
+                                                                <a class=""
+                                                                    href="{{ route('sanpham.chitiet', $sanPhamGg->id) }}">{{ $sanPhamGg->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star"></span>
-                                                                <span class="ion-ios-star de-selected"></span>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($sanPhamGg->danh_gia > 0 && $i <= floor($sanPhamGg->danh_gia))
+                                                                        <span class="ion-ios-star"></span>
+                                                                        <!-- Sao có màu -->
+                                                                    @else
+                                                                        <span class="ion-ios-star-outline"></span>
+                                                                        <!-- Sao không màu -->
+                                                                    @endif
+                                                                @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span
-                                                                    class="product-price">{{ number_format($sanphamview->gia_goc) }}</span>
-                                                                {{-- <button class="pro-btn" data-bs-toggle="modal"
-                                                                data-bs-target="#add-to-cart">
-                                                                <i class="icon-basket"></i>
-                                                            </button> --}}
-                                                                {{-- <form action="{{ route('cart.add') }}" method="POST"
-                                                                    class="d-inline">
-                                                                    @csrf
-                                                                    <input type="hidden" name="san_pham_id"
-                                                                        value="{{ $sanphamview->id }}">
-                                                                    <input type="number" name="so_luong" value="1"
-                                                                        min="1" class="d-none">
-                                                                    <button type="submit" class="pro-btn">
-                                                                        <i class="icon-basket"></i>
-                                                                    </button>
-                                                                </form> --}}
-
-
+                                                                <span class="product-price">Giá:
+                                                                    {{ number_format($sanPhamGg->gia_km) }} VNĐ</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -385,8 +430,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-
-                                <!-- slider-item end -->
                             </div>
                         </div>
                     </div>
@@ -394,6 +437,7 @@
             </div>
         </div>
     </section>
+
     <!-- product tab end -->
 
     <!-- product tab repetation start -->
@@ -402,7 +446,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-3 mb-3">Sản phẩm nhiều lượt xem</h2>
+                        <h2 class="title pb-3 mb-3">Sản phẩm được quan tâm</h2>
                     </div>
                     <div class="product-slider-init theme1 slick-nav">
                         @foreach ($sanPhamView as $sanphamview)
@@ -419,39 +463,28 @@
                                                 </a>
                                                 <!-- product links end-->
                                             </div>
-                                            <div class="media-body">
+                                            <div class="media-body w-100">
                                                 <div class="product-desc">
-                                                    <h3 class="title">
-                                                        <a class="min_h"
+                                                    <h3 class="title min_h">
+                                                        <a class=""
                                                             href="{{ route('san-phams.incrementViews', $sanphamview->id) }}">
                                                             {{ $sanphamview->ten_san_pham }}
                                                         </a>
                                                     </h3>
                                                     <div class="star-rating">
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star"></span>
-                                                        <span class="ion-ios-star de-selected"></span>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($sanphamview->danh_gia > 0 && $i <= floor($sanphamview->danh_gia))
+                                                                <span class="ion-ios-star"></span>
+                                                                <!-- Sao có màu -->
+                                                            @else
+                                                                <span class="ion-ios-star-outline"></span>
+                                                                <!-- Sao không màu -->
+                                                            @endif
+                                                        @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span
-                                                            class="product-price">{{ number_format($sanphamview->gia_goc) }}</span>
-                                                        {{-- <button class="pro-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#add-to-cart">
-                                                    <i class="icon-basket"></i>
-                                                </button> --}}
-                                                        {{-- <form action="{{ route('cart.add') }}" method="POST"
-                                                            class="d-inline">
-                                                            @csrf
-                                                            <input type="hidden" name="san_pham_id"
-                                                                value="{{ $sanphamview->id }}">
-                                                            <input type="number" name="so_luong" value="1"
-                                                                min="1" class="d-none">
-                                                            <button type="submit" class="pro-btn">
-                                                                <i class="icon-basket"></i>
-                                                            </button>
-                                                        </form> --}}
+                                                        <span class="product-price">Giá:
+                                                            {{ number_format($sanphamview->gia_km) }} VNĐ</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -485,22 +518,22 @@
                         @foreach ($baiVietMoi as $baivietmoi)
                             <div class="slider-item">
                                 <div class="single-blog">
-                                    <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden"
+                                    <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden height-200"
                                         href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">
                                         <img src="{{ asset('/storage/' . $baivietmoi->anh_bai_viet) }}"
                                             alt="blog-thumb-naile" />
                                     </a>
                                     <div class="blog-post-content">
-                                        <a class="blog-link theme-color d-inline-block mb-10 text-uppercase"
-                                            href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->user?->ho_ten }}</a>
+                                        <a class="blog-link theme-color d-inline-block mb-10"
+                                            href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">Tác giả:
+                                            {{ $baivietmoi->user?->ho_ten }}</a>
                                         <h3 class="title mb-15">
-                                            <a href="single-blog.html">{{ $baivietmoi->tieu_de_bai_viet }}</a>
+                                            <a
+                                                href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">{{ $baivietmoi->tieu_de_bai_viet }}</a>
                                         </h3>
                                         <p class="sub-title">
-                                            Ngày đăng
-                                            <a class="theme-color d-inline-block mx-1"
-                                                href="{{ url('client/baivietchitiet', $baivietmoi->id) }}"></a>
-                                            {{ $baivietmoi->ngay_dang }}
+                                            Ngày đăng:
+                                            {{ date('d/m/Y', strtotime($baivietmoi->ngay_dang)) }}
                                         </p>
                                     </div>
                                 </div>
@@ -521,20 +554,21 @@
                         @foreach ($anhDMuc as $anhdm)
                             <div class="slider-item">
                                 <div class="single-brand">
-                                    <a href="{{ route('client.cuahang') }}" class="brand-thumb">
-                                        <img src="{{ asset('/storage/' . $anhdm->anh_danh_muc) }}" />
+                                    <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
+                                    <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
+                                        <!-- Hiển thị ảnh hình tròn -->
+                                        <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
+                                            class="brand-image" />
                                     </a>
+                                    <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
                                 </div>
                             </div>
                         @endforeach
-
-                        <!-- slider-item end -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <style>
         .min_h {
             display: -webkit-box;
@@ -547,236 +581,52 @@
             /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
         }
     </style>
-    <!-- modals start -->
-    <!-- modal giỏ hàng -->
-    {{-- <div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-8 mx-auto col-lg-5 mb-5 mb-lg-0">
-                            <div class="product-sync-init mb-20">
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="assets/img/slider/thumb/1.jpg" alt="product-thumb" />
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="assets/img/slider/thumb/2.jpg" alt="product-thumb" />
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="assets/img/slider/thumb/3.jpg" alt="product-thumb" />
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="assets/img/slider/thumb/4.jpg" alt="product-thumb" />
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                            </div>
+    <script>
+        const maxSnowflakes = 20;
 
-                            <div class="product-sync-nav">
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)">
-                                            <img src="assets/img/slider/thumb/1.1.jpg" alt="product-thumb" /></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)">
-                                            <img src="assets/img/slider/thumb/2.1.jpg" alt="product-thumb" /></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)"><img src="assets/img/slider/thumb/3.1.jpg"
-                                                alt="product-thumb" /></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)"><img src="assets/img/slider/thumb/4.1.jpg"
-                                                alt="product-thumb" /></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="modal-product-info">
-                                <div class="product-head">
-                                    <h2 class="title">
-                                        New Balance Running Arishi trainers in triple
-                                    </h2>
-                                    <h4 class="sub-title">Reference: demo_5</h4>
-                                    <div class="star-content mb-20">
-                                        <span class="star-on"><i class="fas fa-star"></i> </span>
-                                        <span class="star-on"><i class="fas fa-star"></i> </span>
-                                        <span class="star-on"><i class="fas fa-star"></i> </span>
-                                        <span class="star-on"><i class="fas fa-star"></i> </span>
-                                        <span class="star-on de-selected"><i class="fas fa-star"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="product-body">
-                                    <span class="product-price text-center">
-                                        <span class="new-price">$29.00</span>
-                                    </span>
-                                    <p>
-                                        Break old records and make new goals in the New Balance®
-                                        Arishi Sport v1.
-                                    </p>
-                                    <ul>
-                                        <li>Predecessor: None.</li>
-                                        <li>Support Type: Neutral.</li>
-                                        <li>Cushioning: High energizing cushioning.</li>
-                                    </ul>
-                                </div>
-                                <div class="d-flex mt-30">
-                                    <div class="product-size">
-                                        <h3 class="title">Dimension</h3>
-                                        <select>
-                                            <option value="0">40x60cm</option>
-                                            <option value="1">60x90cm</option>
-                                            <option value="2">80x120cm</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="product-footer">
-                                    <div class="product-count style d-flex flex-column flex-sm-row my-4">
-                                        <div class="count d-flex">
-                                            <input type="number" min="1" max="10" step="1"
-                                                value="1" />
-                                            <div class="button-group">
-                                                <button class="count-btn increment">
-                                                    <i class="fas fa-chevron-up"></i>
-                                                </button>
-                                                <button class="count-btn decrement">
-                                                    <i class="fas fa-chevron-down"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <button class="btn btn-dark btn--xl mt-5 mt-sm-0">
-                                                <span class="me-2"><i class="ion-android-add"></i></span>
-                                                Add to cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="addto-whish-list">
-                                        <a href="#"><i class="icon-heart"></i> Add to wishlist</a>
-                                        <a href="#"><i class="icon-shuffle"></i> Add to compare</a>
-                                    </div>
-                                    <div class="pro-social-links mt-10">
-                                        <ul class="d-flex align-items-center">
-                                            <li class="share">Share</li>
-                                            <li>
-                                                <a href="#"><i class="ion-social-facebook"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="ion-social-twitter"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="ion-social-google"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="ion-social-pinterest"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    {{-- <!-- second modal -->
-    <div class="modal fade style2" id="compare" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5 class="title">
-                        <i class="fa fa-check"></i> Product added to compare shoppp.
-                    </h5>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- second modal -->
-    <div class="modal fade style3" id="add-to-cart" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center bg-dark">
-                    <h5 class="modal-title" id="add-to-cartCenterTitle">
-                        Product successfully
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-5 divide-right">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="assets/img/modal/1.jpg" alt="img" />
-                                </div>
-                                <div class="col-md-6 mb-2 mb-md-0">
-                                    <h4 class="product-name">
-                                        New Balance Running Arishi trainers in triple
-                                    </h4>
-                                    <h5 class="price">$$29.00</h5>
-                                    <h6 class="color">
-                                        <strong>Dimension: </strong>: <span class="dmc">40x60cm</span>
-                                    </h6>
-                                    <h6 class="quantity"><strong>Quantity:</strong>&nbsp;1</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="modal-cart-content">
-                                <p class="cart-products-count">There is 1 item in your cart.</p>
-                                <p><strong>Total products:</strong>&nbsp;$123.72</p>
-                                <p><strong>Total shipping:</strong>&nbsp;$7.00</p>
-                                <p><strong>Taxes</strong>&nbsp;$0.00</p>
-                                <p><strong>Total:</strong>&nbsp;$130.72 (tax excl.)</p>
-                                <div class="cart-content-btn">
-                                    <button type="button" class="btn btn-dark btn--md mt-4" data-bs-dismiss="modal">
-                                        Continue shopping
-                                    </button>
-                                    <button class="btn btn-dark btn--md mt-4">
-                                        Proceed to checkout
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- modals end -->
+        function createSnowflake() {
+            if (document.querySelectorAll('.snowflake').length < maxSnowflakes) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerText = '❄️';
+
+
+                snowflake.style.left = `${Math.random() * 100}%`;
+                snowflake.style.fontSize = `${Math.random() * 1.5 + 0.5}em`;
+
+                document.querySelector('.discount-codes').appendChild(snowflake);
+
+                snowflake.addEventListener('animationend', () => {
+                    snowflake.remove();
+                });
+            }
+        }
+
+        // Tạo bông tuyết mới mỗi 500ms
+        setInterval(createSnowflake, 500);
+
+
+        function copyCode(code) {
+            var tempInput = document.createElement("input");
+            tempInput.value = code;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showCopyModal("Mã giảm giá đã được sao chép: " + code);
+        }
+
+        function showCopyModal(message) {
+            var modal = document.getElementById("copyModal");
+            var modalMessage = document.getElementById("copyMessage");
+
+            modalMessage.textContent = message;
+
+            modal.classList.add("show");
+
+            setTimeout(function() {
+                modal.classList.remove("show");
+            }, 3000);
+        }
+    </script>
 @endsection

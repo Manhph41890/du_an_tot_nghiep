@@ -81,7 +81,7 @@
                         <div class="input-group mb-3">
                             <input type="number" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
                                 required
-                                class="form-control form-control-lg bg-  fs-6 @error('so_dien_thoai') is-invalid @enderror"
+                                class="form-control form-control-lg bg-light  fs-6 @error('so_dien_thoai') is-invalid @enderror"
                                 placeholder="Số điện thoại">
                             @error('so_dien_thoai')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -106,11 +106,10 @@
                             @enderror
                         </div>
 
-                        <div class="input-group mb-5 d-flex justify-content-between">
+                        <div class="input-group mb-3 d-flex justify-content-between">
                             <div class="form-check">
                                 <input type="checkbox" name="remember" class="form-check-input" id="formCheck">
-                                <label for="formCheck" class="form-check-label text-secondary"><small>Remember
-                                        Me</small></label>
+                                <label for="formCheck" class="form-check-label text-secondary"><small>Ghi nhớ</small></label>
                             </div>
                         </div>
 
@@ -118,7 +117,7 @@
                             <button class="btn btn-lg btn-primary w-100 fs-6">Đăng Kí</button>
                         </div>
 
-                        <div class="input-group d-flex mb-3">
+                        {{-- <div class="input-group d-flex mb-3">
                             <button class="btn btn-lg btn-light me-2 fs-6">
                                 <img src="{{ asset('images/google.png') }}" style="width: 20px;" class="me-2">
                                 Sign In with Google
@@ -128,7 +127,7 @@
                                 <img src="{{ asset('images/facebook.png') }}" style="width: 20px;" class="me-2">
                                 Sign In with Facebook
                             </button>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <small>Bạn đã có tài khoản? <a href="{{ route('auth.login') }}"> Đăng Nhập </a></small>

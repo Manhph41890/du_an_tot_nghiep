@@ -368,15 +368,15 @@
     <div id="sticky" class="header-middle theme1 py-15 py-lg-0">
         <div class="container position-relative">
             <div class="row align-items-center">
-                <div class="col-6 col-lg-2 col-xl-2">
+                <div class="col-xl-2 col-lg-2 col-6  ">
                     <div class="logo">
                         <a href="{{ route('client.home') }}"><img
                                 src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
                     </div>
                 </div>
-                <div class="col-xl-8 col-lg-7 d-none d-lg-block">
+                <div class="col-xl-6 col-lg-7 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
-                        <li class="active ml-0">
+                        <li class="ml-0">
                             <a href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
                         </li>
                         <li>
@@ -392,7 +392,7 @@
                         <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
-                <div class="col-6 col-lg-3 col-xl-2">
+                <div class="col-xl-4 col-lg-3 col-6 ">
                     <!-- search-form end -->
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
@@ -403,21 +403,30 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li> -->
-                                <form class="search-box" style="margin: 0;" action="{{ url('/') }}"
-                                    method="post">
-                                    @csrf
-                                    @method('get')
-                                    <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
-                                        <div class="my-2 mx-2">
-                                            <a class="search-toggle" id="searchIcon" role="button"
-                                                style="font-size: 20px;">
-                                                <i class="icon-magnifier"></i>
-                                            </a>
+                                <li class="mr-xl-0 cart-block position-relative me-1">
+                                    <form class="search-box" style="margin: 0;" action="{{ url('/') }}"
+                                        method="post">
+                                        @csrf
+                                        @method('get')
+                                        <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
+                                            <div class="my-2 mx-2">
+                                                <a class="search-toggle" id="searchIcon" role="button"
+                                                    style="font-size: 20px;">
+                                                    <i class="icon-magnifier"></i>
+                                                </a>
+                                            </div>
+                                            <!-- Ô nhập liệu sẽ được thêm vào DOM bằng JavaScript -->
                                         </div>
-                                        <!-- Ô nhập liệu sẽ được thêm vào DOM bằng JavaScript -->
-                                    </div>
-                                </form>
+                                    </form>
+                                </li>
 
+                                <li class="mr-xl-0 cart-block position-relative me-1">
+                                    <a id="notification-icon" href="javascript:void(0);">
+                                        <span class="position-relative">
+                                            <i class="icon-bell"></i>
+                                        </span>
+                                    </a>
+                                </li>
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
@@ -427,8 +436,32 @@
                                         </span>
                                     </a>
                                 </li>
+                               
                                 <!-- cart block end -->
                             </ul>
+                            <!-- Modal thông báo -->
+                            <div class="modal fade" id="notificationModal" tabindex="-1"
+                                aria-labelledby="notificationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="notificationModalLabel">Thông báo</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul id="order-list">
+                                                <li>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="mobile-menu-toggle theme1 d-lg-none">
                             <a href="#offcanvas-mobile-menu" class="offcanvas-toggle">
@@ -481,11 +514,6 @@
                                     <li>
                                         <a style="font-size: 16px;" href="{{ route('auth.login') }}">
                                             Đăng Nhập
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a style="font-size: 16px;" href="{{ route('auth.register') }}">
-                                            Đăng Ký
                                         </a>
                                     </li>
                                 @endauth
@@ -710,6 +738,12 @@
 <!-- JavaScript cho modal -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    $(document).ready(function() {
+        // Mở modal khi nhấn vào chuông thông báo
+        $('#notification-icon').click(function() {
+            $('#notificationModal').modal('show');
+        });
+    });
     document.getElementById("searchIcon").addEventListener("click", function() {
         const mainMenu = document.querySelector(".main-menu");
 
@@ -818,63 +852,5 @@
             $('#product-search').empty(); // Xóa kết quả tìm kiếm
             $('#product-search').hide(); // Ẩn dropdown
         }
-    });
-
-
-
-
-    $(document).ready(function() {
-        // Hiển thị popup thông tin người dùng
-        $('#showUserProfile').click(function(e) {
-            e.preventDefault();
-            console.log('Nút thông tin cá nhân đã được click!'); // Thêm dòng này để kiểm tra
-            $('#userProfilePopup').fadeIn();
-        });
-
-        // Ẩn popup thông tin người dùng
-        $('#closeUserProfile, #closeUserProfileBtn').click(function() {
-            $('#userProfilePopup').fadeOut();
-        });
-
-        // Hiển thị popup chỉnh sửa tài khoản
-        $('#editUserProfileBtn').click(function() {
-            $('#userProfilePopup').fadeOut();
-            $('#editUserProfilePopup').fadeIn();
-        });
-
-        // Ẩn popup chỉnh sửa tài khoản
-        $('#closeEditUserProfile, #cancelEditProfile').click(function() {
-            $('#editUserProfilePopup').fadeOut();
-        });
-
-        // Đóng popup khi click bên ngoài popup
-        $(window).click(function(e) {
-            if ($(e.target).is('#userProfilePopup')) {
-                $('#userProfilePopup').fadeOut();
-            }
-            if ($(e.target).is('#editUserProfilePopup')) {
-                $('#editUserProfilePopup').fadeOut();
-            }
-        });
-
-        // Gửi form chỉnh sửa qua AJAX
-        $('#editUserProfileForm').on('submit', function(e) {
-            e.preventDefault();
-
-            $.ajax({
-                url: $(this).attr('action'),
-                type: $(this).attr('method'),
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    alert('Cập nhật thông tin thành công!');
-                    $('#editUserProfilePopup').fadeOut();
-                },
-                error: function(xhr) {
-                    alert('Có lỗi xảy ra. Vui lòng thử lại.');
-                }
-            });
-        });
     });
 </script>

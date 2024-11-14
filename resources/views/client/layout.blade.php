@@ -120,36 +120,62 @@
             background-color: #4a4db3;
         }
 
-        /* Thêm phần tử HOT */
         .hot-tag {
-            display: inline-block;
-            background-color: #FF5733;
-            /* Màu nền nổi bật */
-            color: #fff;
+            color: #0d0653;
+            /* Màu tuyết */
             font-weight: bold;
-            padding: 5px 10px;
-            margin-left: 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            animation: bounce 1s infinite;
-            /* Áp dụng hiệu ứng chuyển động */
+            position: relative;
+            padding: 0 10px;
+            animation: blink 1s infinite alternate;
+            /* Hiệu ứng nhấp nháy */
         }
 
-        /* Hiệu ứng chuyển động của chữ HOT */
-        @keyframes bounce {
+        /* Hiệu ứng nhấp nháy cho chữ "HOT" */
+        @keyframes blink {
             0% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-                /* Di chuyển lên */
+                opacity: 1;
             }
 
             100% {
-                transform: translateY(0);
+                opacity: 0.6;
             }
         }
+
+        /* Bông tuyết xung quanh chữ "HOT" */
+        .hot-tag::before,
+        .hot-tag::after {
+            content: "❄️";
+            position: absolute;
+            color: #ffffff;
+            font-size: 1.2em;
+            animation: snowflake-blink 1.5s infinite alternate;
+        }
+
+        /* Vị trí bông tuyết bên trái */
+        .hot-tag::before {
+            top: -5px;
+            left: -15px;
+            animation-delay: 0.2s;
+        }
+
+        /* Vị trí bông tuyết bên phải */
+        .hot-tag::after {
+            top: -5px;
+            right: -15px;
+            animation-delay: 0.5s;
+        }
+
+        /* Hiệu ứng nhấp nháy cho bông tuyết */
+        @keyframes snowflake-blink {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
 
         .discount-item {
             position: relative;

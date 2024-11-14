@@ -27,6 +27,8 @@ class User extends Authenticatable
         'dia_chi',
         'gioi_tinh',
         'password',
+        'provider',
+        'provider_id',
         'is_active'
     ];
 

@@ -104,16 +104,17 @@
                         </div>
 
                         <div class="input-group d-flex mb-3">
-                            <button class="btn btn-lg btn-light me-2 fs-6">
+                            <a href="{{ route('auth.google') }}" class="btn btn-lg btn-light me-2 fs-6">
                                 <img src="{{ asset('images/google.png') }}" style="width: 20px;" class="me-2">
                                 Sign In with Google
-                            </button>
-
-                            <button class="btn btn-lg btn-light ms-2 fs-6">
+                            </a>
+                        
+                            <a href="{{ route('auth.facebook') }}" class="btn btn-lg btn-light ms-2 fs-6">
                                 <img src="{{ asset('images/facebook.png') }}" style="width: 20px;" class="me-2">
                                 Sign In with Facebook
-                            </button>
+                            </a>
                         </div>
+                        
 
                         <div class="row">
                             <small>Bạn chưa có tài khoản? <a href="{{ route('auth.register') }}"> Đăng Kí </a></small>

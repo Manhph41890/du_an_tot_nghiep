@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\chuc_vu; // Đảm bảo đã import model chuc_vu
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Str; // Thêm dòng này
 
 class SocialController extends Controller
 {
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')
+            ->scopes(['openid', 'profile', 'email'])  // Thêm phạm vi profile và email
+            ->redirect();
     }
 
+
     public function handleGoogleCallback()
-    { 
+    {
         $user = Socialite::driver('google')->user();
+        dd($user); 
         return $this->loginOrCreateUser($user, 'google');
     }
 
@@ -29,26 +30,32 @@ class SocialController extends Controller
     }
 
     public function handleFacebookCallback()
-    {   
+    {
         $user = Socialite::driver('facebook')->stateless()->user();
         return $this->loginOrCreateUser($user, 'facebook');
     }
 
     protected function loginOrCreateUser($socialUser, $provider)
     {
+        // Lấy ID của vai trò 'khach_hang'
+        $khachHangRole = chuc_vu::where('ten_chuc_vu', 'khach_hang')->first();
+
         // Tìm hoặc tạo người dùng
         $user = User::firstOrCreate(
             ['email' => $socialUser->getEmail()],
             [
-                'name' => $socialUser->getName(),
+                'ho_ten' => $socialUser->getName(),
                 'provider' => $provider,
                 'provider_id' => $socialUser->getId(),
-                'avatar' => $socialUser->getAvatar(),
+                'anh_dai_dien' => $socialUser->getAvatar() ?: 'path/to/default-avatar.jpg',
+                'chuc_vu_id' => $khachHangRole ? $khachHangRole->id : null, // Gán chuc_vu_id cho người dùng
             ]
         );
 
+        // Đăng nhập người dùng vừa tạo hoặc đã tồn tại
         Auth::login($user);
 
-        return redirect()->intended('/home'); // Chuyển hướng sau khi đăng nhập thành công
+        // Chuyển hướng sau khi đăng nhập thành công
+        return redirect()->intended('/');
     }
 }

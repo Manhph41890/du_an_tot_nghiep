@@ -1,130 +1,362 @@
-@extends('auth.layout')
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
 
-@section('css')
-@import url('https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700&display=swap');
+    ::after,
+    ::before {
+        box-sizing: border-box;
+    }
+
     body {
-    font-family: "Itim", cursive;
-    background: #ececec;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative;
     }
 
-    .box-area {
-    width: 930px;
+    .form-contain {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 732px;
+        height: 557px;
+        position: relative;
+        background: #d9d9d9;
+        border-radius: 27px;
+        box-shadow: 18px 25px 29px rgba(0, 0, 0, 0.25);
     }
 
-    .right-box {
-    padding: 40px 30px 40px 40px;
+    .form-list {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    ::placeholder {
-    font-size: 16px;
+    .form-list form {
+        gap: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
     }
 
-    .rounded-4 {
-    border-radius: 20px;
+    .form-list form input {
+        border: none;
+        width: 226px;
+        height: 45.73px;
+        background: #ffffff;
+        box-shadow: 0px 8px 4px rgba(97, 178, 228, 0.44);
+        border-radius: 37px;
     }
 
-    .rounded-5 {
-    border-radius: 30px;
+    .form-list form input::placeholder {
+        padding: 18px;
     }
 
-    @media only screen and (max-width: 768px) {
-    .box-area {
-    margin: 0 10px;
+    .overlay {
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s ease-in-out;
+        z-index: 1;
+        border-radius: 27px;
+        box-shadow: 10px 4px 7px rgba(0, 0, 0, 0.24);
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .left-box {
-    height: 100px;
-    overflow: hidden;
+    .overlay .titre-login {
+        gap: 45px;
+        flex-direction: column;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: none;
     }
 
-    .right-box {
-    padding: 20px;
+    .overlay .titre-register {
+        gap: 45px;
+        flex-direction: column;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-    }
-@endsection
 
-@section('content')
+    .btn-register {
+        color: #000;
+        padding: 10px 20px;
+        border: none;
+        margin-right: 10px;
+        display: none;
+        background: #cccccc;
+        box-shadow: 0px 4px 4px rgba(97, 178, 228, 0.44);
+        border-radius: 37px;
+        font-size: 20px;
+    }
+
+    .btn-login {
+        color: black;
+        padding: 10px 20px;
+        border: none;
+        margin-left: 10px;
+        background: #cccccc;
+        box-shadow: 0px 4px 4px rgba(97, 178, 228, 0.44);
+        border-radius: 37px;
+        font-size: 20px;
+    }
+
+    .decoration {
+        position: absolute;
+        top: 35px;
+        width: 100%;
+        border: none;
+    }
+
+    .wave-svg {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+    }
+
+    #snow-container {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    .snowflake {
+        position: absolute;
+        top: -10px;
+        display: block;
+        width: 10px;
+        height: 10px;
+        border: 1px solid #000000;
+        background-color: #fff;
+        border-radius: 50%;
+        opacity: 0.7;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(-50px);
+        }
+
+        100% {
+            transform: translateY(100vh);
+        }
+    }
+
+    .decoration-back {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .decoration-back .carpet-snow {
+        height: 20%;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .decoration-back .tree {
+        position: relative;
+        top: 100px;
+    }
+
+    .is-invalid {
+        border-color: red;
+    }
+
+    .invalid-feedback {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+</style>
+
+<body>
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('auth.login') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <div class="row border rounded-5 p-3 bg-white shadow box-area">
+    <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/banner_0.jpg" alt="">
 
-                <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
-                    style="">
-                    <div class="featured-image mb-3">
-                        <img src="{{ asset('assets/client/images/banner/bn1.jpg') }}" class="img-fluid"
-                            style="width: 500px;">
-                    </div>
+    <div id="snow-container"></div>
 
-                </div>
+    <div class="form-contain">
 
-                <div class="col-md-6 right-box">
-                    <div class="row align-items-center">
-                        <div
-                            class="header-text mb-4 text-center d-flex flex-column justify-content-center align-items-center">
-                            <h2>Đăng Nhập</h2>
-                        </div>
+        <div class="overlay">
 
-                        <div class="input-group mb-3">
-                            <input type="email"
-                                class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
-                                name="email" id="email" required placeholder="Email address"
-                                value="{{ old('email') }}">
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+            <img class="decoration" src="http://127.0.0.1:8000/assets/client/images/logo/logo_art.png" alt="Logo Art">
 
-                        <div class="input-group mb-1">
-                            <input type="password" name="password" id="password" required
-                                class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
-                                placeholder="Password" value="{{ old('password') }}">
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
 
-                        <div class="input-group mb-3 d-flex justify-content-between">
-                            <div class="form-check">
-                                <input type="checkbox" name="remember" class="form-check-input" id="formCheck">
-                                <label for="formCheck" class="form-check-label text-secondary"><small>Ghi nhớ</small></label>
-                            </div>
-
-                            <div class="forgot">
-                                <small><a href="{{ route('auth.forgot_password') }}">Quên mật khẩu?</a></small>
-                            </div>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <button class="btn btn-lg btn-primary w-100 fs-6">ĐĂNG NHẬP</button>
-                        </div>
-{{-- 
-                        <div class="input-group d-flex mb-3">
-                            <button class="btn btn-lg btn-light me-2 fs-6">
-                                <img src="{{ asset('images/google.png') }}" style="width: 20px;" class="me-2">
-                                Sign In with Google
-                            </button>
-
-                            <button class="btn btn-lg btn-light ms-2 fs-6">
-                                <img src="{{ asset('images/facebook.png') }}" style="width: 20px;" class="me-2">
-                                Sign In with Facebook
-                            </button>
-                        </div> --}}
-
-                        <div class="row">
-                            <small>Bạn chưa có tài khoản? <a href="{{ route('auth.register') }}"> Đăng Kí </a></small>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="titre-register" style="margin-top: 30px">
+                <h2>Đăng Ký</h2>
+                <p>Chào mừng bạn đến với Articaft</p>
+                <button class="btn-login">Đăng Nhập</button>
             </div>
-        </div>
-    </form>
-@endsection
 
-@section('js')
-@endsection
+            <div class="titre-login" style="margin-top: 50px">
+                <h2>Đăng Nhập</h2>
+                <p>Chào mừng bạn đến với Articaft. Hãy Đăng Nhập ngay !</p>
+                <button class="btn-register">Đăng Ký</button>
+            </div>
+
+        </div>
+
+        <div class="form-list">
+            <form class="login" action="{{ route('auth.login') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                        class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
+                        placeholder="Email">
+
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" id="password" name="password" value="{{ old('password') }}" required
+                        class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
+                        placeholder="Mật khẩu">
+                    @if (session('login_error'))
+                        <div class="alert alert-danger">
+                            {{ session('login_error') }}
+                        </div>
+                    @endif
+
+                </div>
+                <div class="input-group mb-3">
+                    <input type="submit" value="Đăng Nhập">
+                </div>
+            </form>
+        </div>
+
+        <div class="form-list">
+            <form class="register" action="{{ route('auth.register') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="text" id="ho_ten" name="ho_ten" value="{{ old('ho_ten') }}" required
+                        class="form-control form-control-lg bg-light fs-6 @error('ho_ten') is-invalid @enderror"
+                        placeholder="Họ Tên">
+                    @error('ho_ten')
+                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                        class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
+                        placeholder="Email">
+                    @error('email')
+                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="number" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
+                        required
+                        class="form-control form-control-lg bg-light  fs-6 @error('so_dien_thoai') is-invalid @enderror"
+                        placeholder="Số điện thoại">
+                    @error('so_dien_thoai')
+                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="password" id="password" name="password" required
+                        class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
+                        placeholder="Mật Khẩu">
+                    @error('password')
+                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="password" id="password_confirmation" name="password_confirmation" required
+                        class="form-control form-control-lg bg-light fs-6 @error('password_confirmation') is-invalid @enderror"
+                        placeholder="Xác nhận mật khẩu">
+                    @error('password_confirmation')
+                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="input-group mb-3">
+                    <input type="submit" value="Đăng ký" style="margin-bottom: 60px">
+                </div>
+            </form>
+        </div>
+
+        <svg class="wave-svg" width="732" height="136" viewBox="0 0 732 136" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M0 8.45888V109C0 123.912 12.0883 136 27 136H704.938C726.424 136 739.186 112.207 726.912 94.5719C712.116 73.3129 694.835 49.4713 683.965 37.7334C661.789 13.7871 602.805 -0.265669 539.433 15.6257C476.061 31.517 439.194 53.2459 393.889 69.1733C336.766 89.2556 288.703 90.1814 232.182 69.1733C191.945 54.2179 191.297 22.9896 150.781 8.45888C97.7137 -10.5736 0 8.45888 0 8.45888Z"
+                fill="white" />
+        </svg>
+    </div>
+</body>
+<script>
+    const registerBtn = document.querySelector(".btn-register");
+    const loginBtn = document.querySelector(".btn-login");
+    const overlayDiv = document.querySelector(".overlay");
+    const titreregister = document.querySelector(".titre-register");
+    const titrelogin = document.querySelector(".titre-login");
+    const shadow = document.querySelector(".overlay");
+
+    registerBtn.addEventListener("click", () => {
+        overlayDiv.style.transform = "translateX(0)";
+        registerBtn.style.display = "none";
+        loginBtn.style.display = "block";
+        titreregister.style.display = "flex";
+        titrelogin.style.display = "none";
+        shadow.style.boxShadow = "10px 4px 7px rgba(0, 0, 0, 0.24)";
+    });
+
+    loginBtn.addEventListener("click", () => {
+        overlayDiv.style.transform = "translateX(100%)";
+        registerBtn.style.display = "block";
+        loginBtn.style.display = "none";
+        titreregister.style.display = "none";
+        titrelogin.style.display = "flex";
+        shadow.style.boxShadow = "-10px 4px 7px rgba(0, 0, 0, 0.24)";
+    });
+
+    var NUMBER_OF_SNOWFLAKES = 30;
+
+    function createSnowflake() {
+        var snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+
+        snowflake.style.left = Math.random() * 100 + "vw";
+
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+        snowflake.style.animationDelay = Math.random() * 5 + "s";
+
+        document.getElementById("snow-container").appendChild(snowflake);
+    }
+
+    for (let i = 0; i < NUMBER_OF_SNOWFLAKES; i++) {
+        createSnowflake();
+    }
+
+
+    document.addEventListener("click", function(event) {
+        createSnowflake();
+    });
+</script>

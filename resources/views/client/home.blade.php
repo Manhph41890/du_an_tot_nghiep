@@ -2,14 +2,7 @@
 
 @section('content')
     <style>
-        .product-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
 
         .main-slider {
             max-height: 500px;
@@ -147,23 +140,7 @@
             /* Khoảng cách giữa tên và các phần tử khác */
         }
 
-        @keyframes blink {
 
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
-        }
-
-        .badge-danger {
-            background-color: red;
-            color: white;
-            animation: blink 1s infinite;
-        }
 
         .snowflake {
             position: absolute;
@@ -373,7 +350,7 @@
                                                                 alt="thumbnail" />
                                                         </a>
                                                     </div>
-                                                    <div class="media-body">
+                                                    <div class="media-body w-100">
                                                         <div class="product-desc">
                                                             <h3 class="title min_h">
                                                                 <a class=""

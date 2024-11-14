@@ -345,7 +345,7 @@
                                                                 alt="thumbnail" />
                                                         </a>
                                                     </div>
-                                                    <div class="media-body">
+                                                    <div class="media-body w-100">
                                                         <div class="product-desc">
                                                             <h3 class="title min_h">
                                                                 <a class=""

@@ -1,7 +1,7 @@
 <!-- offcanvas-overlay start -->
-<div class="offcanvas-overlay"></div>
 <!-- offcanvas-overlay end -->
 <!-- offcanvas-mobile-menu start -->
+
 <div id="offcanvas-mobile-menu" class="offcanvas theme1 offcanvas-mobile-menu">
     <div class="inner">
         <div class="border-bottom mb-4 pb-4 text-end">
@@ -231,139 +231,9 @@
         <a href="wishlist.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block mt-30">view wishlist</a>
     </div>
 </div>
-<!-- OffCanvas Wishlist End -->
-
-<!-- OffCanvas Cart Start -->
-{{-- <div id="offcanvas-cart" class="offcanvas offcanvas-cart theme1">
-    <div class="inner">
-        <div class="head d-flex flex-wrap justify-content-between">
-            <span class="title">Cart</span>
-            <button class="offcanvas-close">×</button>
-        </div>
-        <ul class="minicart-product-list">
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/1.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/2.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">On Trend Makeup and Beauty Cosmetics</a>
-                    <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/3.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-        </ul>
-        <div class="sub-total d-flex flex-wrap justify-content-between">
-            <strong>Subtotal :</strong>
-            <span class="amount">$144.00</span>
-        </div>
-        <a href="cart.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block me-sm-2">view cart</a>
-        <a href="checkout.html" class="btn btn-dark btn--lg d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
-        <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
-    </div>
-</div> --}}
-<!-- OffCanvas Cart End -->
 
 <!-- header start -->
 <header>
-    <!-- header top start -->
-    {{-- <div class="header-top theme1 bg-dark py-15">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-sm-6 order-last order-sm-first">
-                    <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
-                        <div class="social-network2">
-                            <ul class="d-flex">
-                                <li>
-                                    <a href="https://www.facebook.com/" target="_blank"><span
-                                            class="icon-social-facebook"></span></a>
-                                </li>
-                                <li>
-                                    <a href="https://twitter.com/" target="_blank"><span
-                                            class="icon-social-twitter"></span></a>
-                                </li>
-                                <li>
-                                    <a href="https://www.youtube.com/" target="_blank"><span
-                                            class="icon-social-youtube"></span></a>
-                                </li>
-                                <li class="mr-0">
-                                    <a href="https://www.instagram.com/" target="_blank"><span
-                                            class="icon-social-instagram"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="media static-media ms-4 d-flex align-items-center">
-                            <div class="media-body">
-                                <div class="phone">
-                                    <a href="tel:(+123)4567890" class="text-white"><i class="icon-call-out me-1"></i>
-                                        (+123)4567890</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-6">
-                    <nav class="navbar-top pb-2 pb-sm-0 position-relative">
-                        <ul class="d-flex justify-content-center justify-content-md-end align-items-center">
-                            <li>
-                                <a href="#" id="dropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">Setting <i class="ion ion-ios-arrow-down"></i></a>
-                                <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown1">
-                                    <li><a href="myaccount.html">My account</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="login.html">Sign out</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" id="dropdown2" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">USD $ <i class="ion ion-ios-arrow-down"></i>
-                                </a>
-                                <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown2">
-                                    <li class="active"><a href="#">EUR €</a></li>
-                                    <li><a href="#">USD $</a></li>
-                                </ul>
-                            </li>
-                            <li class="english">
-                                <a href="#" id="dropdown3" class="pe-0" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <img src="{{asset('assets/admin/images/logo/us-flag.jpg')}}" alt="us flag" />
-                                    English
-                                    <i class="ion ion-ios-arrow-down"></i>
-                                </a>
-                                <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown3">
-                                    <li class="active">
-                                        <a href="#"><img src="{{asset('assets/admin/images/logo/us-flag.jpg')}}" alt="us flag" />
-                                            English</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="{{asset('assets/admin/images/logo/france.jpg')}}" alt="france flag" />
-                                            Français</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- header top end -->
     <!-- header-middle satrt -->
     <div id="sticky" class="header-middle theme1 py-15 py-lg-0">
         <div class="container position-relative">
@@ -436,7 +306,7 @@
                                         </span>
                                     </a>
                                 </li>
-                               
+
                                 <!-- cart block end -->
                             </ul>
                             <!-- Modal thông báo -->

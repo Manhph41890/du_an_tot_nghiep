@@ -140,23 +140,7 @@
             /* Khoảng cách giữa tên và các phần tử khác */
         }
 
-        @keyframes blink {
 
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
-        }
-
-        .badge-danger {
-            background-color: red;
-            color: white;
-            animation: blink 1s infinite;
-        }
 
         .snowflake {
             position: absolute;

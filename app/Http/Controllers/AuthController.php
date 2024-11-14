@@ -23,6 +23,7 @@ class AuthController extends Controller
     public function profile()
     {
         $user = Auth::user();
+        
         return view('auth.profile', compact('user')); // Đường dẫn tới view của bạn
     }
 

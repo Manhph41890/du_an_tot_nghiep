@@ -25,6 +25,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HuyDonHangController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TaiKhoanController;
 
 // Route trang chủ
@@ -75,6 +76,13 @@ Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
+// Login gg fb
+Route::get('auth/google', [SocialController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
+
+Route::get('auth/facebook', [SocialController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('auth/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
+Route::post('auth/logout', [SocialController::class, 'logout'])->name('auth.logout');
 
 // Route quên mật khẩu
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('auth.forgot_password');

@@ -80,7 +80,7 @@
                             aria-labelledby="pills-home-tab">
                             <div class="row grid-view theme1">
                                 @foreach ($list_sanphams as $item)
-                                    <div class="col-sm-6 col-lg-4 mb-30">
+                                    <div class="col-6 col-sm-4 col-lg-3 mb-30">
                                         <div class="card product-card">
                                             <div class="card-body">
                                                 <div class="product-thumbnail position-relative">
@@ -117,9 +117,11 @@
                                                         @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <p class="product-price">
-                                                            <del class="text-secondary"> {{ $item->gia_goc }}</del>
-                                                            <span class="ms-2"> {{ $item?->gia_km }} đ</span>
+                                                        <p>Giá: </p>
+                                                        <p style="color: red">
+                                                            <del
+                                                                style="color: black">{{ $item->gia_goc }}</del>
+                                                            {{ $item?->gia_km }} VNĐ
                                                         </p>
                                                     </div>
                                                 </div>
@@ -213,8 +215,8 @@
                                     <div class="form-group">
                                         @foreach ($danhmucs as $item)
                                             <div class="widget-check-box">
-                                                <input type="checkbox" id="danhmuc_{{ $item->id }}" name="danhmuc[]"  onchange="this.form.submit()"
-                                                    value="{{ $item->id }}"
+                                                <input type="checkbox" id="danhmuc_{{ $item->id }}" name="danhmuc[]"
+                                                    onchange="this.form.submit()" value="{{ $item->id }}"
                                                     @if (isset($request->danhmuc) && in_array($item->id, $request->danhmuc)) checked @endif />
                                                 <label
                                                     for="danhmuc_{{ $item->id }}">{{ $item->ten_danh_muc }}</label>
@@ -225,33 +227,37 @@
                                 <div class="">
                                     <h6 class="sub-title mt-30  mb-2 fs-15">Giá</h6>
                                     <div class="widget-check-box">
-                                        <input type="checkbox" id="price1" name="price[]" value="0-100000"  onchange="this.form.submit()"
+                                        <input type="checkbox" id="price1" name="price[]" value="0-100000"
+                                            onchange="this.form.submit()"
                                             @if (isset($request->price) && in_array('0-100000', $request->price)) checked @endif />
                                         <label for="price1">0 - 100.000</label>
                                     </div>
                                     <div class="widget-check-box">
-                                        <input type="checkbox" id="price2" name="price[]" value="100000-500000"  onchange="this.form.submit()"
+                                        <input type="checkbox" id="price2" name="price[]" value="100000-500000"
+                                            onchange="this.form.submit()"
                                             @if (isset($request->price) && in_array('100000-500000', $request->price)) checked @endif />
                                         <label for="price2">100.000 - 500.000</label>
                                     </div>
                                     <div class="widget-check-box">
-                                        <input type="checkbox" id="price3" name="price[]" value="500000-1000000"  onchange="this.form.submit()"
+                                        <input type="checkbox" id="price3" name="price[]" value="500000-1000000"
+                                            onchange="this.form.submit()"
                                             @if (isset($request->price) && in_array('500000-1000000', $request->price)) checked @endif />
                                         <label for="price3">500.000 - 1.000.000</label>
                                     </div>
-                                    <div class="widget-check-box"> 
-                                        <input type="checkbox" id="price4" name="price[]" value="1000000+"  onchange="this.form.submit()"
+                                    <div class="widget-check-box">
+                                        <input type="checkbox" id="price4" name="price[]" value="1000000+"
+                                            onchange="this.form.submit()"
                                             @if (isset($request->price) && in_array('1000000+', $request->price)) checked @endif />
                                         <label for="price4">> 1.000.000</label>
                                     </div>
                                 </div>
-                                <div class=""> 
+                                <div class="">
                                     <h6 class="sub-title mt-30  mb-2 fs-15">Size</h6>
                                     <div class="form-group">
                                         @foreach ($size_sidebar as $item)
                                             <div class="widget-check-box">
-                                                <input type="checkbox" id="size-{{ $item->id }}" name="size[]"  onchange="this.form.submit()"
-                                                    value="{{ $item->id }}"
+                                                <input type="checkbox" id="size-{{ $item->id }}" name="size[]"
+                                                    onchange="this.form.submit()" value="{{ $item->id }}"
                                                     @if (isset($request->size) && in_array($item->id, $request->size)) checked @endif />
                                                 <label for="size-{{ $item->id }}">{{ $item->ten_size }}
                                                     {{-- <span>({{ $item->sl_size }})</span> --}}
@@ -265,8 +271,8 @@
                                     <div class="form-group">
                                         @foreach ($color_sidebar as $item)
                                             <div class="widget-check-box">
-                                                <input type="checkbox" id="color-{{ $item->id }}" name="color[]"  onchange="this.form.submit()"
-                                                    value="{{ $item->id }}"
+                                                <input type="checkbox" id="color-{{ $item->id }}" name="color[]"
+                                                    onchange="this.form.submit()" value="{{ $item->id }}"
                                                     @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
                                                 <label for="color-{{ $item->id }}">
                                                     {{ $item->ten_color }}

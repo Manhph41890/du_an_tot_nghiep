@@ -59,23 +59,40 @@
                                                     <td>{{ $huyDon->trang_thai }}</td>
                                                     <td>
                                                         @if ($huyDon->trang_thai == 'Chờ xác nhận hủy')
+                                                            <!-- Chỉ hiển thị nút khi trạng thái là "Chờ xác nhận hủy" -->
                                                             <a href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#allmyModalXacNhanhuy{{ $huyDon->id }}">
-                                                                <a href="{{ route('huy-don-hang', $huyDon->id) }}"
-                                                                    class="btn btn-info btn-sm">Xem và
-                                                                    duyệt</a>
+                                                                data-bs-target="#allmyModalXacNhanhuy{{ $huyDon->id }}"
+                                                                class="btn btn-info btn-sm">
+                                                                Xem và duyệt
                                                             </a>
                                                         @elseif ($huyDon->trang_thai == 'Xác nhận hủy' || $huyDon->trang_thai == 'Từ chối hủy')
-                                                            <a href="{{ route('huy-don-hang', $huyDon->id) }}"
+                                                            <!-- Nếu đã xác nhận hoặc từ chối hủy -->
+                                                            <a href="{{ route('huydonhang.showhuy', $huyDon->id) }}"
                                                                 class="btn btn-info btn-sm">Đã duyệt</a>
                                                         @else
                                                             <p>Trạng thái không hợp lệ</p>
                                                         @endif
-                                                        <!-- The Modal -->
-                                                        <div class="modal" id="allmyModalXacNhanhuy{{ $huyDon->id }}">
-                                                            @include('admin.donhang.showhuy', [
-                                                                'donhang' => $huyDon,
-                                                            ])
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="allmyModalXacNhanhuy{{ $huyDon->id }}"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Chi
+                                                                            tiết hủy đơn hàng</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        @include('admin.donhang.showhuy', [
+                                                                            'donhang' => $huyDon,
+                                                                        ])
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                 </tr>

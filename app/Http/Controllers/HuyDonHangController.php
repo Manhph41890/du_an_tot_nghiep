@@ -61,6 +61,6 @@ class HuyDonHangController extends Controller
         ])->findOrFail($id);
         $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
         // Trả về view cùng với dữ liệu đơn hàng
-        return view('admin.donhang.show', compact('donhang'));
+        return view('admin.donhang.showhuy', compact('donhang'));
     }
 }

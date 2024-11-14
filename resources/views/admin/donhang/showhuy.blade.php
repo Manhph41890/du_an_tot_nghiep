@@ -134,7 +134,7 @@
                             <div class="col-lg-3">
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Chờ xác nhận' -->
-                                @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
+                                @if ($huydon->trang_thai == 'Chờ xác nhận hủy')
                                     <div class="card mb-3">
                                         <div class="card-body">
                                             <h5>Xác nhận đơn hàng</h5>
@@ -143,59 +143,11 @@
                                                 method="POST">
                                                 @csrf
                                                 <button type="submit" class="complete-button btn btn-primary">Xác nhận
-                                                    đơn hàng</button>
+                                                    hủy
+                                                </button>
                                             </form>
                                         </div>
                                     </div>
-                                @endif
-
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h5>Thông tin khách hàng</h5>
-                                        <br>
-                                        <h6>Khách hàng:</h6> {{ $donhang->user?->ho_ten }}
-                                        <br>
-                                        <p><strong>Tên người nhận:</strong> {{ $donhang->ho_ten }}</p>
-                                        <p><strong>Email:</strong> {{ $donhang->email }}</p>
-                                        <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
-                                        <p><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
-                                    </div>
-                                </div>
-
-                                <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if ($donhang->trang_thai_don_hang == 'Thành công')
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5>Đánh giá của khách hàng</h5>
-                                            @if ($donhang->san_phams?->danh_gias->isNotEmpty())
-
-                                                @foreach ($donhang->san_phams?->danh_gias as $danhGia)
-                                                    <div class="d-flex justify-content-between">
-                                                        <h6></h6>
-                                                        <strong>{{ $danhGia->user?->ho_ten }}</strong>
-                                                        <small><em>Đánh giá:
-                                                                @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($i <= $danhGia->diem_so)
-                                                                        <i class="mdi mdi-star text-warning"></i>
-                                                                        <!-- Ngôi sao đầy -->
-                                                                    @else
-                                                                        <i class="mdi mdi-star-outline text-muted"></i>
-                                                                        <!-- Ngôi sao rỗng -->
-                                                                    @endif
-                                                                @endfor
-                                                            </em></small>
-                                                    </div>
-                                                    <h6>Bình luận:</h6>
-                                                    <textarea class="form-control" rows="3" readonly>{{ $danhGia->binh_luan }}</textarea>
-                                                    <p class="text-muted">Ngày đánh giá:
-                                                        {{ $danhGia->ngay_danh_gia }}</p>
-                                                    </li>
-                                                @endforeach
-                                                </ul>
-                                            @else
-                                                <p>Chưa có đánh giá nào.</p>
-                                            @endif
-                                        </div>
                                 @endif
                             </div>
                         </div>
@@ -210,7 +162,6 @@
         </div>
     </div>
 
-</div>
 </div>
 
 <style>

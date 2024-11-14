@@ -1,7 +1,8 @@
 @extends('auth.layout')
 
 @section('css')
-@import url('https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700&display=swap'); 
+    @import
+    url('https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700&display=swap');
 
     body {
     font-family: "Itim", cursive;
@@ -109,25 +110,28 @@
                         <div class="input-group mb-3 d-flex justify-content-between">
                             <div class="form-check">
                                 <input type="checkbox" name="remember" class="form-check-input" id="formCheck">
-                                <label for="formCheck" class="form-check-label text-secondary"><small>Ghi nhớ</small></label>
+                                <label for="formCheck" class="form-check-label text-secondary"><small>Ghi
+                                        nhớ</small></label>
                             </div>
                         </div>
 
                         <div class="input-group mb-3">
                             <button class="btn btn-lg btn-primary w-100 fs-6">Đăng Kí</button>
                         </div>
-
-                        {{-- <div class="input-group d-flex mb-3">
+                        <link rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                        <div class="input-group d-flex mb-3">
+                            <i class="fa-brands fa-google"></i>
                             <button class="btn btn-lg btn-light me-2 fs-6">
-                                <img src="{{ asset('images/google.png') }}" style="width: 20px;" class="me-2">
-                                Sign In with Google
+                                <i class="fa-brands fa-google"></i>
+                                Đăng nhận bằng gmail
                             </button>
-
+                            {{-- 
                             <button class="btn btn-lg btn-light ms-2 fs-6">
                                 <img src="{{ asset('images/facebook.png') }}" style="width: 20px;" class="me-2">
                                 Sign In with Facebook
-                            </button>
-                        </div> --}}
+                            </button> --}}
+                        </div>
 
                         <div class="row">
                             <small>Bạn đã có tài khoản? <a href="{{ route('auth.login') }}"> Đăng Nhập </a></small>

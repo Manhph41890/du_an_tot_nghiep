@@ -77,6 +77,7 @@ Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallba
 
 Route::get('auth/facebook', [SocialController::class, 'redirectToFacebook'])->name('auth.facebook');
 Route::get('auth/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
+Route::post('auth/logout', [SocialController::class, 'logout'])->name('auth.logout');
 
 // Route quên mật khẩu
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('auth.forgot_password');

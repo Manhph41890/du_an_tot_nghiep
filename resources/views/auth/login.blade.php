@@ -192,11 +192,6 @@
         font-size: 12px;
         margin-top: 5px;
     }
-
-    input.form-control {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
 </style>
 
 <body>
@@ -248,6 +243,17 @@
                         </div>
                     @endif
 
+                </div>
+                <div class="input-group d-flex mb-3">
+                    <a href="{{ route('auth.google') }}" class="btn btn-lg btn-light me-2 fs-6">
+                        <img src="{{ asset('images/google.png') }}" style="width: 20px;" class="me-2">
+                        Sign In with Google
+                    </a>
+                
+                    <a href="{{ route('auth.facebook') }}" class="btn btn-lg btn-light ms-2 fs-6">
+                        <img src="{{ asset('images/facebook.png') }}" style="width: 20px;" class="me-2">
+                        Sign In with Facebook
+                    </a>
                 </div>
                 <div class="input-group mb-3">
                     <input type="submit" value="Đăng Nhập">
@@ -305,17 +311,7 @@
                             <button class="btn btn-lg btn-primary w-100 fs-6">ĐĂNG NHẬP</button>
                         </div>
 
-                        <div class="input-group d-flex mb-3">
-                            <a href="{{ route('auth.google') }}" class="btn btn-lg btn-light me-2 fs-6">
-                                <img src="{{ asset('images/google.png') }}" style="width: 20px;" class="me-2">
-                                Sign In with Google
-                            </a>
                         
-                            <a href="{{ route('auth.facebook') }}" class="btn btn-lg btn-light ms-2 fs-6">
-                                <img src="{{ asset('images/facebook.png') }}" style="width: 20px;" class="me-2">
-                                Sign In with Facebook
-                            </a>
-                        </div>
                         
 
                         <div class="row">
@@ -323,9 +319,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="submit" value="Đăng ký" style="margin-bottom: 60px">
-                </div>
+               
             </form>
         </div>
 

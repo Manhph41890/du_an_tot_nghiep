@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\chuc_vu; // Đảm bảo đã import model chuc_vu
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -27,8 +28,8 @@ class SocialController extends Controller
     public function redirectToFacebook()
     {
         return Socialite::driver('facebook')
-        ->scopes(['email', 'public_profile']) // Đảm bảo rằng các phạm vi này có trong ứng dụng của bạn
-        ->redirect();
+            ->scopes(['email', 'public_profile']) // Đảm bảo rằng các phạm vi này có trong ứng dụng của bạn
+            ->redirect();
     }
 
     public function handleFacebookCallback()
@@ -49,7 +50,7 @@ class SocialController extends Controller
                 'ho_ten' => $socialUser->getName(),
                 'provider' => $provider,
                 'provider_id' => $socialUser->getId(),
-                'anh_dai_dien' => $socialUser->getAvatar() ?: 'path/to/default-avatar.jpg',
+                'anh_dai_dien' => $socialUser->getAvatar(),
                 'chuc_vu_id' => $khachHangRole ? $khachHangRole->id : null, // Gán chuc_vu_id cho người dùng
             ]
         );
@@ -59,5 +60,10 @@ class SocialController extends Controller
 
         // Chuyển hướng sau khi đăng nhập thành công
         return redirect()->intended('/');
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Đăng xuất người dùng
+        return redirect('/');
     }
 }

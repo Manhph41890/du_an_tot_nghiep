@@ -516,11 +516,6 @@
                                             Đăng Nhập
                                         </a>
                                     </li>
-                                    <li>
-                                        <a style="font-size: 16px;" href="{{ route('auth.register') }}">
-                                            Đăng Ký
-                                        </a>
-                                    </li>
                                 @endauth
                             </ul>
                         </div>

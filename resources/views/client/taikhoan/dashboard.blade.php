@@ -234,8 +234,7 @@
                                                                 border-radius: 50%;
                                                                 font-size: 50px;
                                                                 color: red;
-                                                            }
-                                                            
+                                                            }  
                                                         </style>
                                                         <script>
                                                             document.querySelectorAll('.tichs_dg').forEach(function(element) {

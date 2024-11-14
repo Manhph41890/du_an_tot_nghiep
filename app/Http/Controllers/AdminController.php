@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\don_hang;
 use App\Models\san_pham;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -334,24 +335,27 @@ class AdminController extends Controller
                 $phantramdonhang[$trang_thai_don_hang] = $count;
             }
 
-            // Biểu đồ LỢI NHUẬN-------------------
             $loi_nhuan_theo_thang = [];
-            for ($thang = 1; $thang <= 12; $thang++) {
-                // Tính tổng tiền của đơn hàng theo tháng
-                $tt_dh_tang = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
-                    ->whereMonth('ngay_tao', $thang)->where('trang_thai_don_hang', '=', 'Thành công')->sum('tong_tien');
 
-                // Lấy tổng giá nhập và chi phí vận chuyển (gia_ship) cho mỗi đơn hàng trong tháng
-                $tong_gia_nhap_tang = don_hang::whereMonth('ngay_tao', $thang)
+            for ($thang = 1; $thang <= 12; $thang++) {
+                // Tính tổng tiền của các đơn hàng thành công theo tháng trong khoảng thời gian đã chọn
+                $tt_dh_tang = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->whereMonth('ngay_tao', $thang)
+                    ->where('trang_thai_don_hang', 'Thành công')
+                    ->sum('tong_tien');
+
+                // Tính tổng giá nhập và phí vận chuyển cho đơn hàng thành công theo tháng và khoảng thời gian
+                $tong_gia_nhap_tang = don_hang::whereBetween('ngay_tao', [$request->input('ngay_bat_dau_bieudo'), $request->input('ngay_ket_thuc_bieudo')])
+                    ->whereMonth('ngay_tao', $thang)
+                    ->where('trang_thai_don_hang', 'Thành công')
                     ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
                     ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
                     ->join('phuong_thuc_van_chuyens', 'don_hangs.phuong_thuc_van_chuyen_id', '=', 'phuong_thuc_van_chuyens.id')
                     ->selectRaw('
-    SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) AS tong_gia_nhap,
-    SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship
-')
-                    ->first(); // Lấy ra tổng giá nhập và tổng chi phí vận chuyển cho tháng
-
+                        SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) AS tong_gia_nhap,
+                        SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship
+                    ')
+                    ->first();
 
                 // Tính lợi nhuận theo tháng: tổng tiền của đơn hàng - tổng giá nhập - tổng chi phí vận chuyển
                 $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang->tong_gia_nhap - $tong_gia_nhap_tang->tong_gia_ship;
@@ -387,23 +391,26 @@ class AdminController extends Controller
             // Biểu đồ LỢI NHUẬN-------------------
             $loi_nhuan_theo_thang = [];
             for ($thang = 1; $thang <= 12; $thang++) {
-                // Tính tổng tiền của đơn hàng theo tháng
-                $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)->where('trang_thai_don_hang', '=', 'Thành công')->sum('tong_tien');
+                // Tính tổng tiền của các đơn hàng thành công trong tháng
+                $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)
+                    ->where('trang_thai_don_hang', 'Thành công')
+                    ->sum('tong_tien');
 
-                // Lấy tổng giá nhập và chi phí vận chuyển (gia_ship) cho mỗi đơn hàng trong tháng
-                $tong_gia_nhap_tang = don_hang::whereMonth('ngay_tao', $thang)
+                // Tính tổng giá nhập của các sản phẩm trong đơn hàng thành công trong tháng
+                $tong_gia_nhap = don_hang::whereMonth('ngay_tao', $thang)
+                    ->where('trang_thai_don_hang', 'Thành công')
                     ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
                     ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
-                    ->join('phuong_thuc_van_chuyens', 'don_hangs.phuong_thuc_van_chuyen_id', '=', 'phuong_thuc_van_chuyens.id')
-                    ->selectRaw('
-    SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) AS tong_gia_nhap,
-    SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship
-')
-                    ->first(); // Lấy ra tổng giá nhập và tổng chi phí vận chuyển cho tháng
+                    ->sum(DB::raw('san_phams.gia_nhap * chi_tiet_don_hangs.so_luong'));
 
+                // Tính tổng phí vận chuyển, chỉ tính một lần cho mỗi đơn hàng thành công trong tháng
+                $tong_gia_ship = don_hang::whereMonth('ngay_tao', $thang)
+                    ->where('trang_thai_don_hang', 'Thành công')
+                    ->join('phuong_thuc_van_chuyens', 'don_hangs.phuong_thuc_van_chuyen_id', '=', 'phuong_thuc_van_chuyens.id')
+                    ->sum('phuong_thuc_van_chuyens.gia_ship');
 
                 // Tính lợi nhuận theo tháng: tổng tiền của đơn hàng - tổng giá nhập - tổng chi phí vận chuyển
-                $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang->tong_gia_nhap - $tong_gia_nhap_tang->tong_gia_ship;
+                $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap - $tong_gia_ship;
             }
         } else {
             // Biểu đồ DOANH THU-------------------
@@ -426,25 +433,26 @@ class AdminController extends Controller
             // Biểu đồ LỢI NHUẬN-------------------
             $loi_nhuan_theo_thang = [];
             for ($thang = 1; $thang <= 12; $thang++) {
-                // Tính tổng tiền của đơn hàng theo tháng (chỉ với trạng thái "Thành công")
+                // Tính tổng tiền của các đơn hàng thành công trong tháng
                 $tt_dh_tang = don_hang::whereMonth('ngay_tao', $thang)
                     ->where('trang_thai_don_hang', 'Thành công')
                     ->sum('tong_tien');
 
-                // Lấy tổng giá nhập và chi phí vận chuyển (gia_ship) cho mỗi đơn hàng trong tháng
-                $tong_gia_nhap_tang = don_hang::whereMonth('ngay_tao', $thang)
+                // Tính tổng giá nhập của các sản phẩm trong đơn hàng thành công trong tháng
+                $tong_gia_nhap = don_hang::whereMonth('ngay_tao', $thang)
+                    ->where('trang_thai_don_hang', 'Thành công')
                     ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
                     ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
-                    ->join('phuong_thuc_van_chuyens', 'don_hangs.phuong_thuc_van_chuyen_id', '=', 'phuong_thuc_van_chuyens.id')
-                    ->selectRaw('
-    SUM(san_phams.gia_nhap * chi_tiet_don_hangs.so_luong) AS tong_gia_nhap,
-    SUM(phuong_thuc_van_chuyens.gia_ship) AS tong_gia_ship
-')
-                    ->first(); // Lấy ra tổng giá nhập và tổng chi phí vận chuyển cho tháng
+                    ->sum(DB::raw('san_phams.gia_nhap * chi_tiet_don_hangs.so_luong'));
 
+                // Tính tổng phí vận chuyển, chỉ tính một lần cho mỗi đơn hàng thành công trong tháng
+                $tong_gia_ship = don_hang::whereMonth('ngay_tao', $thang)
+                    ->where('trang_thai_don_hang', 'Thành công')
+                    ->join('phuong_thuc_van_chuyens', 'don_hangs.phuong_thuc_van_chuyen_id', '=', 'phuong_thuc_van_chuyens.id')
+                    ->sum('phuong_thuc_van_chuyens.gia_ship');
 
                 // Tính lợi nhuận theo tháng: tổng tiền của đơn hàng - tổng giá nhập - tổng chi phí vận chuyển
-                $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap_tang->tong_gia_nhap - $tong_gia_nhap_tang->tong_gia_ship;
+                $loi_nhuan_theo_thang[$thang] = $tt_dh_tang - $tong_gia_nhap - $tong_gia_ship;
             }
         }
 

@@ -217,10 +217,33 @@
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#allmyModalfororder{{ $myOrder->id }}">
                                                             <i
-                                                                class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                                class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1 @if ($myOrder->trang_thai_don_hang == 'Thành công') tichs_dg @endif"></i>
                                                         </a>
 
+                                                        <style>
+                                                            .tichs_dg {
+                                                                position: relative;
+                                                                border: 1px solid red !important;
+                                                            }
 
+                                                            .tichs_dg::after {
+                                                                content: ".";
+                                                                position: absolute;
+                                                                top: -55px;
+                                                                right: -5px;
+                                                                border-radius: 50%;
+                                                                font-size: 50px;
+                                                                color: red;
+                                                            }
+                                                            
+                                                        </style>
+                                                        <script>
+                                                            document.querySelectorAll('.tichs_dg').forEach(function(element) {
+                                                                element.addEventListener('click', function() {
+                                                                    element.classList.remove('tichs_dg');
+                                                                })
+                                                            });
+                                                        </script>
                                                         <!-- The Modal -->
                                                         <div class="modal" id="allmyModalfororder{{ $myOrder->id }}">
                                                             @include('client.taikhoan.showmyorder', [
@@ -379,8 +402,6 @@
             });
         });
     </script>
-
-
     {{-- xử lý ảnh + thông tin --}}
     <script>
         // Define routes in a JavaScript object
@@ -416,5 +437,5 @@
                 console.error(`Route [${routeName}] is not defined.`);
             }
         } <
-        <script/>
-    @endsection
+    </script>
+@endsection

@@ -57,7 +57,8 @@
                                 </td>
                                 <td class="text-center" style="font-size:16px;">{{ $item->quantity }}</td>
                                 <td class="text-center" style="font-size:16px;">
-                                    <strong>{{ number_format($item->price, 2) }}đ</strong></td>
+                                    <strong>{{ number_format($item->price, 2) }}đ</strong>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -163,7 +164,7 @@
                                 </ul>
 
                                 <div class="total clearfix">Tổng cộng <span id="total_amount"
-                                        data-total="{{ $totall }}">{{ number_format($totall, 2) }}₫</span>
+                                        data-total="{{ $totall }}">{{ number_format($totall) }}₫</span>
                                 </div>
 
                                 <div class="place-order mt-10" id="place-order-cod" style="display: none;">

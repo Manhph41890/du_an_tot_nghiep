@@ -1,5 +1,3 @@
-
-
 @extends('client.layout')
 
 @section('content')
@@ -226,7 +224,7 @@
                                     </div>
                                 </div>
                                 <div class="">
-                                    <h4 class="sub-title pt-10" >Giá</h4>
+                                    <h4 class="sub-title pt-10">Giá</h4>
                                     <div class="widget-check-box">
                                         <input type="checkbox" id="price1" name="price[]" value="0-100000"
                                             @if (isset($request->price) && in_array('0-100000', $request->price)) checked @endif />
@@ -272,7 +270,7 @@
                                                     value="{{ $item->id }}"
                                                     @if (isset($request->color) && in_array($item->id, $request->color)) checked @endif />
                                                 <label for="color-{{ $item->id }}">
-                                                    {{ $item->ten_color }} 
+                                                    {{ $item->ten_color }}
                                                     {{-- <span>({{ $item->sl_color }})
 
                                                     </span> --}}
@@ -298,7 +296,18 @@
         </div>
     </div>
 
-
+    <style>
+        .min_h {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Số dòng muốn hiển thị */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 3em;
+            /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+        }
+    </style>
     <!-- Modal cho từng sản phẩm -->
     {{-- @foreach ($list_sanphams as $item)
         <div class="modal fade theme1 style1" id="quickview{{ $item->id }}" tabindex="-1" role="dialog">

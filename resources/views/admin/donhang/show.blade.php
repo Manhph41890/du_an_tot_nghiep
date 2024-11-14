@@ -194,10 +194,10 @@
                                                                     </em></small>
                                                             </div>
                                                             <div class="d-flex justify-content-between">
-                                                                <h6>{{ $danhGia->users?->ho_ten }}</h6>
-                                                                <textarea class="form-control" rows="3" readonly>{{ $danhGia->binh_luan }}</textarea>
+                                                                <h6 class="me-3">{{ $danhGia->users?->ho_ten }}</h6>
+                                                                <textarea class="form-control" rows="2"  readonly>{{ $danhGia->binh_luan }}</textarea>
                                                             </div>
-                                                            <p class="text-muted">
+                                                            <p class="text-muted text-end">
                                                                 {{ date('d/m/Y', strtotime($danhGia->ngay_danh_gia)) }}
                                                             </p>
                                                         @endforeach

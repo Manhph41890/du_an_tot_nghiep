@@ -27,6 +27,7 @@ use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TaiKhoanController;
 
+
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
 // tìm kiếm toàn trang 

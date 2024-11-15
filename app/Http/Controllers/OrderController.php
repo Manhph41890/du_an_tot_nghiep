@@ -161,7 +161,8 @@ class OrderController extends Controller
             );
             // Redirect to VNPay for payment
             return redirect($vnp_Url);
-        } else { // Thanh toán khi nhận hàng
+        } else {
+            // Thanh toán khi nhận hàng
             // Tạo đơn hàng mới và lưu thông tin người dùng
             $order = new don_hang();
             $order->user_id = Auth::id();
@@ -214,10 +215,20 @@ class OrderController extends Controller
                 $product->save();
             }
 
+            Mail::send('auth.success_order', [
+                'ho_ten' => $user->ho_ten,
+                'order' => $order,
+            ], function ($message) use ($user) {
+                $message->to($user->email)
+                    ->subject('Đặt hàng thành công');
+            });
 
             // Xóa giỏ hàng sau khi đặt hàng thành công
             $cart->cartItems()->delete();
             $cart->delete();
+
+            // Gửi email với mã xác thực
+
 
             return redirect()->route('order.success_nhanhang')->with('success', 'Đặt hàng thành công!');
         }
@@ -266,15 +277,13 @@ class OrderController extends Controller
             $cart->cartItems()->delete();
             $cart->delete();
 
-            return redirect()->route('order.success_nhanhang')->with('success', 'Đặt hàng thành công!');
+            return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
         }
     }
 
-
-
     public function success_nhanhang()
     {
-        return view('client.order.success');
+        return view('client.order.success_nhanhang');
     }
 
     public function applyCoupon(Request $request)

@@ -303,7 +303,7 @@
                     <small> <a href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
                 </div>
                 <div class="input-group d-flex mb-3 ">
-                    <a href="" style=" margin-right: 40px;  text-decoration: none;">
+                    <a href="{{ route('auth.google') }}" style=" margin-right: 40px;  text-decoration: none;">
                         <img src="{{ asset('assets/client/images/icon/icons8-google-48.png') }}" class="social-icon">
                     </a>
 
@@ -312,66 +312,68 @@
                     </a>
                 </div>
 
-            </form>
-        </div>
-
-        <div class="form-list">
-            <form class="register" action="{{ route('auth.register') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="input-group mb-3">
-                    <input type="text" id="ho_ten" name="ho_ten" value="{{ old('ho_ten') }}" required
-                        class="form-control form-control-lg bg-light fs-6 @error('ho_ten') is-invalid @enderror"
-                        placeholder="Họ Tên">
-                    @error('ho_ten')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="input-group mb-3">
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                        class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
-                        placeholder="Email">
-                    @error('email')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="input-group mb-3">
-                    <input type="number" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
-                        required
-                        class="form-control form-control-lg bg-light  fs-6 @error('so_dien_thoai') is-invalid @enderror"
-                        placeholder="Số điện thoại">
-                    @error('so_dien_thoai')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="input-group mb-3">
-                    <input type="password" id="password" name="password" required
-                        class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
-                        placeholder="Mật Khẩu">
-                    @error('password')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="input-group mb-3">
-                    <input type="password" id="password_confirmation" name="password_confirmation" required
-                        class="form-control form-control-lg bg-light fs-6 @error('password_confirmation') is-invalid @enderror"
-                        placeholder="Xác nhận mật khẩu">
-                    @error('password_confirmation')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
-                    @enderror
-
-
-
-
-                </div>
-                <div class="nut-button">
-                    <input type="submit" value="Đăng Ký">
-                </div>
         </div>
 
         </form>
+    </div>
+
+    <div class="form-list">
+        <form class="register" action="{{ route('auth.register') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group mb-3">
+                <input type="text" id="ho_ten" name="ho_ten" value="{{ old('ho_ten') }}" required
+                    class="form-control form-control-lg bg-light fs-6 @error('ho_ten') is-invalid @enderror"
+                    placeholder="Họ Tên">
+                @error('ho_ten')
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="input-group mb-3">
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                    class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
+                    placeholder="Email">
+                @error('email')
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="number" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
+                    required
+                    class="form-control form-control-lg bg-light  fs-6 @error('so_dien_thoai') is-invalid @enderror"
+                    placeholder="Số điện thoại">
+                @error('so_dien_thoai')
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="password" id="password" name="password" required
+                    class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
+                    placeholder="Mật Khẩu">
+                @error('password')
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="password" id="password_confirmation" name="password_confirmation" required
+                    class="form-control form-control-lg bg-light fs-6 @error('password_confirmation') is-invalid @enderror"
+                    placeholder="Xác nhận mật khẩu">
+                @error('password_confirmation')
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                @enderror
+
+
+
+
+            </div>
+            <div class="nut-button">
+                <input type="submit" value="Đăng Ký">
+            </div>
+    </div>
+
+    </form>
     </div>
 
     <svg class="wave-svg" width="732" height="136" viewBox="0 0 732 136" fill="none"

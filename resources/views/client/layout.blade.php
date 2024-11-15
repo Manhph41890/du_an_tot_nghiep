@@ -142,14 +142,14 @@
         }
 
         /* Bông tuyết xung quanh chữ "HOT" */
-        .hot-tag::before,
+        /* .hot-tag::before,
         .hot-tag::after {
             content: "❄️";
             position: absolute;
             color: #ffffff;
             font-size: 1.2em;
             animation: snowflake-blink 1.5s infinite alternate;
-        }
+        } */
 
         /* Vị trí bông tuyết bên trái */
         .hot-tag::before {

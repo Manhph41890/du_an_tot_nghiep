@@ -107,7 +107,7 @@ class HuyDonHangController extends Controller
             'order' => $donHang      // Đơn hàng bị hủy
         ], function ($message) use ($user) {
             $message->to($user->email)
-                ->subject('Đặt hàng thành công');
+                ->subject('Xác nhận hủy đặt hàng thành công');
         });
 
 
@@ -118,6 +118,7 @@ class HuyDonHangController extends Controller
     // Từ chối hủy đơn hàng (Từ chối hủy)
     public function rejectCancel($id)
     {
+        $user = Auth::user();
         // Tìm yêu cầu hủy đơn hàng
         $huyDon = huy_don_hang::findOrFail($id);
 
@@ -135,6 +136,14 @@ class HuyDonHangController extends Controller
         $huyDon->update([
             'trang_thai' => 'Từ chối hủy',
         ]);
+
+        Mail::send('auth.tuchoi_huy', [
+            'user' => $huyDon->user, // Người dùng liên quan
+            'order' => $donHang      // Đơn hàng bị hủy
+        ], function ($message) use ($user) {
+            $message->to($user->email)
+                ->subject('Từ chối xác nhận hủy đặt hàng thành công');
+        });
 
         // Trả về thông báo thành công
         return redirect()->back()->with('success', 'Đơn hàng đã bị từ chối hủy.');

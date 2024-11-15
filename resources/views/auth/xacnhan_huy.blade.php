@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 100%;
             background: #fff;
             border: 1px solid #ddd;
             border-radius: 10px;
@@ -77,28 +77,39 @@
             margin: 0 auto 20px;
             display: block;
         }
+
+        .c {
+            display: flex;
+            justify-content: center
+        }
     </style>
 </head>
 
 <body>
-    <img src="https://i.imgur.com/vPk7lbg.png" alt="Uploaded Image">
+
     <div class="container">
+        <div class=".c">
+            <img src="https://i.imgur.com/vPk7lbg.png" alt="Uploaded Image">
+        </div>
+
         <h1>Xác nhận hủy đơn hàng</h1>
-        <p>Chào <strong>{{ $user->ho_ten }}</strong>,</p>
-        <p>Đơn hàng của bạn với mã <strong>{{ $order->id }}</strong> đã được hủy thành công. Dưới đây là thông tin
+        <p>Chào <strong>{{ $order->user->ho_ten }}</strong>,</p>
+        <p>Đơn hàng của bạn với mã <strong>{{ $order->ma_don_hang }}</strong> đã được hủy thành công. Dưới đây là thông
+            tin
             chi tiết:</p>
 
         <div class="order-info">
             <ul>
-                <li><strong>Mã đơn hàng:</strong> {{ $order->id }}</li>
+                <li><strong>Mã đơn hàng:</strong> {{ $order->ma_don_hang }}</li>
                 <li><strong>Ngày đặt hàng:</strong> {{ $order->ngay_tao }}</li>
-                <li><strong>Trạng thái:</strong> Đã hủy</li>
-                <li><strong>Phương thức thanh toán:</strong> {{ $order->phuong_thuc_thanh_toan }}</li>
+                <li><strong>Trạng thái:</strong> {{ $order->trang_thai_don_hang }}</li>
+                <li><strong>Phương thức thanh toán:</strong> {{ $order->phuong_thuc_thanh_toan->kieu_thanh_toan }}</li>
+                <li><strong>Phương thức vận chuyển:</strong> {{ $order->phuong_thuc_van_chuyen->kieu_van_chuyen }}</li>
                 <li><strong>Tổng tiền:</strong> {{ number_format($order->tong_tien, 0, ',', '.') }} VND</li>
             </ul>
         </div>
         <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>
-        <p><a href="{{ url('/') }}">Quay lại trang chủ</a></p>
+        <p><a href="{{ route('taikhoan.dashboard') }}">Kiểm tra đơn hàng</a></p>
     </div>
     </div>
 </body>

@@ -267,7 +267,7 @@
             </div>
 
             <div class="titre-login" style="margin-top: 50px">
-              
+
                 <p>Chào mừng bạn đến với Articaft. Hãy Đăng Nhập ngay !</p>
                 <button class="btn-register">Đăng Ký</button>
             </div>
@@ -295,14 +295,14 @@
                     @endif
 
                 </div>
-                
+
                 <div class="nut-button">
                     <input type="submit" value="Đăng Nhập">
                 </div>
                 <div class="row">
                     <small> <a href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
                 </div>
-                <div class="input-group d-flex mb-3 ">
+                {{-- <div class="input-group d-flex mb-3 ">
                     <a href="{{ route('auth.google') }}" style=" margin-right: 40px;  text-decoration: none;">
                         <img src="{{ asset('assets/client/images/icon/icons8-google-48.png') }}" class="social-icon">
                     </a>
@@ -310,8 +310,8 @@
                     <a href="{{ route('auth.facebook') }}" style=" margin-left: 0px;  text-decoration: none;">
                         <img src="{{ asset('assets/client/images/icon/icons8-facebook-48.png') }}" class="social-icon">
                     </a>
-                </div>
-                
+                </div> --}}
+
             </form>
         </div>
 

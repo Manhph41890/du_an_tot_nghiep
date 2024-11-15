@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\don_hang;
 use App\Models\huy_don_hang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class HuyDonHangController extends Controller
 {
@@ -76,6 +78,7 @@ class HuyDonHangController extends Controller
     // Xác nhận hủy đơn hàng (Xác nhận hủy)
     public function confirmCancel($id)
     {
+        $user = Auth::user();
         // Tìm yêu cầu hủy đơn hàng
         $huyDon = huy_don_hang::findOrFail($id);
 
@@ -98,6 +101,15 @@ class HuyDonHangController extends Controller
         $donHang->update([
             'trang_thai_don_hang' => 'Đã hủy',
         ]);
+
+        Mail::send('auth.xacnhan_huy', [
+            'user' => $huyDon->user, // Người dùng liên quan
+            'order' => $donHang      // Đơn hàng bị hủy
+        ], function ($message) use ($user) {
+            $message->to($user->email)
+                ->subject('Đặt hàng thành công');
+        });
+
 
         // Trả về thông báo thành công
         return redirect()->back()->with('success', 'Đơn hàng đã được xác nhận hủy.');

@@ -22,7 +22,6 @@ class OrderController extends Controller
     public function add(Request $request)
     {
         $user = Auth::user();
-
         // Khởi tạo biến coupon là null
         $coupon = null;
         // Kiểm tra và xác thực các trường cần thiết
@@ -51,8 +50,6 @@ class OrderController extends Controller
         $cartItems = $cart->cartItems->filter(function ($item) use ($selectedProductIds) {
             return in_array($item->id, $selectedProductIds);
         });
-
-
 
         $total = $cart->cartItems->sum(fn($item) => $item->price);
 
@@ -101,10 +98,9 @@ class OrderController extends Controller
                 'trang_thai_thanh_toan' => 'Đã thanh toán'
             ]);
 
-
             // Xử lý chuyển hướng đến trang thanh toán VnPay
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = "http://du_an_tot_nghiep.test/order/success"; // Đường dẫn xử lý kết quả thanh toán
+            $vnp_Returnurl = "http://127.0.0.1:8000/order/success"; // Đường dẫn xử lý kết quả thanh toán
             $vnp_TmnCode = "TQL3PNVO"; // Mã website tại VNPAY 
             $vnp_HashSecret = "SDOLTO3JSO8WXIMDIIIFMSUL9NSR39BD"; // Chuỗi bí mật
 
@@ -159,8 +155,10 @@ class OrderController extends Controller
                 'message' => 'success',
                 'data' => $vnp_Url
             );
+
             // Redirect to VNPay for payment
             return redirect($vnp_Url);
+            // return redirect()->route('order.success');
         } else {
             // Thanh toán khi nhận hàng
             // Tạo đơn hàng mới và lưu thông tin người dùng
@@ -236,10 +234,13 @@ class OrderController extends Controller
 
     public function success(Request $request)
     {
+        // Lấy thông tin từ session
         $orderDetails = Session::get('order_details');
+        $vnp_TxnRef = Session::get('vnp_TxnRef');
+        $vnp_ResponseCode = $request->input('vnp_ResponseCode');
 
-        if ($orderDetails) {
-            // Kiểm tra lại tổng tiền từ session đã bao gồm khuyến mãi
+        if ($vnp_ResponseCode == '00' && $orderDetails) { // '00' là mã giao dịch thành công
+            // Tạo đơn hàng mới
             $order = new don_hang();
             $order->user_id = $orderDetails['user_id'];
             $order->khuyen_mai_id = $orderDetails['khuyen_mai_id'];
@@ -249,36 +250,53 @@ class OrderController extends Controller
             $order->dia_chi = $orderDetails['dia_chi'];
             $order->phuong_thuc_thanh_toan_id = $orderDetails['phuong_thuc_thanh_toan_id'];
             $order->phuong_thuc_van_chuyen_id = $orderDetails['phuong_thuc_van_chuyen_id'];
-            $order->ngay_tao = $orderDetails['ngay_tao'];
-            $order->tong_tien = $orderDetails['tong_tien']; // Lấy tổng tiền từ session
+            $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
+            $order->tong_tien = $orderDetails['tong_tien'];
             $order->trang_thai_don_hang = 'Chờ xác nhận';
             $order->trang_thai_thanh_toan = 'Đã thanh toán';
             $order->save();
 
-            // Lưu chi tiết đơn hàng từ giỏ hàng
-            $orderId = $order->id;
-            $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
-                ->where('user_id', Auth::id())
-                ->first();
+            // Lưu chi tiết đơn hàng
+            $cart = Cart::with('cartItems')->where('user_id', Auth::id())->first();
+            if ($cart) {
+                foreach ($cart->cartItems as $item) {
+                    $orderDetail = new chi_tiet_don_hang();
+                    $orderDetail->don_hang_id = $order->id;
+                    $orderDetail->san_pham_id = $item->san_pham_id;
+                    $orderDetail->color_san_pham_id = $item->color_san_pham_id;
+                    $orderDetail->size_san_pham_id = $item->size_san_pham_id;
+                    $orderDetail->so_luong = $item->quantity;
+                    $orderDetail->gia_tien = $item->price;
+                    $orderDetail->thanh_tien = $item->price * $item->quantity;
+                    $orderDetail->save();
 
-            foreach ($cart->cartItems as $item) {
-                $orderDetail = new chi_tiet_don_hang();
-                $orderDetail->don_hang_id = $orderId;
-                $orderDetail->san_pham_id = $item->san_pham_id;
-                $orderDetail->color_san_pham_id = $item->color_san_pham_id;
-                $orderDetail->size_san_pham_id = $item->size_san_pham_id;
-                $orderDetail->so_luong = $item->quantity;
-                $orderDetail->gia_tien = $item->price;
-                $orderDetail->thanh_tien = $item->price * $item->quantity;
-                $orderDetail->save();
+                    $variant = $item->san_pham->bien_the_san_phams()
+                        ->where('color_san_pham_id', $item->color_san_pham_id)
+                        ->where('size_san_pham_id', $item->size_san_pham_id)
+                        ->first();
+                    if ($variant) {
+                        $variant->so_luong -= $item->quantity;
+                        $variant->save();
+                    }
+
+                    $product = san_pham::find($item->san_pham_id);
+                    if ($product) {
+                        $product->so_luong -= $item->quantity;
+                        $product->save();
+                    }
+                }
+
+                // Xóa giỏ hàng
+                $cart->cartItems()->delete();
+                $cart->delete();
             }
 
-            // Xóa giỏ hàng
-            $cart->cartItems()->delete();
-            $cart->delete();
+            Session::forget(['order_details', 'vnp_TxnRef']);
 
-            return redirect()->route('order.success')->with('success', 'Đặt hàng thành công!');
+            return redirect()->route('order.success_nhanhang')->with('success', 'Thanh toán thành công! Đơn hàng của bạn đã được tạo.');
         }
+
+        return redirect()->route('client.cart.index')->with('error', 'Thanh toán thất bại. Vui lòng thử lại.');
     }
 
     public function success_nhanhang()

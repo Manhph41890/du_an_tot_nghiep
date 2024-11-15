@@ -48,19 +48,83 @@ class HuyDonHangController extends Controller
         // Trả về thông báo thành công
         return redirect()->back()->with('success', 'Yêu cầu hủy đơn hàng đã được gửi.');
     }
-    public function showhuy(don_hang $don_hang, $id)
+    public function showhuy($id)
     {
-        $donhang = don_hang::with([
-            'user',
-            'khuyen_mai',
-            'phuong_thuc_thanh_toan',
-            'phuong_thuc_van_chuyen',
-            'chi_tiet_don_hangs.san_pham',
-            'chi_tiet_don_hangs.color_san_pham',
-            'chi_tiet_don_hangs.size_san_pham'
-        ])->findOrFail($id);
-        $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
+        // $donhang = don_hang::with([
+        //     'user',
+        //     'khuyen_mai',
+        //     'phuong_thuc_thanh_toan',
+        //     'phuong_thuc_van_chuyen',
+        //     'chi_tiet_don_hangs.san_pham',
+        //     'chi_tiet_don_hangs.color_san_pham',
+        //     'chi_tiet_don_hangs.size_san_pham'
+        // ])->findOrFail($id);
+        $huyDat = huy_don_hang::with(
+            'don_hang.user',
+            'don_hang.khuyen_mai',
+            'don_hang.phuong_thuc_thanh_toan',
+            'don_hang.phuong_thuc_van_chuyen',
+            'don_hang.chi_tiet_don_hangs.san_pham',
+            'don_hang.chi_tiet_don_hangs.color_san_pham',
+            'don_hang.chi_tiet_don_hangs.size_san_pham'
+        )->findOrFail($id);;
+        $huyDat->donhang->tong_tien = $huyDat->donhang->chi_tiet_don_hangs->sum('thanh_tien');
         // Trả về view cùng với dữ liệu đơn hàng
-        return view('admin.donhang.showhuy', compact('donhang'));
+        return view('admin.donhang.showhuy', compact('huyDat'));
+    }
+
+    // Xác nhận hủy đơn hàng (Xác nhận hủy)
+    public function confirmCancel($id)
+    {
+        // Tìm yêu cầu hủy đơn hàng
+        $huyDon = huy_don_hang::findOrFail($id);
+
+        // Tìm đơn hàng liên quan
+        $donHang = $huyDon->don_hang;
+
+        // Kiểm tra trạng thái của đơn hàng có hợp lệ cho việc xác nhận hủy
+        if ($donHang->trang_thai_don_hang !== 'Chờ xác nhận') {
+            return redirect()->back()->withErrors([
+                'error' => 'Đơn hàng không thể hủy vì trạng thái không hợp lệ.',
+            ]);
+        }
+
+        // Cập nhật trạng thái yêu cầu hủy thành "Xác nhận hủy"
+        $huyDon->update([
+            'trang_thai' => 'Xác nhận hủy',
+        ]);
+
+        // Cập nhật trạng thái đơn hàng thành "Đã hủy"
+        $donHang->update([
+            'trang_thai_don_hang' => 'Đã hủy',
+        ]);
+
+        // Trả về thông báo thành công
+        return redirect()->back()->with('success', 'Đơn hàng đã được xác nhận hủy.');
+    }
+
+    // Từ chối hủy đơn hàng (Từ chối hủy)
+    public function rejectCancel($id)
+    {
+        // Tìm yêu cầu hủy đơn hàng
+        $huyDon = huy_don_hang::findOrFail($id);
+
+        // Tìm đơn hàng liên quan
+        $donHang = $huyDon->don_hang;
+
+        // Kiểm tra trạng thái của đơn hàng có hợp lệ cho việc từ chối hủy
+        if ($donHang->trang_thai_don_hang !== 'Chờ xác nhận') {
+            return redirect()->back()->withErrors([
+                'error' => 'Đơn hàng không thể từ chối hủy vì trạng thái không hợp lệ.',
+            ]);
+        }
+
+        // Cập nhật trạng thái yêu cầu hủy thành "Từ chối hủy"
+        $huyDon->update([
+            'trang_thai' => 'Từ chối hủy',
+        ]);
+
+        // Trả về thông báo thành công
+        return redirect()->back()->with('success', 'Đơn hàng đã bị từ chối hủy.');
     }
 }

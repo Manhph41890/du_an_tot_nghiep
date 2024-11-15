@@ -72,7 +72,7 @@ class don_hang extends Model
 
     public function huy_don_hang()
     {
-        return $this->hasMany(huy_don_hang::class, 'don_hang_id', 'id');
+        return $this->hasOne(huy_don_hang::class);
     }
 
     // Tạo mã đơn hàng từ id

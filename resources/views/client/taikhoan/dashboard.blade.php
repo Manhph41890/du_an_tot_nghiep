@@ -234,7 +234,7 @@
                                                                 border-radius: 50%;
                                                                 font-size: 50px;
                                                                 color: red;
-                                                            }  
+                                                            }
                                                         </style>
                                                         <script>
                                                             document.querySelectorAll('.tichs_dg').forEach(function(element) {
@@ -276,7 +276,7 @@
 
                                     <!-- Số thẻ -->
                                     <div class="card-number">
-                                        9704 1985 2619 1432 198
+                                        9704198526191432198
                                     </div>
 
                                     <!-- Thông tin khác của thẻ -->

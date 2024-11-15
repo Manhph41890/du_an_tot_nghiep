@@ -67,8 +67,9 @@
                                                             </a>
                                                         @elseif ($huyDon->trang_thai == 'Xác nhận hủy' || $huyDon->trang_thai == 'Từ chối hủy')
                                                             <!-- Nếu đã xác nhận hoặc từ chối hủy -->
-                                                            <a href="{{ route('huydonhang.showhuy', $huyDon->id) }}"
-                                                                class="btn btn-info btn-sm">Đã duyệt</a>
+                                                            <a href="#" data-bs-toggle="modal"
+                                                                data-bs-target="#allmyModalXacNhanhuy{{ $huyDon->id }}"
+                                                                class="btn btn-info btn-sm"">Đã duyệt</a>
                                                         @else
                                                             <p>Trạng thái không hợp lệ</p>
                                                         @endif
@@ -77,7 +78,8 @@
                                                         <div class="modal fade" id="allmyModalXacNhanhuy{{ $huyDon->id }}"
                                                             tabindex="-1" aria-labelledby="exampleModalLabel"
                                                             aria-hidden="true">
-                                                            <div class="modal-dialog">
+                                                            <div class="modal-dialog modal-xl">
+                                                                <!-- Add modal-lg class here -->
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">Chi
@@ -88,7 +90,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         @include('admin.donhang.showhuy', [
-                                                                            'donhang' => $huyDon,
+                                                                            'huyDat' => $huyDon,
                                                                         ])
                                                                     </div>
                                                                 </div>

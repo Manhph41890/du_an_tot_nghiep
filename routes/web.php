@@ -160,11 +160,10 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
-    Route::post('/order/success', [OrderController::class, 'success'])->name('order.success');
+    Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
     Route::get('/order/success_nhanhang', [OrderController::class, 'success_nhanhang'])->name('order.success_nhanhang');
 
     Route::post('/apply-coupon', [OrderController::class, 'applyCoupon'])->name('apply.coupon');
-
     // 
 });
 

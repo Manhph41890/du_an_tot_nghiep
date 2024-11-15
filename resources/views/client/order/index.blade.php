@@ -164,7 +164,7 @@
                                 </ul>
 
                                 <div class="total clearfix">Tổng cộng <span id="total_amount"
-                                        data-total="{{ $totall }}">{{ number_format($totall, 2) }}₫</span>
+                                        data-total="{{ $totall }}">{{ number_format($totall) }}₫</span>
                                 </div>
 
                                 <div class="place-order mt-10" id="place-order-cod" style="display: none;">

@@ -100,7 +100,9 @@
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
                                                                 VND</td>
                                                             <td>
-                                                                @if ($donhang->trang_thai_don_hang == 'Thành công' && !$chi_tiet->san_pham->danh_gias()->where('user_id', auth()->user()->id)->exists())
+                                                                @if (
+                                                                    $donhang->trang_thai_don_hang == 'Thành công' &&
+                                                                        !$chi_tiet->san_pham->danh_gias()->where('user_id', auth()->user()->id)->exists())
                                                                     <div class="col-lg-12">
                                                                         <!-- Nút Viết Đánh Giá -->
                                                                         <a class="btn danhgia"
@@ -224,26 +226,48 @@
                                         <p><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
                                     </div>
                                 </div>
-                                @if ($donhang->trang_thai_thanh_toan == 'Chưa thanh toán' || $donhang->trang_thai_don_hang == 'Chờ xác nhận')
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <h5>Hủy nhận đơn hàng này</h5>
-                                            <form action="{{ route('taikhoan.cancel', $donhang->id) }}" method="POST"
-                                                onsubmit="return confirmCancel()">
-                                                @csrf
-                                                <button type="submit" class="btn btn-secondary mt-2">Hủy
-                                                    nhận hàng</button>
-                                            </form>
 
-                                            <script>
-                                                function confirmCancel() {
-                                                    return confirm("Bạn có chắc chắn muốn hủy nhận đơn hàng này không?");
-                                                }
-                                            </script>
+                                {{-- ------------------------------------------------------------------------------------------ --}}
+                                @if ($donhang->trang_thai_thanh_toan == 'Chưa thanh toán' && $donhang->trang_thai_don_hang == 'Chờ xác nhận')
+                                    <div class="col-lg-12">
+                                        <!-- Nút Viết Đánh Giá -->
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5>Hủy nhận đơn hàng này</h5>
+                                                <a id="openReviewForm{{ $chi_tiet->san_pham->id }}">
+                                                    @if ($donhang->trang_thai_thanh_toan == 'Chưa thanh toán' && $donhang->trang_thai_don_hang == 'Chờ xác nhận')
+                                                        <button type="submit" class="btn btn-secondary mt-2">Hủy
+                                                            nhận hàng</button>
+                                                    @endif
+                                                </a>
+                                            </div>
+                                        </div>
 
+                                        <!-- Form Đánh Giá -->
+                                        <div class="ratting-form-wrapper" id="reviewForm{{ $chi_tiet->san_pham->id }}">
+                                            <h3>Lý do hủy đơn hàng</h3>
+                                            <div class="ratting-form">
+                                                <form action="{{ route('huydonhang.store') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="don_hang_id"
+                                                        value="{{ $donhang->id }}">
+                                                    <!-- Lấy don_hang_id từ đơn hàng -->
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="rating-form-style form-submit">
+                                                                <textarea id="review{{ $chi_tiet->san_pham->id }}" name="ly_do_huy" placeholder="Viết lý do" maxlength="100"></textarea>
+                                                                <p id="charCount{{ $chi_tiet->san_pham->id }}">0/100
+                                                                </p>
+                                                                <input type="submit" value="Gửi" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 @endif
+
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
                                 @if ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán online')

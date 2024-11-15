@@ -123,8 +123,7 @@
 
                         <!-- Hiển thị ảnh sản phẩm -->
                         <div class="product-image mb-30">
-                            <img src="{{ asset($sanPhamCT->anh_bien_the) }}" alt="{{ $sanPhamCT->ten_san_pham }}"
-                                class="img-fluid" />
+
                         </div>
 
                         <form id="add-to-cart-form{{ $sanPhamCT->id }}" action="{{ route('cart.add') }}" method="POST">

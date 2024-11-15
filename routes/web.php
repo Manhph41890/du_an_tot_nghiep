@@ -22,9 +22,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\ClientSanPhamController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\HuyDonHangController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
-use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TaiKhoanController;
 
 // Route trang chủ
@@ -51,7 +51,16 @@ Route::prefix('client')->group(function () {
     Route::post('/taikhoan/update-avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard.avatar');
 
     Route::get('/taikhoan/myorder/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.myorder');
+
+    //Hủy đặt hàng
     Route::post('/taikhoan/cancel/{id}', [TaiKhoanController::class, 'cancel'])->name('taikhoan.cancel');
+    Route::post('/huy-don-hang', [HuyDonHangController::class, 'store'])->name('huydonhang.store');
+    Route::get('/huy-don-hang/{id}', [HuyDonHangController::class, 'showhuy'])->name('huydonhang.showhuy');
+    // Route xác nhận hủy đơn hàng
+    Route::post('/huydonhang/{id}/confirm', [HuyDonHangController::class, 'confirmCancel'])->name('huydonhang.confirm');
+    // Route từ chối hủy đơn hàng
+    Route::post('/huydonhang/{id}/reject', [HuyDonHangController::class, 'rejectCancel'])->name('huydonhang.reject');
+
     Route::get('/taikhoan/lichsugd/{id}', [TaiKhoanController::class, 'history'])->name('taikhoan.lichsugd');
     // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
 
@@ -71,13 +80,6 @@ Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
-// Login gg fb
-Route::get('auth/google', [SocialController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
-
-Route::get('auth/facebook', [SocialController::class, 'redirectToFacebook'])->name('auth.facebook');
-Route::get('auth/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
-Route::post('auth/logout', [SocialController::class, 'logout'])->name('auth.logout');
 
 // Route quên mật khẩu
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('auth.forgot_password');
@@ -129,6 +131,8 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);
     Route::resource('/donhangs', DonHangController::class);
     Route::post('/donhang/{id}/confirm', [DonHangController::class, 'confirmOrder'])->name('donhangs.confirm');
+    //
+    Route::get('/xacnhanhuys', [HuyDonHangController::class, 'index'])->name('xacnhanhuy.index');
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
     // Route::get('/danhgia/create', [DanhGiaController::class, 'create'])->name('danhgia.create');
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
@@ -150,7 +154,6 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/cart/update-multiple', [CartController::class, 'updateMultiple'])->name('cart.updateMultiple');
     Route::post('cart/remove-multiple', [CartController::class, 'removeMultiple'])->name('cart.removeMultiple');
     Route::post('/cart/update-price', [CartController::class, 'updatePrice'])->name('cart.updatePrice');
-
 
 
     Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');

@@ -117,10 +117,26 @@ class DonHangController extends Controller
             // Lấy toàn bộ dữ liệu từ form dưới dạng mảng
             $data_don_hang = $request->all();
 
-            // Kiểm tra nếu `trang_thai_don_hang` là "thành công"
-            if (isset($data_don_hang['trang_thai_don_hang']) && $data_don_hang['trang_thai_don_hang'] === 'Thành công') {
-                // Cập nhật `trang_thai_thanh_toan` thành "Đã thanh toán"
-                $data_don_hang['trang_thai_thanh_toan'] = 'Đã thanh toán';
+            // Định nghĩa các trạng thái và các quy tắc chuyển đổi
+            $trangThaiChoPhep = [
+                'Chờ xác nhận' => ['Đã xác nhận'],
+                'Đã xác nhận' => ['Đang chuẩn bị hàng'],
+                'Đang chuẩn bị hàng' => ['Đang vận chuyển'],
+                'Đang vận chuyển' => ['Đã giao'],
+                'Đã giao' => ['Thành công'],
+                'Thành công' => [], // Không thể chuyển đi nữa
+                'Đã hủy' => [] // Không thể chuyển đi nữa
+            ];
+
+            // Kiểm tra trạng thái mới được gửi lên
+            if (isset($data_don_hang['trang_thai_don_hang'])) {
+                $trangThaiMoi = $data_don_hang['trang_thai_don_hang'];
+                $trangThaiHienTai = $donhang->trang_thai_don_hang;
+
+                // Kiểm tra trạng thái hiện tại và trạng thái mới
+                if (!in_array($trangThaiMoi, $trangThaiChoPhep[$trangThaiHienTai])) {
+                    return back()->with('error', 'Không thể chuyển trạng thái từ ' . $trangThaiHienTai . ' sang ' . $trangThaiMoi . '.');
+                }
             }
 
             // Cập nhật bản ghi trong bảng don_hang

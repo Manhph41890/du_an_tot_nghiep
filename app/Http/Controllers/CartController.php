@@ -155,7 +155,10 @@ class CartController extends Controller
             $availableQuantity = $variant->so_luong; // Tổng số lượng hiện có (bao gồm số lượng cũ đã có trong giỏ)
 
             if ($newQuantity > $availableQuantity) {
-                return back()->withErrors(['quantity' => 'Số lượng không được vượt quá ' . $variant->so_luong . ' sản phẩm còn lại.']);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Số lượng không được vượt quá ' . $availableQuantity . ' sản phẩm còn lại.'
+                ]);
             }
 
             // Cập nhật giá cho sản phẩm trong giỏ hàng
@@ -163,23 +166,23 @@ class CartController extends Controller
             $discountedPrice = $product->gia_km ?? 0;
             $cartItem->price = ($variant->gia + $discountedPrice) * $newQuantity;
         } else {
-            return back()->with('error', 'Biến thể sản phẩm không tồn tại.');
+            return response()->json([
+                'success' => false,
+                'message' => 'Biến thể sản phẩm không tồn tại.'
+            ]);
         }
 
         // Lưu lại thông tin giỏ hàng
         $cartItem->save();
 
-        // Cập nhật số lượng trong bảng san_pham (sản phẩm gốc)
-        $product = san_pham::find($cartItem->san_pham_id);
-
-
-
-
+        // Trả về phản hồi JSON thành công
         return response()->json([
             'success' => true,
             'message' => 'Cập nhật thành công'
         ]);
     }
+
+
 
 
 

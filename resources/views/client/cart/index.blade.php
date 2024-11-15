@@ -8,6 +8,38 @@
             padding: 5px;
             font-size: 14px;
         }
+
+        td {
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+
+        td select,
+        td input,
+        td button {
+            height: 35px;
+            margin-right: 10px;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        td select {
+            width: auto;
+        }
+
+        td input[type="number"] {
+            width: 60px;
+        }
+
+        .btn {
+            border-radius: 5px;
+        }
     </style>
     <div class="container margin_30">
         <div class="page_header">
@@ -16,15 +48,14 @@
 
         <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
             @csrf
-            <table class="table table-striped cart-list">
+            <table class="table cart-list">
                 <thead>
                     <tr>
                         <th>Chọn</th>
-                        <th>Sản Phẩm</th>
-                        <th>Giá</th>
+                        <th>Thông tin sản phẩm</th>
+                        <th>Đơn giá</th>
                         <th>Phân loại</th>
                         <th>Tổng Tiền</th>
-                        <th>Hành Động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,7 +74,8 @@
                                     <span class="item_cart">{{ $item->san_pham->ten_san_pham }}</span>
                                 </td>
                                 <td>
-                                    <strong>{{ number_format($item->san_pham->gia_km ?? $item->san_pham->gia_ban) }}
+                                    <strong
+                                        style="color: #ee4d2d">{{ number_format($item->san_pham->gia_km ?? $item->san_pham->gia_ban) }}
                                         đ</strong>
                                 </td>
                                 <td>
@@ -66,6 +98,7 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    <span>Số lượng:</span>
                                     <input type="number" name="quantity" value="{{ $item->quantity }}" min="1"
                                         max="100" class="quantity-input" data-item-id="{{ $item->id }}">
                                     <button type="button" class="btn btn-primary btn-sm update-cart-btn"
@@ -74,17 +107,9 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <strong><span class="whish-list-price">{{ number_format($item->price) }}
+                                    <strong><span style="color: #ee4d2d"
+                                            class="whish-list-price">{{ number_format($item->price) }}
                                             đ</span></strong>
-                                </td>
-                                <td class="options">
-                                    <form action="{{ route('cart.removeFromCart', $item->id) }}" method="POST"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?');">
-                                        @csrf
-                                        <button type="submit" class="btn btn-secondary btn-sm">
-                                            <span class="trash"><i class="fas fa-trash-alt"></i> Xóa</span>
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -113,7 +138,8 @@
                     <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
                         @csrf
                         <input type="hidden" name="checkout_items[]" id="selected-items">
-                        <button id="checkout-button" class="btn btn-success">
+                        <button id="checkout-button" class="btn btn-success"
+                            style="margin-bottom: 50px; padding: 20px 35px;">
                             Thanh toán ngay
                         </button>
                     </form>
@@ -125,12 +151,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const updateButtons = document.querySelectorAll('.update-cart-btn');
             const checkboxes = document.querySelectorAll('.item-checkbox');
             const totalPriceEl = document.getElementById('total-price');
             const removeButton = document.getElementById('remove-selected-items');
             const checkoutForm = document.getElementById('checkout-form');
             const removeMultipleForm = document.getElementById('remove-multiple-form');
 
+            // Hàm tính tổng giá trị giỏ hàng
             function calculateTotal() {
                 let totalPrice = 0;
                 const selectedItems = [];
@@ -166,11 +194,74 @@
                 });
             }
 
+            // Kiểm tra số lượng sản phẩm không vượt quá tồn kho
+            function checkMaxQuantity(itemId, inputQuantity) {
+                const itemElement = document.querySelector(`.item-checkbox[data-id="${itemId}"]`);
+                const maxQuantity = parseInt(itemElement.getAttribute('data-max-quantity'));
+                const quantity = parseInt(inputQuantity.value);
+
+                if (quantity > maxQuantity) {
+                    toastr.error(`Số lượng tối đa cho sản phẩm này là ${maxQuantity}`);
+                    inputQuantity.value = maxQuantity; // Cập nhật giá trị lại về số lượng tối đa
+                    return false;
+                }
+                return true;
+            }
+
+            // Sự kiện cập nhật giỏ hàng khi người dùng bấm "Cập nhật"
+            updateButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    const sizeSelect = document.querySelector(
+                        `select.size-select[data-item-id="${itemId}"]`);
+                    const colorSelect = document.querySelector(
+                        `select.color-select[data-item-id="${itemId}"]`);
+                    const quantityInput = document.querySelector(
+                        `input.quantity-input[data-item-id="${itemId}"]`);
+
+                    if (checkMaxQuantity(itemId, quantityInput)) {
+                        const data = {
+                            size_san_pham_id: sizeSelect.value,
+                            color_san_pham_id: colorSelect.value,
+                            quantity: quantityInput.value,
+                            _token: '{{ csrf_token() }}'
+                        };
+
+                        fetch(`/cart/update/${itemId}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify(data)
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    toastr.success('Cập nhật thành công');
+                                    calculateTotal();
+                                    location.reload();
+                                } else {
+                                    toastr.error(data.message); // Hiển thị thông báo lỗi nếu có
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                toastr.error('Có lỗi xảy ra, vui lòng thử lại.');
+                            });
+
+
+                    }
+                });
+            });
+
+            // Sự kiện thay đổi khi chọn các checkbox
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', calculateTotal);
             });
 
-            calculateTotal();
+            calculateTotal(); // Tính toán giá trị ban đầu của giỏ hàng
         });
     </script>
+
 @endsection

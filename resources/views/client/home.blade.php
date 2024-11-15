@@ -2,8 +2,6 @@
 
 @section('content')
     <style>
-
-
         .main-slider {
             max-height: 500px;
             display: flex;

@@ -237,7 +237,7 @@ class CartController extends Controller
         // Lấy user_id của người dùng hiện tại
         $userId = auth()->id();
 
-        // Lấy cart của người dùng hiện tại
+        // Lấy giỏ hàng của người dùng hiện tại
         $cart = Cart::where('user_id', $userId)->first();
 
         // Nếu không có giỏ hàng, số lượng sản phẩm sẽ là 0
@@ -245,13 +245,15 @@ class CartController extends Controller
             $cartItemsCount = 0;
             $insufficientStockItems = [];
         } else {
-            // Đếm số lượng sản phẩm khác nhau trong giỏ hàng
-            $cartItemsCount = CartItem::where('cart_id', $cart->id)
-                ->distinct('san_pham_id')
-                ->count('san_pham_id');
+            // Lấy tất cả các sản phẩm trong giỏ hàng của người dùng, bao gồm màu sắc và kích thước
+            $cartItems = CartItem::with(['san_pham', 'size', 'color'])
+                ->where('cart_id', $cart->id)
+                ->get();
 
-            // Lấy tất cả các sản phẩm trong giỏ hàng của người dùng
-            $cartItems = CartItem::where('cart_id', $cart->id)->get();
+            // Đếm số lượng các biến thể sản phẩm khác nhau bằng cách nhóm theo san_pham_id, color_san_pham_id, size_san_pham_id
+            $cartItemsCount = $cartItems->unique(function ($item) {
+                return $item->san_pham_id . '-' . $item->color_san_pham_id . '-' . $item->size_san_pham_id;
+            })->count();
 
             // Kiểm tra số lượng tồn kho của từng sản phẩm
             $insufficientStockItems = [];
@@ -276,8 +278,12 @@ class CartController extends Controller
             }
         }
 
+        // Trả về view với dữ liệu đã xử lý
         return view('client.partials.header', compact('cartItemsCount', 'insufficientStockItems'));
     }
+
+
+
 
 
     // Quá trình thanh toán

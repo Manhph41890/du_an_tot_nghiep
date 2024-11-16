@@ -63,9 +63,11 @@ class HomeController extends Controller
         // Lấy khuyến mãi
         $discounts = khuyen_mai::where('is_active', 1)
             ->where('so_luong_ma', '>', 0) // Thêm điều kiện so_luong_ma > 0
+            ->whereNull('user_id') // Thêm điều kiện user_id = null
             ->orderBy('created_at', 'desc') // Sắp xếp theo ngày tạo mới nhất
             ->take(4) // Lấy 4 mã giảm giá
             ->get();
+
 
         $title = "Trang chủ";
         $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);

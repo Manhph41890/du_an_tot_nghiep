@@ -248,7 +248,7 @@
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
-                                
+                                <h2>Đánh Giá Sản Phẩm</h2>
                                 <div class="filter-rating">
                                     <button class="btn btn-outline-primary" onclick="filterByStars(0)">Tất cả</button>
                                     <button class="btn btn-outline-primary" onclick="filterByStars(1)">1 Sao</button>

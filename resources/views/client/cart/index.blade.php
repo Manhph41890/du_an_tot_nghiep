@@ -124,7 +124,7 @@
                                         <td>
                                             <div class="thumb_cart">
                                                 <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}"
-                                                    alt="img" height="150px" width="150px"
+                                                    alt="img" height="100px" width="100px"
                                                     style="object-fit: cover" />
                                             </div>
                                             <span class="item_cart">{{ $item->san_pham->ten_san_pham }}</span>

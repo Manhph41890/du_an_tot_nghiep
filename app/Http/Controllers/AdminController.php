@@ -16,7 +16,7 @@ class AdminController extends Controller
 
     public function thong_ke_chung(Request $request)
     {
-
+        
         $title = "Tổng quan chung";
 
         // Validate ngày bắt đầu, ngày kết thúc

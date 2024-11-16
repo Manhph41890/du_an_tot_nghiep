@@ -244,7 +244,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- third tab-pane -->
+                        
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
@@ -255,7 +255,7 @@
                                     <button class="btn btn-outline-primary" onclick="filterByStars(3)">3 Sao</button>
                                     <button class="btn btn-outline-primary" onclick="filterByStars(4)">4 Sao</button>
                                     <button class="btn btn-outline-primary" onclick="filterByStars(5)">5 Sao</button>
-                                </div>                                
+                                </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="review-wrapper">
@@ -272,7 +272,8 @@
                                                                 </div>
                                                                 <div class="rating-product">
                                                                     @for ($i = 1; $i <= 5; $i++)
-                                                                        <i class="{{ $i <= $danhgia->diem_so ? 'ion-android-star' : 'ion-android-star-outline' }}"></i>
+                                                                        <i
+                                                                            class="{{ $i <= $danhgia->diem_so ? 'ion-android-star' : 'ion-android-star-outline' }}"></i>
                                                                     @endfor
                                                                 </div>
                                                             </div>
@@ -282,7 +283,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
                                             @endforeach
                                         </div>
                                     </div>
@@ -526,19 +526,18 @@
             // }, 1000);
         }
         function filterByStars(starCount) {
-    const reviews = document.querySelectorAll('.single-review');
+            const reviews = document.querySelectorAll('.single-review');
 
-    reviews.forEach(review => {
-        const reviewStars = parseInt(review.getAttribute('data-rating'));
+            reviews.forEach(review => {
+                const reviewStars = parseInt(review.getAttribute('data-rating'));
 
-        // Hiển thị tất cả nếu chọn "Tất cả"
-        if (starCount === 0 || reviewStars === starCount) {
-            review.style.display = 'block';
-        } else {
-            review.style.display = 'none';
+                // Hiển thị tất cả nếu chọn "Tất cả"
+                if (starCount === 0 || reviewStars === starCount) {
+                    review.style.display = 'block';
+                } else {
+                    review.style.display = 'none';
+                }
+            });
         }
-    });
-}
-
     </script>
 @endsection

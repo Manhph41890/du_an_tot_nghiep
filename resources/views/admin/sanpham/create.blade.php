@@ -1,4 +1,8 @@
 @extends('admin.layout')
+
+@section('css')
+@endsection
+
 @section('content')
     <div class="content-page">
         <div class="content">
@@ -115,16 +119,14 @@
                                                     <img id="imagePreview"
                                                         src="{{ old('anh_san_pham') ? asset('storage/' . old('anh_san_pham')) : (isset($sanPham->anh_san_pham) ? asset('storage/' . $sanPham->anh_san_pham) : '') }}"
                                                         alt="Hình ảnh"
-                                                        style="display: '{{ old('anh_san_pham') || isset($sanPham->anh_san_pham) ? 'block' : 'none' }}'; width: 200px;">
+                                                        style="display: {{ old('anh_san_pham') || isset($sanPham->anh_san_pham) ? 'block' : 'none' }}; width: 200px;">
                                                 </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ma_ta_san_pham" class="form-label">Mô tả sản phẩm</label>
-                                                <!-- Thay input bằng textarea -->
-                                                <div id="quill-editor" style="height: 400px;"></div>
-                                                <textarea id="ma_ta_san_pham" name="ma_ta_san_pham" class="form-control @error('ma_ta_san_pham') is-invalid @enderror">
-                                                    {{ old('ma_ta_san_pham') }}
-                                                    </textarea>
+                                                <input type="text" id="ma_ta_san_pham" name="ma_ta_san_pham"
+                                                    class="form-control @error('ma_ta_san_pham') is-invalid @enderror"
+                                                    value="{{ old('ma_ta_san_pham') }}">
                                                 @error('ma_ta_san_pham')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -266,7 +268,6 @@
     </div>
 
 @section('script')
-      
     <script>
         document.getElementById('add-variant').addEventListener('click', function() {
             var container = document.getElementById('variant-container');
@@ -364,23 +365,6 @@
             }
         });
 
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize Quill editor
-        var quill = new Quill("#quill-editor", {
-            theme: "snow",
-        });
-
-        // Set initial content
-        var oldContent = `{!! old('ma_ta_san_pham') !!}`;
-        quill.root.innerHTML = oldContent;
-
-        // Update hidden textarea with Quill editor content
-        quill.on('text-change', function() {
-            document.getElementById('ma_ta_san_pham').value = quill.root.innerHTML;
-        });
     });
 </script>
 

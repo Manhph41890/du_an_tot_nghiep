@@ -248,6 +248,7 @@
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
+                                
                                 <div class="filter-rating">
                                     <button class="btn btn-outline-primary" onclick="filterByStars(0)">Tất cả</button>
                                     <button class="btn btn-outline-primary" onclick="filterByStars(1)">1 Sao</button>
@@ -256,6 +257,7 @@
                                     <button class="btn btn-outline-primary" onclick="filterByStars(4)">4 Sao</button>
                                     <button class="btn btn-outline-primary" onclick="filterByStars(5)">5 Sao</button>
                                 </div>
+                                <br>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="review-wrapper">

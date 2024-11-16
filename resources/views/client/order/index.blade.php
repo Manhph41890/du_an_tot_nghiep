@@ -33,9 +33,10 @@
                         <tr>
                             <th class="text-center" style="width: 15%; font-size:18px">Ảnh sản phẩm</th>
                             <th class="text-center" style="width: 30%; font-size:18px">Tên sản phẩm</th>
+                            <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
                             <th class="text-center" style="width: 20%; font-size:18px">Phân loại</th>
                             <th class="text-center" style="width: 10%; font-size:18px">Số lượng</th>
-                            <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
+                            <th class="text-center" style="width: 15%; font-size:18px">Thành tiền</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,9 @@
                                         class="img-fluid" style="max-width: 80px; max-height: 80px;">
                                 </td>
                                 <td class="text-center" style="font-size:16px;">{{ $item->san_pham->ten_san_pham }}</td>
+                                <td class="text-center" style="font-size:16px;">
+                                    {{ number_format($item->san_pham->gia_km ?? $item->san_pham->gia_ban) }}
+                                    đ</td>
                                 <td class="text-center" style="font-size:16px;">
                                     @if ($item->size && $item->color)
                                         <span>Size: {{ $item->size->ten_size }}</span>

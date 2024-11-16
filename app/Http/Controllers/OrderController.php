@@ -186,7 +186,7 @@ class OrderController extends Controller
                 $orderDetail->color_san_pham_id = $item->color_san_pham_id;
                 $orderDetail->size_san_pham_id = $item->size_san_pham_id;
                 $orderDetail->so_luong = $item->quantity;
-                $orderDetail->gia_tien = $item->price;
+                $orderDetail->gia_tien = $item->san_pham->gia_km ?? $item->san_pham->gia_ban;
                 $orderDetail->thanh_tien = $item->price;
                 $orderDetail->save();
             }
@@ -235,6 +235,7 @@ class OrderController extends Controller
     public function success(Request $request)
     {
         // Lấy thông tin từ session
+        $user = Auth::user();
         $orderDetails = Session::get('order_details');
         $vnp_TxnRef = Session::get('vnp_TxnRef');
         $vnp_ResponseCode = $request->input('vnp_ResponseCode');
@@ -266,8 +267,8 @@ class OrderController extends Controller
                     $orderDetail->color_san_pham_id = $item->color_san_pham_id;
                     $orderDetail->size_san_pham_id = $item->size_san_pham_id;
                     $orderDetail->so_luong = $item->quantity;
-                    $orderDetail->gia_tien = $item->price;
-                    $orderDetail->thanh_tien = $item->price * $item->quantity;
+                    $orderDetail->gia_tien = $item->san_pham->gia_km ?? $item->san_pham->gia_ban;
+                    $orderDetail->thanh_tien = $item->price;
                     $orderDetail->save();
 
                     $variant = $item->san_pham->bien_the_san_phams()
@@ -285,10 +286,42 @@ class OrderController extends Controller
                         $product->save();
                     }
                 }
+                $coupon = null;
+                // Giảm số lượng mã khuyến mãi
+                if ($coupon) {
+                    $coupon->so_luong_ma -= 1;
+                    $coupon->save();
+                }
+
+                $variant = $item->san_pham->bien_the_san_phams()->where('color_san_pham_id', $item->color_san_pham_id)
+                    ->where('size_san_pham_id', $item->size_san_pham_id)
+                    ->first();
+
+                if ($variant) {
+                    // Giảm số lượng của biến thể sản phẩm
+                    $variant->so_luong -= $item->quantity;
+                    $variant->save();
+                }
+                // Trừ số lượng sản phẩm trong kho
+                $product = san_pham::find($item->san_pham_id);
+                if ($product) {
+                    $product->so_luong -= $item->quantity;  // Trừ số lượng sản phẩm
+                    $product->save();
+                }
+
 
                 // Xóa giỏ hàng
                 $cart->cartItems()->delete();
                 $cart->delete();
+
+
+                Mail::send('auth.success_order', [
+                    'ho_ten' => $user->ho_ten,
+                    'order' => $order,
+                ], function ($message) use ($user) {
+                    $message->to($user->email)
+                        ->subject('Đặt hàng thành công');
+                });
             }
 
             Session::forget(['order_details', 'vnp_TxnRef']);

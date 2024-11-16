@@ -111,23 +111,23 @@
             justify-content: center;
         }
 
-        .brand-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    .brand-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        .brand-image {
-            width: 120px;
-            /* Thay đổi kích thước ảnh theo ý muốn */
-            height: 120px;
-            border-radius: 50%;
-            /* Để ảnh hình tròn */
-            object-fit: cover;
-            /* Cắt ảnh để vừa với khung */
-            margin-bottom: 10px;
-            /* Khoảng cách giữa ảnh và tên danh mục */
-        }
+    .brand-image {
+        width: 120px;
+        /* Thay đổi kích thước ảnh theo ý muốn */
+        height: 120px;
+        border-radius: 50%;
+        /* Để ảnh hình tròn */
+        object-fit: cover;
+        /* Cắt ảnh để vừa với khung */
+        margin-bottom: 10px;
+        /* Khoảng cách giữa ảnh và tên danh mục */
+    }
 
         .brand-name {
             font-size: 14px;
@@ -285,9 +285,9 @@
     <div class="common-banner bg-white">
         <div class="container">
 
-        </div>
     </div>
-    <!-- common banner  end -->
+</div>
+<!-- common banner  end -->
 
     <!-- product tab start -->
     <section class="product-tab bg-white pt-50 pb-80">

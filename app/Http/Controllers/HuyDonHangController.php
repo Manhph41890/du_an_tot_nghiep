@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\don_hang;
 use App\Models\huy_don_hang;
+use App\Models\san_pham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -31,7 +32,6 @@ class HuyDonHangController extends Controller
 
         // Kiểm tra trạng thái đơn hàng
         if (
-            $donHang->trang_thai_thanh_toan !== 'Chưa thanh toán' ||
             $donHang->trang_thai_don_hang !== 'Chờ xác nhận'
         ) {
             return redirect()->back()->withErrors([
@@ -96,11 +96,34 @@ class HuyDonHangController extends Controller
         $huyDon->update([
             'trang_thai' => 'Xác nhận hủy',
         ]);
-
         // Cập nhật trạng thái đơn hàng thành "Đã hủy"
         $donHang->update([
             'trang_thai_don_hang' => 'Đã hủy',
         ]);
+
+
+        // Khôi phục số lượng sản phẩm trong kho và biến thể sản phẩm
+        foreach ($donHang->chi_tiet_don_hangs as $item) {
+            $variant = $item->san_pham->bien_the_san_phams()
+                ->where('color_san_pham_id', $item->color_san_pham_id)
+                ->where('size_san_pham_id', $item->size_san_pham_id)
+                ->first();
+
+            if ($variant) {
+                // Tăng lại số lượng của biến thể sản phẩm
+                $variant->so_luong += $item->so_luong;
+                $variant->save();
+            }
+
+            $product = san_pham::find($item->san_pham_id);
+            if ($product) {
+                // Tăng lại số lượng sản phẩm trong kho
+                $product->so_luong += $item->so_luong;
+                $product->save();
+            }
+        }
+
+
 
         Mail::send('auth.xacnhan_huy', [
             'user' => $huyDon->user, // Người dùng liên quan

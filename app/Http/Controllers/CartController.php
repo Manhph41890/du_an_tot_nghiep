@@ -319,7 +319,7 @@ class CartController extends Controller
         }
 
         // Tính tổng tiền của các sản phẩm đã chọn
-        $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
+        $total = $cartItems->sum(fn($item) => $item->price);
         $shippingCost = 30000; // 30,000 VND
         $totall = $total + $shippingCost;
 

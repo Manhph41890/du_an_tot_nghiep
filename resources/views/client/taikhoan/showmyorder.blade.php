@@ -228,14 +228,14 @@
                                 </div>
 
                                 {{-- ------------------------------------------------------------------------------------------ --}}
-                                @if ($donhang->trang_thai_thanh_toan == 'Chưa thanh toán' && $donhang->trang_thai_don_hang == 'Chờ xác nhận')
+                                @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
                                     <div class="col-lg-12">
                                         <!-- Nút Viết Đánh Giá -->
                                         <div class="card mb-3">
                                             <div class="card-body">
                                                 <h5>Hủy nhận đơn hàng này</h5>
-                                                <a id="openReviewForm{{ $chi_tiet->san_pham->id }}">
-                                                    @if ($donhang->trang_thai_thanh_toan == 'Chưa thanh toán' && $donhang->trang_thai_don_hang == 'Chờ xác nhận')
+                                                <a id="openReviewForm{{ $donhang->id }}">
+                                                    @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
                                                         <button type="submit" class="btn btn-secondary mt-2">Hủy
                                                             nhận hàng</button>
                                                     @endif
@@ -243,8 +243,8 @@
                                             </div>
                                         </div>
 
-                                        <!-- Form Đánh Giá -->
-                                        <div class="ratting-form-wrapper" id="reviewForm{{ $chi_tiet->san_pham->id }}">
+                                        <!-- Form hủy đơn hàng -->
+                                        <div class="ratting-form-wrapper" id="reviewForm{{ $donhang->id }}">
                                             <h3>Lý do hủy đơn hàng</h3>
                                             <div class="ratting-form">
                                                 <form action="{{ route('huydonhang.store') }}" method="post">
@@ -255,10 +255,11 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="rating-form-style form-submit">
-                                                                <textarea id="review{{ $chi_tiet->san_pham->id }}" name="ly_do_huy" placeholder="Viết lý do" maxlength="100"></textarea>
-                                                                <p id="charCount{{ $chi_tiet->san_pham->id }}">0/100
+                                                                <textarea id="review{{ $donhang->id }}" name="ly_do_huy" placeholder="Viết lý do" maxlength="100"></textarea>
+                                                                <p id="charCount{{ $donhang->id }}">0/100
                                                                 </p>
-                                                                <input type="submit" value="Gửi" />
+                                                                <button class="btn btn-dark"
+                                                                    type="submit">Gửi</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -382,6 +383,30 @@
         background-color: #e0e0e0;
     }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var openReviewBtn = document.getElementById('openReviewForm{{ $donhang->id }}');
+        var reviewForm = document.getElementById('reviewForm{{ $donhang->id }}');
+
+        openReviewBtn.addEventListener('click', function() {
+            // Kiểm tra nếu form đang ẩn thì hiển thị, nếu đang hiển thị thì ẩn đi
+            if (reviewForm.style.display === 'none') {
+                reviewForm.style.display = 'block';
+            } else {
+                reviewForm.style.display = 'none';
+            }
+        });
+
+        // Cập nhật số lượng ký tự nhập vào textarea
+        var textarea = document.getElementById('review{{ $donhang->id }}');
+        var charCount = document.getElementById('charCount{{ $donhang->id }}');
+
+        textarea.addEventListener('input', function() {
+            var currentLength = textarea.value.length;
+            charCount.textContent = currentLength + '/100';
+        });
+    });
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)

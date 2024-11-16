@@ -189,12 +189,12 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
+                                {{-- <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
                                     ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300"
                                     style="color: #5C5BCA">
-                                </p>
-                                <h2 class="title animated">
+                                </p> --}}
+                                {{-- <h2 class="title animated">
                                     <span class="animated d-block" data-animation-in="fadeInLeft" data-delay-in=".800"
                                         style="color: #5C5BCA">Khơi
                                         nguồn đam mê nghệ thuật</span>
@@ -203,7 +203,7 @@
                                 </h2>
                                 <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a> --}}
                             </div>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                {{-- <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
                                     style="color: #5C5BCA">
@@ -233,7 +233,7 @@
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a> --}}
                             </div>
                         </div>
                     </div>
@@ -245,7 +245,7 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                {{-- <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
                                     style="color: #5C5BCA">
@@ -263,7 +263,7 @@
 
                                 <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a> --}}
                             </div>
                         </div>
                     </div>
@@ -273,41 +273,31 @@
         </div>
     </section>
     <!-- main slider end -->
-
-    {{-- mã giảm giá 'voucher' --}}
-    <section class="discount-codes">
-        <div class="container">
-            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span></h2>
-            </h2>
-            <div class="discount-list">
-                @foreach ($discounts as $item)
-                    <div class="discount-item">
-                        <div class="discount-code">
-                            <span class="code">{{ $item->ma_khuyen_mai }}</span>
+<!-- brand slider start -->
+<div class="brand-slider-section theme1 bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="brand-init border-top py-35 slick-nav-brand">
+                    @foreach ($anhDMuc as $anhdm)
+                        <div class="slider-item">
+                            <div class="single-brand">
+                                <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
+                                <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
+                                    <!-- Hiển thị ảnh hình tròn -->
+                                    <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
+                                        class="brand-image" />
+                                </a>
+                                <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
+                            </div>
                         </div>
-                        <div class="discount-description">
-                            <p>Giảm <span
-                                    class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
-                                VNĐ cho tất cả các sản phẩm.
-                            </p>
-                        </div>
-                        <button style="font-size: 1em" class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
-                            chép mã</button>
-                    </div>
-                @endforeach
-
-
-                <!-- Thêm các mã giảm giá khác ở đây -->
+                    @endforeach
+                </div>
             </div>
         </div>
-        <!-- Modal -->
-        <div id="copyModal" class="copy-modal">
-            <div class="modal-content">
-                <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
-            </div>
-        </div>
-    </section>
-    {{-- end --}}
+    </div>
+</div>
+    
     <!-- staic media end -->
     <!-- common banner  start -->
     <div class="common-banner bg-white">
@@ -561,30 +551,41 @@
         </div>
     </section>
     <!-- blog-section end -->
-    <!-- brand slider start -->
-    <div class="brand-slider-section theme1 bg-white">
+    {{-- mã giảm giá 'voucher' --}}
+    <section class="discount-codes">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="brand-init border-top py-35 slick-nav-brand">
-                        @foreach ($anhDMuc as $anhdm)
-                            <div class="slider-item">
-                                <div class="single-brand">
-                                    <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
-                                    <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
-                                        <!-- Hiển thị ảnh hình tròn -->
-                                        <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
-                                            class="brand-image" />
-                                    </a>
-                                    <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
-                                </div>
-                            </div>
-                        @endforeach
+            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span></h2>
+            </h2>
+            <div class="discount-list">
+                @foreach ($discounts as $item)
+                    <div class="discount-item">
+                        <div class="discount-code">
+                            <span class="code">{{ $item->ma_khuyen_mai }}</span>
+                        </div>
+                        <div class="discount-description">
+                            <p>Giảm <span
+                                    class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
+                                VNĐ cho tất cả các sản phẩm.
+                            </p>
+                        </div>
+                        <button style="font-size: 1em" class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
+                            chép mã</button>
                     </div>
-                </div>
+                @endforeach
+
+
+                <!-- Thêm các mã giảm giá khác ở đây -->
             </div>
         </div>
-    </div>
+        <!-- Modal -->
+        <div id="copyModal" class="copy-modal">
+            <div class="modal-content">
+                <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
+            </div>
+        </div>
+    </section>
+    {{-- end --}}
+    
     <style>
         .min_h {
             display: -webkit-box;

@@ -10,24 +10,23 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\SanPhamController;
-use App\Http\Controllers\VariantController;
 
+use App\Http\Controllers\VariantController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KhuyenMaiController;
+use App\Http\Controllers\HuyDonHangController;
 use App\Http\Controllers\ClientSanPhamController;
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\HuyDonHangController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
-use App\Http\Controllers\SocialController;
-use App\Http\Controllers\TaiKhoanController;
-
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
@@ -170,11 +169,10 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
-    Route::post('/order/success', [OrderController::class, 'success'])->name('order.success');
+    Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
     Route::get('/order/success_nhanhang', [OrderController::class, 'success_nhanhang'])->name('order.success_nhanhang');
 
     Route::post('/apply-coupon', [OrderController::class, 'applyCoupon'])->name('apply.coupon');
-
     // 
 });
 

@@ -111,23 +111,23 @@
             justify-content: center;
         }
 
-    .brand-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        .brand-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .brand-image {
-        width: 120px;
-        /* Thay đổi kích thước ảnh theo ý muốn */
-        height: 120px;
-        border-radius: 50%;
-        /* Để ảnh hình tròn */
-        object-fit: cover;
-        /* Cắt ảnh để vừa với khung */
-        margin-bottom: 10px;
-        /* Khoảng cách giữa ảnh và tên danh mục */
-    }
+        .brand-image {
+            width: 120px;
+            /* Thay đổi kích thước ảnh theo ý muốn */
+            height: 120px;
+            border-radius: 50%;
+            /* Để ảnh hình tròn */
+            object-fit: cover;
+            /* Cắt ảnh để vừa với khung */
+            margin-bottom: 10px;
+            /* Khoảng cách giữa ảnh và tên danh mục */
+        }
 
         .brand-name {
             font-size: 14px;
@@ -273,78 +273,54 @@
         </div>
     </section>
     <!-- main slider end -->
-<!-- brand slider start -->
-<div class="brand-slider-section theme1 bg-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="brand-init border-top py-35 slick-nav-brand">
-                    @foreach ($anhDMuc as $anhdm)
-                        <div class="slider-item">
-                            <div class="single-brand">
-                                <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
-                                <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
-                                    <!-- Hiển thị ảnh hình tròn -->
-                                    <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
-                                        class="brand-image" />
-                                </a>
-                                <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
+    <!-- brand slider start -->
+    <div class="brand-slider-section theme1 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="brand-init border-top py-35 slick-nav-brand">
+                        @foreach ($anhDMuc as $anhdm)
+                            <div class="slider-item">
+                                <div class="single-brand">
+                                    <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
+                                    <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
+                                        <!-- Hiển thị ảnh hình tròn -->
+                                        <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
+                                            class="brand-image" />
+                                    </a>
+                                    <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-    
+
     <!-- staic media end -->
     <!-- common banner  start -->
     <div class="common-banner bg-white">
         <div class="container">
 
+        </div>
     </div>
-</div>
-<!-- common banner  end -->
+    <!-- common banner  end -->
 
     <!-- product tab start -->
     <section class="product-tab bg-white pt-50 pb-80">
         <div class="container">
-            <div class="product-tab-nav mb-50">
-                <div class="row align-items-center">
-                    {{-- <div class="col-12">
-                        <div class="section-title text-center">
-                            <h2 class="title pb-3 mb-3">Sản phẩm của chúng tôi</h2>
-                            <p class="text">Vẽ sáng tạo - Tô hạnh phúc</p>
-                        </div>
-                    </div> --}}
-                    <div class="col-12">
-                        <nav class="product-tab-menu theme1">
-                            <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                        href="#pills-home" role="tab" aria-controls="pills-home"
-                                        aria-selected="true" style="font-size: 20px">Sản phẩm mới</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                        href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false" style="font-size: 20px">Đang giảm giá</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="tab-content" id="pills-tabContent">
                         <!-- first tab-pane -->
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                            aria-labelledby="pills-home-tab">
+                        <div class="pb-80">
                             <div class="row">
+                                <div class="section-title text-center">
+                                    <h2 class="title pb-3 mb-3">Sản phẩm Mới</h2>
+                                </div>
                                 @foreach ($sanPhamMois as $item)
-                                    <div class="col-12 col-md-4 col-lg-2 mb-4">
+                                    <div class="col-12 col-md-6  col-lg-2 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
@@ -375,10 +351,10 @@
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <p>Giá: </p>
-                                                                <p style="color: red">
-                                                                    <del
-                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
-                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                <p>
+
+                                                                    {{ number_format($item->gia_goc, 0, ',', '.') }}
+                                                                    VNĐ
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -392,8 +368,11 @@
                             </div>
                         </div>
                         <!-- second tab-pane -->
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="pb-80">
                             <div class="row">
+                                <div class="section-title text-center">
+                                    <h2 class="title pb-3 mb-3">Sản phẩm giảm giá</h2>
+                                </div>
                                 @foreach ($sanPhamGiamGias as $sanPhamGg)
                                     <div class="col-12 col-md-4 col-lg-2 mb-4">
                                         <div class="card product-card">
@@ -426,8 +405,12 @@
                                                                 @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span class="product-price">Giá:
-                                                                    {{ number_format($sanPhamGg->gia_km) }} VNĐ</span>
+                                                                <p>Giá: </p>
+                                                                <p style="color: red">
+                                                                    <del
+                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
+                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -461,7 +444,7 @@
                                     <div class="card-body p-0">
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
-                                                <span class="badge badge-danger top-right">New</span>
+                                                <span class="badge badge-danger top-right">{{  $sanphamview->views }} lượt xem</span>
                                                 <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
@@ -489,8 +472,12 @@
                                                         @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span class="product-price">Giá:
-                                                            {{ number_format($sanphamview->gia_km) }} VNĐ</span>
+                                                        <p>Giá: </p>
+                                                        <p style="color: red">
+                                                            <del
+                                                                style="color: black">{{ number_format($sanphamview->gia_goc, 0, ',', '.') }}</del>
+                                                            {{ number_format($sanphamview->gia_km, 0, ',', '.') }} VNĐ
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -568,7 +555,8 @@
                                 VNĐ cho tất cả các sản phẩm.
                             </p>
                         </div>
-                        <button style="font-size: 1em" class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
+                        <button style="font-size: 1em" class="copy-btn"
+                            onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
                             chép mã</button>
                     </div>
                 @endforeach
@@ -585,7 +573,7 @@
         </div>
     </section>
     {{-- end --}}
-    
+
     <style>
         .min_h {
             display: -webkit-box;

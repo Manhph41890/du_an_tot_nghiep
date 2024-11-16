@@ -19,27 +19,27 @@
                         <div class="card-body">
                             <form>
                                 <div class="mb-3">
-                                        <p><strong>Tên sản phẩm:</strong> {{ $post->san_phams?->ten_san_pham }}</p>
+                                    <p><strong>Tên sản phẩm:</strong> {{ $post->san_phams?->ten_san_pham }}</p>
                                 </div>
                                 <div class="mb-3">
                                     <p><strong>Tên người dùng:</strong> {{ $post->users?->ho_ten }}</p>
                                 </div>
                                 <div class="mb-3">
-                                        <p><strong>Ngày đánh giá:</strong> {{ $post->ngay_danh_gia }}</p>
+                                    <p><strong>Ngày đánh giá:</strong> {{ $post->ngay_danh_gia }}</p>
                                 </div>
                                 <div class="mb-3">
-                                    <p><strong>Đánh giá:</strong> 
+                                    <p><strong>Đánh giá:</strong>
                                         @for ($i = 1; $i <= 5; $i++)
                                             @if ($i <= $post->diem_so)
-                                                <i class="mdi mdi-star text-warning"></i> 
+                                                <i class="mdi mdi-star text-warning"></i>
                                             @else
-                                                <i class="mdi mdi-star-outline text-muted"></i> 
+                                                <i class="mdi mdi-star-outline text-muted"></i>
                                             @endif
                                         @endfor
                                     </p>
-                                </div>                                
+                                </div>
                                 <div class="mb-3">
-                                        <p><strong>Bình luận:</strong> {{ $post->binh_luan }}</p>
+                                    <p><strong>Bình luận:</strong> {{ $post->binh_luan }}</p>
                                 </div>
                             </form>
 

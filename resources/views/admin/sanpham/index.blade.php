@@ -48,13 +48,6 @@
                             @if ($isAdmin)
                                 <a href="{{ route('sanphams.create') }}" class="btn btn-success">Thêm Sản Phẩm</a>
                             @endif
-                            @if (session('success'))
-                                <div class="alert alert-success alert-dismissable fade show" role="alert">
-                                    {{ session('success') }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                                </div>
-                            @endif
                         </div>
 
                         <div class="row">

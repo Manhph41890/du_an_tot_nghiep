@@ -15,15 +15,7 @@
                 <div class="row">
                     <div class="col-12">
                         <!-- Display Success Message -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                                <div class="mt-3">
-                                    <a href="{{ route('sanphams.create') }}" class="btn btn-primary">Thêm sản phẩm khác</a>
-                                    <a href="{{ route('sanphams.index') }}" class="btn btn-secondary">Quay lại danh sách</a>
-                                </div>
-                            </div>
-                        @endif
+
                         {{-- Lỗi biến thể --}}
                         @if ($errors->has('product_variants'))
                             <ul>

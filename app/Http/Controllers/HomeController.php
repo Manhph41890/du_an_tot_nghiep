@@ -121,7 +121,9 @@ class HomeController extends Controller
             $colorsBySize[$bienThe->size->id][] = [
                 'id' => $bienThe->color->id,
                 'ten_color' => $bienThe->color->ten_color,
-                'so_luong' => $bienThe->so_luong // Thêm số lượng vào mảng
+                'so_luong' => $bienThe->so_luong, // Số lượng
+                'gia' => $bienThe->gia, // Giá biến thể
+                'gia_km' => $sanPhamCT->gia_km, // Giá khuyến mãi của sản phẩm
             ];
         }
         // Lấy danh sách size và màu sắc

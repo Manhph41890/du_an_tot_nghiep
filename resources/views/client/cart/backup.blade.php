@@ -14,6 +14,11 @@
             border: 1px;
         }
 
+        th {
+            align-items: center;
+            justify-content: center;
+        }
+
         td {
             align-items: center;
         }
@@ -35,117 +40,163 @@
             width: 60px;
         }
 
-        th {
-            text-align: center;
-            vertical-align: middle;
+        table th {}
+
+        table.cart-list {
+            width: 100%;
+            border-collapse: collapse;
         }
 
+        table.cart-list th,
+        table.cart-list td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table.cart-list th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
 
         .btn {
             border-radius: 5px;
+        }
+
+        .cart-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .cart-table {
+            flex: 2;
+        }
+
+        .cart-summary {
+            flex: 1;
+            /* border: 1px solid #ddd; */
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .cart-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart-summary li {
+            margin-bottom: 10px;
+        }
+
+        .cart-summary button {
+            width: 100%;
         }
     </style>
     <div class="container margin_30">
         <div class="page_header">
             <h1>Giỏ Hàng</h1>
         </div>
-
-        <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
-            @csrf
-            <table class="table cart-list">
-                <thead>
-                    <tr>
-                        <th>Chọn</th>
-                        <th>Sản Phẩm</th>
-                        <th>Giá</th>
-                        <th>Phân loại</th>
-                        <th>Tổng Tiền</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (!empty($cartItems))
-                        @foreach ($cartItems as $item)
+        <div class="cart-wrapper">
+            <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
+                @csrf
+                <div class="cart-table">
+                    <table class="table cart-list">
+                        <thead>
                             <tr>
-                                <td>
-                                    <input type="checkbox" class="item-checkbox" data-price="{{ $item->price }}"
-                                        data-id="{{ $item->id }}" />
-                                </td>
-                                <td>
-                                    <div class="thumb_cart">
-                                        <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}" alt="img"
-                                            height="150px" width="150px" style="object-fit: cover" />
-                                    </div>
-                                    <span class="item_cart">{{ $item->san_pham->ten_san_pham }}</span>
-                                </td>
-                                <td>
-                                    <strong>{{ number_format($item->san_pham->gia_km ?? $item->san_pham->gia_ban) }}
-                                        đ</strong>
-                                </td>
-                                <td>
-                                    <span>Size:</span>
-                                    <select name="size_san_pham_id" class="size-select" data-item-id="{{ $item->id }}">
-                                        @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                            <option value="{{ $variant->size->id }}"
-                                                {{ $variant->size->id == $item->size_san_pham_id ? 'selected' : '' }}>
-                                                {{ $variant->size->ten_size }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <span>Màu:</span>
-                                    <select name="color_san_pham_id" class="color-select"
-                                        data-item-id="{{ $item->id }}">
-                                        @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                            <option value="{{ $variant->color->id }}"
-                                                {{ $variant->color->id == $item->color_san_pham_id ? 'selected' : '' }}>
-                                                {{ $variant->color->ten_color }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <span>Số lượng:</span>
-                                    <input type="number" name="quantity" value="{{ $item->quantity }}" min="1"
-                                        max="100" class="quantity-input" data-item-id="{{ $item->id }}">
-                                    <button type="button" class="btn btn-primary btn-sm update-cart-btn"
-                                        data-id="{{ $item->id }}">
-                                        Cập nhật
-                                    </button>
-                                </td>
-                                <td>
-                                    <strong><span class="whish-list-price">{{ number_format($item->price) }}
-                                            đ</span></strong>
-                                </td>
+                                <th>Chọn</th>
+                                <th>Sản Phẩm</th>
+                                <th>Giá</th>
+                                <th>Phân loại</th>
+                                <th>Tổng Tiền</th>
                             </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="7" class="text-center">Giỏ hàng trống!</td>
-                        </tr>
-                    @endif
-                </tbody>
-            </table>
-            <button type="submit" class="btn btn-danger btn-sm" id="remove-selected-items" disabled>Xóa Sản Phẩm Đã
-                Chọn</button>
-        </form>
-
-    </div>
-
-    <div class="box_cart">
-        <div class="container">
-            <div class="row justify-content-end">
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <ul>
-                        <li style="font-size: 20px">
-                            <strong><span>Tổng Tiền: </span><span id="total-price">0</span></strong>
-                        </li>
-                    </ul>
-                    <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
-                        @csrf
-                        <input type="hidden" name="checkout_items[]" id="selected-items">
-                        <button id="checkout-button" class="btn btn-success">
-                            Thanh toán ngay
-                        </button>
-                    </form>
-
+                        </thead>
+                        <tbody>
+                            @if (!empty($cartItems))
+                                @foreach ($cartItems as $item)
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="item-checkbox" data-price="{{ $item->price }}"
+                                                data-id="{{ $item->id }}" />
+                                        </td>
+                                        <td>
+                                            <div class="thumb_cart">
+                                                <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}"
+                                                    alt="img" height="150px" width="150px"
+                                                    style="object-fit: cover" />
+                                            </div>
+                                            <span class="item_cart">{{ $item->san_pham->ten_san_pham }}</span>
+                                        </td>
+                                        <td>
+                                            <strong>{{ number_format($item->san_pham->gia_km ?? $item->san_pham->gia_ban) }}
+                                                đ</strong>
+                                        </td>
+                                        <td>
+                                            <span>Size:</span>
+                                            <select name="size_san_pham_id" class="size-select"
+                                                data-item-id="{{ $item->id }}">
+                                                @foreach ($item->san_pham->bien_the_san_phams as $variant)
+                                                    <option value="{{ $variant->size->id }}"
+                                                        {{ $variant->size->id == $item->size_san_pham_id ? 'selected' : '' }}>
+                                                        {{ $variant->size->ten_size }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <span>Màu:</span>
+                                            <select name="color_san_pham_id" class="color-select"
+                                                data-item-id="{{ $item->id }}">
+                                                @foreach ($item->san_pham->bien_the_san_phams as $variant)
+                                                    <option value="{{ $variant->color->id }}"
+                                                        {{ $variant->color->id == $item->color_san_pham_id ? 'selected' : '' }}>
+                                                        {{ $variant->color->ten_color }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <span>Số lượng:</span>
+                                            <input type="number" name="quantity" value="{{ $item->quantity }}"
+                                                min="1" max="100" class="quantity-input"
+                                                data-item-id="{{ $item->id }}">
+                                            <button type="button" class="btn btn-primary btn-sm update-cart-btn"
+                                                data-id="{{ $item->id }}">
+                                                Cập nhật
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <strong><span class="whish-list-price">{{ number_format($item->price) }}
+                                                    đ</span></strong>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="7" class="text-center">Giỏ hàng trống!</td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-danger btn-sm" id="remove-selected-items" disabled>Xóa Sản Phẩm Đã
+                        Chọn</button>
                 </div>
+            </form>
+            <div class="cart-summary">
+                <ul>
+                    <li style="font-size: 16px">
+                        <strong><span>Phí vận chuyển: </span><span id="shipping">0</span></strong>
+                    </li>
+
+                    <li style="font-size: 20px">
+                        <strong><span>Tổng Tiền: </span><span class="text-danger" id="total-price">0</span></strong>
+                    </li>
+                </ul>
+                <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
+                    @csrf
+                    <input type="hidden" name="checkout_items[]" id="selected-items">
+                    <button id="checkout-button" class="btn btn-primary">
+                        Thanh toán ngay
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -155,6 +206,7 @@
             const updateButtons = document.querySelectorAll('.update-cart-btn');
             const checkboxes = document.querySelectorAll('.item-checkbox');
             const totalPriceEl = document.getElementById('total-price');
+            const shippingEl = document.getElementById('shipping');
             const removeButton = document.getElementById('remove-selected-items');
             const checkoutForm = document.getElementById('checkout-form');
             const removeMultipleForm = document.getElementById('remove-multiple-form');
@@ -162,17 +214,20 @@
             // Hàm tính tổng giá trị giỏ hàng
             function calculateTotal() {
                 let totalPrice = 0;
+                let shipping = 0;
                 const selectedItems = [];
 
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const price = parseInt(checkbox.getAttribute('data-price'));
                         selectedItems.push(checkbox.getAttribute('data-id'));
-                        totalPrice += price;
+                        shipping = 30000; // 
+                        totalPrice += price + shipping;
                     }
                 });
 
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
+                shippingEl.textContent = shipping.toLocaleString() + ' đ';
                 removeButton.disabled = selectedItems.length === 0;
 
                 // Xóa các input hidden trước khi thêm mới

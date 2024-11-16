@@ -2,7 +2,7 @@
 <!-- offcanvas-overlay end -->
 <!-- offcanvas-mobile-menu start -->
 
-<div id="offcanvas-mobile-menu" class="offcanvas theme1 offcanvas-mobile-menu">
+{{-- <div id="offcanvas-mobile-menu" class="offcanvas theme1 offcanvas-mobile-menu">
     <div class="inner">
         <div class="border-bottom mb-4 pb-4 text-end">
             <button class="offcanvas-close">×</button>
@@ -230,7 +230,7 @@
         </ul>
         <a href="wishlist.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block mt-30">view wishlist</a>
     </div>
-</div>
+</div> --}}
 
 <!-- header start -->
 <header>

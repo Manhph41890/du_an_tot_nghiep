@@ -162,6 +162,24 @@
                 opacity: 0.3;
             }
         }
+
+        .blinking-text {
+            color: red;
+            font-size: 15px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
     <!-- main slider start -->
     <section class="bg-light">
@@ -331,7 +349,7 @@
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
-                                                        <span class="badge badge-danger top-right">Mới</span>
+                                                        <span class="badge badge-danger top-right blinking-text">Mới</span>
                                                         <a href="{{ route('san-phams.incrementViews', $item->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"

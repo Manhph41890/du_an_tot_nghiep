@@ -307,7 +307,7 @@
                         <img src="{{ asset('assets/client/images/icon/icons8-google-48.png') }}" class="social-icon">
                     </a>
 
-                    <a href="{{ route('auth.facebook') }}" style=" margin-left: 0px;  text-decoration: none;">
+                    <a href="" style=" margin-left: 0px;  text-decoration: none;">
                         <img src="{{ asset('assets/client/images/icon/icons8-facebook-48.png') }}" class="social-icon">
                     </a>
                 </div>

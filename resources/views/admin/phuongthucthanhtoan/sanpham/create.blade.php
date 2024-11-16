@@ -115,7 +115,7 @@
                                                     <img id="imagePreview"
                                                         src="{{ old('anh_san_pham') ? asset('storage/' . old('anh_san_pham')) : (isset($sanPham->anh_san_pham) ? asset('storage/' . $sanPham->anh_san_pham) : '') }}"
                                                         alt="Hình ảnh"
-                                                        style="display: {{ old('anh_san_pham') || isset($sanPham->anh_san_pham) ? 'block' : 'none' }}; width: 200px;">
+                                                        style="display: '{{ old('anh_san_pham') || isset($sanPham->anh_san_pham) ? 'block' : 'none' }}'; width: 200px;">
                                                 </div>
                                             </div>
                                             <div class="mb-3">
@@ -124,8 +124,7 @@
                                                 <div id="quill-editor" style="height: 400px;"></div>
                                                 <textarea id="ma_ta_san_pham" name="ma_ta_san_pham" class="form-control @error('ma_ta_san_pham') is-invalid @enderror">
                                                     {{ old('ma_ta_san_pham') }}
-                                                </textarea>
-
+                                                    </textarea>
                                                 @error('ma_ta_san_pham')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

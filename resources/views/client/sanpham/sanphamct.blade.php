@@ -295,7 +295,7 @@
 
         </div>
     </div>
-    <!-- product tab end -->
+  
     <!-- new arrival section start -->
     <section class="theme1 bg-white pb-80">
         <div class="container">

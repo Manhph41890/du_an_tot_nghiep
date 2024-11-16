@@ -123,9 +123,9 @@
             <img src="https://i.imgur.com/vPk7lbg.png" alt="Uploaded Image">
         </div>
 
-        <h1>Xác nhận hủy đơn hàng</h1>
+        <h1>Đặt hàng thành công</h1>
         <p>Chào <strong>{{ $order->user->ho_ten }}</strong>,</p>
-        <p>Đơn hàng của bạn với mã <strong>{{ $order->ma_don_hang }}</strong> đã được hủy thành công. Dưới đây là thông
+        <p>Đơn hàng của bạn với mã <strong>{{ $order->ma_don_hang }}</strong> Đặt hàng thành công. Dưới đây là thông
             tin
             chi tiết:</p>
 
@@ -143,6 +143,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Ảnh sản phẩm</th>
                         <th>Sản phẩm</th>
                         <th>Màu sắc</th>
                         <th>Kích thước</th>
@@ -154,6 +155,9 @@
                 <tbody>
                     @foreach ($order->chi_tiet_don_hangs as $chiTiet)
                         <tr>
+                            <td><img src="{{ asset('storage/' . $chiTiet->san_pham->anh_san_pham) }}"
+                                    alt="{{ $chiTiet->san_pham->ten_san_pham }}" style="width: 100px; height: auto;">
+                            </td>
                             <td>{{ $chiTiet->san_pham->ten_san_pham }}</td>
                             <td>{{ $chiTiet->color_san_pham->ten_color }}</td>
                             <td>{{ $chiTiet->size_san_pham->ten_size }}</td>

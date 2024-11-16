@@ -97,11 +97,12 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ma_ta_san_pham" class="form-label">Mô tả sản phẩm</label>
-                                                <!-- Thay input bằng textarea -->
-                                                <textarea id="ma_ta_san_pham" name="ma_ta_san_pham" class="form-control @error('ma_ta_san_pham') is-invalid @enderror">
+                                                <!-- <input type="text" id="ma_ta_san_pham" name="ma_ta_san_pham"
+                                                    class="form-control @error('ma_ta_san_pham') is-invalid @enderror"
+                                                    value="{{ old('ma_ta_san_pham', $product->ma_ta_san_pham) }}"> -->
+                                                    <textarea rows="8" id="ma_ta_san_pham" name="ma_ta_san_pham" class="form-control @error('ma_ta_san_pham') is-invalid @enderror">
                                                     {{ old('ma_ta_san_pham', $product->ma_ta_san_pham) }}
-                                                </textarea>
-
+                                                    </textarea>
                                                 @error('ma_ta_san_pham')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

@@ -39,10 +39,13 @@ class ForgotPasswordController extends Controller
             ->first();
 
         if (!$record) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Mã xác thực không hợp lệ.'
-            ], 400);
+            // return response()->json([
+            //     'status' => false,
+            //     'message' => 'Mã xác thực không hợp lệ.'
+            // ], 400);
+            session()->flash('status', 'Mã xác thực không hợp lệ.');
+
+            return redirect()->back();
         }
 
         return redirect()->route('auth.reset_password', ['token' => $request->token, 'email' => $request->email]);
@@ -72,14 +75,23 @@ class ForgotPasswordController extends Controller
         $user->save();
 
         // Xóa mã xác thực
-         $record->delete();
+        $record->delete();
 
         return redirect()->route('auth.login')->with('status', 'Mật khẩu đã được đặt lại thành công.');
     }
 
     public function sendResetLinkEmails(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
+        $request->validate(
+            ['email' => 'required|email'],
+            [
+                'email.required' => 'Email không được bỏ trống',
+                'email.email' => 'Email không hợp lệ',
+
+
+            ]
+
+        );
 
         // Tạo mã xác thực ngẫu nhiên
         $verificationCode = sprintf('%06d', mt_rand(0, 999999));
@@ -106,17 +118,26 @@ class ForgotPasswordController extends Controller
                     ->subject('Mã xác thực để đặt lại mật khẩu');
             });
 
-            return response()->json([
-                'status' => true,
-                'message' => 'Mã xác thực đã được gửi đến email của bạn.',
-                'token' => $verificationCode,
+            // return response()->json([
+            //     'status' => true,
+            //     'message' => 'Mã xác thực đã được gửi đến email của bạn.',
+            //     'token' => $verificationCode,
 
-            ]);
+            // ]);
+            // Lưu thông báo vào session
+            session()->flash('status', 'Mã xác thực đã được gửi đến email của bạn.');
+
+            return redirect()->back();  // Quay lại trang trước đó
         }
 
-        return response()->json([
-            'status' => false,
-            'message' => 'Email không tồn tại trên hệ thống.'
-        ], 400);
+        // return response()->json([
+        //     'status' => false,
+        //     'message' => 'Email không tồn tại trên hệ thống.'
+        // ], 400);
+
+        // Lưu thông báo lỗi vào session
+        session()->flash('status', 'Email không tồn tại trên hệ thống.');
+
+        return redirect()->back();  // Quay lại trang trước đó
     }
 }

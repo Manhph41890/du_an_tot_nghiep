@@ -15,10 +15,12 @@ class danh_gia extends Model
         'diem_so',
         'binh_luan'
     ];
-    public function san_phams(){
+    public function san_phams()
+    {
         return $this->belongsTo(san_pham::class, 'san_pham_id');
     }
-    public function users(){
+    public function users()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -37,6 +37,7 @@ class DanhGiaController extends Controller
             });
         }
 
+
         // Lấy danh sách đã lọc
         $params = [];
         $params['list'] = $query->get();

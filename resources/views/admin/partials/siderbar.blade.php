@@ -41,14 +41,7 @@
                     <div class="collapse" id="donhang-menu">
                         <ul class="nav-second-level">
                             <li><a class="tp-link" href="{{ route('donhangs.index') }}">Danh sách</a></li>
-                            <li>
-                                <a class="tp-link" href="{{ route('xacnhanhuy.index') }}">
-                                    Yêu cầu hủy đặt hàng
-                                    @if ($hasPendingCancellations)
-                                        <span class="badge bg-danger ms-2">Cần duyệt</span>
-                                    @endif
-                                </a>
-                            </li>
+                            <li><a class="tp-link" href="{{ route('xacnhanhuy.index') }}">Yêu cầu hủy đặt hàng</a></li>
                         </ul>
                     </div>
                 </li>

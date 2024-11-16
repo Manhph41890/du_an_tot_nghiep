@@ -90,11 +90,6 @@
             @endif
         });
     </script>
-    @php
-        $hasPendingCancellations =
-            !session()->has('viewed_pending_cancellations') &&
-            HuyDonHang::where('trang_thai', 'Chờ xác nhận')->exists();
-    @endphp
 
     <!-- Begin page -->
     <div id="app-layout">

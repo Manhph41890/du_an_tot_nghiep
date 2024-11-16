@@ -57,7 +57,6 @@ Route::prefix('client')->group(function () {
     Route::post('/taikhoan/cancel/{id}', [TaiKhoanController::class, 'cancel'])->name('taikhoan.cancel');
     Route::post('/huy-don-hang', [HuyDonHangController::class, 'store'])->name('huydonhang.store');
     Route::get('/huy-don-hang/{id}', [HuyDonHangController::class, 'showhuy'])->name('huydonhang.showhuy');
-    Route::post('/mark-pending-as-viewed', [DonHangController::class, 'markPendingAsViewed'])->name('markPendingAsViewed');
     // Route xác nhận hủy đơn hàng
     Route::post('/huydonhang/{id}/confirm', [HuyDonHangController::class, 'confirmCancel'])->name('huydonhang.confirm');
     // Route từ chối hủy đơn hàng

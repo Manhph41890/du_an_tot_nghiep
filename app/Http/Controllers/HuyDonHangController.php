@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\don_hang;
 use App\Models\huy_don_hang;
+use App\Models\san_pham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -13,26 +14,9 @@ class HuyDonHangController extends Controller
     public function index()
     {
         // Lấy tất cả các đơn hàng đã hủy
-        $huyDons = huy_don_hang::with('don_hang.user')
-            ->where('trang_thai', 'Chờ xác nhận')
-            ->latest('id')
-            ->paginate(6);
-
-        // Kiểm tra xem có đơn hàng cần duyệt hay không
-        $hasPendingCancellations = huy_don_hang::where('trang_thai', 'Chờ xác nhận')->exists();
-
+        $huyDons = huy_don_hang::with('don_hang.user')->latest('id')->paginate(6);
         $title = "Danh sách đơn hàng cần xác nhận hủy";
-
-        // Cập nhật session đã xem
-        session()->put('viewed_pending_cancellations', true);
-
-        return view('admin.donhang.xacnhanhuy', compact('huyDons', 'title', 'hasPendingCancellations'));
-    }
-
-    public function markPendingAsViewed()
-    {
-        session()->put('viewed_pending_cancellations', true);
-        return response()->json(['message' => 'Marked as viewed']);
+        return view('admin.donhang.xacnhanhuy', compact('huyDons', 'title'));
     }
 
     public function store(Request $request)
@@ -48,7 +32,6 @@ class HuyDonHangController extends Controller
 
         // Kiểm tra trạng thái đơn hàng
         if (
-            $donHang->trang_thai_thanh_toan !== 'Chưa thanh toán' ||
             $donHang->trang_thai_don_hang !== 'Chờ xác nhận'
         ) {
             return redirect()->back()->withErrors([
@@ -109,15 +92,40 @@ class HuyDonHangController extends Controller
             ]);
         }
 
+        // dd($donHang);
+        // die();
         // Cập nhật trạng thái yêu cầu hủy thành "Xác nhận hủy"
         $huyDon->update([
             'trang_thai' => 'Xác nhận hủy',
         ]);
-
         // Cập nhật trạng thái đơn hàng thành "Đã hủy"
         $donHang->update([
             'trang_thai_don_hang' => 'Đã hủy',
         ]);
+
+
+        // Khôi phục số lượng sản phẩm trong kho và biến thể sản phẩm
+        foreach ($donHang->chi_tiet_don_hangs as $item) {
+            $variant = $item->san_pham->bien_the_san_phams()
+                ->where('color_san_pham_id', $item->color_san_pham_id)
+                ->where('size_san_pham_id', $item->size_san_pham_id)
+                ->first();
+
+            if ($variant) {
+                // Tăng lại số lượng của biến thể sản phẩm
+                $variant->so_luong += $item->so_luong;
+                $variant->save();
+            }
+
+            $product = san_pham::find($item->san_pham_id);
+            if ($product) {
+                // Tăng lại số lượng sản phẩm trong kho
+                $product->so_luong += $item->so_luong;
+                $product->save();
+            }
+        }
+
+
 
         Mail::send('auth.xacnhan_huy', [
             'user' => $huyDon->user, // Người dùng liên quan

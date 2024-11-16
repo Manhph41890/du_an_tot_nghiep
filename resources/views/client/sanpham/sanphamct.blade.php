@@ -249,6 +249,7 @@
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
                                 <h2>Đánh Giá Sản Phẩm</h2>
+                                <br>
                                 <div class="filter-rating">
                                     <button class="btn btn-outline-primary" onclick="filterByStars(0)">Tất cả</button>
                                     <button class="btn btn-outline-primary" onclick="filterByStars(1)">1 Sao</button>
@@ -263,9 +264,9 @@
                                         <div class="review-wrapper">
                                             @foreach ($sanPhamCT->danh_gias as $danhgia)
                                                 <div class="single-review" data-rating="{{ $danhgia->diem_so }}">
-                                                    <div class="review-img">
+                                                    {{-- <div class="review-img">
                                                         <img src="/assets/img/testimonial-image/1.png" alt="" />
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="review-content">
                                                         <div class="review-top-wrap">
                                                             <div class="review-left">

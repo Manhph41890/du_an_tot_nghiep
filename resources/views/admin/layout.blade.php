@@ -27,11 +27,11 @@
 
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-      <link href="{{ asset('assets/admin/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/admin/libs/quill/quill.bubble.css') }}" rel="stylesheet" type="text/css" />
     {{-- biểu đồ  --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
 
     {{-- <style>
         h4 {
@@ -90,6 +90,11 @@
             @endif
         });
     </script>
+    @php
+        $hasPendingCancellations =
+            !session()->has('viewed_pending_cancellations') &&
+            HuyDonHang::where('trang_thai', 'Chờ xác nhận')->exists();
+    @endphp
 
     <!-- Begin page -->
     <div id="app-layout">
@@ -120,7 +125,7 @@
 
     <!-- Widgets Init Js -->
     <script src="{{ asset('assets/admin/js/pages/analytics-dashboard.init.js') }}"></script>
-     @yield('js')
+    @yield('js')
     <!-- App js-->
     <script src="{{ asset('assets/admin/js/app.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/quill/quill.min.js') }}"></script>

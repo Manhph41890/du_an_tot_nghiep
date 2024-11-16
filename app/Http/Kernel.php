@@ -73,8 +73,11 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\RoleMiddleware::class,
     ];
 
+    // protected $routeMiddleware = [
+    //     // Other middleware
+    //     // 'role' => \App\Http\Middleware\RoleMiddleware::class,
+    // ];
     protected $routeMiddleware = [
-        // Other middleware
-        // 'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'check.pending.cancellations' => \App\Http\Middleware\CheckPendingCancellations::class,
     ];
 }

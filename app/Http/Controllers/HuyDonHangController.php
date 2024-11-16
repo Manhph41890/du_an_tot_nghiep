@@ -13,9 +13,26 @@ class HuyDonHangController extends Controller
     public function index()
     {
         // Lấy tất cả các đơn hàng đã hủy
-        $huyDons = huy_don_hang::with('don_hang.user')->latest('id')->paginate(6);
+        $huyDons = huy_don_hang::with('don_hang.user')
+            ->where('trang_thai', 'Chờ xác nhận')
+            ->latest('id')
+            ->paginate(6);
+
+        // Kiểm tra xem có đơn hàng cần duyệt hay không
+        $hasPendingCancellations = huy_don_hang::where('trang_thai', 'Chờ xác nhận')->exists();
+
         $title = "Danh sách đơn hàng cần xác nhận hủy";
-        return view('admin.donhang.xacnhanhuy', compact('huyDons', 'title'));
+
+        // Cập nhật session đã xem
+        session()->put('viewed_pending_cancellations', true);
+
+        return view('admin.donhang.xacnhanhuy', compact('huyDons', 'title', 'hasPendingCancellations'));
+    }
+
+    public function markPendingAsViewed()
+    {
+        session()->put('viewed_pending_cancellations', true);
+        return response()->json(['message' => 'Marked as viewed']);
     }
 
     public function store(Request $request)

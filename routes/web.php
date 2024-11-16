@@ -57,6 +57,7 @@ Route::prefix('client')->group(function () {
     Route::post('/taikhoan/cancel/{id}', [TaiKhoanController::class, 'cancel'])->name('taikhoan.cancel');
     Route::post('/huy-don-hang', [HuyDonHangController::class, 'store'])->name('huydonhang.store');
     Route::get('/huy-don-hang/{id}', [HuyDonHangController::class, 'showhuy'])->name('huydonhang.showhuy');
+    Route::post('/mark-pending-as-viewed', [DonHangController::class, 'markPendingAsViewed'])->name('markPendingAsViewed');
     // Route xác nhận hủy đơn hàng
     Route::post('/huydonhang/{id}/confirm', [HuyDonHangController::class, 'confirmCancel'])->name('huydonhang.confirm');
     // Route từ chối hủy đơn hàng
@@ -134,7 +135,7 @@ Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
     Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
     Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
-  
+
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
     Route::resource('/phuongthucvanchuyens', PhuongThucVanChuyenController::class);

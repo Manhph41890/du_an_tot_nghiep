@@ -169,6 +169,22 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const badge = document.querySelector('.badge.bg-danger');
+        if (badge) {
+            badge.style.display = "none";
+            // Gửi AJAX để lưu trạng thái đã xem
+            fetch("{{ route('markPendingAsViewed') }}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    "Content-Type": "application/json",
+                },
+            });
+        }
+    });
+</script>
 
 <style>
     .modal-backdrop.show.nested-modal {

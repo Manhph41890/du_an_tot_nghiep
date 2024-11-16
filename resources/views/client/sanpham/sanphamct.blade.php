@@ -260,31 +260,6 @@
                                     <div class="col-12">
                                         <div class="review-wrapper">
                                             @foreach ($sanPhamCT->danh_gias as $danhgia)
-                                                {{-- <div class="single-review">
-                                                    <div class="review-img">
-                                                        <img src="/assets/img/testimonial-image/1.png" alt="" />
-                                                    </div>
-                                                    <div class="review-content">
-                                                        <div class="review-top-wrap">
-                                                            <div class="review-left">
-                                                                <div class="review-name">
-                                                                    <h4>{{ $danhgia->users->ho_ten }}</h4>
-                                                                </div>
-                                                                <div class="rating-product">
-                                                                    @for ($i = 1; $i <= 5; $i++)
-                                                                        <i
-                                                                            class="{{ $i <= $danhgia->diem_so ? 'ion-android-star' : 'ion-android-star-outline' }}"></i>
-                                                                    @endfor
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="review-bottom">
-                                                            <p>
-                                                            <p>{{ $danhgia->binh_luan }}</p>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
                                                 <div class="single-review" data-rating="{{ $danhgia->diem_so }}">
                                                     <div class="review-img">
                                                         <img src="/assets/img/testimonial-image/1.png" alt="" />

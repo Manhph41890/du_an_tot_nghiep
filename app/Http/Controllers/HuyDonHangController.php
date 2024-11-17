@@ -8,6 +8,7 @@ use App\Models\san_pham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 
 class HuyDonHangController extends Controller
 {
@@ -21,19 +22,28 @@ class HuyDonHangController extends Controller
 
     public function store(Request $request)
     {
+        // Danh sách lý do hợp lệ
+        $validReasons = [
+            'Tôi muốn cập nhật địa chỉ/sđt nhận hàng',
+            'Tôi muốn thêm/thay đổi Mã giảm giá',
+            'Tôi muốn thay đổi sản phẩm (kích thước, màu sắc, số lượng…)',
+            'Thủ tục thanh toán rắc rối',
+            'Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ hơn, uy tín hơn, giao nhanh hơn…)',
+            'Tôi không có nhu cầu mua nữa',
+            'Tôi không tìm thấy lý do hủy phù hợp',
+        ];
+
         // Validate input
         $request->validate([
-            'ly_do_huy' => 'required|string|max:100',
-            'don_hang_id' => 'required|exists:don_hangs,id', // Kiểm tra nếu don_hang_id có tồn tại
+            'ly_do_huy' => ['required', 'string', Rule::in($validReasons)],
+            'don_hang_id' => 'required|exists:don_hangs,id',
         ]);
 
         // Lấy thông tin đơn hàng
         $donHang = don_hang::find($request->don_hang_id);
 
         // Kiểm tra trạng thái đơn hàng
-        if (
-            $donHang->trang_thai_don_hang !== 'Chờ xác nhận'
-        ) {
+        if ($donHang->trang_thai_don_hang !== 'Chờ xác nhận') {
             return redirect()->back()->withErrors([
                 'error' => 'Đơn hàng không thể hủy do trạng thái không hợp lệ.',
             ]);
@@ -50,6 +60,7 @@ class HuyDonHangController extends Controller
         // Trả về thông báo thành công
         return redirect()->back()->with('success', 'Yêu cầu hủy đơn hàng đã được gửi.');
     }
+
     public function showhuy($id)
     {
         // $donhang = don_hang::with([

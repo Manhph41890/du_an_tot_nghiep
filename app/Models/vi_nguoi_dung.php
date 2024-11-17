@@ -10,7 +10,7 @@ class vi_nguoi_dung extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'tien_trong_vi',
+        'tong_tien',
     ];
 
 

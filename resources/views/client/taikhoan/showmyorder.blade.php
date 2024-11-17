@@ -229,12 +229,10 @@
 
                                 {{-- ------------------------------------------------------------------------------------------ --}}
                                 @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
-                                    {{-- @php
-                                        dd($donhang->huy_don_hang);
-                                    @endphp --}}
+
                                     <div class="col-lg-12">
                                         <!-- Kiểm tra trạng thái hủy -->
-                                        @if ($donhang->huy_don_hang->trang_thai == 'Từ chối hủy')
+                                        @if ($donhang->huy_don_hang && $donhang->huy_don_hang->trang_thai == 'Từ chối hủy')
                                             <div class="alert alert-warning mt-3">
                                                 Đơn hàng bị từ chối hủy.
                                             </div>

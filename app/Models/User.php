@@ -50,6 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(khuyen_mai::class);
     }
+    public function vi_nguoi_dungs()
+    {
+        return $this->hasMany(vi_nguoi_dung::class);
+    }
 
     /**
      * Các trường cần ẩn khi trả về JSON.

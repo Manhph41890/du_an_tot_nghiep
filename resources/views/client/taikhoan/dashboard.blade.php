@@ -327,37 +327,42 @@
                         <div class="tab-pane fade" id="payment-method" role="tabpanel">
                             <div class="myaccount-content">
                                 <h3 class="text-center mb-4">Thông tin ví người dùng</h3>
-                                <div class="card-container">
+                                <div class="card-container p-4"
+                                    style="max-width: 400px; margin: 0 auto; background-color: #f8f9fa; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                                     <!-- Logo của ngân hàng -->
-                                    <div class="bank-logo">
+                                    <div class="bank-logo text-center mb-3">
                                         <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                            width="50px" alt="NCB Logo">
-                                    </div>
-
-                                    <!-- Chip thẻ -->
-                                    <div class="chip"></div>
-
-                                    <!-- Số thẻ -->
-                                    <div class="card-number">
-                                        9704198526191432198
+                                            width="80px" alt="VNPay Logo">
                                     </div>
 
                                     <!-- Thông tin khác của thẻ -->
-                                    <div class="card-info">
+                                    <div class="card-info d-flex justify-content-between px-3 mb-4">
                                         <div>
-                                            <div> NGUYEN VAN A</div>
+                                            <div class="text-muted">Chủ tài khoản</div>
+                                            <div style="font-size: 1rem; font-weight: bold;">{{ $user->ho_ten }}</div>
                                         </div>
-                                        <div>
-                                            <div>07/15</div>
+                                        <div class="text-end">
+                                            <div class="text-muted">Lịch sử giao dịch</div>
+                                            <button class="btn btn-success">Lịch sử</button>
                                         </div>
                                     </div>
+
+                                    <!-- Tổng tiền -->
+                                    <div class="text-center mb-3">
+                                        <div class="text-muted">Tổng tiền trong ví</div>
+                                        <div style="font-size: 1.5rem; font-weight: bold; color: #28a745;">
+                                            {{ $viNguoiDung->tong_tien }}
+                                        </div>
+                                    </div>
+
                                     <!-- Logo Visa -->
-                                    <div class="visa-logo">
+                                    <div class="visa-logo text-center">
                                         <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                            alt="Visa Logo">
+                                            width="50px" alt="VNPay Logo">
                                     </div>
                                 </div>
 
+                                <!-- Bootstrap Script -->
                                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                             </div>
                         </div>

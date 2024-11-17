@@ -52,6 +52,7 @@ Route::prefix('client')->group(function () {
     Route::post('/taikhoan/update-avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard.avatar');
 
     Route::get('/taikhoan/myorder/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.myorder');
+    Route::get('/taikhoan/vinguoidung', [TaiKhoanController::class, 'viNguoiDung'])->name('taikhoan.vinguoidung');
 
     //Hủy đặt hàng
     Route::post('/taikhoan/cancel/{id}', [TaiKhoanController::class, 'cancel'])->name('taikhoan.cancel');

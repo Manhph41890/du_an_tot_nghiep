@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\chi_tiet_vi;
 use App\Models\don_hang;
 use App\Models\huy_don_hang;
 use App\Models\san_pham;
+use App\Models\vi_nguoi_dung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -134,8 +136,6 @@ class HuyDonHangController extends Controller
             }
         }
 
-
-
         Mail::send('auth.xacnhan_huy', [
             'user' => $huyDon->user, // Người dùng liên quan
             'order' => $donHang      // Đơn hàng bị hủy
@@ -144,6 +144,28 @@ class HuyDonHangController extends Controller
                 ->subject('Xác nhận hủy đặt hàng thành công');
         });
 
+        // Kiểm tra trạng thái thanh toán của đơn hàng
+        if ($donHang->trang_thai_thanh_toan === 'Đã thanh toán') {
+            // Chuyển tiền về ví người dùng
+            $viNguoiDung = vi_nguoi_dung::where('user_id', $donHang->user_id)->first();
+
+            if ($viNguoiDung) {
+                $viNguoiDung->tong_tien += $donHang->tong_tien;
+                $viNguoiDung->save();
+
+                // Lưu chi tiết ví
+                chi_tiet_vi::create([
+                    'don_hang_id' => $donHang->id,
+                    'vi_nguoi_dung_id' => $viNguoiDung->id,
+                    'tien_hoan' => $donHang->tong_tien,
+                    'thoi_gian_hoan' => now()->timezone('Asia/Ho_Chi_Minh'),
+                    'trang_thai' => 'Thành công',
+                ]);
+            } else {
+                // Xử lý khi không tìm thấy ví người dùng
+                return response()->json(['error' => 'Ví người dùng không tồn tại'], 404);
+            }
+        }
 
         // Trả về thông báo thành công
         return redirect()->back()->with('success', 'Đơn hàng đã được xác nhận hủy.');

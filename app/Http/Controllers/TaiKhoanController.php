@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\don_hang;
 use App\Models\lich_su_thanh_toan;
+use App\Models\vi_nguoi_dung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,15 @@ class TaiKhoanController extends Controller
         $myOrders = don_hang::where('user_id', $user->id)->latest()->paginate(4);
 
         return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders'));
+    }
+
+    public function viNguoiDung()
+    {
+        $user = Auth::user(); // Lấy thông tin người dùng hiện tại
+        $title = "Ví người dùng";
+        $viNguoiDung = vi_nguoi_dung::where('user_id', $user->id)->first();
+
+        return view('client.taikhoan.dashboard', compact('user', 'title', 'viNguoiDung'));
     }
 
     public function showMyOrder(don_hang $don_hang, $id)
@@ -41,6 +51,8 @@ class TaiKhoanController extends Controller
         // Trả về view cùng với dữ liệu đơn hàng
         return view('client.taikhoan.showmyorder', compact('donhang'));
     }
+
+
 
     public function cancel($id)
     {

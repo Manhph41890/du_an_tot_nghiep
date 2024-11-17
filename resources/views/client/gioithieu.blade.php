@@ -72,12 +72,12 @@
         </p>
       </div>
     </div>
-    <p>
+    <strong style="text-align: center;">
+    Hãy để Articraft đồng hành cùng bạn trên hành trình sáng tạo vô tận. Ghé thăm chúng tôi tại website <a href="http://du_an_tot_nghiep.test/">Articraft</a> và khám phá ngay bộ sưu tập đồ họa cụ đỉnh cao dành riêng cho bạn!
+    </strong>
 
-      Hãy để Articraft đồng hành cùng bạn trên hành trình sáng tạo vô tận. Ghé thăm chúng tôi tại website <a href="http://du_an_tot_nghiep.test/">Articraft</a> và khám phá ngay bộ sưu tập đồ họa cụ đỉnh cao dành riêng cho bạn!
-
-      Articraft – Kết nối cảm hứng, tạo nên kỳ tích.
-    </p>
+      
+  
   </div>
 </section>
 <style>
@@ -90,6 +90,10 @@
     max-width: 900px;
     margin: 0 auto 20px;
     line-height: 1.4;
+    text-align: center;
+  }
+  strong{
+    font-size: 17px;
     text-align: center;
   }
 

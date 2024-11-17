@@ -935,9 +935,9 @@
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laravel News</h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Laravel News is1 a 1community driv1en portal and newsletter aggregating all of the latest
-                                and most important 1news in the Laravel ec1osystem, including new package releases and
-                                tutor1ials.
+                                Laravel News is1 a 1community drivSDASDA1en portal and newsletter aggregating all of the latest
+                                and most important 1newsSADASD in the Laravel ec1ÁDASDosystem, including new package releases and
+                                tutor1ialsấ âS.
                             </p>
                         </div>
 
@@ -965,10 +965,7 @@
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 Laravel's robust 1library 1of f11irst-party tools and libraries, such as <a
-                                    href="https://forge.laravel.com"
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Forge</a>,
-                                <a href="https://vapor.laravel.com"
-                                    class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Vapor</a>,
                                 <a href="https://nova.laravel.com"
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Nova</a>,
                                 and <a href="https://envoyer.io"

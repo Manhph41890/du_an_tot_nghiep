@@ -318,7 +318,7 @@
                             <p class="text">Vẽ sáng tạo - Tô hạnh phúc</p>
                         </div>
                     </div> --}}
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <nav class="product-tab-menu theme1">
                             <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li class="nav-item">
@@ -333,18 +333,20 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="tab-content" id="pills-tabContent">
                         <!-- first tab-pane -->
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                            aria-labelledby="pills-home-tab">
+                        <div class="pb-80">
                             <div class="row">
+                                <div class="section-title text-center">
+                                    <h2 class="title pb-3 mb-3">Sản phẩm Mới</h2>
+                                </div>
                                 @foreach ($sanPhamMois as $item)
-                                    <div class="col-12 col-md-4 col-lg-2 mb-4">
+                                    <div class="col-12 col-md-6  col-lg-2 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
@@ -375,10 +377,10 @@
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <p>Giá: </p>
-                                                                <p style="color: red">
-                                                                    <del
-                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
-                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                <p>
+
+                                                                    {{ number_format($item->gia_goc, 0, ',', '.') }}
+                                                                    VNĐ
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -392,8 +394,11 @@
                             </div>
                         </div>
                         <!-- second tab-pane -->
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="pb-80">
                             <div class="row">
+                                <div class="section-title text-center">
+                                    <h2 class="title pb-3 mb-3">Sản phẩm giảm giá</h2>
+                                </div>
                                 @foreach ($sanPhamGiamGias as $sanPhamGg)
                                     <div class="col-12 col-md-4 col-lg-2 mb-4">
                                         <div class="card product-card">
@@ -426,8 +431,12 @@
                                                                 @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span class="product-price">Giá:
-                                                                    {{ number_format($sanPhamGg->gia_km) }} VNĐ</span>
+                                                                <p>Giá: </p>
+                                                                <p style="color: red">
+                                                                    <del
+                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
+                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -461,7 +470,8 @@
                                     <div class="card-body p-0">
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
-                                                <span class="badge badge-danger top-right">New</span>
+                                                <span class="badge badge-danger top-right">{{ $sanphamview->views }} lượt
+                                                    xem</span>
                                                 <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
@@ -489,8 +499,12 @@
                                                         @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span class="product-price">Giá:
-                                                            {{ number_format($sanphamview->gia_km) }} VNĐ</span>
+                                                        <p>Giá: </p>
+                                                        <p style="color: red">
+                                                            <del
+                                                                style="color: black">{{ number_format($sanphamview->gia_goc, 0, ',', '.') }}</del>
+                                                            {{ number_format($sanphamview->gia_km, 0, ',', '.') }} VNĐ
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>

@@ -255,7 +255,7 @@
                                                 <div class="single-review">
                                                     <div class="review-img">
                                                         <img src="/assets/img/testimonial-image/1.png" alt="" />
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="review-content">
                                                         <div class="review-top-wrap">
                                                             <div class="review-left">

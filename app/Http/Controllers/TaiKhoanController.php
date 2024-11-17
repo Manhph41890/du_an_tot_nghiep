@@ -34,10 +34,8 @@ class TaiKhoanController extends Controller
             'chi_tiet_don_hangs.color_san_pham',
             'chi_tiet_don_hangs.size_san_pham',
             'lich_su_thanh_toans',
-            'huy_dat_hang',
-        ])->whereDoesntHave('huy_dat_hang', function ($query) {
-            $query->where('trang_thai', 'Từ chối hủy');
-        })->findOrFail($id);
+            'huy_don_hang',
+        ])->findOrFail($id);
         $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
 
         // Trả về view cùng với dữ liệu đơn hàng

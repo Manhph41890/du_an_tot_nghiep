@@ -40,8 +40,7 @@
                         @endif
                         <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng của bạn</a>
 
-                        <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh
-                            toán</a>
+                        <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Ví người dùng </a>
 
                         <a href="#logout-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng xuất</a>
 
@@ -264,7 +263,7 @@
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="payment-method" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3 class="text-center mb-4">Thông tin ví thanh toán điện tử</h3>
+                                <h3 class="text-center mb-4">Thông tin ví người dùng</h3>
                                 <div class="card-container">
                                     <!-- Logo của ngân hàng -->
                                     <div class="bank-logo">
@@ -300,18 +299,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="admin-dashboad" role="tabpanel">
-                        <div class="myaccount-content">
-                            <h3>Quản trị</h3>
 
-                            <div class="welcome mb-20 d-flex">
-                                <h5><strong>Vào trang quản trị với chức vụ là:<h4 class="badge bg-primary ms-3 h3">
-                                            {{ $user->chuc_vu?->ten_chuc_vu }}</h4></strong></h5>
-                            </div>
-                            <a href="{{ route('thong_ke_chung') }}" class="btn btn-success">Vào quản trị</a>
-
-                        </div>
-                    </div>
 
                     <!-- Single Tab Content End -->
                 </div>

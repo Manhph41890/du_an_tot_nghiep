@@ -319,27 +319,7 @@
                                 <!-- cart block end -->
                             </ul>
                             <!-- Modal thông báo -->
-                            <div class="modal fade" id="notificationModal" tabindex="-1"
-                                aria-labelledby="notificationModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="notificationModalLabel">Thông báo</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul id="order-list">
-                                                <li>
 
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                         <div class="mobile-menu-toggle theme1 d-lg-none">
@@ -673,12 +653,6 @@
         });
     });
 
-    $(document).ready(function() {
-        // Mở modal khi nhấn vào chuông thông báo
-        $('#notification-icon').click(function() {
-            $('#notificationModal').modal('show');
-        });
-    });
 
 
     // Lấy phần tử icon và container

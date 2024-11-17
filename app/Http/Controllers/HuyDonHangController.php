@@ -103,8 +103,6 @@ class HuyDonHangController extends Controller
             ]);
         }
 
-        // dd($donHang);
-        // die();
         // Cập nhật trạng thái yêu cầu hủy thành "Xác nhận hủy"
         $huyDon->update([
             'trang_thai' => 'Xác nhận hủy',

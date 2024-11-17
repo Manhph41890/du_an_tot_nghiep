@@ -166,13 +166,13 @@
                                 <div class="your-order-total mb-0">
                                     <ul>
                                         <li class="order-total">Tổng thanh toán</li>
-                                        <li>??? VND</li>
+                                        <li>100000 VND</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="Place-order mt-25">
-                            <a class="btn btn--lg btn-primary my-2 my-sm-0 ms-2" href="#">Thanh toán</a>
+                            <a class="btn btn--lg btn-primary my-2 my-sm-0 ms-2" href="#">Thanh toán ngay</a>
                         </div>
                     </div>
                 </div>

@@ -43,7 +43,7 @@
 
                         <div class="single-contact-block ">
                             <h4 class="style_primary"><i class="fa fa-fax" style="margin-right: 8px;"></i> Địa chỉ</h4>
-                            <p>P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội </p>
+                            <p>Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội </p>
                         </div>
 
                         <!--  End of single contact block -->
@@ -79,7 +79,7 @@
                     <div class="contact-form-content">
                         <h3 class="contact-page-title style_primary" >Tư Vấn Thêm</h3>
                         <div class="contact-form">
-                            <form id="contact-form" action="https://htmldemo.net/looki/looki/assets/php/contact.php"
+                            <form id="contact-form" action=""
                                 method="POST">
                                 <div class="form-group">
                                     <label class="style_primary">Họ và tên <span class="required">*</span></label>

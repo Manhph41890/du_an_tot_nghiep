@@ -92,6 +92,7 @@
                             <th class="text-center" style="width: 30%; font-size:18px">Tên sản phẩm</th>
                             <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
                             <th class="text-center" style="width: 20%; font-size:18px">Phân loại</th>
+                            <th class="text-center" style="width: 20%; font-size:18px">Giá biến thể</th>
                             <th class="text-center" style="width: 10%; font-size:18px">Số lượng</th>
                             <th class="text-center" style="width: 15%; font-size:18px">Thành tiền</th>
                         </tr>
@@ -114,6 +115,22 @@
                                         <span>Color: {{ $item->color->ten_color }}</span>
                                     @else
                                         <span class="text-muted">Không có thông tin kích thước hoặc màu sắc</span>
+                                    @endif
+                                </td>
+                                <td class="text-center" style="font-size:16px;">
+                                    @php
+                                        // Tìm biến thể dựa trên size và color của item
+                                        $variant = $item->san_pham->bien_the_san_phams->firstWhere(function (
+                                            $variant,
+                                        ) use ($item) {
+                                            return $variant->size_san_pham_id == $item->size_san_pham_id &&
+                                                $variant->color_san_pham_id == $item->color_san_pham_id;
+                                        });
+                                    @endphp
+                                    @if ($variant)
+                                        {{ number_format($variant->gia, 0, ',', '.') }} đ
+                                    @else
+                                        <span>Chưa có giá biến thể</span>
                                     @endif
                                 </td>
                                 <td class="text-center" style="font-size:16px;">{{ $item->quantity }}</td>

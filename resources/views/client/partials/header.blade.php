@@ -1,4 +1,46 @@
+<style>
+    .dropdown-menu {
+        display: none;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease-in-out;
+    }
 
+    .dropdown:hover .dropdown-menu,
+    .dropdown-menu.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .notification-dot {
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        border-radius: 50%;
+        border: 2px solid white;
+        position: absolute;
+        top: -25px;
+        left: -15px;
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+            /* Kích thước ban đầu */
+        }
+
+        50% {
+            transform: scale(0.8);
+            /* Thu nhỏ */
+        }
+    }
+</style>
+
+<!-- header start -->
 <header>
     <!-- header-middle satrt -->
     <div id="sticky" class="header-middle theme1 py-15 py-lg-0">
@@ -62,16 +104,6 @@
                                         </div>
                                     </form>
                                 </li>
-
-
-
-                                <li class="mr-xl-0 cart-block position-relative me-1">
-                                    <a id="notification-icon" href="javascript:void(0);">
-                                        <span class="position-relative">
-                                            <i class="icon-bell"></i>
-                                        </span>
-                                    </a>
-                                </li>
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
@@ -84,28 +116,7 @@
 
                                 <!-- cart block end -->
                             </ul>
-                            <!-- Modal thông báo -->
-                            <div class="modal fade" id="notificationModal" tabindex="-1"
-                                aria-labelledby="notificationModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="notificationModalLabel">Thông báo</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul id="order-list">
-                                                <li>
 
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                         <div class="mobile-menu-toggle theme1 d-lg-none">
@@ -127,30 +138,26 @@
                                 @auth
                                     <li class="dropdown notification-list topbar-dropdown">
                                         <a class="nav-link dropdown-toggle nav-user me-0 avatar_box" href="#"
-                                            style="width: 50px;" id="profileDropdown" role="button"
-                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            style="width: 50px;" id="profileDropdown" role="button">
                                             @php
                                                 $avatar = Auth::user()->anh_dai_dien;
-
-                                                // Check if 'anh_dai_dien' is a URL or a storage path
                                                 $isUrl = filter_var($avatar, FILTER_VALIDATE_URL) !== false;
                                             @endphp
-
                                             <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
                                                 alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
-                                            {{-- <span class="pro-user-name ms-1">
-                                                {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
-                                        </span> --}}
+                                            @if (isset($notifications) && $notifications['totalNotifications'] > 0)
+                                                <span class="ms-2 position-relative">
+                                                    <span class="notification-dot"></span>
+                                                </span>
+                                            @endif
+                                            <span class="menu-arrow ms-auto"></span>
                                         </a>
                                         <div
                                             class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
-                                            <!-- <hr> -->
                                             <a class="notify-item notify-item__form"
-                                                href="{{ route('taikhoan.dashboard') }}" id="">
+                                                href="{{ route('taikhoan.dashboard') }}">
                                                 <i class="far fa-user"></i> <span>Thông tin tài khoản</span>
                                             </a>
-                                            <!-- <div class="dropdown-divider"></div> -->
-                                            <!-- Đăng xuất -->
                                             <form id="logout-form" class="notify-item notify-item__form"
                                                 style="margin-bottom: 0;" action="{{ route('auth.logout') }}"
                                                 method="POST">
@@ -171,6 +178,7 @@
                                 @endauth
                             </ul>
                         </div>
+
 
 
                     </div>
@@ -439,12 +447,6 @@
         });
     });
 
-    $(document).ready(function() {
-        // Mở modal khi nhấn vào chuông thông báo
-        $('#notification-icon').click(function() {
-            $('#notificationModal').modal('show');
-        });
-    });
 
 
     // Lấy phần tử icon và container

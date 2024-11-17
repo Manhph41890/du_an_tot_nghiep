@@ -145,7 +145,7 @@
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                  <a href="#" class="btn btn-primary check-out-btn">apply code</a>
+                  <a href="#" class="btn btn-primary check-out-btn">Apply code</a>
                 </div>
               </div>
             </form>
@@ -160,7 +160,7 @@
                                 <div class="your-order-bottom">
                                     <ul>
                                         <li class="your-order-shipping">Thành tiền</li>
-                                        <li>100000 VND</li>
+                                        <li>1000000 VND</li>
                                     </ul>
                                 </div>
                                 <div class="your-order-total mb-0">

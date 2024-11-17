@@ -31,10 +31,11 @@
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
-                        <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i> Chi tiết tài
+                        <a href="#account-info" class="active" data-bs-toggle="tab"><i class="fa fa-user"></i> Chi tiết tài
                             khoản</a>
                         @if ($user->chuc_vu_id === 1 || $user->chuc_vu_id === 3)
-                            <a href="#dashboad" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Vào trang quản
+                            <a href="#admin-dashboad" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Vào trang
+                                quản
                                 trị</a>
                         @endif
                         <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng của bạn</a>
@@ -51,7 +52,7 @@
                 <!-- My Account Tab Content Start -->
                 <div class="col-lg-9 col-12 mb-30">
                     <div class="tab-content" id="myaccountContent">
-                        <div class="tab-pane fade active show" id="account-info" role="tabpanel">
+                        <div class="tab-pane fade show active" id="account-info" role="tabpanel">
                             <div class="myaccount-content">
                                 <h3>{{ $title }}</h3>
 
@@ -299,7 +300,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="dashboad" role="tabpanel">
+                    <div class="tab-pane fade" id="admin-dashboad" role="tabpanel">
                         <div class="myaccount-content">
                             <h3>Quản trị</h3>
 
@@ -316,9 +317,6 @@
                 </div>
 
                 {{-- aa a --}}
-
-
-
 
                 <!-- My Account Tab Content End -->
             </div>

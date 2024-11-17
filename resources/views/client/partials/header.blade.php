@@ -241,7 +241,7 @@
                 <div class="col-xl-3 col-lg-3 col-6  ">
                     <div class="logo col-8">
                         <a href="{{ route('client.home') }}"><img
-                                src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
+                                src="{{ asset('assets/client/images/logo/logo_art2.png') }}" alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 d-none d-lg-block">

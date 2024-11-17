@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\danh_muc;
+use App\Models\don_hang;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeServiceProvider;
@@ -27,6 +29,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // / Lấy số lượng đơn hàng mới và yêu cầu hủy
+        $newOrdersCount = DB::table('don_hangs')->where('trang_thai_don_hang', 'Chờ xác nhận')->count();
+        $cancelRequestsCount = DB::table('huy_don_hangs')->where('trang_thai', 'Chờ xác nhận hủy')->count();
+
+        // Tạo biến notifications
+        $notifications = [
+            'newOrdersCount' => $newOrdersCount,
+            'cancelRequestsCount' => $cancelRequestsCount,
+            'totalNotifications' => $newOrdersCount + $cancelRequestsCount,
+        ];
+
+        // Chia sẻ biến notifications đến tất cả các view
+        View::share('notifications', $notifications);
         //
         Paginator::useBootstrapFive();
         // Lấy dữ liệu từ database

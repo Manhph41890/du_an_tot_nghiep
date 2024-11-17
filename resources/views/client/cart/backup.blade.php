@@ -135,7 +135,7 @@
                             <tr>
                                 <th>Chọn</th>
                                 <th>Sản phẩm</th>
-                                <th>Đơn giá</th>
+                                {{-- <th>Đơn giá</th> --}}
                                 <th>Phân loại</th>
                                 {{-- <th>Giá biến thể</th> --}}
                                 <th>Tổng tiền</th>
@@ -158,9 +158,9 @@
 
                                             </div>
                                         </td>
-                                        <td style="padding-top: 30px">
+                                        {{-- <td style="padding-top: 30px">
                                             <strong>{{ number_format($item->san_pham->gia_km, 0, ',', '.') }} đ</strong>
-                                        </td>
+                                        </td> --}}
                                         <td style="padding-top: 30px">
                                             <span>Size:</span>
                                             <select name="size_san_pham_id" class="size-select"

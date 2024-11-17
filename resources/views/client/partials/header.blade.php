@@ -237,14 +237,14 @@
     <!-- header-middle satrt -->
     <div id="sticky" class="header-middle theme1 py-15 py-lg-0">
         <div class="container position-relative">
-            <div class="row align-items-center">
-                <div class="col-xl-2 col-lg-2 col-6  ">
-                    <div class="logo">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-6  ">
+                    <div class="logo col-8">
                         <a href="{{ route('client.home') }}"><img
                                 src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-7 d-none d-lg-block">
+                <div class="col-xl-6 col-lg-6 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="ml-0">
                             <a href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
@@ -262,7 +262,7 @@
                         <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
-                <div class="col-xl-4 col-lg-3 col-6 ">
+                <div class="col-xl-3 col-lg-3 col-6 ">
                     <!-- search-form end -->
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
@@ -275,20 +275,29 @@
                                 </li> -->
                                 <li class="mr-xl-0 cart-block position-relative me-1">
                                     <form class="search-box" style="margin: 0;" action="{{ url('/') }}"
-                                        method="post">
+                                        method="get">
                                         @csrf
-                                        @method('get')
-                                        <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
+                                        <div class="d-flex align-items-center flex-row-reverse position-relative"
+                                            id="searchContainer">
                                             <div class="my-2 mx-2">
+                                                <!-- Icon tìm kiếm -->
                                                 <a class="search-toggle" id="searchIcon" role="button"
-                                                    style="font-size: 20px;">
+                                                    style="font-size: 20px; cursor: pointer;">
                                                     <i class="icon-magnifier"></i>
                                                 </a>
                                             </div>
-                                            <!-- Ô nhập liệu sẽ được thêm vào DOM bằng JavaScript -->
+                                            <!-- Input tìm kiếm (ẩn mặc định) -->
+                                            <div id="searchInput" class="search-input d-none">
+                                                <div class="input-group">
+                                                    <input type="text" name="search" class="form-control"
+                                                        placeholder="Tìm kiếm..." aria-label="Search">
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </li>
+
+
 
                                 <li class="mr-xl-0 cart-block position-relative me-1">
                                     <a id="notification-icon" href="javascript:void(0);">
@@ -388,7 +397,7 @@
                                         </div>
                                     </li>
                                 @else
-                                    <li>
+                                    <li class="me-0">
                                         <a style="font-size: 16px;" href="{{ route('auth.login') }}">
                                             Đăng Nhập
                                         </a>
@@ -421,16 +430,44 @@
 </script>
 
 <style>
-    /* Ẩn ô nhập liệu lúc đầu */
+    /* Hiệu ứng trượt */
+    @keyframes slideIn {
+        from {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+    }
+
+    /* Style cho ô nhập liệu */
     .search-input {
-        width: 0;
-        /* Không hiển thị lúc đầu */
-        opacity: 0;
-        /* Ẩn nội dung */
-        animation-duration: 0.5s;
-        /* Thời gian cho animation */
-        animation-fill-mode: forwards;
-        /* Để duy trì trạng thái cuối của animation */
+        position: absolute;
+        top: 100%;
+        /* Hiển thị ngay dưới biểu tượng */
+        right: 0;
+        width: 250px;
+        z-index: 1000;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-in-out;
     }
 
     /* Hiệu ứng trượt vào */
@@ -615,25 +652,34 @@
 <!-- JavaScript cho modal -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    // Đảm bảo mã JavaScript chạy sau khi DOM được tải
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchIcon = document.getElementById("searchIcon");
+        const searchInput = document.getElementById("searchInput");
+
+        // Thêm sự kiện click vào biểu tượng tìm kiếm
+        searchIcon.addEventListener("click", function() {
+            if (searchInput.classList.contains("d-none")) {
+                // Hiển thị ô nhập liệu với hiệu ứng trượt xuống
+                searchInput.classList.remove("d-none");
+                searchInput.style.animationName = "slideIn";
+            } else {
+                // Ẩn ô nhập liệu với hiệu ứng trượt lên
+                searchInput.style.animationName = "slideOut";
+                setTimeout(() => {
+                    searchInput.classList.add("d-none");
+                }, 300); // Chờ hiệu ứng hoàn tất trước khi ẩn
+            }
+        });
+    });
+
     $(document).ready(function() {
         // Mở modal khi nhấn vào chuông thông báo
         $('#notification-icon').click(function() {
             $('#notificationModal').modal('show');
         });
     });
-    document.getElementById("searchIcon").addEventListener("click", function() {
-        const mainMenu = document.querySelector(".main-menu");
 
-        // Kiểm tra xem class justify-content-center có tồn tại không
-        if (mainMenu.classList.contains("justify-content-center")) {
-            mainMenu.classList.remove("justify-content-center"); // Xóa class justify-content-center
-            mainMenu.classList.add("justify-content-start"); // Thêm class justify-content-start
-        } else {
-            mainMenu.classList.remove(
-                "justify-content-start"); // Nếu đã là justify-content-start, quay về justify-content-center
-            mainMenu.classList.add("justify-content-center");
-        }
-    });
 
     // Lấy phần tử icon và container
     const searchIcon = document.getElementById("searchIcon");

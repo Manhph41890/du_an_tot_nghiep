@@ -51,17 +51,11 @@ class ClientSanPhamController extends Controller
         // Xử lý sắp xếp
         if ($request->has('sort')) {
             switch ($request->sort) {
-                case '1':
-                    $query->orderBy('created_at', 'DESC');
-                    break;
                 case '2':
                     $query->orderBy('gia_km', 'DESC');
                     break;
                 case '3':
                     $query->orderBy('gia_km', 'ASC');
-                    break;
-                case '4':
-                    $query->orderBy('views', 'DESC');
                     break;
             }
         } else {

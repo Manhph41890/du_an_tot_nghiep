@@ -355,7 +355,6 @@ class OrderController extends Controller
                     'trang_thai' => 'Thanh toán thành công',
                 ]);
 
-
                 Mail::send('auth.success_order', [
                     'ho_ten' => $user->ho_ten,
                     'order' => $order,

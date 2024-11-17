@@ -1,6 +1,58 @@
 @extends('client.layout')
 
 @section('content')
+    <style>
+        .notification-dot {
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: -50px;
+            left: 260px;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                /* Kích thước ban đầu */
+            }
+
+            50% {
+                transform: scale(0.8);
+                /* Thu nhỏ */
+            }
+        }
+
+        .notification-dot2 {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            border: 2px solid white;
+            position: absolute;
+            top: -22px;
+            left: -10px;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                /* Kích thước ban đầu */
+            }
+
+            50% {
+                transform: scale(0.8);
+                /* Thu nhỏ */
+            }
+        }
+    </style>
     <!-- breadcrumb-section start -->
     <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
         <div class="container">
@@ -31,13 +83,20 @@
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
-                        <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i> Chi tiết tài
+                        <a href="#account-info" class="active" data-bs-toggle="tab"><i class="fa fa-user"></i> Chi tiết tài
                             khoản</a>
                         @if ($user->chuc_vu_id === 1 || $user->chuc_vu_id === 3)
-                            <a href="#dashboad" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Vào trang quản
+                            <a href="#admin-dashboad" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Vào trang
+                                quản
                                 trị</a>
                         @endif
                         <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng của bạn</a>
+                        @if (isset($notifications) && $notifications['totalNotifications'] > 0)
+                            <span class="ms-2 position-relative">
+                                <span class="notification-dot"></span>
+                            </span>
+                        @endif
+                        <span class="menu-arrow ms-auto"></span>
 
                         <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh
                             toán</a>
@@ -51,7 +110,7 @@
                 <!-- My Account Tab Content Start -->
                 <div class="col-lg-9 col-12 mb-30">
                     <div class="tab-content" id="myaccountContent">
-                        <div class="tab-pane fade active show" id="account-info" role="tabpanel">
+                        <div class="tab-pane fade show active" id="account-info" role="tabpanel">
                             <div class="myaccount-content">
                                 <h3>{{ $title }}</h3>
 
@@ -209,6 +268,11 @@
 
                                                             <span class="badge {{ $class }}">
                                                                 {{ $myOrder->trang_thai_don_hang }}
+                                                                @if ($myOrder->trang_thai_don_hang == 'Chờ xác nhận')
+                                                                    <span class="ms-2 position-relative">
+                                                                        <span class="notification-dot2"></span>
+                                                                    </span>
+                                                                @endif
                                                             </span>
                                                         </div>
                                                     </td>
@@ -299,7 +363,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="dashboad" role="tabpanel">
+                    <div class="tab-pane fade" id="admin-dashboad" role="tabpanel">
                         <div class="myaccount-content">
                             <h3>Quản trị</h3>
 
@@ -316,9 +380,6 @@
                 </div>
 
                 {{-- aa a --}}
-
-
-
 
                 <!-- My Account Tab Content End -->
             </div>

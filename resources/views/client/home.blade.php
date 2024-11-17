@@ -3,7 +3,7 @@
 @section('content')
     <style>
         .main-slider {
-            max-height: 500px;
+            height: 100vh;
             display: flex;
 
         }
@@ -180,15 +180,118 @@
                 opacity: 0;
             }
         }
+
+        svg {
+            width: 350px;
+            height: 150px;
+        }
+
+        /* Phần chữ Merry Christmas - Cong nhẹ */
+        .curved-text text {
+            font-size: 22px;
+            font-weight: 500;
+            fill: #e74c3c;
+
+        }
+
+        /* Đường cong */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+                /* Chữ nhảy lên */
+            }
+        }
+
+        /* Phần chữ SALE UPTO 20% - Nhảy */
+        .bouncing-text {
+            font-size: 48px;
+            font-weight: bold;
+            fill: #e74c3c;
+            text-transform: uppercase;
+            animation: bounce 1s infinite;
+        }
+
+        .slider-content1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: translate(64%, -100%);
+            position: absolute;
+        }
+
+        .curved-text {
+            margin-bottom: -10px;
+            /* Giảm khoảng cách dưới của chữ Merry Christmas */
+        }
+
+        .bouncing-text {
+            position: absolute;
+            top: 100%;
+            right: 16%;
+        }
+
+        .btn-see-cart {
+            position: relative;
+            left: 25%;
+            top: 100px;
+            background: #4498c8;
+            color: #fff;
+            border-color: #4498c8;
+            border-radius: 8px;
+        }
+
+        .btn-see-cart:hover {
+            background: #367da5;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+                /* Chữ nhảy lên */
+            }
+        }
+
+        .bg-img {
+            height: 100vh !important;
+            max-height: 100vh !important;
+        }
     </style>
     <!-- main slider start -->
     <section class="bg-light">
-        <div class="main-slider dots-style theme1">
-            <div class="slider-item bg-img bg-img1">
+        <div class=" main-slider dots-style theme1">
+            <div class="slider-item bg-img bg-img1 ">
                 <div class="container">
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
-                            <div class="slider-content">
+                            <div class="slider-content1">
+                                <svg class="curved-text" viewBox="0 25 400 30">
+                                    <path id="curve1" d="M50,120 Q150,90 250,120" fill="transparent" stroke="none" />
+                                    <text>
+                                        <textPath href="#curve1" startOffset="50%" text-anchor="middle">
+                                            Merry Christmas
+                                        </textPath>
+                                    </text>
+                                </svg>
+
+                                <!-- Chữ SALE UPTO 20%, nhảy nhót -->
+                                <svg class="bouncing-text">
+                                    <text class="bouncing-text" x="50%" y="50%" text-anchor="middle">
+                                        SALE UPTO 50%
+                                    </text>
+                                </svg>
+
                                 {{-- <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
                                     ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300"
@@ -202,8 +305,13 @@
                                         data-delay-in="1.5" style="color: #5C5BCA" style="color: #5C5BCA">Ưu đãi 20%</span>
                                 </h2>
                                 <a href="{{ route('client.cuahang') }}"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a> --}}
+                            class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                            data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a> --}}
+                            </div>
+                            <div>
+                                <a href="{{ route('client.cuahang') }}"
+                                    class="btn btn-outline-primary btn--lg  mt-45 mt-sm-25 btn-see-cart"
+                                    data-animation-in="fadeInLeft">Mua ngay</a>
                             </div>
                         </div>
                     </div>
@@ -232,8 +340,8 @@
                                 <a href="shop-grid-4-column.html"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     href="{{ route('client.cuahang') }}"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a> --}}
+                            class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                            data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a> --}}
                             </div>
                         </div>
                     </div>
@@ -262,8 +370,8 @@
                                 </h2>
 
                                 <a href="{{ route('client.cuahang') }}"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a> --}}
+                            class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                            data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a> --}}
                             </div>
                         </div>
                     </div>
@@ -310,6 +418,7 @@
     <!-- product tab start -->
     <section class="product-tab bg-white pt-50 pb-80">
         <div class="container">
+
             <div class="product-tab-nav mb-50">
                 <div class="row align-items-center">
                     {{-- <div class="col-12">
@@ -528,7 +637,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-3 mb-3">Bài viết mới nhất</h2>
+                        <h2 class="title pb-3 mb-3">BÀI VIẾT MỚI NHẤT</h2>
                     </div>
                 </div>
             </div>

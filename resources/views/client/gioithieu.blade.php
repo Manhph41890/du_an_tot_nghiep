@@ -1,13 +1,14 @@
+
 @extends('client.layout')
 
 @section('content')
 <!-- breadcrumb-section start -->
-<nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
+<nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110 " style="height: 325.5px;">
   <div class="container">
     <div class="row">
       <div class="col-12">
         <div class="section-title text-center">
-          <h2 class="title pb-4 text-dark text-capitalize">Giới thiệu</h2>
+          <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">GIỚI THIỆU</h2>
         </div>
       </div>
       <div class="col-12">

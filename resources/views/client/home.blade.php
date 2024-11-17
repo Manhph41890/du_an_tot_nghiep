@@ -427,22 +427,7 @@
                             <p class="text">Vẽ sáng tạo - Tô hạnh phúc</p>
                         </div>
                     </div> --}}
-                    {{-- <div class="col-12">
-                        <nav class="product-tab-menu theme1">
-                            <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home"
-                                        role="tab" aria-controls="pills-home" aria-selected="true"
-                                        style="font-size: 20px">Sản phẩm mới</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" href="#pills-profile"
-                                        role="tab" aria-controls="pills-profile" aria-selected="false"
-                                        style="font-size: 20px">Đang giảm giá</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div> --}}
+                  
                 </div>
             </div>
             <div class="row">
@@ -452,7 +437,7 @@
                         <div class="pb-80">
                             <div class="row">
                                 <div class="section-title text-center">
-                                    <h2 class="title pb-3 mb-3">Sản phẩm Mới</h2>
+                                    <h2 class="title pb-3 mb-3">SẢN PHẨM MỚI</h2>
                                 </div>
                                 @foreach ($sanPhamMois as $item)
                                     <div class="col-12 col-md-6  col-lg-2 mb-4">
@@ -506,7 +491,7 @@
                         <div class="pb-80">
                             <div class="row">
                                 <div class="section-title text-center">
-                                    <h2 class="title pb-3 mb-3">Sản phẩm giảm giá</h2>
+                                    <h2 class="title pb-3 mb-3">SẢN PHẨM GIẢM GIÁ</h2>
                                 </div>
                                 @foreach ($sanPhamGiamGias as $sanPhamGg)
                                     <div class="col-12 col-md-4 col-lg-2 mb-4">
@@ -570,7 +555,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-3 mb-3">Sản phẩm được quan tâm</h2>
+                        <h2 class="title pb-3 mb-3">SẢN PHẨM ĐƯỢC QUAN TÂM</h2>
                     </div>
                     <div class="product-slider-init theme1 slick-nav">
                         @foreach ($sanPhamView as $sanphamview)
@@ -677,7 +662,7 @@
     {{-- mã giảm giá 'voucher' --}}
     <section class="discount-codes">
         <div class="container">
-            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span></h2>
+            <h2 class="section-title">MÃ GIẢM GIÁ <span class="hot-tag">HOT</span></h2>
             </h2>
             <div class="discount-list">
                 @foreach ($discounts as $item)

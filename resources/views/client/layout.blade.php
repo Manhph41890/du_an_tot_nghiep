@@ -35,7 +35,7 @@
         }
 
         .bg-img1 {
-            background-image: url('./assets/client/images/banner/Banner1@2x.png');
+            background-image: url('./assets/client/images/banner/banner.png');
             width: 50%;
         }
 

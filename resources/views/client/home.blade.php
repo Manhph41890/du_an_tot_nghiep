@@ -412,7 +412,7 @@
         <div class="container">
 
         </div>
-        <<<<<<< HEAD <!-- common banner end -->
+<!-- common banner end -->
 
             <!-- product tab start -->
             <section class="product-tab bg-white pt-50 pb-80">
@@ -426,84 +426,51 @@
                             <p class="text">Vẽ sáng tạo - Tô hạnh phúc</p>
                         </div>
                     </div> --}}
-                            <div class="col-12">
-                                <nav class="product-tab-menu theme1">
-                                    <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                                href="#pills-home" role="tab" aria-controls="pills-home"
-                                                aria-selected="true" style="font-size: 20px">Sản phẩm mới</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                                href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                                aria-selected="false" style="font-size: 20px">Đang giảm giá</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="tab-content" id="pills-tabContent">
-                                <!-- first tab-pane -->
-                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                                    aria-labelledby="pills-home-tab">
-                                    <div class="row">
-                                        @foreach ($sanPhamMois as $item)
-                                            <div class="col-12 col-md-4 col-lg-2 mb-4">
-                                                <div class="card product-card">
-                                                    <div class="card-body p-0">
-                                                        <div class="media flex-column">
-                                                            <div class="product-thumbnail position-relative">
-                                                                <span
-                                                                    class="badge badge-danger top-right blinking-text">Mới</span>
-                                                                <a
-                                                                    href="{{ route('san-phams.incrementViews', $item->id) }}">
-                                                                    <img class="first-img"
-                                                                        src="{{ asset('storage/' . $item->anh_san_pham) }}"
-                                                                        alt="thumbnail" />
-                                                                </a>
-                                                            </div>
-                                                            <div class="media-body w-100">
-                                                                <div class="product-desc">
-                                                                    <h3 class="title min_h">
-                                                                        <a class=""
-                                                                            href="{{ route('sanpham.chitiet', $item->id) }}">{{ $item->ten_san_pham }}</a>
-                                                                    </h3>
-                                                                    <div class="star-rating">
-                                                                        @for ($i = 1; $i <= 5; $i++)
-                                                                            @if ($item->diem_trung_binh > 0 && $i <= floor($item->diem_trung_binh))
-                                                                                <span class="ion-ios-star"></span>
-                                                                                <!-- Sao có màu -->
-                                                                            @else
-                                                                                <span class="ion-ios-star-outline"></span>
-                                                                                <!-- Sao không màu -->
-                                                                            @endif
-                                                                        @endfor
-                                                                    </div>
-                                                                    <div
-                                                                        class="d-flex align-items-center justify-content-between">
-                                                                        <p>Giá: </p>
-                                                                        <p style="color: red">
-                                                                            <del
-                                                                                style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
-                                                                            {{ number_format($item->gia_km, 0, ',', '.') }}
-                                                                            VNĐ
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                    {{-- <div class="col-12">
+                        <nav class="product-tab-menu theme1">
+                            <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home"
+                                        role="tab" aria-controls="pills-home" aria-selected="true"
+                                        style="font-size: 20px">Sản phẩm mới</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" href="#pills-profile"
+                                        role="tab" aria-controls="pills-profile" aria-selected="false"
+                                        style="font-size: 20px">Đang giảm giá</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="tab-content" id="pills-tabContent">
+                        <!-- first tab-pane -->
+                        <div class="pb-80">
+                            <div class="row">
+                                <div class="section-title text-center">
+                                    <h2 class="title pb-3 mb-3">Sản phẩm Mới</h2>
+                                </div>
+                                @foreach ($sanPhamMois as $item)
+                                    <div class="col-12 col-md-6  col-lg-2 mb-4">
+                                        <div class="card product-card">
+                                            <div class="card-body p-0">
+                                                <div class="media flex-column">
+                                                    <div class="product-thumbnail position-relative">
+                                                        <span class="badge badge-danger top-right blinking-text">Mới</span>
+                                                        <a href="{{ route('san-phams.incrementViews', $item->id) }}">
+                                                            <img class="first-img"
+                                                                src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                                alt="thumbnail" />
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         @endforeach
-                                        =======
                                     </div>
                                     <!-- common banner  end -->
-                                    >>>>>>> b986ba2b555b66a7f06f5c9f9353e4b4a898a59e
 
                                     <!-- product tab start -->
                                     <section class="product-tab bg-white pt-50 pb-80">

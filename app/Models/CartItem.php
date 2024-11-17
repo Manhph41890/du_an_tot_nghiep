@@ -28,4 +28,9 @@ class CartItem extends Model
     {
         return $this->belongsTo(size_san_pham::class, 'size_san_pham_id');
     }
+    // Model CartItem
+    public function bien_the_san_pham()
+    {
+        return $this->belongsTo(bien_the_san_pham::class, 'bien_the_san_pham_id');
+    }
 }

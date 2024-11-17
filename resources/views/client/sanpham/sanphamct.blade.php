@@ -244,32 +244,18 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!-- third tab-pane -->
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
-
-                                <h2>Đánh Giá Sản Phẩm</h2>
-                                <br>
-                                <div class="filter-rating">
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(0)">Tất cả</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(1)">1 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(2)">2 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(3)">3 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(4)">4 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(5)">5 Sao</button>
-                                </div>                                
-                                <br>
-
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="review-wrapper">
                                             @foreach ($sanPhamCT->danh_gias as $danhgia)
-                                                <div class="single-review" data-rating="{{ $danhgia->diem_so }}">
-                                                    {{-- <div class="review-img">
-
+                                                <div class="single-review">
+                                                    <div class="review-img">
                                                         <img src="/assets/img/testimonial-image/1.png" alt="" />
-                                                    </div> --}}
+                                                    </div>
                                                     <div class="review-content">
                                                         <div class="review-top-wrap">
                                                             <div class="review-left">
@@ -285,7 +271,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="review-bottom">
+                                                            <p>
                                                             <p>{{ $danhgia->binh_luan }}</p>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -301,7 +289,8 @@
 
         </div>
     </div>
-
+    <!-- product tab end -->
+    <!-- new arrival section start -->
     <section class="theme1 bg-white pb-80">
         <div class="container">
             <div class="row">
@@ -390,22 +379,38 @@
             var colorOptions = @json($colorsBySize); // Mảng các màu sắc cho từng size
             var colorsBySize = @json($colorsBySize); // Mảng các biến thể theo size và màu
             var newPriceElement = document.getElementById('new-price'); // Phần tử giá mới
+
             // Làm trống các lựa chọn màu cũ
             var colorContainer = document.getElementById('color-options');
             colorContainer.innerHTML = '';
+
             if (sizeId && colorOptions[sizeId]) {
                 // Lọc ra các màu sắc tương ứng với size đã chọn
                 colorOptions[sizeId].forEach(function(color) {
                     var colorInput = document.createElement('input');
                     colorInput.type = 'radio';
-	@@ -422,47 +409,23 @@ class="product-price">{{ number_format($sanphamlq->gia_goc) }}</span>
+                    colorInput.name = 'color';
+                    colorInput.id = 'color-' + color.id;
+                    colorInput.value = color.id;
+                    colorInput.required = true;
+
+                    var colorLabel = document.createElement('label');
+                    colorLabel.setAttribute('for', 'color-' + color.id);
+                    colorLabel.classList.add('me-2');
+                    colorLabel.textContent = `${color.ten_color} (Tồn kho: ${color.so_luong})`;
+
+                    var colorDiv = document.createElement('div');
+                    colorDiv.classList.add('widget-check-box');
+                    colorDiv.appendChild(colorInput);
                     colorDiv.appendChild(colorLabel);
+
                     colorInput.addEventListener('change', function() {
                         var selectedColorId = colorInput.value;
                         console.log('Size ID: ', sizeId);
                         console.log('Color ID: ', selectedColorId);
                         console.log('Color Options: ',
                             colorOptions); // Kiểm tra cấu trúc của colorOptions
+
                         // Tìm biến thể tương ứng với size và màu
                         var selectedVariant = null;
                         // Duyệt qua các biến thể để tìm match sizeId và selectedColorId
@@ -414,17 +419,21 @@
                                 selectedVariant = variant;
                             }
                         });
+
                         console.log('Selected Variant: ', selectedVariant);
+
                         if (selectedVariant) {
                             // Tính giá mới: gia_km + gia của cặp size và màu
                             var newPrice = parseFloat({{ $sanPhamCT->gia_km }}) + parseFloat(
                                 selectedVariant.gia);
                             newPriceElement.textContent = numberWithCommas(
                                 newPrice); // Cập nhật giá mới
+
                             // Cập nhật số lượng tồn kho
                             var quantityInput = document.getElementById('quantity-input');
                             quantityInput.max = selectedVariant.so_luong;
                             quantityInput.value = 1; // Đặt lại số lượng khi chọn màu mới
+
                             // Kiểm tra tồn kho và vô hiệu hóa nút nếu hết hàng
                             var addToCartButton = document.querySelector(
                                 `#add-to-cart-form{{ $sanPhamCT->id }} button[type="submit"]`);
@@ -439,9 +448,12 @@
                             }
                         }
                     });
-	@@ -471,20 +434,6 @@ class="product-price">{{ number_format($sanphamlq->gia_goc) }}</span>
+
+                    colorContainer.appendChild(colorDiv);
+                });
             }
         });
+
         // Hàm hỗ trợ định dạng số có dấu phân cách ngàn
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -450,6 +462,83 @@
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('form[id^="add-to-cart-form"]').forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+                    const formData = new FormData(form); // Lấy dữ liệu của form
+                    const url = form.getAttribute('action');
+                    fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Accept': 'application/json' // Cấu hình để server hiểu đây là yêu cầu JSON
+                            },
+                            body: formData
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(
+                                    'Network response was not ok'); // Kiểm tra phản hồi HTTP
+                            }
+                            return response.json(); // Xử lý phản hồi JSON
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                toastr.success(data.message); // Hiển thị thông báo thành công
+                            } else {
+                                toastr.error(data.message ||
+                                    'Có lỗi xảy ra.'); // Hiển thị thông báo lỗi nếu có
+                            }
+                        })
+                        .catch(error => {
+                            toastr.error(
+                                'Đã xảy ra lỗi khi thêm vào giỏ hàng. Vui lòng kiểm tra lại.'
+                            ); // Thông báo lỗi chung
+
+                            console.error('Error:', error); // Để debug lỗi trên console
+                        });
+                });
+            });
+        });
+
+        // Hàm tăng số lượng
+        function incrementQuantity() {
+            const quantityInput = document.querySelector('input[name="quantity"]');
+            let quantity = parseInt(quantityInput.value);
+            if (quantity < 10) {
+                quantityInput.value = quantity + 1;
+            }
+        } // Hàm giảm số lượng function decrementQuantity() { const
+        quantityInput = document.querySelector('input[name="quantity" ]');
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {
+            quantityInput.value = quantity - 1;
+        }
+
+
+        function showMainImage(imageUrl) {
+            // Tìm phần tử của ảnh chính
+            const mainImage = document.querySelector('.main-product .product-thumb img');
+            if (mainImage) {
+                mainImage.src = imageUrl;
+            }
+        }
+        const reviewInput = document.getElementById("review");
+        const charCountDisplay = document.getElementById("charCount");
+
+        reviewInput.addEventListener("input", function() {
+            const currentLength = reviewInput.value.length;
+
+            // Cập nhật bộ đếm ký tự
+            charCountDisplay.textContent = `${currentLength}/100`;
+
+            // Nếu vượt quá 100 ký tự, cắt ngắn lại (phòng ngừa trường hợp maxlength không hoạt động trên một số trình duyệt)
+            if (currentLength > 100) {
+                reviewInput.value = reviewInput.value.substring(0, 100);
+            }
+        });
 
         function promptLogin() {
             // toastr.options = {

@@ -257,7 +257,7 @@
                                     <button class="btn btn-outline-primary" onclick="filterByStars(3)">3 Sao</button>
                                     <button class="btn btn-outline-primary" onclick="filterByStars(4)">4 Sao</button>
                                     <button class="btn btn-outline-primary" onclick="filterByStars(5)">5 Sao</button>
-                                </div>                                
+                                </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-12">
@@ -272,6 +272,7 @@
                                                             <div class="review-left">
                                                                 <div class="review-name">
                                                                     <h4>{{ $danhgia->users->ho_ten }}</h4>
+                                                                    {{-- <small>{{ $danhgia->ngay_danh_gia->format('d/m/Y') }}</small> <!-- Thêm ngày đánh giá --> --}}
                                                                 </div>
                                                                 <div class="rating-product">
                                                                     @for ($i = 1; $i <= 5; $i++)
@@ -541,22 +542,6 @@
                     review.style.display = 'none';
                 }
             });
-
-            function filterByStars(starCount) {
-                const reviews = document.querySelectorAll('.single-review');
-
-                reviews.forEach(review => {
-                    const reviewStars = parseInt(review.getAttribute('data-rating'));
-
-                    // Hiển thị tất cả nếu chọn "Tất cả"
-                    if (starCount === 0 || reviewStars === starCount) {
-                        review.style.display = 'block';
-                    } else {
-                        review.style.display = 'none';
-                    }
-                });
-            }
-
         }
     </script>
 @endsection

@@ -310,6 +310,7 @@
     <!-- product tab start -->
     <section class="product-tab bg-white pt-50 pb-80">
         <div class="container">
+
             <div class="product-tab-nav mb-50">
                 <div class="row align-items-center">
                     {{-- <div class="col-12">

@@ -56,6 +56,7 @@ class CartController extends Controller
     // Thêm sản phẩm vào giỏ hàng
     public function add(Request $request)
     {
+
         // Xác thực dữ liệu đầu vào
         $validatedData = $request->validate([
             'san_pham_id' => 'required|exists:san_phams,id',
@@ -79,9 +80,11 @@ class CartController extends Controller
             ->where('color_san_pham_id', $validatedData['color'])
             ->first();
 
-        if (!$variant) {
-            return response()->json(['success' => false, 'message' => 'Biến thể sản phẩm không hợp lệ.']);
+        // Kiểm tra tồn kho trước khi thêm vào giỏ
+        if ($variant && $variant->so_luong < $validatedData['quantity']) {
+            return response()->json(['success' => false, 'message' => 'Số lượng yêu cầu vượt quá tồn kho.']);
         }
+
 
         // Lấy user_id của người dùng hiện tại
         $userId = auth()->id();

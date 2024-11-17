@@ -137,7 +137,7 @@
                                 <th>Sản phẩm</th>
                                 <th>Đơn giá</th>
                                 <th>Phân loại</th>
-                                <th>Giá biến thể</th>
+                                {{-- <th>Giá biến thể</th> --}}
                                 <th>Tổng tiền</th>
                             </tr>
                         </thead>
@@ -193,7 +193,7 @@
 
 
                                         </td>
-                                        <td style="padding-top: 30px">
+                                        {{-- <td style="padding-top: 30px">
                                             <span>
                                                 @php
                                                     // Tìm biến thể dựa trên size và color của item
@@ -211,7 +211,7 @@
                                                     <span>Chưa có giá biến thể</span>
                                                 @endif
                                             </span>
-                                        </td>
+                                        </td> --}}
 
 
 

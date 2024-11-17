@@ -1,236 +1,44 @@
-<!-- offcanvas-overlay start -->
-<!-- offcanvas-overlay end -->
-<!-- offcanvas-mobile-menu start -->
+<style>
+    .dropdown-menu {
+        display: none;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease-in-out;
+    }
 
-{{-- <div id="offcanvas-mobile-menu" class="offcanvas theme1 offcanvas-mobile-menu">
-    <div class="inner">
-        <div class="border-bottom mb-4 pb-4 text-end">
-            <button class="offcanvas-close">×</button>
-        </div>
-        <div class="offcanvas-head mb-4">
-            <nav class="offcanvas-top-nav">
-                <ul class="d-flex flex-wrap">
-                    <li class="my-2 mx-2">
-                        <a href="wishlist.html">
-                            <i class="icon-bag"></i> Wishlist <span>(0)</span></a>
-                    </li>
-                    <li class="my-2 mx-2">
-                        <a href="wishlist.html">
-                            <i class="ion-android-favorite-outline"></i> Wishlist
-                            <span>(3)</span></a>
-                    </li>
-                    <li class="my-2 mx-2">
-                        <a href="compare.html"><i class="ion-ios-loop-strong"></i> Compare <span>(2)</span>
-                        </a>
-                    </li>
-                    <li class="my-2 mx-2">
-                        <a class="search search-toggle" href="javascript:void(0)">
-                            <i class="icon-magnifier"></i> Search</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <nav class="offcanvas-menu">
-            <ul>
-                <li>
-                    <a href="#"><span class="menu-text">Home</span></a>
-                    <ul class="offcanvas-submenu">
-                        <li><a href="index.html">Home 1</a></li>
-                        <li><a href="index-2.html">Home 2</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><span class="menu-text">Giới thiệu</span></a>
-                    <ul class="offcanvas-submenu">
-                        <li><a href="about-us.html">About Page</a></li>
-                        <li><a href="cart.html">Cart Page</a></li>
-                        <li><a href="checkout.html">Checkout Page</a></li>
-                        <li><a href="compare.html">Compare Page</a></li>
-                        <li><a href="login.html">Login &amp; Register Page</a></li>
-                        <li><a href="myaccount.html">Account Page</a></li>
-                        <li><a href="wishlist.html">Wishlist Page</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><span class="menu-text">Cửa hàng</span></a>
-                    <ul class="offcanvas-submenu">
-                        <li>
-                            <a href="#"><span class="menu-text">Shop Grid</span></a>
-                            <ul class="offcanvas-submenu">
-                                <li>
-                                    <a href="shop-grid-3-column.html">Shop Grid 3 Column</a>
-                                </li>
-                                <li>
-                                    <a href="shop-grid-4-column.html">Shop Grid 4 Column</a>
-                                </li>
-                                <li>
-                                    <a href="shop-grid-left-sidebar.html">Shop Grid Left Sidebar</a>
-                                </li>
-                                <li>
-                                    <a href="shop-grid-right-sidebar.html">Shop Grid Right Sidebar</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><span class="menu-text">Shop List</span></a>
-                            <ul class="offcanvas-submenu">
-                                <li><a href="shop-grid-list.html">Shop List</a></li>
-                                <li>
-                                    <a href="shop-grid-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                </li>
-                                <li>
-                                    <a href="shop-grid-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><span class="menu-text">Shop Single</span></a>
-                            <ul class="offcanvas-submenu">
-                                <li><a href="single-product.html">Shop Single</a></li>
-                                <li>
-                                    <a href="single-product-configurable.html">Shop Variable</a>
-                                </li>
-                                <li>
-                                    <a href="single-product-affiliate.html">Shop Affiliate</a>
-                                </li>
-                                <li><a href="single-product-group.html">Shop Group</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><span class="menu-text">other pages</span></a>
-                            <ul class="offcanvas-submenu">
-                                <li><a href="about-us.html">About Page</a></li>
-                                <li><a href="cart.html">Cart Page</a></li>
-                                <li><a href="checkout.html">Checkout Page</a></li>
-                                <li><a href="compare.html">Compare Page</a></li>
-                                <li><a href="login.html">Login &amp; Register Page</a></li>
-                                <li><a href="myaccount.html">Account Page</a></li>
-                                <li><a href="wishlist.html">Wishlist Page</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><span class="menu-text">Pages</span></a>
-                    <ul class="offcanvas-submenu">
-                        <li><a href="about-us.html">About Page</a></li>
-                        <li><a href="cart.html">Cart Page</a></li>
-                        <li><a href="checkout.html">Checkout Page</a></li>
-                        <li><a href="compare.html">Compare Page</a></li>
-                        <li><a href="login.html">Login &amp; Register Page</a></li>
-                        <li><a href="myaccount.html">Account Page</a></li>
-                        <li><a href="wishlist.html">Wishlist Page</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="blog-grid-3-column.html"><span class="menu-text">Blog</span></a>
-                    <ul class="offcanvas-submenu">
-                        <li>
-                            <a href="#"><span class="menu-text">Blog Grid</span></a>
-                            <ul class="offcanvas-submenu">
-                                <li>
-                                    <a href="blog-grid-3-column.html">Blog Grid 3 column</a>
-                                </li>
-                                <li>
-                                    <a href="blog-grid-4-column.html">Blog Grid 4 column</a>
-                                </li>
-                                <li>
-                                    <a href="blog-grid-left-sidebar.html">Blog Grid Left Sidebar</a>
-                                </li>
-                                <li>
-                                    <a href="blog-grid-right-sidebar.html">Blog Grid Right Sidebar</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><span class="menu-text">Blog List</span></a>
-                            <ul class="offcanvas-submenu">
-                                <li>
-                                    <a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a>
-                                </li>
-                                <li>
-                                    <a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><span class="menu-text">Blog Single</span></a>
-                            <ul class="offcanvas-submenu">
-                                <li><a href="single-blog.html">Single Blog</a></li>
-                                <li>
-                                    <a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a>
-                                </li>
-                                <li>
-                                    <a href="blog-single-right-sidebar.html">Blog Single Right Sidbar</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </nav>
-        <div class="offcanvas-social py-30">
-            <ul>
-                <li>
-                    <a href="#"><i class="icon-social-facebook"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="icon-social-twitter"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="icon-social-instagram"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="icon-social-google"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="icon-social-instagram"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- offcanvas-mobile-menu end -->
-<!-- OffCanvas Wishlist Start -->
-<div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist theme1">
-    <div class="inner">
-        <div class="head d-flex flex-wrap justify-content-between">
-            <span class="title">Wishlist</span>
-            <button class="offcanvas-close">×</button>
-        </div>
-        <ul class="minicart-product-list">
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/4.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/5.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">On Trend Makeup and Beauty Cosmetics</a>
-                    <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/6.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-        </ul>
-        <a href="wishlist.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block mt-30">view wishlist</a>
-    </div>
-</div> --}}
+    .dropdown:hover .dropdown-menu,
+    .dropdown-menu.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .notification-dot {
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        border-radius: 50%;
+        border: 2px solid white;
+        position: absolute;
+        top: -25px;
+        left: -15px;
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+            /* Kích thước ban đầu */
+        }
+
+        50% {
+            transform: scale(0.8);
+            /* Thu nhỏ */
+        }
+    }
+</style>
 
 <!-- header start -->
 <header>
@@ -296,16 +104,6 @@
                                         </div>
                                     </form>
                                 </li>
-
-
-
-                                <li class="mr-xl-0 cart-block position-relative me-1">
-                                    <a id="notification-icon" href="javascript:void(0);">
-                                        <span class="position-relative">
-                                            <i class="icon-bell"></i>
-                                        </span>
-                                    </a>
-                                </li>
                                 <li class="mr-xl-0 cart-block position-relative">
                                     <a class="" href="{{ route('cart.index') }}">
                                         <span class="position-relative">
@@ -318,28 +116,7 @@
 
                                 <!-- cart block end -->
                             </ul>
-                            <!-- Modal thông báo -->
-                            <div class="modal fade" id="notificationModal" tabindex="-1"
-                                aria-labelledby="notificationModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="notificationModalLabel">Thông báo</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul id="order-list">
-                                                <li>
 
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                         <div class="mobile-menu-toggle theme1 d-lg-none">
@@ -361,30 +138,26 @@
                                 @auth
                                     <li class="dropdown notification-list topbar-dropdown">
                                         <a class="nav-link dropdown-toggle nav-user me-0 avatar_box" href="#"
-                                            style="width: 50px;" id="profileDropdown" role="button"
-                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            style="width: 50px;" id="profileDropdown" role="button">
                                             @php
                                                 $avatar = Auth::user()->anh_dai_dien;
-
-                                                // Check if 'anh_dai_dien' is a URL or a storage path
                                                 $isUrl = filter_var($avatar, FILTER_VALIDATE_URL) !== false;
                                             @endphp
-
                                             <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
                                                 alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
-                                            {{-- <span class="pro-user-name ms-1">
-                                                {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
-                                        </span> --}}
+                                            @if (isset($notifications) && $notifications['totalNotifications'] > 0)
+                                                <span class="ms-2 position-relative">
+                                                    <span class="notification-dot"></span>
+                                                </span>
+                                            @endif
+                                            <span class="menu-arrow ms-auto"></span>
                                         </a>
                                         <div
                                             class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
-                                            <!-- <hr> -->
                                             <a class="notify-item notify-item__form"
-                                                href="{{ route('taikhoan.dashboard') }}" id="">
+                                                href="{{ route('taikhoan.dashboard') }}">
                                                 <i class="far fa-user"></i> <span>Thông tin tài khoản</span>
                                             </a>
-                                            <!-- <div class="dropdown-divider"></div> -->
-                                            <!-- Đăng xuất -->
                                             <form id="logout-form" class="notify-item notify-item__form"
                                                 style="margin-bottom: 0;" action="{{ route('auth.logout') }}"
                                                 method="POST">
@@ -405,6 +178,7 @@
                                 @endauth
                             </ul>
                         </div>
+
 
 
                     </div>
@@ -673,12 +447,6 @@
         });
     });
 
-    $(document).ready(function() {
-        // Mở modal khi nhấn vào chuông thông báo
-        $('#notification-icon').click(function() {
-            $('#notificationModal').modal('show');
-        });
-    });
 
 
     // Lấy phần tử icon và container

@@ -427,7 +427,7 @@
                             <p class="text">Vẽ sáng tạo - Tô hạnh phúc</p>
                         </div>
                     </div> --}}
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <nav class="product-tab-menu theme1">
                             <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li class="nav-item">
@@ -442,7 +442,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="row">

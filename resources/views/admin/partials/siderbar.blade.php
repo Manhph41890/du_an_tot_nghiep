@@ -1,4 +1,31 @@
 <!-- Left Sidebar Start -->
+<style>
+    .notification-dot {
+        width: 8px;
+        height: 8px;
+        background-color: red;
+        border-radius: 50%;
+        border: 2px solid white;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+            /* Kích thước ban đầu */
+        }
+
+        50% {
+            transform: scale(0.8);
+            /* Thu nhỏ */
+        }
+    }
+</style>
 <div class="app-sidebar-menu">
     <div class="h-100" data-simplebar>
 
@@ -32,19 +59,51 @@
                 </li>
 
                 <!-- Đơn hàng -->
+
                 <li>
-                    <a href="#donhang-menu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                    <a href="#donhang-menu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu"
+                        class="d-flex align-items-center">
                         <i data-feather="shopping-cart"></i>
                         <span> Đơn hàng </span>
-                        <span class="menu-arrow"></span>
+                        @if (isset($notifications) && $notifications['totalNotifications'] > 0)
+                            <span class="ms-2 position-relative">
+                                <span class="notification-dot"></span>
+                            </span>
+                        @endif
+                        <span class="menu-arrow ms-auto"></span>
                     </a>
                     <div class="collapse" id="donhang-menu">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('donhangs.index') }}">Danh sách</a></li>
-                            <li><a class="tp-link" href="{{ route('xacnhanhuy.index') }}">Yêu cầu hủy đặt hàng</a></li>
+                            <!-- Menu con: Danh sách -->
+                            <li>
+                                <a class="tp-link d-flex align-items-center" href="{{ route('donhangs.index') }}">
+                                    Danh sách
+                                    @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
+                                        <span class="ms-2 position-relative">
+                                            <span class="notification-dot"></span>
+                                        </span>
+                                    @endif
+                                </a>
+                            </li>
+                            <!-- Menu con: Yêu cầu hủy -->
+                            <li>
+                                <a class="tp-link d-flex align-items-center" href="{{ route('xacnhanhuy.index') }}">
+                                    Yêu cầu hủy đặt hàng
+                                    @if (isset($notifications) && $notifications['cancelRequestsCount'] > 0)
+                                        <span class="ms-2 position-relative">
+                                            <span class="notification-dot"></span>
+                                        </span>
+                                    @endif
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
+
+
+
+
+
                 <!-- Danh mục -->
                 <li>
                     <a href="#danhmuc" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">

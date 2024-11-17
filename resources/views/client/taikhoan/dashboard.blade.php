@@ -1,6 +1,58 @@
 @extends('client.layout')
 
 @section('content')
+    <style>
+        .notification-dot {
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: -50px;
+            left: 260px;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                /* Kích thước ban đầu */
+            }
+
+            50% {
+                transform: scale(0.8);
+                /* Thu nhỏ */
+            }
+        }
+
+        .notification-dot2 {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            border: 2px solid white;
+            position: absolute;
+            top: -22px;
+            left: -10px;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                /* Kích thước ban đầu */
+            }
+
+            50% {
+                transform: scale(0.8);
+                /* Thu nhỏ */
+            }
+        }
+    </style>
     <!-- breadcrumb-section start -->
     <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
         <div class="container">
@@ -39,6 +91,12 @@
                                 trị</a>
                         @endif
                         <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng của bạn</a>
+                        @if (isset($notifications) && $notifications['totalNotifications'] > 0)
+                            <span class="ms-2 position-relative">
+                                <span class="notification-dot"></span>
+                            </span>
+                        @endif
+                        <span class="menu-arrow ms-auto"></span>
 
                         <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Ví người dùng </a>
 
@@ -209,6 +267,11 @@
 
                                                             <span class="badge {{ $class }}">
                                                                 {{ $myOrder->trang_thai_don_hang }}
+                                                                @if ($myOrder->trang_thai_don_hang == 'Chờ xác nhận')
+                                                                    <span class="ms-2 position-relative">
+                                                                        <span class="notification-dot2"></span>
+                                                                    </span>
+                                                                @endif
                                                             </span>
                                                         </div>
                                                     </td>

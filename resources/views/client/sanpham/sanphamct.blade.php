@@ -248,31 +248,14 @@
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
-                                <h2>Đánh Giá Sản Phẩm</h2>
-                                <br>
-                                <div class="filter-rating">
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(0)">Tất cả</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(1)">1 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(2)">2 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(3)">3 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(4)">4 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(5)">5 Sao</button>
-                                </div>
-                                <br>
-
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="review-wrapper">
                                             @foreach ($sanPhamCT->danh_gias as $danhgia)
-
                                                 <div class="single-review">
                                                     <div class="review-img">
-
-                                                <div class="single-review" data-rating="{{ $danhgia->diem_so }}">
-                                                    {{-- <div class="review-img">
-
                                                         <img src="/assets/img/testimonial-image/1.png" alt="" />
-                                                    </div> --}}
+                                                    </div>
                                                     <div class="review-content">
                                                         <div class="review-top-wrap">
                                                             <div class="review-left">
@@ -475,18 +458,10 @@
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
-
-
         // Hàm hỗ trợ định dạng số có dấu phân cách ngàn
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
-
-
-
-
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('form[id^="add-to-cart-form"]').forEach(form => {
                 form.addEventListener('submit', function(event) {
@@ -577,6 +552,37 @@
             // setTimeout(function() {
             //     window.location.href = "{{ route('auth.login') }}";
             // }, 1000);
+        }
+
+        function filterByStars(starCount) {
+            const reviews = document.querySelectorAll('.single-review');
+
+            reviews.forEach(review => {
+                const reviewStars = parseInt(review.getAttribute('data-rating'));
+
+                // Hiển thị tất cả nếu chọn "Tất cả"
+                if (starCount === 0 || reviewStars === starCount) {
+                    review.style.display = 'block';
+                } else {
+                    review.style.display = 'none';
+                }
+            });
+
+            function filterByStars(starCount) {
+                const reviews = document.querySelectorAll('.single-review');
+
+                reviews.forEach(review => {
+                    const reviewStars = parseInt(review.getAttribute('data-rating'));
+
+                    // Hiển thị tất cả nếu chọn "Tất cả"
+                    if (starCount === 0 || reviewStars === starCount) {
+                        review.style.display = 'block';
+                    } else {
+                        review.style.display = 'none';
+                    }
+                });
+            }
+
         }
     </script>
 @endsection

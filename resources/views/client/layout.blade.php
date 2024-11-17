@@ -122,15 +122,12 @@
 
         .hot-tag {
             color: #fd0000;
-            /* Màu tuyết */
             font-weight: bold;
             position: relative;
             padding: 0 10px;
             animation: blink 1s infinite alternate;
-            /* Hiệu ứng nhấp nháy */
         }
 
-        /* Hiệu ứng nhấp nháy cho chữ "HOT" */
         @keyframes blink {
             0% {
                 opacity: 1;
@@ -142,14 +139,14 @@
         }
 
         /* Bông tuyết xung quanh chữ "HOT" */
-        .hot-tag::before,
+        /* .hot-tag::before,
         .hot-tag::after {
             content: "❄️";
             position: absolute;
             color: #ffffff;
             font-size: 1.2em;
             animation: snowflake-blink 1.5s infinite alternate;
-        }
+        } */
 
         /* Vị trí bông tuyết bên trái */
         .hot-tag::before {
@@ -158,14 +155,12 @@
             animation-delay: 0.2s;
         }
 
-        /* Vị trí bông tuyết bên phải */
         .hot-tag::after {
             top: -5px;
             right: -15px;
             animation-delay: 0.5s;
         }
 
-        /* Hiệu ứng nhấp nháy cho bông tuyết */
         @keyframes snowflake-blink {
             0% {
                 opacity: 1;
@@ -190,7 +185,6 @@
             font-weight: bold;
         }
 
-        /* Hiệu ứng cho button sao chép */
         .copy-btn {
             margin-top: 10px;
             background-color: #28a745;
@@ -206,7 +200,6 @@
             background-color: #218838;
         }
 
-        /* Mặc định ẩn modal */
         .copy-modal {
             display: none;
             position: fixed;

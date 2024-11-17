@@ -14,15 +14,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+
                         <form action="{{ route('sanphams.update', $product->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
@@ -97,11 +89,9 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ma_ta_san_pham" class="form-label">Mô tả sản phẩm</label>
-                                                <!-- Thay input bằng textarea -->
-                                                <textarea id="ma_ta_san_pham" name="ma_ta_san_pham" class="form-control @error('ma_ta_san_pham') is-invalid @enderror">
-                                                    {{ old('ma_ta_san_pham', $product->ma_ta_san_pham) }}
-                                                </textarea>
-
+                                                <input type="text" id="ma_ta_san_pham" name="ma_ta_san_pham"
+                                                    class="form-control @error('ma_ta_san_pham') is-invalid @enderror"
+                                                    value="{{ old('ma_ta_san_pham', $product->ma_ta_san_pham) }}">
                                                 @error('ma_ta_san_pham')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

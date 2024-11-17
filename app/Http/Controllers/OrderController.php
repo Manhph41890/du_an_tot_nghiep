@@ -13,6 +13,7 @@ use App\Models\phuong_thuc_van_chuyen;
 use App\Models\san_pham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
@@ -22,7 +23,6 @@ class OrderController extends Controller
     public function add(Request $request)
     {
         $user = Auth::user();
-
         // Khởi tạo biến coupon là null
         $coupon = null;
         // Kiểm tra và xác thực các trường cần thiết
@@ -52,8 +52,6 @@ class OrderController extends Controller
             return in_array($item->id, $selectedProductIds);
         });
 
-
-
         $total = $cart->cartItems->sum(fn($item) => $item->price);
 
         $discount = 0;
@@ -63,13 +61,26 @@ class OrderController extends Controller
                 ->where('ngay_bat_dau', '<=', now())
                 ->where('ngay_ket_thuc', '>=', now())
                 ->first();
+
             if ($coupon) {
+                // Kiểm tra xem người dùng đã sử dụng mã này chưa
+                $alreadyUsed = DB::table('coupon_usages')
+                    ->where('user_id', $user->id)
+                    ->where('coupon_id', $coupon->id)
+                    ->exists();
+
+                if ($alreadyUsed) {
+                    return redirect()->back()->with('error', 'Bạn đã sử dụng mã giảm giá này trước đó.');
+                }
+
+                // Áp dụng giảm giá
                 $discount = $coupon->gia_tri_khuyen_mai;
                 $total -= $discount;
             } else {
                 return redirect()->back()->with('error', 'Mã khuyến mãi không hợp lệ hoặc đã hết hạn.');
             }
         }
+
 
         $shippingCost = 30000;
         $totall = $total + $shippingCost;
@@ -101,10 +112,9 @@ class OrderController extends Controller
                 'trang_thai_thanh_toan' => 'Đã thanh toán'
             ]);
 
-
             // Xử lý chuyển hướng đến trang thanh toán VnPay
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = "http://du_an_tot_nghiep.test/order/success"; // Đường dẫn xử lý kết quả thanh toán
+            $vnp_Returnurl = "http://127.0.0.1:8000/order/success"; // Đường dẫn xử lý kết quả thanh toán
             $vnp_TmnCode = "TQL3PNVO"; // Mã website tại VNPAY 
             $vnp_HashSecret = "SDOLTO3JSO8WXIMDIIIFMSUL9NSR39BD"; // Chuỗi bí mật
 
@@ -159,9 +169,12 @@ class OrderController extends Controller
                 'message' => 'success',
                 'data' => $vnp_Url
             );
+
             // Redirect to VNPay for payment
             return redirect($vnp_Url);
-        } else { // Thanh toán khi nhận hàng
+            // return redirect()->route('order.success');
+        } else {
+            // Thanh toán khi nhận hàng
             // Tạo đơn hàng mới và lưu thông tin người dùng
             $order = new don_hang();
             $order->user_id = Auth::id();
@@ -187,10 +200,19 @@ class OrderController extends Controller
                 $orderDetail->color_san_pham_id = $item->color_san_pham_id;
                 $orderDetail->size_san_pham_id = $item->size_san_pham_id;
                 $orderDetail->so_luong = $item->quantity;
-                $orderDetail->gia_tien = $item->price;
+                $orderDetail->gia_tien = $item->san_pham->gia_km ?? $item->san_pham->gia_ban;
                 $orderDetail->thanh_tien = $item->price;
                 $orderDetail->save();
             }
+            if ($coupon) {
+                DB::table('coupon_usages')->insert([
+                    'user_id' => $user->id,
+                    'coupon_id' => $coupon->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
 
             // Giảm số lượng mã khuyến mãi
             if ($coupon) {
@@ -214,94 +236,182 @@ class OrderController extends Controller
                 $product->save();
             }
 
+            Mail::send('auth.success_order', [
+                'ho_ten' => $user->ho_ten,
+                'order' => $order,
+            ], function ($message) use ($user) {
+                $message->to($user->email)
+                    ->subject('Đặt hàng thành công');
+            });
 
             // Xóa giỏ hàng sau khi đặt hàng thành công
             $cart->cartItems()->delete();
             $cart->delete();
 
+            // Gửi email với mã xác thực
+
+
             return redirect()->route('order.success_nhanhang')->with('success', 'Đặt hàng thành công!');
         }
     }
 
-    // public function success(Request $request)
-    // {
-    //     $orderDetails = Session::get('order_details');
+    public function success(Request $request)
+    {
+        // Lấy thông tin từ session
+        $user = Auth::user();
+        $orderDetails = Session::get('order_details');
+        $vnp_TxnRef = Session::get('vnp_TxnRef');
+        $vnp_ResponseCode = $request->input('vnp_ResponseCode');
 
-    //     if ($orderDetails) {
-    //         // Kiểm tra lại tổng tiền từ session đã bao gồm khuyến mãi
-    //         $order = new don_hang();
-    //         $order->user_id = $orderDetails['user_id'];
-    //         $order->khuyen_mai_id = $orderDetails['khuyen_mai_id'];
-    //         $order->ho_ten = $orderDetails['ho_ten'];
-    //         $order->so_dien_thoai = $orderDetails['so_dien_thoai'];
-    //         $order->email = $orderDetails['email'];
-    //         $order->dia_chi = $orderDetails['dia_chi'];
-    //         $order->phuong_thuc_thanh_toan_id = $orderDetails['phuong_thuc_thanh_toan_id'];
-    //         $order->phuong_thuc_van_chuyen_id = $orderDetails['phuong_thuc_van_chuyen_id'];
-    //         $order->ngay_tao = $orderDetails['ngay_tao'];
-    //         $order->tong_tien = $orderDetails['tong_tien']; // Lấy tổng tiền từ session
-    //         $order->trang_thai_don_hang = 'Chờ xác nhận';
-    //         $order->trang_thai_thanh_toan = 'Đã thanh toán';
-    //         $order->save();
+        if ($vnp_ResponseCode == '00' && $orderDetails) { // '00' là mã giao dịch thành công
+            // Tạo đơn hàng mới
+            $order = new don_hang();
+            $order->user_id = $orderDetails['user_id'];
+            $order->khuyen_mai_id = $orderDetails['khuyen_mai_id'];
+            $order->ho_ten = $orderDetails['ho_ten'];
+            $order->so_dien_thoai = $orderDetails['so_dien_thoai'];
+            $order->email = $orderDetails['email'];
+            $order->dia_chi = $orderDetails['dia_chi'];
+            $order->phuong_thuc_thanh_toan_id = $orderDetails['phuong_thuc_thanh_toan_id'];
+            $order->phuong_thuc_van_chuyen_id = $orderDetails['phuong_thuc_van_chuyen_id'];
+            $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
+            $order->tong_tien = $orderDetails['tong_tien'];
+            $order->trang_thai_don_hang = 'Chờ xác nhận';
+            $order->trang_thai_thanh_toan = 'Đã thanh toán';
+            $order->save();
 
-    //         // Lưu chi tiết đơn hàng từ giỏ hàng
-    //         $orderId = $order->id;
-    //         $cart = Cart::with('cartItems.san_pham', 'cartItems.color', 'cartItems.size')
-    //             ->where('user_id', Auth::id())
-    //             ->first();
+            // Lưu chi tiết đơn hàng
+            $cart = Cart::with('cartItems')->where('user_id', Auth::id())->first();
+            if ($cart) {
+                foreach ($cart->cartItems as $item) {
+                    $orderDetail = new chi_tiet_don_hang();
+                    $orderDetail->don_hang_id = $order->id;
+                    $orderDetail->san_pham_id = $item->san_pham_id;
+                    $orderDetail->color_san_pham_id = $item->color_san_pham_id;
+                    $orderDetail->size_san_pham_id = $item->size_san_pham_id;
+                    $orderDetail->so_luong = $item->quantity;
+                    $orderDetail->gia_tien = $item->san_pham->gia_km ?? $item->san_pham->gia_ban;
+                    $orderDetail->thanh_tien = $item->price;
+                    $orderDetail->save();
 
-    //         foreach ($cart->cartItems as $item) {
-    //             $orderDetail = new chi_tiet_don_hang();
-    //             $orderDetail->don_hang_id = $orderId;
-    //             $orderDetail->san_pham_id = $item->san_pham_id;
-    //             $orderDetail->color_san_pham_id = $item->color_san_pham_id;
-    //             $orderDetail->size_san_pham_id = $item->size_san_pham_id;
-    //             $orderDetail->so_luong = $item->quantity;
-    //             $orderDetail->gia_tien = $item->price;
-    //             $orderDetail->thanh_tien = $item->price * $item->quantity;
-    //             $orderDetail->save();
-    //         }
+                    $variant = $item->san_pham->bien_the_san_phams()
+                        ->where('color_san_pham_id', $item->color_san_pham_id)
+                        ->where('size_san_pham_id', $item->size_san_pham_id)
+                        ->first();
+                    if ($variant) {
+                        $variant->so_luong -= $item->quantity;
+                        $variant->save();
+                    }
 
-    //         // Xóa giỏ hàng
-    //         $cart->cartItems()->delete();
-    //         $cart->delete();
+                    $product = san_pham::find($item->san_pham_id);
+                    if ($product) {
+                        $product->so_luong -= $item->quantity;
+                        $product->save();
+                    }
+                }
+                $coupon = null;
+                if ($coupon) {
+                    DB::table('coupon_usages')->insert([
+                        'user_id' => $user->id,
+                        'coupon_id' => $coupon->id,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
 
-    //         return redirect()->route('order.success_nhanhang')->with('success', 'Đặt hàng thành công!');
-    //     }
-    // }
+                // Giảm số lượng mã khuyến mãi
+                if ($coupon) {
+                    $coupon->so_luong_ma -= 1;
+                    $coupon->save();
+                }
+
+                $variant = $item->san_pham->bien_the_san_phams()->where('color_san_pham_id', $item->color_san_pham_id)
+                    ->where('size_san_pham_id', $item->size_san_pham_id)
+                    ->first();
+
+                if ($variant) {
+                    // Giảm số lượng của biến thể sản phẩm
+                    $variant->so_luong -= $item->quantity;
+                    $variant->save();
+                }
+                // Trừ số lượng sản phẩm trong kho
+                $product = san_pham::find($item->san_pham_id);
+                if ($product) {
+                    $product->so_luong -= $item->quantity;  // Trừ số lượng sản phẩm
+                    $product->save();
+                }
+
+
+                // Xóa giỏ hàng
+                $cart->cartItems()->delete();
+                $cart->delete();
+
+
+                Mail::send('auth.success_order', [
+                    'ho_ten' => $user->ho_ten,
+                    'order' => $order,
+                ], function ($message) use ($user) {
+                    $message->to($user->email)
+                        ->subject('Đặt hàng thành công');
+                });
+            }
+
+            Session::forget(['order_details', 'vnp_TxnRef']);
+
+            return redirect()->route('order.success_nhanhang')->with('success', 'Thanh toán thành công! Đơn hàng của bạn đã được tạo.');
+        }
+
+        return redirect()->route('client.cart.index')->with('error', 'Thanh toán thất bại. Vui lòng thử lại.');
+    }
 
     public function success_nhanhang()
     {
-        return view('client.order.success');
+        return view('client.order.success_nhanhang');
     }
 
     public function applyCoupon(Request $request)
     {
-        $couponCode = $request->input('coupon_code');
-        $totalAmount = $request->input('totall'); // Tổng tiền trước khi áp mã
+        $couponCode = $request->input('coupon_code'); // Mã giảm giá người dùng nhập
+        $totalAmount = $request->input('totall'); // Tổng tiền trước khi áp mã giảm giá
 
-        // Kiểm tra mã giảm giá và tính toán tổng tiền mới
-        $discount = 0;
+        $userId = Auth::id(); // Lấy ID người dùng đang đăng nhập
 
-        // Giả sử bạn có bảng coupon trong cơ sở dữ liệu hoặc một cách khác để kiểm tra mã giảm giá
+        // 1. Tìm mã giảm giá trong cơ sở dữ liệu
         $coupon = khuyen_mai::where('ma_khuyen_mai', $couponCode)->first();
-        $giakm = $coupon->gia_tri_khuyen_mai;
 
-        if ($coupon) {
-            // Giả sử mã giảm giá có thể là phần trăm giảm
-            $discount = $totalAmount - $coupon->gia_tri_khuyen_mai;
-        } else {
+        if (!$coupon) {
+            // Nếu mã giảm giá không tồn tại
             return response()->json(['success' => false, 'message' => 'Mã giảm giá không hợp lệ!']);
         }
 
-        // Tính tổng tiền sau khi giảm giá
-        $newTotal = max(0, $discount);
+        // 2. Kiểm tra ngày hết hạn của mã giảm giá
+        $currentDate = now(); // Lấy thời gian hiện tại
 
-        // Trả về tổng tiền mới
+        if ($coupon->ngay_ket_thuc && $currentDate->greaterThan($coupon->ngay_ket_thuc)) {
+            // Nếu mã giảm giá đã hết hạn
+            return response()->json(['success' => false, 'message' => 'Mã giảm giá đã hết hạn!']);
+        }
+
+        // 3. Kiểm tra xem người dùng đã sử dụng mã này chưa
+        $usedCoupon = DB::table('coupon_usages')
+            ->where('user_id', $userId)
+            ->where('coupon_id', $coupon->id)
+            ->exists();
+
+        if ($usedCoupon) {
+            // Nếu người dùng đã sử dụng mã này
+            return response()->json(['success' => false, 'message' => 'Bạn đã sử dụng mã giảm giá này rồi!']);
+        }
+
+        // 4. Tính toán số tiền giảm giá
+        $discountAmount = min($coupon->gia_tri_khuyen_mai, $totalAmount); // Giảm tối đa đến tổng tiền
+        $newTotal = max(0, $totalAmount - $discountAmount); // Tổng tiền mới sau khi giảm (không âm)
+
         return response()->json([
             'success' => true,
-            'newTotal' => number_format($newTotal, 2), // Định dạng số tiền
-            'discountAmount' => number_format($giakm, 2) // Trả về số tiền giảm giá
+            'newTotal' => number_format($newTotal, 2), // Tổng tiền mới
+            'discountAmount' => number_format($discountAmount, 2), // Số tiền giảm giá
+            'message' => 'Áp dụng mã giảm giá thành công!',
         ]);
     }
 }

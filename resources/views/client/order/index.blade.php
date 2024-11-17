@@ -1,6 +1,63 @@
 @extends('client.layout')
 
 @section('content')
+    <style>
+        .vnpay-logo {
+            width: 80px;
+            display: block;
+        }
+
+        .custom-thead {
+            background-color: #333 !important;
+            /* Màu nền */
+        }
+
+        /* Thay đổi màu chữ của các thẻ <th> */
+        .custom-thead th {
+            color: white !important;
+            /* Màu chữ */
+        }
+
+        /* Nếu bạn muốn thay đổi cả màu nền cho các ô thẻ <th> */
+        .custom-thead th {
+            background-color: #5a5ac9 !important;
+            /* Nền của các thẻ <th> */
+            color: #fff !important;
+            /* Màu chữ của các thẻ <th> */
+        }
+
+        #apply-coupon {
+            color: #5a5ac9;
+            background: #fff;
+            border-color: #5a5ac9;
+        }
+
+        #apply-coupon:hover {
+            color: #fff;
+            background: #5a5ac9;
+            border-color: #5a5ac9;
+        }
+
+        .box_general.summary ul {
+            border-bottom: none !important;
+        }
+
+        .input-group {
+            padding: 0 !important;
+        }
+
+        .container_radio {
+            font-size: 16px !important;
+        }
+
+        .box_general.summary ul li {
+            font-size: 16px !important;
+        }
+
+        #tab_1 {
+            font-size: 16px !important;
+        }
+    </style>
     <!-- breadcrumb-section start -->
     <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
         <div class="container">
@@ -33,9 +90,10 @@
                         <tr>
                             <th class="text-center" style="width: 15%; font-size:18px">Ảnh sản phẩm</th>
                             <th class="text-center" style="width: 30%; font-size:18px">Tên sản phẩm</th>
+                            <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
                             <th class="text-center" style="width: 20%; font-size:18px">Phân loại</th>
                             <th class="text-center" style="width: 10%; font-size:18px">Số lượng</th>
-                            <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
+                            <th class="text-center" style="width: 15%; font-size:18px">Thành tiền</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +104,9 @@
                                         class="img-fluid" style="max-width: 80px; max-height: 80px;">
                                 </td>
                                 <td class="text-center" style="font-size:16px;">{{ $item->san_pham->ten_san_pham }}</td>
+                                <td class="text-center" style="font-size:16px;">
+                                    {{ number_format($item->san_pham->gia_km ?? $item->san_pham->gia_ban) }}
+                                    đ</td>
                                 <td class="text-center" style="font-size:16px;">
                                     @if ($item->size && $item->color)
                                         <span>Size: {{ $item->size->ten_size }}</span>
@@ -164,7 +225,7 @@
                                 </ul>
 
                                 <div class="total clearfix">Tổng cộng <span id="total_amount"
-                                        data-total="{{ $totall }}">{{ number_format($totall, 2) }}₫</span>
+                                        data-total="{{ $totall }}">{{ number_format($totall) }}₫</span>
                                 </div>
 
                                 <div class="place-order mt-10" id="place-order-cod" style="display: none;">
@@ -185,63 +246,7 @@
                 <!-- /row -->
             </form>
         </div>
-        <style>
-            .vnpay-logo {
-                width: 80px;
-                display: block;
-            }
 
-            .custom-thead {
-                background-color: #333 !important;
-                /* Màu nền */
-            }
-
-            /* Thay đổi màu chữ của các thẻ <th> */
-            .custom-thead th {
-                color: white !important;
-                /* Màu chữ */
-            }
-
-            /* Nếu bạn muốn thay đổi cả màu nền cho các ô thẻ <th> */
-            .custom-thead th {
-                background-color: #5a5ac9 !important;
-                /* Nền của các thẻ <th> */
-                color: #fff !important;
-                /* Màu chữ của các thẻ <th> */
-            }
-
-            #apply-coupon {
-                color: #5a5ac9;
-                background: #fff;
-                border-color: #5a5ac9;
-            }
-
-            #apply-coupon:hover {
-                color: #fff;
-                background: #5a5ac9;
-                border-color: #5a5ac9;
-            }
-
-            .box_general.summary ul {
-                border-bottom: none !important;
-            }
-
-            .input-group {
-                padding: 0 !important;
-            }
-
-            .container_radio {
-                font-size: 16px !important;
-            }
-
-            .box_general.summary ul li {
-                font-size: 16px !important;
-            }
-
-            #tab_1 {
-                font-size: 16px !important;
-            }
-        </style>
         <script>
             $(document).ready(function() {
                 $('#apply-coupon').on('click', function() {
@@ -257,8 +262,10 @@
                             totall: totalAmount,
                             _token: "{{ csrf_token() }}" // CSRF token cho bảo mật
                         },
+
                         success: function(response) {
                             if (response.success) {
+
                                 // Cập nhật giá trị tổng tiền sau khi áp dụng mã khuyến mãi
                                 $('#total_amount').text(response.newTotal + '₫');
                                 $('#discount-amount').text(response.discountAmount + '₫');

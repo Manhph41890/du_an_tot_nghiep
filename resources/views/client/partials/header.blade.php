@@ -1,8 +1,8 @@
 <!-- offcanvas-overlay start -->
-<div class="offcanvas-overlay"></div>
 <!-- offcanvas-overlay end -->
 <!-- offcanvas-mobile-menu start -->
-<div id="offcanvas-mobile-menu" class="offcanvas theme1 offcanvas-mobile-menu">
+
+{{-- <div id="offcanvas-mobile-menu" class="offcanvas theme1 offcanvas-mobile-menu">
     <div class="inner">
         <div class="border-bottom mb-4 pb-4 text-end">
             <button class="offcanvas-close">×</button>
@@ -230,151 +230,21 @@
         </ul>
         <a href="wishlist.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block mt-30">view wishlist</a>
     </div>
-</div>
-<!-- OffCanvas Wishlist End -->
-
-<!-- OffCanvas Cart Start -->
-{{-- <div id="offcanvas-cart" class="offcanvas offcanvas-cart theme1">
-    <div class="inner">
-        <div class="head d-flex flex-wrap justify-content-between">
-            <span class="title">Cart</span>
-            <button class="offcanvas-close">×</button>
-        </div>
-        <ul class="minicart-product-list">
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/1.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/2.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">On Trend Makeup and Beauty Cosmetics</a>
-                    <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-            <li>
-                <a href="single-product.html" class="image"><img src="assets/img/mini-cart/3.png"
-                        alt="Cart product Image" /></a>
-                <div class="content">
-                    <a href="single-product.html" class="title">orginal Age Defying Cosmetics Makeup</a>
-                    <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
-                    <a href="#" class="remove">×</a>
-                </div>
-            </li>
-        </ul>
-        <div class="sub-total d-flex flex-wrap justify-content-between">
-            <strong>Subtotal :</strong>
-            <span class="amount">$144.00</span>
-        </div>
-        <a href="cart.html" class="btn btn-secondary btn--lg d-block d-sm-inline-block me-sm-2">view cart</a>
-        <a href="checkout.html" class="btn btn-dark btn--lg d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
-        <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
-    </div>
 </div> --}}
-<!-- OffCanvas Cart End -->
 
 <!-- header start -->
 <header>
-    <!-- header top start -->
-    {{-- <div class="header-top theme1 bg-dark py-15">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-sm-6 order-last order-sm-first">
-                    <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
-                        <div class="social-network2">
-                            <ul class="d-flex">
-                                <li>
-                                    <a href="https://www.facebook.com/" target="_blank"><span
-                                            class="icon-social-facebook"></span></a>
-                                </li>
-                                <li>
-                                    <a href="https://twitter.com/" target="_blank"><span
-                                            class="icon-social-twitter"></span></a>
-                                </li>
-                                <li>
-                                    <a href="https://www.youtube.com/" target="_blank"><span
-                                            class="icon-social-youtube"></span></a>
-                                </li>
-                                <li class="mr-0">
-                                    <a href="https://www.instagram.com/" target="_blank"><span
-                                            class="icon-social-instagram"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="media static-media ms-4 d-flex align-items-center">
-                            <div class="media-body">
-                                <div class="phone">
-                                    <a href="tel:(+123)4567890" class="text-white"><i class="icon-call-out me-1"></i>
-                                        (+123)4567890</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-6">
-                    <nav class="navbar-top pb-2 pb-sm-0 position-relative">
-                        <ul class="d-flex justify-content-center justify-content-md-end align-items-center">
-                            <li>
-                                <a href="#" id="dropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">Setting <i class="ion ion-ios-arrow-down"></i></a>
-                                <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown1">
-                                    <li><a href="myaccount.html">My account</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="login.html">Sign out</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" id="dropdown2" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">USD $ <i class="ion ion-ios-arrow-down"></i>
-                                </a>
-                                <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown2">
-                                    <li class="active"><a href="#">EUR €</a></li>
-                                    <li><a href="#">USD $</a></li>
-                                </ul>
-                            </li>
-                            <li class="english">
-                                <a href="#" id="dropdown3" class="pe-0" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <img src="{{asset('assets/admin/images/logo/us-flag.jpg')}}" alt="us flag" />
-                                    English
-                                    <i class="ion ion-ios-arrow-down"></i>
-                                </a>
-                                <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown3">
-                                    <li class="active">
-                                        <a href="#"><img src="{{asset('assets/admin/images/logo/us-flag.jpg')}}" alt="us flag" />
-                                            English</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="{{asset('assets/admin/images/logo/france.jpg')}}" alt="france flag" />
-                                            Français</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- header top end -->
     <!-- header-middle satrt -->
     <div id="sticky" class="header-middle theme1 py-15 py-lg-0">
         <div class="container position-relative">
-            <div class="row align-items-center">
-                <div class="col-xl-2 col-lg-2 col-6  ">
-                    <div class="logo">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-6  ">
+                    <div class="logo col-8">
                         <a href="{{ route('client.home') }}"><img
                                 src="{{ asset('assets/client/images/logo/logo_art.png') }}" alt="logo" /></a>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-7 d-none d-lg-block">
+                <div class="col-xl-6 col-lg-6 d-none d-lg-block">
                     <ul class="main-menu d-flex justify-content-center">
                         <li class="ml-0">
                             <a href="{{ route('client.home') }}" class="ps-0">Trang chủ </a>
@@ -392,7 +262,7 @@
                         <li><a href="{{ route('client.lienhe') }}">Liên hệ</a></li>
                     </ul>
                 </div>
-                <div class="col-xl-4 col-lg-3 col-6 ">
+                <div class="col-xl-3 col-lg-3 col-6 ">
                     <!-- search-form end -->
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- static-media end -->
@@ -405,20 +275,29 @@
                                 </li> -->
                                 <li class="mr-xl-0 cart-block position-relative me-1">
                                     <form class="search-box" style="margin: 0;" action="{{ url('/') }}"
-                                        method="post">
+                                        method="get">
                                         @csrf
-                                        @method('get')
-                                        <div class="d-flex align-items-center flex-row-reverse" id="searchContainer">
+                                        <div class="d-flex align-items-center flex-row-reverse position-relative"
+                                            id="searchContainer">
                                             <div class="my-2 mx-2">
+                                                <!-- Icon tìm kiếm -->
                                                 <a class="search-toggle" id="searchIcon" role="button"
-                                                    style="font-size: 20px;">
+                                                    style="font-size: 20px; cursor: pointer;">
                                                     <i class="icon-magnifier"></i>
                                                 </a>
                                             </div>
-                                            <!-- Ô nhập liệu sẽ được thêm vào DOM bằng JavaScript -->
+                                            <!-- Input tìm kiếm (ẩn mặc định) -->
+                                            <div id="searchInput" class="search-input d-none">
+                                                <div class="input-group">
+                                                    <input type="text" name="search" class="form-control"
+                                                        placeholder="Tìm kiếm..." aria-label="Search">
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </li>
+
+
 
                                 <li class="mr-xl-0 cart-block position-relative me-1">
                                     <a id="notification-icon" href="javascript:void(0);">
@@ -436,7 +315,7 @@
                                         </span>
                                     </a>
                                 </li>
-                               
+
                                 <!-- cart block end -->
                             </ul>
                             <!-- Modal thông báo -->
@@ -484,7 +363,14 @@
                                         <a class="nav-link dropdown-toggle nav-user me-0 avatar_box" href="#"
                                             style="width: 50px;" id="profileDropdown" role="button"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
+                                            @php
+                                                $avatar = Auth::user()->anh_dai_dien;
+
+                                                // Check if 'anh_dai_dien' is a URL or a storage path
+                                                $isUrl = filter_var($avatar, FILTER_VALIDATE_URL) !== false;
+                                            @endphp
+
+                                            <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
                                                 alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
                                             {{-- <span class="pro-user-name ms-1">
                                                 {{ Auth::user()->ho_ten }} <i class="mdi mdi-chevron-down"></i>
@@ -511,7 +397,7 @@
                                         </div>
                                     </li>
                                 @else
-                                    <li>
+                                    <li class="me-0">
                                         <a style="font-size: 16px;" href="{{ route('auth.login') }}">
                                             Đăng Nhập
                                         </a>
@@ -544,16 +430,44 @@
 </script>
 
 <style>
-    /* Ẩn ô nhập liệu lúc đầu */
+    /* Hiệu ứng trượt */
+    @keyframes slideIn {
+        from {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+    }
+
+    /* Style cho ô nhập liệu */
     .search-input {
-        width: 0;
-        /* Không hiển thị lúc đầu */
-        opacity: 0;
-        /* Ẩn nội dung */
-        animation-duration: 0.5s;
-        /* Thời gian cho animation */
-        animation-fill-mode: forwards;
-        /* Để duy trì trạng thái cuối của animation */
+        position: absolute;
+        top: 100%;
+        /* Hiển thị ngay dưới biểu tượng */
+        right: 0;
+        width: 250px;
+        z-index: 1000;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-in-out;
     }
 
     /* Hiệu ứng trượt vào */
@@ -738,25 +652,34 @@
 <!-- JavaScript cho modal -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    // Đảm bảo mã JavaScript chạy sau khi DOM được tải
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchIcon = document.getElementById("searchIcon");
+        const searchInput = document.getElementById("searchInput");
+
+        // Thêm sự kiện click vào biểu tượng tìm kiếm
+        searchIcon.addEventListener("click", function() {
+            if (searchInput.classList.contains("d-none")) {
+                // Hiển thị ô nhập liệu với hiệu ứng trượt xuống
+                searchInput.classList.remove("d-none");
+                searchInput.style.animationName = "slideIn";
+            } else {
+                // Ẩn ô nhập liệu với hiệu ứng trượt lên
+                searchInput.style.animationName = "slideOut";
+                setTimeout(() => {
+                    searchInput.classList.add("d-none");
+                }, 300); // Chờ hiệu ứng hoàn tất trước khi ẩn
+            }
+        });
+    });
+
     $(document).ready(function() {
         // Mở modal khi nhấn vào chuông thông báo
         $('#notification-icon').click(function() {
             $('#notificationModal').modal('show');
         });
     });
-    document.getElementById("searchIcon").addEventListener("click", function() {
-        const mainMenu = document.querySelector(".main-menu");
 
-        // Kiểm tra xem class justify-content-center có tồn tại không
-        if (mainMenu.classList.contains("justify-content-center")) {
-            mainMenu.classList.remove("justify-content-center"); // Xóa class justify-content-center
-            mainMenu.classList.add("justify-content-start"); // Thêm class justify-content-start
-        } else {
-            mainMenu.classList.remove(
-                "justify-content-start"); // Nếu đã là justify-content-start, quay về justify-content-center
-            mainMenu.classList.add("justify-content-center");
-        }
-    });
 
     // Lấy phần tử icon và container
     const searchIcon = document.getElementById("searchIcon");

@@ -2,8 +2,6 @@
 
 @section('content')
     <style>
-
-
         .main-slider {
             max-height: 500px;
             display: flex;
@@ -164,6 +162,24 @@
                 opacity: 0.3;
             }
         }
+
+        .blinking-text {
+            color: red;
+            font-size: 15px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
     <!-- main slider start -->
     <section class="bg-light">
@@ -173,12 +189,12 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
+                                {{-- <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
                                     ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300"
                                     style="color: #5C5BCA">
-                                </p>
-                                <h2 class="title animated">
+                                </p> --}}
+                                {{-- <h2 class="title animated">
                                     <span class="animated d-block" data-animation-in="fadeInLeft" data-delay-in=".800"
                                         style="color: #5C5BCA">Khơi
                                         nguồn đam mê nghệ thuật</span>
@@ -187,7 +203,7 @@
                                 </h2>
                                 <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a> --}}
                             </div>
                         </div>
                     </div>
@@ -199,7 +215,7 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                {{-- <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
                                     style="color: #5C5BCA">
@@ -217,7 +233,7 @@
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a> --}}
                             </div>
                         </div>
                     </div>
@@ -229,7 +245,7 @@
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
                             <div class="slider-content">
-                                <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
+                                {{-- <p class="text animated text-slider" data-animation-in="fadeInLeft" data-delay-in=".300">
                                     ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
                                     style="color: #5C5BCA">
@@ -247,7 +263,7 @@
 
                                 <a href="{{ route('client.cuahang') }}"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a> --}}
                             </div>
                         </div>
                     </div>
@@ -257,41 +273,31 @@
         </div>
     </section>
     <!-- main slider end -->
-
-    {{-- mã giảm giá 'voucher' --}}
-    <section class="discount-codes">
+    <!-- brand slider start -->
+    <div class="brand-slider-section theme1 bg-white">
         <div class="container">
-            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span></h2>
-            </h2>
-            <div class="discount-list">
-                @foreach ($discounts as $item)
-                    <div class="discount-item">
-                        <div class="discount-code">
-                            <span class="code">{{ $item->ma_khuyen_mai }}</span>
-                        </div>
-                        <div class="discount-description">
-                            <p>Giảm <span
-                                    class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
-                                VNĐ cho tất cả các sản phẩm.
-                            </p>
-                        </div>
-                        <button style="font-size: 1em" class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
-                            chép mã</button>
+            <div class="row">
+                <div class="col-12">
+                    <div class="brand-init border-top py-35 slick-nav-brand">
+                        @foreach ($anhDMuc as $anhdm)
+                            <div class="slider-item">
+                                <div class="single-brand">
+                                    <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
+                                    <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
+                                        <!-- Hiển thị ảnh hình tròn -->
+                                        <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
+                                            class="brand-image" />
+                                    </a>
+                                    <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
-
-
-                <!-- Thêm các mã giảm giá khác ở đây -->
+                </div>
             </div>
         </div>
-        <!-- Modal -->
-        <div id="copyModal" class="copy-modal">
-            <div class="modal-content">
-                <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
-            </div>
-        </div>
-    </section>
-    {{-- end --}}
+    </div>
+
     <!-- staic media end -->
     <!-- common banner  start -->
     <div class="common-banner bg-white">
@@ -304,6 +310,7 @@
     <!-- product tab start -->
     <section class="product-tab bg-white pt-50 pb-80">
         <div class="container">
+
             <div class="product-tab-nav mb-50">
                 <div class="row align-items-center">
                     {{-- <div class="col-12">
@@ -316,14 +323,14 @@
                         <nav class="product-tab-menu theme1">
                             <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                        href="#pills-home" role="tab" aria-controls="pills-home"
-                                        aria-selected="true" style="font-size: 20px">Sản phẩm mới</a>
+                                    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home"
+                                        role="tab" aria-controls="pills-home" aria-selected="true"
+                                        style="font-size: 20px">Sản phẩm mới</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                        href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false" style="font-size: 20px">Đang giảm giá</a>
+                                    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" href="#pills-profile"
+                                        role="tab" aria-controls="pills-profile" aria-selected="false"
+                                        style="font-size: 20px">Đang giảm giá</a>
                                 </li>
                             </ul>
                         </nav>
@@ -334,16 +341,18 @@
                 <div class="col-12">
                     <div class="tab-content" id="pills-tabContent">
                         <!-- first tab-pane -->
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                            aria-labelledby="pills-home-tab">
+                        <div class="pb-80">
                             <div class="row">
+                                <div class="section-title text-center">
+                                    <h2 class="title pb-3 mb-3">Sản phẩm Mới</h2>
+                                </div>
                                 @foreach ($sanPhamMois as $item)
-                                    <div class="col-12 col-md-4 col-lg-2 mb-4">
+                                    <div class="col-12 col-md-6  col-lg-2 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
-                                                        <span class="badge badge-danger top-right">Mới</span>
+                                                        <span class="badge badge-danger top-right blinking-text">Mới</span>
                                                         <a href="{{ route('san-phams.incrementViews', $item->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -369,10 +378,10 @@
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <p>Giá: </p>
-                                                                <p style="color: red">
-                                                                    <del
-                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
-                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                <p>
+
+                                                                    {{ number_format($item->gia_goc, 0, ',', '.') }}
+                                                                    VNĐ
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -386,8 +395,11 @@
                             </div>
                         </div>
                         <!-- second tab-pane -->
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="pb-80">
                             <div class="row">
+                                <div class="section-title text-center">
+                                    <h2 class="title pb-3 mb-3">Sản phẩm giảm giá</h2>
+                                </div>
                                 @foreach ($sanPhamGiamGias as $sanPhamGg)
                                     <div class="col-12 col-md-4 col-lg-2 mb-4">
                                         <div class="card product-card">
@@ -420,8 +432,12 @@
                                                                 @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span class="product-price">Giá:
-                                                                    {{ number_format($sanPhamGg->gia_km) }} VNĐ</span>
+                                                                <p>Giá: </p>
+                                                                <p style="color: red">
+                                                                    <del
+                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
+                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -455,7 +471,7 @@
                                     <div class="card-body p-0">
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
-                                                <span class="badge badge-danger top-right">New</span>
+                                                <span class="badge badge-danger top-right">{{  $sanphamview->views }} lượt xem</span>
                                                 <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
@@ -483,8 +499,12 @@
                                                         @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span class="product-price">Giá:
-                                                            {{ number_format($sanphamview->gia_km) }} VNĐ</span>
+                                                        <p>Giá: </p>
+                                                        <p style="color: red">
+                                                            <del
+                                                                style="color: black">{{ number_format($sanphamview->gia_goc, 0, ',', '.') }}</del>
+                                                            {{ number_format($sanphamview->gia_km, 0, ',', '.') }} VNĐ
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -545,30 +565,42 @@
         </div>
     </section>
     <!-- blog-section end -->
-    <!-- brand slider start -->
-    <div class="brand-slider-section theme1 bg-white">
+    {{-- mã giảm giá 'voucher' --}}
+    <section class="discount-codes">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="brand-init border-top py-35 slick-nav-brand">
-                        @foreach ($anhDMuc as $anhdm)
-                            <div class="slider-item">
-                                <div class="single-brand">
-                                    <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
-                                    <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
-                                        <!-- Hiển thị ảnh hình tròn -->
-                                        <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
-                                            class="brand-image" />
-                                    </a>
-                                    <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
-                                </div>
-                            </div>
-                        @endforeach
+            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span></h2>
+            </h2>
+            <div class="discount-list">
+                @foreach ($discounts as $item)
+                    <div class="discount-item">
+                        <div class="discount-code">
+                            <span class="code">{{ $item->ma_khuyen_mai }}</span>
+                        </div>
+                        <div class="discount-description">
+                            <p>Giảm <span
+                                    class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
+                                VNĐ cho tất cả các sản phẩm.
+                            </p>
+                        </div>
+                        <button style="font-size: 1em" class="copy-btn"
+                            onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
+                            chép mã</button>
                     </div>
-                </div>
+                @endforeach
+
+
+                <!-- Thêm các mã giảm giá khác ở đây -->
             </div>
         </div>
-    </div>
+        <!-- Modal -->
+        <div id="copyModal" class="copy-modal">
+            <div class="modal-content">
+                <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
+            </div>
+        </div>
+    </section>
+    {{-- end --}}
+
     <style>
         .min_h {
             display: -webkit-box;

@@ -39,7 +39,7 @@
                 <label class="form-label">Mã xác thực:</label>
                 <input type="text" name="token" class="form-control" required>
             </div>
-            <button type="button" id="confirm-code-button" class="btn btn-success" onclick="confirmVerificationCode()">Xác nhận mã</button>
+            <button type="submit" id="confirm-code-button" class="btn btn-success">Xác nhận mã</button>
         </form>
     </div>
 
@@ -83,7 +83,7 @@
                 success: function(response) {
                     if (response.redirectUrl) {
                         $('#verification-form').hide();
-                        $('#reset-password-form').show(); // Ensure you have this form defined elsewhere
+                        window.location.href = response.redirectUrl; // Redirect to reset password page
                     }
                 },
                 error: function(xhr) {

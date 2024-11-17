@@ -23,7 +23,7 @@ class CartController extends Controller
             ->where('user_id', Auth::id())
             ->first();
 
-        // Nếu không có cart, bạn có thể xử lý như sau
+        // 
         if (!$cart) {
             return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
         }
@@ -113,9 +113,11 @@ class CartController extends Controller
         $discountedPrice = $sanPham->gia_km;  // Lấy giá khuyến mãi của sản phẩm
         $variantPrice = $variant->gia;  // Lấy giá của biến thể sản phẩm
 
+
         // Tính tổng giá cho sản phẩm (giá khuyến mãi + giá biến thể) * số lượng
         $totalPrice = ($discountedPrice + $variantPrice) * $cartItem->quantity;
         $cartItem->price = $totalPrice;
+
 
         // Lưu CartItem vào database
         $cartItem->save();

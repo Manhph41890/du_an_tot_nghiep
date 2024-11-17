@@ -13,18 +13,18 @@
                                     alt="footer logo" />
                             </a>
                         </div>
-                        <p class="text " style="transform: translate(5%, -157%);">
+                        <p class="text m-0" style="transform: translate(5%, -157%); font-size:14px; line-height: 1.715;">
                             Vẽ sáng tạo - Tô hạnh phúc
                         </p>
-                        <ul class="footer-menu" style="transform: translateY(-14%);">
+                        <ul class="footer-menu" style="transform: translateY(-20%);">
                             <li>
                                 <i class="fa fa-envelope  mx-2" style="color: #fff; "></i>
-                                <span class="text hover-left">articraft@gmail.com</span>
+                                <span class="text hover-left" style="font-size: 15px;">articraft@gmail.com</span>
                             </li>
 
                             <li>
                                 <i class="fa fa-mobile  mx-2" style="color: #fff; "></i>
-                                <a href="#" class="text hover-left"> (024) 8582 0808</a>
+                                <a href="#" class="text hover-left" style="font-size: 15px;"> (024) 8582 0808</a>
                             </li>
                             <li>
                                 <i class="fa fa-map-pin  mx-2 " style="color: #fff"></i>
@@ -37,7 +37,7 @@
                     <div class="footer-widget">
                         <div class="border-bt cbb1 mb-25">
                             <div class="section-title">
-                                <h2 class="title" style="color: #fff !important;">CHÍNH SÁCH BÁN HÀNG</h2>
+                                <h2 class="title m-0" style="color: #fff !important; text-align:start; height:auto">CHÍNH SÁCH BÁN HÀNG</h2>
                             </div>
                         </div>
                         <!-- footer-menu start -->
@@ -55,7 +55,7 @@
                     <div class="footer-widget">
                         <div class="border-bt cbb1 mb-25">
                             <div class="section-title">
-                                <h2 class="title" style="color: #fff !important;">HỖ TRỢ KHÁCH HÀNG</h2>
+                                <h2 class="title m-0" style="color: #fff !important; text-align:start; height:auto">HỖ TRỢ KHÁCH HÀNG</h2>
                             </div>
                         </div>
                         <!-- footer-menu start -->
@@ -71,7 +71,7 @@
                     <!-- <div class="footer-widget">
                         <div class="border-bt cbb1 mb-25">
                             <div class="section-title">
-                                <h2 class="title">ĐỊA CHỈ</h2>
+                                <h2 class="title m-0">ĐỊA CHỈ</h2>
                             </div>
                         </div>
                       

@@ -1,26 +1,23 @@
-
 @extends('client.layout')
 
 @section('content')
-    <style>
-        p {
-            font-size: 16px;
-        }
-    </style>
+    <!-- header end -->
     <!-- breadcrumb-section start -->
-    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
+    <nav class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">CHI TIẾT BLOG</h2>
+                        <h2 class="title pb-4 text-white text-capitalize" style=" color: #fff !important">
+                            Blog
+                        </h2>
                     </div>
                 </div>
                 <div class="col-12">
                     <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('client.home') }}">Trang chủ</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Chi tiết blog
+                            Blog
                         </li>
                     </ol>
                 </div>
@@ -28,73 +25,138 @@
         </div>
     </nav>
     <!-- breadcrumb-section end -->
-    <!-- product tab start -->
-    <section class="blog-section pt-80 pb-80">
+
+    <!-- Blog Section Start -->
+    <section class="blog-section py-80 bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-10 mx-auto">
-                    <div class="blog-posts">
-                        <div class="single-blog-post blog-grid-post">
-                            <div class="blog-post-media d-flex align-items-center">
-                                <div class="blog-image single-blog" style="max-width: 500px; margin-right: 20px;">
-                                    <a href="#">
-                                        <img src="{{ asset('/storage/' . $baiViet->anh_bai_viet) }}" style="width: 100%;">
-                                    </a>
+                @foreach ($baiviets as $baiviet)
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-30">
+                        <div class="single-blog overflow-hidden position-relative">
+                            <!-- Image -->
+                            <a class="blog-thumb mb-20 zoom-in d-block"
+                                href="{{ url('client/baivietchitiet', $baiviet->id) }}">
+                                <img src="{{ asset('/storage/' . $baiviet->anh_bai_viet) }}" class="img-fluid"
+                                    alt="{{ $baiviet->tieu_de_bai_viet }}">
+                            </a>
+                            <!-- Blog Content -->
+                            <div class="blog-post-content p-4">
+                                <div class="d-flex justify-content-between text-muted mb-2">
+                                    <p>Tác giả: <a
+                                            href="{{ url('client/baivietchitiet', $baiviet->id) }}">{{ $baiviet->user->ho_ten }}</a>
+                                    </p>
+                                    <p>Xuất bản: {{ $baiviet->ngay_dang }}</p>
                                 </div>
-                                <div class="blog-post-content-inner">
-                                    <h4 class="blog-title">{{ $baiViet->tieu_de_bai_viet }}</h4>
-                                    <ul class="blog-page-meta">
-                                        <li>
-                                            <a href="#"><i class="ion-person"></i>{{ $baiViet->user->ho_ten }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="ion-calendar"></i> {{ $baiViet->ngay_dang }}</a>
-                                        </li>
-                                    </ul>
-                                    <p>{{ $baiViet->noi_dung }}</p>
-                                </div>
-                                <!-- single blog post -->
-                            </div>
-                            
-                            <div class="blog-related-post">
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <!-- Section Title -->
-                                        <div class="section-title underline-shape">
-                                            <h2>BÀI VIẾT GẦN ĐÂY</h2>
-                                        </div>
-                                        <!-- Section Title -->
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    @foreach ($docThem as $item)
-                                        <div class="col-md-4 mb-4 mb-md-0">
-                                            <div class="blog-post-media">
-                                                <div class="blog-image single-blog">
-                                                    <a href="{{ url('client/baivietchitiet', $item->id) }}"> <img
-                                                            src="{{ asset('/storage/' . $item->anh_bai_viet) }}"></a>
-                                                </div>
-                                            </div>
-                                            <div class="blog-post-content">
-
-                                                <h3 class="title mb-15">
-                                                    <a href="single-blog.html">{{ $item->tieu_de_bai_viet }}</a>
-                                                </h3>
-                                                <p class="sub-title">
-                                                    Tác giả:
-                                                    <a class="theme-color d-inline-block mx-1"
-                                                        href="#">{{ $item->user->ho_ten }}</a>
-                                                    {{ $item->ngay_dang }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-                                </div>
+                                <h3 class="title mb-15 mt-10">
+                                    <a href="{{ url('client/baivietchitiet', $baiviet->id) }}"
+                                        class="text-primary">{{ $baiviet->tieu_de_bai_viet }}</a>
+                                </h3>
+                                <p class="text-muted mb-3">
+                                    {{ Str::limit($baiviet->noi_dung, 120, '...') }}
+                                </p>
+                                <a class="read-more text-primary"
+                                    href="{{ url('client/baivietchitiet', $baiviet->id) }}">Đọc thêm</a>
                             </div>
                         </div>
                     </div>
+                @endforeach
+            </div>
+
+            <!-- Pagination -->
+            <div class="row">
+                <div class="col-12">
+                    <nav class="pagination-section mt-30 text-center">
+                        <ul class="pagination justify-content-center">
+                            {{ $baiviets->links() }}
+                        </ul>
+                    </nav>
                 </div>
+            </div>
+        </div>
     </section>
-    <!-- product tab end -->
+    <!-- Blog Section End -->
+@endsection
+
+@section('styles')
+    <style>
+        /* Cải thiện giao diện của phần Breadcrumb */
+        .breadcrumb-section {
+            background: #0056b3;
+        }
+
+        .breadcrumb-section .breadcrumb-item a {
+            color: #fff;
+        }
+
+        .breadcrumb-section .breadcrumb-item.active {
+            color: #ffd700;
+        }
+
+        /* Tinh chỉnh layout cho blog */
+        .single-blog {
+            background: #fff;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .single-blog:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-thumb {
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-thumb:hover {
+            transform: scale(1.05);
+        }
+
+        /* Tinh chỉnh thông tin bài viết */
+        .blog-post-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .blog-post-content p {
+            font-size: 0.9rem;
+        }
+
+        .read-more {
+            font-weight: bold;
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Cải thiện giao diện phân trang */
+        .pagination-section .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pagination-section .pagination .page-item a {
+            color: #0056b3;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .pagination-section .pagination .page-item a:hover {
+            background: #0056b3;
+            color: #fff;
+        }
+
+        .pagination-section .pagination .page-item.active a {
+            background: #0056b3;
+            color: #fff;
+        }
+    </style>
 @endsection

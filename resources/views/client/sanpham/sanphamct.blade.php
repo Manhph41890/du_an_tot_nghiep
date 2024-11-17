@@ -255,7 +255,7 @@
                                                 <div class="single-review">
                                                     <div class="review-img">
                                                         <img src="/assets/img/testimonial-image/1.png" alt="" />
-                                                    </div> --}}
+                                                    </div>
                                                     <div class="review-content">
                                                         <div class="review-top-wrap">
                                                             <div class="review-left">
@@ -458,18 +458,10 @@
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
-
-
         // Hàm hỗ trợ định dạng số có dấu phân cách ngàn
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
-
-
-
-
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('form[id^="add-to-cart-form"]').forEach(form => {
                 form.addEventListener('submit', function(event) {
@@ -560,6 +552,37 @@
             // setTimeout(function() {
             //     window.location.href = "{{ route('auth.login') }}";
             // }, 1000);
+        }
+
+        function filterByStars(starCount) {
+            const reviews = document.querySelectorAll('.single-review');
+
+            reviews.forEach(review => {
+                const reviewStars = parseInt(review.getAttribute('data-rating'));
+
+                // Hiển thị tất cả nếu chọn "Tất cả"
+                if (starCount === 0 || reviewStars === starCount) {
+                    review.style.display = 'block';
+                } else {
+                    review.style.display = 'none';
+                }
+            });
+
+            function filterByStars(starCount) {
+                const reviews = document.querySelectorAll('.single-review');
+
+                reviews.forEach(review => {
+                    const reviewStars = parseInt(review.getAttribute('data-rating'));
+
+                    // Hiển thị tất cả nếu chọn "Tất cả"
+                    if (starCount === 0 || reviewStars === starCount) {
+                        review.style.display = 'block';
+                    } else {
+                        review.style.display = 'none';
+                    }
+                });
+            }
+
         }
     </script>
 @endsection

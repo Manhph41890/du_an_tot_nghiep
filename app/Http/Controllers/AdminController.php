@@ -15,8 +15,9 @@ class AdminController extends Controller
 {
 
     public function thong_ke_chung(Request $request)
-    {
+    {   
         
+        $this->authorize('viewAny', User::class);
         $title = "Tổng quan chung";
 
         // Validate ngày bắt đầu, ngày kết thúc

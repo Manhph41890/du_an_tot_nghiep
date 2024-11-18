@@ -177,7 +177,7 @@
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="gioi_tinh" class="mb-2">Giới tính</label>
                                                 <select id="gioi_tinh" name="gioi_tinh" class="form-control"
-                                                    {{ $user->gioi_tinh ? '' : '' }}>
+                                                    {{ $user->gioi_tinh ? '' : 'disabled' }}>
                                                     <option value="Nam"
                                                         {{ $user->gioi_tinh == 'Nam' ? 'selected' : '' }}>Nam</option>
                                                     <option value="Nữ"
@@ -464,7 +464,7 @@
         // Function to toggle edit mode
         function toggleEdit() {
             document.querySelectorAll(
-                '#user-info-form input[type="text"], #user-info-form input[type="number"], #user-info-form input[type="date"]'
+                '#user-info-form input[type="text"], #user-info-form input[type="number"], #user-info-form input[type="date"],#user-info-form select'
             ).forEach(field => {
                 field.disabled = !field.disabled;
             });

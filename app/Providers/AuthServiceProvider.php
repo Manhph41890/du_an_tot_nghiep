@@ -17,6 +17,7 @@ use App\Policies\BaiVietPolicy;
 use App\Policies\ChucVuPolicy;
 use App\Policies\DanhGiaPolicy;
 use App\Policies\DanhMucPolicy;
+use App\Policies\DashboardAdminPolicy;
 use App\Policies\KhuyenMaiPolicy;
 use App\Policies\PhuongThucThanhToanPolicy;
 use App\Policies\PhuongThucVanChuyenPolicy;
@@ -35,14 +36,16 @@ class AuthServiceProvider extends ServiceProvider
         //
         danh_muc::class => DanhMucPolicy::class,
         san_pham::class => SanPhamPolicy::class,
-        chuc_vu::class =>ChucVuPolicy::class,
+        chuc_vu::class => ChucVuPolicy::class,
         khuyen_mai::class => KhuyenMaiPolicy::class,
         danh_gia::class => DanhGiaPolicy::class,
         phuong_thuc_thanh_toan::class => PhuongThucThanhToanPolicy::class,
         phuong_thuc_van_chuyen::class => PhuongThucVanChuyenPolicy::class,
         User::class => UserPolicy::class,
+       
         bai_viet::class => BaiVietPolicy::class,
-        
+
+
     ];
 
     /**

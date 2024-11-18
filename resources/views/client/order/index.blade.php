@@ -2,9 +2,29 @@
 
 @section('content')
     <style>
-        .vnpay-logo {
-            width: 80px;
-            display: block;
+        .payment-text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .icon-image {
+            height: 24px;
+            width: auto;
+        }
+
+        .icon-size {
+            font-size: 20px;
+        }
+
+        .container_radio {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .payment-text {
+            font-size: 16px;
         }
 
         .custom-thead {
@@ -184,28 +204,41 @@
                         <div class="step middle payments">
                             <h3 style="font-size:18px">2. Thông tin thanh toán</h3>
                             <ul>
-                                @foreach ($phuongThucThanhToans as $phuongThucThanhToan)
-                                    <li>
-                                        <label class="container_radio">
-                                            {{ $phuongThucThanhToan->kieu_thanh_toan }}
-                                            <a href="#0" class="info" data-bs-toggle="modal"
-                                                data-bs-target="#payments_method"></a>
-                                            <input type="radio" id="payment-{{ $phuongThucThanhToan->id }}"
-                                                name="phuong_thuc_thanh_toan" class="form-check-input"
-                                                value="{{ $phuongThucThanhToan->id }}"
-                                                {{ old('phuong_thuc_thanh_toan') == $phuongThucThanhToan->id ? 'checked' : '' }}
-                                                onchange="toggleOrderButton('{{ $phuongThucThanhToan->kieu_thanh_toan }}')">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        {{-- Hiển thị logo VNPay nếu kieu_thanh_toan là "Thanh toán online" --}}
-                                        @if ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán online')
-                                            <div class="vnpay-logo ms-2">
-                                                <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                                    alt="VNPay Logo">
-                                            </div>
-                                        @endif
-                                    </li>
-                                @endforeach
+                                @if ($phuongThucThanhToans->isEmpty())
+                                    <p>Không có phương thức thanh toán nào!</p>
+                                @else
+                                    @foreach ($phuongThucThanhToans as $phuongThucThanhToan)
+                                        <li>
+                                            <label
+                                                class="container_radio d-flex align-items-center justify-content-between">
+                                                <!-- Kiểu thanh toán và icon -->
+                                                <div class="d-flex align-items-center">
+                                                    <!-- Kiểu thanh toán -->
+                                                    <span
+                                                        class="payment-text me-3">{{ $phuongThucThanhToan->kieu_thanh_toan }}</span>
+
+                                                    <!-- Icon hoặc hình ảnh -->
+                                                    @if ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Vnpay')
+                                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
+                                                            alt="VNPay Logo" class="icon-image">
+                                                    @elseif ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Ví')
+                                                        <i class="fas fa-wallet text-success ms-2 icon-size"></i>
+                                                        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                                                            rel="stylesheet">
+                                                    @endif
+                                                </div>
+
+                                                <!-- Input Radio -->
+                                                <input type="radio" id="payment-{{ $phuongThucThanhToan->id }}"
+                                                    name="phuong_thuc_thanh_toan" class="form-check-input"
+                                                    value="{{ $phuongThucThanhToan->id }}"
+                                                    {{ old('phuong_thuc_thanh_toan') == $phuongThucThanhToan->id ? 'checked' : '' }}
+                                                    onchange="toggleOrderButton('{{ $phuongThucThanhToan->kieu_thanh_toan }}')">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                         <!-- /step -->
@@ -307,7 +340,7 @@
                 if (paymentType === 'Thanh toán khi nhận hàng') {
                     codButton.style.display = 'block';
                     onlineButton.style.display = 'none';
-                } else if (paymentType === 'Thanh toán online') {
+                } else if (paymentType === 'Thanh toán bằng Vnpay') {
                     codButton.style.display = 'none';
                     onlineButton.style.display = 'block';
                 }

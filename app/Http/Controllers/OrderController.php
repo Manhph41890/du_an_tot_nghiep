@@ -95,7 +95,7 @@ class OrderController extends Controller
         $paymentMethod = phuong_thuc_thanh_toan::find($paymentMethodId);
 
         // Kiểm tra xem có phải phương thức thanh toán VnPay
-        if ($paymentMethod->kieu_thanh_toan === 'Thanh toán online') {
+        if ($paymentMethod->kieu_thanh_toan === 'Thanh toán bằng Vnpay') {
             // Lưu thông tin order vào session
             Session::put('order_details', [
                 'user_id' => Auth::id(),

@@ -1,12 +1,9 @@
 <div class="modal-dialog modal-xl">
     <div class="modal-content">
-
         <!-- Modal Header -->
         <div class="modal-header w-100">
             <h3 class="modal-title">Chi tiết đơn hàng</h3>
-
         </div>
-
         <!-- Modal Body -->
         <div class="modal-body">
             <div class="row">
@@ -22,8 +19,8 @@
                                             <p>Ngày tạo: {{ $donhang->ngay_tao }}</p>
                                         </div>
                                         <div class="">
-                                            <div class="">
-                                                <p class="mb-0 me-2">Trạng thái đơn hàng:</p>
+                                            <div class="d-flex justify-content-end">
+                                                <p class="me-5 pe-5">Trạng thái đơn hàng:</p>
                                                 @php
                                                     $statusClasses = [
                                                         'Chờ xác nhận' => 'bg-warning',
@@ -37,14 +34,12 @@
                                                     $class =
                                                         $statusClasses[$donhang->trang_thai_don_hang] ?? 'bg-secondary';
                                                 @endphp
-
                                                 <span class="badge {{ $class }}">
                                                     {{ $donhang->trang_thai_don_hang }}
                                                 </span>
-
                                             </div>
-                                            <div class="mt-3">
-                                                <p class="mb-0 me-2">Trạng thái Thanh toán:</p>
+                                            <div class="mt-3 d-flex justify-content-end">
+                                                <p class="me-5 pe-5">Trạng thái Thanh toán:</p>
                                                 @php
                                                     $statusClasses = [
                                                         'Đã thanh toán' => 'bg-success',
@@ -365,7 +360,6 @@
         padding: 20px;
         background-color: #f9f9f9;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
     }
 
     .danhgia {
@@ -386,18 +380,6 @@
         font-size: 20px;
         color: #333;
         cursor: pointer;
-        font-weight: bold;
-    }
-
-    .order-status {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-        border-radius: 5px;
-        padding: 5px 10px;
-    }
-
-    .order-summary {
         font-weight: bold;
     }
 

@@ -154,9 +154,24 @@
                     }
                 }
             });
+
+            $(document).ready(function() {
+                $('#email').on('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        $('#send-code-button').click(); // Gọi hành động gửi mã
+                    }
+                });
+
+                $('#send-code-button').on('click', function() {
+                    sendVerificationCode();
+                });
+            });
         }
 
-        // Function to confirm the verification code
+
+
+
         function confirmVerificationCode() {
             $.ajax({
                 url: $('#verification-form').attr('action'),
@@ -167,7 +182,7 @@
 
                     if (response.redirectUrl) {
                         $('#verification-form').hide();
-                        window.location.href = response.redirectUrl; // Redirect to reset password page
+                        window.location.href = response.redirectUrl;
                     }
                 },
                 error: function(xhr) {

@@ -181,7 +181,6 @@ class SanPhamController extends Controller
     public function show(san_pham $san_pham, $id)
     {
         //
-
     }
 
     /**

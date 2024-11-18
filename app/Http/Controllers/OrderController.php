@@ -173,7 +173,11 @@ class OrderController extends Controller
             // Redirect to VNPay for payment
             return redirect($vnp_Url);
             // return redirect()->route('order.success');
+        } elseif ($paymentMethod->kieu_thanh_toan === 'Thanh toán bằng Ví') {
+            //
+            return redirect()->route('order.success');
         } else {
+
             // Thanh toán khi nhận hàng
             // Tạo đơn hàng mới và lưu thông tin người dùng
             $order = new don_hang();
@@ -365,6 +369,122 @@ class OrderController extends Controller
             }
 
             Session::forget(['order_details', 'vnp_TxnRef']);
+
+            return redirect()->route('order.success_nhanhang')->with('success', 'Thanh toán thành công! Đơn hàng của bạn đã được tạo.');
+        }
+
+        return redirect()->route('client.cart.index')->with('error', 'Thanh toán thất bại. Vui lòng thử lại.');
+    }
+
+    public function success_vi(Request $request)
+    {
+        // Lấy thông tin từ session
+        $user = Auth::user();
+        $orderDetails = Session::get('order_details');
+        $vnp_ResponseCode = $request->input('vnp_ResponseCode');
+
+        if ($vnp_ResponseCode == '00' && $orderDetails) { // '00' là mã giao dịch thành công
+            // Tạo đơn hàng mới
+            $order = new don_hang();
+            $order->user_id = $orderDetails['user_id'];
+            $order->khuyen_mai_id = $orderDetails['khuyen_mai_id'];
+            $order->ho_ten = $orderDetails['ho_ten'];
+            $order->so_dien_thoai = $orderDetails['so_dien_thoai'];
+            $order->email = $orderDetails['email'];
+            $order->dia_chi = $orderDetails['dia_chi'];
+            $order->phuong_thuc_thanh_toan_id = $orderDetails['phuong_thuc_thanh_toan_id'];
+            $order->phuong_thuc_van_chuyen_id = $orderDetails['phuong_thuc_van_chuyen_id'];
+            $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
+            $order->tong_tien = $orderDetails['tong_tien'];
+            $order->trang_thai_don_hang = 'Chờ xác nhận';
+            $order->trang_thai_thanh_toan = 'Đã thanh toán';
+            $order->save();
+
+            // Lưu chi tiết đơn hàng
+            $cart = Cart::with('cartItems')->where('user_id', Auth::id())->first();
+            if ($cart) {
+                foreach ($cart->cartItems as $item) {
+                    $orderDetail = new chi_tiet_don_hang();
+                    $orderDetail->don_hang_id = $order->id;
+                    $orderDetail->san_pham_id = $item->san_pham_id;
+                    $orderDetail->color_san_pham_id = $item->color_san_pham_id;
+                    $orderDetail->size_san_pham_id = $item->size_san_pham_id;
+                    $orderDetail->so_luong = $item->quantity;
+                    $orderDetail->gia_tien = $item->san_pham->gia_km ?? $item->san_pham->gia_ban;
+                    $orderDetail->thanh_tien = $item->price;
+                    $orderDetail->save();
+
+                    $variant = $item->san_pham->bien_the_san_phams()
+                        ->where('color_san_pham_id', $item->color_san_pham_id)
+                        ->where('size_san_pham_id', $item->size_san_pham_id)
+                        ->first();
+                    if ($variant) {
+                        $variant->so_luong -= $item->quantity;
+                        $variant->save();
+                    }
+
+                    $product = san_pham::find($item->san_pham_id);
+                    if ($product) {
+                        $product->so_luong -= $item->quantity;
+                        $product->save();
+                    }
+                }
+                $coupon = null;
+                if ($coupon) {
+                    DB::table('coupon_usages')->insert([
+                        'user_id' => $user->id,
+                        'coupon_id' => $coupon->id,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+
+                // Giảm số lượng mã khuyến mãi
+                if ($coupon) {
+                    $coupon->so_luong_ma -= 1;
+                    $coupon->save();
+                }
+
+                $variant = $item->san_pham->bien_the_san_phams()->where('color_san_pham_id', $item->color_san_pham_id)
+                    ->where('size_san_pham_id', $item->size_san_pham_id)
+                    ->first();
+
+                if ($variant) {
+                    // Giảm số lượng của biến thể sản phẩm
+                    $variant->so_luong -= $item->quantity;
+                    $variant->save();
+                }
+                // Trừ số lượng sản phẩm trong kho
+                $product = san_pham::find($item->san_pham_id);
+                if ($product) {
+                    $product->so_luong -= $item->quantity;  // Trừ số lượng sản phẩm
+                    $product->save();
+                }
+
+
+                // Xóa giỏ hàng
+                $cart->cartItems()->delete();
+                $cart->delete();
+
+                // Lưu thông tin lịch sử thanh toán vào bảng lich_su_thanh_toan
+                DB::table('lich_su_thanh_toans')->insert([
+                    'don_hang_id' => $order->id,
+                    'vnp_TxnRef_id' => rand(''),
+                    'vnp_ngay_tao' => now()->timezone('Asia/Ho_Chi_Minh'),
+                    'vnp_tong_tien' => $order->tong_tien,
+                    'trang_thai' => 'Thanh toán thành công',
+                ]);
+
+                Mail::send('auth.success_order', [
+                    'ho_ten' => $user->ho_ten,
+                    'order' => $order,
+                ], function ($message) use ($user) {
+                    $message->to($user->email)
+                        ->subject('Đặt hàng thành công');
+                });
+            }
+
+            Session::forget(['order_details']);
 
             return redirect()->route('order.success_nhanhang')->with('success', 'Thanh toán thành công! Đơn hàng của bạn đã được tạo.');
         }

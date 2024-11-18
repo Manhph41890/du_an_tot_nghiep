@@ -278,14 +278,22 @@
                                         data-total="{{ $totall }}">{{ number_format($totall) }}₫</span>
                                 </div>
 
+                                <!-- Nút Đặt hàng cho phương thức "Thanh toán khi nhận hàng" -->
                                 <div class="place-order mt-10" id="place-order-cod" style="display: none;">
                                     <button type="submit" class="btn_1 full-width btn-block btn-primary">Đặt
                                         Hàng</button>
                                 </div>
+
+                                <!-- Nút Thanh toán ngay cho phương thức "Thanh toán bằng Vnpay" -->
                                 <div class="place-order mt-10" id="place-order-online" style="display: none;">
                                     <button type="submit" class="btn_1 full-width btn-block btn-danger"
-                                        name="redirect">Thanh
-                                        toán ngay</button>
+                                        name="redirect">Thanh toán ngay</button>
+                                </div>
+
+                                <!-- Nút Thanh toán ngay cho phương thức "Thanh toán bằng Ví" -->
+                                <div class="place-order mt-10" id="place-order-wallet" style="display: none;">
+                                    <button type="submit" class="btn_1 full-width btn-block btn-success"
+                                        name="wallet-redirect">Thanh toán ngay với Ví</button>
                                 </div>
                             </div>
                             <!-- /box_general -->
@@ -335,14 +343,21 @@
             function toggleOrderButton(paymentType) {
                 const codButton = document.getElementById('place-order-cod');
                 const onlineButton = document.getElementById('place-order-online');
+                const walletButton = document.getElementById('place-order-wallet'); // Thêm phần tử nút ví
 
                 // Kiểm tra loại thanh toán để hiển thị nút tương ứng
                 if (paymentType === 'Thanh toán khi nhận hàng') {
                     codButton.style.display = 'block';
                     onlineButton.style.display = 'none';
+                    walletButton.style.display = 'none'; // Ẩn nút ví
                 } else if (paymentType === 'Thanh toán bằng Vnpay') {
                     codButton.style.display = 'none';
                     onlineButton.style.display = 'block';
+                    walletButton.style.display = 'none'; // Ẩn nút ví
+                } else if (paymentType === 'Thanh toán bằng Ví') {
+                    codButton.style.display = 'none';
+                    onlineButton.style.display = 'none';
+                    walletButton.style.display = 'block'; // Hiển thị nút ví
                 }
             }
 

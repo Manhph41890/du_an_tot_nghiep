@@ -118,7 +118,7 @@
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="gioi_tinh" class="mb-2">Giới tính</label>
                                                 <select id="gioi_tinh" name="gioi_tinh" class="form-control"
-                                                    {{ $user->gioi_tinh ? '' : 'disabled' }}>
+                                                    {{ $user->gioi_tinh ? '' : '' }}>
                                                     <option value="Nam"
                                                         {{ $user->gioi_tinh == 'Nam' ? 'selected' : '' }}>Nam</option>
                                                     <option value="Nữ"
@@ -327,16 +327,6 @@
 
     {{-- ssssss --}}
 
-
-
-
-
-    {{-- enddd sssss --}}
-    <!-- product tab end -->
-@endsection
-
-
-@section('js')
     <script>
         document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -413,7 +403,7 @@
         // Function to toggle edit mode
         function toggleEdit() {
             document.querySelectorAll(
-                '#user-info-form input[type="text"], #user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"]'
+                '#user-info-form input[type="text"], #user-info-form input[type="number"], #user-info-form input[type="date"]'
             ).forEach(field => {
                 field.disabled = !field.disabled;
             });
@@ -435,6 +425,11 @@
             } else {
                 console.error(`Route [${routeName}] is not defined.`);
             }
-        } <
+        };
     </script>
+
+
+
+    {{-- enddd sssss --}}
+    <!-- product tab end -->
 @endsection

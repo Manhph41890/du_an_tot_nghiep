@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\chi_tiet_vi;
 use App\Models\don_hang;
 use App\Models\lich_su_thanh_toan;
 use App\Models\vi_nguoi_dung;
@@ -20,18 +21,16 @@ class TaiKhoanController extends Controller
         $showForm = $request->query('showForm') === 'true';
 
         $myOrders = don_hang::where('user_id', $user->id)->latest()->paginate(4);
-
-        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders'));
-    }
-
-    public function viNguoiDung()
-    {
-        $user = Auth::user(); // Lấy thông tin người dùng hiện tại
-        $title = "Ví người dùng";
         $viNguoiDung = vi_nguoi_dung::where('user_id', $user->id)->first();
+        // Lấy lịch sử giao dịch (chi tiết ví)
+        $chiTietVi = chi_tiet_vi::with('don_hang', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
 
-        return view('client.taikhoan.dashboard', compact('user', 'title', 'viNguoiDung'));
+        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi'));
     }
+
 
     public function showMyOrder(don_hang $don_hang, $id)
     {

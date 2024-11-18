@@ -326,48 +326,98 @@
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="payment-method" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3 class="text-center mb-4">Thông tin ví người dùng</h3>
-                                <div class="card-container p-4"
-                                    style="max-width: 400px; margin: 0 auto; background-color: #f8f9fa; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                                    <!-- Logo của ngân hàng -->
-                                    <div class="bank-logo text-center mb-3">
-                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                            width="80px" alt="VNPay Logo">
+                                <div class="card mx-auto p-4"
+                                    style="max-width: 450px; background-color: #ffffff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+                                    <!-- Header: Logo và tiêu đề -->
+                                    <div class="d-flex align-items-center justify-content-center mb-4">
+                                        <i class="fas fa-wallet text-success"
+                                            style="font-size: 2.5rem; margin-right: 10px;"></i>
+                                        <h4 class="mb-0 text-success">Ví người dùng</h4>
                                     </div>
 
-                                    <!-- Thông tin khác của thẻ -->
-                                    <div class="card-info d-flex justify-content-between px-3 mb-4">
-                                        <div>
-                                            <div class="text-muted">Chủ tài khoản</div>
-                                            <div style="font-size: 1rem; font-weight: bold;">{{ $user->ho_ten }}</div>
-                                        </div>
-                                        <div class="text-end">
-                                            <div class="text-muted">Lịch sử giao dịch</div>
-                                            <button class="btn btn-success">Lịch sử</button>
+                                    <!-- Thông tin chủ tài khoản -->
+                                    <div class="border p-3 mb-4" style="background-color: #f8f9fa;">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <div class="text-muted">Chủ tài khoản</div>
+                                                <div class="fw-bold">{{ $user->ho_ten }}</div>
+                                            </div>
+                                            <button class="btn btn-outline-success" data-bs-toggle="modal"
+                                                data-bs-target="#historyModal">
+                                                <i class="fas fa-history me-2"></i>Lịch sử
+                                            </button>
                                         </div>
                                     </div>
 
-                                    <!-- Tổng tiền -->
-                                    <div class="text-center mb-3">
+                                    <!-- Tổng tiền trong ví -->
+                                    <div class="text-center mb-4">
                                         <div class="text-muted">Tổng tiền trong ví</div>
-                                        <div style="font-size: 1.5rem; font-weight: bold; color: #28a745;">
-                                            {{ $viNguoiDung->tong_tien }}
+                                        <div class="fw-bold text-success" style="font-size: 2rem;">
+                                            <i class="fas fa-money-bill-wave me-2"></i>
+                                            @if ($viNguoiDung)
+                                                {{ number_format($viNguoiDung->tong_tien, 0, ',', '.') }} đ
+                                            @else
+                                                0 đ
+                                            @endif
                                         </div>
                                     </div>
 
-                                    <!-- Logo Visa -->
-                                    <div class="visa-logo text-center">
-                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                            width="50px" alt="VNPay Logo">
+                                    <!-- Thao tác bổ sung -->
+                                    <div class="d-grid">
+                                        <button class="btn btn-success btn-lg">
+                                            <i class="fas fa-plus-circle me-2"></i>Rút tiền
+                                        </button>
                                     </div>
                                 </div>
-
+                                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
                                 <!-- Bootstrap Script -->
                                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                             </div>
                         </div>
-                    </div>
+                        <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="historyModalLabel">Lịch sử Giao Dịch</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="">
+                                            <!-- Item 1 -->
+                                            <style>
+                                                .custom-hr {
+                                                    border: none;
+                                                    border-top: 1px solid #ccc;
+                                                    margin: 10px 0;
+                                                }
+                                            </style>
 
+                                            @foreach ($chiTietVi as $item)
+                                                <div class="d-flex justify-content-around">
+                                                    <div class="d-flex justify-content-start">
+                                                        <p class="">Tiền hoàn</p>
+                                                    </div>
+                                                    <p class="">{{ $item->thoi_gian_hoan }}</p>
+                                                    <div class="transaction-amount negative">
+                                                        {{ number_format($item->tien_hoan, 0, ',', '.') }} VNĐ
+                                                    </div>
+                                                </div>
+                                                <hr class="custom-hr">
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn btn-primary">Xem chi tiết</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Single Tab Content End -->
                 </div>

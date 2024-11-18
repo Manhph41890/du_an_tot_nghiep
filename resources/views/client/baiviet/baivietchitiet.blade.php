@@ -12,14 +12,14 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">single blog</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">CHI TIẾT BÀI VIẾT</h2>
                     </div>
                 </div>
                 <div class="col-12">
                     <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            single blog
+                            Chi tiết bài viết
                         </li>
                     </ol>
                 </div>
@@ -54,39 +54,13 @@
                                 </div>
                                 <!-- single blog post -->
                             </div>
-                            <div class="blog-single-tags-share d-sm-flex justify-content-between">
-                                <div class="blog-single-tags d-flex">
-                                    <span class="title">Tags: </span>
-                                    <ul class="tag-list">
-                                        <li><a href="#">Fashion,</a></li>
-                                        <li><a href="#">T-shirt,</a></li>
-                                        <li><a href="#">White</a></li>
-                                    </ul>
-                                </div>
-                                <div class="blog-single-share d-flex">
-                                    <span class="title">Share:</span>
-                                    <ul class="social">
-                                        <li>
-                                            <a href="#"><i class="ion-social-facebook"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="ion-social-twitter"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="ion-social-google"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="ion-social-instagram"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            
                             <div class="blog-related-post">
                                 <div class="row">
                                     <div class="col-md-12 text-center">
                                         <!-- Section Title -->
                                         <div class="section-title underline-shape">
-                                            <h2>Related Post</h2>
+                                            <h2>BÀI VIẾT GẦN ĐÂY</h2>
                                         </div>
                                         <!-- Section Title -->
                                     </div>

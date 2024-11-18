@@ -68,7 +68,8 @@
             text-align: center;
             font-size: 2em;
             margin-bottom: 30px;
-            color: #333;
+            color: #5a5ac9;
+            font-weight: 700;
         }
 
         .discount-list {

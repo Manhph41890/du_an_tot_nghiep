@@ -50,7 +50,7 @@
             position: absolute;
             top: -22px;
             left: -10px;
-            animation: pulse 1s infinite;
+            /* animation: pulse 1s infinite; */
         }
     </style>
     <!-- breadcrumb-section start -->
@@ -287,32 +287,14 @@
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#allmyModalfororder{{ $myOrder->id }}">
                                                             <i
-                                                                class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1 @if ($myOrder->trang_thai_don_hang == 'Thành công') tichs_dg @endif"></i>
+                                                                class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1 "></i>
+                                                            @if ($myOrder->trang_thai_don_hang == 'Thành công')
+                                                                <span class="ms-2 position-relative">
+                                                                    <span class="notification-dot2"></span>
+                                                                </span>
+                                                            @endif
                                                         </a>
 
-                                                        <style>
-                                                            .tichs_dg {
-                                                                position: relative;
-                                                                border: 1px solid red !important;
-                                                            }
-
-                                                            .tichs_dg::after {
-                                                                content: ".";
-                                                                position: absolute;
-                                                                top: -55px;
-                                                                right: -5px;
-                                                                border-radius: 50%;
-                                                                font-size: 50px;
-                                                                color: red;
-                                                            }
-                                                        </style>
-                                                        <script>
-                                                            document.querySelectorAll('.tichs_dg').forEach(function(element) {
-                                                                element.addEventListener('click', function() {
-                                                                    element.classList.remove('tichs_dg');
-                                                                })
-                                                            });
-                                                        </script>
                                                         <!-- The Modal -->
                                                         <div class="modal" id="allmyModalfororder{{ $myOrder->id }}">
                                                             @include('client.taikhoan.showmyorder', [

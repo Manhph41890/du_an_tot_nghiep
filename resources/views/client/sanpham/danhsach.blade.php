@@ -196,7 +196,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 mb-30 order-lg-first">
+                <div class="col-lg-2 mb-30 order-lg-first bg-lighten2">
                     <aside class="left-sidebar theme1">
                         <div class="search-filter">
                             <form action="{{ route('client.cuahang') }}" method="post">
@@ -204,7 +204,7 @@
                                 @method('GET')
                                 <div class="">
                                     <div class="header-sidebar d-flex justify-content-between">
-                                        <h5 class="title" style="font-weight:600">LỌC THEO</h5>
+                                        <h5 class="title mt-3" style="font-weight:600">LỌC THEO</h5>
                                         {{-- <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button> --}}
                                     </div>
                                     <h6 class="sub-title mt-30 mb-2 ">Danh mục</h6>

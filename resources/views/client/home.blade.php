@@ -471,7 +471,7 @@
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <p>Giá: </p>
-                                                                <p>
+                                                                <p style="color:red;font-weight: 600;">
 
                                                                     {{ number_format($item->gia_goc, 0, ',', '.') }}
                                                                     VNĐ

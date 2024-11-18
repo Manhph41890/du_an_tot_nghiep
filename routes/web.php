@@ -172,6 +172,7 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
     Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
     Route::get('/order/success_nhanhang', [OrderController::class, 'success_nhanhang'])->name('order.success_nhanhang');
+    Route::get('/order/success_vi', [OrderController::class, 'success_vi'])->name('order.success_vi');
     Route::get('/cart/variant-price/{id}', [CartController::class, 'getVariantPrice']);
 
     Route::post('/apply-coupon', [OrderController::class, 'applyCoupon'])->name('apply.coupon');

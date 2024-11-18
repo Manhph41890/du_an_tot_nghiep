@@ -44,7 +44,7 @@ class OrderController extends Controller
             ->first();
 
         if (!$cart) {
-            return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
+            return view('cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
         }
 
         // Lọc các sản phẩm được chọn dựa trên selectedProductIds
@@ -174,7 +174,27 @@ class OrderController extends Controller
             return redirect($vnp_Url);
             // return redirect()->route('order.success');
         } elseif ($paymentMethod->kieu_thanh_toan === 'Thanh toán bằng Ví') {
-            //
+
+            // Kiểm tra số dư trong ví
+            if ($user->so_du_vi < $totall) {
+                return redirect()->back()->withErrors(['message' => 'Tiền trong tài khoản không đủ để thanh toán.']);
+            }
+
+            Session::put('order_details', [
+                'user_id' => Auth::id(),
+                'khuyen_mai_id' => $validatedData['khuyen_mai'] ? $coupon->id : null,
+                'ho_ten' => $user->ho_ten ?? $validatedData['ho_ten'],
+                'so_dien_thoai' => $user->so_dien_thoai ?? $validatedData['so_dien_thoai'],
+                'email' => $user->email ?? $validatedData['email'],
+                'dia_chi' => $user->dia_chi ?? $validatedData['dia_chi'],
+                'phuong_thuc_thanh_toan_id' => $validatedData['phuong_thuc_thanh_toan'],
+                'phuong_thuc_van_chuyen_id' => 9,
+                'ngay_tao' => now()->timezone('Asia/Ho_Chi_Minh'),
+                'tong_tien' => $totall, // Sử dụng tổng tiền đã tính trước
+                'trang_thai_don_hang' => 'Chờ xác nhận',
+                'trang_thai_thanh_toan' => 'Đã thanh toán'
+            ]);
+
             return redirect()->route('order.success');
         } else {
 
@@ -373,7 +393,7 @@ class OrderController extends Controller
             return redirect()->route('order.success_nhanhang')->with('success', 'Thanh toán thành công! Đơn hàng của bạn đã được tạo.');
         }
 
-        return redirect()->route('client.cart.index')->with('error', 'Thanh toán thất bại. Vui lòng thử lại.');
+        return redirect()->route('cart.index')->with('error', 'Thanh toán thất bại. Vui lòng thử lại.');
     }
 
     public function success_vi(Request $request)
@@ -489,7 +509,7 @@ class OrderController extends Controller
             return redirect()->route('order.success_nhanhang')->with('success', 'Thanh toán thành công! Đơn hàng của bạn đã được tạo.');
         }
 
-        return redirect()->route('client.cart.index')->with('error', 'Thanh toán thất bại. Vui lòng thử lại.');
+        return redirect()->route('cart.index')->with('error', 'Thanh toán thất bại. Vui lòng thử lại.');
     }
 
     public function success_nhanhang()

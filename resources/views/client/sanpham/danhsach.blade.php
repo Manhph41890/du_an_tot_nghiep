@@ -1,12 +1,12 @@
 @extends('client.layout')
 
 @section('content')
-    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110 opacity-75">
+    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-uppercase">
+                        <h2 class="title pb-4 text-dark text-uppercase" style=" color: #fff !important">
                             {{ $title }}
                         </h2>
                     </div>
@@ -204,7 +204,7 @@
                                 @method('GET')
                                 <div class="">
                                     <div class="header-sidebar d-flex justify-content-between">
-                                        <h5 class="title">LỌC THEO</h5>
+                                        <h5 class="title" style="font-weight:600">LỌC THEO</h5>
                                         {{-- <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button> --}}
                                     </div>
                                     <h6 class="sub-title mt-30 mb-2 ">Danh mục</h6>

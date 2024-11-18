@@ -345,7 +345,6 @@
                                 <p>
                                     {!! $sanPhamCT->ma_ta_san_pham !!}
                                 </p>
-
                             </div>
                         </div>
                         <!-- second tab-pane -->
@@ -364,15 +363,7 @@
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
                                 <h2>Đánh giá sản phẩm:</h2>
-                                <br>
-                                <div class="filter-rating">
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(0)">Tất cả</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(1)">1 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(2)">2 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(3)">3 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(4)">4 Sao</button>
-                                    <button class="btn btn-outline-primary" onclick="filterByStars(5)">5 Sao</button>
-                                </div>
+
                                 <br>
                                 <div class="row">
                                     <div class="col-12">
@@ -428,6 +419,7 @@
                                                             </div>
                                                             <div class="review-bottom mt-2">
                                                                 <p class="text-muted">{{ $danhgia->binh_luan }}</p>
+                                                                <small>{{ $danhgia->ngay_danh_gia}}</small>
                                                             </div>
                                                         </div>
                                                     </div>

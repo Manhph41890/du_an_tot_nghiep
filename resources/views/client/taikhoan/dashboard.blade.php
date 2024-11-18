@@ -491,6 +491,6 @@
 
 
 
-    {{-- end --}}
-    <!-- product tab end -->
+    {{-- ends --}}
+    <!-- product tab  -->
 @endsection

@@ -3,7 +3,7 @@
 @section('content')
     <style>
         .main-slider {
-            max-height: 500px;
+            height: 100vh;
             display: flex;
 
         }
@@ -111,23 +111,23 @@
             justify-content: center;
         }
 
-    .brand-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        .brand-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .brand-image {
-        width: 120px;
-        /* Thay đổi kích thước ảnh theo ý muốn */
-        height: 120px;
-        border-radius: 50%;
-        /* Để ảnh hình tròn */
-        object-fit: cover;
-        /* Cắt ảnh để vừa với khung */
-        margin-bottom: 10px;
-        /* Khoảng cách giữa ảnh và tên danh mục */
-    }
+        .brand-image {
+            width: 120px;
+            /* Thay đổi kích thước ảnh theo ý muốn */
+            height: 120px;
+            border-radius: 50%;
+            /* Để ảnh hình tròn */
+            object-fit: cover;
+            /* Cắt ảnh để vừa với khung */
+            margin-bottom: 10px;
+            /* Khoảng cách giữa ảnh và tên danh mục */
+        }
 
         .brand-name {
             font-size: 14px;
@@ -180,15 +180,118 @@
                 opacity: 0;
             }
         }
+
+        svg {
+            width: 350px;
+            height: 150px;
+        }
+
+        /* Phần chữ Merry Christmas - Cong nhẹ */
+        .curved-text text {
+            font-size: 22px;
+            font-weight: 500;
+            fill: #e74c3c;
+
+        }
+
+        /* Đường cong */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+                /* Chữ nhảy lên */
+            }
+        }
+
+        /* Phần chữ SALE UPTO 20% - Nhảy */
+        .bouncing-text {
+            font-size: 48px;
+            font-weight: bold;
+            fill: #e74c3c;
+            text-transform: uppercase;
+            animation: bounce 1s infinite;
+        }
+
+        .slider-content1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: translate(64%, -100%);
+            position: absolute;
+        }
+
+        .curved-text {
+            margin-bottom: -10px;
+            /* Giảm khoảng cách dưới của chữ Merry Christmas */
+        }
+
+        .bouncing-text {
+            position: absolute;
+            top: 100%;
+            right: 16%;
+        }
+
+        .btn-see-cart {
+            position: relative;
+            left: 25%;
+            top: 100px;
+            background: #4498c8;
+            color: #fff;
+            border-color: #4498c8;
+            border-radius: 8px;
+        }
+
+        .btn-see-cart:hover {
+            background: #367da5;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+                /* Chữ nhảy lên */
+            }
+        }
+
+        .bg-img {
+            height: 100vh !important;
+            max-height: 100vh !important;
+        }
     </style>
     <!-- main slider start -->
     <section class="bg-light">
-        <div class="main-slider dots-style theme1">
-            <div class="slider-item bg-img bg-img1">
+        <div class=" main-slider dots-style theme1">
+            <div class="slider-item bg-img bg-img1 ">
                 <div class="container">
                     <div class="row align-items-center slider-height">
                         <div class="col-12">
-                            <div class="slider-content">
+                            <div class="slider-content1">
+                                <svg class="curved-text" viewBox="0 25 400 30">
+                                    <path id="curve1" d="M50,120 Q150,90 250,120" fill="transparent" stroke="none" />
+                                    <text>
+                                        <textPath href="#curve1" startOffset="50%" text-anchor="middle">
+                                            Merry Christmas
+                                        </textPath>
+                                    </text>
+                                </svg>
+
+                                <!-- Chữ SALE UPTO 20%, nhảy nhót -->
+                                <svg class="bouncing-text">
+                                    <text class="bouncing-text" x="50%" y="50%" text-anchor="middle">
+                                        SALE UPTO 50%
+                                    </text>
+                                </svg>
+
                                 {{-- <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
                                     ArtiCraft
                                 <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300"
@@ -202,8 +305,13 @@
                                         data-delay-in="1.5" style="color: #5C5BCA" style="color: #5C5BCA">Ưu đãi 20%</span>
                                 </h2>
                                 <a href="{{ route('client.cuahang') }}"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a> --}}
+                            class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                            data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a> --}}
+                            </div>
+                            <div>
+                                <a href="{{ route('client.cuahang') }}"
+                                    class="btn btn-outline-primary btn--lg  mt-45 mt-sm-25 btn-see-cart"
+                                    data-animation-in="fadeInLeft">Mua ngay</a>
                             </div>
                         </div>
                     </div>
@@ -232,8 +340,8 @@
                                 <a href="shop-grid-4-column.html"
                                     class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary"
                                     href="{{ route('client.cuahang') }}"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a> --}}
+                            class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                            data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a> --}}
                             </div>
                         </div>
                     </div>
@@ -262,8 +370,8 @@
                                 </h2>
 
                                 <a href="{{ route('client.cuahang') }}"
-                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a> --}}
+                            class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                            data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a> --}}
                             </div>
                         </div>
                     </div>
@@ -273,43 +381,44 @@
         </div>
     </section>
     <!-- main slider end -->
-<!-- brand slider start -->
-<div class="brand-slider-section theme1 bg-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="brand-init border-top py-35 slick-nav-brand">
-                    @foreach ($anhDMuc as $anhdm)
-                        <div class="slider-item">
-                            <div class="single-brand">
-                                <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
-                                <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
-                                    <!-- Hiển thị ảnh hình tròn -->
-                                    <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
-                                        class="brand-image" />
-                                </a>
-                                <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
+    <!-- brand slider start -->
+    <div class="brand-slider-section theme1 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="brand-init border-top py-35 slick-nav-brand">
+                        @foreach ($anhDMuc as $anhdm)
+                            <div class="slider-item">
+                                <div class="single-brand">
+                                    <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
+                                    <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
+                                        <!-- Hiển thị ảnh hình tròn -->
+                                        <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
+                                            class="brand-image" />
+                                    </a>
+                                    <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-    
+
     <!-- staic media end -->
     <!-- common banner  start -->
     <div class="common-banner bg-white">
         <div class="container">
 
+        </div>
     </div>
-</div>
-<!-- common banner  end -->
+    <!-- common banner  end -->
 
     <!-- product tab start -->
     <section class="product-tab bg-white pt-50 pb-80">
         <div class="container">
+
             <div class="product-tab-nav mb-50">
                 <div class="row align-items-center">
                     {{-- <div class="col-12">
@@ -318,33 +427,20 @@
                             <p class="text">Vẽ sáng tạo - Tô hạnh phúc</p>
                         </div>
                     </div> --}}
-                    <div class="col-12">
-                        <nav class="product-tab-menu theme1">
-                            <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                        href="#pills-home" role="tab" aria-controls="pills-home"
-                                        aria-selected="true" style="font-size: 20px">Sản phẩm mới</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                        href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false" style="font-size: 20px">Đang giảm giá</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                  
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="tab-content" id="pills-tabContent">
                         <!-- first tab-pane -->
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                            aria-labelledby="pills-home-tab">
+                        <div class="pb-80">
                             <div class="row">
+                                <div class="section-title text-center">
+                                    <h2 class="title pb-3 mb-3">SẢN PHẨM MỚI</h2>
+                                </div>
                                 @foreach ($sanPhamMois as $item)
-                                    <div class="col-12 col-md-4 col-lg-2 mb-4">
+                                    <div class="col-12 col-md-6  col-lg-2 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
@@ -375,10 +471,10 @@
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <p>Giá: </p>
-                                                                <p style="color: red">
-                                                                    <del
-                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
-                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                <p style="color:red;font-weight: 600;">
+
+                                                                    {{ number_format($item->gia_goc, 0, ',', '.') }}
+                                                                    VNĐ
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -392,8 +488,11 @@
                             </div>
                         </div>
                         <!-- second tab-pane -->
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="pb-80">
                             <div class="row">
+                                <div class="section-title text-center">
+                                    <h2 class="title pb-3 mb-3">SẢN PHẨM GIẢM GIÁ</h2>
+                                </div>
                                 @foreach ($sanPhamGiamGias as $sanPhamGg)
                                     <div class="col-12 col-md-4 col-lg-2 mb-4">
                                         <div class="card product-card">
@@ -426,8 +525,12 @@
                                                                 @endfor
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <span class="product-price">Giá:
-                                                                    {{ number_format($sanPhamGg->gia_km) }} VNĐ</span>
+                                                                <p>Giá: </p>
+                                                                <p style="color: red">
+                                                                    <del
+                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
+                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -452,7 +555,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-3 mb-3">Sản phẩm được quan tâm</h2>
+                        <h2 class="title pb-3 mb-3">SẢN PHẨM ĐƯỢC QUAN TÂM</h2>
                     </div>
                     <div class="product-slider-init theme1 slick-nav">
                         @foreach ($sanPhamView as $sanphamview)
@@ -461,7 +564,8 @@
                                     <div class="card-body p-0">
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
-                                                <span class="badge badge-danger top-right">New</span>
+                                                <span class="badge badge-danger top-right">{{ $sanphamview->views }} lượt
+                                                    xem</span>
                                                 <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
@@ -489,8 +593,12 @@
                                                         @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span class="product-price">Giá:
-                                                            {{ number_format($sanphamview->gia_km) }} VNĐ</span>
+                                                        <p>Giá: </p>
+                                                        <p style="color: red">
+                                                            <del
+                                                                style="color: black">{{ number_format($sanphamview->gia_goc, 0, ',', '.') }}</del>
+                                                            {{ number_format($sanphamview->gia_km, 0, ',', '.') }} VNĐ
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -514,7 +622,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-3 mb-3">Bài viết mới nhất</h2>
+                        <h2 class="title pb-3 mb-3">BÀI VIẾT MỚI NHẤT</h2>
                     </div>
                 </div>
             </div>
@@ -554,7 +662,7 @@
     {{-- mã giảm giá 'voucher' --}}
     <section class="discount-codes">
         <div class="container">
-            <h2 class="section-title">Mã Giảm Giá <span class="hot-tag">HOT</span></h2>
+            <h2 class="section-title">MÃ GIẢM GIÁ <span class="hot-tag">HOT</span></h2>
             </h2>
             <div class="discount-list">
                 @foreach ($discounts as $item)
@@ -568,7 +676,8 @@
                                 VNĐ cho tất cả các sản phẩm.
                             </p>
                         </div>
-                        <button style="font-size: 1em" class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
+                        <button style="font-size: 1em" class="copy-btn"
+                            onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
                             chép mã</button>
                     </div>
                 @endforeach
@@ -585,7 +694,7 @@
         </div>
     </section>
     {{-- end --}}
-    
+
     <style>
         .min_h {
             display: -webkit-box;

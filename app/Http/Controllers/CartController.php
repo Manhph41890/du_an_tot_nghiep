@@ -23,7 +23,7 @@ class CartController extends Controller
             ->where('user_id', Auth::id())
             ->first();
 
-        // Nếu không có cart, bạn có thể xử lý như sau
+        // 
         if (!$cart) {
             return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
         }
@@ -56,6 +56,7 @@ class CartController extends Controller
     // Thêm sản phẩm vào giỏ hàng
     public function add(Request $request)
     {
+
         // Xác thực dữ liệu đầu vào
         $validatedData = $request->validate([
             'san_pham_id' => 'required|exists:san_phams,id',
@@ -79,9 +80,11 @@ class CartController extends Controller
             ->where('color_san_pham_id', $validatedData['color'])
             ->first();
 
-        if (!$variant) {
-            return response()->json(['success' => false, 'message' => 'Biến thể sản phẩm không hợp lệ.']);
+        // Kiểm tra tồn kho trước khi thêm vào giỏ
+        if ($variant && $variant->so_luong < $validatedData['quantity']) {
+            return response()->json(['success' => false, 'message' => 'Số lượng yêu cầu vượt quá tồn kho.']);
         }
+
 
         // Lấy user_id của người dùng hiện tại
         $userId = auth()->id();
@@ -113,9 +116,11 @@ class CartController extends Controller
         $discountedPrice = $sanPham->gia_km;  // Lấy giá khuyến mãi của sản phẩm
         $variantPrice = $variant->gia;  // Lấy giá của biến thể sản phẩm
 
+
         // Tính tổng giá cho sản phẩm (giá khuyến mãi + giá biến thể) * số lượng
         $totalPrice = ($discountedPrice + $variantPrice) * $cartItem->quantity;
         $cartItem->price = $totalPrice;
+
 
         // Lưu CartItem vào database
         $cartItem->save();
@@ -237,7 +242,7 @@ class CartController extends Controller
         // Lấy user_id của người dùng hiện tại
         $userId = auth()->id();
 
-        // Lấy cart của người dùng hiện tại
+        // Lấy giỏ hàng của người dùng hiện tại
         $cart = Cart::where('user_id', $userId)->first();
 
         // Nếu không có giỏ hàng, số lượng sản phẩm sẽ là 0
@@ -245,13 +250,15 @@ class CartController extends Controller
             $cartItemsCount = 0;
             $insufficientStockItems = [];
         } else {
-            // Đếm số lượng sản phẩm khác nhau trong giỏ hàng
-            $cartItemsCount = CartItem::where('cart_id', $cart->id)
-                ->distinct('san_pham_id')
-                ->count('san_pham_id');
+            // Lấy tất cả các sản phẩm trong giỏ hàng của người dùng, bao gồm màu sắc và kích thước
+            $cartItems = CartItem::with(['san_pham', 'size', 'color'])
+                ->where('cart_id', $cart->id)
+                ->get();
 
-            // Lấy tất cả các sản phẩm trong giỏ hàng của người dùng
-            $cartItems = CartItem::where('cart_id', $cart->id)->get();
+            // Đếm số lượng các biến thể sản phẩm khác nhau bằng cách nhóm theo san_pham_id, color_san_pham_id, size_san_pham_id
+            $cartItemsCount = $cartItems->unique(function ($item) {
+                return $item->san_pham_id . '-' . $item->color_san_pham_id . '-' . $item->size_san_pham_id;
+            })->count();
 
             // Kiểm tra số lượng tồn kho của từng sản phẩm
             $insufficientStockItems = [];
@@ -276,8 +283,12 @@ class CartController extends Controller
             }
         }
 
+        // Trả về view với dữ liệu đã xử lý
         return view('client.partials.header', compact('cartItemsCount', 'insufficientStockItems'));
     }
+
+
+
 
 
     // Quá trình thanh toán
@@ -319,7 +330,7 @@ class CartController extends Controller
         }
 
         // Tính tổng tiền của các sản phẩm đã chọn
-        $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
+        $total = $cartItems->sum(fn($item) => $item->price);
         $shippingCost = 30000; // 30,000 VND
         $totall = $total + $shippingCost;
 

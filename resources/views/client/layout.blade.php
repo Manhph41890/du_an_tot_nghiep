@@ -35,7 +35,7 @@
         }
 
         .bg-img1 {
-            background-image: url('./assets/client/images/banner/Banner1@2x.png');
+            background-image: url('./assets/client/images/banner/banner.png');
             width: 50%;
         }
 
@@ -48,11 +48,10 @@
         }
 
         .breadcrumb-section {
-            background-image: url('/assets/client/images/banner/banner_0.jpg');
+            background-image: url('/assets/client/images/banner/banner_0.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* height: 568px; */
         }
 
         .discount-codes {
@@ -69,7 +68,8 @@
             text-align: center;
             font-size: 2em;
             margin-bottom: 30px;
-            color: #333;
+            color: #5a5ac9;
+            font-weight: 700;
         }
 
         .discount-list {
@@ -217,11 +217,20 @@
         .modal-content {
             text-align: center;
         }
+        .border-bottom .section-title .title, .footer-menu li a, .footer-widget .text{
+            color: #fff !important;
+        }
 
         /* Thêm hiệu ứng chuyển động cho modal */
         .copy-modal.show {
             display: block;
             animation: fadeInOut 3s forwards;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: "Itim", cursive;
+                margin: 0;
+                line-height: 1.25;
+                color: #5a5ac9;
         }
 
         /* Hiệu ứng fade in và fade out */
@@ -241,6 +250,7 @@
             100% {
                 opacity: 0;
             }
+            
         }
     </style>
 

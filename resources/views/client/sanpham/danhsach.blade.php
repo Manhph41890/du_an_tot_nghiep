@@ -1,12 +1,12 @@
 @extends('client.layout')
 
 @section('content')
-    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110 opacity-75">
+    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-uppercase">
+                        <h2 class="title pb-4 text-dark text-uppercase" style=" color: #fff !important">
                             {{ $title }}
                         </h2>
                     </div>
@@ -28,7 +28,7 @@
                 <div class="col-lg-10 mb-30">
                     <div class="grid-nav-wraper bg-lighten2 mb-30">
                         <div class="row align-items-center">
-                            <div class="col-12 col-md-6 mb-3 mb-md-0">
+                            <div class="col-12 col-md-5 mb-3 mb-md-0">
                                 <nav class="shop-grid-nav">
                                     <ul class="nav nav-pills align-items-center" id="pills-tab" role="tablist">
                                         <li class="nav-item">
@@ -50,24 +50,20 @@
                                     </ul>
                                 </nav>
                             </div>
-                            <div class="col-12 col-md-6 position-relative">
+                            <div class="col-12 col-md-7 position-relative">
                                 <div class="shop-grid-button d-flex align-items-center justify-content-end">
                                     <span class="sort-by">Sắp xếp:</span>
                                     <form action="{{ route('client.cuahang') }}" method="post">
                                         @csrf
                                         @method('GET')
-                                        <select class="form-select custom-select" name="sort"
+                                        <select class="form-select custom-select ms-3" name="sort"
                                             aria-label="Default select example" onchange="this.form.submit()">
                                             <option value="" @if (request('sort') == '') selected @endif>Chọn
                                             </option>
-                                            <option value="1" @if (request('sort') == '1') selected @endif>Sản
-                                                phẩm mới</option>
                                             <option value="2" @if (request('sort') == '2') selected @endif>Giá
                                                 giảm dần</option>
                                             <option value="3" @if (request('sort') == '3') selected @endif>Giá
                                                 tăng dần</option>
-                                            <option value="4" @if (request('sort') == '4') selected @endif>Xem
-                                                nhiều gần đây</option>
                                         </select>
                                     </form>
 
@@ -85,7 +81,7 @@
                                             <div class="card-body">
                                                 <div class="product-thumbnail position-relative">
                                                     <span
-                                                        class="badge badge-danger top-right">{{ $item->phantramgia }}%</span>
+                                                        class="badge badge-danger top-right">- {{ $item->phantramgia }}%</span>
                                                     <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                         <img class="first-img"
                                                             src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -141,7 +137,7 @@
                                                 <div class="media flex-column flex-md-row">
                                                     <div class="product-thumbnail position-relative  w-300">
                                                         <span
-                                                            class="badge badge-danger top-right">{{ $item->phantramgia }}%</span>
+                                                            class="badge badge-danger top-right">- {{ $item->phantramgia }}%</span>
                                                         <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -208,7 +204,7 @@
                                 @method('GET')
                                 <div class="">
                                     <div class="header-sidebar d-flex justify-content-between">
-                                        <h5 class="title">LỌC THEO</h5>
+                                        <h5 class="title" style="font-weight:600">LỌC THEO</h5>
                                         {{-- <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button> --}}
                                     </div>
                                     <h6 class="sub-title mt-30 mb-2 ">Danh mục</h6>

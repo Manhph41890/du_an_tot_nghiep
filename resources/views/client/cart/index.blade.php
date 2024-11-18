@@ -94,11 +94,59 @@
         .cart-summary button {
             width: 100%;
         }
+
+        /* btn thanh toán */
+        .ripple-hover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-hover::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s, opacity 0.5s;
+            opacity: 0;
+        }
+
+        .ripple-hover:hover::after {
+            width: 200%;
+            height: 200%;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
     </style>
     <div class="container margin_30">
-        <div class="page_header">
-            <h1>Giỏ Hàng</h1>
+        <!-- <div class="page_header">
+            <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>
+        </div> -->
+        <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title pb-4 text-white text-capitalize" style=" color: #fff !important">
+                            GIỎ HÀNG
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
+                        <li class="breadcrumb-item"><a href="{{ route('client.home') }}">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Giỏ hàng
+                        </li>
+                    </ol>
+                </div>
+            </div>
         </div>
+    </nav>
         <div class="cart-wrapper">
             <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
                 @csrf
@@ -107,33 +155,34 @@
                         <thead>
                             <tr>
                                 <th>Chọn</th>
-                                <th>Sản Phẩm</th>
-                                <th>Giá</th>
+                                <th>Sản phẩm</th>
+                                <th>Đơn giá</th>
                                 <th>Phân loại</th>
-                                <th>Tổng Tiền</th>
+                                <th>Giá biến thể</th>
+                                <th>Tổng tiền</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (!empty($cartItems))
                                 @foreach ($cartItems as $item)
                                     <tr>
-                                        <td>
+                                        <td style="padding-top: 30px">
                                             <input type="checkbox" class="item-checkbox" data-price="{{ $item->price }}"
                                                 data-id="{{ $item->id }}" />
                                         </td>
                                         <td>
                                             <div class="thumb_cart">
                                                 <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}"
-                                                    alt="img" height="150px" width="150px"
+                                                    alt="img" height="90px" width="90px"
                                                     style="object-fit: cover" />
+                                                <span class="item_cart">{{ $item->san_pham->ten_san_pham }}</span>
+
                                             </div>
-                                            <span class="item_cart">{{ $item->san_pham->ten_san_pham }}</span>
                                         </td>
-                                        <td>
-                                            <strong>{{ number_format($item->san_pham->gia_km ?? $item->san_pham->gia_ban) }}
-                                                đ</strong>
+                                        <td style="padding-top: 30px">
+                                            <strong>{{ number_format($item->san_pham->gia_km, 0, ',', '.') }} đ</strong>
                                         </td>
-                                        <td>
+                                        <td style="padding-top: 30px">
                                             <span>Size:</span>
                                             <select name="size_san_pham_id" class="size-select"
                                                 data-item-id="{{ $item->id }}">
@@ -162,8 +211,32 @@
                                                 data-id="{{ $item->id }}">
                                                 Cập nhật
                                             </button>
+
+
                                         </td>
-                                        <td>
+                                        <td style="padding-top: 30px">
+                                            <span>
+                                                @php
+                                                    // Tìm biến thể dựa trên size và color của item
+                                                    $variant = $item->san_pham->bien_the_san_phams->firstWhere(
+                                                        function ($variant) use ($item) {
+                                                            return $variant->size_san_pham_id ==
+                                                                $item->size_san_pham_id &&
+                                                                $variant->color_san_pham_id == $item->color_san_pham_id;
+                                                        },
+                                                    );
+                                                @endphp
+                                                @if ($variant)
+                                                    {{ number_format($variant->gia, 0, ',', '.') }} đ
+                                                @else
+                                                    <span>Chưa có giá biến thể</span>
+                                                @endif
+                                            </span>
+                                        </td>
+
+
+
+                                        <td style="padding-top: 30px">
                                             <strong><span class="whish-list-price">{{ number_format($item->price) }}
                                                     đ</span></strong>
                                         </td>
@@ -187,13 +260,14 @@
                     </li>
 
                     <li style="font-size: 20px">
-                        <strong><span>Tổng Tiền: </span><span class="text-danger" id="total-price">0</span></strong>
+                        <strong><span>Tổng tiền cần thanh toán: </span><span class="text-danger"
+                                id="total-price">0</span></strong>
                     </li>
                 </ul>
                 <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
                     @csrf
                     <input type="hidden" name="checkout_items[]" id="selected-items">
-                    <button id="checkout-button" class="btn btn-primary">
+                    <button id="checkout-button" class="btn btn-primary ripple">
                         Thanh toán ngay
                     </button>
                 </form>

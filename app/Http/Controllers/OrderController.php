@@ -13,6 +13,7 @@ use App\Models\phuong_thuc_van_chuyen;
 use App\Models\san_pham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
@@ -60,13 +61,26 @@ class OrderController extends Controller
                 ->where('ngay_bat_dau', '<=', now())
                 ->where('ngay_ket_thuc', '>=', now())
                 ->first();
+
             if ($coupon) {
+                // Kiểm tra xem người dùng đã sử dụng mã này chưa
+                $alreadyUsed = DB::table('coupon_usages')
+                    ->where('user_id', $user->id)
+                    ->where('coupon_id', $coupon->id)
+                    ->exists();
+
+                if ($alreadyUsed) {
+                    return redirect()->back()->with('error', 'Bạn đã sử dụng mã giảm giá này trước đó.');
+                }
+
+                // Áp dụng giảm giá
                 $discount = $coupon->gia_tri_khuyen_mai;
                 $total -= $discount;
             } else {
                 return redirect()->back()->with('error', 'Mã khuyến mãi không hợp lệ hoặc đã hết hạn.');
             }
         }
+
 
         $shippingCost = 30000;
         $totall = $total + $shippingCost;
@@ -186,10 +200,19 @@ class OrderController extends Controller
                 $orderDetail->color_san_pham_id = $item->color_san_pham_id;
                 $orderDetail->size_san_pham_id = $item->size_san_pham_id;
                 $orderDetail->so_luong = $item->quantity;
-                $orderDetail->gia_tien = $item->price;
+                $orderDetail->gia_tien = $item->san_pham->gia_km ?? $item->san_pham->gia_ban;
                 $orderDetail->thanh_tien = $item->price;
                 $orderDetail->save();
             }
+            if ($coupon) {
+                DB::table('coupon_usages')->insert([
+                    'user_id' => $user->id,
+                    'coupon_id' => $coupon->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
 
             // Giảm số lượng mã khuyến mãi
             if ($coupon) {
@@ -235,6 +258,7 @@ class OrderController extends Controller
     public function success(Request $request)
     {
         // Lấy thông tin từ session
+        $user = Auth::user();
         $orderDetails = Session::get('order_details');
         $vnp_TxnRef = Session::get('vnp_TxnRef');
         $vnp_ResponseCode = $request->input('vnp_ResponseCode');
@@ -266,8 +290,8 @@ class OrderController extends Controller
                     $orderDetail->color_san_pham_id = $item->color_san_pham_id;
                     $orderDetail->size_san_pham_id = $item->size_san_pham_id;
                     $orderDetail->so_luong = $item->quantity;
-                    $orderDetail->gia_tien = $item->price;
-                    $orderDetail->thanh_tien = $item->price * $item->quantity;
+                    $orderDetail->gia_tien = $item->san_pham->gia_km ?? $item->san_pham->gia_ban;
+                    $orderDetail->thanh_tien = $item->price;
                     $orderDetail->save();
 
                     $variant = $item->san_pham->bien_the_san_phams()
@@ -285,10 +309,58 @@ class OrderController extends Controller
                         $product->save();
                     }
                 }
+                $coupon = null;
+                if ($coupon) {
+                    DB::table('coupon_usages')->insert([
+                        'user_id' => $user->id,
+                        'coupon_id' => $coupon->id,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+
+                // Giảm số lượng mã khuyến mãi
+                if ($coupon) {
+                    $coupon->so_luong_ma -= 1;
+                    $coupon->save();
+                }
+
+                $variant = $item->san_pham->bien_the_san_phams()->where('color_san_pham_id', $item->color_san_pham_id)
+                    ->where('size_san_pham_id', $item->size_san_pham_id)
+                    ->first();
+
+                if ($variant) {
+                    // Giảm số lượng của biến thể sản phẩm
+                    $variant->so_luong -= $item->quantity;
+                    $variant->save();
+                }
+                // Trừ số lượng sản phẩm trong kho
+                $product = san_pham::find($item->san_pham_id);
+                if ($product) {
+                    $product->so_luong -= $item->quantity;  // Trừ số lượng sản phẩm
+                    $product->save();
+                }
+
 
                 // Xóa giỏ hàng
                 $cart->cartItems()->delete();
                 $cart->delete();
+
+                // Lưu thông tin lịch sử thanh toán vào bảng lich_su_thanh_toan
+                DB::table('lich_su_thanh_toans')->insert([
+                    'don_hang_id' => $order->id,
+                    'vnp_TxnRef_id' => $vnp_TxnRef,
+                    'vnp_ngay_tao' => now()->timezone('Asia/Ho_Chi_Minh'),
+                    'vnp_tong_tien' => $order->tong_tien,
+                    'trang_thai' => 'Thanh toán thành công',
+                ]);
+                Mail::send('auth.success_order', [
+                    'ho_ten' => $user->ho_ten,
+                    'order' => $order,
+                ], function ($message) use ($user) {
+                    $message->to($user->email)
+                        ->subject('Đặt hàng thành công');
+                });
             }
 
             Session::forget(['order_details', 'vnp_TxnRef']);
@@ -306,31 +378,47 @@ class OrderController extends Controller
 
     public function applyCoupon(Request $request)
     {
-        $couponCode = $request->input('coupon_code');
-        $totalAmount = $request->input('totall'); // Tổng tiền trước khi áp mã
+        $couponCode = $request->input('coupon_code'); // Mã giảm giá người dùng nhập
+        $totalAmount = $request->input('totall'); // Tổng tiền trước khi áp mã giảm giá
 
-        // Kiểm tra mã giảm giá và tính toán tổng tiền mới
-        $discount = 0;
+        $userId = Auth::id(); // Lấy ID người dùng đang đăng nhập
 
-        // Giả sử bạn có bảng coupon trong cơ sở dữ liệu hoặc một cách khác để kiểm tra mã giảm giá
+        // 1. Tìm mã giảm giá trong cơ sở dữ liệu
         $coupon = khuyen_mai::where('ma_khuyen_mai', $couponCode)->first();
-        $giakm = $coupon->gia_tri_khuyen_mai;
 
-        if ($coupon) {
-            // Giả sử mã giảm giá có thể là phần trăm giảm
-            $discount = $totalAmount - $coupon->gia_tri_khuyen_mai;
-        } else {
+        if (!$coupon) {
+            // Nếu mã giảm giá không tồn tại
             return response()->json(['success' => false, 'message' => 'Mã giảm giá không hợp lệ!']);
         }
 
-        // Tính tổng tiền sau khi giảm giá
-        $newTotal = max(0, $discount);
+        // 2. Kiểm tra ngày hết hạn của mã giảm giá
+        $currentDate = now(); // Lấy thời gian hiện tại
 
-        // Trả về tổng tiền mới
+        if ($coupon->ngay_ket_thuc && $currentDate->greaterThan($coupon->ngay_ket_thuc)) {
+            // Nếu mã giảm giá đã hết hạn
+            return response()->json(['success' => false, 'message' => 'Mã giảm giá đã hết hạn!']);
+        }
+
+        // 3. Kiểm tra xem người dùng đã sử dụng mã này chưa
+        $usedCoupon = DB::table('coupon_usages')
+            ->where('user_id', $userId)
+            ->where('coupon_id', $coupon->id)
+            ->exists();
+
+        if ($usedCoupon) {
+            // Nếu người dùng đã sử dụng mã này
+            return response()->json(['success' => false, 'message' => 'Bạn đã sử dụng mã giảm giá này rồi!']);
+        }
+
+        // 4. Tính toán số tiền giảm giá
+        $discountAmount = min($coupon->gia_tri_khuyen_mai, $totalAmount); // Giảm tối đa đến tổng tiền
+        $newTotal = max(0, $totalAmount - $discountAmount); // Tổng tiền mới sau khi giảm (không âm)
+
         return response()->json([
             'success' => true,
-            'newTotal' => number_format($newTotal, 2), // Định dạng số tiền
-            'discountAmount' => number_format($giakm, 2) // Trả về số tiền giảm giá
+            'newTotal' => number_format($newTotal, 2), // Tổng tiền mới
+            'discountAmount' => number_format($discountAmount, 2), // Số tiền giảm giá
+            'message' => 'Áp dụng mã giảm giá thành công!',
         ]);
     }
 }

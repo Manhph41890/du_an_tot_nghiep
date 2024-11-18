@@ -1408,7 +1408,7 @@ button.close:hover {
     width: 60px;
     height: 2px;
     content: "";
-    background: #5a5ac9
+    background: #ffffff
 }
 
 .badge {
@@ -3287,7 +3287,8 @@ body.offcanvas-open {
 .breadcrumb-item {
     text-transform: capitalize;
     line-height: 1;
-    padding: 0 !important
+    padding: 0 !important;
+    font-size: 20px;
 }
 
 @media screen and (max-width:450px) {
@@ -3299,8 +3300,9 @@ body.offcanvas-open {
 .breadcrumb-item a {
     display: inline-block;
     position: relative;
-    color: #111 !important;
-    line-height: 1
+    color: #cbcccf  !important;
+    line-height: 1;
+    font-size: 20px;
 }
 
 .breadcrumb-item+.breadcrumb-item:before {
@@ -3315,11 +3317,11 @@ body.offcanvas-open {
 }
 
 .theme1 .breadcrumb-item a:hover {
-    color: #5a5ac9 !important
+    color: #fff !important
 }
 
 .theme1 .breadcrumb-item.active {
-    color: #5a5ac9
+    color: #fff
 }
 
 .breadcrumb-section .section-title {
@@ -4664,7 +4666,7 @@ img.second-img {
     left: 0;
     bottom: -1px;
     width: 60px;
-    height: 2px;
+    height: 0px;
     content: ""
 }
 
@@ -4678,7 +4680,7 @@ img.second-img {
 }
 
 .theme1 .footer-widget .section-title:after {
-    background: #5a5ac9
+    background: #ffffff
 }
 
 .footer-menu li {
@@ -4690,7 +4692,7 @@ img.second-img {
 }
 
 .footer-menu li a {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px;
     text-transform: capitalize;
     color: #565656
@@ -7919,7 +7921,7 @@ button.close:hover {
     width: 60px;
     height: 2px;
     content: "";
-    background: #5a5ac9
+    background: #fff
 }
 
 .badge {
@@ -9809,8 +9811,9 @@ body.offcanvas-open {
 .breadcrumb-item a {
     display: inline-block;
     position: relative;
-    color: #111 !important;
-    line-height: 1
+    color: #cbcccf  !important;
+    line-height: 1;
+    font-size: 20px;
 }
 
 .breadcrumb-item+.breadcrumb-item:before {
@@ -9825,11 +9828,11 @@ body.offcanvas-open {
 }
 
 .theme1 .breadcrumb-item a:hover {
-    color: #5a5ac9 !important
+    color: #fff !important
 }
 
 .theme1 .breadcrumb-item.active {
-    color: #5a5ac9
+    color: #fff
 }
 
 .breadcrumb-section .section-title {
@@ -11174,7 +11177,7 @@ img.second-img {
     left: 0;
     bottom: -1px;
     width: 60px;
-    height: 2px;
+    height: 0px;
     content: ""
 }
 
@@ -11188,7 +11191,7 @@ img.second-img {
 }
 
 .theme1 .footer-widget .section-title:after {
-    background: #5a5ac9
+    background: #fff
 }
 
 .footer-menu li {
@@ -11200,7 +11203,7 @@ img.second-img {
 }
 
 .footer-menu li a {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px;
     text-transform: capitalize;
     color: #565656
@@ -14428,7 +14431,7 @@ button.close:hover {
     width: 60px;
     height: 2px;
     content: "";
-    background: #5a5ac9
+    background: #fff
 }
 
 .badge {
@@ -16318,8 +16321,9 @@ body.offcanvas-open {
 .breadcrumb-item a {
     display: inline-block;
     position: relative;
-    color: #111 !important;
-    line-height: 1
+    color: #cbcccf  !important;
+    line-height: 1;
+    font-size: 20px;
 }
 
 .breadcrumb-item+.breadcrumb-item:before {
@@ -16334,11 +16338,11 @@ body.offcanvas-open {
 }
 
 .theme1 .breadcrumb-item a:hover {
-    color: #5a5ac9 !important
+    color: #fff !important
 }
 
 .theme1 .breadcrumb-item.active {
-    color: #5a5ac9
+    color: #fff
 }
 
 .breadcrumb-section .section-title {
@@ -17683,7 +17687,7 @@ img.second-img {
     left: 0;
     bottom: -1px;
     width: 60px;
-    height: 2px;
+    height: 0px;
     content: ""
 }
 
@@ -17697,7 +17701,7 @@ img.second-img {
 }
 
 .theme1 .footer-widget .section-title:after {
-    background: #5a5ac9
+    background: #fff
 }
 
 .footer-menu li {
@@ -17709,7 +17713,7 @@ img.second-img {
 }
 
 .footer-menu li a {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px;
     text-transform: capitalize;
     color: #565656

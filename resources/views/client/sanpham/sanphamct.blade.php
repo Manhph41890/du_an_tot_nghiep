@@ -1,6 +1,121 @@
 @extends('client.layout')
 
 @section('content')
+    <style>
+        /* Căn chỉnh các nút đánh giá ngang đều */
+        .filter-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            /* Khoảng cách giữa các nút */
+            /* flex-wrap: wrap; */
+            /* Để các nút tự động xuống dòng nếu màn hình nhỏ */
+        }
+
+        /* Style cho các nút */
+        .filter-btn {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .filter-btn:active {
+            background-color: #0056b3;
+        }
+
+        #no-reviews-message {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: red;
+            margin: 20px 0;
+        }
+
+        .single-review {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-img {
+            margin-right: 15px;
+        }
+
+        .review-img img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .review-content {
+            flex-grow: 1;
+        }
+
+        .review-top-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .review-left h5 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .rating-product i {
+            font-size: 1.1rem;
+        }
+
+        .rating-product {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .review-bottom {
+            margin-top: 10px;
+        }
+
+        .review-bottom p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        @media (max-width: 767px) {
+            .single-review {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .review-img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .review-top-wrap {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .review-left h5 {
+                text-align: center;
+            }
+        }
+    </style>
     <!-- breadcrumb-section start -->
     <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
         <div class="container">
@@ -250,30 +365,59 @@
                             <div class="single-product-desc">
                                 <div class="row">
                                     <div class="col-12">
+                                        <div class="filter-rating text-center mb-4">
+                                            <button class="filter-btn" data-star="5">5 <i
+                                                    class="mdi mdi-star text-warning"
+                                                    style="font-size: 1.5rem;"></i></button>
+                                            <button class="filter-btn" data-star="4">4 <i
+                                                    class="mdi mdi-star text-warning"
+                                                    style="font-size: 1.5rem;"></i></button>
+                                            <button class="filter-btn" data-star="3">3 <i
+                                                    class="mdi mdi-star text-warning"
+                                                    style="font-size: 1.5rem;"></i></button>
+                                            <button class="filter-btn" data-star="2">2 <i
+                                                    class="mdi mdi-star text-warning"
+                                                    style="font-size: 1.5rem;"></i></button>
+                                            <button class="filter-btn" data-star="1">1 <i
+                                                    class="mdi mdi-star text-warning"
+                                                    style="font-size: 1.5rem;"></i></button>
+                                            <button class="filter-btn" data-star="all">All</button>
+                                        </div>
+                                        <div id="no-reviews-message"
+                                            style="display: none; color: red; text-align: center;">
+                                            Không có đánh giá phù hợp.
+                                        </div>
                                         <div class="review-wrapper">
                                             @foreach ($sanPhamCT->danh_gias as $danhgia)
-                                                <div class="single-review">
-                                                    <div class="review-img">
-                                                        <img src="/assets/img/testimonial-image/1.png" alt="" />
-                                                    </div>
-                                                    <div class="review-content">
-                                                        <div class="review-top-wrap">
-                                                            <div class="review-left">
-                                                                <div class="review-name">
-                                                                    <h4>{{ $danhgia->users->ho_ten }}</h4>
+                                                <div class="single-review mb-4 p-3 shadow-sm rounded-lg bg-light">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="review-img me-3">
+                                                            <img src="{{ $danhgia->users->anh_dai_dien ? asset('storage/' . $danhgia->users->anh_dai_dien) : '/assets/img/default-avatar.png' }}"
+                                                                alt="{{ $danhgia->users->ho_ten }}"
+                                                                class="rounded-circle" />
+                                                        </div>
+                                                        <div class="review-content">
+                                                            <div class="review-top-wrap d-flex justify-content-between">
+                                                                <div class="review-left">
+                                                                    <h5 class="review-name mb-1">
+                                                                        {{ $danhgia->users->ho_ten }}</h5>
                                                                 </div>
                                                                 <div class="rating-product">
+                                                                    <!-- Logic hiển thị sao với mdi -->
                                                                     @for ($i = 1; $i <= 5; $i++)
-                                                                        <i
-                                                                            class="{{ $i <= $danhgia->diem_so ? 'ion-android-star' : 'ion-android-star-outline' }}"></i>
+                                                                        @if ($i <= $danhgia->diem_so)
+                                                                            <i class="mdi mdi-star text-warning"
+                                                                                style="font-size: 1.5rem;"></i>
+                                                                        @else
+                                                                            <i class="mdi mdi-star-outline text-muted"
+                                                                                style="font-size: 1.5rem;"></i>
+                                                                        @endif
                                                                     @endfor
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="review-bottom">
-                                                            <p>
-                                                            <p>{{ $danhgia->binh_luan }}</p>
-                                                            </p>
+                                                            <div class="review-bottom mt-2">
+                                                                <p class="text-muted">{{ $danhgia->binh_luan }}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -309,53 +453,32 @@
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
                                                 <span class="badge badge-danger top-right">New</span>
-                                                <a href="{{ route('sanpham.chitiet', $sanphamlq->id) }}">
+                                                <a href="{{ route('san-phams.incrementViews', $sanphamlq->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('storage/' . $sanphamlq->anh_san_pham) }}"
                                                         alt="thumbnail" />
                                                 </a>
-                                                <!-- product links -->
-                                                <ul class="actions d-flex justify-content-center">
-                                                    <li>
-                                                        <a class="action" href="wishlist.html">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="add to wishlist" class="icon-heart">
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="action" href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#compare">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="Add to compare" class="icon-shuffle"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="action" href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view">
-                                                            <span data-bs-toggle="tooltip" data-placement="bottom"
-                                                                title="Quick view" class="icon-magnifier"></span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <!-- product links end-->
                                             </div>
                                             <div class="media-body">
                                                 <div class="product-desc">
                                                     <h3 class="title">
                                                         <a
-                                                            href="shop-grid-4-column.html">{{ $sanphamlq->ten_san_pham }}</a>
+                                                            href="{{ route('san-phams.incrementViews', $sanphamlq->id) }}">{{ $sanphamlq->ten_san_pham }}</a>
                                                     </h3>
                                                     <div class="rating">
-                                                        <span class="ion-android-star"></span>
-                                                        <span class="ion-android-star"></span>
-                                                        <span class="ion-android-star"></span>
-                                                        <span class="ion-android-star"></span>
-                                                        <span class="ion-android-star de-selected"></span>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $sanphamlq->diem_trung_binh)
+                                                                <i class="mdi mdi-star text-warning"
+                                                                    style="font-size: 2.3em;"></i>
+                                                            @else
+                                                                <i class="mdi mdi-star-outline text-muted"
+                                                                    style="font-size: 2.3em;"></i>
+                                                            @endif
+                                                        @endfor
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <span
-                                                            class="product-price">{{ number_format($sanphamlq->gia_goc) }}</span>
+                                                            class="product-price">{{ number_format($sanphamlq->gia_km) }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -409,7 +532,7 @@
                         console.log('Size ID: ', sizeId);
                         console.log('Color ID: ', selectedColorId);
                         console.log('Color Options: ',
-                        colorOptions); // Kiểm tra cấu trúc của colorOptions
+                            colorOptions); // Kiểm tra cấu trúc của colorOptions
 
                         // Tìm biến thể tương ứng với size và màu
                         var selectedVariant = null;
@@ -427,7 +550,7 @@
                             var newPrice = parseFloat({{ $sanPhamCT->gia_km }}) + parseFloat(
                                 selectedVariant.gia);
                             newPriceElement.textContent = numberWithCommas(
-                            newPrice); // Cập nhật giá mới
+                                newPrice); // Cập nhật giá mới
 
                             // Cập nhật số lượng tồn kho
                             var quantityInput = document.getElementById('quantity-input');
@@ -458,18 +581,10 @@
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
-
-
         // Hàm hỗ trợ định dạng số có dấu phân cách ngàn
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
-
-
-
-
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('form[id^="add-to-cart-form"]').forEach(form => {
                 form.addEventListener('submit', function(event) {
@@ -509,6 +624,43 @@
                         });
                 });
             });
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const rating = this.getAttribute('data-star');
+                    console.log('Nút đã được nhấn, giá trị rating:', rating);
+                    filterReviews(rating);
+                });
+            });
+
+            function filterReviews(rating) {
+                const reviews = document.querySelectorAll('.single-review');
+                let found = false; // Biến để kiểm tra có đánh giá phù hợp hay không
+
+                reviews.forEach(review => {
+                    const reviewRating = review.querySelector('.rating-product');
+                    const stars = reviewRating.querySelectorAll('.mdi-star.text-warning')
+                        .length; // Lấy số sao đã được đánh giá
+
+                    console.log('Số sao trong đánh giá:', stars); // In ra số sao trong mỗi đánh giá
+
+                    // Nếu đánh giá có số sao khớp với bộ lọc
+                    if (rating === 'all' || stars === parseInt(rating)) {
+                        review.style.display = 'block'; // Hiển thị đánh giá
+                        found = true; // Đánh dấu đã tìm thấy ít nhất 1 đánh giá phù hợp
+                    } else {
+                        review.style.display = 'none'; // Ẩn đánh giá
+                    }
+                });
+
+                // Hiển thị/ẩn thông báo nếu không có đánh giá nào phù hợp
+                const noReviewsMessage = document.getElementById('no-reviews-message');
+                if (found) {
+                    noReviewsMessage.style.display = 'none'; // Ẩn thông báo nếu có đánh giá
+                } else {
+                    noReviewsMessage.style.display = 'block'; // Hiển thị thông báo nếu không có đánh giá
+                }
+            }
+
         });
 
         // Hàm tăng số lượng

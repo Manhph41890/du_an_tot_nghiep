@@ -14,14 +14,18 @@
     }
 
     .notification-dot {
-        width: 10px;
-        height: 10px;
+        width: 15px;
+        height: 15px;
         background-color: red;
         border-radius: 50%;
-        border: 2px solid white;
         position: absolute;
-        top: -25px;
-        left: -15px;
+        top: -20px;
+        left: -10px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
         animation: pulse 1s infinite;
     }
 
@@ -146,12 +150,17 @@
                                             @endphp
                                             <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
                                                 alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
-                                            @if (isset($notifications) && $notifications['totalNotifications'] > 0)
+                                            @php
+                                                $tongDonHang = DB::table('don_hangs')
+                                                    ->where('trang_thai_don_hang', 'Chờ xác nhận')
+                                                    ->where('user_id', Auth::id()) // Lọc theo ID người dùng hiện tại
+                                                    ->count();
+                                            @endphp
+                                            @if ($tongDonHang > 0)
                                                 <span class="ms-2 position-relative">
-                                                    <span class="notification-dot"></span>
+                                                    <span class="notification-dot">{{ $tongDonHang }}</span>
                                                 </span>
                                             @endif
-                                            <span class="menu-arrow ms-auto"></span>
                                         </a>
                                         <div
                                             class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">

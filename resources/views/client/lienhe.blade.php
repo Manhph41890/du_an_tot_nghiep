@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">Liên hệ</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">LIÊN HỆ</h2>
                     </div>
                 </div>
                 <div class="col-12">
@@ -19,26 +19,22 @@
             </div>
         </div>
     </nav>
-    <!-- breadcrumb-section end -->
-    <!-- map start -->
-    {{-- <div style="margin-top:20px;" class="map">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.5480490037507!2d90.42897841550803!3d23.76349088458297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c78ab2187d4d%3A0x4d5f8a6c610c144b!2sHasTech%20Digital%20Item%20%26%20Service%20Provider!5e0!3m2!1sen!2sua!4v1595747193974!5m2!1sen!2sua"
-    ></iframe>
-  </div> --}}
-    <!-- map end -->
-    <!-- contact-section satrt -->
     <section class="contact-section pt-80 pb-50">
         <div class="container">
             <div class="row">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10993.517839725198!2d105.75015105398771!3d21.037658157177084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455e940879933%3A0xcf10b34e9f1a03df!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1sen!2s!4v1730219909258!5m2!1sen!2s" 
+                width="600" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
                 <div class="col-lg-6 col-12 mb-30">
                     <!--  contact page side content  -->
                     <div class="contact-page-side-content">
-                        <h3 class="contact-page-title style_primary" >Liên hệ</h3>
-                        <p class="contact-page-message mb-30">
-                            ARTICRAFT
-                        <p>Vẽ sáng tạo - Tô hạnh phúc</p>
-                        </p>
+                        <!-- <h3 class="contact-page-title style_primary" >Liên hệ</h3> -->
                         <!--  single contact block  -->
 
                         <div class="single-contact-block ">
@@ -74,41 +70,7 @@
 
                     <!--=======  End of contact page side content  =======-->
                 </div>
-                <div class="col-lg-6 col-12 mb-30">
-                    <!--  contact form content -->
-                    <div class="contact-form-content">
-                        <h3 class="contact-page-title style_primary" >Tư Vấn Thêm</h3>
-                        <div class="contact-form">
-                            <form id="contact-form" action=""
-                                method="POST">
-                                <div class="form-group">
-                                    <label class="style_primary">Họ và tên <span class="required">*</span></label>
-                                    <input type="text" name="name" placeholder="Nhập tên của bạn..." id="name" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="style_primary">Email <span class="required">*</span></label>
-                                    <input type="email" name="email" placeholder="Nhập email..." id="email" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="style_primary">Đối tượng</label>
-                                    <input type="text" name="subject" placeholder="Nhập đối tượng..." id="subject" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="style_primary">Nội dung</label>
-                                    <textarea name="contactMessage" class="pb-10" placeholder="Nhập nội dung..." id="contactMessage"></textarea>
-                                </div>
-                                <div class="form-group my-3">
-                                    <button type="submit" value="submit" id="submit" class="btn btn-dark btn--lg button_submit"
-                                        name="submit">
-                                        submit
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                        <p class="form-message mt-10"></p>
-                    </div>
-                    <!-- End of contact -->
-                </div>
+                
             </div>
         </div>
     </section>

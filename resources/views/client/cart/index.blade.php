@@ -123,9 +123,30 @@
         }
     </style>
     <div class="container margin_30">
-        <div class="page_header">
+        <!-- <div class="page_header">
             <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>
+        </div> -->
+        <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title pb-4 text-white text-capitalize" style=" color: #fff !important">
+                            GIỎ HÀNG
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
+                        <li class="breadcrumb-item"><a href="{{ route('client.home') }}">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Giỏ hàng
+                        </li>
+                    </ol>
+                </div>
+            </div>
         </div>
+    </nav>
         <div class="cart-wrapper">
             <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
                 @csrf

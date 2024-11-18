@@ -491,6 +491,6 @@
 
 
 
-    {{-- enddd  --}}
+    {{-- end --}}
     <!-- product tab end -->
 @endsection

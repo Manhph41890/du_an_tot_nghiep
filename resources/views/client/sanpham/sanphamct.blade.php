@@ -248,7 +248,7 @@
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
-                                <h2>Đánh Giá Sản Phẩm</h2>
+                                <h2>Đánh giá sản phẩm:</h2>
                                 <br>
                                 <div class="filter-rating">
                                     <button class="btn btn-outline-primary" onclick="filterByStars(0)">Tất cả</button>
@@ -266,13 +266,13 @@
                                                 <div class="single-review" data-rating="{{ $danhgia->diem_so }}">
                                                     {{-- <div class="review-img">
                                                         <img src="/assets/img/testimonial-image/1.png" alt="" />
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="review-content">
                                                         <div class="review-top-wrap">
                                                             <div class="review-left">
                                                                 <div class="review-name">
                                                                     <h4>{{ $danhgia->users->ho_ten }}</h4>
-                                                                    {{-- <small>{{ $danhgia->ngay_danh_gia->format('d/m/Y') }}</small> <!-- Thêm ngày đánh giá --> --}}
+                                                                    <small>{{ $danhgia->ngay_danh_gia }}</small> <!-- Thêm ngày đánh giá -->
                                                                 </div>
                                                                 <div class="rating-product">
                                                                     @for ($i = 1; $i <= 5; $i++)
@@ -283,9 +283,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="review-bottom">
-                                                            <p>
                                                             <p>{{ $danhgia->binh_luan }}</p>
-                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -579,6 +577,22 @@
                     review.style.display = 'none';
                 }
             });
+
+            function filterByStars(starCount) {
+                const reviews = document.querySelectorAll('.single-review');
+
+                reviews.forEach(review => {
+                    const reviewStars = parseInt(review.getAttribute('data-rating'));
+
+                    // Hiển thị tất cả nếu chọn "Tất cả"
+                    if (starCount === 0 || reviewStars === starCount) {
+                        review.style.display = 'block';
+                    } else {
+                        review.style.display = 'none';
+                    }
+                });
+            }
+
         }
     </script>
 @endsection

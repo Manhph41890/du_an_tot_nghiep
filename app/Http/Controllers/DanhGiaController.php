@@ -88,10 +88,8 @@ class DanhGiaController extends Controller
      */
     public function show($id)
     {
-        $danhgia = danh_gia::findOrFail($id);  // Tìm đánh giá theo id
-        // dd($danhgia);
-
-        // Trả về view admin.danhgia.show với dữ liệu đánh giá
+        $danhgia = danh_gia::findOrFail($id);  
+       
         return view('admin.danhgia.show', compact('danhgia'));
     }
 

@@ -64,13 +64,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">cart</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">THANH TOÁN</h2>
                     </div>
                 </div>
                 <div class="col-12">
                     <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">cart</li>
+                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
                     </ol>
                 </div>
             </div>
@@ -83,7 +83,7 @@
             <form action="{{ route('order.add') }}" class="personal-information" method="POST">
                 @csrf
                 <div class="page_header">
-                    <h1>Thông tin đơn hàng</h1>
+                    <h1 style="text-align: center;font-weight: 600;">THÔNG TIN ĐƠN HÀNG</h1>
                 </div>
                 <table class="table table-hover cart-list">
                     <thead class="table-light custom-thead">

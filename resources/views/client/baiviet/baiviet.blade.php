@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-white text-capitalize">
+                        <h2 class="title pb-4 text-white text-capitalize" style=" color: #fff !important">
                             Blog
                         </h2>
                     </div>

@@ -346,7 +346,14 @@ class OrderController extends Controller
                 $cart->cartItems()->delete();
                 $cart->delete();
 
-
+                // Lưu thông tin lịch sử thanh toán vào bảng lich_su_thanh_toan
+                DB::table('lich_su_thanh_toans')->insert([
+                    'don_hang_id' => $order->id,
+                    'vnp_TxnRef_id' => $vnp_TxnRef,
+                    'vnp_ngay_tao' => now()->timezone('Asia/Ho_Chi_Minh'),
+                    'vnp_tong_tien' => $order->tong_tien,
+                    'trang_thai' => 'Thanh toán thành công',
+                ]);
                 Mail::send('auth.success_order', [
                     'ho_ten' => $user->ho_ten,
                     'order' => $order,

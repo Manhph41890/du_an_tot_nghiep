@@ -1,14 +1,26 @@
 <!-- Left Sidebar Start -->
 <style>
     .notification-dot {
-        width: 8px;
-        height: 8px;
+        width: 20px;
+        /* Điều chỉnh kích thước chấm đỏ */
+        height: 20px;
+        /* Điều chỉnh kích thước chấm đỏ */
         background-color: red;
         border-radius: 50%;
-        border: 2px solid white;
         position: absolute;
-        top: -10px;
-        left: -10px;
+        top: -15px;
+        /* Điều chỉnh vị trí chấm đỏ */
+        left: -8px;
+        /* Điều chỉnh vị trí chấm đỏ */
+        color: white;
+        /* Màu chữ trắng */
+        display: flex;
+        align-items: center;
+        /* Căn giữa chữ theo chiều dọc */
+        justify-content: center;
+        /* Căn giữa chữ theo chiều ngang */
+        font-size: 12px;
+        /* Kích thước chữ */
         animation: pulse 1s infinite;
     }
 
@@ -24,6 +36,21 @@
             transform: scale(0.8);
             /* Thu nhỏ */
         }
+    }
+
+    .notification-dot2 {
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        border-radius: 50%;
+        position: absolute;
+        top: -5px;
+        left: 0px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
     }
 </style>
 <div class="app-sidebar-menu">
@@ -67,11 +94,12 @@
                         <span> Đơn hàng </span>
                         @if (isset($notifications) && $notifications['totalNotifications'] > 0)
                             <span class="ms-2 position-relative">
-                                <span class="notification-dot"></span>
+                                <span class="notification-dot">{{ $notifications['totalNotifications'] }}</span>
                             </span>
                         @endif
                         <span class="menu-arrow ms-auto"></span>
                     </a>
+
                     <div class="collapse" id="donhang-menu">
                         <ul class="nav-second-level">
                             <!-- Menu con: Danh sách -->
@@ -80,7 +108,7 @@
                                     Danh sách
                                     @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
                                         <span class="ms-2 position-relative">
-                                            <span class="notification-dot"></span>
+                                            <span class="notification-dot2"></span>
                                         </span>
                                     @endif
                                 </a>
@@ -91,7 +119,7 @@
                                     Yêu cầu hủy đặt hàng
                                     @if (isset($notifications) && $notifications['cancelRequestsCount'] > 0)
                                         <span class="ms-2 position-relative">
-                                            <span class="notification-dot"></span>
+                                            <span class="notification-dot2"></span>
                                         </span>
                                     @endif
                                 </a>

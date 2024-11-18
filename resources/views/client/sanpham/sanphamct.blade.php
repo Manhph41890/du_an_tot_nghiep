@@ -244,7 +244,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!-- third tab-pane -->
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
@@ -266,7 +266,7 @@
                                                 <div class="single-review" data-rating="{{ $danhgia->diem_so }}">
                                                     {{-- <div class="review-img">
                                                         <img src="/assets/img/testimonial-image/1.png" alt="" />
-                                                    </div> --}}
+                                                    </div>
                                                     <div class="review-content">
                                                         <div class="review-top-wrap">
                                                             <div class="review-left">
@@ -283,7 +283,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="review-bottom">
+                                                            <p>
                                                             <p>{{ $danhgia->binh_luan }}</p>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -299,7 +301,8 @@
 
         </div>
     </div>
-
+    <!-- product tab end -->
+    <!-- new arrival section start -->
     <section class="theme1 bg-white pb-80">
         <div class="container">
             <div class="row">
@@ -384,13 +387,17 @@
     <script>
         // Hàm lọc màu sắc khi chọn size
         document.getElementById('size_san_pham_id{{ $sanPhamCT->id }}').addEventListener('change', function() {
-            var sizeId = this.value;
-            var colorOptions = @json($colorsBySize);
+            var sizeId = this.value; // Lấy size được chọn
+            var colorOptions = @json($colorsBySize); // Mảng các màu sắc cho từng size
+            var colorsBySize = @json($colorsBySize); // Mảng các biến thể theo size và màu
+            var newPriceElement = document.getElementById('new-price'); // Phần tử giá mới
 
+            // Làm trống các lựa chọn màu cũ
             var colorContainer = document.getElementById('color-options');
             colorContainer.innerHTML = '';
 
             if (sizeId && colorOptions[sizeId]) {
+                // Lọc ra các màu sắc tương ứng với size đã chọn
                 colorOptions[sizeId].forEach(function(color) {
                     var colorInput = document.createElement('input');
                     colorInput.type = 'radio';
@@ -410,23 +417,47 @@
                     colorDiv.appendChild(colorLabel);
 
                     colorInput.addEventListener('change', function() {
-                        // Cập nhật số lượng tồn kho khi chọn màu
-                        var quantityInput = document.getElementById('quantity-input');
-                        var addToCartButton = document.querySelector(
-                            `#add-to-cart-form{{ $sanPhamCT->id }} button[type="submit"]`);
+                        var selectedColorId = colorInput.value;
+                        console.log('Size ID: ', sizeId);
+                        console.log('Color ID: ', selectedColorId);
+                        console.log('Color Options: ',
+                            colorOptions); // Kiểm tra cấu trúc của colorOptions
 
-                        quantityInput.max = color.so_luong;
-                        quantityInput.value = 1; // Đặt lại số lượng về 1 khi chọn màu mới
+                        // Tìm biến thể tương ứng với size và màu
+                        var selectedVariant = null;
+                        // Duyệt qua các biến thể để tìm match sizeId và selectedColorId
+                        colorsBySize[sizeId].forEach(function(variant) {
+                            if (variant.id == selectedColorId) {
+                                selectedVariant = variant;
+                            }
+                        });
 
-                        // Kiểm tra số lượng tồn kho
-                        if (color.so_luong === 0) {
-                            addToCartButton.textContent = "Đã hết hàng";
-                            addToCartButton.disabled = true; // Vô hiệu hóa nút
-                            quantityInput.disabled = true; // Vô hiệu hóa ô nhập số lượng
-                        } else {
-                            addToCartButton.textContent = "Thêm vào giỏ hàng";
-                            addToCartButton.disabled = false; // Kích hoạt lại nút
-                            quantityInput.disabled = false; // Kích hoạt lại ô nhập số lượng
+                        console.log('Selected Variant: ', selectedVariant);
+
+                        if (selectedVariant) {
+                            // Tính giá mới: gia_km + gia của cặp size và màu
+                            var newPrice = parseFloat({{ $sanPhamCT->gia_km }}) + parseFloat(
+                                selectedVariant.gia);
+                            newPriceElement.textContent = numberWithCommas(
+                                newPrice); // Cập nhật giá mới
+
+                            // Cập nhật số lượng tồn kho
+                            var quantityInput = document.getElementById('quantity-input');
+                            quantityInput.max = selectedVariant.so_luong;
+                            quantityInput.value = 1; // Đặt lại số lượng khi chọn màu mới
+
+                            // Kiểm tra tồn kho và vô hiệu hóa nút nếu hết hàng
+                            var addToCartButton = document.querySelector(
+                                `#add-to-cart-form{{ $sanPhamCT->id }} button[type="submit"]`);
+                            if (selectedVariant.so_luong === 0) {
+                                addToCartButton.textContent = "Đã hết hàng";
+                                addToCartButton.disabled = true;
+                                quantityInput.disabled = true;
+                            } else {
+                                addToCartButton.textContent = "Thêm vào giỏ hàng";
+                                addToCartButton.disabled = false;
+                                quantityInput.disabled = false;
+                            }
                         }
                     });
 
@@ -435,8 +466,14 @@
             }
         });
 
-
-
+        // Hàm hỗ trợ định dạng số có dấu phân cách ngàn
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        // Hàm hỗ trợ định dạng số có dấu phân cách ngàn
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('form[id^="add-to-cart-form"]').forEach(form => {
                 form.addEventListener('submit', function(event) {

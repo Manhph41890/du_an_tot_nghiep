@@ -3,29 +3,6 @@
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (session('status'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: '{{ session('status') }}',
-            });
-        </script>
-    @endif
-
-    @if ($errors->any())
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: '{{ $errors->first() }}',
-            });
-        </script>
-    @endif
-
-    {{-- @if (session('status'))
-    <div class="alert alert-success">{{ session('status') }}</div>
-@endif --}}
-    @if (session('status'))
         <div class="modal" style="200px">
             <div class="modal-content">
                 <span class="close-btn">&times;</span>
@@ -98,40 +75,84 @@
             });
         });
 
+        //old
 
+        // function sendVerificationCode() {
+        //     var email = $('#email').val(); // Get the email value
 
+        //     $.ajax({
+        //         url: $('#forgot-password-form').attr('action'),
+        //         method: 'POST',
+        //         data: $('#forgot-password-form').serialize(),
+        //         success: function(response) {
+        //             // Show a success SweetAlert2 message
+        //             Swal.fire({
+        //                 icon: 'success',
+        //                 title: 'Thành công',
+        //                 text: 'Mã xác thực đã được gửi đến email của bạn.',
+        //             });
+
+        //             // Show the verification form
+        //             $('#verification-message').show();
+        //             $('#send-code-button').hide();
+        //             $('#verification-form').show();
+
+        //             // Set the email in the hidden input for the verification form
+        //             $('#verification-email').val(email);
+        //         },
+        //         error: function(xhr) {
+        //             // Show an error SweetAlert2 message if the email doesn't exist
+        //             Swal.fire({
+        //                 icon: 'error',
+        //                 title: 'Lỗi',
+        //                 text: 'Email không tồn tại trên hệ thống.',
+        //             });
+        //         }
+
+        //     });
+        // }
+
+        //new
         function sendVerificationCode() {
-            var email = $('#email').val(); // Get the email value
+            var email = $('#email').val(); // Lấy giá trị email
 
             $.ajax({
-                url: $('#forgot-password-form').attr('action'),
+                url: $('#forgot-password-form').attr('action'), // Lấy URL từ form
                 method: 'POST',
                 data: $('#forgot-password-form').serialize(),
                 success: function(response) {
-                    // Show a success SweetAlert2 message
+                    // Hiển thị thông báo thành công bằng SweetAlert2
                     Swal.fire({
                         icon: 'success',
                         title: 'Thành công',
-                        text: 'Mã xác thực đã được gửi đến email của bạn.',
+                        text: response.message, // Sử dụng thông báo từ server
                     });
 
-                    // Show the verification form
+                    // Hiển thị form nhập mã xác thực
                     $('#verification-message').show();
                     $('#send-code-button').hide();
                     $('#verification-form').show();
 
-                    // Set the email in the hidden input for the verification form
+                    // Gán email vào input ẩn trong form xác thực
                     $('#verification-email').val(email);
                 },
                 error: function(xhr) {
-                    // Show an error SweetAlert2 message if the email doesn't exist
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Lỗi',
-                        text: 'Email không tồn tại trên hệ thống.',
-                    });
+                    if (xhr.status === 404) {
+                        // Hiển thị thông báo lỗi nếu email không tồn tại
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: 'Email không tồn tại trên hệ thống.',
+                        });
+                    } else {
+                        // Xử lý các lỗi khác
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: 'Đã xảy ra lỗi, vui lòng thử lại.',
+                        });
+                    }
                 }
-
             });
         }
 

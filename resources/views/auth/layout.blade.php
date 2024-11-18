@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Quên mật khẩu</title>
+    <title>Art</title>
 
 </head>
 <style>
@@ -72,7 +72,7 @@
         background: #ffffff;
         box-shadow: 0px 8px 4px rgba(97, 178, 228, 0.44);
         border-radius: 37px;
-        padding: 10px;
+        padding: 15px 15px;
     }
 
     .form-list form input::placeholder {

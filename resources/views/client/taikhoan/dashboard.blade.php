@@ -496,6 +496,6 @@
             } else {
                 console.error(`Route [${routeName}] is not defined.`);
             }
-        } <
+        } 
     </script>
 @endsection

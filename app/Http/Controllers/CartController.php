@@ -134,8 +134,6 @@ class CartController extends Controller
     {
         // Validate input
         $request->validate([
-            'size_san_pham_id' => 'required|exists:size_san_phams,id',
-            'color_san_pham_id' => 'required|exists:color_san_phams,id',
             'quantity' => 'required|integer|min:1',
         ]);
 
@@ -143,15 +141,13 @@ class CartController extends Controller
         $cartItem = CartItem::findOrFail($id);
         $oldQuantity = $cartItem->quantity;  // Số lượng cũ
 
-        // Cập nhật size và màu trong giỏ hàng
-        $cartItem->size_san_pham_id = $request->size_san_pham_id;
-        $cartItem->color_san_pham_id = $request->color_san_pham_id;
+        // Cập nhật số lượng
         $cartItem->quantity = $request->quantity;
 
         // Lấy biến thể sản phẩm tương ứng
         $variant = bien_the_san_pham::where('san_pham_id', $cartItem->san_pham_id)
-            ->where('size_san_pham_id', $request->size_san_pham_id)
-            ->where('color_san_pham_id', $request->color_san_pham_id)
+            ->where('size_san_pham_id', $cartItem->size_san_pham_id)  // Giữ nguyên kích thước cũ
+            ->where('color_san_pham_id', $cartItem->color_san_pham_id) // Giữ nguyên màu sắc cũ
             ->first();
 
         if ($variant) {
@@ -186,6 +182,7 @@ class CartController extends Controller
             'message' => 'Cập nhật thành công'
         ]);
     }
+
 
 
 

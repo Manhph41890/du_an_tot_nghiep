@@ -54,46 +54,20 @@
                                                     </td>
                                                     <td>{{ date('d-m-Y H:i:s', strtotime($item->thoi_gian_rut)) }}
                                                     <td>{{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ</td>
-                                                    {{-- <td>
-                                                    @if ($huyDon->trang_thai == 'Chờ xác nhận hủy')
-                                                        <!-- Chỉ hiển thị nút khi trạng thái là "Chờ xác nhận hủy" -->
-                                                        <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#allmyModalXacNhanhuy{{ $huyDon->id }}"
-                                                            class="btn btn-info btn-sm">
-                                                            Xem và duyệt
-                                                        </a>
-                                                    @elseif ($huyDon->trang_thai == 'Xác nhận hủy' || $huyDon->trang_thai == 'Từ chối hủy')
-                                                        <!-- Nếu đã xác nhận hoặc từ chối hủy -->
-                                                        <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#allmyModalXacNhanhuy{{ $huyDon->id }}"
-                                                            class="btn btn-info btn-sm"">Đã duyệt</a>
-                                                    @else
-                                                        <p>Trạng thái không hợp lệ</p>
-                                                    @endif
+                                                    <td>
+                                                        <form action="{{ route('duyetRutAdmin', $item->id) }}" method="post">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            @if ($item->trang_thai === 'Chờ duyệt')
+                                                                <button type="submit"
+                                                                    class="btn btn-info btn-sm">Duyệt</button>
+                                                            @else
+                                                                <button type="button" class="btn btn-success btn-sm"
+                                                                    disabled>Đã duyệt</button>
+                                                            @endif
+                                                        </form>
 
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="allmyModalXacNhanhuy{{ $huyDon->id }}"
-                                                        tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-xl">
-                                                            <!-- Add modal-lg class here -->
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Chi
-                                                                        tiết hủy đơn hàng</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    @include('admin.donhang.showhuy', [
-                                                                        'huyDat' => $huyDon,
-                                                                    ])
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td> --}}
+                                                    </td>
                                                 </tr>
                                             @endforeach
 

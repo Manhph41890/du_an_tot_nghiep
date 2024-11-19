@@ -117,6 +117,8 @@ Route::middleware(['auth', 'role:admin', 'role:nhan_vien'])->group(function () {
 
     // Duyệt rút tiền admin
     Route::get('/ruttien', [RutTienController::class, 'duyetruttienAdmin'])->name('duyetruttienAdmin');
+    Route::put('/duyetrut/{id}', [RutTienController::class, 'duyetRutAdmin'])->name('duyetRutAdmin');
+
 
     // Resource routes cho quản lý
     Route::resource('/danhmucs', DanhMucController::class);

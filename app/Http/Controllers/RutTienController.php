@@ -56,7 +56,7 @@ class RutTienController extends Controller
             'vi_nguoi_dung_id' => $user->vi_nguoi_dungs->id,
             'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
             'tien_rut' => $request->amount,
-            'trang_thai' => 'Thành công',
+            'trang_thai' => 'Chờ duyệt',
             'bank_id' => $request->bank_id,
         ]);
 
@@ -71,5 +71,19 @@ class RutTienController extends Controller
 
         // dd($duyetruttien);
         return view('admin.lichsuduyetrut', compact('title', 'duyetruttien'));
+    }
+
+    public function duyetRutAdmin($id)
+    {
+        $lsRutVi = ls_rut_vi::find($id);
+
+        if (!$lsRutVi) {
+            return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
+        }
+
+        // Cập nhật trạng thái
+        $lsRutVi->update(['trang_thai' => 'Thành công']);
+
+        return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được duyệt.');
     }
 }

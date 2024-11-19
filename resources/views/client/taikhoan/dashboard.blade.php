@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                        <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                    </div> -->
+                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                            </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -387,8 +387,8 @@
                                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                             </div>
                         </div>
-                        <div class="modal fade " id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" style="--bs-modal-width: 800px;"
-                            aria-hidden="true">
+                        <div class="modal fade " id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel"
+                            style="--bs-modal-width: 800px;" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -471,7 +471,22 @@
                                                                 <td class="transaction-amount negative">
                                                                     {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
                                                                 </td>
-                                                                <td><span class="badge bg-success position-static">{{ $item->trang_thai }}</span></td>
+                                                                <td>
+                                                                    @php
+                                                                        $statusClasses = [
+                                                                            'Thành công' => 'bg-success',
+                                                                            'Chờ duyệt' => 'bg-warning',
+                                                                        ];
+                                                                        $class =
+                                                                            $statusClasses[
+                                                                                $item->trang_thai
+                                                                            ] ?? 'bg-secondary';
+                                                                    @endphp
+
+                                                                    <span class="badge position-static {{ $class }}">
+                                                                     {{ $item->trang_thai }} 
+                                                                    </span>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
 

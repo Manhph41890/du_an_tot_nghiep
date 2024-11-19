@@ -7,6 +7,7 @@ use App\Models\ls_rut_vi;
 use App\Models\vi_nguoi_dung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RutTienController extends Controller
 {
@@ -50,6 +51,14 @@ class RutTienController extends Controller
 
         $bank->balance += $request->amount;
         $bank->save();
+
+        DB::table('ls_rut_vis')->insert([
+            'vi_nguoi_dung_id' => $user->vi_nguoi_dungs->id,
+            'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
+            'tien_rut' => $request->amount,
+            'trang_thai' => 'Thành công',
+            'bank_id' => $request->bank_id,
+        ]);
 
         return  redirect()->route('taikhoan.rut-tien')->with('success', 'Rút tiền thành công.');
     }

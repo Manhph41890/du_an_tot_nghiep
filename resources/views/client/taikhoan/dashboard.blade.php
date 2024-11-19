@@ -10,9 +10,9 @@
             background-color: red;
             border-radius: 50%;
             position: absolute;
-            top: -50px;
+            top: -60px;
             /* Điều chỉnh vị trí chấm đỏ */
-            left: 260px;
+            left: 240px;
             /* Điều chỉnh vị trí chấm đỏ */
             color: white;
             /* Màu chữ trắng */
@@ -107,7 +107,8 @@
 
                         <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Ví người dùng </a>
 
-                        <a href="{{route('auth.logout')}}" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng xuất</a>
+                        <a href="{{ route('auth.logout') }}" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng
+                            xuất</a>
 
                     </div>
                 </div>
@@ -457,11 +458,12 @@
                                             <!-- Tab 3: Tiền rút -->
                                             <div class="tab-pane fade" id="rut" role="tabpanel"
                                                 aria-labelledby="rut-tab">
-                                                @foreach ($lsThanhToanVi as $item)
+                                                @foreach ($lsRutVi as $item)
                                                     <div class="d-flex justify-content-between">
                                                         <div class="d-flex justify-content-start">
                                                             <p class="">Tiền rút</p>
                                                         </div>
+                                                        <p class="">{{ $item->bank?->name }}</p>
                                                         <p class="">{{ $item->thoi_gian_rut }}</p>
                                                         <div class="transaction-amount negative">
                                                             {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
@@ -585,13 +587,13 @@
             document.querySelectorAll(
                 '#user-info-form input[type="text"],#user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"],#user-info-form select'
             ).forEach(field => {
-                
+
                 field.disabled = !field.disabled;
             });
             document.getElementById('toggleEditBtn').style.display = 'none';
             document.getElementById('saveBtn').style.display = 'inline-block';
         }
-     
+
 
         // Function to show avatar change form
         function toggleAvatarForm(event) {
@@ -609,6 +611,4 @@
             }
         };
     </script>
-
-
 @endsection

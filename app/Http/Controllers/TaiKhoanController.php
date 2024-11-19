@@ -33,7 +33,7 @@ class TaiKhoanController extends Controller
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
-        $lsRutVi = ls_rut_vi::with('don_hang', 'vi_nguoi_dung')
+        $lsRutVi = ls_rut_vi::with('vi_nguoi_dung', 'bank')
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();

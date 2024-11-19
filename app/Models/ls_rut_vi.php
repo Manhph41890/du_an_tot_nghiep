@@ -15,15 +15,8 @@ class ls_rut_vi extends Model
         'thoi_gian_rut',
         'tien_rut',
         'trang_thai',
+        'bank_id',
     ];
-
-    /**
-     * Quan hệ với DonHang (một chi tiết ví thuộc về một đơn hàng).
-     */
-    public function don_hang()
-    {
-        return $this->belongsTo(don_hang::class);
-    }
 
     /**
      * Quan hệ với ViNguoiDung (một chi tiết ví thuộc về một ví người dùng).
@@ -31,5 +24,10 @@ class ls_rut_vi extends Model
     public function vi_nguoi_dung()
     {
         return $this->belongsTo(vi_nguoi_dung::class, 'vi_nguoi_dung_id');
+    }
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class, 'bank_id');
     }
 }

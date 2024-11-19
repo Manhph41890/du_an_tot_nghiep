@@ -464,13 +464,15 @@
         // Function to toggle edit mode
         function toggleEdit() {
             document.querySelectorAll(
-                '#user-info-form input[type="text"], #user-info-form input[type="number"], #user-info-form input[type="date"],#user-info-form select'
+                '#user-info-form input[type="text"],#user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"],#user-info-form select'
             ).forEach(field => {
+                
                 field.disabled = !field.disabled;
             });
             document.getElementById('toggleEditBtn').style.display = 'none';
             document.getElementById('saveBtn').style.display = 'inline-block';
         }
+     
 
         // Function to show avatar change form
         function toggleAvatarForm(event) {

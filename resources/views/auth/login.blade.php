@@ -240,7 +240,12 @@
         outline: none;
         /* Remove default outline */
         box-shadow: 0 0 5px rgba(15, 47, 255, 0.5);
-        /* Green shadow when focused */
+        /*
+         Green shadow when focused */
+    }
+
+    input {
+        padding: 20px 20px;
     }
 </style>
 
@@ -249,7 +254,8 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/banner_0.jpg" alt="">
+    <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/aboutus1.jpg"
+        style="object-fit: cover" alt="">
 
     <div id="snow-container"></div>
 
@@ -257,7 +263,7 @@
 
         <div class="overlay">
 
-            <img class="decoration" src="http://127.0.0.1:8000/assets/client/images/logo/logo_art.png" alt="Logo Art">
+            <img class="decoration" src="http://127.0.0.1:8000/assets/client/img/logo/logo_art.png" alt="Logo Art">
 
 
             <div class="titre-register" style="margin-top: 30px">
@@ -336,14 +342,14 @@
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="number" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
+                    <input type="text" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
                         required
                         class="form-control form-control-lg bg-light  fs-6 @error('so_dien_thoai') is-invalid @enderror"
                         placeholder="Số điện thoại">
-                    @error('so_dien_thoai')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
-                    @enderror
                 </div>
+                @error('so_dien_thoai')
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                @enderror
 
                 <div class="input-group mb-3">
                     <input type="password" id="password" name="password" required

@@ -2,130 +2,180 @@
 
 @section('content')
     <style>
-        .update-cart-form input,
-        .update-cart-form select {
-            height: 40px;
-            padding: 5px;
-            font-size: 14px;
-        }
-
-        table {
-            width: 100%;
-            border: 1px;
-        }
-
-        th {
-            align-items: center;
-            justify-content: center;
-        }
-
-        td {
-            align-items: center;
-        }
-
-        td select,
-        td input,
-        td button {
-            height: 35px;
-            margin-right: 10px;
-            padding: 5px;
-            font-size: 14px;
-        }
-
-        td select {
-            width: auto;
-        }
-
-        td input[type="number"] {
-            width: 60px;
-        }
-
-        table th {}
-
-        table.cart-list {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table.cart-list th,
-        table.cart-list td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-
-        table.cart-list th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-        }
-
-        .btn {
-            border-radius: 5px;
-        }
-
         .cart-wrapper {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            flex-direction: column;
             gap: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
         }
 
         .cart-table {
-            flex: 2;
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .cart-list {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            table-layout: fixed;
+        }
+
+        .cart-list th,
+        .cart-list td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        /* Cột "Phân loại" rộng hơn */
+        .cart-list th:nth-child(4),
+        .cart-list td:nth-child(4) {
+            width: 35%;
+            word-wrap: break-word;
+            text-align: left;
+        }
+
+        .cart-list th:nth-child(3),
+        .cart-list td:nth-child(3) {
+            width: 10%;
+            word-wrap: break-word;
+            text-align: left;
+        }
+
+        .cart-list th:nth-child(5),
+        .cart-list td:nth-child(5) {
+            width: 10%;
+            word-wrap: break-word;
+            text-align: left;
+        }
+
+
+
+
+        .cart-list th:nth-child(1),
+        /* Header của cột "Chọn" */
+        .cart-list td:nth-child(1) {
+            /* Dữ liệu của cột "Chọn" */
+            width: 5%;
+            /* Đặt độ rộng nhỏ */
+            text-align: center;
+            /* Căn giữa nội dung */
+            padding: 5px;
+            /* Giảm padding để nhỏ gọn hơn */
+        }
+
+        cart-list th:nth-child(2),
+        /* Header của cột "Chọn" */
+        .cart-list td:nth-child(2) {
+            /* Dữ liệu của cột "Chọn" */
+            width: 40%;
+            /* Đặt độ rộng nhỏ */
+            text-align: center;
+            /* Căn giữa nội dung */
+            /* Giảm padding để nhỏ gọn hơn */
+        }
+
+
+        .cart-list th {
+            background-color: #f8f8f8;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .cart-list tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .thumb_cart {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .thumb_cart img {
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .cart-summary {
-            flex: 1;
-            /* border: 1px solid #ddd; */
+            border: 1px solid #ddd;
+            border-radius: 8px;
             padding: 20px;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            max-width: 400px;
+            margin-left: auto;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .cart-summary ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .cart-summary li {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 10px;
         }
 
         .cart-summary button {
             width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        /* btn thanh toán */
-        .ripple-hover {
-            position: relative;
-            overflow: hidden;
+        .cart-summary button:hover {
+            background-color: #0056b3;
         }
 
-        .ripple-hover::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.5s, opacity 0.5s;
-            opacity: 0;
-        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .cart-wrapper {
+                flex-direction: column;
+                gap: 15px;
+            }
 
-        .ripple-hover:hover::after {
-            width: 200%;
-            height: 200%;
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
+            .cart-summary {
+                max-width: 100%;
+            }
         }
     </style>
     <div class="container margin_30">
-        <div class="page_header">
-            <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>
-        </div>
+        <!-- <div class="page_header">
+                                                                            <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>
+                                                                        </div> -->
+        <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title text-center">
+                            <h2 class="title pb-4 text-white text-capitalize" style=" color: #fff !important">
+                                GIỎ HÀNG
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
+                            <li class="breadcrumb-item"><a href="{{ route('client.home') }}">Trang chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Giỏ hàng
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </nav>
         <div class="cart-wrapper">
             <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
                 @csrf

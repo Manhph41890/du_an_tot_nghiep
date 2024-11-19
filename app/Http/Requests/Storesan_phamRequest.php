@@ -30,6 +30,7 @@ class Storesan_phamRequest extends FormRequest
             'anh_san_pham' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active' => [Rule::in([0, 1])],
 
+            'product_variants' => 'required|array|min:1',
             'product_variants.size_san_pham.*' => 'required|exists:size_san_phams,id',
             'product_variants.color_san_pham.*' => 'required|exists:color_san_phams,id',
             'product_variants.so_luong.*' => 'required|integer|min:0',
@@ -89,6 +90,8 @@ class Storesan_phamRequest extends FormRequest
             'anh_san_pham.max' => 'Ảnh sản phẩm không được vượt quá :max kilobytes.',
             'is_active.in' => 'Trạng thái không hợp lệ.',
 
+
+            'product_variants.required' => 'Phải có ít nhất một biến thể sản phẩm.',
             'product_variants.*.color_san_pham.required' => 'Màu không thể để trống.',
             'product_variants.*.color_san_pham.exists' => 'Màu đã chọn không hợp lệ.',
             'product_variants.*.size_san_pham.required' => 'Kích thước không thể để trống.',

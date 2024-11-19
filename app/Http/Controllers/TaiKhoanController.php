@@ -18,7 +18,7 @@ class TaiKhoanController extends Controller
     public function showAccountDetails(Request $request)
     {
         $user = Auth::user(); // Lấy thông tin người dùng hiện tại
-        $title = " Thông tin tài khoản ";
+        $title = " THÔNG TIN TÀI KHOẢN ";
         $avatar = $user->anh_dai_dien ? Storage::url($user->anh_dai_dien) : asset('assets/client/images/avatar.png');
         $showForm = $request->query('showForm') === 'true';
 

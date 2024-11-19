@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">Thông tin tài khoản</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">Thông tin tài khoản</h2>
                     </div>
                 </div>
                 <div class="col-12">
@@ -77,9 +77,9 @@
     <div class="my-account pt-80 pb-50">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                </div>
+                </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -119,7 +119,7 @@
                     <div class="tab-content" id="myaccountContent">
                         <div class="tab-pane fade show active" id="account-info" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3>{{ $title }}</h3>
+                                <h3 style="font-size: 17px;">{{ $title }}</h3>
 
                                 <form id="user-info-form" action="" method="POST" enctype="multipart/form-data">
                                     @csrf

@@ -182,7 +182,11 @@
                     <table class="table cart-list">
                         <thead>
                             <tr>
-                                <th>Chọn</th>
+                                <th>
+                                    <!-- Nút Chọn Tất Cả -->
+                                    <button type="button" style="background-color: none;" id="select-all"><input
+                                            type="checkbox"></button>
+                                </th>
                                 <th>Sản phẩm</th>
                                 <th>Đơn giá</th>
                                 <th>Số lượng</th>
@@ -203,18 +207,13 @@
                                                 <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}"
                                                     alt="img" height="90px" width="90px"
                                                     style="object-fit: cover" />
-
-                                                <!-- Tên sản phẩm -->
                                                 <div class="ms-3">
-                                                    <h5> {{ $item->san_pham->ten_san_pham }}
-                                                    </h5>
+                                                    <h5> {{ $item->san_pham->ten_san_pham }}</h5>
                                                     <p class="small mb-0">
                                                         {{ $item->size->ten_size }}-{{ $item->color->ten_color }}</p>
                                                 </div>
                                             </div>
                                         </td>
-
-
                                         <td style="padding-top: 30px">
                                             <strong>{{ number_format($item->san_pham->gia_km, 0, ',', '.') }} đ</strong>
                                         </td>
@@ -228,8 +227,6 @@
                                                 Cập nhật
                                             </button>
                                         </td>
-
-
                                         <td style="padding-top: 30px">
                                             <span>
                                                 @php
@@ -249,9 +246,6 @@
                                                 @endif
                                             </span>
                                         </td>
-
-
-
                                         <td style="padding-top: 30px">
                                             <strong><span class="whish-list-price">{{ number_format($item->price) }}
                                                     đ</span></strong>
@@ -265,8 +259,10 @@
                             @endif
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-danger btn-sm" id="remove-selected-items" disabled>Xóa Sản Phẩm Đã
-                        Chọn</button>
+                    <!-- Nút Xóa Sản Phẩm Đã Chọn -->
+                    <button type="submit" class="btn btn-danger btn-sm" id="remove-selected-items"
+                        style="display: none;">Xóa Sản Phẩm Đã Chọn</button> <!-- Ẩn mặc định -->
+
                 </div>
             </form>
             <div class="cart-summary">
@@ -274,7 +270,6 @@
                     <li style="font-size: 16px">
                         <strong><span>Phí vận chuyển: </span><span id="shipping">0</span></strong>
                     </li>
-
                     <li style="font-size: 20px">
                         <strong><span>Tổng tiền cần thanh toán: </span><span class="text-danger"
                                 id="total-price">0</span></strong>
@@ -283,12 +278,11 @@
                 <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
                     @csrf
                     <input type="hidden" name="checkout_items[]" id="selected-items">
-                    <button id="checkout-button" class="btn btn-primary ripple">
-                        Thanh toán ngay
-                    </button>
+                    <button id="checkout-button" class="btn btn-primary ripple">Thanh toán ngay</button>
                 </form>
             </div>
         </div>
+
     </div>
 
     <script>
@@ -300,7 +294,14 @@
             const removeButton = document.getElementById('remove-selected-items');
             const checkoutForm = document.getElementById('checkout-form');
             const removeMultipleForm = document.getElementById('remove-multiple-form');
+            const selectAllButton = document.getElementById('select-all');
 
+            // Chọn hoặc bỏ chọn tất cả checkbox
+            selectAllButton.addEventListener('click', function() {
+                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                checkboxes.forEach(checkbox => checkbox.checked = !allChecked);
+                calculateTotal(); // Tính toán lại tổng giỏ hàng
+            });
             // Hàm tính tổng giá trị giỏ hàng
             function calculateTotal() {
                 let totalPrice = 0;
@@ -318,7 +319,8 @@
 
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
                 shippingEl.textContent = shipping.toLocaleString() + ' đ';
-                removeButton.disabled = selectedItems.length === 0;
+                removeButton.style.display = selectedItems.length > 0 ? 'inline-block' :
+                    'none'; // Hiển thị/ẩn nút xóa
 
                 // Xóa các input hidden trước khi thêm mới
                 removeMultipleForm.querySelectorAll('input[name="remove_items[]"]').forEach(input => input

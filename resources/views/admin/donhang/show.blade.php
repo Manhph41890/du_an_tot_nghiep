@@ -69,8 +69,9 @@
                                                     <tr>
                                                         <th>Hình ảnh</th>
                                                         <th>Sản phẩm</th>
-                                                        <th>Số Lượng</th>
                                                         <th>Giá</th>
+                                                        <th>Số Lượng</th>
+
                                                         <th>Thành Tiền</th>
                                                     </tr>
                                                 </thead>
@@ -179,8 +180,9 @@
                                                                 $hasRatings = true;
                                                             @endphp
                                                             <div class="d-flex justify-content-between">
-                                                                <strong> <img src="{{ asset('/storage/' . $danhGia->users?->anh_dai_dien) }}"
-                                                                    width="50px"></strong>
+                                                                <strong> <img
+                                                                        src="{{ asset('/storage/' . $danhGia->users?->anh_dai_dien) }}"
+                                                                        width="50px"></strong>
                                                                 <small><em>Đánh giá:
                                                                         @for ($i = 1; $i <= 5; $i++)
                                                                             @if ($i <= $danhGia->diem_so)
@@ -195,7 +197,7 @@
                                                             </div>
                                                             <div class="d-flex justify-content-between">
                                                                 <h6 class="me-3">{{ $danhGia->users?->ho_ten }}</h6>
-                                                                <textarea class="form-control" rows="2"  readonly>{{ $danhGia->binh_luan }}</textarea>
+                                                                <textarea class="form-control" rows="2" readonly>{{ $danhGia->binh_luan }}</textarea>
                                                             </div>
                                                             <p class="text-muted text-end">
                                                                 {{ date('d/m/Y', strtotime($danhGia->ngay_danh_gia)) }}

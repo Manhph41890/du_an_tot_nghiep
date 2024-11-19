@@ -1,12 +1,9 @@
 <div class="modal-dialog modal-xl">
     <div class="modal-content">
-
         <!-- Modal Header -->
         <div class="modal-header w-100">
             <h3 class="modal-title">Chi tiết đơn hàng</h3>
-
         </div>
-
         <!-- Modal Body -->
         <div class="modal-body">
             <div class="row">
@@ -22,8 +19,8 @@
                                             <p>Ngày tạo: {{ $donhang->ngay_tao }}</p>
                                         </div>
                                         <div class="">
-                                            <div class="">
-                                                <p class="mb-0 me-2">Trạng thái đơn hàng:</p>
+                                            <div class="d-flex justify-content-end">
+                                                <p class="me-5 pe-5">Trạng thái đơn hàng:</p>
                                                 @php
                                                     $statusClasses = [
                                                         'Chờ xác nhận' => 'bg-warning',
@@ -37,14 +34,12 @@
                                                     $class =
                                                         $statusClasses[$donhang->trang_thai_don_hang] ?? 'bg-secondary';
                                                 @endphp
-
                                                 <span class="badge {{ $class }}">
                                                     {{ $donhang->trang_thai_don_hang }}
                                                 </span>
-
                                             </div>
-                                            <div class="mt-3">
-                                                <p class="mb-0 me-2">Trạng thái Thanh toán:</p>
+                                            <div class="mt-3 d-flex justify-content-end">
+                                                <p class="me-5 pe-5">Trạng thái Thanh toán:</p>
                                                 @php
                                                     $statusClasses = [
                                                         'Đã thanh toán' => 'bg-success',
@@ -229,72 +224,89 @@
 
                                 {{-- ------------------------------------------------------------------------------------------ --}}
                                 @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
-                                    <div class="col-lg-12">
-                                        <!-- Nút Hủy Nhận Hàng -->
-                                        <div class="card mb-3">
-                                            <div class="card-body">
-                                                <h5>Hủy nhận đơn hàng này</h5>
-                                                <a id="openReviewForm{{ $donhang->id }}">
-                                                    <button type="submit" class="btn btn-secondary mt-2">Hủy nhận
-                                                        hàng</button>
-                                                </a>
-                                            </div>
-                                        </div>
 
-                                        <!-- Form Hủy Đơn Hàng -->
-                                        <div class="ratting-form-wrapper" id="reviewForm{{ $donhang->id }}">
-                                            <h3>Lý do hủy đơn hàng</h3>
-                                            <div class="ratting-form">
-                                                <form action="{{ route('huydonhang.store') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="don_hang_id"
-                                                        value="{{ $donhang->id }}">
-                                                    <!-- Lấy don_hang_id từ đơn hàng -->
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="rating-form-style form-submit">
-                                                                <select name="ly_do_huy" class="form-select">
-                                                                    <option value="" disabled selected>Chọn lý do
-                                                                        hủy</option>
-                                                                    <option
-                                                                        value="Tôi muốn cập nhật địa chỉ/sđt nhận hàng">
-                                                                        Tôi muốn cập nhật địa chỉ/sđt nhận hàng</option>
-                                                                    <option value="Tôi muốn thêm/thay đổi Mã giảm giá">
-                                                                        Tôi muốn thêm/thay đổi Mã giảm giá</option>
-                                                                    <option
-                                                                        value="Tôi muốn thay đổi sản phẩm (kích thước, màu sắc, số lượng…)">
-                                                                        Tôi muốn thay đổi sản phẩm (kích thước, màu sắc,
-                                                                        số lượng…)</option>
-                                                                    <option value="Thủ tục thanh toán rắc rối">Thủ tục
-                                                                        thanh toán rắc rối</option>
-                                                                    <option
-                                                                        value="Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ hơn, uy tín hơn, giao nhanh hơn…)">
-                                                                        Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ hơn, uy
-                                                                        tín hơn, giao nhanh hơn…)</option>
-                                                                    <option value="Tôi không có nhu cầu mua nữa">Tôi
-                                                                        không có nhu cầu mua nữa</option>
-                                                                    <option
-                                                                        value="Tôi không tìm thấy lý do hủy phù hợp">
-                                                                        Tôi không tìm thấy lý do hủy phù hợp</option>
-                                                                </select>
-                                                                @error('ly_do_huy')
-                                                                    <p class="text-danger">{{ $message }}</p>
-                                                                @enderror
-                                                                <button class="btn btn-dark mt-3"
-                                                                    type="submit">Gửi</button>
+                                    <div class="col-lg-12">
+                                        <!-- Kiểm tra trạng thái hủy -->
+                                        @if ($donhang->huy_don_hang && $donhang->huy_don_hang->trang_thai == 'Từ chối hủy')
+                                            <div class="alert alert-warning mt-3">
+                                                Đơn hàng bị từ chối hủy.
+                                            </div>
+                                        @else
+                                            <!-- Nút Hủy Nhận Hàng -->
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <h5>Hủy nhận đơn hàng này</h5>
+                                                    <a id="openReviewForm{{ $donhang->id }}">
+                                                        <button type="submit" class="btn btn-secondary mt-2">Hủy
+                                                            nhận
+                                                            hàng</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Form Hủy Đơn Hàng -->
+                                            <div class="ratting-form-wrapper" id="reviewForm{{ $donhang->id }}">
+                                                <h3>Lý do hủy đơn hàng</h3>
+                                                <div class="ratting-form">
+                                                    <form action="{{ route('huydonhang.store') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="don_hang_id"
+                                                            value="{{ $donhang->id }}">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="rating-form-style form-submit">
+                                                                    <select name="ly_do_huy" class="form-select">
+                                                                        <option value="" disabled selected>
+                                                                            Chọn
+                                                                            lý do hủy</option>
+                                                                        <option
+                                                                            value="Tôi muốn cập nhật địa chỉ/sđt nhận hàng">
+                                                                            Tôi muốn cập nhật địa chỉ/sđt nhận hàng
+                                                                        </option>
+                                                                        <option
+                                                                            value="Tôi muốn thêm/thay đổi Mã giảm giá">
+                                                                            Tôi muốn thêm/thay đổi Mã giảm giá
+                                                                        </option>
+                                                                        <option
+                                                                            value="Tôi muốn thay đổi sản phẩm (kích thước, màu sắc, số lượng…)">
+                                                                            Tôi muốn thay đổi sản phẩm (kích thước,
+                                                                            màu
+                                                                            sắc, số lượng…)
+                                                                        </option>
+                                                                        <option value="Thủ tục thanh toán rắc rối">
+                                                                            Thủ
+                                                                            tục thanh toán rắc rối</option>
+                                                                        <option
+                                                                            value="Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ hơn, uy tín hơn, giao nhanh hơn…)">
+                                                                            Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ
+                                                                            hơn,
+                                                                            uy tín hơn, giao nhanh hơn…)
+                                                                        </option>
+                                                                        <option value="Tôi không có nhu cầu mua nữa">
+                                                                            Tôi không có nhu cầu mua nữa</option>
+                                                                        <option
+                                                                            value="Tôi không tìm thấy lý do hủy phù hợp">
+                                                                            Tôi không tìm thấy lý do hủy phù hợp
+                                                                        </option>
+                                                                    </select>
+                                                                    @error('ly_do_huy')
+                                                                        <p class="text-danger">{{ $message }}</p>
+                                                                    @enderror
+                                                                    <button class="btn btn-dark mt-3"
+                                                                        type="submit">Gửi</button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 @endif
 
 
-
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán online')
+                                @if ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán bằng Vnpay')
                                     @if ($donhang->lich_su_thanh_toans->isNotEmpty())
                                         <div class="card">
                                             <div class="card-body">
@@ -348,7 +360,6 @@
         padding: 20px;
         background-color: #f9f9f9;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
     }
 
     .danhgia {
@@ -369,18 +380,6 @@
         font-size: 20px;
         color: #333;
         cursor: pointer;
-        font-weight: bold;
-    }
-
-    .order-status {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-        border-radius: 5px;
-        padding: 5px 10px;
-    }
-
-    .order-summary {
         font-weight: bold;
     }
 

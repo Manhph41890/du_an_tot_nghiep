@@ -10,9 +10,9 @@
             background-color: red;
             border-radius: 50%;
             position: absolute;
-            top: -50px;
+            top: -60px;
             /* Điều chỉnh vị trí chấm đỏ */
-            left: 260px;
+            left: 240px;
             /* Điều chỉnh vị trí chấm đỏ */
             color: white;
             /* Màu chữ trắng */
@@ -50,7 +50,7 @@
             position: absolute;
             top: -22px;
             left: -10px;
-            animation: pulse 1s infinite;
+            /* animation: pulse 1s infinite; */
         }
     </style>
     <!-- breadcrumb-section start -->
@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">Thông tin tài khoản</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">Thông tin tài khoản</h2>
                     </div>
                 </div>
                 <div class="col-12">
@@ -77,16 +77,17 @@
     <div class="my-account pt-80 pb-50">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                </div>
+                </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
                         <a href="#account-info" class="active" data-bs-toggle="tab"><i class="fa fa-user"></i> Chi tiết tài
                             khoản</a>
                         @if ($user->chuc_vu_id === 1 || $user->chuc_vu_id === 3)
-                            <a href="#admin-dashboad" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Vào trang
+                            <a href="#admin-dashboad-qt" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Vào
+                                trang
                                 quản
                                 trị</a>
                         @endif
@@ -104,10 +105,10 @@
                         @endif
                         <span class="menu-arrow ms-auto"></span>
 
-                        <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh
-                            toán</a>
+                        <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Ví người dùng </a>
 
-                        <a href="{{route('auth.logout')}}" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng xuất</a>
+                        <a href="{{ route('auth.logout') }}" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng
+                            xuất</a>
 
                     </div>
                 </div>
@@ -118,7 +119,7 @@
                     <div class="tab-content" id="myaccountContent">
                         <div class="tab-pane fade show active" id="account-info" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3>{{ $title }}</h3>
+                                <h3 style="font-size: 17px;">{{ $title }}</h3>
 
                                 <form id="user-info-form" action="" method="POST" enctype="multipart/form-data">
                                     @csrf
@@ -219,7 +220,7 @@
 
                         </div>
                         {{-- aa --}}
-                        <div class="tab-pane fade" id="dashboad" role="tabpanel">
+                        <div class="tab-pane fade" id="admin-dashboad-qt" role="tabpanel">
                             <div class="myaccount-content">
                                 <h3>Quản trị</h3>
 
@@ -235,150 +236,264 @@
 
                         <!-- Single Tab ssss -->
                         <div class="tab-pane fade" id="orders" role="tabpanel">
-                            <div class="myaccount-content">
-                                <h3>Đơn hàng của bạn</h3>
-
-                                <div class="myaccount-table table-responsive text-center">
-                                    <table class="table table-hover">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th>Mã đơn hàng</th>
-                                                <th>Ngày tạo đơn hàng</th>
-                                                <th>Tổng tiền</th>
-                                                <th>Trạng thái đơn hàng</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($myOrders as $myOrder)
+                            <div class="myaccount-content" id="orders-content">
+                                <div class="myaccount-content">
+                                    <h3>Đơn hàng của bạn</h3>
+                                    <div class="myaccount-table table-responsive text-center">
+                                        <table class="table table-hover">
+                                            <thead class="thead-light">
                                                 <tr>
-                                                    <td>{{ $myOrder->ma_don_hang }}</td>
-                                                    <td>{{ $myOrder->ngay_tao }}</td>
-                                                    <td>{{ number_format($myOrder->tong_tien, 0, ',', '.') }} VNĐ</td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-center mb-30">
-                                                            @php
-                                                                $statusClasses = [
-                                                                    'Chờ xác nhận' => 'bg-warning',
-                                                                    'Đã xác nhận' => 'bg-info',
-                                                                    'Đang chuẩn bị hàng' => 'bg-info',
-                                                                    'Đang vận chuyển' => 'bg-info',
-                                                                    'Đã giao' => 'bg-success',
-                                                                    'Thành công' => 'bg-success',
-                                                                    'Đã hủy' => 'bg-danger',
-                                                                ];
-                                                                $class =
-                                                                    $statusClasses[$myOrder->trang_thai_don_hang] ??
-                                                                    'bg-secondary';
-                                                            @endphp
-
-                                                            <span class="badge {{ $class }}">
-                                                                {{ $myOrder->trang_thai_don_hang }}
-                                                                @if ($myOrder->trang_thai_don_hang == 'Chờ xác nhận')
-                                                                    <span class="ms-2 position-relative">
-                                                                        <span class="notification-dot2"></span>
-                                                                    </span>
-                                                                @endif
-                                                            </span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('taikhoan.myorder', $myOrder->id) }}"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#allmyModalfororder{{ $myOrder->id }}">
-                                                            <i
-                                                                class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1 @if ($myOrder->trang_thai_don_hang == 'Thành công') tichs_dg @endif"></i>
-                                                        </a>
-
-                                                        <style>
-                                                            .tichs_dg {
-                                                                position: relative;
-                                                                border: 1px solid red !important;
-                                                            }
-
-                                                            .tichs_dg::after {
-                                                                content: ".";
-                                                                position: absolute;
-                                                                top: -55px;
-                                                                right: -5px;
-                                                                border-radius: 50%;
-                                                                font-size: 50px;
-                                                                color: red;
-                                                            }
-                                                        </style>
-                                                        <script>
-                                                            document.querySelectorAll('.tichs_dg').forEach(function(element) {
-                                                                element.addEventListener('click', function() {
-                                                                    element.classList.remove('tichs_dg');
-                                                                })
-                                                            });
-                                                        </script>
-                                                        <!-- The Modal -->
-                                                        <div class="modal" id="allmyModalfororder{{ $myOrder->id }}">
-                                                            @include('client.taikhoan.showmyorder', [
-                                                                'donhang' => $myOrder,
-                                                            ])
-                                                        </div>
-
-                                                    </td>
+                                                    <th>Mã đơn hàng</th>
+                                                    <th>Ngày tạo đơn hàng</th>
+                                                    <th>Tổng tiền</th>
+                                                    <th>Trạng thái đơn hàng</th>
+                                                    <th>Action</th>
                                                 </tr>
-                                            @endforeach
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($myOrders as $myOrder)
+                                                    <tr>
+                                                        <td>{{ $myOrder->ma_don_hang }}</td>
+                                                        <td>{{ $myOrder->ngay_tao }}</td>
+                                                        <td>{{ number_format($myOrder->tong_tien, 0, ',', '.') }} VNĐ</td>
+                                                        <td>
+                                                            <div class="d-flex justify-content-center mb-30">
+                                                                @php
+                                                                    $statusClasses = [
+                                                                        'Chờ xác nhận' => 'bg-warning',
+                                                                        'Đã xác nhận' => 'bg-info',
+                                                                        'Đang chuẩn bị hàng' => 'bg-info',
+                                                                        'Đang vận chuyển' => 'bg-info',
+                                                                        'Đã giao' => 'bg-success',
+                                                                        'Thành công' => 'bg-success',
+                                                                        'Đã hủy' => 'bg-danger',
+                                                                    ];
+                                                                    $class =
+                                                                        $statusClasses[$myOrder->trang_thai_don_hang] ??
+                                                                        'bg-secondary';
+                                                                @endphp
 
-                                        </tbody>
-                                    </table>
-                                    {{ $myOrders->links() }}
+                                                                <span class="badge {{ $class }}">
+                                                                    {{ $myOrder->trang_thai_don_hang }}
+                                                                    @if ($myOrder->trang_thai_don_hang == 'Chờ xác nhận')
+                                                                        <span class="ms-2 position-relative">
+                                                                            <span class="notification-dot2"></span>
+                                                                        </span>
+                                                                    @endif
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('taikhoan.myorder', $myOrder->id) }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#allmyModalfororder{{ $myOrder->id }}">
+                                                                <i
+                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1 @if ($myOrder->trang_thai_don_hang == 'Thành công') tichs_dg @endif"></i>
+                                                            </a>
+
+                                                            <style>
+                                                                .tichs_dg {
+                                                                    position: relative;
+                                                                    border: 1px solid red !important;
+                                                                }
+
+                                                                .tichs_dg::after {
+                                                                    content: ".";
+                                                                    position: absolute;
+                                                                    top: -55px;
+                                                                    right: -5px;
+                                                                    border-radius: 50%;
+                                                                    font-size: 50px;
+                                                                    color: red;
+                                                                }
+                                                            </style>
+                                                            <script>
+                                                                document.querySelectorAll('.tichs_dg').forEach(function(element) {
+                                                                    element.addEventListener('click', function() {
+                                                                        element.classList.remove('tichs_dg');
+                                                                    })
+                                                                });
+                                                            </script>
+                                                            <!-- The Modal -->
+                                                            <div class="modal"
+                                                                id="allmyModalfororder{{ $myOrder->id }}">
+                                                                @include('client.taikhoan.showmyorder', [
+                                                                    'donhang' => $myOrder,
+                                                                ])
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+                                            </tbody>
+                                        </table>
+                                        {{ $myOrders->links() }}
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
+
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="payment-method" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3 class="text-center mb-4">Thông tin ví thanh toán điện tử</h3>
-                                <div class="card-container">
-                                    <!-- Logo của ngân hàng -->
-                                    <div class="bank-logo">
-                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                            width="50px" alt="NCB Logo">
+                                <div class="card mx-auto p-4"
+                                    style="max-width: 450px; background-color: #ffffff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+                                    <!-- Header: Logo và tiêu đề -->
+                                    <div class="d-flex align-items-center justify-content-center mb-4">
+                                        <i class="fas fa-wallet text-success"
+                                            style="font-size: 2.5rem; margin-right: 10px;"></i>
+                                        <h4 class="mb-0 text-success">Ví người dùng</h4>
                                     </div>
 
-                                    <!-- Chip thẻ -->
-                                    <div class="chip"></div>
-
-                                    <!-- Số thẻ -->
-                                    <div class="card-number">
-                                        9704198526191432198
-                                    </div>
-
-                                    <!-- Thông tin khác của thẻ -->
-                                    <div class="card-info">
-                                        <div>
-                                            <div> NGUYEN VAN A</div>
-                                        </div>
-                                        <div>
-                                            <div>07/15</div>
+                                    <!-- Thông tin chủ tài khoản -->
+                                    <div class="border p-3 mb-4" style="background-color: #f8f9fa;">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <div class="text-muted">Chủ tài khoản</div>
+                                                <div class="fw-bold">{{ $user->ho_ten }}</div>
+                                            </div>
+                                            <button class="btn btn-outline-success" data-bs-toggle="modal"
+                                                data-bs-target="#historyModal">
+                                                <i class="fas fa-history me-2"></i>Lịch sử
+                                            </button>
                                         </div>
                                     </div>
-                                    <!-- Logo Visa -->
-                                    <div class="visa-logo">
-                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                            alt="Visa Logo">
+
+                                    <!-- Tổng tiền trong ví -->
+                                    <div class="text-center mb-4">
+                                        <div class="text-muted">Tổng tiền trong ví</div>
+                                        <div class="fw-bold text-success" style="font-size: 2rem;">
+                                            <i class="fas fa-money-bill-wave me-2"></i>
+                                            @if ($viNguoiDung)
+                                                {{ number_format($viNguoiDung->tong_tien, 0, ',', '.') }} đ
+                                            @else
+                                                0 đ
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <!-- Thao tác bổ sung -->
+                                    <div class="d-grid">
+                                        <a href="{{ route('taikhoan.rut-tien') }}" class="btn btn-success btn-lg">
+                                            <i class="fas fa-plus-circle me-2"></i>Rút tiền
+                                        </a>
                                     </div>
                                 </div>
-
+                                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                                <!-- Bootstrap Script -->
                                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="admin-dashboad" role="tabpanel">
-                        <div class="myaccount-content">
-                            <h3>Quản trị</h3>
+                        <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="historyModalLabel">Lịch sử Giao Dịch</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ul class="nav nav-tabs" id="transactionTabs" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="hoan-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#hoan" type="button" role="tab"
+                                                    aria-controls="hoan" aria-selected="true">
+                                                    Tiền hoàn
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="thanh-toan-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#thanh-toan" type="button" role="tab"
+                                                    aria-controls="thanh-toan" aria-selected="false">
+                                                    Tiền thanh toán
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="rut-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#rut" type="button" role="tab"
+                                                    aria-controls="rut" aria-selected="false">
+                                                    Tiền rút
+                                                </button>
+                                            </li>
+                                        </ul>
 
-                            <div class="welcome mb-20 d-flex">
-                                <h5><strong>Vào trang quản trị với chức vụ là:<h4 class="badge bg-primary ms-3 h3">
-                                            {{ $user->chuc_vu?->ten_chuc_vu }}</h4></strong></h5>
+                                        <div class="tab-content" id="transactionTabsContent">
+                                            <!-- Tab 1: Tiền hoàn -->
+                                            <div class="tab-pane fade show active" id="hoan" role="tabpanel"
+                                                aria-labelledby="hoan-tab">
+                                                @foreach ($chiTietVi as $item)
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-start">
+                                                            <p class="">Tiền hoàn</p>
+                                                        </div>
+                                                        <p class="">{{ $item->thoi_gian_hoan }}</p>
+                                                        <div class="transaction-amount negative">
+                                                            {{ number_format($item->tien_hoan, 0, ',', '.') }} VNĐ
+                                                        </div>
+                                                    </div>
+                                                    <hr class="custom-hr">
+                                                @endforeach
+                                            </div>
+
+                                            <!-- Tab 2: Tiền thanh toán -->
+                                            <div class="tab-pane fade" id="thanh-toan" role="tabpanel"
+                                                aria-labelledby="thanh-toan-tab">
+                                                @foreach ($lsThanhToanVi as $item)
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-start">
+                                                            <p class="">Tiền thanh toán</p>
+                                                        </div>
+                                                        <p class="">{{ $item->thoi_gian_thanh_toan }}</p>
+                                                        <div class="transaction-amount negative">
+                                                            {{ number_format($item->tien_thanh_toan, 0, ',', '.') }} VNĐ
+                                                        </div>
+                                                    </div>
+                                                    <hr class="custom-hr">
+                                                @endforeach
+                                            </div>
+
+                                            <!-- Tab 3: Tiền rút -->
+                                            <div class="tab-pane fade" id="rut" role="tabpanel"
+                                                aria-labelledby="rut-tab">
+                                                @foreach ($lsRutVi as $item)
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-start">
+                                                            <p class="">Tiền rút</p>
+                                                        </div>
+                                                        <p class="">{{ $item->bank?->name }}</p>
+                                                        <p class="">{{ $item->thoi_gian_rut }}</p>
+                                                        <div class="transaction-amount negative">
+                                                            {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
+                                                        </div>
+                                                    </div>
+                                                    <hr class="custom-hr">
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <style>
+                                        .custom-hr {
+                                            border: none;
+                                            border-top: 1px solid #ccc;
+                                            margin: 10px 0;
+                                        }
+
+                                        .transaction-amount {
+                                            font-weight: bold;
+                                        }
+                                    </style>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn btn-primary">Xem chi tiết</button>
+                                    </div>
+                                </div>
                             </div>
-                            <a href="{{ route('thong_ke_chung') }}" class="btn btn-success">Vào quản trị</a>
-
                         </div>
                     </div>
 
@@ -394,6 +509,16 @@
 
     {{-- ssssss --}}
 
+
+
+
+
+    {{-- enddd sssss --}}
+    <!-- product tab end -->
+@endsection
+
+
+@section('js')
     <script>
         document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -419,20 +544,20 @@
         });
     </script>
     <script>
-        // function toggleEdit() {
-        //     const inputs = document.querySelectorAll('#user-info-form input');
-        //     const toggleEditBtn = document.getElementById('toggleEditBtn');
-        //     const saveBtn = document.getElementById('saveBtn');
+        function toggleEdit() {
+            const inputs = document.querySelectorAll('#user-info-form input');
+            const toggleEditBtn = document.getElementById('toggleEditBtn');
+            const saveBtn = document.getElementById('saveBtn');
 
-        //     // Toggle input disabled state
-        //     inputs.forEach(input => input.disabled = !input.disabled);
+            // Toggle input disabled state
+            inputs.forEach(input => input.disabled = !input.disabled);
 
-        //     // Switch button visibility
-        //     if (saveBtn.style.display === 'none') {
-        //         saveBtn.style.display = 'inline-block';
-        //         toggleEditBtn.style.display = 'none';
-        //     }
-        // }
+            // Switch button visibility
+            if (saveBtn.style.display === 'none') {
+                saveBtn.style.display = 'inline-block';
+                toggleEditBtn.style.display = 'none';
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             const accountInfoTab = document.querySelector('[href="#account-info"]');
@@ -470,15 +595,15 @@
         // Function to toggle edit mode
         function toggleEdit() {
             document.querySelectorAll(
-                '#user-info-form input[type="text"],#user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"],#user-info-form select'
+                '#user-info-form input[type="text"], #user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"]'
             ).forEach(field => {
-                
+
                 field.disabled = !field.disabled;
             });
             document.getElementById('toggleEditBtn').style.display = 'none';
             document.getElementById('saveBtn').style.display = 'inline-block';
         }
-     
+
 
         // Function to show avatar change form
         function toggleAvatarForm(event) {
@@ -494,8 +619,6 @@
             } else {
                 console.error(`Route [${routeName}] is not defined.`);
             }
-        };
+        } <
     </script>
-
-
 @endsection

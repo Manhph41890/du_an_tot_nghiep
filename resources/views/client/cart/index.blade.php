@@ -30,13 +30,7 @@
             border: 1px solid #ddd;
         }
 
-        /* Cột "Phân loại" rộng hơn */
-        .cart-list th:nth-child(4),
-        .cart-list td:nth-child(4) {
-            width: 40%;
-            word-wrap: break-word;
-            text-align: left;
-        }
+
 
         .cart-list th:nth-child(3),
         .cart-list td:nth-child(3) {
@@ -49,6 +43,20 @@
         .cart-list td:nth-child(5) {
             width: 13%;
             word-wrap: break-word;
+            text-align: center;
+        }
+
+        .cart-list th:nth-child(4),
+        .cart-list td:nth-child(4) {
+            width: 17%;
+            word-wrap: break-word;
+            text-align: left;
+        }
+
+        .cart-list th:nth-child(6),
+        .cart-list td:nth-child(6) {
+            width: 10%;
+            word-wrap: break-word;
             text-align: left;
         }
 
@@ -59,7 +67,7 @@
         /* Header của cột "Chọn" */
         .cart-list td:nth-child(1) {
             /* Dữ liệu của cột "Chọn" */
-            width: 4%;
+            width: 5%;
             /* Đặt độ rộng nhỏ */
             text-align: center;
             /* Căn giữa nội dung */
@@ -67,22 +75,11 @@
             /* Giảm padding để nhỏ gọn hơn */
         }
 
-        .cart-list th:nth-child(6),
-        /* Header của cột "Chọn" */
-        .cart-list td:nth-child(6) {
-            /* Dữ liệu của cột "Chọn" */
-            width: 13%;
-            /* Đặt độ rộng nhỏ */
-            text-align: center;
-            /* Căn giữa nội dung */
-            padding: 5px;
-            /* Giảm padding để nhỏ gọn hơn */
-        }
-
+        cart-list th:nth-child(2),
         /* Header của cột "Chọn" */
         .cart-list td:nth-child(2) {
             /* Dữ liệu của cột "Chọn" */
-            width: 40%;
+            width: 35%;
             /* Đặt độ rộng nhỏ */
             text-align: center;
             /* Căn giữa nội dung */
@@ -163,9 +160,7 @@
         }
     </style>
     <div class="container margin_30">
-        <!-- <div class="page_header">
-                                                                                                                                                <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>
-                                                                                                                                            </div> -->
+        <!-- <div class="page_header">                                                                   <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>                                                                </div> -->
         <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
             <div class="container">
                 <div class="row">
@@ -197,7 +192,7 @@
                                 <th>Chọn</th>
                                 <th>Sản phẩm</th>
                                 <th>Đơn giá</th>
-                                <th>Phân loại</th>
+                                <th>Số lượng</th>
                                 <th>Giá biến thể</th>
                                 <th>Tổng tiền</th>
                             </tr>
@@ -211,49 +206,39 @@
                                                 data-id="{{ $item->id }}" />
                                         </td>
                                         <td>
-                                            <div class="thumb_cart">
+                                            <div class="thumb_cart" style="text-align: center;">
                                                 <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}"
                                                     alt="img" height="90px" width="90px"
                                                     style="object-fit: cover" />
-                                                <span class="item_cart">{{ $item->san_pham->ten_san_pham }}</span>
 
+                                                <!-- Tên sản phẩm -->
+                                                <div class="ms-3">
+                                                    <h6> {{ $item->san_pham->ten_san_pham }}
+                                                    </h6>
+                                                    <p class="small mb-0">
+                                                        Phân loại:
+                                                        <strong>{{ $item->size->ten_size }}-{{ $item->color->ten_color }}</strong>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </td>
+
+
                                         <td style="padding-top: 30px">
                                             <strong>{{ number_format($item->san_pham->gia_km, 0, ',', '.') }} đ</strong>
                                         </td>
                                         <td style="padding-top: 30px">
-                                            <span>Size:</span>
-                                            <select name="size_san_pham_id" class="size-select"
-                                                data-item-id="{{ $item->id }}">
-                                                @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                                    <option value="{{ $variant->size->id }}"
-                                                        {{ $variant->size->id == $item->size_san_pham_id ? 'selected' : '' }}>
-                                                        {{ $variant->size->ten_size }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <span>Màu:</span>
-                                            <select name="color_san_pham_id" class="color-select"
-                                                data-item-id="{{ $item->id }}">
-                                                @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                                    <option value="{{ $variant->color->id }}"
-                                                        {{ $variant->color->id == $item->color_san_pham_id ? 'selected' : '' }}>
-                                                        {{ $variant->color->ten_color }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <span>Số lượng:</span>
                                             <input type="number" name="quantity" value="{{ $item->quantity }}"
                                                 min="1" max="100" class="quantity-input"
-                                                data-item-id="{{ $item->id }}">
-                                            <button type="button" class="btn btn-primary btn-sm update-cart-btn"
+                                                data-item-id="{{ $item->id }}" style="width: 60px; height: 30px;">
+                                            <button style="height: 30px; margin-bottom: 4px" type="button"
+                                                class="btn btn-primary btn-sm update-cart-btn"
                                                 data-id="{{ $item->id }}">
                                                 Cập nhật
                                             </button>
-
-
                                         </td>
+
+
                                         <td style="padding-top: 30px">
                                             <span>
                                                 @php
@@ -267,7 +252,7 @@
                                                     );
                                                 @endphp
                                                 @if ($variant)
-                                                    {{ number_format($variant->gia, 0, ',', '.') }} đ
+                                                    <strong>{{ number_format($variant->gia, 0, ',', '.') }} đ</strong>
                                                 @else
                                                     <span>Chưa có giá biến thể</span>
                                                 @endif
@@ -283,7 +268,9 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <td class="text-center">Giỏ hàng trống!</td>
+                                <tr>
+                                    <td colspan="7" class="text-center">Giỏ hàng trống!</td>
+                                </tr>
                             @endif
                         </tbody>
                     </table>
@@ -380,19 +367,14 @@
             updateButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const itemId = this.getAttribute('data-id');
-                    const sizeSelect = document.querySelector(
-                        `select.size-select[data-item-id="${itemId}"]`);
-                    const colorSelect = document.querySelector(
-                        `select.color-select[data-item-id="${itemId}"]`);
                     const quantityInput = document.querySelector(
                         `input.quantity-input[data-item-id="${itemId}"]`);
 
+                    // Kiểm tra số lượng hợp lệ trước khi gửi
                     if (checkMaxQuantity(itemId, quantityInput)) {
                         const data = {
-                            size_san_pham_id: sizeSelect.value,
-                            color_san_pham_id: colorSelect.value,
-                            quantity: quantityInput.value,
-                            _token: '{{ csrf_token() }}'
+                            quantity: quantityInput.value, // Chỉ gửi số lượng
+                            _token: '{{ csrf_token() }}' // CSRF token để bảo mật
                         };
 
                         fetch(`/cart/update/${itemId}`, {
@@ -407,8 +389,8 @@
                             .then(data => {
                                 if (data.success) {
                                     toastr.success('Cập nhật thành công');
-                                    calculateTotal();
-                                    location.reload();
+                                    calculateTotal(); // Tính toán lại tổng giỏ hàng
+                                    location.reload(); // Làm mới trang để cập nhật thông tin
                                 } else {
                                     toastr.error(data.message); // Hiển thị thông báo lỗi nếu có
                                 }
@@ -417,8 +399,6 @@
                                 console.error('Error:', error);
                                 toastr.error('Có lỗi xảy ra, vui lòng thử lại.');
                             });
-
-
                     }
                 });
             });

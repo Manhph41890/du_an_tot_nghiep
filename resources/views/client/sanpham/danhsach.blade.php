@@ -80,8 +80,8 @@
                                         <div class="card product-card">
                                             <div class="card-body">
                                                 <div class="product-thumbnail position-relative">
-                                                    <span
-                                                        class="badge badge-danger top-right">- {{ $item->phantramgia }}%</span>
+                                                    <span class="badge badge-danger top-right">-
+                                                        {{ $item->phantramgia }}%</span>
                                                     <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                         <img class="first-img"
                                                             src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -115,8 +115,7 @@
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <p>Giá: </p>
                                                         <p style="color: red">
-                                                            <del
-                                                                style="color: black">{{ $item->gia_goc }}</del>
+                                                            <del style="color: black">{{ $item->gia_goc }}</del>
                                                             {{ $item?->gia_km }} VNĐ
                                                         </p>
                                                     </div>
@@ -136,8 +135,8 @@
                                             <div class="card-body">
                                                 <div class="media flex-column flex-md-row">
                                                     <div class="product-thumbnail position-relative  w-300">
-                                                        <span
-                                                            class="badge badge-danger top-right">- {{ $item->phantramgia }}%</span>
+                                                        <span class="badge badge-danger top-right">-
+                                                            {{ $item->phantramgia }}%</span>
                                                         <a href="{{ route('sanpham.chitiet', $item->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $item->anh_san_pham) }}"
@@ -203,8 +202,10 @@
                                 @csrf
                                 @method('GET')
                                 <div class="">
-                                    <div class="header-sidebar d-flex justify-content-between">
-                                        <h5 class="title mt-3" style="font-weight:600">LỌC THEO</h5>
+                                    <div class="header-sidebar mt-3">
+                                        <div class="d-flex justify-content-center rounded " style="background-color: #5b5bad;">
+                                            <h5 class="title m-2 text-white" style="font-weight:600">LỌC THEO</h5>
+                                        </div>
                                         {{-- <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button> --}}
                                     </div>
                                     <h6 class="sub-title mt-30 mb-2 ">Danh mục</h6>

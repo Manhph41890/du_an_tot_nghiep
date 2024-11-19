@@ -217,7 +217,10 @@
         .modal-content {
             text-align: center;
         }
-        .border-bottom .section-title .title, .footer-menu li a, .footer-widget .text{
+
+        .border-bottom .section-title .title,
+        .footer-menu li a,
+        .footer-widget .text {
             color: #fff !important;
         }
 
@@ -226,11 +229,17 @@
             display: block;
             animation: fadeInOut 3s forwards;
         }
-        h1, h2, h3, h4, h5, h6 {
-                font-family: "Itim", cursive;
-                margin: 0;
-                line-height: 1.25;
-                color: #5a5ac9;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Itim", cursive;
+            margin: 0;
+            line-height: 1.25;
+            color: #5a5ac9;
         }
 
         /* Hiệu ứng fade in và fade out */
@@ -250,16 +259,90 @@
             100% {
                 opacity: 0;
             }
-            
+
+        }
+
+        /* Lớp phủ toàn màn hình */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color:#c7d2dd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        /* Phần tử bao quanh ảnh và vệt quay */
+        .loading-spinner {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+
+        /* Ảnh không quay */
+        .loading-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+
+        /* Vệt quay quanh ảnh */
+        .spin-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 5px solid transparent;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        /* Hiệu ứng quay tròn */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 
 </head>
 
 <body>
-
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <img src="{{ asset('assets/client/images/logo/load-removebg.png') }}" alt="Loading Image" class="loading-image">
+            <div class="spin-ring"></div>
+        </div>
+    </div>
 
     <script>
+        window.addEventListener('load', () => {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            // Sau 3 giây, ẩn lớp phủ
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                loadingOverlay.style.visibility = 'hidden';
+            }, 1000);
+        });
+
         $(document).ready(function() {
             @if (Session::has('success'))
                 toastr.success("{{ Session::get('success') }}", "Thông báo", {

@@ -94,9 +94,14 @@
 
         <h1>Xác nhận hủy đơn hàng</h1>
         <p>Chào <strong>{{ $order->user->ho_ten }}</strong>,</p>
-        <p>Đơn hàng của bạn với mã <strong>{{ $order->ma_don_hang }}</strong> đã được hủy thành công. Dưới đây là thông
+        <p>Đơn hàng của bạn với mã <strong>{{ $order->ma_don_hang }}</strong> đã được hủy thành công.
+            @if ($order->trang_thai_thanh_toan == 'Đã thanh toán')
+                Tiền thanh toán đơn hàng của bạn sẽ được hoàn trong 24h tới
+            @endif
+            Dưới đây là thông
             tin
-            chi tiết:</p>
+            chi tiết:
+        </p>
 
         <div class="order-info">
             <ul>

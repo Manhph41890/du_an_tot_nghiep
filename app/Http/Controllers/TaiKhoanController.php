@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\chi_tiet_vi;
 use App\Models\don_hang;
 use App\Models\lich_su_thanh_toan;
+use App\Models\ls_rut_vi;
 use App\Models\ls_thanh_toan_vi;
 use App\Models\vi_nguoi_dung;
 use Illuminate\Http\Request;
@@ -32,8 +33,12 @@ class TaiKhoanController extends Controller
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
+        $lsRutVi = ls_rut_vi::with('don_hang', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
 
-        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi'));
+        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsRutVi'));
     }
 
 

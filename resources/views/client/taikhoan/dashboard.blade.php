@@ -375,9 +375,9 @@
 
                                     <!-- Thao tác bổ sung -->
                                     <div class="d-grid">
-                                        <button class="btn btn-success btn-lg">
+                                        <a href="{{ route('taikhoan.rut-tien') }}" class="btn btn-success btn-lg">
                                             <i class="fas fa-plus-circle me-2"></i>Rút tiền
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

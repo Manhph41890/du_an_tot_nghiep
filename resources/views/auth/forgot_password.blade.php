@@ -3,7 +3,7 @@
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (session('status'))
-        <div class="modal" style="200px">
+        <div class="modal" style="width:200px">
             <div class="modal-content">
                 <span class="close-btn">&times;</span>
                 <p>{{ session('status') }}</p>

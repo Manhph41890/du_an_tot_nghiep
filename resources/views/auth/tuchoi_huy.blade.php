@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xác nhận hủy đơn hàng</title>
+    <title>XÁC NHẬN HỦY ĐƠN HÀNG</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -92,7 +92,7 @@
             <img src="https://i.imgur.com/vPk7lbg.png" alt="Uploaded Image">
         </div>
 
-        <h1>Đặt hàng thành công</h1>
+        <h1>ĐẶT HÀNG THÀNH CÔNG</h1>
         <p>Chào <strong>{{ $order->user->ho_ten }}</strong>,</p>
         <p>Đơn hàng của bạn với mã <strong>{{ $order->ma_don_hang }}</strong>. Đặt hàng thành công
             . Dưới đây là thông tin chi tiết:

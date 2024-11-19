@@ -401,107 +401,18 @@
     {{-- enddd sssss --}}
     <!-- product tab end -->
 @endsection
-
-
-@section('js')
-    <script>
-        document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-
-            fetch('{{ route('taikhoan.dashboard.avatar') }}', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Update the image src without reloading
-                        document.querySelector('img[alt="Profile Image"]').src = data.newAvatarUrl;
-                        // Hide the form
-                        document.getElementById('change-avatar-form').style.display = 'none';
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+<script>
+    // Giữ trạng thái tab khi người dùng chuyển trang
+    $(document).ready(function() {
+        // Lưu trạng thái tab vào localStorage
+        $('.nav-link').on('click', function() {
+            localStorage.setItem('activeTab', $(this).attr('id'));
         });
-    </script>
-    <script>
-        function toggleEdit() {
-            const inputs = document.querySelectorAll('#user-info-form input');
-            const toggleEditBtn = document.getElementById('toggleEditBtn');
-            const saveBtn = document.getElementById('saveBtn');
 
-            // Toggle input disabled state
-            inputs.forEach(input => input.disabled = !input.disabled);
-
-            // Switch button visibility
-            if (saveBtn.style.display === 'none') {
-                saveBtn.style.display = 'inline-block';
-                toggleEditBtn.style.display = 'none';
-            }
+        // Khôi phục trạng thái tab khi người dùng quay lại
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('#' + activeTab).tab('show');
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const accountInfoTab = document.querySelector('[href="#account-info"]');
-            const ordersTab = document.querySelector('[href="#orders"]');
-            const paymentMethodTab = document.querySelector('[href="#payment-method"]');
-
-            accountInfoTab.addEventListener('click', function() {
-                document.getElementById('account-info').style.display = 'block';
-                document.getElementById('orders').style.display = 'none';
-                document.getElementById('payment-method').style.display = 'none';
-            });
-
-            ordersTab.addEventListener('click', function() {
-                document.getElementById('account-info').style.display = 'none';
-                document.getElementById('orders').style.display = 'block';
-                document.getElementById('payment-method').style.display = 'none';
-            });
-
-            paymentMethodTab.addEventListener('click', function() {
-                document.getElementById('account-info').style.display = 'none';
-                document.getElementById('orders').style.display = 'none';
-                document.getElementById('payment-method').style.display = 'block';
-            });
-        });
-    </script>
-    {{-- xử lý ảnh + thông tin --}}
-    <script>
-        // Define routes in a JavaScript object
-        const routes = {
-            taikhoanDashboard: "{{ route('taikhoan.dashboard') }}",
-            updateThongtin: "{{ route('update_thongtin') }}",
-            avatarUpdate: "{{ route('taikhoan.dashboard.avatar') }}"
-        };
-
-        // Function to toggle edit mode
-        function toggleEdit() {
-            document.querySelectorAll(
-                '#user-info-form input[type="text"], #user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"]'
-            ).forEach(field => {
-                field.disabled = !field.disabled;
-            });
-            document.getElementById('toggleEditBtn').style.display = 'none';
-            document.getElementById('saveBtn').style.display = 'inline-block';
-        }
-
-        // Function to show avatar change form
-        function toggleAvatarForm(event) {
-            event.preventDefault();
-            document.getElementById('change-avatar-form').style.display = 'block';
-            document.getElementById('avatarSaveBtn').style.display = 'inline-block';
-        }
-
-        // Function to set the form action dynamically
-        function setFormAction(routeName) {
-            if (routes[routeName]) {
-                document.getElementById('user-info-form').action = routes[routeName];
-            } else {
-                console.error(`Route [${routeName}] is not defined.`);
-            }
-        } <
-    </script>
-@endsection
+    });
+</script>

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\chi_tiet_vi;
 use App\Models\don_hang;
 use App\Models\lich_su_thanh_toan;
+use App\Models\ls_rut_vi;
+use App\Models\ls_thanh_toan_vi;
+use App\Models\vi_nguoi_dung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -19,9 +23,24 @@ class TaiKhoanController extends Controller
         $showForm = $request->query('showForm') === 'true';
 
         $myOrders = don_hang::where('user_id', $user->id)->latest()->paginate(4);
+        $viNguoiDung = vi_nguoi_dung::where('user_id', $user->id)->first();
+        // Lấy lịch sử giao dịch (chi tiết ví)
+        $chiTietVi = chi_tiet_vi::with('don_hang', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+        $lsThanhToanVi = ls_thanh_toan_vi::with('don_hang', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+        $lsRutVi = ls_rut_vi::with('vi_nguoi_dung', 'bank')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
 
-        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders'));
+        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsRutVi'));
     }
+
 
     public function showMyOrder(don_hang $don_hang, $id)
     {
@@ -34,15 +53,15 @@ class TaiKhoanController extends Controller
             'chi_tiet_don_hangs.color_san_pham',
             'chi_tiet_don_hangs.size_san_pham',
             'lich_su_thanh_toans',
-            'huy_dat_hang',
-        ])->whereDoesntHave('huy_dat_hang', function ($query) {
-            $query->where('trang_thai', 'Từ chối hủy');
-        })->findOrFail($id);
+            'huy_don_hang',
+        ])->findOrFail($id);
         $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
 
         // Trả về view cùng với dữ liệu đơn hàng
         return view('client.taikhoan.showmyorder', compact('donhang'));
     }
+
+
 
     public function cancel($id)
     {

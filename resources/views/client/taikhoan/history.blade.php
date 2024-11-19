@@ -62,7 +62,9 @@
 
         <div class="item">
             <span for="total">Số tiền thanh toán:</span>
-            <span class="value">{{ $history->vnp_tong_tien }}</span>
+            <span class="value">
+                {{ number_format($history->vnp_tong_tien, 0, ',', '.') }} VND</p>
+            </span>
         </div>
 
         <div class="item">

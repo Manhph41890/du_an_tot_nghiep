@@ -422,7 +422,7 @@
 
                                         <div class="tab-content" id="transactionTabsContent">
                                             <!-- Tab 1: Tiền hoàn -->
-                                            <div class="tab-pane fade show active" id="hoan" role="tabpanel"
+                                            {{-- <div class="tab-pane fade show active" id="hoan" role="tabpanel"
                                                 aria-labelledby="hoan-tab">
                                                 @foreach ($chiTietVi as $item)
                                                     <div class="d-flex justify-content-between">
@@ -436,10 +436,10 @@
                                                     </div>
                                                     <hr class="custom-hr">
                                                 @endforeach
-                                            </div>
+                                            </div> --}}
 
                                             <!-- Tab 2: Tiền thanh toán -->
-                                            <div class="tab-pane fade" id="thanh-toan" role="tabpanel"
+                                            {{-- <div class="tab-pane fade" id="thanh-toan" role="tabpanel"
                                                 aria-labelledby="thanh-toan-tab">
                                                 @foreach ($lsThanhToanVi as $item)
                                                     <div class="d-flex justify-content-between">
@@ -453,10 +453,10 @@
                                                     </div>
                                                     <hr class="custom-hr">
                                                 @endforeach
-                                            </div>
+                                            </div> --}}
 
                                             <!-- Tab 3: Tiền rút -->
-                                            <div class="tab-pane fade" id="rut" role="tabpanel"
+                                            {{-- <div class="tab-pane fade" id="rut" role="tabpanel"
                                                 aria-labelledby="rut-tab">
                                                 @foreach ($lsRutVi as $item)
                                                     <div class="d-flex justify-content-between">
@@ -471,7 +471,7 @@
                                                     </div>
                                                     <hr class="custom-hr">
                                                 @endforeach
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
 

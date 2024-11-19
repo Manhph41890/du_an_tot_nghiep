@@ -14,14 +14,18 @@
     }
 
     .notification-dot {
-        width: 10px;
-        height: 10px;
+        width: 15px;
+        height: 15px;
         background-color: red;
         border-radius: 50%;
-        border: 2px solid white;
         position: absolute;
-        top: -25px;
-        left: -15px;
+        top: -20px;
+        left: -10px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
         animation: pulse 1s infinite;
     }
 
@@ -85,23 +89,24 @@
                                     <form class="search-box" style="margin: 0;" action="{{ url('/') }}"
                                         method="get">
                                         @csrf
-                                        <div class="d-flex align-items-center flex-row-reverse position-relative"
-                                            id="searchContainer">
+                                        <div class="d-flex align-items-center flex-row-reverse position-relative" id="searchContainer">
                                             <div class="my-2 mx-2">
                                                 <!-- Icon tìm kiếm -->
-                                                <a class="search-toggle" id="searchIcon" role="button"
-                                                    style="font-size: 20px; cursor: pointer;">
+                                                <a class="search-toggle" id="searchIcon" role="button" style="font-size: 20px; cursor: pointer;">
                                                     <i class="icon-magnifier"></i>
                                                 </a>
                                             </div>
                                             <!-- Input tìm kiếm (ẩn mặc định) -->
-                                            <div id="searchInput" class="search-input d-none">
+                                            <div id="searchInput" class="search-input d-none position-relative">
                                                 <div class="input-group">
-                                                    <input type="text" name="search" class="form-control"
-                                                        placeholder="Tìm kiếm..." aria-label="Search">
+                                                    <input type="text" name="search" id="inputsearch" class="form-control" placeholder="Tìm kiếm..." aria-label="Search">
+                                                    <div id="product-search" class="product-grouped product-count style" style="position: absolute; width: 100%; top: 100%; background: white; z-index: 100; display: none;">
+                                                        <!-- Kết quả tìm kiếm hiển thị tại đây -->
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </form>
                                 </li>
                                 <li class="mr-xl-0 cart-block position-relative">
@@ -145,12 +150,17 @@
                                             @endphp
                                             <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
                                                 alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
-                                            @if (isset($notifications) && $notifications['totalNotifications'] > 0)
+                                            @php
+                                                $tongDonHang = DB::table('don_hangs')
+                                                    ->where('trang_thai_don_hang', 'Chờ xác nhận')
+                                                    ->where('user_id', Auth::id()) // Lọc theo ID người dùng hiện tại
+                                                    ->count();
+                                            @endphp
+                                            @if ($tongDonHang > 0)
                                                 <span class="ms-2 position-relative">
-                                                    <span class="notification-dot"></span>
+                                                    <span class="notification-dot">{{ $tongDonHang }}</span>
                                                 </span>
                                             @endif
-                                            <span class="menu-arrow ms-auto"></span>
                                         </a>
                                         <div
                                             class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
@@ -204,78 +214,31 @@
 </script>
 
 <style>
-    /* Hiệu ứng trượt */
     @keyframes slideIn {
-        from {
-            transform: translateY(-10px);
-            opacity: 0;
-        }
-
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
-
-    @keyframes slideOut {
-        from {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        to {
-            transform: translateY(-10px);
-            opacity: 0;
-        }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    /* Style cho ô nhập liệu */
-    .search-input {
-        position: absolute;
-        top: 100%;
-        /* Hiển thị ngay dưới biểu tượng */
-        right: 0;
-        width: 250px;
-        z-index: 1000;
-        background: white;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 4px;
-        animation-duration: 0.3s;
-        animation-timing-function: ease-in-out;
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
     }
-
-    /* Hiệu ứng trượt vào */
-    @keyframes slideIn {
-        0% {
-            width: 0;
-            opacity: 0;
-        }
-
-        100% {
-            width: 200px;
-            /* Độ rộng khi hiển thị */
-            opacity: 1;
-            /* Hiển thị nội dung */
-        }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
     }
+}
 
-    /* Hiệu ứng trượt ra */
-    @keyframes slideOut {
-        0% {
-            width: 200px;
-            /* Độ rộng ban đầu */
-            opacity: 1;
-            /* Hiện tại */
-        }
-
-        100% {
-            width: 0;
-            /* Không hiển thị khi trượt ra */
-            opacity: 0;
-            /* Ẩn nội dung */
-        }
-    }
-
+#searchInput{
+    width: 200px;
+}
 
     .user-profile-popup {
         display: none;
@@ -340,32 +303,6 @@
     }
 
 
-    /* search  */
-    #product-search {
-        position: absolute;
-        /* Đặt vị trí tuyệt đối để nó không bị che khuất */
-        top: 100%;
-        /* Đảm bảo nó sẽ xuất hiện ngay dưới ô input */
-        left: 0;
-        right: 0;
-        /* Để dropdown bao phủ chiều ngang của ô input */
-        max-height: 300px;
-        /* Giới hạn chiều cao */
-        background-color: #fff;
-        /* Màu nền trắng */
-        border: 1px solid #ddd;
-        /* Viền mờ để dễ nhìn */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        /* Để dropdown có bóng đổ */
-        width: 100%;
-        /* Đảm bảo chiều rộng của dropdown bằng với ô input */
-        z-index: 9999;
-        /* Đảm bảo dropdown hiển thị lên trên tất cả các phần tử khác */
-        display: none;
-        /* Ẩn mặc định */
-        border-radius: 5px;
-        /* Bo góc */
-    }
 
     #product-search .dropdown-item {
         padding: 8px 12px;
@@ -426,122 +363,85 @@
 <!-- JavaScript cho modal -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // Đảm bảo mã JavaScript chạy sau khi DOM được tải
     document.addEventListener("DOMContentLoaded", function() {
         const searchIcon = document.getElementById("searchIcon");
-        const searchInput = document.getElementById("searchInput");
+        const searchInputContainer = document.getElementById("searchInput");
+        const inputSearch = document.getElementById("inputsearch");
+        const productSearch = document.getElementById("product-search");
 
         // Thêm sự kiện click vào biểu tượng tìm kiếm
         searchIcon.addEventListener("click", function() {
-            if (searchInput.classList.contains("d-none")) {
-                // Hiển thị ô nhập liệu với hiệu ứng trượt xuống
-                searchInput.classList.remove("d-none");
-                searchInput.style.animationName = "slideIn";
+            if (searchInputContainer.classList.contains("d-none")) {
+                searchInputContainer.classList.remove("d-none");
+                searchInputContainer.style.animation = "slideIn 0.3s forwards";
             } else {
-                // Ẩn ô nhập liệu với hiệu ứng trượt lên
-                searchInput.style.animationName = "slideOut";
+                searchInputContainer.style.animation = "slideOut 0.3s forwards";
                 setTimeout(() => {
-                    searchInput.classList.add("d-none");
+                    searchInputContainer.classList.add("d-none");
+                    productSearch.style.display = "none"; // Ẩn dropdown khi đóng ô input
+                    productSearch.innerHTML = ""; // Xóa nội dung kết quả tìm kiếm
                 }, 300); // Chờ hiệu ứng hoàn tất trước khi ẩn
             }
         });
-    });
 
+        // Lắng nghe sự kiện 'keyup' trên input tìm kiếm
+        $(document).on("keyup", "#inputsearch", function() {
+            const query = $(this).val();
 
+            if (query.length > 0) { // Nếu có bất kỳ ký tự nào
+                $.ajax({
+                    url: "{{ route('global.search') }}",
+                    type: "GET",
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        $("#product-search").empty();
+                        $("#product-search").show(); // Hiển thị dropdown
 
-    // Lấy phần tử icon và container
-    const searchIcon = document.getElementById("searchIcon");
-    const searchContainer = document.getElementById("searchContainer");
-    let isSearchInputVisible = false; // Trạng thái hiển thị của ô nhập liệu
-
-    // Thêm sự kiện click vào icon để hiển thị/ẩn ô nhập liệu
-    searchIcon.addEventListener("click", function() {
-        // Kiểm tra xem phần tử tìm kiếm đã tồn tại chưa
-        const existingSearchInput = document.getElementById("searchInput");
-
-        if (!existingSearchInput) {
-            // Nếu ô nhập liệu chưa hiển thị, tạo và thêm nó vào DOM
-            const searchInputLi = document.createElement("div");
-            searchInputLi.id = "searchInput"; // Thêm ID cho ô nhập liệu
-            searchInputLi.classList.add("my-2", "mx-2", "search-input");
-
-            // Tạo nội dung của ô nhập liệu
-            searchInputLi.innerHTML = `
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Search" id="inputsearch">
-            <div class="product-grouped product-count style " id="product-search" style="position: absolute; width: 100%;top:100%; background: white; z-index: 100; display: none;">
-            </div>
-        </div>
-        `;
-
-            // Thêm ô nhập liệu ngay sau icon
-            searchContainer.appendChild(searchInputLi);
-            // Thêm hiệu ứng slide-in
-            searchInputLi.style.animationName = "slideIn";
-            isSearchInputVisible = true;
-        } else {
-            // Nếu ô nhập liệu đã hiển thị, thêm hiệu ứng slide-out
-            existingSearchInput.style.animationName = "slideOut"; // Bỏ hiệu ứng trước khi xóa
-            setTimeout(() => {
-                existingSearchInput.remove();
-            }, 500); // Đợi hết hiệu ứng trước khi xóa phần tử
-            isSearchInputVisible = false;
-        }
-    });
-
-    // Lắng nghe sự kiện 'keyup' trên input search
-    $(document).on('keyup', '#inputsearch', function() {
-        var query = $(this).val();
-
-        // Kiểm tra nếu có ít nhất 2 ký tự thì bắt đầu gọi AJAX tìm kiếm
-        if (query.length > 1) {
-            $.ajax({
-                url: "{{ route('global.search') }}", // Đảm bảo route này đúng
-                type: "GET",
-                data: {
-                    query: query
-                },
-                success: function(data) {
-                    $('#product-search').empty();
-                    if (data.products.length) {
-                        $('#product-search').show(); // Hiển thị dropdown
-
-                        data.products.forEach(function(product) {
-                            $('#product-search').append(
-                                '<div class="dropdown-item">' +
-                                '<a href="{{ url('client/sanphamchitiet') }}/' +
-                                product.id + '" class="d-flex align-items-center">' +
-                                '<img src="' + product.image_url + '" alt="' + product
-                                .ten_san_pham +
-                                '" style="width: 40px; height: auto;" class="me-3">' +
-                                '<div class="flex-column d-flex">' +
-                                '<span class="text-truncate" style="max-width: 120px;">' +
-                                product.ten_san_pham + '</span>' +
-                                '<span class="ms-auto">' + product.gia_km +
-                                ' VNĐ</span>' +
-                                '</div>' +
-                                '</a>' +
-                                '</div>'
+                        if (data.products.length > 0) {
+                            data.products.forEach(function(product) {
+                                $("#product-search").append(`
+                                <div class="dropdown-item">
+                                    <a href="{{ url('client/sanphamchitiet') }}/${product.id}" class="d-flex align-items-center">
+                                        <img src="${product.image_url}" alt="${product.ten_san_pham}" style="width: 40px; height: auto;" class="me-3">
+                                        <div class="flex-column d-flex align-items-start">
+                                            <span class="text-truncate" style="max-width: 120px;">${product.ten_san_pham}</span>
+                                            <span class="ms-auto">${product.gia_km} VNĐ</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            `);
+                            });
+                        } else {
+                            // Hiển thị thông báo "Không tìm thấy sản phẩm"
+                            $("#product-search").append(
+                                '<div class="suggestion-item p-2 text-center text-muted">Không tìm thấy sản phẩm</div>'
                             );
-                        });
-                    } else {
-                        $('#product-search').append(
-                            '<div class="suggestion-item">Không tìm thấy kết quả</div>'
+                        }
+                    },
+                    error: function() {
+                        $("#product-search").empty();
+                        $("#product-search")
+                    .show(); // Hiển thị thông báo lỗi nếu AJAX thất bại
+                        $("#product-search").append(
+                            '<div class="suggestion-item p-2 text-center text-danger">Có lỗi xảy ra, vui lòng thử lại sau</div>'
                         );
                     }
-                }
-            });
-        } else {
-            $('#product-search').empty(); // Xóa gợi ý khi không có từ khóa tìm kiếm
-            $('#product-search').hide(); // Ẩn dropdown
-        }
-    });
+                });
+            } else {
+                $("#product-search").empty();
+                $("#product-search").hide();
+            }
+        });
 
-    // Ẩn gợi ý khi nhấp bên ngoài
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest('#inputsearch').length) {
-            $('#product-search').empty(); // Xóa kết quả tìm kiếm
-            $('#product-search').hide(); // Ẩn dropdown
-        }
+        // Ẩn gợi ý khi nhấp bên ngoài
+        $(document).on("click", function(e) {
+            if (!$(e.target).closest("#inputsearch").length && !$(e.target).closest("#product-search")
+                .length) {
+                $("#product-search").empty();
+                $("#product-search").hide();
+            }
+        });
     });
 </script>

@@ -343,7 +343,6 @@
                                 <p>
                                     {!! $sanPhamCT->ma_ta_san_pham !!}
                                 </p>
-
                             </div>
                         </div>
                         <!-- second tab-pane -->
@@ -361,6 +360,9 @@
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
+                                <h2>Đánh giá sản phẩm:</h2>
+
+                                <br>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="filter-rating text-center mb-4">
@@ -415,6 +417,7 @@
                                                             </div>
                                                             <div class="review-bottom mt-2">
                                                                 <p class="text-muted">{{ $danhgia->binh_luan }}</p>
+                                                                <small>{{ $danhgia->ngay_danh_gia}}</small>
                                                             </div>
                                                         </div>
                                                     </div>

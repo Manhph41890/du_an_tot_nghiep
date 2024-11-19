@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use App\Events\SendMail;
+use App\Listeners\CreateWalletOnLogin;
 use App\Listeners\SendVerificationEmail;
-
+use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
@@ -18,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         SendMail::class => [
             SendVerificationEmail::class,
+        ],
+        Login::class => [
+            CreateWalletOnLogin::class,
         ],
     ];
 

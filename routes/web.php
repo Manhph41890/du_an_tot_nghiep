@@ -27,6 +27,7 @@ use App\Http\Controllers\ClientSanPhamController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
+use App\Http\Controllers\RutTienController;
 
 
 // Route trang chủ
@@ -53,6 +54,7 @@ Route::prefix('client')->group(function () {
     Route::post('/taikhoan/update-avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard.avatar');
 
     Route::get('/taikhoan/myorder/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.myorder');
+    Route::get('/taikhoan/vinguoidung', [TaiKhoanController::class, 'viNguoiDung'])->name('taikhoan.vinguoidung');
 
     //Hủy đặt hàng
     Route::post('/taikhoan/cancel/{id}', [TaiKhoanController::class, 'cancel'])->name('taikhoan.cancel');
@@ -65,6 +67,9 @@ Route::prefix('client')->group(function () {
 
     Route::get('/taikhoan/lichsugd/{id}', [TaiKhoanController::class, 'history'])->name('taikhoan.lichsugd');
     // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
+
+    Route::post('/withdraw', [RutTienController::class, 'withdraw'])->name('withdraw');
+    Route::get('/rut-tien', [RutTienController::class, 'rut'])->name('taikhoan.rut-tien');
 
     //danh mục
     Route::get('/danh-muc/{danhMucId}', [HomeController::class, 'showByCategory'])->name('client.showByCategory');
@@ -172,6 +177,7 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
     Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
     Route::get('/order/success_nhanhang', [OrderController::class, 'success_nhanhang'])->name('order.success_nhanhang');
+    Route::get('/order/success_vi', [OrderController::class, 'success_vi'])->name('order.success_vi');
     Route::get('/cart/variant-price/{id}', [CartController::class, 'getVariantPrice']);
 
     Route::post('/apply-coupon', [OrderController::class, 'applyCoupon'])->name('apply.coupon');

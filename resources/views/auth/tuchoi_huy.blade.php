@@ -92,9 +92,10 @@
             <img src="https://i.imgur.com/vPk7lbg.png" alt="Uploaded Image">
         </div>
 
-        <h1>ĐẶT HÀNG THÀNH CÔNG</h1>
+        <h1>Đã bị từ chối hủy đơn hàng</h1>
         <p>Chào <strong>{{ $order->user->ho_ten }}</strong>,</p>
-        <p>Đơn hàng của bạn với mã <strong>{{ $order->ma_don_hang }}</strong>. Đặt hàng thành công
+        <p>Đơn hàng của bạn với mã <strong>{{ $order->ma_don_hang }}</strong>. Đã bị từ chối hủy Hãy tiếp tục theo dõi
+            đơn hàng và nhận hàng
             . Dưới đây là thông tin chi tiết:
         </p>
 

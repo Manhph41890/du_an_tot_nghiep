@@ -28,6 +28,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 
+
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
 // tìm kiếm toàn trang 
@@ -99,7 +100,7 @@ Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']
 
 
 // Route cho các chức năng quản lý (admin)
-Route::middleware(['auth', 'role:admin', 'role:nhan-vien'])->group(function () {
+Route::middleware(['auth', 'role:admin', 'role:nhan_vien'])->group(function () {
     // Thống kê
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');

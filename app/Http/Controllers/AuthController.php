@@ -23,7 +23,7 @@ class AuthController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        
+
         return view('auth.profile', compact('user')); // Đường dẫn tới view của bạn
     }
 
@@ -46,7 +46,7 @@ class AuthController extends Controller
             [
                 'ho_ten' => 'required|string|max:255',
                 'email' => 'required|email|max:255|unique:users',
-                'so_dien_thoai' => 'required|string|max:10',
+                'so_dien_thoai' => ['required', 'regex:/^(\+84|0)[1-9][0-9]{8}$/'],
                 'password' => 'required|string|min:8|confirmed',
             ],
             [
@@ -56,12 +56,13 @@ class AuthController extends Controller
                 'email.email' => 'Email không đúng định dạng',
                 'email.unique' => 'Email đã tồn tại',
                 'so_dien_thoai.required' => 'Số điện thoại không được để trống',
-                'so_dien_thoai.max' => 'Số điện thoại không được quá 10 ký tự',
+                'so_dien_thoai.regex' => 'Số điện thoại không đúng định dạng',
                 'password.required' => 'Mật khẩu không được bỏ trống',
                 'password.min' => 'Tối thiểu là 8 ký tự',
                 'password.confirmed' => 'Mật khẩu xác nhận không khớp',
             ]
         );
+
 
         Log::info('Dữ liệu đã xác thực: ', $validatedData);
 

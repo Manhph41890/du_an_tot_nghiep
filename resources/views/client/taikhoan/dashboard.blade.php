@@ -3,13 +3,26 @@
 @section('content')
     <style>
         .notification-dot {
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            /* Điều chỉnh lại kích thước chấm đỏ */
+            height: 20px;
+            /* Điều chỉnh lại kích thước chấm đỏ */
             background-color: red;
             border-radius: 50%;
             position: absolute;
             top: -50px;
+            /* Điều chỉnh vị trí chấm đỏ */
             left: 260px;
+            /* Điều chỉnh vị trí chấm đỏ */
+            color: white;
+            /* Màu chữ trắng */
+            display: flex;
+            align-items: center;
+            /* Căn giữa chữ theo chiều dọc */
+            justify-content: center;
+            /* Căn giữa chữ theo chiều ngang */
+            font-size: 12px;
+            /* Kích thước chữ */
             animation: pulse 1s infinite;
         }
 
@@ -26,6 +39,7 @@
                 /* Thu nhỏ */
             }
         }
+
 
         .notification-dot2 {
             width: 10px;
@@ -37,20 +51,6 @@
             top: -22px;
             left: -10px;
             animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                /* Kích thước ban đầu */
-            }
-
-            50% {
-                transform: scale(0.8);
-                /* Thu nhỏ */
-            }
         }
     </style>
     <!-- breadcrumb-section start -->
@@ -91,9 +91,15 @@
                                 trị</a>
                         @endif
                         <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng của bạn</a>
-                        @if (isset($notifications) && $notifications['totalNotifications'] > 0)
+                        @php
+                            $tongDonHang = DB::table('don_hangs')
+                                ->where('trang_thai_don_hang', 'Chờ xác nhận')
+                                ->where('user_id', Auth::id()) // Lọc theo ID người dùng hiện tại
+                                ->count();
+                        @endphp
+                        @if ($tongDonHang > 0)
                             <span class="ms-2 position-relative">
-                                <span class="notification-dot"></span>
+                                <span class="notification-dot">{{ $tongDonHang }}</span>
                             </span>
                         @endif
                         <span class="menu-arrow ms-auto"></span>
@@ -492,7 +498,4 @@
     </script>
 
 
-
-    {{--  --}}
-    <!-- product tab  -->
 @endsection

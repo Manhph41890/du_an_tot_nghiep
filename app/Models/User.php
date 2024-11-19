@@ -52,7 +52,7 @@ class User extends Authenticatable
     }
     public function vi_nguoi_dungs()
     {
-        return $this->hasMany(vi_nguoi_dung::class);
+        return $this->hasOne(vi_nguoi_dung::class, 'user_id', 'id');
     }
 
     /**

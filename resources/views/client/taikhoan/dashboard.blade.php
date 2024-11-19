@@ -395,31 +395,96 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="">
-                                            <!-- Item 1 -->
-                                            <style>
-                                                .custom-hr {
-                                                    border: none;
-                                                    border-top: 1px solid #ccc;
-                                                    margin: 10px 0;
-                                                }
-                                            </style>
+                                        <ul class="nav nav-tabs" id="transactionTabs" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="hoan-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#hoan" type="button" role="tab"
+                                                    aria-controls="hoan" aria-selected="true">
+                                                    Tiền hoàn
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="thanh-toan-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#thanh-toan" type="button" role="tab"
+                                                    aria-controls="thanh-toan" aria-selected="false">
+                                                    Tiền thanh toán
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="rut-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#rut" type="button" role="tab"
+                                                    aria-controls="rut" aria-selected="false">
+                                                    Tiền rút
+                                                </button>
+                                            </li>
+                                        </ul>
 
-                                            @foreach ($chiTietVi as $item)
-                                                <div class="d-flex justify-content-around">
-                                                    <div class="d-flex justify-content-start">
-                                                        <p class="">Tiền hoàn</p>
+                                        <div class="tab-content" id="transactionTabsContent">
+                                            <!-- Tab 1: Tiền hoàn -->
+                                            <div class="tab-pane fade show active" id="hoan" role="tabpanel"
+                                                aria-labelledby="hoan-tab">
+                                                @foreach ($chiTietVi as $item)
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-start">
+                                                            <p class="">Tiền hoàn</p>
+                                                        </div>
+                                                        <p class="">{{ $item->thoi_gian_hoan }}</p>
+                                                        <div class="transaction-amount negative">
+                                                            {{ number_format($item->tien_hoan, 0, ',', '.') }} VNĐ
+                                                        </div>
                                                     </div>
-                                                    <p class="">{{ $item->thoi_gian_hoan }}</p>
-                                                    <div class="transaction-amount negative">
-                                                        {{ number_format($item->tien_hoan, 0, ',', '.') }} VNĐ
-                                                    </div>
-                                                </div>
-                                                <hr class="custom-hr">
-                                            @endforeach
+                                                    <hr class="custom-hr">
+                                                @endforeach
+                                            </div>
 
+                                            <!-- Tab 2: Tiền thanh toán -->
+                                            <div class="tab-pane fade" id="thanh-toan" role="tabpanel"
+                                                aria-labelledby="thanh-toan-tab">
+                                                @foreach ($lsThanhToanVi as $item)
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-start">
+                                                            <p class="">Tiền thanh toán</p>
+                                                        </div>
+                                                        <p class="">{{ $item->thoi_gian_thanh_toan }}</p>
+                                                        <div class="transaction-amount negative">
+                                                            {{ number_format($item->tien_thanh_toan, 0, ',', '.') }} VNĐ
+                                                        </div>
+                                                    </div>
+                                                    <hr class="custom-hr">
+                                                @endforeach
+                                            </div>
+
+                                            <!-- Tab 3: Tiền rút -->
+                                            <div class="tab-pane fade" id="rut" role="tabpanel"
+                                                aria-labelledby="rut-tab">
+                                                @foreach ($lsThanhToanVi as $item)
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-start">
+                                                            <p class="">Tiền rút</p>
+                                                        </div>
+                                                        <p class="">{{ $item->thoi_gian_rut }}</p>
+                                                        <div class="transaction-amount negative">
+                                                            {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
+                                                        </div>
+                                                    </div>
+                                                    <hr class="custom-hr">
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <style>
+                                        .custom-hr {
+                                            border: none;
+                                            border-top: 1px solid #ccc;
+                                            margin: 10px 0;
+                                        }
+
+                                        .transaction-amount {
+                                            font-weight: bold;
+                                        }
+                                    </style>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>

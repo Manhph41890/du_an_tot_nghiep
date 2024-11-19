@@ -306,7 +306,7 @@
 
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán online')
+                                @if ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán bằng Vnpay')
                                     @if ($donhang->lich_su_thanh_toans->isNotEmpty())
                                         <div class="card">
                                             <div class="card-body">

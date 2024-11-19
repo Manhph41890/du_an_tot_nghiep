@@ -27,6 +27,7 @@ use App\Http\Controllers\ClientSanPhamController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
+use App\Http\Controllers\RutTienController;
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
@@ -65,6 +66,9 @@ Route::prefix('client')->group(function () {
 
     Route::get('/taikhoan/lichsugd/{id}', [TaiKhoanController::class, 'history'])->name('taikhoan.lichsugd');
     // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
+
+    Route::post('/withdraw', [RutTienController::class, 'withdraw'])->name('withdraw');
+    Route::get('/rut-tien', [RutTienController::class, 'rut'])->name('taikhoan.rut-tien');
 
     //danh mục
     Route::get('/danh-muc/{danhMucId}', [HomeController::class, 'showByCategory'])->name('client.showByCategory');

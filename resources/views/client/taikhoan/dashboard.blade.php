@@ -59,7 +59,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">Thông tin tài khoản</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">Thông tin tài khoản
+                        </h2>
                     </div>
                 </div>
                 <div class="col-12">
@@ -78,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                    <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                </div> -->
+                                        <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                    </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -178,8 +179,8 @@
                                             </div>
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="ngay_sinh" class="mb-2">Ngày sinh</label>
-                                                <input id="ngay_sinh" name="ngay_sinh" type="date" class="form-control"
-                                                    value="{{ $user->ngay_sinh }}" disabled />
+                                                <input id="ngay_sinh" name="ngay_sinh" type="date"
+                                                    class="form-control" value="{{ $user->ngay_sinh }}" disabled />
                                             </div>
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="gioi_tinh" class="mb-2">Giới tính</label>
@@ -386,7 +387,7 @@
                                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                             </div>
                         </div>
-                        <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel"
+                        <div class="modal fade " id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" style="--bs-modal-width: 800px;"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -422,7 +423,7 @@
 
                                         <div class="tab-content" id="transactionTabsContent">
                                             <!-- Tab 1: Tiền hoàn -->
-                                            {{-- <div class="tab-pane fade show active" id="hoan" role="tabpanel"
+                                            <div class="tab-pane fade show active" id="hoan" role="tabpanel"
                                                 aria-labelledby="hoan-tab">
                                                 @foreach ($chiTietVi as $item)
                                                     <div class="d-flex justify-content-between">
@@ -436,10 +437,10 @@
                                                     </div>
                                                     <hr class="custom-hr">
                                                 @endforeach
-                                            </div> --}}
+                                            </div>
 
                                             <!-- Tab 2: Tiền thanh toán -->
-                                            {{-- <div class="tab-pane fade" id="thanh-toan" role="tabpanel"
+                                            <div class="tab-pane fade" id="thanh-toan" role="tabpanel"
                                                 aria-labelledby="thanh-toan-tab">
                                                 @foreach ($lsThanhToanVi as $item)
                                                     <div class="d-flex justify-content-between">
@@ -453,25 +454,31 @@
                                                     </div>
                                                     <hr class="custom-hr">
                                                 @endforeach
-                                            </div> --}}
+                                            </div>
 
                                             <!-- Tab 3: Tiền rút -->
-                                            {{-- <div class="tab-pane fade" id="rut" role="tabpanel"
+                                            <div class="tab-pane fade" id="rut" role="tabpanel"
                                                 aria-labelledby="rut-tab">
-                                                @foreach ($lsRutVi as $item)
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="d-flex justify-content-start">
-                                                            <p class="">Tiền rút</p>
-                                                        </div>
-                                                        <p class="">{{ $item->bank?->name }}</p>
-                                                        <p class="">{{ $item->thoi_gian_rut }}</p>
-                                                        <div class="transaction-amount negative">
-                                                            {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
-                                                        </div>
-                                                    </div>
-                                                    <hr class="custom-hr">
-                                                @endforeach
-                                            </div> --}}
+                                                <table class="table table-bordered">
+                                                    <tbody>
+                                                        @foreach ($lsRutVi as $item)
+                                                            <tr>
+                                                                <td>{{ $item->bank?->name }}</td>
+                                                                <td>{{ $item->bank?->account_number }}</td>
+                                                                <td>{{ $item->bank?->account_holder }}</td>
+                                                                <td>{{ date('d-m-Y H:i:s', strtotime($item->thoi_gian_rut)) }}
+                                                                </td>
+                                                                <td class="transaction-amount negative">
+                                                                    {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
+                                                                </td>
+                                                                <td><span class="badge bg-success position-static">{{ $item->trang_thai }}</span></td>
+                                                            </tr>
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </table>
+                                                <hr class="custom-hr">
+                                            </div>
                                         </div>
                                     </div>
 

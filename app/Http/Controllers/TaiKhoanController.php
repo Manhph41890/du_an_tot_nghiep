@@ -25,20 +25,20 @@ class TaiKhoanController extends Controller
         $myOrders = don_hang::where('user_id', $user->id)->latest()->paginate(4);
         $viNguoiDung = vi_nguoi_dung::where('user_id', $user->id)->first();
         // Lấy lịch sử giao dịch (chi tiết ví)
-        // $chiTietVi = chi_tiet_vi::with('don_hang', 'vi_nguoi_dung')
-        //     ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
-        //     ->latest('id') // Lấy giao dịch mới nhất trước
-        //     ->get();
-        // $lsThanhToanVi = ls_thanh_toan_vi::with('don_hang', 'vi_nguoi_dung')
-        //     ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
-        //     ->latest('id') // Lấy giao dịch mới nhất trước
-        //     ->get();
-        // $lsRutVi = ls_rut_vi::with('vi_nguoi_dung', 'bank')
-        //     ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
-        //     ->latest('id') // Lấy giao dịch mới nhất trước
-        //     ->get();
+        $chiTietVi = chi_tiet_vi::with('don_hang', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+        $lsThanhToanVi = ls_thanh_toan_vi::with('don_hang', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+        $lsRutVi = ls_rut_vi::with('vi_nguoi_dung', 'bank')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
 
-        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung'));
+        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsRutVi'));
     }
 
 

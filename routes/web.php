@@ -115,6 +115,9 @@ Route::middleware(['auth', 'role:admin', 'role:nhan_vien'])->group(function () {
     // Profile
     Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile');
 
+    // Duyệt rút tiền admin
+    Route::get('/ruttien', [RutTienController::class, 'duyetruttienAdmin'])->name('duyetruttienAdmin');
+
     // Resource routes cho quản lý
     Route::resource('/danhmucs', DanhMucController::class);
     Route::resource('/chucvus', ChucVuController::class);

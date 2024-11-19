@@ -62,4 +62,14 @@ class RutTienController extends Controller
 
         return  redirect()->route('taikhoan.rut-tien')->with('success', 'Rút tiền thành công.');
     }
+
+
+    public function duyetruttienAdmin()
+    {
+        $title = "Duyệt rút tiền khách hàng";
+        $duyetruttien = ls_rut_vi::with(['vi_nguoi_dung.user', 'bank'])->get();
+
+        // dd($duyetruttien);
+        return view('admin.lichsuduyetrut', compact('title', 'duyetruttien'));
+    }
 }

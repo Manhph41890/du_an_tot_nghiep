@@ -201,7 +201,9 @@
                             <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
                             @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                                 <li><a class="tp-link" href="{{ route('user.create') }}">Thêm nhân viên</a></li>
+                                <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền</a></li>
                             @endif
+
                         </ul>
                     </div>
                 </li>

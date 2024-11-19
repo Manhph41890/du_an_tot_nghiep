@@ -122,8 +122,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">
-                            Chi tiết sản phẩm
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">
+                            CHI TIẾT SẢN PHẨM
                         </h2>
                     </div>
                 </div>
@@ -200,7 +200,8 @@
                 <div class="col-lg-6">
                     <div class="single-product-info">
                         <div class="single-product-head">
-                            <h2 class="title mb-20">{{ $sanPhamCT->ten_san_pham }}</h2>
+                            <h2 class="title mb-10">{{ $sanPhamCT->ten_san_pham }}</h2>
+                            <span style="font-size: 17px; margin-top:-15px; color:red"><small style="color:#888 !important;font-weight:600;">Còn hàng:</small> {{ $sanPhamCT->so_luong }}</span>
                             <div class="star-content mb-20">
                                 @for ($i = 1; $i <= 5; $i++)
                                     @if ($i <= $sanPhamCT->diem_trung_binh)
@@ -212,15 +213,14 @@
                                 <a href="#" id="write-comment"><span class="ms-2"><i
                                             class="far fa-comment-dots"></i></span>
                                     Xem đánh giá <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span
-                                            class="edite"><i class="far fa-edit"></i></span>Viết đánh giá</a>
+            
                             </div>
                         </div>
                         <div class="product-body mb-40">
                             <div class="d-flex align-items-center mb-30">
-                                <div class="product-price me-2">
-                                    <del class="del">{{ number_format($sanPhamCT->gia_goc) }}</del>
-                                    <span id="new-price" class="onsale">{{ number_format($sanPhamCT->gia_km) }}</span>
+                                <div class="product-price me-2"> Giá: 
+                                    <del style="color: #a5a59c;" class="del"> {{ number_format($sanPhamCT->gia_goc) }}</del>
+                                    <span style="color: red;"  id="new-price" class="onsale">{{ number_format($sanPhamCT->gia_km) }}</span>
                                     <!-- Giá cập nhật sẽ được hiển thị ở đây -->
                                 </div>
                                 <span class="badge position-static bg-dark rounded-0">Giảm
@@ -289,9 +289,7 @@
                                             <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
                                                 <span class="me-2"></span> Thêm vào giỏ hàng
                                             </button>
-                                            <span style="font-size: 17px">Còn {{ $sanPhamCT->so_luong }} sản phẩm trong
-                                                kho</span>
-
+                                            
                                         @endauth
                                         @guest
                                             <button type="button" class="btn btn-dark btn--xl mt-5 mt-sm-0"

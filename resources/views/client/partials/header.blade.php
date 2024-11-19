@@ -45,7 +45,7 @@
 
     .btn-login {
         border: 1px solid #5a5a9c !important;
-        padding: 6  px 12px !important;
+        padding: 6px 12px !important;
         border-radius: 4px;
         background: #5a5a9c !important;
         color: #fff !important;

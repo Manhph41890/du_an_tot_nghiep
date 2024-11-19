@@ -33,7 +33,7 @@
         /* Cột "Phân loại" rộng hơn */
         .cart-list th:nth-child(4),
         .cart-list td:nth-child(4) {
-            width: 35%;
+            width: 40%;
             word-wrap: break-word;
             text-align: left;
         }
@@ -47,7 +47,7 @@
 
         .cart-list th:nth-child(5),
         .cart-list td:nth-child(5) {
-            width: 10%;
+            width: 13%;
             word-wrap: break-word;
             text-align: left;
         }
@@ -59,7 +59,7 @@
         /* Header của cột "Chọn" */
         .cart-list td:nth-child(1) {
             /* Dữ liệu của cột "Chọn" */
-            width: 5%;
+            width: 4%;
             /* Đặt độ rộng nhỏ */
             text-align: center;
             /* Căn giữa nội dung */
@@ -67,7 +67,18 @@
             /* Giảm padding để nhỏ gọn hơn */
         }
 
-        cart-list th:nth-child(2),
+        .cart-list th:nth-child(6),
+        /* Header của cột "Chọn" */
+        .cart-list td:nth-child(6) {
+            /* Dữ liệu của cột "Chọn" */
+            width: 13%;
+            /* Đặt độ rộng nhỏ */
+            text-align: center;
+            /* Căn giữa nội dung */
+            padding: 5px;
+            /* Giảm padding để nhỏ gọn hơn */
+        }
+
         /* Header của cột "Chọn" */
         .cart-list td:nth-child(2) {
             /* Dữ liệu của cột "Chọn" */
@@ -153,8 +164,8 @@
     </style>
     <div class="container margin_30">
         <!-- <div class="page_header">
-                                                                                <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>
-                                                                            </div> -->
+                                                                                                                                                <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>
+                                                                                                                                            </div> -->
         <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
             <div class="container">
                 <div class="row">
@@ -272,9 +283,7 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <tr>
-                                    <td colspan="7" class="text-center">Giỏ hàng trống!</td>
-                                </tr>
+                                <td class="text-center">Giỏ hàng trống!</td>
                             @endif
                         </tbody>
                     </table>

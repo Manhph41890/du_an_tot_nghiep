@@ -101,7 +101,7 @@
                         <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh
                             toán</a>
 
-                        <a href="#logout-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng xuất</a>
+                        <a href="{{route('auth.logout')}}" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng xuất</a>
 
                     </div>
                 </div>
@@ -413,20 +413,20 @@
         });
     </script>
     <script>
-        function toggleEdit() {
-            const inputs = document.querySelectorAll('#user-info-form input');
-            const toggleEditBtn = document.getElementById('toggleEditBtn');
-            const saveBtn = document.getElementById('saveBtn');
+        // function toggleEdit() {
+        //     const inputs = document.querySelectorAll('#user-info-form input');
+        //     const toggleEditBtn = document.getElementById('toggleEditBtn');
+        //     const saveBtn = document.getElementById('saveBtn');
 
-            // Toggle input disabled state
-            inputs.forEach(input => input.disabled = !input.disabled);
+        //     // Toggle input disabled state
+        //     inputs.forEach(input => input.disabled = !input.disabled);
 
-            // Switch button visibility
-            if (saveBtn.style.display === 'none') {
-                saveBtn.style.display = 'inline-block';
-                toggleEditBtn.style.display = 'none';
-            }
-        }
+        //     // Switch button visibility
+        //     if (saveBtn.style.display === 'none') {
+        //         saveBtn.style.display = 'inline-block';
+        //         toggleEditBtn.style.display = 'none';
+        //     }
+        // }
 
         document.addEventListener('DOMContentLoaded', function() {
             const accountInfoTab = document.querySelector('[href="#account-info"]');

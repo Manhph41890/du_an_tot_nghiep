@@ -202,8 +202,10 @@
                                 @csrf
                                 @method('GET')
                                 <div class="">
-                                    <div class="header-sidebar d-flex justify-content-between">
-                                        <h5 class="title mt-3" style="font-weight:600">LỌC THEO</h5>
+                                    <div class="header-sidebar mt-3">
+                                        <div class="d-flex justify-content-center rounded " style="background-color: #5b5bad;">
+                                            <h5 class="title m-2 text-white" style="font-weight:600">LỌC THEO</h5>
+                                        </div>
                                         {{-- <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button> --}}
                                     </div>
                                     <h6 class="sub-title mt-30 mb-2 ">Danh mục</h6>

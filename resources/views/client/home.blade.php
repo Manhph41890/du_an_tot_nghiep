@@ -98,8 +98,17 @@
             padding: 0;
         }
 
+        .product-tab .col-lg-3 {
+            flex: 0 0 25%;
+            /* 4 sản phẩm trong 1 hàng */
+        }
+
+
+
         .product-thumbnail img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Đảm bảo mỗi phần tử brand có kích thước phù hợp */
@@ -427,7 +436,7 @@
                             <p class="text">Vẽ sáng tạo - Tô hạnh phúc</p>
                         </div>
                     </div> --}}
-                  
+
                 </div>
             </div>
             <div class="row">
@@ -440,7 +449,7 @@
                                     <h2 class="title pb-3 mb-3">SẢN PHẨM MỚI</h2>
                                 </div>
                                 @foreach ($sanPhamMois as $item)
-                                    <div class="col-12 col-md-6  col-lg-2 mb-4">
+                                    <div class="col-12 col-md-6 col-lg-3 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
@@ -494,13 +503,13 @@
                                     <h2 class="title pb-3 mb-3">SẢN PHẨM GIẢM GIÁ</h2>
                                 </div>
                                 @foreach ($sanPhamGiamGias as $sanPhamGg)
-                                    <div class="col-12 col-md-4 col-lg-2 mb-4">
+                                    <div class="col-12 col-md-6 col-lg-3 mb-4"> <!-- Sửa col-lg-2 thành col-lg-3 -->
                                         <div class="card product-card">
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
                                                     <div class="product-thumbnail position-relative">
                                                         <span
-                                                            class=" bg-danger badge badge-danger top-right p-2">-{{ $sanPhamGg->phan_tram_giam_gia }}%</span>
+                                                            class="bg-danger badge badge-danger top-right p-2">-{{ $sanPhamGg->phan_tram_giam_gia }}%</span>
                                                         <a href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
                                                             <img class="first-img"
                                                                 src="{{ asset('storage/' . $sanPhamGg->anh_san_pham) }}"
@@ -510,17 +519,15 @@
                                                     <div class="media-body w-100">
                                                         <div class="product-desc">
                                                             <h3 class="title min_h">
-                                                                <a class=""
+                                                                <a
                                                                     href="{{ route('sanpham.chitiet', $sanPhamGg->id) }}">{{ $sanPhamGg->ten_san_pham }}</a>
                                                             </h3>
                                                             <div class="star-rating">
                                                                 @for ($i = 1; $i <= 5; $i++)
                                                                     @if ($sanPhamGg->danh_gia > 0 && $i <= floor($sanPhamGg->danh_gia))
                                                                         <span class="ion-ios-star"></span>
-                                                                        <!-- Sao có màu -->
                                                                     @else
                                                                         <span class="ion-ios-star-outline"></span>
-                                                                        <!-- Sao không màu -->
                                                                     @endif
                                                                 @endfor
                                                             </div>
@@ -528,8 +535,9 @@
                                                                 <p>Giá: </p>
                                                                 <p style="color: red">
                                                                     <del
-                                                                        style="color: black">{{ number_format($item->gia_goc, 0, ',', '.') }}</del>
-                                                                    {{ number_format($item->gia_km, 0, ',', '.') }} VNĐ
+                                                                        style="color: black">{{ number_format($sanPhamGg->gia_goc, 0, ',', '.') }}</del>
+                                                                    {{ number_format($sanPhamGg->gia_km, 0, ',', '.') }}
+                                                                    VNĐ
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -541,6 +549,7 @@
                                 @endforeach
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

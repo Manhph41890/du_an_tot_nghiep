@@ -15,21 +15,31 @@ class VariantController extends Controller
         $sizes = size_san_pham::all();
         return view('admin.variant.index', compact('colors', 'sizes', 'title'));
     }
+    public function create()
+    {
+        $colors = color_san_pham::pluck('ten_color'); // Lấy tất cả tên màu từ bảng
+        $sizes = size_san_pham::pluck('ten_size'); // 
+        return view('admin.variant.index', compact('colors', 'sizes'));
+    }
+
 
     public function storeColor(Request $request)
     {
         $request->validate([
-            'ten_color' => 'required|string|max:255',
-            'ma_mau' => 'required|string|max:255',
+            'ten_color' => 'required|string|max:255|unique:color_san_phams,ten_color',
+            'ma_mau' => 'required|string|max:255|regex:/^#[0-9A-Fa-f]{6}$/',
+        ], [
+            'ten_color.unique' => 'Tên màu này đã tồn tại.',
+            'ma_mau.regex' => 'Mã màu phải đúng định dạng, ví dụ: #ff0000.',
         ]);
-
         color_san_pham::create([
-            'ten_color' => $request->ten_color,
+            'ten_color' => strtolower($request->ten_color),
             'ma_mau' => $request->ma_mau,
         ]);
 
         return redirect()->back()->with('success', 'Thêm màu thành công!');
     }
+
 
     public function storeSize(Request $request)
     {

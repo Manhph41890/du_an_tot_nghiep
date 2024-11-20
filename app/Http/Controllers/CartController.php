@@ -342,8 +342,10 @@ class CartController extends Controller
         $shippingCost = 30000; // 30,000 VND
         $totall = $total + $shippingCost;
 
+        $selectedProductIds = $request->input('checkout_items');
+
         // Chuyển hướng về trang xác nhận đơn hàng và truyền biến vào view
-        return view('client.order.index', compact('user', 'cartItems', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens'))
+        return view('client.order.index', compact('user', 'cartItems', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens', 'selectedProductIds'))
             ->with('success', 'Vui lòng xác nhận thông tin đặt hàng!');
     }
 

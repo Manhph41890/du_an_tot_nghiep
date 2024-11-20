@@ -30,13 +30,7 @@
             border: 1px solid #ddd;
         }
 
-        /* Cột "Phân loại" rộng hơn */
-        .cart-list th:nth-child(4),
-        .cart-list td:nth-child(4) {
-            width: 35%;
-            word-wrap: break-word;
-            text-align: left;
-        }
+
 
         .cart-list th:nth-child(3),
         .cart-list td:nth-child(3) {
@@ -47,6 +41,13 @@
 
         .cart-list th:nth-child(5),
         .cart-list td:nth-child(5) {
+            width: 16%;
+            word-wrap: break-word;
+            text-align: left;
+        }
+
+        .cart-list th:nth-child(6),
+        .cart-list td:nth-child(6) {
             width: 10%;
             word-wrap: break-word;
             text-align: left;
@@ -152,9 +153,7 @@
         }
     </style>
     <div class="container margin_30">
-        <!-- <div class="page_header">
-                                                                            <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>
-                                                                        </div> -->
+        <!-- <div class="page_header">                                                                   <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>                                                                </div> -->
         <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
             <div class="container">
                 <div class="row">
@@ -183,10 +182,14 @@
                     <table class="table cart-list">
                         <thead>
                             <tr>
-                                <th>Chọn</th>
+                                <th>
+                                    <!-- Nút Chọn Tất Cả -->
+                                    <button type="button" style="background-color: none;" id="select-all"><input
+                                            type="checkbox"></button>
+                                </th>
                                 <th>Sản phẩm</th>
                                 <th>Đơn giá</th>
-                                <th>Phân loại</th>
+                                <th>Số lượng</th>
                                 <th>Giá biến thể</th>
                                 <th>Tổng tiền</th>
                             </tr>
@@ -200,48 +203,29 @@
                                                 data-id="{{ $item->id }}" />
                                         </td>
                                         <td>
-                                            <div class="thumb_cart">
+                                            <div class="thumb_cart" style="text-align: center;">
                                                 <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}"
                                                     alt="img" height="90px" width="90px"
                                                     style="object-fit: cover" />
-                                                <span class="item_cart">{{ $item->san_pham->ten_san_pham }}</span>
-
+                                                <div class="ms-3">
+                                                    <h5> {{ $item->san_pham->ten_san_pham }}</h5>
+                                                    <p class="small mb-0">
+                                                        {{ $item->size->ten_size }}-{{ $item->color->ten_color }}</p>
+                                                </div>
                                             </div>
                                         </td>
                                         <td style="padding-top: 30px">
                                             <strong>{{ number_format($item->san_pham->gia_km, 0, ',', '.') }} đ</strong>
                                         </td>
                                         <td style="padding-top: 30px">
-                                            <span>Size:</span>
-                                            <select name="size_san_pham_id" class="size-select"
-                                                data-item-id="{{ $item->id }}">
-                                                @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                                    <option value="{{ $variant->size->id }}"
-                                                        {{ $variant->size->id == $item->size_san_pham_id ? 'selected' : '' }}>
-                                                        {{ $variant->size->ten_size }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <span>Màu:</span>
-                                            <select name="color_san_pham_id" class="color-select"
-                                                data-item-id="{{ $item->id }}">
-                                                @foreach ($item->san_pham->bien_the_san_phams as $variant)
-                                                    <option value="{{ $variant->color->id }}"
-                                                        {{ $variant->color->id == $item->color_san_pham_id ? 'selected' : '' }}>
-                                                        {{ $variant->color->ten_color }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <span>Số lượng:</span>
                                             <input type="number" name="quantity" value="{{ $item->quantity }}"
                                                 min="1" max="100" class="quantity-input"
-                                                data-item-id="{{ $item->id }}">
-                                            <button type="button" class="btn btn-primary btn-sm update-cart-btn"
+                                                data-item-id="{{ $item->id }}" style="width: 60px; height: 30px;">
+                                            <button style="height: 30px; margin-bottom: 4px" type="button"
+                                                class="btn btn-primary btn-sm update-cart-btn"
                                                 data-id="{{ $item->id }}">
                                                 Cập nhật
                                             </button>
-
-
                                         </td>
                                         <td style="padding-top: 30px">
                                             <span>
@@ -262,9 +246,6 @@
                                                 @endif
                                             </span>
                                         </td>
-
-
-
                                         <td style="padding-top: 30px">
                                             <strong><span class="whish-list-price">{{ number_format($item->price) }}
                                                     đ</span></strong>
@@ -278,8 +259,10 @@
                             @endif
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-danger btn-sm" id="remove-selected-items" disabled>Xóa Sản Phẩm Đã
-                        Chọn</button>
+                    <!-- Nút Xóa Sản Phẩm Đã Chọn -->
+                    <button type="submit" class="btn btn-danger btn-sm" id="remove-selected-items"
+                        style="display: none;">Xóa Sản Phẩm Đã Chọn</button> <!-- Ẩn mặc định -->
+
                 </div>
             </form>
             <div class="cart-summary">
@@ -287,7 +270,6 @@
                     <li style="font-size: 16px">
                         <strong><span>Phí vận chuyển: </span><span id="shipping">0</span></strong>
                     </li>
-
                     <li style="font-size: 20px">
                         <strong><span>Tổng tiền cần thanh toán: </span><span class="text-danger"
                                 id="total-price">0</span></strong>
@@ -296,12 +278,11 @@
                 <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
                     @csrf
                     <input type="hidden" name="checkout_items[]" id="selected-items">
-                    <button id="checkout-button" class="btn btn-primary ripple">
-                        Thanh toán ngay
-                    </button>
+                    <button id="checkout-button" class="btn btn-primary ripple">Thanh toán ngay</button>
                 </form>
             </div>
         </div>
+
     </div>
 
     <script>
@@ -313,7 +294,14 @@
             const removeButton = document.getElementById('remove-selected-items');
             const checkoutForm = document.getElementById('checkout-form');
             const removeMultipleForm = document.getElementById('remove-multiple-form');
+            const selectAllButton = document.getElementById('select-all');
 
+            // Chọn hoặc bỏ chọn tất cả checkbox
+            selectAllButton.addEventListener('click', function() {
+                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                checkboxes.forEach(checkbox => checkbox.checked = !allChecked);
+                calculateTotal(); // Tính toán lại tổng giỏ hàng
+            });
             // Hàm tính tổng giá trị giỏ hàng
             function calculateTotal() {
                 let totalPrice = 0;
@@ -331,7 +319,8 @@
 
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
                 shippingEl.textContent = shipping.toLocaleString() + ' đ';
-                removeButton.disabled = selectedItems.length === 0;
+                removeButton.style.display = selectedItems.length > 0 ? 'inline-block' :
+                    'none'; // Hiển thị/ẩn nút xóa
 
                 // Xóa các input hidden trước khi thêm mới
                 removeMultipleForm.querySelectorAll('input[name="remove_items[]"]').forEach(input => input
@@ -371,19 +360,14 @@
             updateButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const itemId = this.getAttribute('data-id');
-                    const sizeSelect = document.querySelector(
-                        `select.size-select[data-item-id="${itemId}"]`);
-                    const colorSelect = document.querySelector(
-                        `select.color-select[data-item-id="${itemId}"]`);
                     const quantityInput = document.querySelector(
                         `input.quantity-input[data-item-id="${itemId}"]`);
 
+                    // Kiểm tra số lượng hợp lệ trước khi gửi
                     if (checkMaxQuantity(itemId, quantityInput)) {
                         const data = {
-                            size_san_pham_id: sizeSelect.value,
-                            color_san_pham_id: colorSelect.value,
-                            quantity: quantityInput.value,
-                            _token: '{{ csrf_token() }}'
+                            quantity: quantityInput.value, // Chỉ gửi số lượng
+                            _token: '{{ csrf_token() }}' // CSRF token để bảo mật
                         };
 
                         fetch(`/cart/update/${itemId}`, {
@@ -398,8 +382,8 @@
                             .then(data => {
                                 if (data.success) {
                                     toastr.success('Cập nhật thành công');
-                                    calculateTotal();
-                                    location.reload();
+                                    calculateTotal(); // Tính toán lại tổng giỏ hàng
+                                    location.reload(); // Làm mới trang để cập nhật thông tin
                                 } else {
                                     toastr.error(data.message); // Hiển thị thông báo lỗi nếu có
                                 }
@@ -408,8 +392,6 @@
                                 console.error('Error:', error);
                                 toastr.error('Có lỗi xảy ra, vui lòng thử lại.');
                             });
-
-
                     }
                 });
             });

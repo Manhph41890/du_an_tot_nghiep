@@ -20,7 +20,7 @@ class HomeController extends Controller
         $sanPhamMois = san_pham::where('is_active', 1) // Thêm điều kiện lọc
             ->orderByDesc('id')
             ->latest('id')
-            ->paginate(10);
+            ->paginate(8);
 
         // Tính điểm trung bình cho các sản phẩm mới
         $sanPhamMois->getCollection()->transform(function ($sanPham) {
@@ -37,7 +37,7 @@ class HomeController extends Controller
             ->whereNotNull('gia_km')
             ->where('is_active', 1) // Thêm điều kiện lọc
             ->orderByDesc('id')
-            ->paginate(5);
+            ->paginate(4);
 
         // Tính phần trăm giảm giá cho sản phẩm giảm giá
         $sanPhamGiamGias->getCollection()->transform(function ($sanPham) {

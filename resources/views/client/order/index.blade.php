@@ -270,6 +270,7 @@
                                     <li class="clearfix"><em><strong>Tiền sản phẩm</strong></em>
                                         <span>{{ number_format($total, 0, ',', '.') }}₫</span>
                                     </li>
+                                    <input type="hidden" name="total" id="hidden_total" value="{{ $total }}">
                                 </ul>
 
                                 <ul>
@@ -295,6 +296,9 @@
 
                                 <div class="total clearfix">Tổng cộng <span id="total_amount"
                                         data-total="{{ $totall }}">{{ number_format($totall) }}₫</span>
+                                    <input type="hidden" name="totall" id="hidden_totall"
+                                        value="{{ $totall }}">
+
                                 </div>
 
                                 <!-- Nút Đặt hàng cho phương thức "Thanh toán khi nhận hàng" -->

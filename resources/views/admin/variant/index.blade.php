@@ -235,7 +235,7 @@
 
         // Lấy danh sách màu sắc và kích thước từ server
         var existingColors = @json($colors->map(fn($color) => strtolower($color)));
-        var existingSizes = @json($sizes->pluck('ten_size')->map(fn($size) => strtolower($size)));
+        var existingSizes = @json($sizes->map(fn($sizes) => strtolower($sizes)));;
 
         document.querySelector('form[action="{{ route('variants.colors.store') }}"]').addEventListener('submit', function(
             event) {

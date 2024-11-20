@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Bank;
 use App\Models\ls_rut_vi;
-use App\Models\vi_nguoi_dung;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\vi_nguoi_dung;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RutTienController extends Controller
 {
@@ -95,16 +96,18 @@ class RutTienController extends Controller
     public function duyetRutAdmin($id)
     {
         $lsRutVi = ls_rut_vi::find($id);
-
         if (!$lsRutVi) {
             return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
         }
-
-        // Cập nhật trạng thái
-        $lsRutVi->update(['trang_thai' => 'Thành công']);
-
+        $lsRutVi->trang_thai = 'Thành công';
+        $lsRutVi->updated_at = Carbon::now()->setTimezone('Asia/Ho_Chi_Minh');
+        $lsRutVi->save();
         return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được duyệt.');
     }
+
+
+
+
     public function HuyRutAdmin($id, Request $request)
     {
         $request->validate([
@@ -113,17 +116,13 @@ class RutTienController extends Controller
             'noi_dung_tu_choi.required' => "Nội dung không được để trống",
             'noi_dung_tu_choi.string' => "Nội dung phải là chữ",
         ]);
-
         $lsRutVi = ls_rut_vi::findOrFail($id);
-
-        // Cập nhật trạng thái và lý do từ chối
         $lsRutVi->update([
             'trang_thai' => 'Thất bại',
         ]);
+        $lsRutVi->updated_at = Carbon::now()->setTimezone('Asia/Ho_Chi_Minh');
         $lsRutVi->noi_dung_tu_choi = $request->input('noi_dung_tu_choi');
         $lsRutVi->save();
-
-        // Phản hồi thành công
         return redirect()->back()->with('success', 'Xác nhận từ chối rút tiền thành công.');
     }
 }

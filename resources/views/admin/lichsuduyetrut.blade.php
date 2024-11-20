@@ -40,7 +40,7 @@
                                                 <th scope="col">#ID</th>
                                                 <th scope="col">Người rút</th>
                                                 <th scope="col">Thông tin ngân hàng</th>
-                                                <th scope="col">Thời gian</th>
+                                                <th scope="col">Thời gian rút tiền</th>
                                                 <th scope="col">Số tiền rút</th>
                                                 <th scope="col">Hành động</th>
                                             </tr>

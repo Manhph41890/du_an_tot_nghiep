@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                            </div> -->
+                                                                                        <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                    </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -459,62 +459,107 @@
                                             <!-- Tab 3: Tiền rút -->
                                             <div class="tab-pane fade" id="rut" role="tabpanel"
                                                 aria-labelledby="rut-tab">
-                                                <table class="table table-bordered">
-                                                    <tbody>
-                                                        @foreach ($lsRutVi as $item)
-                                                            <tr>
-                                                                <td>{{ $item->id }}</td>
-                                                                <td>{{ $item->bank?->name }}</td>
-                                                                <td>{{ $item->bank?->account_number }}</td>
-                                                                <td>{{ $item->bank?->account_holder }}</td>
-                                                                <td>{{ date('d-m-Y H:i:s', strtotime($item->thoi_gian_rut)) }}
-                                                                </td>
-                                                                <td class="transaction-amount negative">
-                                                                    {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
-                                                                </td>
-                                                                <td>
-                                                                    @php
-                                                                        $statusClasses = [
-                                                                            'Thành công' => 'bg-success',
-                                                                            'Chờ duyệt' => 'bg-warning',
-                                                                            'Thất bại' => 'bg-danger',
-                                                                        ];
-                                                                        $class =
-                                                                            $statusClasses[$item->trang_thai] ??
-                                                                            'bg-secondary';
-                                                                    @endphp
 
-                                                                    @if ($item->trang_thai === 'Thành công' || $item->trang_thai === 'Chờ duyệt')
-                                                                        <span
-                                                                            class="badge position-static {{ $class }}">
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-pills mt-3 mb-3">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" data-bs-toggle="pill"
+                                                            href="#tabchoduyet">Chờ duyệt</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-bs-toggle="pill"
+                                                            href="#tabthanhcong">Thành công</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-bs-toggle="pill" href="#tabthatbai">Thất
+                                                            bại</a>
+                                                    </li>
+                                                </ul>
+
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div class="tab-pane container active p-0" id="tabchoduyet">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                @foreach ($lsRutVi_choduyet as $item)
+                                                                    <tr>
+                                                                        <td>{{ $item->bank?->name }}</td>
+                                                                        <td>{{ $item->bank?->account_number }}</td>
+                                                                        <td>{{ $item->bank?->account_holder }}</td>
+                                                                        <td>{{ date('d-m-Y H:i:s', strtotime($item->thoi_gian_rut)) }}
+                                                                        </td>
+                                                                        <td class="transaction-amount negative">
+                                                                            {{ number_format($item->tien_rut, 0, ',', '.') }}
+                                                                            VNĐ
+                                                                        </td>
+                                                                        <td>
+                                                                            <span
+                                                                                class="badge position-static bg-warning">
+                                                                                {{ $item->trang_thai }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane container fade" id="tabthanhcong">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                @foreach ($lsRutVi_thanhcong as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->bank?->name }}</td>
+                                                                    <td>{{ $item->bank?->account_number }}</td>
+                                                                    <td>{{ $item->bank?->account_holder }}</td>
+                                                                    <td>{{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i:s') : 'Chưa có thời gian' }}</td> <!-- Hiển thị thời gian -->
+                                                                    <td class="transaction-amount negative">
+                                                                        {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="badge position-static bg-success">
                                                                             {{ $item->trang_thai }}
                                                                         </span>
-                                                                    @endif
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane container fade" id="tabthatbai">
+                                                        <table class="table table-bordered">
 
-
-                                                                    @if ($item->trang_thai === 'Thất bại')
+                                                            @foreach ($lsRutVi_thatbai as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->bank?->name }}</td>
+                                                                    <td>{{ $item->bank?->account_number }}</td>
+                                                                    <td>{{ $item->bank?->account_holder }}</td>
+                                                                    <td>{{ date('d-m-Y H:i:s', strtotime($item->updated_at)) }}
+                                                                    </td>
+                                                                    <td class="transaction-amount negative">
+                                                                        {{ number_format($item->tien_rut, 0, ',', '.') }}
+                                                                        VNĐ
+                                                                    </td>
+                                                                    <td>
                                                                         <button type="button"
-                                                                            class=" badge position-static {{ $class }}"
+                                                                            class=" badge position-static bg-danger"
                                                                             data-bs-toggle="popover" title="Lý do"
                                                                             data-bs-content="{{ $item->noi_dung_tu_choi }}">
                                                                             {{ $item->trang_thai }}
                                                                         </button>
-                                                                    @endif
-
-                                                                    <script>
-                                                                        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-                                                                        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
-                                                                            return new bootstrap.Popover(popoverTriggerEl);
-                                                                        });
-                                                                    </script>
-
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-
-                                                    </tbody>
-                                                </table>
-                                                <hr class="custom-hr">
+                                                                        <script>
+                                                                            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+                                                                            var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+                                                                                return new bootstrap.Popover(popoverTriggerEl);
+                                                                            });
+                                                                        </script>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>

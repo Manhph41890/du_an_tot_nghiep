@@ -105,17 +105,25 @@ class RutTienController extends Controller
 
         return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được duyệt.');
     }
-    public function HuyRutAdmin($id)
+    public function HuyRutAdmin($id, Request $request)
     {
-        $lsRutVi = ls_rut_vi::find($id);
+        $request->validate([
+            'noi_dung_tu_choi' => 'required|string',
+        ], [
+            'noi_dung_tu_choi.required' => "Nội dung không được để trống",
+            'noi_dung_tu_choi.string' => "Nội dung phải là chữ",
+        ]);
 
-        if (!$lsRutVi) {
-            return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
-        }
+        $lsRutVi = ls_rut_vi::findOrFail($id);
 
-        // Cập nhật trạng thái
-        $lsRutVi->update(['trang_thai' => 'Thất bại']);
+        // Cập nhật trạng thái và lý do từ chối
+        $lsRutVi->update([
+            'trang_thai' => 'Thất bại',
+        ]);
+        $lsRutVi->noi_dung_tu_choi = $request->input('noi_dung_tu_choi');
+        $lsRutVi->save();
 
-        return redirect()->back()->with('success', 'Xác nhận');
+        // Phản hồi thành công
+        return redirect()->back()->with('success', 'Xác nhận từ chối rút tiền thành công.');
     }
 }

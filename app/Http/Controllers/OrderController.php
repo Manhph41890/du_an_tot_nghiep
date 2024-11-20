@@ -281,6 +281,9 @@ class OrderController extends Controller
             $order->trang_thai_thanh_toan = 'Chưa thanh toán';
             $order->save();
 
+
+            $cartItemsToDelete = $validatedData['cart_items']; // Mảng chứa các sản phẩm trong giỏ
+
             // Lưu chi tiết đơn hàng từ giỏ hàng
             foreach ($validatedData['cart_items'] as $item) {
                 chi_tiet_don_hang::create([
@@ -338,11 +341,13 @@ class OrderController extends Controller
             });
 
             // Xóa giỏ hàng sau khi đặt hàng thành công
-            // Xóa sản phẩm này khỏi giỏ hàng
-            CartItem::where('san_pham_id', $item['san_pham_id'])
-                ->where('color_san_pham_id', $item['color_id'])
-                ->where('size_san_pham_id', $item['size_id'])
-                ->delete();
+            // Xóa giỏ hàng sau khi đặt hàng thành công
+            foreach ($cartItemsToDelete as $item) {
+                CartItem::where('san_pham_id', $item['san_pham_id'])
+                    ->where('color_san_pham_id', $item['color_id'])
+                    ->where('size_san_pham_id', $item['size_id'])
+                    ->delete();
+            }
 
             // Gửi email với mã xác thực
 

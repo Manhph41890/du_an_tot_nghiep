@@ -49,8 +49,8 @@
 
                                             @foreach ($duyetruttien as $item)
                                                 <tr>
-                                                    <td scope="row">{{ $item->id }}</td>
-                                                    <td scope="row">
+                                                    <td>{{ $item->id }}</td>
+                                                    <td>
                                                         {{ $item->vi_nguoi_dung?->user?->ho_ten ?? 'Không có thông tin' }}
                                                     </td>
                                                     <td>
@@ -70,18 +70,57 @@
                                                     </td>
                                                     <td>{{ date('d-m-Y H:i:s', strtotime($item->thoi_gian_rut)) }}
                                                     <td>{{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ</td>
-                                                    <td>
-                                                        <form action="{{ route('duyetRutAdmin', $item->id) }}"
+                                                    <td >
+                                                      
+                                                        <form action="{{ route('duyetRutAdmin', $item->id) }}" class="mb-2"
                                                             method="post">
                                                             @csrf
                                                             @method('PUT')
                                                             @if ($item->trang_thai === 'Chờ duyệt')
                                                                 <button type="submit"
                                                                     class="btn btn-info btn-sm">Duyệt</button>
-                                                            @else
+                                                            @elseif ($item->trang_thai === 'Thành công')
                                                                 <button type="button" class="btn btn-success btn-sm"
                                                                     disabled>Đã duyệt</button>
+                                                            @elseif ($item->trang_thai === 'Thất bại')
+                                                                <button type="button" class="btn btn-danger btn-sm"
+                                                                    disabled>Từ chối rút tiền</button>
                                                             @endif
+                                                        </form>
+
+                                                       
+                                                        <form action="{{ route('HuyRutAdmin', $item->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            @if ($item->trang_thai === 'Chờ duyệt')
+                                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal{{ $item->id }}">Từ
+                                                                    chối</button>
+                                                            @endif
+
+                                                              <div class="modal" id="myModal{{ $item->id }}">
+                                                                <div class="modal-dialog">
+                                                                  <div class="modal-content">
+                                                              
+                                                                    <!-- Modal Header -->
+                                                                    <div class="modal-header">
+                                                                      <h4 class="modal-title">Lý do từ chối</h4>
+                                                                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                                    </div>
+                                                              
+                                                                    <div class="modal-body">
+                                                                        <textarea class="form-control" rows="5" id="comment" name="noi_dung_tu_choi" placeholder="Nội dung..."></textarea>
+                                                                    </div>
+                                                              
+                                                                    <!-- Modal footer -->
+                                                                    <div class="modal-footer">
+                                                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                                                                      <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Xác nhận</button>
+                                                                    </div>
+                                                              
+                                                                  </div>
+                                                                </div>
+                                                              </div>
                                                         </form>
 
                                                     </td>

@@ -105,4 +105,17 @@ class RutTienController extends Controller
 
         return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được duyệt.');
     }
+    public function HuyRutAdmin($id)
+    {
+        $lsRutVi = ls_rut_vi::find($id);
+
+        if (!$lsRutVi) {
+            return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
+        }
+
+        // Cập nhật trạng thái
+        $lsRutVi->update(['trang_thai' => 'Thất bại']);
+
+        return redirect()->back()->with('success', 'Xác nhận');
+    }
 }

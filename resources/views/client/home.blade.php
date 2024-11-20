@@ -634,8 +634,7 @@
                                 <div class="single-blog">
                                     <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden height-200"
                                         href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">
-                                        <img src="{{ asset('/storage/' . $baivietmoi->anh_bai_viet) }}"
-                                            alt="blog-thumb-naile" />
+                                        <img src="{{ asset('storage/' . $baivietmoi->anh_bai_viet) }}" alt="blog-thumb-naile">
                                     </a>
                                     <div class="blog-post-content">
                                         <a class="blog-link theme-color d-inline-block mb-10"

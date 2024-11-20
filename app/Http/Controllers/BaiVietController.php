@@ -105,15 +105,32 @@ class BaiVietController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(bai_viet $bai_viet, $id)
-    {  
-        $this->authorize('update', bai_viet::class);
-        //Tim bài viết theo id
-        $post = bai_viet::findOrFail($id);
-        $user = User::query()->pluck('ho_ten', 'id')->all();
-        $title = "Sửa bài viết";
-        return view('admin.baiviet.edit', compact('post', 'user', 'title'));
-    }
+    // public function edit(bai_viet $bai_viet, $id)
+    // {  
+    //     $this->authorize('update', bai_viet::class);
+    //     //Tim bài viết theo id
+    //     $post = bai_viet::findOrFail($id);
+    //     $user = User::query()->pluck('ho_ten', 'id')->all();
+    //     $title = "Sửa bài viết";
+    //     return view('admin.baiviet.edit', compact('post', 'user', 'title'));
+    // }
+    public function edit(bai_viet $baiViet, $id)
+{  
+    // Xác thực quyền chỉnh sửa bài viết
+    $this->authorize('update', $baiViet);
+
+    // Tìm bài viết theo ID
+    $post = bai_viet::findOrFail($id);
+
+    // Lấy danh sách người dùng (id và họ tên)
+    $users = User::pluck('ho_ten', 'id');
+
+    // Tiêu đề trang
+    $title = "Sửa bài viết";
+
+    // Trả về view với dữ liệu
+    return view('admin.baiviet.edit', compact('post', 'users', 'title'));
+}
 
     /**
      * Update the specified resource in storage.

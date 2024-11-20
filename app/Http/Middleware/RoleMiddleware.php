@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Auth;
 class RoleMiddleware
 {
     public function handle($request, Closure $next)
-    {   
-            // if (Auth::check()) {
-            //     dd(Auth::user()->chuc_vu->ten_chuc_vu);
-            // } 
-        
-        if (Auth::check() && Auth::user()->chuc_vu->ten_chuc_vu ) {
+    {
+        // if (Auth::check()) {
+        //     dd(Auth::user()->chuc_vu->ten_chuc_vu);
+        // } 
+
+        if (Auth::check() && Auth::user()->chuc_vu->ten_chuc_vu) {
             return $next($request);
         }
 

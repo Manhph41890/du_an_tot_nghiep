@@ -24,12 +24,12 @@ class Storekhuyen_maiRequest extends FormRequest
         return [
             //
             'ten_khuyen_mai' => 'required|max:255',
-            'gia_tri_khuyen_mai' => 'required|numeric|min:0|max:100',
+            'gia_tri_khuyen_mai' => 'required|numeric|min:0',
             'so_luong_ma' => 'required|integer|min:1',
             'ngay_bat_dau' => 'required|date',
             'ngay_ket_thuc' => 'required|date|after:ngay_bat_dau',
             'is_active' => 'required|boolean',
-            
+
         ];
     }
 
@@ -44,7 +44,7 @@ class Storekhuyen_maiRequest extends FormRequest
             'gia_tri_khuyen_mai.required' => 'Gía trị khyến mãi không được để trống',
             'gia_tri_khuyen_mai.numeric' => 'Giá trị khuyến mãi không phải là số',
             'gia_tri_khuyen_mai.min' => 'Giá trị khuyến mãi không được nhỏ hơn 0',
-            'gia_tri_khuyen_mai.max' => 'Giá trị khuyến mãi không được lớn hơn 100',
+            // 'gia_tri_khuyen_mai.max' => 'Giá trị khuyến mãi không được lớn hơn 100',
 
             'so_luong_ma.required' => 'Số lượng khyến mãi không được để trống',
             'so_luong_ma.integer' => 'Số lượng khyến mãi không phải số',
@@ -58,7 +58,7 @@ class Storekhuyen_maiRequest extends FormRequest
             'ngay_ket_thuc.after' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu',
 
             'is_active' => 'Trạng thái không được để trống',
-           
+
         ];
     }
 }

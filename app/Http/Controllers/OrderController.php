@@ -15,6 +15,7 @@ use App\Models\san_pham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
@@ -79,27 +80,13 @@ class OrderController extends Controller
 
         // Kiểm tra xem có phải phương thức thanh toán VnPay
         if ($paymentMethod->kieu_thanh_toan === 'Thanh toán bằng Vnpay') {
-            // Lưu thông tin order vào session
-            Session::put('order_details', [
-                'user_id' => Auth::id(),
-                'khuyen_mai_id' => $validatedData['khuyen_mai'] ? $coupon->id : null,
-                'ho_ten' => $user->ho_ten ?? $validatedData['ho_ten'],
-                'so_dien_thoai' => $user->so_dien_thoai ?? $validatedData['so_dien_thoai'],
-                'email' => $user->email ?? $validatedData['email'],
-                'dia_chi' => $user->dia_chi ?? $validatedData['dia_chi'],
-                'phuong_thuc_thanh_toan_id' => $validatedData['phuong_thuc_thanh_toan'],
-                'phuong_thuc_van_chuyen_id' => 9,
-                'ngay_tao' => now()->timezone('Asia/Ho_Chi_Minh'),
-                'tong_tien' => $totall, // Sử dụng tổng tiền đã tính trước
-                'trang_thai_don_hang' => 'Chờ xác nhận',
-                'trang_thai_thanh_toan' => 'Đã thanh toán'
-            ]);
+
 
             // Xử lý chuyển hướng đến trang thanh toán VnPay
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
             $vnp_Returnurl = "http://127.0.0.1:8000/order/success"; // Đường dẫn xử lý kết quả thanh toán
-            $vnp_TmnCode = "TQL3PNVO"; // Mã website tại VNPAY 
-            $vnp_HashSecret = "SDOLTO3JSO8WXIMDIIIFMSUL9NSR39BD"; // Chuỗi bí mật
+            $vnp_TmnCode = "LA4W2ILI"; // Mã website tại VNPAY 
+            $vnp_HashSecret = "N63WYTF57CWU6R33CWZASHLS64RMKS2H"; // Chuỗi bí mật
 
             $vnp_TxnRef = rand(00, 9999);
             Session::put('vnp_TxnRef', $vnp_TxnRef); // Lưu vào session
@@ -376,9 +363,16 @@ class OrderController extends Controller
     {
         // Lấy thông tin từ session
         $user = Auth::user();
-        $orderDetails = Session::get('order_details');
+        // $orderDetails = Session::get('order_details');
         $vnp_TxnRef = Session::get('vnp_TxnRef');
         $vnp_ResponseCode = $request->input('vnp_ResponseCode');
+
+        // Log::info('VNP Response Code: ', ['response_code' => $vnp_ResponseCode]);
+
+        // Đảm bảo session không rỗng
+        if (!$vnp_TxnRef) {
+            return redirect()->route('cart.index')->with('error', 'Thông tin thanh toán không hợp lệ.');
+        }
         $validatedData = $request->validate([
             'ho_ten' => 'required|string|max:255',
             'so_dien_thoai' => 'required|string|max:15',
@@ -394,6 +388,7 @@ class OrderController extends Controller
             'cart_items.*.quantity' => 'required|integer|min:1',
             'cart_items.*.price' => 'required|numeric|min:0',
         ]);
+        Log::info($validatedData);
 
         $totall = $request->totall;
         $total = $request->total;
@@ -422,10 +417,12 @@ class OrderController extends Controller
                 return redirect()->back()->with('error', 'Mã khuyến mãi không hợp lệ hoặc đã hết hạn.');
             }
         }
-        if ($vnp_ResponseCode == '00' && $orderDetails) { // '00' là mã giao dịch thành công
+        if ($vnp_ResponseCode === '00') { // '00' là mã giao dịch thành công
             // Tạo đơn hàng mới
+            // Log::info('Thanh toán thành công - Tạo đơn hàng:', $orderDetails); // Log thông tin đơn hàng
+
             $order = new don_hang();
-            $order->user_id = Auth::id();
+            $order->user_id = $user->id;
             $order->khuyen_mai_id = $validatedData['khuyen_mai'] ? $coupon->id : null;
             $order->ho_ten = $user->ho_ten ?? $validatedData['ho_ten'];
             $order->so_dien_thoai = $user->so_dien_thoai ?? $validatedData['so_dien_thoai'];
@@ -435,9 +432,11 @@ class OrderController extends Controller
             $order->phuong_thuc_van_chuyen_id = 9;
             $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
             $order->tong_tien =  $totall;
-            $order->trang_thai_don_hang = 'Chờ xác nhận';
-            $order->trang_thai_thanh_toan = 'Chưa thanh toán';
+            $order->trang_thai_don_hang = $validatedData['trang_thai_don_hang'];
+            $order->trang_thai_thanh_toan = $validatedData['trang_thai_thanh_toan'];
             $order->save();
+
+            Log::info('Đơn hàng đã được lưu:', $order->id); // Log ID của đơn hàng
 
             // Lưu chi tiết đơn hàng
             $cartItemsToDelete = $validatedData['cart_items']; // Mảng chứa các sản phẩm trong giỏ
@@ -454,6 +453,8 @@ class OrderController extends Controller
                     'thanh_tien' => $totall,
 
                 ]);
+                Log::info('Chi tiết đơn hàng đã được lưu:', $item); // Log chi tiết đơn hàng
+
                 if ($coupon) {
                     DB::table('coupon_usages')->insert([
                         'user_id' => $user->id,
@@ -515,9 +516,6 @@ class OrderController extends Controller
                 $message->to($user->email)
                     ->subject('Đặt hàng thành công');
             });
-
-
-            Session::forget(['order_details', 'vnp_TxnRef']);
 
             return redirect()->route('order.success_nhanhang')->with('success', 'Thanh toán thành công! Đơn hàng của bạn đã được tạo.');
         }

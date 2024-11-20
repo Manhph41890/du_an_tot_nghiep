@@ -16,7 +16,9 @@ class ls_rut_vi extends Model
         'tien_rut',
         'trang_thai',
         'bank_id',
+        'updated_at',
     ];
+    public $timestamps = true;
 
     /**
      * Quan hệ với ViNguoiDung (một chi tiết ví thuộc về một ví người dùng).

@@ -16,28 +16,20 @@
             color: #fff;
             /* Màu chữ cho mã màu hợp lệ */
         }
+
+        input.valid {
+            color: #fff;
+        }
+
+        input.invalid {
+            border: 1px solid red;
+        }
     </style>
     <div class="content-page">
 
         <div class="content">
             <div class="container">
                 <h2>Quản lý Biến Thể</h2>
-
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
 
                 <!-- Danh sách màu sắc -->
                 <div class="card mt-3">
@@ -96,21 +88,13 @@
                                                             <label for="ten_color">Tên Màu</label>
                                                             <input type="text" name="ten_color" class="form-control"
                                                                 value="{{ $color->ten_color }}" required>
-                                                            @if ($errors->has('ten_color'))
-                                                                <div class="invalid-feedback d-block">
-                                                                    {{ $errors->first('ten_color') }}
-                                                                </div>
-                                                            @endif
+
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="ma_mau">Mã Màu</label>
                                                             <input type="text" name="ma_mau" class="form-control"
                                                                 value="{{ $color->ma_mau }}" required>
-                                                            @if ($errors->has('ma_mau'))
-                                                                <div class="invalid-feedback d-block">
-                                                                    {{ $errors->first('ma_mau') }}
-                                                                </div>
-                                                            @endif
+
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -131,20 +115,12 @@
                             <div class="input-group mb-3">
                                 <input type="text" name="ten_color" class="form-control" placeholder="Nhập tên màu"
                                     value="{{ old('ten_color') }}" required>
-                                @if ($errors->has('ten_color'))
-                                    <div class="invalid-feedback d-block">
-                                        {{ $errors->first('ten_color') }}
-                                    </div>
-                                @endif
+
 
                                 <input type="text" name="ma_mau" class="form-control"
                                     placeholder="Nhập mã màu (ví dụ: #ff0000)" id="maMauInput" required>
 
-                                @if ($errors->has('ma_mau'))
-                                    <div class="invalid-feedback d-block">
-                                        {{ $errors->first('ma_mau') }}
-                                    </div>
-                                @endif
+
 
                                 <button type="submit" class="btn btn-primary">Thêm Màu</button>
                             </div>
@@ -201,29 +177,19 @@
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="editSizeModalLabel">Sửa Kích Thước
                                                         </h5>
-
-
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="form-group">
                                                             <label for="ten_size">Tên Kích Thước</label>
                                                             <input type="text" name="ten_size" class="form-control"
                                                                 value="{{ $size->ten_size }}" required>
-                                                            @if ($errors->has('ten_size'))
-                                                                <div class="invalid-feedback d-block">
-                                                                    {{ $errors->first('ten_size') }}
-                                                                </div>
-                                                            @endif
+
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="gia">Giá</label>
                                                             <input type="number" name="gia" class="form-control"
                                                                 value="{{ $size->gia }}" required>
-                                                            @if ($errors->has('gia'))
-                                                                <div class="invalid-feedback d-block">
-                                                                    {{ $errors->first('gia') }}
-                                                                </div>
-                                                            @endif
+
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -244,11 +210,6 @@
                             <div class="input-group mb-3">
                                 <input type="text" name="ten_size" class="form-control"
                                     placeholder="Nhập tên kích thước" value="{{ old('ten_size') }}" required>
-                                @if ($errors->has('ten_size'))
-                                    <div class="invalid-feedback d-block">
-                                        {{ $errors->first('ten_size') }}
-                                    </div>
-                                @endif
                                 <button type="submit" class="btn btn-primary">Thêm Kích Thước</button>
                             </div>
                         </form>
@@ -258,51 +219,73 @@
         </div>
     </div>
     <script>
-        // Lấy danh sách màu sắc và kích thước đã có từ db
-        var existingColors = @json($colors->pluck('ten_color'));
-        var existingSizes = @json($sizes->pluck('ten_size'));
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
 
-        // Kiểm tra màu sắc trùng
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        @endif
+
+        // Lấy danh sách màu sắc và kích thước từ server
+        var existingColors = @json($colors->map(fn($color) => strtolower($color)));
+        var existingSizes = @json($sizes->pluck('ten_size')->map(fn($size) => strtolower($size)));
+
         document.querySelector('form[action="{{ route('variants.colors.store') }}"]').addEventListener('submit', function(
             event) {
-            var newColor = document.querySelector('input[name="ten_color"]').value;
-            if (existingColors.includes(newColor)) {
+            var newColor = document.querySelector('input[name="ten_color"]').value.trim().toLowerCase();
+
+            // Kiểm tra trùng lặp với danh sách màu đã có
+            if (existingColors.some(color => color.trim().toLowerCase() === newColor)) {
                 event.preventDefault();
-                alert('Màu này đã tồn tại! Vui lòng nhập màu khác.');
+                toastr.error('Tên màu này đã tồn tại! Vui lòng nhập tên khác.');
             }
         });
 
-        // Kiểm tra kích thước trùng
+
+        // Kiểm tra trùng kích thước
         document.querySelector('form[action="{{ route('variants.sizes.store') }}"]').addEventListener('submit', function(
             event) {
-            var newSize = document.querySelector('input[name="ten_size"]').value;
+            var newSize = document.querySelector('input[name="ten_size"]').value.trim().toLowerCase();
             if (existingSizes.includes(newSize)) {
                 event.preventDefault();
-                alert('Kích thước này đã tồn tại! Vui lòng nhập kích thước khác.');
+                toastr.error('Kích thước này đã tồn tại! Vui lòng nhập kích thước khác.');
             }
         });
 
+        // Kiểm tra mã màu hợp lệ
         document.getElementById('maMauInput').addEventListener('input', function() {
             const colorValue = this.value;
-
-            // Kiểm tra mã màu hợp lệ
             if (/^#([0-9A-F]{3}){1,2}$/i.test(colorValue)) {
-                this.style.backgroundColor = colorValue; // Cập nhật màu nền
-                this.classList.add('valid'); // Thêm lớp để thay đổi màu chữ
+                this.style.backgroundColor = colorValue;
+                this.classList.add('valid');
+                this.classList.remove('invalid');
             } else {
-                this.style.backgroundColor = 'transparent'; // Đặt lại màu nền nếu không hợp lệ
-                this.classList.remove('valid'); // Xóa lớp nếu không hợp lệ
+                this.style.backgroundColor = 'transparent';
+                this.classList.add('invalid');
+                this.classList.remove('valid');
             }
         });
+
+        // Hiển thị modal
         $(document).ready(function() {
             $('.btn-warning').click(function() {
                 var colorId = $(this).data('target');
                 $(colorId).modal('show');
             });
         });
+
+        // Reset modal khi đóng
         $('#editColorModal{{ $color->id }}').on('hidden.bs.modal', function() {
-            $(this).find("form")[0].reset(); // Reset form khi đóng
+            $(this).find('form')[0].reset();
+            $(this).find('.valid').removeClass('valid');
+            $(this).find('.invalid').removeClass('invalid');
         });
     </script>
-
 @endsection

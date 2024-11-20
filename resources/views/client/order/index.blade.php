@@ -157,6 +157,23 @@
                                 <td class="text-center" style="font-size:16px;">
                                     <span>{{ number_format($item->price, 0, ',', '.') }}₫</span>
                                 </td>
+                                {{--  --}}
+                                <input type="hidden" name="cart_items[{{ $item->id }}][san_pham_id]"
+                                    value="{{ $item->san_pham->id }}">
+                                <input type="hidden" name="cart_items[{{ $item->id }}][variant_id]"
+                                    value="{{ $item->variant_id }}">
+                                <input type="hidden" name="cart_items[{{ $item->id }}][size_id]"
+                                    value="{{ $item->size_san_pham_id }}">
+                                <input type="hidden" name="cart_items[{{ $item->id }}][color_id]"
+                                    value="{{ $item->color_san_pham_id }}">
+                                <input type="hidden" name="cart_items[{{ $item->id }}][quantity]"
+                                    value="{{ $item->quantity }}">
+                                <input type="hidden" name="cart_items[{{ $item->id }}][price]"
+                                    value="{{ $item->price }}">
+                                <input type="hidden" name="cart_items[{{ $item->id }}][gia_tien]"
+                                    value="{{ $item->san_pham->gia_km ?? $item->san_pham->gia_ban }}">
+
+
                             </tr>
                         @endforeach
                     </tbody>
@@ -223,7 +240,8 @@
                                                             alt="VNPay Logo" class="icon-image">
                                                     @elseif ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Ví')
                                                         <i class="fas fa-wallet text-success ms-2 icon-size"></i>
-                                                        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                                                        <link
+                                                            href="https://fonts.googleapis.com/icon?family=Material+Icons"
                                                             rel="stylesheet">
                                                     @endif
                                                 </div>
@@ -253,6 +271,7 @@
                                         <span>{{ number_format($total, 0, ',', '.') }}₫</span>
                                     </li>
                                 </ul>
+
                                 <ul>
                                     <li>
                                         <div class="row">

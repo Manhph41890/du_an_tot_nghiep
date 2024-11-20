@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                            </div> -->
+                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                            </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -463,6 +463,7 @@
                                                     <tbody>
                                                         @foreach ($lsRutVi as $item)
                                                             <tr>
+                                                                <td>{{ $item->id }}</td>
                                                                 <td>{{ $item->bank?->name }}</td>
                                                                 <td>{{ $item->bank?->account_number }}</td>
                                                                 <td>{{ $item->bank?->account_holder }}</td>
@@ -476,16 +477,37 @@
                                                                         $statusClasses = [
                                                                             'Thành công' => 'bg-success',
                                                                             'Chờ duyệt' => 'bg-warning',
+                                                                            'Thất bại' => 'bg-danger',
                                                                         ];
                                                                         $class =
-                                                                            $statusClasses[
-                                                                                $item->trang_thai
-                                                                            ] ?? 'bg-secondary';
+                                                                            $statusClasses[$item->trang_thai] ??
+                                                                            'bg-secondary';
                                                                     @endphp
 
-                                                                    <span class="badge position-static {{ $class }}">
-                                                                     {{ $item->trang_thai }} 
-                                                                    </span>
+                                                                    @if ($item->trang_thai === 'Thành công' || $item->trang_thai === 'Chờ duyệt')
+                                                                        <span
+                                                                            class="badge position-static {{ $class }}">
+                                                                            {{ $item->trang_thai }}
+                                                                        </span>
+                                                                    @endif
+
+
+                                                                    @if ($item->trang_thai === 'Thất bại')
+                                                                        <button type="button"
+                                                                            class=" badge position-static {{ $class }}"
+                                                                            data-bs-toggle="popover" title="Lý do"
+                                                                            data-bs-content="{{ $item->noi_dung_tu_choi }}">
+                                                                            {{ $item->trang_thai }}
+                                                                        </button>
+                                                                    @endif
+
+                                                                    <script>
+                                                                        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+                                                                        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+                                                                            return new bootstrap.Popover(popoverTriggerEl);
+                                                                        });
+                                                                    </script>
+
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -512,7 +534,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary">Xem chi tiết</button>
+                                        {{-- <button type="button" class="btn btn-primary">Xem chi tiết</button> --}}
                                     </div>
                                 </div>
                             </div>

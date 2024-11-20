@@ -312,11 +312,14 @@
                     if (checkbox.checked) {
                         const price = parseInt(checkbox.getAttribute('data-price'));
                         selectedItems.push(checkbox.getAttribute('data-id'));
-                        shipping = 30000; // 
-                        totalPrice += price + shipping;
+                        totalPrice += price;
                     }
                 });
-
+                // Nếu có ít nhất 1 sản phẩm được chọn, cộng phí vận chuyển một lần
+                if (selectedItems.length > 0) {
+                    shipping = 30000; // Cộng phí vận chuyển chỉ một lần
+                }
+                totalPrice += shipping; // Cộng phí vận chuyển vào tổng giá trị
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
                 shippingEl.textContent = shipping.toLocaleString() + ' đ';
                 removeButton.style.display = selectedItems.length > 0 ? 'inline-block' :

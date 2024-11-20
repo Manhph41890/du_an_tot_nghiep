@@ -18,7 +18,8 @@ class VariantController extends Controller
     public function create()
     {
         $colors = color_san_pham::pluck('ten_color'); // Lấy tất cả tên màu từ bảng
-        return view('admin.variant.index', compact('colors'));
+        $sizes = size_san_pham::pluck('ten_size'); // 
+        return view('admin.variant.index', compact('colors', 'sizes'));
     }
 
 

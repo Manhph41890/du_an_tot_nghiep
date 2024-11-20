@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\OrderConfirmationMail;
 use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\chi_tiet_don_hang;
 use App\Models\don_hang;
 use App\Models\khuyen_mai;
@@ -33,29 +34,19 @@ class OrderController extends Controller
             'dia_chi' => 'required|string|max:255',
             'phuong_thuc_thanh_toan' => 'required|integer|exists:phuong_thuc_thanh_toans,id',
             'khuyen_mai' => 'nullable|string|max:255',
+            'cart_items' => 'required|array',
+            'cart_items.*.san_pham_id' => 'required|exists:san_phams,id',
+            'cart_items.*.variant_id' => 'nullable|exists:bien_the_san_phams,id',
+            'cart_items.*.size_id' => 'nullable|exists:size_san_phams,id',
+            'cart_items.*.color_id' => 'nullable|exists:color_san_phams,id',
+            'cart_items.*.quantity' => 'required|integer|min:1',
+            'cart_items.*.price' => 'required|numeric|min:0',
         ]);
 
-        // Lấy danh sách sản phẩm được chọn từ request
-        $selectedProductIds = $request->input('selected_products', []);
-
-        // Lấy giỏ hàng của người dùng và lọc các sản phẩm được chọn
-        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')
-            ->where('user_id', Auth::id())
-            ->first();
-
-        if (!$cart) {
-            return view('cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
-        }
-
-        // Lọc các sản phẩm được chọn dựa trên selectedProductIds
-        $cartItems = $cart->cartItems->filter(function ($item) use ($selectedProductIds) {
-            return in_array($item->id, $selectedProductIds);
-        });
-
-        $total = $cart->cartItems->sum(fn($item) => $item->price);
+        $totall = $request->totall;
+        $total = $request->total;
 
         $discount = 0;
-
         if ($validatedData['khuyen_mai']) {
             $coupon = khuyen_mai::where('ma_khuyen_mai', $validatedData['khuyen_mai'])
                 ->where('ngay_bat_dau', '<=', now())
@@ -72,21 +63,13 @@ class OrderController extends Controller
                 if ($alreadyUsed) {
                     return redirect()->back()->with('error', 'Bạn đã sử dụng mã giảm giá này trước đó.');
                 }
-
-                // Áp dụng giảm giá
                 $discount = $coupon->gia_tri_khuyen_mai;
                 $total -= $discount;
+                // Áp dụng giảm giá
             } else {
                 return redirect()->back()->with('error', 'Mã khuyến mãi không hợp lệ hoặc đã hết hạn.');
             }
         }
-
-
-        $shippingCost = 30000;
-        $totall = $total + $shippingCost;
-
-        // Tính `newTotal` sau khi áp dụng giảm giá
-        $newTotal = $coupon ? ($totall - $coupon->gia_tri_khuyen_mai) : $totall;
 
         // Lấy phương thức thanh toán từ request
         $paymentMethodId = $validatedData['phuong_thuc_thanh_toan'];
@@ -199,47 +182,47 @@ class OrderController extends Controller
 
             // Lưu chi tiết đơn hàng từ giỏ hàng
             $orderId = $order->id;
-            foreach ($cart->cartItems as $item) {
-                $orderDetail = new chi_tiet_don_hang();
-                $orderDetail->don_hang_id = $orderId;
-                $orderDetail->san_pham_id = $item->san_pham_id;
-                $orderDetail->color_san_pham_id = $item->color_san_pham_id;
-                $orderDetail->size_san_pham_id = $item->size_san_pham_id;
-                $orderDetail->so_luong = $item->quantity;
-                $orderDetail->gia_tien = $item->san_pham->gia_km ?? $item->san_pham->gia_ban;
-                $orderDetail->thanh_tien = $item->price;
-                $orderDetail->save();
-            }
-            if ($coupon) {
-                DB::table('coupon_usages')->insert([
-                    'user_id' => $user->id,
-                    'coupon_id' => $coupon->id,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+            foreach ($validatedData['cart_items'] as $item) {
+                chi_tiet_don_hang::create([
+                    'don_hang_id' => $order->id,
+                    'san_pham_id' => $item['san_pham_id'],
+                    'bien_the_id' => $item['variant_id'] ?? null,
+                    'size_id' => $item['size_id'] ?? null,
+                    'color_id' => $item['color_id'] ?? null,
+                    'so_luong' => $item['quantity'],
+                    'don_gia' => $item['price'],
                 ]);
-            }
+                if ($coupon) {
+                    DB::table('coupon_usages')->insert([
+                        'user_id' => $user->id,
+                        'coupon_id' => $coupon->id,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
 
 
-            // Giảm số lượng mã khuyến mãi
-            if ($coupon) {
-                $coupon->so_luong_ma -= 1;
-                $coupon->save();
-            }
+                // Giảm số lượng mã khuyến mãi
+                if ($coupon) {
+                    $coupon->so_luong_ma -= 1;
+                    $coupon->save();
+                }
 
-            $variant = $item->san_pham->bien_the_san_phams()->where('color_san_pham_id', $item->color_san_pham_id)
-                ->where('size_san_pham_id', $item->size_san_pham_id)
-                ->first();
+                $variant = $item->san_pham->bien_the_san_phams()->where('color_san_pham_id', $item->color_san_pham_id)
+                    ->where('size_san_pham_id', $item->size_san_pham_id)
+                    ->first();
 
-            if ($variant) {
-                // Giảm số lượng của biến thể sản phẩm
-                $variant->so_luong -= $item->quantity;
-                $variant->save();
-            }
-            // Trừ số lượng sản phẩm trong kho
-            $product = san_pham::find($item->san_pham_id);
-            if ($product) {
-                $product->so_luong -= $item->quantity;  // Trừ số lượng sản phẩm
-                $product->save();
+                if ($variant) {
+                    // Giảm số lượng của biến thể sản phẩm
+                    $variant->so_luong -= $item->quantity;
+                    $variant->save();
+                }
+                // Trừ số lượng sản phẩm trong kho
+                $product = san_pham::find($item->san_pham_id);
+                if ($product) {
+                    $product->so_luong -= $item->quantity;  // Trừ số lượng sản phẩm
+                    $product->save();
+                }
             }
 
             // Lưu thông tin lịch sử thanh toán vào bảng lich_su_thanh_toan
@@ -274,8 +257,10 @@ class OrderController extends Controller
             });
 
             // Xóa giỏ hàng sau khi đặt hàng thành công
-            $cart->cartItems()->delete();
-            $cart->delete();
+            CartItem::where('cart_id', $item['cart_id'])
+                ->where('san_pham_id', $item['san_pham_id'])
+                ->where('variant_id', $item['variant_id'])
+                ->delete();
 
             return redirect()->route('order.success_nhanhang')->with('success', 'Đặt hàng thành công!');
         } else {
@@ -292,54 +277,60 @@ class OrderController extends Controller
             $order->phuong_thuc_thanh_toan_id = $validatedData['phuong_thuc_thanh_toan'];
             $order->phuong_thuc_van_chuyen_id = 9;
             $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
-            $order->tong_tien = $totall;
+            $order->tong_tien =  $totall;
             $order->trang_thai_don_hang = 'Chờ xác nhận';
             $order->trang_thai_thanh_toan = 'Chưa thanh toán';
             $order->save();
 
+
+            $cartItemsToDelete = $validatedData['cart_items']; // Mảng chứa các sản phẩm trong giỏ
+
             // Lưu chi tiết đơn hàng từ giỏ hàng
-            $orderId = $order->id;
-            foreach ($cart->cartItems as $item) {
-                $orderDetail = new chi_tiet_don_hang();
-                $orderDetail->don_hang_id = $orderId;
-                $orderDetail->san_pham_id = $item->san_pham_id;
-                $orderDetail->color_san_pham_id = $item->color_san_pham_id;
-                $orderDetail->size_san_pham_id = $item->size_san_pham_id;
-                $orderDetail->so_luong = $item->quantity;
-                $orderDetail->gia_tien = $item->san_pham->gia_km ?? $item->san_pham->gia_ban;
-                $orderDetail->thanh_tien = $item->price;
-                $orderDetail->save();
-            }
-            if ($coupon) {
-                DB::table('coupon_usages')->insert([
-                    'user_id' => $user->id,
-                    'coupon_id' => $coupon->id,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+            foreach ($validatedData['cart_items'] as $item) {
+                chi_tiet_don_hang::create([
+                    'don_hang_id' => $order->id,
+                    'san_pham_id' => $item['san_pham_id'],
+                    'size_san_pham_id' => $item['size_id'] ?? null,
+                    'color_san_pham_id' => $item['color_id'] ?? null,
+                    'so_luong' => $item['quantity'],
+                    'gia_tien' => $item['price'],
+                    'thanh_tien' => $totall,
+
                 ]);
-            }
+                if ($coupon) {
+                    DB::table('coupon_usages')->insert([
+                        'user_id' => $user->id,
+                        'coupon_id' => $coupon->id,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
 
 
-            // Giảm số lượng mã khuyến mãi
-            if ($coupon) {
-                $coupon->so_luong_ma -= 1;
-                $coupon->save();
-            }
+                // Giảm số lượng mã khuyến mãi
+                if ($coupon) {
+                    $coupon->so_luong_ma -= 1;
+                    $coupon->save();
+                }
 
-            $variant = $item->san_pham->bien_the_san_phams()->where('color_san_pham_id', $item->color_san_pham_id)
-                ->where('size_san_pham_id', $item->size_san_pham_id)
-                ->first();
+                $sanPham = san_pham::find($item['san_pham_id']);
+                $variant = $sanPham->bien_the_san_phams()
+                    ->where('color_san_pham_id', $item['color_id'])
+                    ->where('size_san_pham_id', $item['size_id'])
+                    ->first();
 
-            if ($variant) {
-                // Giảm số lượng của biến thể sản phẩm
-                $variant->so_luong -= $item->quantity;
-                $variant->save();
-            }
-            // Trừ số lượng sản phẩm trong kho
-            $product = san_pham::find($item->san_pham_id);
-            if ($product) {
-                $product->so_luong -= $item->quantity;  // Trừ số lượng sản phẩm
-                $product->save();
+
+                if ($variant) {
+                    // Giảm số lượng của biến thể sản phẩm
+                    $variant->so_luong -= $item['quantity'];
+                    $variant->save();
+                }
+                // Trừ số lượng sản phẩm trong kho
+                $product = san_pham::find($item['san_pham_id']);
+                if ($product) {
+                    $product->so_luong -= $item['quantity'];  // Trừ số lượng sản phẩm
+                    $product->save();
+                }
             }
 
             Mail::send('auth.success_order', [
@@ -351,8 +342,13 @@ class OrderController extends Controller
             });
 
             // Xóa giỏ hàng sau khi đặt hàng thành công
-            $cart->cartItems()->delete();
-            $cart->delete();
+            // Xóa giỏ hàng sau khi đặt hàng thành công
+            foreach ($cartItemsToDelete as $item) {
+                CartItem::where('san_pham_id', $item['san_pham_id'])
+                    ->where('color_san_pham_id', $item['color_id'])
+                    ->where('size_san_pham_id', $item['size_id'])
+                    ->delete();
+            }
 
             // Gửi email với mã xác thực
 

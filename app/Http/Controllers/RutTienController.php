@@ -60,7 +60,7 @@ class RutTienController extends Controller
             'bank_id' => $request->bank_id,
         ]);
 
-        return  redirect()->route('taikhoan.rut-tien')->with('success', 'Rút tiền thành công.');
+        return  redirect()->route('taikhoan.rut-tien')->with('success', 'Yêu cầu rút đã được gửi');
     }
 
 

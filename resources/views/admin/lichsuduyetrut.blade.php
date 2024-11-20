@@ -12,28 +12,23 @@
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4>
                     </div>
+                    <form method="post" action="{{ route('duyetruttienAdmin') }}" class="d-flex">
+                        @csrf
+                        @method('GET')
+                        <input type="text" name="search_ten_nguoi_dung" class="form-control me-2"
+                            placeholder="Tìm tài khoản..." value="{{ request('search_ten_nguoi_dung') }}">
+                        <select name="search_duyetrut" class="form-select me-2">
+                            <option value="">Chọn</option>
+                            <option value="Chờ duyệt" {{ request('search_duyetrut') == 'Chờ duyệt' ? 'selected' : '' }}>Chờ
+                                duyệt</option>
+                            <option value="Thành công" {{ request('search_duyetrut') == 'Thành công' ? 'selected' : '' }}>
+                                Thành công</option>
+                            <option value="Thất bại" {{ request('search_duyetrut') == 'Thất bại' ? 'selected' : '' }}>Thất
+                                bại</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Tìm</button>
+                    </form>
                 </div>
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#menu1">Menu 1</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#menu2">Menu 2</a>
-                    </li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane container active" id="home">...</div>
-                    <div class="tab-pane container fade" id="menu1">...</div>
-                    <div class="tab-pane container fade" id="menu2">...</div>
-                </div>
-
-
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="row">

@@ -46,7 +46,7 @@ class OrderController extends Controller
         $totall = $request->totall;
         $total = $request->total;
 
-
+        $discount = 0;
         if ($validatedData['khuyen_mai']) {
             $coupon = khuyen_mai::where('ma_khuyen_mai', $validatedData['khuyen_mai'])
                 ->where('ngay_bat_dau', '<=', now())
@@ -63,7 +63,8 @@ class OrderController extends Controller
                 if ($alreadyUsed) {
                     return redirect()->back()->with('error', 'Bạn đã sử dụng mã giảm giá này trước đó.');
                 }
-
+                $discount = $coupon->gia_tri_khuyen_mai;
+                $total -= $discount;
                 // Áp dụng giảm giá
             } else {
                 return redirect()->back()->with('error', 'Mã khuyến mãi không hợp lệ hoặc đã hết hạn.');

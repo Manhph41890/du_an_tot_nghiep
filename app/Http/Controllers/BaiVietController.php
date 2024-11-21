@@ -101,18 +101,6 @@ class BaiVietController extends Controller
         return view('admin.baiviet.show', compact('post', 'user', 'title'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit(bai_viet $bai_viet, $id)
-    // {
-    //     $this->authorize('update', bai_viet::class);
-    //     //Tim bài viết theo id
-    //     $post = bai_viet::findOrFail($id);
-    //     $user = User::query()->pluck('ho_ten', 'id')->all();
-    //     $title = "Sửa bài viết";
-    //     return view('admin.baiviet.edit', compact('post', 'user', 'title'));
-    // }
     public function edit(bai_viet $baiViet, $id)
     {
         // Xác thực quyền chỉnh sửa bài viết
@@ -169,9 +157,9 @@ class BaiVietController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id,bai_viet $baiViet)
     {
-        $this->authorize('delete', bai_viet::class);
+        $this->authorize('delete', $baiViet);
         try {
             DB::beginTransaction();
 

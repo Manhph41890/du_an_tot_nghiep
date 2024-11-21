@@ -41,36 +41,12 @@
                                     <a class="nav-link {{ !request('status') ? 'active' : '' }}"
                                         href="{{ route('donhangs.index') }}">Tất cả</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link {{ request('status') == 'Chờ xác nhận' ? 'active' : '' }}"
-                                        href="{{ route('donhangs.index', ['status' => 'Chờ xác nhận']) }}">Chờ xác nhận</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link {{ request('status') == 'Đã xác nhận' ? 'active' : '' }}"
-                                        href="{{ route('donhangs.index', ['status' => 'Đã xác nhận']) }}">Đã xác nhận</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link {{ request('status') == 'Đang chuẩn bị hàng' ? 'active' : '' }}"
-                                        href="{{ route('donhangs.index', ['status' => 'Đang chuẩn bị hàng']) }}">Đang chuẩn
-                                        bị hàng</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link {{ request('status') == 'Đang vận chuyển' ? 'active' : '' }}"
-                                        href="{{ route('donhangs.index', ['status' => 'Đang vận chuyển']) }}">Đang vận
-                                        chuyển</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link {{ request('status') == 'Đã giao' ? 'active' : '' }}"
-                                        href="{{ route('donhangs.index', ['status' => 'Đã giao']) }}">Đã giao</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link {{ request('status') == 'Thành công' ? 'active' : '' }}"
-                                        href="{{ route('donhangs.index', ['status' => 'Thành công']) }}">Thành công</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link {{ request('status') == 'Đã hủy' ? 'active' : '' }}"
-                                        href="{{ route('donhangs.index', ['status' => 'Đã hủy']) }}">Đã hủy</a>
-                                </li>
+                                @foreach (['Chờ xác nhận', 'Đã xác nhận', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công', 'Đã hủy'] as $status)
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link {{ request('status') == $status ? 'active' : '' }}"
+                                            href="{{ route('donhangs.index', ['status' => $status]) }}">{{ $status }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
 

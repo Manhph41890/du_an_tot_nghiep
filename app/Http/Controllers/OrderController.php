@@ -201,7 +201,7 @@ class OrderController extends Controller
                     'color_san_pham_id' => $item['color_id'] ?? null,
                     'so_luong' => $item['quantity'],
                     'gia_tien' => $item['price'],
-                    'thanh_tien' => $totall,
+                    'thanh_tien' => $total,
 
                 ]);
                 if ($coupon) {
@@ -319,7 +319,7 @@ class OrderController extends Controller
                     'color_san_pham_id' => $item['color_id'] ?? null,
                     'so_luong' => $item['quantity'],
                     'gia_tien' => $item['price'],
-                    'thanh_tien' => $totall,
+                    'thanh_tien' => $total,
 
                 ]);
                 if ($coupon) {
@@ -464,7 +464,7 @@ class OrderController extends Controller
                     'color_san_pham_id' => $item['color_id'] ?? null,
                     'so_luong' => $item['quantity'],
                     'gia_tien' => $item['price'],
-                    'thanh_tien' => $totall,
+                    'thanh_tien' => $total,
 
                 ]);
 

@@ -112,7 +112,7 @@
                             <th class="text-center" style="width: 30%; font-size:18px">Tên sản phẩm</th>
                             <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
                             <th class="text-center" style="width: 20%; font-size:18px">Phân loại</th>
-                            <th class="text-center" style="width: 20%; font-size:18px">Giá biến thể</th>
+                            <th class="text-center" style="width: 20%; font-size:18px">Giá phân loại</th>
                             <th class="text-center" style="width: 10%; font-size:18px">Số lượng</th>
                             <th class="text-center" style="width: 15%; font-size:18px">Thành tiền</th>
                         </tr>

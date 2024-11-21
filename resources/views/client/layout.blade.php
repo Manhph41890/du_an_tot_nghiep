@@ -505,6 +505,7 @@
             passive: true
         });
     </script>
+    @yield('js')
 </body>
 
 </html>

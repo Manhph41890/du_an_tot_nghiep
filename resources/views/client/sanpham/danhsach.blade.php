@@ -1,31 +1,11 @@
 @extends('client.layout')
 
 @section('content')
-    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-uppercase" style=" color: #fff !important">
-                            {{ $title }}
-                        </h2>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                        <li class="breadcrumb-item"><a href="{{ route('client.home') }}">Trang chủ</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            {{ $title }}
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </nav>
+
     <div class="product-tab bg-white pt-80 pb-50">
         <div class="container">
             <div class="row">
-                <div class="col-lg-10 mb-30">
+                <div class="col-lg-10 mb-30" style="position: static;    margin-left: auto;">
                     <div class="grid-nav-wraper bg-lighten2 mb-30">
                         <div class="row align-items-center">
                             <div class="col-12 col-md-5 mb-3 mb-md-0">
@@ -195,7 +175,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 mb-30 order-lg-first bg-lighten2">
+                <div class="col-lg-2 mb-30 order-lg-first bg-lighten2 " style="width: 210px;position: fixed;overflow-y: auto;">
                     <aside class="left-sidebar theme1">
                         <div class="search-filter">
                             <form action="{{ route('client.cuahang') }}" method="post">

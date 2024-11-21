@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                                        <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                                                    </div> -->
+                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                            </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -108,8 +108,12 @@
 
                         <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Ví người dùng </a>
 
-                        <a href="{{ route('auth.logout') }}" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng
-                            xuất</a>
+                        <a href="#" data-bs-toggle="tab">
+                            <form action="{{ route('auth.logout') }}" method="post">
+                                @csrf
+                                <button><i class="fa fa-credit-card"></i> ĐĂNG XUẤT</button>
+                            </form>
+                        </a>
 
                     </div>
                 </div>
@@ -493,8 +497,7 @@
                                                                             VNĐ
                                                                         </td>
                                                                         <td>
-                                                                            <span
-                                                                                class="badge position-static bg-warning">
+                                                                            <span class="badge position-static bg-warning">
                                                                                 {{ $item->trang_thai }}
                                                                             </span>
                                                                         </td>
@@ -507,22 +510,24 @@
                                                         <table class="table table-bordered">
                                                             <tbody>
                                                                 @foreach ($lsRutVi_thanhcong as $item)
-                                                                <tr>
-                                                                    <td>{{ $item->bank?->name }}</td>
-                                                                    <td>{{ $item->bank?->account_number }}</td>
-                                                                    <td>{{ $item->bank?->account_holder }}</td>
-                                                                    <td>{{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i:s') : 'Chưa có thời gian' }}</td> <!-- Hiển thị thời gian -->
-                                                                    <td class="transaction-amount negative">
-                                                                        {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
-                                                                    </td>
-                                                                    <td>
-                                                                        <span class="badge position-static bg-success">
-                                                                            {{ $item->trang_thai }}
-                                                                        </span>
-                                                                    </td>
-                                                                </tr>
+                                                                    <tr>
+                                                                        <td>{{ $item->bank?->name }}</td>
+                                                                        <td>{{ $item->bank?->account_number }}</td>
+                                                                        <td>{{ $item->bank?->account_holder }}</td>
+                                                                        <td>{{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i:s') : 'Chưa có thời gian' }}
+                                                                        </td> <!-- Hiển thị thời gian -->
+                                                                        <td class="transaction-amount negative">
+                                                                            {{ number_format($item->tien_rut, 0, ',', '.') }}
+                                                                            VNĐ
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="badge position-static bg-success">
+                                                                                {{ $item->trang_thai }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
                                                                 @endforeach
-                                                                
+
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -559,7 +564,7 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>

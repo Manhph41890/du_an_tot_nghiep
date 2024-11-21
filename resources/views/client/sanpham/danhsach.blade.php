@@ -1,7 +1,7 @@
 @extends('client.layout')
 
 @section('content')
-    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
+    {{-- <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -21,7 +21,32 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </nav> --}}
+    {{-- mã giảm giá 'voucher' --}}
+    <section class="discount-codes">
+        <div class="discount-list">
+            @foreach ($discounts as $item)
+                <div class="discount-item">
+                    <div class="discount-code">
+                        <span class="code">{{ $item->ma_khuyen_mai }}</span>
+                    </div>
+                    <div class="discount-description">
+                        <p>Giảm <span class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
+                            VNĐ cho tất cả các sản phẩm.
+                        </p>
+                    </div>
+                    <button style="font-size: 1em" class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
+                        chép mã</button>
+                </div>
+            @endforeach
+        </div>
+        <!-- Modal -->
+        <div id="copyModal" class="copy-modal">
+            <div class="modal-content">
+                <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
+            </div>
+        </div>
+    </section>
     <div class="product-tab bg-white pt-80 pb-50">
         <div class="container">
             <div class="row">
@@ -203,7 +228,8 @@
                                 @method('GET')
                                 <div class="">
                                     <div class="header-sidebar mt-3">
-                                        <div class="d-flex justify-content-center rounded " style="background-color: #5b5bad;">
+                                        <div class="d-flex justify-content-center rounded "
+                                            style="background-color: #5b5bad;">
                                             <h5 class="title m-2 text-white" style="font-weight:600">LỌC THEO</h5>
                                         </div>
                                         {{-- <button type="submit" class="btn btn-primary sidebar-loc rounded-2">Lọc</button> --}}
@@ -310,246 +336,29 @@
             /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
         }
     </style>
-    <!-- Modal cho từng sản phẩm -->
-    {{-- @foreach ($list_sanphams as $item)
-        <div class="modal fade theme1 style1" id="quickview{{ $item->id }}" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-8 mx-auto col-lg-5 mb-5 mb-lg-0">
-                                <div>
-                                    <div class="position-relative">
-                                        <span class="badge badge-danger top-right">{{ $item->phantramgia }}%</span>
-                                    </div>
-                                    <div class="product-sync-init mb-20">
-                                        <!-- Ảnh sản phẩm chính -->
-                                        <div class="single-product main-product">
-                                            <div class="product-thumb">
-                                                <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
-                                                    alt="Ảnh sản phẩm chính">
-                                            </div>
-                                        </div>
+    <script>
+        function copyCode(code) {
+            var tempInput = document.createElement("input");
+            tempInput.value = code;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showCopyModal("Mã giảm giá đã được sao chép: " + code);
 
-                                        <!-- Ảnh các biến thể sản phẩm -->
-                                        @foreach ($item->bien_the_san_phams as $bien_the)
-                                            <div class="single-product variant-product">
-                                                <div class="product-thumb">
-                                                    <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
-                                                        alt="Ảnh biến thể sản phẩm">
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
+        }
 
-                                <!-- Thanh điều hướng ảnh (thumbnail) -->
-                                <div class="product-sync-nav single-product">
-                                    <!-- Ảnh sản phẩm chính -->
-                                    <div class="single-product thumbnail">
-                                        <div class="product-thumb">
-                                            <a href="javascript:void(0)"
-                                                onclick="showMainImage('{{ asset('/storage/' . $item->anh_san_pham) }}')">
-                                                <img src="{{ asset('/storage/' . $item->anh_san_pham) }}"
-                                                    alt="Thumbnail sản phẩm chính">
-                                            </a>
-                                        </div>
-                                    </div>
+        function showCopyModal(message) {
+            var modal = document.getElementById("copyModal");
+            var modalMessage = document.getElementById("copyMessage");
 
-                                    <!-- Thumbnail ảnh biến thể sản phẩm -->
-                                    @foreach ($item->bien_the_san_phams as $bien_the)
-                                        <div class="single-product thumbnail">
-                                            <div class="product-thumb">
-                                                <a href="javascript:void(0)"
-                                                    onclick="showMainImage('{{ asset('/storage/' . $bien_the->anh_bien_the) }}')">
-                                                    <img src="{{ asset('/storage/' . $bien_the->anh_bien_the) }}"
-                                                        alt="Thumbnail biến thể sản phẩm">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="modal-product-info">
-                                    <div class="product-head">
-                                        <h2 class="title">{{ $item->ten_san_pham }}</h2>
-                                        <h4 class="sub-title">Danh mục: {{ $item->danh_muc->ten_danh_muc }}</h4>
-                                        <div class="star-content mb-20">
-                                            @if ($item->danh_gia > 0)
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    @if ($i <= floor($item->danh_gia))
-                                                        <span class="star-on"><i class="fas fa-star"></i></span>
-                                                    @else
-                                                        <span class="star-on de-selected"><i
-                                                                class="fas fa-star"></i></span>
-                                                    @endif
-                                                @endfor
-                                            @endif
-                                        </div>
-                                    </div>
+            modalMessage.textContent = message;
 
-                                    <div class="product-body">
-                                        <span class="product-price text-center">
-                                            <p class="new-price">
-                                                <del class="text-secondary">{{ $item->gia_goc }}</del>
-                                                <span class="ms-2">{{ $item?->gia_km }} VNĐ</span>
-                                            </p>
-                                        </span>
-                                        <p>{{ $item?->mo_ta_san_pham }}</p>
-                                    </div>
+            modal.classList.add("show");
 
-                                    <form id="add-to-cart-form{{ $item->id }}" method="POST"
-                                        action="{{ route('cart.add') }}">
-                                        @csrf <!-- Thêm token CSRF để bảo mật -->
-
-                                        <!-- Hidden field for san_pham_id -->
-                                        <input type="hidden" name="san_pham_id" value="{{ $item->id }}">
-
-                                        <div class="d-flex mt-30">
-                                            <div class="product-size col-3">
-                                                <h3 class="title">Size</h3>
-                                                <select class="mt-0" id="size_san_pham_id{{ $item->id }}"
-                                                    name="size_san_pham_id">
-                                                    <option value="">Chọn</option>
-                                                    <!-- Thêm tùy chọn "Chọn kích thước" -->
-                                                    @foreach ($item->bien_the_san_phams as $bien_the)
-                                                        <option value="{{ $bien_the->size->id }}">
-                                                            {{ $bien_the->size->ten_size }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <span id="size-error{{ $item->id }}" class="text-danger"
-                                                    style="display: none;">Vui lòng
-                                                    chọn size!</span>
-                                            </div>
-                                            <div class="product-size col-3">
-                                                <h3 class="title">Màu sắc</h3>
-                                                <div class="d-flex">
-                                                    @foreach ($item->bien_the_san_phams as $bien_the)
-                                                        <div class="widget-check-box color-grey">
-                                                            <input type="radio"
-                                                                id="color-{{ $item->id }}-{{ $bien_the->id }}"
-                                                                name="color" value="{{ $bien_the->color->id }}"
-                                                                @if (isset($request->color[$item->id]) && $request->color[$item->id] == $bien_the->color->id) checked @endif />
-                                                            <label for="color-{{ $item->id }}-{{ $bien_the->id }}">
-                                                                {{ $bien_the->color->ten_color }}
-                                                            </label>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                                <span id="color-error{{ $item->id }}" class="text-danger"
-                                                    style="display: none;">Vui
-                                                    lòng chọn màu!</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-footer">
-                                            <div class="product-count style d-flex flex-column flex-sm-row my-4">
-                                                <div class="count d-flex">
-                                                    <input type="number" name="quantity" min="1" max="10"
-                                                        step="1" value="1" required />
-                                                    <div class="button-group">
-                                                        <button type="button" class="count-btn increment"
-                                                            onclick="incrementQuantity()">
-                                                            <i class="fas fa-chevron-up"></i>
-                                                        </button>
-                                                        <button type="button" class="count-btn decrement"
-                                                            onclick="decrementQuantity()">
-                                                            <i class="fas fa-chevron-down"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
-                                                        <span class="me-2"><i class="ion-android-add"></i></span>
-                                                        Thêm giỏ hàng
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <style>
-            .min_h {
-                display: -webkit-box;
-                -webkit-line-clamp: 1;
-                /* Số dòng */
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .sub-title{
-                font-size: 18px;
-            }
-        </style>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('add-to-cart-form{{ $item->id }}').addEventListener('submit', function(
-                    event) {
-                    const sizeSelect = document.getElementById('size_san_pham_id{{ $item->id }}');
-                    const sizeError = document.getElementById('size-error{{ $item->id }}');
-                    const colorError = document.getElementById('color-error{{ $item->id }}');
-                    let isValid = true;
-
-                    // Kiểm tra size
-                    if (sizeSelect.value === "") {
-                        sizeError.style.display = 'block'; // Hiện thông báo lỗi cho size
-                        isValid = false;
-                    } else {
-                        sizeError.style.display = 'none'; // Ẩn thông báo lỗi cho size
-                    }
-
-                    // Kiểm tra nếu không có màu nào được chọn
-                    const colorRadios = document.querySelectorAll('input[name="color"]:checked');
-                    if (colorRadios.length === 0) {
-                        colorError.style.display = 'block'; // Hiện thông báo lỗi cho màu
-                        isValid = false;
-                    } else {
-                        colorError.style.display = 'none'; // Ẩn thông báo lỗi cho màu
-                    }
-
-                    // Nếu không hợp lệ, ngăn không cho gửi form
-                    if (!isValid) {
-                        event.preventDefault(); // Ngăn gửi form
-                    }
-                });
-            });
-            // Hàm tăng số lượng
-            function incrementQuantity() {
-                const quantityInput = document.querySelector('input[name="quantity"]');
-                let quantity = parseInt(quantityInput.value);
-                if (quantity < 10) {
-                    quantityInput.value = quantity + 1;
-                }
-            }
-
-            // Hàm giảm số lượng
-            function decrementQuantity() {
-                const quantityInput = document.querySelector('input[name="quantity"]');
-                let quantity = parseInt(quantityInput.value);
-                if (quantity > 1) {
-                    quantityInput.value = quantity - 1;
-                }
-            }
-
-            function showMainImage(imageUrl) {
-                // Tìm phần tử của ảnh chính
-                const mainImage = document.querySelector('.main-product .product-thumb img');
-                if (mainImage) {
-                    mainImage.src = imageUrl;
-                }
-            }
-        </script>
-    @endforeach --}}
+            setTimeout(function() {
+                modal.classList.remove("show");
+            }, 3000);
+        }
+    </script>
 @endsection

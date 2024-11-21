@@ -66,6 +66,8 @@ Route::prefix('client')->group(function () {
     // Route từ chối hủy đơn hàng
     Route::post('/huydonhang/{id}/reject', [HuyDonHangController::class, 'rejectCancel'])->name('huydonhang.reject');
 
+    Route::post('/donhang/success/{id}', [TaiKhoanController::class, 'successOrder'])->name('donhangs.success');
+
     Route::get('/taikhoan/lichsugd/{id}', [TaiKhoanController::class, 'history'])->name('taikhoan.lichsugd');
     // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
 

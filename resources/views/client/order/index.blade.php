@@ -285,7 +285,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="clearfix"><em><strong>Số tiền được giảm</strong></em> <span> 0</span>
+                                    {{-- <li class="clearfix"><em><strong>Số tiền được giảm</strong></em> <span> 0</span> --}}
                                 </ul>
                                 <ul style="border-bottom: 1px solid #ededed !important;">
                                     <li class="clearfix"><em><strong>Tiền vận chuyển</strong></em> <span> 30.000 đ</span>

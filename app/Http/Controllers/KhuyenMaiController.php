@@ -142,18 +142,7 @@ class KhuyenMaiController extends Controller
      */
     public function update(Updatekhuyen_maiRequest $request, khuyen_mai $khuyen_mai, string $id)
     {
-        // if ($request->isMethod('PUT')) {
-
-        //     $param = $request->except('_token', '_method');
-
-        //     $khuyen_mai = khuyen_mai::findOrFail($id);
-
-        //     $khuyen_mai->update($param);
-        // }
-
-        // return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
-
-
+       
         $khuyen_mai = khuyen_mai::findOrFail($id);
         $khuyen_mai->update($request->all());
 
@@ -170,11 +159,7 @@ class KhuyenMaiController extends Controller
     {
         //
 
-        // $khuyen_mai = khuyen_mai::findOrFail($id);
-        // $this->authorize('delete', $khuyen_mai);
-        // $khuyen_mai->delete();
-
-        // return redirect()->route('khuyenmais.index')->with('success', 'Cập nhật mã khuyến mãi thành công');
+    
 
         $khuyen_mai = khuyen_mai::findOrFail($id);
         $khuyen_mai->delete();

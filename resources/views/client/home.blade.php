@@ -502,7 +502,7 @@
                                                         <span
                                                             class=" bg-danger badge badge-danger top-right p-2">-{{ $sanPhamGg->phan_tram_giam_gia }}%</span>
                                                         <a href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
-                                                            <img class="first-img"
+                                                            <img  class="first-img"
                                                                 src="{{ asset('storage/' . $sanPhamGg->anh_san_pham) }}"
                                                                 alt="thumbnail" />
                                                         </a>

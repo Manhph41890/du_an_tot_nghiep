@@ -66,7 +66,7 @@
 
                                     <div class="form-group mb-3">
                                         <label for="noi_dung">Nội dung</label>
-                                        <textarea type="text" name="noi_dung" class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung', $post->noi_dung) }}</textarea>
+                                        <textarea rows="6" type="text" name="noi_dung" class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung', $post->noi_dung) }}</textarea>
                                         @error('noi_dung')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

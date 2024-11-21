@@ -508,12 +508,23 @@ class OrderController extends Controller
                 'trang_thai' => 'Thanh toán thành công',
             ]);
 
+            $user = $order->user;
+            $orderDetails = $order->chi_tiet_don_hangs;
+
             Mail::send('auth.success_order', [
                 'ho_ten' => $user->ho_ten,
                 'order' => $order,
-            ], function ($message) use ($user) {
+            ], function ($message) use ($user, $orderDetails) {
                 $message->to($user->email)
                     ->subject('Đặt hàng thành công');
+
+                foreach ($orderDetails as $chiTiet) {
+                    $imagePath = storage_path('app/public/' . $chiTiet->san_pham->anh_san_pham);
+
+                    if (file_exists($imagePath)) {
+                        $message->embed($imagePath);
+                    }
+                }
             });
 
 

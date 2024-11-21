@@ -87,10 +87,10 @@ class OrderController extends Controller
             Session::put('order_details', [
                 'user_id' => Auth::id(),
                 'khuyen_mai_id' => $validatedData['khuyen_mai'] ? $coupon->id : null,
-                'ho_ten' => $user->ho_ten ?? $validatedData['ho_ten'],
-                'so_dien_thoai' => $user->so_dien_thoai ?? $validatedData['so_dien_thoai'],
-                'email' => $user->email ?? $validatedData['email'],
-                'dia_chi' => $user->dia_chi ?? $validatedData['dia_chi'],
+                'ho_ten' => $validatedData['ho_ten'],
+                'so_dien_thoai' => $validatedData['so_dien_thoai'],
+                'email' => $validatedData['email'],
+                'dia_chi' => $validatedData['dia_chi'],
                 'phuong_thuc_thanh_toan_id' => $validatedData['phuong_thuc_thanh_toan'],
                 'phuong_thuc_van_chuyen_id' => 9,
                 'ngay_tao' => now()->timezone('Asia/Ho_Chi_Minh'),
@@ -177,10 +177,10 @@ class OrderController extends Controller
             $order = new don_hang();
             $order->user_id = Auth::id();
             $order->khuyen_mai_id = $validatedData['khuyen_mai'] ? $coupon->id : null;
-            $order->ho_ten = $user->ho_ten ?? $validatedData['ho_ten'];
-            $order->so_dien_thoai = $user->so_dien_thoai ?? $validatedData['so_dien_thoai'];
-            $order->email = $user->email ?? $validatedData['email'];
-            $order->dia_chi = $user->dia_chi ?? $validatedData['dia_chi'];
+            $order->ho_ten = $validatedData['ho_ten'];
+            $order->so_dien_thoai = $validatedData['so_dien_thoai'];
+            $order->email = $validatedData['email'];
+            $order->dia_chi = $validatedData['dia_chi'];
             $order->phuong_thuc_thanh_toan_id = $validatedData['phuong_thuc_thanh_toan'];
             $order->phuong_thuc_van_chuyen_id = 9;
             $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
@@ -201,7 +201,7 @@ class OrderController extends Controller
                     'color_san_pham_id' => $item['color_id'] ?? null,
                     'so_luong' => $item['quantity'],
                     'gia_tien' => $item['price'],
-                    'thanh_tien' => $totall,
+                    'thanh_tien' => $total,
 
                 ]);
                 if ($coupon) {
@@ -265,16 +265,16 @@ class OrderController extends Controller
             Mail::send('auth.success_order', [
                 'ho_ten' => $user->ho_ten,
                 'order' => $order,
-            ], function ($message) use ($user) {
-                $message->to($user->email)
+            ], function ($message) use ($order) {
+                $message->to($order->email)
                     ->subject('Đặt hàng thành công');
             });
 
             Mail::send('auth.success_order', [
                 'ho_ten' => $user->ho_ten,
                 'order' => $order,
-            ], function ($message) use ($user) {
-                $message->to($user->email)
+            ], function ($message) use ($order) {
+                $message->to($order->email)
                     ->subject('Đặt hàng thành công');
             });
 
@@ -295,10 +295,10 @@ class OrderController extends Controller
             $order = new don_hang();
             $order->user_id = Auth::id();
             $order->khuyen_mai_id = $validatedData['khuyen_mai'] ? $coupon->id : null;
-            $order->ho_ten = $user->ho_ten ?? $validatedData['ho_ten'];
-            $order->so_dien_thoai = $user->so_dien_thoai ?? $validatedData['so_dien_thoai'];
-            $order->email = $user->email ?? $validatedData['email'];
-            $order->dia_chi = $user->dia_chi ?? $validatedData['dia_chi'];
+            $order->ho_ten = $validatedData['ho_ten'];
+            $order->so_dien_thoai = $validatedData['so_dien_thoai'];
+            $order->email = $validatedData['email'];
+            $order->dia_chi = $validatedData['dia_chi'];
             $order->phuong_thuc_thanh_toan_id = $validatedData['phuong_thuc_thanh_toan'];
             $order->phuong_thuc_van_chuyen_id = 9;
             $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
@@ -319,7 +319,7 @@ class OrderController extends Controller
                     'color_san_pham_id' => $item['color_id'] ?? null,
                     'so_luong' => $item['quantity'],
                     'gia_tien' => $item['price'],
-                    'thanh_tien' => $totall,
+                    'thanh_tien' => $total,
 
                 ]);
                 if ($coupon) {
@@ -361,8 +361,8 @@ class OrderController extends Controller
             Mail::send('auth.success_order', [
                 'ho_ten' => $user->ho_ten,
                 'order' => $order,
-            ], function ($message) use ($user) {
-                $message->to($user->email)
+            ], function ($message) use ($order) {
+                $message->to($order->email)
                     ->subject('Đặt hàng thành công');
             });
 
@@ -440,10 +440,10 @@ class OrderController extends Controller
             $order = new don_hang();
             $order->user_id = $user->id;
             $order->khuyen_mai_id = $orderDetails['khuyen_mai'] ? $coupon->id : null;
-            $order->ho_ten = $user->ho_ten ?? $orderDetails['ho_ten'];
-            $order->so_dien_thoai = $user->so_dien_thoai ?? $orderDetails['so_dien_thoai'];
-            $order->email = $user->email ?? $orderDetails['email'];
-            $order->dia_chi = $user->dia_chi ?? $orderDetails['dia_chi'];
+            $order->ho_ten = $orderDetails['ho_ten'];
+            $order->so_dien_thoai = $orderDetails['so_dien_thoai'];
+            $order->email = $orderDetails['email'];
+            $order->dia_chi = $orderDetails['dia_chi'];
             $order->phuong_thuc_thanh_toan_id = $orderDetails['phuong_thuc_thanh_toan_id'];
             $order->phuong_thuc_van_chuyen_id = 9;
             $order->ngay_tao = now()->timezone('Asia/Ho_Chi_Minh');
@@ -464,10 +464,9 @@ class OrderController extends Controller
                     'color_san_pham_id' => $item['color_id'] ?? null,
                     'so_luong' => $item['quantity'],
                     'gia_tien' => $item['price'],
-                    'thanh_tien' => $totall,
+                    'thanh_tien' => $total,
 
                 ]);
-
 
 
                 $sanPham = san_pham::find($item['san_pham_id']);
@@ -514,8 +513,8 @@ class OrderController extends Controller
             Mail::send('auth.success_order', [
                 'ho_ten' => $user->ho_ten,
                 'order' => $order,
-            ], function ($message) use ($user, $orderDetails) {
-                $message->to($user->email)
+            ], function ($message) use ($order) {
+                $message->to($order->email)
                     ->subject('Đặt hàng thành công');
 
                 foreach ($orderDetails as $chiTiet) {

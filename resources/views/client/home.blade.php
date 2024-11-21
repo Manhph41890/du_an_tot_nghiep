@@ -51,6 +51,7 @@
         }
 
         .product-thumbnail {
+        width: 100%;
             height: 250px;
             /* Thiết lập chiều cao cố định cho phần hình ảnh sản phẩm */
             overflow: hidden;
@@ -668,40 +669,7 @@
         </div>
     </section>
     <!-- blog-section end -->
-    {{-- mã giảm giá 'voucher' --}}
-    <section class="discount-codes">
-        <div class="container">
-            <h2 class="section-title">MÃ GIẢM GIÁ <span class="hot-tag">HOT</span></h2>
-            </h2>
-            <div class="discount-list">
-                @foreach ($discounts as $item)
-                    <div class="discount-item">
-                        <div class="discount-code">
-                            <span class="code">{{ $item->ma_khuyen_mai }}</span>
-                        </div>
-                        <div class="discount-description">
-                            <p>Giảm <span
-                                    class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
-                                VNĐ cho tất cả các sản phẩm.
-                            </p>
-                        </div>
-                        <button style="font-size: 1em" class="copy-btn"
-                            onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao
-                            chép mã</button>
-                    </div>
-                @endforeach
 
-
-                <!-- Thêm các mã giảm giá khác ở đây -->
-            </div>
-        </div>
-        <!-- Modal -->
-        <div id="copyModal" class="copy-modal">
-            <div class="modal-content">
-                <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
-            </div>
-        </div>
-    </section>
     {{-- end --}}
 
     <style>
@@ -739,29 +707,5 @@
 
         // Tạo bông tuyết mới mỗi 500ms
         setInterval(createSnowflake, 500);
-
-
-        function copyCode(code) {
-            var tempInput = document.createElement("input");
-            tempInput.value = code;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            showCopyModal("Mã giảm giá đã được sao chép: " + code);
-        }
-
-        function showCopyModal(message) {
-            var modal = document.getElementById("copyModal");
-            var modalMessage = document.getElementById("copyMessage");
-
-            modalMessage.textContent = message;
-
-            modal.classList.add("show");
-
-            setTimeout(function() {
-                modal.classList.remove("show");
-            }, 3000);
-        }
     </script>
 @endsection

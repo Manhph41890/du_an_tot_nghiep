@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                                                            </div> -->
+                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                            </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -602,17 +602,6 @@
     </div>
 
     {{-- ssssss --}}
-
-
-
-
-
-    {{-- enddd sssss --}}
-    <!-- product tab end -->
-@endsection
-
-
-@section('js')
     <script>
         document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -638,20 +627,7 @@
         });
     </script>
     <script>
-        function toggleEdit() {
-            const inputs = document.querySelectorAll('#user-info-form input');
-            const toggleEditBtn = document.getElementById('toggleEditBtn');
-            const saveBtn = document.getElementById('saveBtn');
-
-            // Toggle input disabled state
-            inputs.forEach(input => input.disabled = !input.disabled);
-
-            // Switch button visibility
-            if (saveBtn.style.display === 'none') {
-                saveBtn.style.display = 'inline-block';
-                toggleEditBtn.style.display = 'none';
-            }
-        }
+  
 
         document.addEventListener('DOMContentLoaded', function() {
             const accountInfoTab = document.querySelector('[href="#account-info"]');
@@ -686,14 +662,24 @@
             avatarUpdate: "{{ route('taikhoan.dashboard.avatar') }}"
         };
 
+        function toggleGioiTinh() {
+            const gioiTinhField = document.getElementById('gioi_tinh');
+
+            // Loại bỏ thuộc tính disabled để có thể thao tác
+            gioiTinhField.disabled = false;
+
+            // Có thể thay đổi thêm style hoặc class nếu cần thiết (tùy chỉnh thêm)
+            gioiTinhField.style.backgroundColor = "#fff"; // Ví dụ thay đổi màu nền khi có thể chỉnh sửa
+        }
         // Function to toggle edit mode
         function toggleEdit() {
             document.querySelectorAll(
-                '#user-info-form input[type="text"], #user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"]'
+                '#user-info-form input[type="text"],#user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"],#user-info-form select'
             ).forEach(field => {
 
                 field.disabled = !field.disabled;
             });
+            toggleGioiTinh();
             document.getElementById('toggleEditBtn').style.display = 'none';
             document.getElementById('saveBtn').style.display = 'inline-block';
         }
@@ -713,6 +699,6 @@
             } else {
                 console.error(`Route [${routeName}] is not defined.`);
             }
-        } <
+        };
     </script>
 @endsection

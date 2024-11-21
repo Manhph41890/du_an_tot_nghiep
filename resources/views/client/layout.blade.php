@@ -297,6 +297,8 @@
             font-weight: bold;
         }
 
+
+
         .copy-btn {
             background-color: #007bff;
             color: #fff;
@@ -503,6 +505,7 @@
             passive: true
         });
     </script>
+    @yield('js')
 </body>
 
 </html>

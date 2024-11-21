@@ -112,7 +112,7 @@
                             <th class="text-center" style="width: 30%; font-size:18px">Tên sản phẩm</th>
                             <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
                             <th class="text-center" style="width: 20%; font-size:18px">Phân loại</th>
-                            <th class="text-center" style="width: 20%; font-size:18px">Giá biến thể</th>
+                            <th class="text-center" style="width: 20%; font-size:18px">Giá phân loại</th>
                             <th class="text-center" style="width: 10%; font-size:18px">Số lượng</th>
                             <th class="text-center" style="width: 15%; font-size:18px">Thành tiền</th>
                         </tr>
@@ -291,7 +291,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="clearfix"><em><strong>Số tiền được giảm</strong></em> <span> 0</span>
+                                    {{-- <li class="clearfix"><em><strong>Số tiền được giảm</strong></em> <span> 0</span> --}}
                                 </ul>
                                 <ul style="border-bottom: 1px solid #ededed !important;">
                                     <li class="clearfix"><em><strong>Tiền vận chuyển</strong></em> <span> 30.000 đ</span>

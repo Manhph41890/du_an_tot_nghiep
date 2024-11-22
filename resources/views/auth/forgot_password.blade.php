@@ -24,9 +24,7 @@
         </div>
         <div class="form-list"></div>
         <div class="form-list mb-3 ">
-            {{-- <p id="verification-message" style="display:none; color: green; margin:20px" class="mt-3">Mã xác thực có
-            hiệu lực
-            trong 30 phút.</p> --}}
+
             <!-- Form gửi mã xác thực -->
             <form action="{{ route('auth.email') }}" method="POST" id="forgot-password-form">
                 @csrf
@@ -37,7 +35,7 @@
                 </div>
                 <div class="nut-button">
                     <button type="button" id="send-code-button" class="btn btn-primary"
-                        onclick="sendVerificationCode()">Gửi mã xác thực</button>
+                        >Gửi mã xác thực</button>
                 </div>
             </form>
 
@@ -66,56 +64,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Wait for the document to be ready
         $(document).ready(function() {
+            // Thiết lập AJAX CSRF token
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            // Xử lý sự kiện bấm phím Enter để gửi mã
+            $('#email').on('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    $('#send-code-button').click(); // Kích hoạt nút gửi mã
+                }
+            });
+
+            // Gắn sự kiện click cho nút gửi mã xác thực (đảm bảo chỉ đăng ký 1 lần)
+            $('#send-code-button').on('click', function() {
+                sendVerificationCode();
+            });
         });
 
-        //old
-
-        // function sendVerificationCode() {
-        //     var email = $('#email').val(); // Get the email value
-
-        //     $.ajax({
-        //         url: $('#forgot-password-form').attr('action'),
-        //         method: 'POST',
-        //         data: $('#forgot-password-form').serialize(),
-        //         success: function(response) {
-        //             // Show a success SweetAlert2 message
-        //             Swal.fire({
-        //                 icon: 'success',
-        //                 title: 'Thành công',
-        //                 text: 'Mã xác thực đã được gửi đến email của bạn.',
-        //             });
-
-        //             // Show the verification form
-        //             $('#verification-message').show();
-        //             $('#send-code-button').hide();
-        //             $('#verification-form').show();
-
-        //             // Set the email in the hidden input for the verification form
-        //             $('#verification-email').val(email);
-        //         },
-        //         error: function(xhr) {
-        //             // Show an error SweetAlert2 message if the email doesn't exist
-        //             Swal.fire({
-        //                 icon: 'error',
-        //                 title: 'Lỗi',
-        //                 text: 'Email không tồn tại trên hệ thống.',
-        //             });
-        //         }
-
-        //     });
-        // }
-
-        //new
         function sendVerificationCode() {
             var email = $('#email').val(); // Lấy giá trị email
 
+            // Gọi AJAX để gửi yêu cầu
             $.ajax({
                 url: $('#forgot-password-form').attr('action'), // Lấy URL từ form
                 method: 'POST',
@@ -154,44 +128,6 @@
                     }
                 }
             });
-
-            $(document).ready(function() {
-                $('#email').on('keydown', function(event) {
-                    if (event.key === 'Enter') {
-                        event.preventDefault();
-                        $('#send-code-button').click(); // Gọi hành động gửi mã
-                    }
-                });
-
-                $('#send-code-button').on('click', function() {
-                    sendVerificationCode();
-                });
-            });
-        }
-
-
-
-
-        function confirmVerificationCode() {
-            $.ajax({
-                url: $('#verification-form').attr('action'),
-                method: 'POST',
-                data: $('#verification-form').serialize(),
-                success: function(response) {
-
-
-                    if (response.redirectUrl) {
-                        $('#verification-form').hide();
-                        window.location.href = response.redirectUrl;
-                    }
-                },
-                error: function(xhr) {
-                    alert('Lỗi mã xác thực: ' + xhr.responseJSON.message);
-                }
-            });
-
-
-
         }
     </script>
 @endsection

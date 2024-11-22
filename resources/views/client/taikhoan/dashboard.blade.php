@@ -210,9 +210,9 @@
                                             <button type="submit" class="btn btn-success btn--md" id="saveBtn"
                                                 style="display: none;"
                                                 onclick="setFormAction('updateThongtin')">Lưu</button>
-                                            <button type="submit" class="btn btn-primary btn--md" id="avatarSaveBtn"
+                                            {{-- <button type="submit" class="btn btn-primary btn--md" id="avatarSaveBtn"
                                                 style="display: none;" onclick="setFormAction('avatarUpdate')">Cập nhật
-                                                ảnh đại diện</button>
+                                                ảnh đại diện</button> --}}
                                         </div>
                                     </div>
                                 </form>

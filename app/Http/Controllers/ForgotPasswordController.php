@@ -26,30 +26,62 @@ class ForgotPasswordController extends Controller
         ]);
     }
 
+    // public function verifyCode(Request $request)
+    // {
+    //     $request->validate([
+    //         'token' => 'required',
+    //         'email' => 'required|email',
+    //     ]);
+
+    //     // Kiểm tra mã xác thực
+    //     $record = forgot_password::where('email', $request->email)
+    //         ->where('token', $request->token)
+    //         ->first();
+
+    //     if (!$record) {
+    //         // return response()->json([
+    //         //     'status' => false,
+    //         //     'message' => 'Mã xác thực không hợp lệ.'
+    //         // ], 400);
+    //         session()->flash('status', 'Mã xác thực không hợp lệ.');
+
+    //         return redirect()->back();
+    //     }
+
+    //     return redirect()->route('auth.reset_password', ['token' => $request->token, 'email' => $request->email]);
+    // }
     public function verifyCode(Request $request)
     {
         $request->validate([
-            'token' => 'required',
             'email' => 'required|email',
+            'token' => 'required',
         ]);
 
-        // Kiểm tra mã xác thực
-        $record = forgot_password::where('email', $request->email)
-            ->where('token', $request->token)
+        $email = $request->email;
+        $token = $request->token;
+
+        $passwordReset = DB::table('password_reset_tokens')
+            ->where('email', $email)
+            ->where('token', $token)
             ->first();
 
-        if (!$record) {
-            // return response()->json([
-            //     'status' => false,
-            //     'message' => 'Mã xác thực không hợp lệ.'
-            // ], 400);
-            session()->flash('status', 'Mã xác thực không hợp lệ.');
-
-            return redirect()->back();
+        if (!$passwordReset) {
+            // Mã xác thực không hợp lệ
+            return response()->json([
+                'status' => false,
+                'message' => 'Mã xác thực không đúng hoặc đã hết hạn.',
+            ], 422); // HTTP 422: Unprocessable Entity
         }
 
-        return redirect()->route('auth.reset_password', ['token' => $request->token, 'email' => $request->email]);
+        // Nếu mã đúng, tiếp tục xử lý logic khác (ví dụ: chuyển hướng sang form thay đổi mật khẩu)
+        return response()->json([
+            'status' => true,
+            'message' => 'Mã xác thực hợp lệ. Bạn có thể đặt lại mật khẩu.',
+
+        ]);
+       
     }
+
 
 
     public function resetPassword(Request $request)

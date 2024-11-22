@@ -38,6 +38,7 @@ Route::get('/timkiem', [SearchController::class, 'search'])->name('global.search
 
 // Route cho client
 Route::prefix('client')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
     Route::get('/sanphamchitiet/{id}', [HomeController::class, 'chiTietSanPham'])->name('sanpham.chitiet');
 
@@ -64,6 +65,8 @@ Route::prefix('client')->group(function () {
     Route::post('/huydonhang/{id}/confirm', [HuyDonHangController::class, 'confirmCancel'])->name('huydonhang.confirm');
     // Route từ chối hủy đơn hàng
     Route::post('/huydonhang/{id}/reject', [HuyDonHangController::class, 'rejectCancel'])->name('huydonhang.reject');
+
+    Route::post('/donhang/success/{id}', [TaiKhoanController::class, 'successOrder'])->name('donhangs.success');
 
     Route::get('/taikhoan/lichsugd/{id}', [TaiKhoanController::class, 'history'])->name('taikhoan.lichsugd');
     // Route::post('/taikhoan/avatar', [TaiKhoanController::class, 'updateAvatar'])->name('taikhoan.dashboard');
@@ -168,7 +171,6 @@ Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::get('/sanpham/search', [SanPhamController::class, 'search'])->name('sanpham.search');
     // Route giỏ hàng
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/cart/backup', [CartController::class, 'backup'])->name('cart.backup');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');

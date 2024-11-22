@@ -242,6 +242,132 @@
             color: #5a5ac9;
         }
 
+   .product-tab {
+            background-color: #ffffff;
+            padding-top: 80px;
+            padding-bottom: 50px;
+        }
+
+        .discount-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .discount-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .discount-icon img {
+            width: 60px;
+            height: 39px;
+            object-fit: cover;
+            margin-top: -30px;
+        }
+
+        .discount-content {
+            flex-grow: 1;
+            padding-left: 0px;
+            margin-left: -5px;
+
+            line-height: 1;
+        }
+
+        .zigzag {
+
+            text-align: center;
+            line-height: 1;
+        }
+
+
+        .discount-code {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: #5c5bca;
+            margin-bottom: 10px;
+        }
+
+        .discount-description {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .discount-description p {
+            margin: 0;
+        }
+
+        .text-danger {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            background-color: #1e98f6;
+            color: white;
+            border: none;
+            width: 80px;
+            height: 40px;
+            padding: 0;
+            font-size: 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #4a4db3;
+            transform: scale(1.05);
+        }
+
+        .copy-btn:focus {
+            outline: none;
+        }
+
+        /* Styling for the container */
+        .discounts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .copy-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            border-radius: 8px;
+            color: #fff;
+            text-align: center;
+            z-index: 9999;
+        }
+
+        .copy-modal .modal-content {
+            background-color: #333;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+
         /* Hiệu ứng fade in và fade out */
         @keyframes fadeInOut {
             0% {
@@ -269,7 +395,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color:#c7d2dd;
+            background-color: #c7d2dd;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -328,7 +454,8 @@
 <body>
     <div id="loading-overlay" class="loading-overlay">
         <div class="loading-spinner">
-            <img src="{{ asset('assets/client/images/logo/load-removebg.png') }}" alt="Loading Image" class="loading-image">
+            <img src="{{ asset('assets/client/images/logo/load-removebg.png') }}" alt="Loading Image"
+                class="loading-image">
             <div class="spin-ring"></div>
         </div>
     </div>
@@ -409,6 +536,7 @@
             passive: true
         });
     </script>
+    @yield('js')
 </body>
 
 </html>

@@ -112,7 +112,7 @@
                             <th class="text-center" style="width: 30%; font-size:18px">Tên sản phẩm</th>
                             <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
                             <th class="text-center" style="width: 20%; font-size:18px">Phân loại</th>
-                            <th class="text-center" style="width: 20%; font-size:18px">Giá biến thể</th>
+                            <th class="text-center" style="width: 20%; font-size:18px">Giá phân loại</th>
                             <th class="text-center" style="width: 10%; font-size:18px">Số lượng</th>
                             <th class="text-center" style="width: 15%; font-size:18px">Thành tiền</th>
                         </tr>
@@ -236,13 +236,19 @@
 
                                                     <!-- Icon hoặc hình ảnh -->
                                                     @if ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Vnpay')
-                                                        <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                                            alt="VNPay Logo" class="icon-image">
+                                                        <div class="payment-method d-flex align-items-center">
+                                                            <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
+                                                                alt="VNPay Logo" class="icon-image me-2">
+                                                        </div>
                                                     @elseif ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Ví')
-                                                        <i class="fas fa-wallet text-success ms-2 icon-size"></i>
-                                                        <link
-                                                            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                                                            rel="stylesheet">
+                                                        <div class="payment-method d-flex align-items-center">
+                                                            <i class="fas fa-wallet text-success icon-size me-2"></i>
+                                                            <div>
+                                                                <p class="mb-0 wallet-balance">Số dư:
+                                                                    {{ number_format($tongTienVi->tong_tien, 0, ',', '.') }}
+                                                                    VNĐ</p>
+                                                            </div>
+                                                        </div>
                                                     @endif
                                                 </div>
 
@@ -285,7 +291,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="clearfix"><em><strong>Số tiền được giảm</strong></em> <span> 0</span>
+                                    {{-- <li class="clearfix"><em><strong>Số tiền được giảm</strong></em> <span> 0</span> --}}
                                 </ul>
                                 <ul style="border-bottom: 1px solid #ededed !important;">
                                     <li class="clearfix"><em><strong>Tiền vận chuyển</strong></em> <span> 30.000 đ</span>
@@ -327,7 +333,28 @@
                 <!-- /row -->
             </form>
         </div>
+        <style>
+            .payment-method {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
 
+            .icon-image {
+                width: 60px;
+                height: auto;
+            }
+
+            .payment-label {
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+            .wallet-balance {
+                font-size: 14px;
+                color: #6c757d;
+            }
+        </style>
         <script>
             $(document).ready(function() {
                 $('#apply-coupon').on('click', function() {

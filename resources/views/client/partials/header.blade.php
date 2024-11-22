@@ -51,12 +51,12 @@
         color: #fff !important;
         transform: translateX(10px);
     }
+
     .btn-login:hover {
         border: 1px solid #5a5a9c !important;
         background: #fff !important;
         color: #5a5a9c !important;
     }
-
 
 </style>
 
@@ -105,10 +105,12 @@
                                     <form class="search-box" style="margin: 0;" action="{{ url('/') }}"
                                         method="get">
                                         @csrf
-                                        <div class="d-flex align-items-center flex-row-reverse position-relative" id="searchContainer">
+                                        <div class="d-flex align-items-center flex-row-reverse position-relative"
+                                            id="searchContainer">
                                             <div class="my-2 mx-2">
                                                 <!-- Icon tìm kiếm -->
-                                                <a class="search-toggle" id="searchIcon" role="button" style="font-size: 20px; cursor: pointer;">
+                                                <a class="search-toggle" id="searchIcon" role="button"
+                                                    style="font-size: 20px; cursor: pointer;">
                                                     <i class="icon-magnifier"></i>
                                                 </a>
                                             </div>
@@ -116,6 +118,7 @@
                                                 <div class="input-group">
                                                     <input type="text" name="search" id="inputsearch" class="form-control" placeholder="Tìm kiếm..." aria-label="Search">
                                                     <div id="product-search" class="product-grouped product-count style" style="position: absolute; width: 100%; top: 100%; background: white; z-index: 100; display: none;">                                                   
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -155,51 +158,51 @@
                         <div class="cart-block-links theme1 d-none d-sm-block">
                             <ul class="d-flex">
                                 @auth
-                                <li class="dropdown notification-list topbar-dropdown">
-                                    <a class="nav-link dropdown-toggle nav-user me-0 avatar_box" href="#"
-                                        style="width: 50px;" id="profileDropdown" role="button">
-                                        @php
-                                        $avatar = Auth::user()->anh_dai_dien;
-                                        $isUrl = filter_var($avatar, FILTER_VALIDATE_URL) !== false;
-                                        @endphp
-                                        <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
-                                            alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
-                                        @php
-                                        $tongDonHang = DB::table('don_hangs')
-                                        ->where('trang_thai_don_hang', 'Chờ xác nhận')
-                                        ->where('user_id', Auth::id()) // Lọc theo ID người dùng hiện tại
-                                        ->count();
-                                        @endphp
-                                        @if ($tongDonHang > 0)
-                                        <span class="ms-2 position-relative">
-                                            <span class="notification-dot">{{ $tongDonHang }}</span>
-                                        </span>
-                                        @endif
-                                    </a>
-                                    <div
-                                        class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
-                                        <a class="notify-item notify-item__form"
-                                            href="{{ route('taikhoan.dashboard') }}">
-                                            <i class="far fa-user"></i> <span>Thông tin tài khoản</span>
+                                    <li class="dropdown notification-list topbar-dropdown">
+                                        <a class="nav-link dropdown-toggle nav-user me-0 avatar_box" href="#"
+                                            style="width: 50px;" id="profileDropdown" role="button">
+                                            @php
+                                                $avatar = Auth::user()->anh_dai_dien;
+                                                $isUrl = filter_var($avatar, FILTER_VALIDATE_URL) !== false;
+                                            @endphp
+                                            <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
+                                                alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
+                                            @php
+                                                $tongDonHang = DB::table('don_hangs')
+                                                    ->where('trang_thai_don_hang', 'Chờ xác nhận')
+                                                    ->where('user_id', Auth::id()) // Lọc theo ID người dùng hiện tại
+                                                    ->count();
+                                            @endphp
+                                            @if ($tongDonHang > 0)
+                                                <span class="ms-2 position-relative">
+                                                    <span class="notification-dot">{{ $tongDonHang }}</span>
+                                                </span>
+                                            @endif
                                         </a>
-                                        <form id="logout-form" class="notify-item notify-item__form"
-                                            style="margin-bottom: 0;" action="{{ route('auth.logout') }}"
-                                            method="POST">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item notify-item__button">
-                                                <i class="mdi mdi-location-exit fs-16 align-middle"></i>
-                                                <span>Đăng Xuất</span>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </li>
+                                        <div
+                                            class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
+                                            <a class="notify-item notify-item__form"
+                                                href="{{ route('taikhoan.dashboard') }}">
+                                                <i class="far fa-user"></i> <span>Thông tin tài khoản</span>
+                                            </a>
+                                            <form id="logout-form" class="notify-item notify-item__form"
+                                                style="margin-bottom: 0;" action="{{ route('auth.logout') }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item notify-item__button">
+                                                    <i class="mdi mdi-location-exit fs-16 align-middle"></i>
+                                                    <span>Đăng Xuất</span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
                                 @else
-                                <li class="me-0" >
-                                    <a style=" font-size: 15px; " class="btn-login " href="{{ route('auth.login') }}">
-                                        Đăng Nhập
-                                    </a>
-                                    <!-- <button class="btn-login btn-30">Đăng Nhập</button> -->
-                                </li>
+                                    <li class="me-0">
+                                        <a style=" font-size: 15px; " class="btn-login " href="{{ route('auth.login') }}">
+                                            Đăng Nhập
+                                        </a>
+                                        <!-- <button class="btn-login btn-30">Đăng Nhập</button> -->
+                                    </li>
                                 @endauth
                             </ul>
                         </div>
@@ -224,7 +227,7 @@
     @auth
     var isAuthenticated = true;
     @else
-    var isAuthenticated = false;
+        var isAuthenticated = false;
     @endauth
 </script>
 

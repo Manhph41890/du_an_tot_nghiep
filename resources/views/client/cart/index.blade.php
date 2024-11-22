@@ -43,7 +43,7 @@
         .cart-list td:nth-child(5) {
             width: 16%;
             word-wrap: break-word;
-            text-align: left;
+            text-align: center;
         }
 
         .cart-list th:nth-child(6),
@@ -128,7 +128,7 @@
             width: 100%;
             padding: 10px;
             font-size: 16px;
-            background-color: #007bff;
+            background-color: #5a5ac9;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -190,7 +190,7 @@
                                 <th>Sản phẩm</th>
                                 <th>Đơn giá</th>
                                 <th>Số lượng</th>
-                                <th>Giá biến thể</th>
+                                <th>Giá phân loại</th>
                                 <th>Tổng tiền</th>
                             </tr>
                         </thead>
@@ -209,8 +209,9 @@
                                                     style="object-fit: cover" />
                                                 <div class="ms-3">
                                                     <h5> {{ $item->san_pham->ten_san_pham }}</h5>
-                                                    <p class="small mb-0">
-                                                        {{ $item->size->ten_size }}-{{ $item->color->ten_color }}</p>
+                                                    <p style="font-size: 16px" class="small mb-0">
+                                                        Phân loại: {{ $item->size->ten_size }}-{{ $item->color->ten_color }}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </td>
@@ -240,7 +241,7 @@
                                                     );
                                                 @endphp
                                                 @if ($variant)
-                                                    {{ number_format($variant->gia, 0, ',', '.') }} đ
+                                                    <strong>{{ number_format($variant->gia, 0, ',', '.') }} đ</strong>
                                                 @else
                                                     <span>Chưa có giá biến thể</span>
                                                 @endif

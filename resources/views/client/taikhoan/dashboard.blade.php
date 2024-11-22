@@ -59,7 +59,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">Thông tin tài khoản</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">Thông tin tài khoản
+                        </h2>
                     </div>
                 </div>
                 <div class="col-12">
@@ -78,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                    <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                </div> -->
+                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                            </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -178,8 +179,8 @@
                                             </div>
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="ngay_sinh" class="mb-2">Ngày sinh</label>
-                                                <input id="ngay_sinh" name="ngay_sinh" type="date" class="form-control"
-                                                    value="{{ $user->ngay_sinh }}" disabled />
+                                                <input id="ngay_sinh" name="ngay_sinh" type="date"
+                                                    class="form-control" value="{{ $user->ngay_sinh }}" disabled />
                                             </div>
                                             <div class="col-lg-6 col-12 mb-30">
                                                 <label for="gioi_tinh" class="mb-2">Giới tính</label>
@@ -386,8 +387,8 @@
                                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                             </div>
                         </div>
-                        <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade " id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel"
+                            style="--bs-modal-width: 800px;" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -458,19 +459,108 @@
                                             <!-- Tab 3: Tiền rút -->
                                             <div class="tab-pane fade" id="rut" role="tabpanel"
                                                 aria-labelledby="rut-tab">
-                                                @foreach ($lsRutVi as $item)
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="d-flex justify-content-start">
-                                                            <p class="">Tiền rút</p>
-                                                        </div>
-                                                        <p class="">{{ $item->bank?->name }}</p>
-                                                        <p class="">{{ $item->thoi_gian_rut }}</p>
-                                                        <div class="transaction-amount negative">
-                                                            {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
-                                                        </div>
+
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-pills mt-3 mb-3">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" data-bs-toggle="pill"
+                                                            href="#tabchoduyet">Chờ duyệt</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-bs-toggle="pill"
+                                                            href="#tabthanhcong">Thành công</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-bs-toggle="pill" href="#tabthatbai">Thất
+                                                            bại</a>
+                                                    </li>
+                                                </ul>
+
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div class="tab-pane container active p-0" id="tabchoduyet">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                @foreach ($lsRutVi_choduyet as $item)
+                                                                    <tr>
+                                                                        <td>{{ $item->bank?->name }}</td>
+                                                                        <td>{{ $item->bank?->account_number }}</td>
+                                                                        <td>{{ $item->bank?->account_holder }}</td>
+                                                                        <td>{{ date('d-m-Y H:i:s', strtotime($item->thoi_gian_rut)) }}
+                                                                        </td>
+                                                                        <td class="transaction-amount negative">
+                                                                            {{ number_format($item->tien_rut, 0, ',', '.') }}
+                                                                            VNĐ
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="badge position-static bg-warning">
+                                                                                {{ $item->trang_thai }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                    <hr class="custom-hr">
-                                                @endforeach
+                                                    <div class="tab-pane container fade" id="tabthanhcong">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                @foreach ($lsRutVi_thanhcong as $item)
+                                                                    <tr>
+                                                                        <td>{{ $item->bank?->name }}</td>
+                                                                        <td>{{ $item->bank?->account_number }}</td>
+                                                                        <td>{{ $item->bank?->account_holder }}</td>
+                                                                        <td>{{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i:s') : 'Chưa có thời gian' }}
+                                                                        </td> <!-- Hiển thị thời gian -->
+                                                                        <td class="transaction-amount negative">
+                                                                            {{ number_format($item->tien_rut, 0, ',', '.') }}
+                                                                            VNĐ
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="badge position-static bg-success">
+                                                                                {{ $item->trang_thai }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane container fade" id="tabthatbai">
+                                                        <table class="table table-bordered">
+
+                                                            @foreach ($lsRutVi_thatbai as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->bank?->name }}</td>
+                                                                    <td>{{ $item->bank?->account_number }}</td>
+                                                                    <td>{{ $item->bank?->account_holder }}</td>
+                                                                    <td>{{ date('d-m-Y H:i:s', strtotime($item->updated_at)) }}
+                                                                    </td>
+                                                                    <td class="transaction-amount negative">
+                                                                        {{ number_format($item->tien_rut, 0, ',', '.') }}
+                                                                        VNĐ
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button"
+                                                                            class=" badge position-static bg-danger"
+                                                                            data-bs-toggle="popover" title="Lý do"
+                                                                            data-bs-content="{{ $item->noi_dung_tu_choi }}">
+                                                                            {{ $item->trang_thai }}
+                                                                        </button>
+                                                                        <script>
+                                                                            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+                                                                            var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+                                                                                return new bootstrap.Popover(popoverTriggerEl);
+                                                                            });
+                                                                        </script>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </table>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -490,7 +580,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary">Xem chi tiết</button>
+                                        {{-- <button type="button" class="btn btn-primary">Xem chi tiết</button> --}}
                                     </div>
                                 </div>
                             </div>
@@ -508,17 +598,6 @@
     </div>
 
     {{-- ssssss --}}
-
-
-
-
-
-    {{-- enddd sssss --}}
-    <!-- product tab end -->
-@endsection
-
-
-@section('js')
     <script>
         document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -544,20 +623,7 @@
         });
     </script>
     <script>
-        function toggleEdit() {
-            const inputs = document.querySelectorAll('#user-info-form input');
-            const toggleEditBtn = document.getElementById('toggleEditBtn');
-            const saveBtn = document.getElementById('saveBtn');
-
-            // Toggle input disabled state
-            inputs.forEach(input => input.disabled = !input.disabled);
-
-            // Switch button visibility
-            if (saveBtn.style.display === 'none') {
-                saveBtn.style.display = 'inline-block';
-                toggleEditBtn.style.display = 'none';
-            }
-        }
+  
 
         document.addEventListener('DOMContentLoaded', function() {
             const accountInfoTab = document.querySelector('[href="#account-info"]');
@@ -592,14 +658,24 @@
             avatarUpdate: "{{ route('taikhoan.dashboard.avatar') }}"
         };
 
+        function toggleGioiTinh() {
+            const gioiTinhField = document.getElementById('gioi_tinh');
+
+            // Loại bỏ thuộc tính disabled để có thể thao tác
+            gioiTinhField.disabled = false;
+
+            // Có thể thay đổi thêm style hoặc class nếu cần thiết (tùy chỉnh thêm)
+            gioiTinhField.style.backgroundColor = "#fff"; // Ví dụ thay đổi màu nền khi có thể chỉnh sửa
+        }
         // Function to toggle edit mode
         function toggleEdit() {
             document.querySelectorAll(
-                '#user-info-form input[type="text"], #user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"]'
+                '#user-info-form input[type="text"],#user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"],#user-info-form select'
             ).forEach(field => {
 
                 field.disabled = !field.disabled;
             });
+            toggleGioiTinh();
             document.getElementById('toggleEditBtn').style.display = 'none';
             document.getElementById('saveBtn').style.display = 'inline-block';
         }
@@ -619,6 +695,6 @@
             } else {
                 console.error(`Route [${routeName}] is not defined.`);
             }
-        } <
+        };
     </script>
 @endsection

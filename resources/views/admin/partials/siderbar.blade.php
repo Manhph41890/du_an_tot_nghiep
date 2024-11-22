@@ -201,7 +201,9 @@
                             <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
                             @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                                 <li><a class="tp-link" href="{{ route('user.create') }}">Thêm nhân viên</a></li>
+                                <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền</a></li>
                             @endif
+
                         </ul>
                     </div>
                 </li>
@@ -237,7 +239,7 @@
                     </div>
                 </li>
 
-                <!-- Chức vụ -->
+                {{-- <!-- Chức vụ -->
                 <li>
                     <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="award"></i>
@@ -291,7 +293,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
 
             </ul>
@@ -299,7 +301,7 @@
         <!-- End Sidebar -->
 
         <div class="clearfix"></div>
-        {{-- <div class="row" style="margin-top: 180px">
+        <div class="row" style="margin-top: 180px">
             <div class="col fs-13 text-muted text-center">
                 &copy;
                 <script>
@@ -308,7 +310,7 @@
                     href="#!" class="text-reset fw-semibold"><img src="assets/client/img/logo/logo_art.png"
                         alt="" height="40" style="margin-bottom: 5px"></a>
             </div>
-        </div> --}}
+        </div>
     </div>
 </div>
 <!-- Left Sidebar End -->

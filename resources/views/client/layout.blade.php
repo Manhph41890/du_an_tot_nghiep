@@ -242,6 +242,101 @@
             color: #5a5ac9;
         }
 
+        .discounts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .discount-item {
+            display: flex;
+            align-items: center;
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 48%;
+            /* Điều chỉnh chiều rộng để phù hợp với 4 item trong grid */
+            max-width: 300px;
+            /* Giới hạn chiều dài */
+        }
+
+        .discount-icon img {
+            width: 80px;
+            height: 40px;
+            margin-right: 1rem;
+        }
+
+        .discount-content {
+            flex-grow: 1;
+        }
+
+        .discount-code {
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap;
+            /* Không xuống dòng */
+            overflow: hidden;
+            /* Cắt chữ nếu quá dài */
+            text-overflow: ellipsis;
+        }
+
+        .discount-description {
+            font-size: 0.85em;
+            color: #666;
+            /* margin-top: 0.5rem; */
+            line-height: 1.2;
+        }
+
+        .text-danger {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+
+
+        .copy-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            align-self: flex-end;
+            margin-left: 2px;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .copy-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            border-radius: 8px;
+            color: #fff;
+            text-align: center;
+            z-index: 9999;
+        }
+
+        .copy-modal .modal-content {
+            background-color: #333;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+
         /* Hiệu ứng fade in và fade out */
         @keyframes fadeInOut {
             0% {
@@ -269,7 +364,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color:#c7d2dd;
+            background-color: #c7d2dd;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -328,7 +423,8 @@
 <body>
     <div id="loading-overlay" class="loading-overlay">
         <div class="loading-spinner">
-            <img src="{{ asset('assets/client/images/logo/load-removebg.png') }}" alt="Loading Image" class="loading-image">
+            <img src="{{ asset('assets/client/images/logo/load-removebg.png') }}" alt="Loading Image"
+                class="loading-image">
             <div class="spin-ring"></div>
         </div>
     </div>
@@ -409,6 +505,7 @@
             passive: true
         });
     </script>
+    @yield('js')
 </body>
 
 </html>

@@ -14,22 +14,31 @@
 
         /* Style cho các nút */
         .filter-btn {
-            background-color: #f8f9fa;
+            background-color: #5a5a9c;
+            color: #fff;
             border: 1px solid #ddd;
             border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 5px 10px;
+            /* Giảm kích thước padding */
+            font-size: 1.3rem;
+            /* Giảm kích thước chữ */
+            line-height: 1;
+            /* Đảm bảo chiều cao hợp lý */
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .filter-btn:hover {
-            background-color: #007bff;
-            color: white;
+            background-color: #fff;
+            color: #5a5a9c;  /* số */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Tăng độ bóng khi hover */
+            transform: translateY(-2px); /* Nâng nút lên */
         }
 
         .filter-btn:active {
-            background-color: #0056b3;
+            /* background-color: #0056b3; */
+            box-shadow: 0 2px 4px #7148ee(0, 0, 0, 0.1); 
+            transform: translateY(1px); /* Nhấn nút xuống */
         }
 
         #no-reviews-message {
@@ -363,24 +372,26 @@
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
+                                <h2>Đánh giá sản phẩm: {{ $sanPhamCT->ten_san_pham }}</h2>
+                                <br>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="filter-rating text-center mb-4">
                                             <button class="filter-btn" data-star="5">5 <i
                                                     class="mdi mdi-star text-warning"
-                                                    style="font-size: 1.5rem;"></i></button>
+                                                    style="font-size: 1.3rem;"></i></button>
                                             <button class="filter-btn" data-star="4">4 <i
                                                     class="mdi mdi-star text-warning"
-                                                    style="font-size: 1.5rem;"></i></button>
+                                                    style="font-size: 1.3rem;"></i></button>
                                             <button class="filter-btn" data-star="3">3 <i
                                                     class="mdi mdi-star text-warning"
-                                                    style="font-size: 1.5rem;"></i></button>
+                                                    style="font-size: 1.3rem;"></i></button>
                                             <button class="filter-btn" data-star="2">2 <i
                                                     class="mdi mdi-star text-warning"
-                                                    style="font-size: 1.5rem;"></i></button>
+                                                    style="font-size: 1.3rem;"></i></button>
                                             <button class="filter-btn" data-star="1">1 <i
                                                     class="mdi mdi-star text-warning"
-                                                    style="font-size: 1.5rem;"></i></button>
+                                                    style="font-size: 1.3rem;"></i></button>
                                             <button class="filter-btn" data-star="all">All</button>
                                         </div>
                                         <div id="no-reviews-message"
@@ -390,7 +401,7 @@
                                         <div class="review-wrapper">
                                             @foreach ($sanPhamCT->danh_gias as $danhgia)
                                                 <div class="single-review mb-4 p-3 shadow-sm rounded-lg bg-light">
-                                                    <div class="d-flex align-items-center">
+                                                    <div class="d-flex align-items-center" style="width: 100%">
                                                         <div class="review-img me-3">
                                                             <img src="{{ $danhgia->users->anh_dai_dien ? asset('storage/' . $danhgia->users->anh_dai_dien) : '/assets/img/default-avatar.png' }}"
                                                                 alt="{{ $danhgia->users->ho_ten }}"
@@ -417,6 +428,7 @@
                                                             </div>
                                                             <div class="review-bottom mt-2">
                                                                 <p class="text-muted">{{ $danhgia->binh_luan }}</p>
+                                                                <small>{{ \Carbon\Carbon::parse($danhgia->ngay_danh_gia)->format('d/m/Y') }}</small>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -11,6 +11,7 @@ use App\Models\phuong_thuc_thanh_toan;
 use App\Models\phuong_thuc_van_chuyen;
 use App\Models\san_pham;
 use App\Models\size_san_pham;
+use App\Models\vi_nguoi_dung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -303,7 +304,8 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $user = Auth::user();
-
+        $tongTienVi = $user->vi_nguoi_dungs;
+        // dd($tongTienVi);
         // Kiểm tra nếu không có sản phẩm nào được chọn
         if (!$request->has('checkout_items') || empty($request->checkout_items)) {
             return redirect()->route('cart.index')->with('error', 'Không có sản phẩm nào được chọn để thanh toán.');
@@ -345,7 +347,7 @@ class CartController extends Controller
         $selectedProductIds = $request->input('checkout_items');
 
         // Chuyển hướng về trang xác nhận đơn hàng và truyền biến vào view
-        return view('client.order.index', compact('user', 'cartItems', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens', 'selectedProductIds'))
+        return view('client.order.index', compact('user', 'cartItems', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens', 'selectedProductIds', 'tongTienVi'))
             ->with('success', 'Vui lòng xác nhận thông tin đặt hàng!');
     }
 

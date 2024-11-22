@@ -33,12 +33,25 @@ class TaiKhoanController extends Controller
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
-        $lsRutVi = ls_rut_vi::with('vi_nguoi_dung', 'bank')
+
+
+        $lsRutVi_choduyet = ls_rut_vi::with('vi_nguoi_dung', 'bank')
+            ->where('trang_thai', 'Chờ duyệt')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+        $lsRutVi_thanhcong = ls_rut_vi::with('vi_nguoi_dung', 'bank')
+            ->where('trang_thai', 'Thành công')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+        $lsRutVi_thatbai = ls_rut_vi::with('vi_nguoi_dung', 'bank')
+            ->where('trang_thai', 'Thất bại')
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
 
-        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsRutVi'));
+        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsRutVi_choduyet', 'lsRutVi_thanhcong', 'lsRutVi_thatbai'));
     }
 
 
@@ -59,6 +72,20 @@ class TaiKhoanController extends Controller
 
         // Trả về view cùng với dữ liệu đơn hàng
         return view('client.taikhoan.showmyorder', compact('donhang'));
+    }
+
+    public function successOrder($id)
+    {
+        // Tìm đơn hàng theo id
+        $donhang = don_hang::findOrFail($id);
+
+        // Cập nhật trạng thái đơn hàng sang "Thành công"
+        $donhang->trang_thai_don_hang = 'Thành công';
+        $donhang->trang_thai_thanh_toan = 'Đã thanh toán';
+        $donhang->save();
+
+        // Redirect về dashboard với thông báo thành công
+        return redirect()->route('taikhoan.dashboard')->with('success', 'Đơn hàng đã được xác nhận thành công.');
     }
 
 

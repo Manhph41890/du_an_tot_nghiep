@@ -1,31 +1,10 @@
 @extends('client.layout')
 
 @section('content')
-    {{-- <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-uppercase" style=" color: #fff !important">
-                            {{ $title }}
-                        </h2>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                        <li class="breadcrumb-item"><a href="{{ route('client.home') }}">Trang chủ</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            {{ $title }}
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </nav> --}}
     {{-- mã giảm giá 'voucher' --}}
     <div class="product-tab bg-white pt-80 pb-50">
         <div class="container">
-            <h2></h2>
+           
             <div class="discounts-container">
                 @foreach ($discounts as $item)
                     <div class="discount-item">
@@ -45,7 +24,7 @@
                                 </p>
                             </div>
                         </div>
-                        <button class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao chép mã</button>
+                        <button class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao chép </button>
                     </div>
                 @endforeach
             </div>

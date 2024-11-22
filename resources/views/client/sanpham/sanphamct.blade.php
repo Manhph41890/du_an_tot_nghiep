@@ -413,8 +413,7 @@
                                                                     <h5 class="review-name mb-1">
                                                                         {{ $danhgia->users->ho_ten }}</h5>
                                                                 </div>
-                                                                <div class="rating-product">
-                                                                    <!-- Logic hiển thị sao với mdi -->
+                                                                <div class="rating-product">      
                                                                     @for ($i = 1; $i <= 5; $i++)
                                                                         @if ($i <= $danhgia->diem_so)
                                                                             <i class="mdi mdi-star text-warning"

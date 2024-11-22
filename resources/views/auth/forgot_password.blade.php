@@ -34,8 +34,7 @@
                         placeholder="Email" value="{{ old('email') }}" required>
                 </div>
                 <div class="nut-button">
-                    <button type="button" id="send-code-button" class="btn btn-primary"
-                        >Gửi mã xác thực</button>
+                    <button type="button" id="send-code-button" class="btn btn-primary">Gửi mã xác thực</button>
                 </div>
             </form>
 
@@ -129,5 +128,47 @@
                 }
             });
         }
+        // Xử lý sự kiện bấm xác nhận mã
+        $('#confirm-code-button').on('click', function(e) {
+            e.preventDefault(); // Ngăn form tự động submit
+            const resetPasswordUrl = "{{ route('auth.reset_password', ':token') }}";
+            $.ajax({
+                url: $('#verification-form').attr('action'), // Lấy URL từ form xác nhận mã
+                method: 'POST',
+                data: $('#verification-form').serialize(),
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công',
+                        text: response.message,
+                    });
+
+                    // Chuyển hướng sang trang đặt lại mật khẩu nếu cần
+                    const redirectUrl = resetPasswordUrl.replace(':token', $(
+                            '#verification-form [name="token"]').val()) +
+                        `?email=${encodeURIComponent($('#verification-email').val())}`;
+
+                    // Redirect to the reset password page
+                    window.location.href = redirectUrl;
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        // Hiển thị thông báo lỗi nếu mã xác thực không hợp lệ
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: xhr.responseJSON.message, // Sử dụng thông báo từ server
+                        });
+                    } else {
+                        // Xử lý các lỗi khác
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: 'Đã xảy ra lỗi, vui lòng thử lại.',
+                        });
+                    }
+                },
+            });
+        });
     </script>
 @endsection

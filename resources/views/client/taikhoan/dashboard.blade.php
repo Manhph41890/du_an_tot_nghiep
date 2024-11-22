@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                                                                    <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                                                                                </div> -->
+                                                                                                                            <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                                        </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -599,7 +599,7 @@
     </div>
 
     {{-- ssssss --}}
-    {{-- <script>
+    <script>
         document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
             e.preventDefault();
             let formData = new FormData(this);
@@ -623,8 +623,8 @@
                 .catch(error => console.error('Error:', error));
         });
     </script>
-   
-    
+
+    {{-- xử lý ảnh + thông tin --}}
     <script>
         // Define routes in a JavaScript object
         const routes = {
@@ -671,57 +671,32 @@
                 console.error(`Route [${routeName}] is not defined.`);
             }
         };
-    </script> --}}
-
-    <script>
-        document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    let formData = new FormData(this);
-
-    fetch('{{ route('taikhoan.dashboard.avatar') }}', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Update the image src without reloading
-            document.querySelector('img[alt="Profile Image"]').src = data.newAvatarUrl;
-            // Hide the avatar change form after successful update
-            document.getElementById('change-avatar-form').style.display = 'none';
-        }
-    })
-    .catch(error => console.error('Error:', error));
-});
     </script>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const accountInfoTab = document.querySelector('[href="#account-info"]');
-        const ordersTab = document.querySelector('[href="#orders"]');
-        const paymentMethodTab = document.querySelector('[href="#payment-method"]');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const accountInfoTab = document.querySelector('[href="#account-info"]');
+            const ordersTab = document.querySelector('[href="#orders"]');
+            const paymentMethodTab = document.querySelector('[href="#payment-method"]');
 
-        accountInfoTab.addEventListener('click', function() {
-            document.getElementById('account-info').style.display = 'block';
-            document.getElementById('orders').style.display = 'none';
-            document.getElementById('payment-method').style.display = 'none';
-        });
+            accountInfoTab.addEventListener('click', function() {
+                document.getElementById('account-info').style.display = 'block';
+                document.getElementById('orders').style.display = 'none';
+                document.getElementById('payment-method').style.display = 'none';
+            });
 
-        ordersTab.addEventListener('click', function() {
-            document.getElementById('account-info').style.display = 'none';
-            document.getElementById('orders').style.display = 'block';
-            document.getElementById('payment-method').style.display = 'none';
-        });
+            ordersTab.addEventListener('click', function() {
+                document.getElementById('account-info').style.display = 'none';
+                document.getElementById('orders').style.display = 'block';
+                document.getElementById('payment-method').style.display = 'none';
+            });
 
-        paymentMethodTab.addEventListener('click', function() {
-            document.getElementById('account-info').style.display = 'none';
-            document.getElementById('orders').style.display = 'none';
-            document.getElementById('payment-method').style.display = 'block';
+            paymentMethodTab.addEventListener('click', function() {
+                document.getElementById('account-info').style.display = 'none';
+                document.getElementById('orders').style.display = 'none';
+                document.getElementById('payment-method').style.display = 'block';
+            });
         });
-    });
-</script>
+    </script>
 @endsection

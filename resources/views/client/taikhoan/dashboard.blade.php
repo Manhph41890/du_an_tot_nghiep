@@ -674,7 +674,28 @@
     </script> --}}
 
     <script>
-        
+        document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let formData = new FormData(this);
+
+    fetch('{{ route('taikhoan.dashboard.avatar') }}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update the image src without reloading
+            document.querySelector('img[alt="Profile Image"]').src = data.newAvatarUrl;
+            // Hide the avatar change form after successful update
+            document.getElementById('change-avatar-form').style.display = 'none';
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
     </script>
 
 

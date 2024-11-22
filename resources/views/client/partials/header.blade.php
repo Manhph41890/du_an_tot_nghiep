@@ -117,7 +117,7 @@
                                                 <div class="input-group">
                                                     <input type="text" name="search" id="inputsearch" class="form-control" placeholder="Tìm kiếm..." aria-label="Search">
                                                     <div id="product-search" class="product-grouped product-count style" style="position: absolute; width: 100%; top: 100%; background: white; z-index: 100; display: none;">
-                                                        <!-- Kết quả tìm kiếm hiển thị tại đây -->
+                                                     
                                                     </div>
                                                 </div>
                                             </div>

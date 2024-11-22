@@ -19,7 +19,7 @@ class RoleMiddleware
                 return $next($request); // Người dùng có quyền, tiếp tục với request
             }
 
-            // Nếu quyền không đúng, trả về view lỗi 403 với thông báo
+            // Nếu quyền không đúng, trả về lỗi 403
             return response()->view('error.403', [], 403);
         }
 

@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                                                                            <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                                                                                        </div> -->
+                                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                                            </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -137,15 +137,15 @@
                                             <!-- User Info Section -->
                                             <div class="overflow-hidden ms-4">
                                                 <h4 class="m-0 text-dark fs-20">{{ Auth::user()->name }}</h4>
+
+                                                <a href="#" id="Avatar"
+                                                    class="ml-4 font-semibold text-primary hover:text-blue-700"
+                                                    onclick="toggleAvatarForm(event)">
+                                                    Thay đổi ảnh đại diện
+                                                </a>
+                                                <!-- Avatar Form (Initially hidden) -->
+
                                                 <div id="change-avatar-form" style="display: none;">
-                                                    <a href="#" id="Avatar"
-                                                        class="ml-4 font-semibold text-primary hover:text-blue-700"
-                                                        onclick="toggleAvatarForm(event)">
-                                                        Thay đổi ảnh đại diện
-                                                    </a>
-                                                    <!-- Avatar Form (Initially hidden) -->
-
-
                                                     <div class="form-group">
                                                         <label for="anh_dai_dien">Hình đại diện</label>
                                                         <input type="file" class="form-control" id="anh_dai_dien"
@@ -210,9 +210,9 @@
                                             <button type="submit" class="btn btn-success btn--md" id="saveBtn"
                                                 style="display: none;"
                                                 onclick="setFormAction('updateThongtin')">Lưu</button>
-                                            {{-- <button type="submit" class="btn btn-primary btn--md" id="avatarSaveBtn"
+                                            <button type="submit" class="btn btn-primary btn--md" id="avatarSaveBtn"
                                                 style="display: none;" onclick="setFormAction('avatarUpdate')">Cập nhật
-                                                ảnh đại diện</button> --}}
+                                                ảnh đại diện</button>
                                         </div>
                                     </div>
                                 </form>

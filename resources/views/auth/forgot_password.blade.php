@@ -106,7 +106,7 @@
                     $('#send-code-button').hide();
                     $('#verification-form').show();
 
-                    // Gán email vào input ẩn trong form xác thực
+                    // Gán email vào input ẩn trong form xác thực   
                     $('#verification-email').val(email);
                 },
                 error: function(xhr) {

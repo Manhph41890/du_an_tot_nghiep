@@ -599,7 +599,7 @@
     </div>
 
     {{-- ssssss --}}
-    <script>
+    {{-- <script>
         document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
             e.preventDefault();
             let formData = new FormData(this);
@@ -624,7 +624,7 @@
         });
     </script>
    
-    {{-- xử lý ảnh + thông tin --}}
+    
     <script>
         // Define routes in a JavaScript object
         const routes = {
@@ -671,6 +671,10 @@
                 console.error(`Route [${routeName}] is not defined.`);
             }
         };
+    </script> --}}
+
+    <script>
+        
     </script>
 
 

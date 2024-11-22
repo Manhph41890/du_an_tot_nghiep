@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                                                                            </div> -->
+                                                                                                                    <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                                </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -137,14 +137,15 @@
                                             <!-- User Info Section -->
                                             <div class="overflow-hidden ms-4">
                                                 <h4 class="m-0 text-dark fs-20">{{ Auth::user()->name }}</h4>
-                                                <a href="#"
-                                                    class="ml-4 font-semibold text-primary hover:text-blue-700"
-                                                    onclick="toggleAvatarForm(event)">
-                                                    Thay đổi ảnh đại diện
-                                                </a>
-                                                <!-- Avatar Form (Initially hidden) -->
-
                                                 <div id="change-avatar-form" style="display: none;">
+                                                    <a href="#" id="Avatar"
+                                                        class="ml-4 font-semibold text-primary hover:text-blue-700"
+                                                        onclick="toggleAvatarForm(event)">
+                                                        Thay đổi ảnh đại diện
+                                                    </a>
+                                                    <!-- Avatar Form (Initially hidden) -->
+
+
                                                     <div class="form-group">
                                                         <label for="anh_dai_dien">Hình đại diện</label>
                                                         <input type="file" class="form-control" id="anh_dai_dien"
@@ -622,33 +623,7 @@
                 .catch(error => console.error('Error:', error));
         });
     </script>
-    <script>
-  
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const accountInfoTab = document.querySelector('[href="#account-info"]');
-            const ordersTab = document.querySelector('[href="#orders"]');
-            const paymentMethodTab = document.querySelector('[href="#payment-method"]');
-
-            accountInfoTab.addEventListener('click', function() {
-                document.getElementById('account-info').style.display = 'block';
-                document.getElementById('orders').style.display = 'none';
-                document.getElementById('payment-method').style.display = 'none';
-            });
-
-            ordersTab.addEventListener('click', function() {
-                document.getElementById('account-info').style.display = 'none';
-                document.getElementById('orders').style.display = 'block';
-                document.getElementById('payment-method').style.display = 'none';
-            });
-
-            paymentMethodTab.addEventListener('click', function() {
-                document.getElementById('account-info').style.display = 'none';
-                document.getElementById('orders').style.display = 'none';
-                document.getElementById('payment-method').style.display = 'block';
-            });
-        });
-    </script>
+   
     {{-- xử lý ảnh + thông tin --}}
     <script>
         // Define routes in a JavaScript object
@@ -697,4 +672,31 @@
             }
         };
     </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const accountInfoTab = document.querySelector('[href="#account-info"]');
+        const ordersTab = document.querySelector('[href="#orders"]');
+        const paymentMethodTab = document.querySelector('[href="#payment-method"]');
+
+        accountInfoTab.addEventListener('click', function() {
+            document.getElementById('account-info').style.display = 'block';
+            document.getElementById('orders').style.display = 'none';
+            document.getElementById('payment-method').style.display = 'none';
+        });
+
+        ordersTab.addEventListener('click', function() {
+            document.getElementById('account-info').style.display = 'none';
+            document.getElementById('orders').style.display = 'block';
+            document.getElementById('payment-method').style.display = 'none';
+        });
+
+        paymentMethodTab.addEventListener('click', function() {
+            document.getElementById('account-info').style.display = 'none';
+            document.getElementById('orders').style.display = 'none';
+            document.getElementById('payment-method').style.display = 'block';
+        });
+    });
+</script>
 @endsection

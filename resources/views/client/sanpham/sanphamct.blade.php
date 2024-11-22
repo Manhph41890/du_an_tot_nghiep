@@ -30,15 +30,19 @@
 
         .filter-btn:hover {
             background-color: #fff;
-            color: #5a5a9c;  /* số */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Tăng độ bóng khi hover */
-            transform: translateY(-2px); /* Nâng nút lên */
+            color: #5a5a9c;
+            /* số */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            /* Tăng độ bóng khi hover */
+            transform: translateY(-2px);
+            /* Nâng nút lên */
         }
 
         .filter-btn:active {
             /* background-color: #0056b3; */
-            box-shadow: 0 2px 4px #7148ee(0, 0, 0, 0.1); 
-            transform: translateY(1px); /* Nhấn nút xuống */
+            box-shadow: 0 2px 4px #7148ee(0, 0, 0, 0.1);
+            transform: translateY(1px);
+            /* Nhấn nút xuống */
         }
 
         #no-reviews-message {
@@ -413,7 +417,7 @@
                                                                     <h5 class="review-name mb-1">
                                                                         {{ $danhgia->users->ho_ten }}</h5>
                                                                 </div>
-                                                                <div class="rating-product">      
+                                                                <div class="rating-product">
                                                                     @for ($i = 1; $i <= 5; $i++)
                                                                         @if ($i <= $danhgia->diem_so)
                                                                             <i class="mdi mdi-star text-warning"
@@ -472,7 +476,7 @@
                                             </div>
                                             <div class="media-body">
                                                 <div class="product-desc">
-                                                    <h3 class="title">
+                                                    <h3 class="title min_h">
                                                         <a
                                                             href="{{ route('san-phams.incrementViews', $sanphamlq->id) }}">{{ $sanphamlq->ten_san_pham }}</a>
                                                     </h3>
@@ -503,6 +507,18 @@
                     </div>
                 </div>
             </div>
+            <style>
+                .min_h {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    /* Số dòng muốn hiển thị */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    min-height: 3em;
+                    /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+                }
+            </style>
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -585,8 +601,10 @@
 
                     colorContainer.appendChild(colorDiv);
                 });
+
             }
         });
+
 
         // Hàm hỗ trợ định dạng số có dấu phân cách ngàn
         function numberWithCommas(x) {

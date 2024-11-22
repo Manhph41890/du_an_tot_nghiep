@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                                        <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                                                    </div> -->
+                                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                                            </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -137,7 +137,8 @@
                                             <!-- User Info Section -->
                                             <div class="overflow-hidden ms-4">
                                                 <h4 class="m-0 text-dark fs-20">{{ Auth::user()->name }}</h4>
-                                                <a href="#"
+
+                                                <a href="#" id="Avatar"
                                                     class="ml-4 font-semibold text-primary hover:text-blue-700"
                                                     onclick="toggleAvatarForm(event)">
                                                     Thay đổi ảnh đại diện
@@ -493,8 +494,7 @@
                                                                             VNĐ
                                                                         </td>
                                                                         <td>
-                                                                            <span
-                                                                                class="badge position-static bg-warning">
+                                                                            <span class="badge position-static bg-warning">
                                                                                 {{ $item->trang_thai }}
                                                                             </span>
                                                                         </td>
@@ -507,22 +507,24 @@
                                                         <table class="table table-bordered">
                                                             <tbody>
                                                                 @foreach ($lsRutVi_thanhcong as $item)
-                                                                <tr>
-                                                                    <td>{{ $item->bank?->name }}</td>
-                                                                    <td>{{ $item->bank?->account_number }}</td>
-                                                                    <td>{{ $item->bank?->account_holder }}</td>
-                                                                    <td>{{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i:s') : 'Chưa có thời gian' }}</td> <!-- Hiển thị thời gian -->
-                                                                    <td class="transaction-amount negative">
-                                                                        {{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ
-                                                                    </td>
-                                                                    <td>
-                                                                        <span class="badge position-static bg-success">
-                                                                            {{ $item->trang_thai }}
-                                                                        </span>
-                                                                    </td>
-                                                                </tr>
+                                                                    <tr>
+                                                                        <td>{{ $item->bank?->name }}</td>
+                                                                        <td>{{ $item->bank?->account_number }}</td>
+                                                                        <td>{{ $item->bank?->account_holder }}</td>
+                                                                        <td>{{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i:s') : 'Chưa có thời gian' }}
+                                                                        </td> <!-- Hiển thị thời gian -->
+                                                                        <td class="transaction-amount negative">
+                                                                            {{ number_format($item->tien_rut, 0, ',', '.') }}
+                                                                            VNĐ
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="badge position-static bg-success">
+                                                                                {{ $item->trang_thai }}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
                                                                 @endforeach
-                                                                
+
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -559,7 +561,7 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -597,17 +599,6 @@
     </div>
 
     {{-- ssssss --}}
-
-
-
-
-
-    {{-- enddd sssss --}}
-    <!-- product tab end -->
-@endsection
-
-
-@section('js')
     <script>
         document.getElementById('change-avatar-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -632,22 +623,58 @@
                 .catch(error => console.error('Error:', error));
         });
     </script>
+
+    {{-- xử lý ảnh + thông tin --}}
     <script>
+        // Define routes in a JavaScript object
+        const routes = {
+            taikhoanDashboard: "{{ route('taikhoan.dashboard') }}",
+            updateThongtin: "{{ route('update_thongtin') }}",
+            avatarUpdate: "{{ route('taikhoan.dashboard.avatar') }}"
+        };
+
+        function toggleGioiTinh() {
+            const gioiTinhField = document.getElementById('gioi_tinh');
+
+            // Loại bỏ thuộc tính disabled để có thể thao tác
+            gioiTinhField.disabled = false;
+
+            // Có thể thay đổi thêm style hoặc class nếu cần thiết (tùy chỉnh thêm)
+            gioiTinhField.style.backgroundColor = "#fff"; // Ví dụ thay đổi màu nền khi có thể chỉnh sửa
+        }
+        // Function to toggle edit mode
         function toggleEdit() {
-            const inputs = document.querySelectorAll('#user-info-form input');
-            const toggleEditBtn = document.getElementById('toggleEditBtn');
-            const saveBtn = document.getElementById('saveBtn');
+            document.querySelectorAll(
+                '#user-info-form input[type="text"],#user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"],#user-info-form select'
+            ).forEach(field => {
 
-            // Toggle input disabled state
-            inputs.forEach(input => input.disabled = !input.disabled);
-
-            // Switch button visibility
-            if (saveBtn.style.display === 'none') {
-                saveBtn.style.display = 'inline-block';
-                toggleEditBtn.style.display = 'none';
-            }
+                field.disabled = !field.disabled;
+            });
+            toggleGioiTinh();
+            document.getElementById('toggleEditBtn').style.display = 'none';
+            document.getElementById('saveBtn').style.display = 'inline-block';
         }
 
+
+        // Function to show avatar change form
+        function toggleAvatarForm(event) {
+            event.preventDefault();
+            document.getElementById('change-avatar-form').style.display = 'block';
+            document.getElementById('avatarSaveBtn').style.display = 'inline-block';
+        }
+
+        // Function to set the form action dynamically
+        function setFormAction(routeName) {
+            if (routes[routeName]) {
+                document.getElementById('user-info-form').action = routes[routeName];
+            } else {
+                console.error(`Route [${routeName}] is not defined.`);
+            }
+        };
+    </script>
+
+
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const accountInfoTab = document.querySelector('[href="#account-info"]');
             const ordersTab = document.querySelector('[href="#orders"]');
@@ -671,43 +698,5 @@
                 document.getElementById('payment-method').style.display = 'block';
             });
         });
-    </script>
-    {{-- xử lý ảnh + thông tin --}}
-    <script>
-        // Define routes in a JavaScript object
-        const routes = {
-            taikhoanDashboard: "{{ route('taikhoan.dashboard') }}",
-            updateThongtin: "{{ route('update_thongtin') }}",
-            avatarUpdate: "{{ route('taikhoan.dashboard.avatar') }}"
-        };
-
-        // Function to toggle edit mode
-        function toggleEdit() {
-            document.querySelectorAll(
-                '#user-info-form input[type="text"], #user-info-form input[type="email"], #user-info-form input[type="number"], #user-info-form input[type="date"]'
-            ).forEach(field => {
-
-                field.disabled = !field.disabled;
-            });
-            document.getElementById('toggleEditBtn').style.display = 'none';
-            document.getElementById('saveBtn').style.display = 'inline-block';
-        }
-
-
-        // Function to show avatar change form
-        function toggleAvatarForm(event) {
-            event.preventDefault();
-            document.getElementById('change-avatar-form').style.display = 'block';
-            document.getElementById('avatarSaveBtn').style.display = 'inline-block';
-        }
-
-        // Function to set the form action dynamically
-        function setFormAction(routeName) {
-            if (routes[routeName]) {
-                document.getElementById('user-info-form').action = routes[routeName];
-            } else {
-                console.error(`Route [${routeName}] is not defined.`);
-            }
-        } <
     </script>
 @endsection

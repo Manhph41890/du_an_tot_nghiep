@@ -25,24 +25,23 @@ class BaiVietController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
-        if($startDate && $endDate){
-            $baiviets= bai_viet::whereBetween('ngay_dang',[$startDate , $endDate])->paginate(5);
-
-        }else{
-            $baiviets= bai_viet::paginate(5);
+        if ($startDate && $endDate) {
+            $baiviets = bai_viet::whereBetween('ngay_dang', [$startDate, $endDate])->paginate(5);
+        } else {
+            $baiviets = bai_viet::paginate(5);
         }
 
 
         $title = "Danh sách bài viết";
 
-        return view('admin.baiviet.index', compact('user', 'baiviets', 'title','isAdmin'));
+        return view('admin.baiviet.index', compact('user', 'baiviets', 'title', 'isAdmin'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    { 
+    {
         $this->authorize('create', bai_viet::class);
         $user = User::query()->pluck('ho_ten', 'id')->all();
         $title = "Thêm mới bài viết";
@@ -94,7 +93,7 @@ class BaiVietController extends Controller
      * Display the specified resource.
      */
     public function show(bai_viet $bai_viet, $id)
-    {  
+    {
         $this->authorize('view', bai_viet::class);
         $post = bai_viet::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
@@ -102,17 +101,22 @@ class BaiVietController extends Controller
         return view('admin.baiviet.show', compact('post', 'user', 'title'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(bai_viet $bai_viet, $id)
-    {  
-        $this->authorize('update', bai_viet::class);
-        //Tim bài viết theo id
+    public function edit(bai_viet $baiViet, $id)
+    {
+        // Xác thực quyền chỉnh sửa bài viết
+        $this->authorize('update', $baiViet);
+
+        // Tìm bài viết theo ID
         $post = bai_viet::findOrFail($id);
-        $user = User::query()->pluck('ho_ten', 'id')->all();
+
+        // Lấy danh sách người dùng (id và họ tên)
+        $users = User::pluck('ho_ten', 'id');
+
+        // Tiêu đề trang
         $title = "Sửa bài viết";
-        return view('admin.baiviet.edit', compact('post', 'user', 'title'));
+
+        // Trả về view với dữ liệu
+        return view('admin.baiviet.edit', compact('post', 'users', 'title'));
     }
 
     /**
@@ -153,9 +157,9 @@ class BaiVietController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
-    { 
-        $this->authorize('delete', bai_viet::class);
+    public function destroy($id,bai_viet $baiViet)
+    {
+        $this->authorize('delete', $baiViet);
         try {
             DB::beginTransaction();
 

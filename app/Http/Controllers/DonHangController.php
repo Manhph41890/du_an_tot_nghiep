@@ -102,53 +102,57 @@ class DonHangController extends Controller
     {
         $donhang = don_hang::findOrFail($id);
         $title = "Cập nhật đơn hàng";
+
+
         return view('admin.donhang.edit', compact('donhang', 'title'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatedon_hangRequest $request, don_hang $don_hang, $id)
+    public function update(Request $request, $id)
     {
         DB::beginTransaction();
         try {
             $donhang = don_hang::findOrFail($id);
 
-            // Lấy toàn bộ dữ liệu từ form dưới dạng mảng
-            $data_don_hang = $request->all();
+            // Cập nhật trạng thái đơn hàng
+            $donhang->update(['trang_thai_don_hang' => $request->input('trang_thai_don_hang')]);
 
-            // Định nghĩa các trạng thái và các quy tắc chuyển đổi
-            $trangThaiChoPhep = [
-                'Chờ xác nhận' => ['Đã xác nhận'],
-                'Đã xác nhận' => ['Đang chuẩn bị hàng'],
-                'Đang chuẩn bị hàng' => ['Đang vận chuyển'],
-                'Đang vận chuyển' => ['Đã giao'],
-                'Đã giao' => ['Thành công'],
-                'Thành công' => [], // Không thể chuyển đi nữa
-                'Đã hủy' => [] // Không thể chuyển đi nữa
+
+            // Xác định trạng thái tiếp theo (giả sử các trạng thái được liệt kê theo thứ tự)
+            $statuses = [
+                'Chờ xác nhận',
+                'Đã xác nhận',
+                'Đang chuẩn bị hàng',
+                'Đang vận chuyển',
+                'Đã giao',
+                'Thành công',
+                'Đã hủy'
             ];
 
-            // Kiểm tra trạng thái mới được gửi lên
-            if (isset($data_don_hang['trang_thai_don_hang'])) {
-                $trangThaiMoi = $data_don_hang['trang_thai_don_hang'];
-                $trangThaiHienTai = $donhang->trang_thai_don_hang;
+            $currentStatus = $donhang->trang_thai_don_hang;  // Lấy trạng thái hiện tại từ đơn hàng
+            $currentStatusIndex = array_search($currentStatus, $statuses);
+            $nextStatus = '';
 
-                // Kiểm tra trạng thái hiện tại và trạng thái mới
-                if (!in_array($trangThaiMoi, $trangThaiChoPhep[$trangThaiHienTai])) {
-                    return back()->with('error', 'Không thể chuyển trạng thái từ ' . $trangThaiHienTai . ' sang ' . $trangThaiMoi . '.');
-                }
+            // Tính toán trạng thái tiếp theo, tránh lỗi ngoài mảng
+            if ($currentStatusIndex !== false && isset($statuses[$currentStatusIndex + 1])) {
+                $nextStatus = $statuses[$currentStatusIndex];  // Lấy trạng thái tiếp theo
             }
 
-            // Cập nhật bản ghi trong bảng don_hang
-            $donhang->update($data_don_hang);
-
+            // Nếu có trạng thái tiếp theo, chuyển hướng đến trạng thái đó
             DB::commit();
-            return redirect()->route('donhangs.index')->with('success', 'Đơn hàng đã được cập nhật thành công.');
+
+            // Redirect đến trang danh sách đơn hàng với trạng thái tiếp theo
+            return redirect()->route('donhangs.index', ['status' => $nextStatus])
+                ->with('success', 'Trạng thái đơn hàng đã được cập nhật thành công.');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Đã xảy ra lỗi khi cập nhật đơn hàng.');
+            return back()->with('error', 'Đã xảy ra lỗi khi cập nhật trạng thái đơn hàng.');
         }
     }
+
     /**
      * Remove the specified resource from storage.
      */

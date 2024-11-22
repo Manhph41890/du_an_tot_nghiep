@@ -20,7 +20,7 @@ class RoleMiddleware
             }
 
             // Nếu quyền không đúng, trả về view lỗi 403 với thông báo
-            return response()->view('errors.403', [], 403);
+            return response()->view('error.403', [], 403);
         }
 
         // Nếu người dùng chưa đăng nhập

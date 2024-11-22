@@ -209,6 +209,20 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
+                                @if ($donhang->trang_thai_don_hang == 'Đã giao')
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5>Xác nhận đơn hàng</h5>
+                                            <p>Xác nhận bạn đã nhận hàng đơn hàng</p>
+                                            <form action="{{ route('donhangs.success', $donhang->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" class="complete-button btn btn-primary">Xác nhận
+                                                    đã nhận hàng</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <h5>Thông tin khách hàng</h5>
@@ -306,7 +320,8 @@
 
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán bằng Vnpay')
+                                @if ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán bằng Vnpay' ||
+                                        $donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán bằng Ví')
                                     @if ($donhang->lich_su_thanh_toans->isNotEmpty())
                                         <div class="card">
                                             <div class="card-body">

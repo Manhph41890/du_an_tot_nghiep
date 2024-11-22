@@ -112,12 +112,10 @@
                                                     <i class="icon-magnifier"></i>
                                                 </a>
                                             </div>
-                                            <!-- Input tìm kiếm (ẩn mặc định) -->
                                             <div id="searchInput" class="search-input d-none position-relative">
                                                 <div class="input-group">
                                                     <input type="text" name="search" id="inputsearch" class="form-control" placeholder="Tìm kiếm..." aria-label="Search">
-                                                    <div id="product-search" class="product-grouped product-count style" style="position: absolute; width: 100%; top: 100%; background: white; z-index: 100; display: none;">
-                                                     
+                                                    <div id="product-search" class="product-grouped product-count style" style="position: absolute; width: 100%; top: 100%; background: white; z-index: 100; display: none;">                                                   
                                                     </div>
                                                 </div>
                                             </div>

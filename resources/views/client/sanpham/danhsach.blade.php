@@ -4,7 +4,7 @@
     {{-- mã giảm giá 'voucher' --}}
     <div class="product-tab bg-white pt-80 pb-50">
         <div class="container">
-           
+
             <div class="discounts-container">
                 @foreach ($discounts as $item)
                     <div class="discount-item">
@@ -13,9 +13,13 @@
                                 alt="Discount Icon">
                         </div>
                         <div class="discount-content">
+
                             <div class="discount-code zigzag">
-                                <span class="code">{{ $item->ma_khuyen_mai }}</span>
+
+                                <span class="code">{{ $item->ten_khuyen_mai }}</span>
                             </div>
+
+                  
                             <div class="discount-description">
                                 <p>
                                     Giảm <span

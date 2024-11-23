@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                                                                                            </div> -->
+                                                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                                                            </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -120,16 +120,14 @@
                     <div class="tab-content" id="myaccountContent">
                         <div class="tab-pane fade show active" id="account-info" role="tabpanel">
                             <div class="myaccount-content">
-                                <h3 style="font-size: 17px;">{{ $title }}</h3>
+                                <h3 style="font-size: 30px;">{{ $title }}</h3>
 
-                                <form id="user-info-form" action="" method="POST" enctype="multipart/form-data">
+                                <form id="user-info-form" style="font-size: 18px;" action="" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="align-items-center">
                                         <div class="d-flex align-items-center">
                                             <!-- User Avatar -->
-                                            {{-- <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}"
-                                                 class="rounded-circle img-thumbnail float-start" alt="Profile Image"
-                                                 style="width: 100px; height: 100px; object-fit: cover;"> --}}
                                             <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}?t={{ time() }}"
                                                 class="rounded-circle img-thumbnail float-start" alt="Profile Image"
                                                 style="width: 100px; height: 100px; object-fit: cover;">

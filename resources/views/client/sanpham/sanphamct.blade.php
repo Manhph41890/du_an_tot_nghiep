@@ -400,7 +400,7 @@
                                         </div>
                                         <div id="no-reviews-message"
                                             style="display: none; color: red; text-align: center;">
-                                            Chưa có đánh giá nào cho sản phẩm này.
+                                            Không có đánh giá phù hợp.
                                         </div>
                                         <div class="review-wrapper">
                                             @foreach ($sanPhamCT->danh_gias as $danhgia)

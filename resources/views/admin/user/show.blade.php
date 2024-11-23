@@ -22,7 +22,7 @@
                                     <p><strong>Họ và tên:</strong> {{ $post->ho_ten }}</p>
                                 </div>
                                 <div class="mb-3">
-                                    <p><strong>Ảnh đại diện:</strong> {{ $post->anh_dai_dien }}</p>
+                                    <p><strong>Ảnh đại diện:{{ $post->anh_dai_dien }}</strong> </p>
                                 </div>
                                 <div class="mb-3">
                                     <p><strong>Email:</strong> {{ $post->email }}</p>

@@ -12,7 +12,7 @@
     @endif
 
 
-    <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/banner_0.jpg" alt="">
+    <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/bannerLogin1.jpg" alt="">
     <div id="snow-container"></div>
     <div class="form-contain">
         <div class="overlay">

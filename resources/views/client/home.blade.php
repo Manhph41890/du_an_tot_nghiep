@@ -425,7 +425,7 @@
     <!-- common banner  end -->
 
     <!-- product tab start -->
-    <section class="product-tab bg-white pt-50 pb-80">
+    <section class="product-tab bg-white pb-80">
         <div class="container">
 
             <div class="product-tab-nav mb-50">
@@ -453,7 +453,7 @@
                                         <div class="card product-card">
                                             <div class="card-body p-0">
                                                 <div class="media flex-column">
-                                                    <div class="product-thumbnail position-relative">
+                                                    <div class="product-thumbnail position-relative" style="">
                                                         <span class="badge badge-danger top-right blinking-text">Mới</span>
                                                         <a href="{{ route('san-phams.incrementViews', $item->id) }}">
                                                             <img class="first-img"
@@ -665,7 +665,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>z
     </section>
     <!-- blog-section end -->
 

@@ -108,12 +108,8 @@ Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']
 
 
 // Route cho các chức năng quản lý (admin)
-Route::middleware(['auth', 'role:admin', 'role:nhan_vien'])->group(function () {
-    // Thống kê
-    Route::prefix('dashboard')->group(function () {
-        Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
-        // Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
-    });
+Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
+
 
     // Profile
     Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile');
@@ -163,7 +159,13 @@ Route::middleware(['auth', 'role:admin', 'role:nhan_vien'])->group(function () {
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
 });
-
+Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
+    // Thống kê
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
+        // Route::get('/doanhthu', [AdminController::class, 'thong_ke_doanh_thu'])->name('thong_ke_doanh_thu');
+    });
+});
 // Route cho người dùng (khách hàng)
 Route::middleware(['auth', 'role:khach_hang'])->group(function () {
     // Route::get('/', [HomeController::class, 'index'])->name('client.home');

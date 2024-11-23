@@ -48,7 +48,9 @@ class AppServiceProvider extends ServiceProvider
 
         // Chia sẻ biến notifications đến tất cả các view
         View::share('notifications', $notifications);
-
+        // 
+        $viewMoney = DB::table('ls_rut_vis')->where('trang_thai', 'Chờ Duyệt')->count();
+        View::share('viewMoney', $viewMoney);
         Paginator::useBootstrapFive();
         // Lấy dữ liệu từ database
         $danhmucs = danh_muc::query()->get();

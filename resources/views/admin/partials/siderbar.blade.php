@@ -267,64 +267,6 @@
                         </ul>
                     </div>
                 </li>
-
-                {{-- <!-- Chức vụ -->
-                <li>
-                    <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="award"></i>
-                        <span> Chức vụ </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="chucvu">
-                        <ul class="nav-second-level">
-                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
-                                <li><a class="tp-link" href="{{ route('chucvus.create') }}">Thêm</a></li>
-                            @endif
-                            <li><a class="tp-link" href="{{ route('chucvus.index') }}">Danh sách</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- Phương thức thanh toán -->
-                <li>
-                    <a href="#phuongthucthanhtoan" data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-parent="#side-menu">
-                        <i data-feather="credit-card"></i>
-                        <span> PT thanh toán </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="phuongthucthanhtoan">
-                        <ul class="nav-second-level">
-                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
-                                <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.create') }}">Thêm</a>
-                                </li>
-                            @endif
-                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.index') }}">Danh sách</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Phương thức vận chuyển -->
-                <li>
-                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-parent="#side-menu">
-                        <i data-feather="truck"></i>
-                        <span> PT vận chuyển </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="phuongthucvanchuyen">
-                        <ul class="nav-second-level">
-                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
-                                <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.create') }}">Thêm</a>
-                                </li>
-                            @endif
-                            <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.index') }}">Danh sách</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> --}}
-
-
             </ul>
         </div>
         <!-- End Sidebar -->

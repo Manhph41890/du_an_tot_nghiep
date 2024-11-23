@@ -91,36 +91,33 @@
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="number" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
+                    <input type="text" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
                         required
                         class="form-control form-control-lg bg-light  fs-6 @error('so_dien_thoai') is-invalid @enderror"
                         placeholder="Số điện thoại">
-                    @error('so_dien_thoai')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
-                    @enderror
+
                 </div>
+                @error('so_dien_thoai')
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                @enderror
 
                 <div class="input-group mb-3">
                     <input type="password" id="password" name="password" required
                         class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
                         placeholder="Mật Khẩu">
-                    @error('password')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
-                    @enderror
-                </div>
 
+                </div>
+                @error('password')
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                @enderror
                 <div class="input-group mb-3">
                     <input type="password" id="password_confirmation" name="password_confirmation" required
                         class="form-control form-control-lg bg-light fs-6 @error('password_confirmation') is-invalid @enderror"
                         placeholder="Xác nhận mật khẩu">
-                    @error('password_confirmation')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
-                    @enderror
-
-
-
-
                 </div>
+                @error('password_confirmation')
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                @enderror
                 <div class="nut-button">
                     <input type="submit" value="Đăng Ký">
                 </div>

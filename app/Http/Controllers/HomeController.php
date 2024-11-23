@@ -65,7 +65,7 @@ class HomeController extends Controller
             ->where('so_luong_ma', '>', 0) // Thêm điều kiện so_luong_ma > 0
             ->whereNull('user_id') // Thêm điều kiện user_id = null
             ->orderBy('created_at', 'desc') // Sắp xếp theo ngày tạo mới nhất
-            ->take(4) // Lấy 4 mã giảm giá
+            ->take(3)
             ->get();
 
 

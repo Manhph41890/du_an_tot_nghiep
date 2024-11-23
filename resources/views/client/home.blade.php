@@ -51,6 +51,7 @@
         }
 
         .product-thumbnail {
+            width: 100%;
             height: 250px;
             /* Thiết lập chiều cao cố định cho phần hình ảnh sản phẩm */
             overflow: hidden;

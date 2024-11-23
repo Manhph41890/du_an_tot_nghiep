@@ -49,7 +49,7 @@
 
         .thumb_cart img {
             border-radius: 0.5rem;
-            transition: transform 0.2s;
+            will-change: transform;
         }
 
         .thumb_cart img:hover {
@@ -234,7 +234,7 @@
     </style>
     <div class="container margin_30">
         <!-- <div class="page_header">                                                                   <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>                                                                </div> -->
-        <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
+        {{-- <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -254,7 +254,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
         <div class="cart-wrapper">
             <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
                 @csrf
@@ -389,56 +389,90 @@
             const removeMultipleForm = document.getElementById('remove-multiple-form');
             const selectAllButton = document.getElementById('select-all');
 
-            // Chọn hoặc bỏ chọn tất cả checkbox
-            selectAllButton.addEventListener('click', function() {
-                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-                checkboxes.forEach(checkbox => checkbox.checked = !allChecked);
-                calculateTotal(); // Tính toán lại tổng giỏ hàng
-            });
-            // Hàm tính tổng giá trị giỏ hàng
-            function calculateTotal() {
+            // Cache for selected items to avoid frequent DOM manipulation
+            let selectedItemsCache = new Set();
+
+            // Debounce function to limit the rate at which calculateTotal runs
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            // Optimized calculate total function
+            const calculateTotal = debounce(() => {
                 let totalPrice = 0;
                 let shipping = 0;
-                const selectedItems = [];
+                selectedItemsCache.clear();
 
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const price = parseInt(checkbox.getAttribute('data-price'));
-                        selectedItems.push(checkbox.getAttribute('data-id'));
+                        const itemId = checkbox.getAttribute('data-id');
+                        selectedItemsCache.add(itemId);
                         totalPrice += price;
                     }
                 });
-                // Nếu có ít nhất 1 sản phẩm được chọn, cộng phí vận chuyển một lần
-                if (selectedItems.length > 0) {
-                    shipping = 30000; // Cộng phí vận chuyển chỉ một lần
+
+                if (selectedItemsCache.size > 0) {
+                    shipping = 30000;
                 }
-                totalPrice += shipping; // Cộng phí vận chuyển vào tổng giá trị
+
+                totalPrice += shipping;
+
+                // Update UI
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
                 shippingEl.textContent = shipping.toLocaleString() + ' đ';
-                removeButton.style.display = selectedItems.length > 0 ? 'inline-block' :
-                    'none'; // Hiển thị/ẩn nút xóa
+                removeButton.style.display = selectedItemsCache.size > 0 ? 'inline-block' : 'none';
 
-                // Xóa các input hidden trước khi thêm mới
+                // Batch DOM updates for forms
+                updateFormInputs();
+            }, 150); // Debounce delay of 150ms
+
+            // Separate function to handle form input updates
+            function updateFormInputs() {
+                // Remove existing inputs
                 removeMultipleForm.querySelectorAll('input[name="remove_items[]"]').forEach(input => input
                     .remove());
                 checkoutForm.querySelectorAll('input[name="checkout_items[]"]').forEach(input => input.remove());
 
-                selectedItems.forEach(itemId => {
-                    let removeInput = document.createElement('input');
+                // Create document fragment for better performance
+                const removeFragment = document.createDocumentFragment();
+                const checkoutFragment = document.createDocumentFragment();
+
+                selectedItemsCache.forEach(itemId => {
+                    const removeInput = document.createElement('input');
                     removeInput.type = 'hidden';
                     removeInput.name = 'remove_items[]';
                     removeInput.value = itemId;
-                    removeMultipleForm.appendChild(removeInput);
+                    removeFragment.appendChild(removeInput);
 
-                    let checkoutInput = document.createElement('input');
+                    const checkoutInput = document.createElement('input');
                     checkoutInput.type = 'hidden';
                     checkoutInput.name = 'checkout_items[]';
                     checkoutInput.value = itemId;
-                    checkoutForm.appendChild(checkoutInput);
+                    checkoutFragment.appendChild(checkoutInput);
                 });
+
+                // Batch append
+                removeMultipleForm.appendChild(removeFragment);
+                checkoutForm.appendChild(checkoutFragment);
             }
 
-            // Kiểm tra số lượng sản phẩm không vượt quá tồn kho
+            // Select all functionality
+            selectAllButton.addEventListener('click', function() {
+                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                checkboxes.forEach(checkbox => checkbox.checked = !allChecked);
+                calculateTotal();
+            });
+
+            // Quantity update handler
             function checkMaxQuantity(itemId, inputQuantity) {
                 const itemElement = document.querySelector(`.item-checkbox[data-id="${itemId}"]`);
                 const maxQuantity = parseInt(itemElement.getAttribute('data-max-quantity'));
@@ -446,24 +480,23 @@
 
                 if (quantity > maxQuantity) {
                     toastr.error(`Số lượng tối đa cho sản phẩm này là ${maxQuantity}`);
-                    inputQuantity.value = maxQuantity; // Cập nhật giá trị lại về số lượng tối đa
+                    inputQuantity.value = maxQuantity;
                     return false;
                 }
                 return true;
             }
 
-            // Sự kiện cập nhật giỏ hàng khi người dùng bấm "Cập nhật"
+            // Update cart event handlers
             updateButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const itemId = this.getAttribute('data-id');
                     const quantityInput = document.querySelector(
                         `input.quantity-input[data-item-id="${itemId}"]`);
 
-                    // Kiểm tra số lượng hợp lệ trước khi gửi
                     if (checkMaxQuantity(itemId, quantityInput)) {
                         const data = {
-                            quantity: quantityInput.value, // Chỉ gửi số lượng
-                            _token: '{{ csrf_token() }}' // CSRF token để bảo mật
+                            quantity: quantityInput.value,
+                            _token: document.querySelector('meta[name="csrf-token"]').content
                         };
 
                         fetch(`/cart/update/${itemId}`, {
@@ -478,10 +511,10 @@
                             .then(data => {
                                 if (data.success) {
                                     toastr.success('Cập nhật thành công');
-                                    calculateTotal(); // Tính toán lại tổng giỏ hàng
-                                    location.reload(); // Làm mới trang để cập nhật thông tin
+                                    calculateTotal();
+                                    location.reload();
                                 } else {
-                                    toastr.error(data.message); // Hiển thị thông báo lỗi nếu có
+                                    toastr.error(data.message);
                                 }
                             })
                             .catch(error => {
@@ -492,12 +525,13 @@
                 });
             });
 
-            // Sự kiện thay đổi khi chọn các checkbox
+            // Checkbox change events
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', calculateTotal);
             });
 
-            calculateTotal(); // Tính toán giá trị ban đầu của giỏ hàng
+            // Initial calculation
+            calculateTotal();
         });
     </script>
 

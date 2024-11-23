@@ -1,11 +1,6 @@
-
-
 @extends('auth.layout')
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
+   
     <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/banner_0.jpg" alt="">
 
     <div id="snow-container"></div>
@@ -35,6 +30,16 @@
             <form class="login" action="{{ route('auth.login') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <h2>Đăng Nhập</h2>
+                @if (session('login_error'))
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Đăng nhập thất bại',
+                            text: @json(session('login_error')),
+                            confirmButtonText: 'OK'
+                        });
+                    </script>
+                @endif
                 <div class="input-group mb-3">
                     <input type="email" id="email" name="email" value="{{ old('email') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
@@ -45,12 +50,6 @@
                     <input type="password" id="password" name="password" value="{{ old('password') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
                         placeholder="Mật khẩu">
-                    @if (session('login_error'))
-                        <div class="alert alert-danger">
-                            {{ session('login_error') }}
-                        </div>
-                    @endif
-
                 </div>
 
                 <div class="nut-button">

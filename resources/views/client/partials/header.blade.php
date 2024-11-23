@@ -63,6 +63,9 @@
         background: #fff !important;
         color: #5a5a9c !important;
     }
+    a.avatar_box {
+        text-decoration: none;
+    }
 </style>
 
 <!-- header start -->
@@ -174,7 +177,7 @@
                                                 $isUrl = filter_var($avatar, FILTER_VALIDATE_URL) !== false;
                                             @endphp
                                             <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
-                                                alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
+                                                alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
                                             @php
                                                 $tongDonHang = DB::table('don_hangs')
                                                     ->where('trang_thai_don_hang', 'Chờ xác nhận')

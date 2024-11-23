@@ -1,6 +1,5 @@
 @extends('auth.layout')
 @section('content')
-   
     <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/banner_0.jpg" alt="">
 
     <div id="snow-container"></div>

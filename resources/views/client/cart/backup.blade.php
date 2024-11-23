@@ -2,151 +2,144 @@
 
 @section('content')
     <style>
+        /* Container styles */
         .cart-wrapper {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0 auto;
+            padding: 20px;
         }
 
+        /* Table styles */
         .cart-table {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
+            overflow-x: auto;
         }
 
-        .table {
+        .cart-list {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            table-layout: fixed;
         }
 
-        .table thead {
-            background: #f8fafc;
-        }
-
-        .table th {
-            padding: 1rem;
-            text-align: left;
+        /* Header styles */
+        .cart-list thead th {
+            background-color: #f8f9fa;
+            padding: 15px;
             font-weight: 600;
-            color: #64748b;
-            border-bottom: 1px solid #e2e8f0;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+            white-space: nowrap;
         }
 
-        .table td {
-            padding: 1rem;
-            vertical-align: top;
-            border-bottom: 1px solid #e2e8f0;
+        /* Column widths */
+        .cart-list th:nth-child(1),
+        .cart-list td:nth-child(1) {
+            width: 50px;
         }
 
+        .cart-list th:nth-child(2),
+        .cart-list td:nth-child(2) {
+            width: 35%;
+        }
+
+        .cart-list th:nth-child(3),
+        .cart-list td:nth-child(3),
+        .cart-list th:nth-child(5),
+        .cart-list td:nth-child(5),
+        .cart-list th:nth-child(6),
+        .cart-list td:nth-child(6) {
+            width: 15%;
+        }
+
+        .cart-list th:nth-child(4),
+        .cart-list td:nth-child(4) {
+            width: 120px;
+        }
+
+        /* Cell styles */
+        .cart-list td {
+            padding: 15px;
+            vertical-align: middle;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        /* Product thumbnail styles */
         .thumb_cart {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 15px;
         }
 
         .thumb_cart img {
-            border-radius: 0.5rem;
-            transition: transform 0.2s;
-        }
-
-        .thumb_cart img:hover {
-            transform: scale(1.05);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .thumb_cart h5 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .thumb_cart p {
+            color: #666;
             margin: 0;
-            font-size: 1rem;
-            color: #1e293b;
         }
 
+        /* Quantity input styles */
         .quantity-input {
-            width: 70px;
-            padding: 0.5rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.375rem;
-            margin-right: 0.5rem;
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            text-align: center;
         }
 
+        /* Update button styles */
         .update-cart-btn {
-            padding: 0.5rem 1rem;
-            background: #3b82f6;
-            color: white;
+            background: none;
             border: none;
-            border-radius: 0.375rem;
+            color: #007bff;
             cursor: pointer;
-            transition: background 0.2s;
+            padding: 5px;
+            transition: color 0.2s;
         }
 
         .update-cart-btn:hover {
-            background: #2563eb;
+            color: #0056b3;
         }
 
-        .cart-summary {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .cart-summary ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 1.5rem 0;
-        }
-
-        .cart-summary li {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            color: #64748b;
-        }
-
-        .cart-summary li:last-child {
-            font-size: 1.25rem;
-            color: #1e293b;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 1rem;
-        }
-
-        #checkout-button {
-            width: 100%;
-            padding: 1rem;
-            background: #22c55e;
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1.1rem;
+        /* Price styles */
+        .price-tag {
             font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
+            color: #dc3545;
         }
 
-        #checkout-button:hover {
-            background: #16a34a;
+        .variant-price {
+            color: #28a745;
+            font-weight: 500;
         }
 
-        #remove-selected-items {
-            margin: 1rem;
-            padding: 0.5rem 1rem;
-            background: #ef4444;
-            color: white;
-            border: none;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            transition: background 0.2s;
+        /* Empty cart styles */
+        .empty-cart {
+            text-align: center;
+            padding: 40px !important;
+            color: #666;
         }
 
-        #remove-selected-items:hover {
-            background: #dc2626;
+        .empty-cart i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #dee2e6;
         }
 
+        /* Checkbox styles */
         .checkbox-wrapper {
-            display: inline-block;
             position: relative;
-            padding-left: 25px;
+            display: inline-block;
             cursor: pointer;
         }
 
@@ -157,84 +150,109 @@
         }
 
         .checkmark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 18px;
+            position: relative;
+            display: inline-block;
             width: 18px;
+            height: 18px;
+            border: 2px solid #dee2e6;
+            border-radius: 3px;
             background-color: #fff;
-            border: 2px solid #e2e8f0;
-            border-radius: 4px;
         }
 
         .checkbox-wrapper input:checked~.checkmark {
-            background-color: #3b82f6;
-            border-color: #3b82f6;
+            background-color: #007bff;
+            border-color: #007bff;
         }
 
         .checkmark:after {
-            content: "";
+            content: '';
             position: absolute;
             display: none;
+            left: 5px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
         }
 
         .checkbox-wrapper input:checked~.checkmark:after {
             display: block;
         }
 
-        .checkbox-wrapper .checkmark:after {
-            left: 5px;
-            top: 2px;
-            width: 4px;
-            height: 8px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
+        /* Cart summary styles */
+        .cart-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .price-tag {
-            color: #ef4444;
+        .cart-summary ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .cart-summary li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .cart-summary li:last-child {
+            border-bottom: none;
             font-weight: 600;
+            font-size: 18px;
         }
 
-        .variant-price {
-            color: #64748b;
-            font-size: 0.9rem;
+        /* Checkout button styles */
+        #checkout-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
 
-        .empty-cart {
-            text-align: center;
-            padding: 3rem;
-            color: #64748b;
+        #checkout-button:hover {
+            background-color: #218838;
         }
 
-        .empty-cart i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #e2e8f0;
+        /* Remove selected items button */
+        #remove-selected-items {
+            margin-top: 15px;
         }
 
+        /* Responsive styles */
         @media (max-width: 768px) {
-            .thumb_cart {
-                flex-direction: column;
-                text-align: center;
+            .cart-list {
+                font-size: 14px;
             }
 
-            .table th:nth-child(3),
-            .table td:nth-child(3),
-            .table th:nth-child(5),
-            .table td:nth-child(5) {
-                display: none;
+            .thumb_cart h5 {
+                font-size: 14px;
             }
 
-            .cart-summary {
-                margin-top: 2rem;
+            .quantity-input {
+                width: 50px;
+            }
+
+            .cart-summary li {
+                font-size: 14px;
             }
         }
     </style>
     <div class="container margin_30">
         <!-- <div class="page_header">                                                                   <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>                                                                </div> -->
-        <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
+        {{-- <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -254,7 +272,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
         <div class="cart-wrapper">
             <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
                 @csrf
@@ -389,56 +407,90 @@
             const removeMultipleForm = document.getElementById('remove-multiple-form');
             const selectAllButton = document.getElementById('select-all');
 
-            // Chọn hoặc bỏ chọn tất cả checkbox
-            selectAllButton.addEventListener('click', function() {
-                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-                checkboxes.forEach(checkbox => checkbox.checked = !allChecked);
-                calculateTotal(); // Tính toán lại tổng giỏ hàng
-            });
-            // Hàm tính tổng giá trị giỏ hàng
-            function calculateTotal() {
+            // Cache for selected items to avoid frequent DOM manipulation
+            let selectedItemsCache = new Set();
+
+            // Debounce function to limit the rate at which calculateTotal runs
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            // Optimized calculate total function
+            const calculateTotal = debounce(() => {
                 let totalPrice = 0;
                 let shipping = 0;
-                const selectedItems = [];
+                selectedItemsCache.clear();
 
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const price = parseInt(checkbox.getAttribute('data-price'));
-                        selectedItems.push(checkbox.getAttribute('data-id'));
+                        const itemId = checkbox.getAttribute('data-id');
+                        selectedItemsCache.add(itemId);
                         totalPrice += price;
                     }
                 });
-                // Nếu có ít nhất 1 sản phẩm được chọn, cộng phí vận chuyển một lần
-                if (selectedItems.length > 0) {
-                    shipping = 30000; // Cộng phí vận chuyển chỉ một lần
+
+                if (selectedItemsCache.size > 0) {
+                    shipping = 30000;
                 }
-                totalPrice += shipping; // Cộng phí vận chuyển vào tổng giá trị
+
+                totalPrice += shipping;
+
+                // Update UI
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
                 shippingEl.textContent = shipping.toLocaleString() + ' đ';
-                removeButton.style.display = selectedItems.length > 0 ? 'inline-block' :
-                    'none'; // Hiển thị/ẩn nút xóa
+                removeButton.style.display = selectedItemsCache.size > 0 ? 'inline-block' : 'none';
 
-                // Xóa các input hidden trước khi thêm mới
+                // Batch DOM updates for forms
+                updateFormInputs();
+            }, 150); // Debounce delay of 150ms
+
+            // Separate function to handle form input updates
+            function updateFormInputs() {
+                // Remove existing inputs
                 removeMultipleForm.querySelectorAll('input[name="remove_items[]"]').forEach(input => input
                     .remove());
                 checkoutForm.querySelectorAll('input[name="checkout_items[]"]').forEach(input => input.remove());
 
-                selectedItems.forEach(itemId => {
-                    let removeInput = document.createElement('input');
+                // Create document fragment for better performance
+                const removeFragment = document.createDocumentFragment();
+                const checkoutFragment = document.createDocumentFragment();
+
+                selectedItemsCache.forEach(itemId => {
+                    const removeInput = document.createElement('input');
                     removeInput.type = 'hidden';
                     removeInput.name = 'remove_items[]';
                     removeInput.value = itemId;
-                    removeMultipleForm.appendChild(removeInput);
+                    removeFragment.appendChild(removeInput);
 
-                    let checkoutInput = document.createElement('input');
+                    const checkoutInput = document.createElement('input');
                     checkoutInput.type = 'hidden';
                     checkoutInput.name = 'checkout_items[]';
                     checkoutInput.value = itemId;
-                    checkoutForm.appendChild(checkoutInput);
+                    checkoutFragment.appendChild(checkoutInput);
                 });
+
+                // Batch append
+                removeMultipleForm.appendChild(removeFragment);
+                checkoutForm.appendChild(checkoutFragment);
             }
 
-            // Kiểm tra số lượng sản phẩm không vượt quá tồn kho
+            // Select all functionality
+            selectAllButton.addEventListener('click', function() {
+                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                checkboxes.forEach(checkbox => checkbox.checked = !allChecked);
+                calculateTotal();
+            });
+
+            // Quantity update handler
             function checkMaxQuantity(itemId, inputQuantity) {
                 const itemElement = document.querySelector(`.item-checkbox[data-id="${itemId}"]`);
                 const maxQuantity = parseInt(itemElement.getAttribute('data-max-quantity'));
@@ -446,24 +498,23 @@
 
                 if (quantity > maxQuantity) {
                     toastr.error(`Số lượng tối đa cho sản phẩm này là ${maxQuantity}`);
-                    inputQuantity.value = maxQuantity; // Cập nhật giá trị lại về số lượng tối đa
+                    inputQuantity.value = maxQuantity;
                     return false;
                 }
                 return true;
             }
 
-            // Sự kiện cập nhật giỏ hàng khi người dùng bấm "Cập nhật"
+            // Update cart event handlers
             updateButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const itemId = this.getAttribute('data-id');
                     const quantityInput = document.querySelector(
                         `input.quantity-input[data-item-id="${itemId}"]`);
 
-                    // Kiểm tra số lượng hợp lệ trước khi gửi
                     if (checkMaxQuantity(itemId, quantityInput)) {
                         const data = {
-                            quantity: quantityInput.value, // Chỉ gửi số lượng
-                            _token: '{{ csrf_token() }}' // CSRF token để bảo mật
+                            quantity: quantityInput.value,
+                            _token: document.querySelector('meta[name="csrf-token"]').content
                         };
 
                         fetch(`/cart/update/${itemId}`, {
@@ -478,10 +529,10 @@
                             .then(data => {
                                 if (data.success) {
                                     toastr.success('Cập nhật thành công');
-                                    calculateTotal(); // Tính toán lại tổng giỏ hàng
-                                    location.reload(); // Làm mới trang để cập nhật thông tin
+                                    calculateTotal();
+                                    location.reload();
                                 } else {
-                                    toastr.error(data.message); // Hiển thị thông báo lỗi nếu có
+                                    toastr.error(data.message);
                                 }
                             })
                             .catch(error => {
@@ -492,12 +543,13 @@
                 });
             });
 
-            // Sự kiện thay đổi khi chọn các checkbox
+            // Checkbox change events
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', calculateTotal);
             });
 
-            calculateTotal(); // Tính toán giá trị ban đầu của giỏ hàng
+            // Initial calculation
+            calculateTotal();
         });
     </script>
 

@@ -49,6 +49,8 @@
                     <input type="password" id="password" name="password" value="{{ old('password') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
                         placeholder="Mật khẩu">
+                    <i class="bi bi-eye" id="togglePasswordIcon"></i>
+
                 </div>
 
                 <div class="nut-button">
@@ -126,12 +128,7 @@
         </form>
     </div>
 
-    {{-- <svg class="wave-svg" width="732" height="136" viewBox="0 0 732 136" fill="none"
-        xmlns="http://www.w3.org/2000/svg">
-        <path
-            d="M0 8.45888V109C0 123.912 12.0883 136 27 136H704.938C726.424 136 739.186 112.207 726.912 94.5719C712.116 73.3129 694.835 49.4713 683.965 37.7334C661.789 13.7871 602.805 -0.265669 539.433 15.6257C476.061 31.517 439.194 53.2459 393.889 69.1733C336.766 89.2556 288.703 90.1814 232.182 69.1733C191.945 54.2179 191.297 22.9896 150.781 8.45888C97.7137 -10.5736 0 8.45888 0 8.45888Z"
-            fill="white" />
-    </svg> --}}
+
     </div>
 
 
@@ -192,5 +189,22 @@
                 confirmButtonText: 'OK'
             });
         @endif
+
+
+        document.querySelector('.toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePasswordIcon');
+
+            // Kiểm tra và thay đổi loại input
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        });
     </script>
 @endsection

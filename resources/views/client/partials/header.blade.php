@@ -63,9 +63,6 @@
         background: #fff !important;
         color: #5a5a9c !important;
     }
-    a.avatar_box {
-        text-decoration: none;
-    }
 </style>
 
 <!-- header start -->

@@ -5,7 +5,7 @@
         /* Căn chỉnh các nút đánh giá ngang đều */
         .filter-rating {
             display: flex;
-            justify-content: center;
+            justify-content: start;
             gap: 10px;
             /* Khoảng cách giữa các nút */
             /* flex-wrap: wrap; */
@@ -14,9 +14,9 @@
 
         /* Style cho các nút */
         .filter-btn {
-            background-color: #5a5a9c;
-            color: #fff;
-            border: 1px solid #ddd;
+            background-color: #ffffff;
+            color: #4460b5;
+            border: 1px solid #9d89ba;
             border-radius: 5px;
             padding: 5px 10px;
             /* Giảm kích thước padding */
@@ -135,7 +135,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">
                             Chi tiết sản phẩm
                         </h2>
                     </div>
@@ -376,11 +376,11 @@
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
-                                <h2>Đánh giá sản phẩm: {{ $sanPhamCT->ten_san_pham }}</h2>
+                                <h4>Đánh giá của khách hàng:</h4>
                                 <br>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="filter-rating text-center mb-4">
+                                        <div class="filter-rating mb-4">
                                             <button class="filter-btn" data-star="5">5 <i
                                                     class="mdi mdi-star text-warning"
                                                     style="font-size: 1.3rem;"></i></button>
@@ -400,7 +400,7 @@
                                         </div>
                                         <div id="no-reviews-message"
                                             style="display: none; color: red; text-align: center;">
-                                            Hiện tại sản phẩm này chưa có đánh giá nào !
+                                            Không có đánh giá phù hợp.
                                         </div>
                                         <div class="review-wrapper">
                                             @foreach ($sanPhamCT->danh_gias as $danhgia)
@@ -467,7 +467,8 @@
                                     <div class="card-body p-0">
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
-                                                <span class="badge badge-danger top-right">New</span>
+                                                <span class="badge badge-danger top-right"
+                                                    style="background-color: red">Mới</span>
                                                 <a href="{{ route('san-phams.incrementViews', $sanphamlq->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('storage/' . $sanphamlq->anh_san_pham) }}"

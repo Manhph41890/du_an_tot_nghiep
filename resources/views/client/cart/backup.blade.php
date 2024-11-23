@@ -2,159 +2,257 @@
 
 @section('content')
     <style>
+        /* Container styles */
         .cart-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin: 20px auto;
             max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
+        /* Table styles */
         .cart-table {
+            margin-bottom: 30px;
             overflow-x: auto;
-            border-radius: 8px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
         }
 
         .cart-list {
             width: 100%;
-            border-collapse: collapse;
-            text-align: center;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             table-layout: fixed;
         }
 
-        .cart-list th,
-        .cart-list td {
+        /* Header styles */
+        .cart-list thead th {
+            background-color: #f8f9fa;
             padding: 15px;
-            border: 1px solid #ddd;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+            white-space: nowrap;
         }
 
+        /* Column widths */
+        .cart-list th:nth-child(1),
+        .cart-list td:nth-child(1) {
+            width: 50px;
+        }
 
+        .cart-list th:nth-child(2),
+        .cart-list td:nth-child(2) {
+            width: 35%;
+        }
 
         .cart-list th:nth-child(3),
-        .cart-list td:nth-child(3) {
-            width: 10%;
-            word-wrap: break-word;
-            text-align: left;
-        }
-
+        .cart-list td:nth-child(3),
         .cart-list th:nth-child(5),
-        .cart-list td:nth-child(5) {
-            width: 16%;
-            word-wrap: break-word;
-            text-align: left;
-        }
-
+        .cart-list td:nth-child(5),
         .cart-list th:nth-child(6),
         .cart-list td:nth-child(6) {
-            width: 10%;
-            word-wrap: break-word;
-            text-align: left;
+            width: 15%;
         }
 
-
-
-
-        .cart-list th:nth-child(1),
-        /* Header của cột "Chọn" */
-        .cart-list td:nth-child(1) {
-            /* Dữ liệu của cột "Chọn" */
-            width: 5%;
-            /* Đặt độ rộng nhỏ */
-            text-align: center;
-            /* Căn giữa nội dung */
-            padding: 5px;
-            /* Giảm padding để nhỏ gọn hơn */
+        .cart-list th:nth-child(4),
+        .cart-list td:nth-child(4) {
+            width: 120px;
         }
 
-        cart-list th:nth-child(2),
-        /* Header của cột "Chọn" */
-        .cart-list td:nth-child(2) {
-            /* Dữ liệu của cột "Chọn" */
-            width: 40%;
-            /* Đặt độ rộng nhỏ */
-            text-align: center;
-            /* Căn giữa nội dung */
-            /* Giảm padding để nhỏ gọn hơn */
+        /* Cell styles */
+        .cart-list td {
+            padding: 15px;
+            vertical-align: middle;
+            border-bottom: 1px solid #dee2e6;
         }
 
-
-        .cart-list th {
-            background-color: #f8f8f8;
-            color: #333;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .cart-list tbody tr:hover {
-            background-color: #f2f2f2;
-        }
-
+        /* Product thumbnail styles */
         .thumb_cart {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .thumb_cart img {
             border-radius: 8px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .cart-summary {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
+        .thumb_cart h5 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .thumb_cart p {
+            color: #666;
+            margin: 0;
+        }
+
+        /* Quantity input styles */
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Update button styles */
+        .update-cart-btn {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+
+        .update-cart-btn:hover {
+            color: #0056b3;
+        }
+
+        /* Price styles */
+        .price-tag {
+            font-weight: 600;
+            color: #dc3545;
+        }
+
+        .variant-price {
+            color: #28a745;
+            font-weight: 500;
+        }
+
+        /* Empty cart styles */
+        .empty-cart {
+            text-align: center;
+            padding: 40px !important;
+            color: #666;
+        }
+
+        .empty-cart i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #dee2e6;
+        }
+
+        /* Checkbox styles */
+        .checkbox-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            position: relative;
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #dee2e6;
+            border-radius: 3px;
             background-color: #fff;
-            max-width: 400px;
-            margin-left: auto;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkbox-wrapper input:checked~.checkmark {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .checkmark:after {
+            content: '';
+            position: absolute;
+            display: none;
+            left: 5px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-wrapper input:checked~.checkmark:after {
+            display: block;
+        }
+
+        /* Cart summary styles */
+        .cart-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .cart-summary ul {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0 0 20px 0;
         }
 
         .cart-summary li {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
         }
 
-        .cart-summary button {
+        .cart-summary li:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        /* Checkout button styles */
+        #checkout-button {
             width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: #fff;
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.2s;
         }
 
-        .cart-summary button:hover {
-            background-color: #0056b3;
+        #checkout-button:hover {
+            background-color: #218838;
         }
 
-        /* Responsive adjustments */
+        /* Remove selected items button */
+        #remove-selected-items {
+            margin-top: 15px;
+        }
+
+        /* Responsive styles */
         @media (max-width: 768px) {
-            .cart-wrapper {
-                flex-direction: column;
-                gap: 15px;
+            .cart-list {
+                font-size: 14px;
             }
 
-            .cart-summary {
-                max-width: 100%;
+            .thumb_cart h5 {
+                font-size: 14px;
+            }
+
+            .quantity-input {
+                width: 50px;
+            }
+
+            .cart-summary li {
+                font-size: 14px;
             }
         }
     </style>
     <div class="container margin_30">
         <!-- <div class="page_header">                                                                   <h1 style="color: #5a5ac9; margin-bottom: 30px">Giỏ Hàng</h1>                                                                </div> -->
-        <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
+        {{-- <nav style="margin-bottom:8vh" class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -174,7 +272,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
         <div class="cart-wrapper">
             <form action="{{ route('cart.removeMultiple') }}" method="POST" id="remove-multiple-form">
                 @csrf
@@ -183,14 +281,15 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <!-- Nút Chọn Tất Cả -->
-                                    <button type="button" style="background-color: none;" id="select-all"><input
-                                            type="checkbox"></button>
+                                    <label class="checkbox-wrapper">
+                                        <input type="checkbox" id="select-all">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </th>
                                 <th>Sản phẩm</th>
                                 <th>Đơn giá</th>
                                 <th>Số lượng</th>
-                                <th>Giá biến thể</th>
+                                <th>Giá phân loại</th>
                                 <th>Tổng tiền</th>
                             </tr>
                         </thead>
@@ -198,39 +297,44 @@
                             @if (!empty($cartItems))
                                 @foreach ($cartItems as $item)
                                     <tr>
-                                        <td style="padding-top: 30px">
-                                            <input type="checkbox" class="item-checkbox" data-price="{{ $item->price }}"
-                                                data-id="{{ $item->id }}" />
+                                        <td>
+                                            <label class="checkbox-wrapper">
+                                                <input type="checkbox" class="item-checkbox"
+                                                    data-price="{{ $item->price }}" data-id="{{ $item->id }}">
+                                                <span class="checkmark"></span>
+                                            </label>
                                         </td>
                                         <td>
-                                            <div class="thumb_cart" style="text-align: center;">
+                                            <div class="thumb_cart">
                                                 <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}"
-                                                    alt="img" height="90px" width="90px"
-                                                    style="object-fit: cover" />
-                                                <div class="ms-3">
-                                                    <h5> {{ $item->san_pham->ten_san_pham }}</h5>
+                                                    alt="img" height="90px" width="90px" style="object-fit: cover">
+                                                <div>
+                                                    <h5>{{ $item->san_pham->ten_san_pham }}</h5>
                                                     <p class="small mb-0">
-                                                        {{ $item->size->ten_size }}-{{ $item->color->ten_color }}</p>
+                                                        Phân loại: {{ $item->size->ten_size }}-{{ $item->color->ten_color }}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td style="padding-top: 30px">
-                                            <strong>{{ number_format($item->san_pham->gia_km, 0, ',', '.') }} đ</strong>
+                                        <td>
+                                            <span class="price-tag">
+                                                {{ number_format($item->san_pham->gia_km, 0, ',', '.') }} đ
+                                            </span>
                                         </td>
-                                        <td style="padding-top: 30px">
-                                            <input type="number" name="quantity" value="{{ $item->quantity }}"
-                                                min="1" max="100" class="quantity-input"
-                                                data-item-id="{{ $item->id }}" style="width: 60px; height: 30px;">
-                                            <button style="height: 30px; margin-bottom: 4px" type="button"
-                                                class="btn btn-primary btn-sm update-cart-btn"
-                                                data-id="{{ $item->id }}">
-                                                Cập nhật
-                                            </button>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                                <input type="number" name="quantity" value="{{ $item->quantity }}"
+                                                    min="1" max="100" class="quantity-input"
+                                                    data-item-id="{{ $item->id }}">
+                                                <button type="button" class="update-cart-btn"
+                                                    data-id="{{ $item->id }}">
+                                                    <i class="fas fa-sync-alt"></i>
+                                                </button>
+                                            </div>
                                         </td>
-                                        <td style="padding-top: 30px">
-                                            <span>
+                                        <td>
+                                            <span class="variant-price">
                                                 @php
-                                                    // Tìm biến thể dựa trên size và color của item
                                                     $variant = $item->san_pham->bien_the_san_phams->firstWhere(
                                                         function ($variant) use ($item) {
                                                             return $variant->size_san_pham_id ==
@@ -242,43 +346,50 @@
                                                 @if ($variant)
                                                     {{ number_format($variant->gia, 0, ',', '.') }} đ
                                                 @else
-                                                    <span>Chưa có giá biến thể</span>
+                                                    Chưa có giá biến thể
                                                 @endif
                                             </span>
                                         </td>
-                                        <td style="padding-top: 30px">
-                                            <strong><span class="whish-list-price">{{ number_format($item->price) }}
-                                                    đ</span></strong>
+                                        <td>
+                                            <span class="price-tag">
+                                                {{ number_format($item->price) }} đ
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="7" class="text-center">Giỏ hàng trống!</td>
+                                    <td colspan="7" class="empty-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <p>Giỏ hàng trống!</p>
+                                    </td>
                                 </tr>
                             @endif
                         </tbody>
                     </table>
-                    <!-- Nút Xóa Sản Phẩm Đã Chọn -->
-                    <button type="submit" class="btn btn-danger btn-sm" id="remove-selected-items"
-                        style="display: none;">Xóa Sản Phẩm Đã Chọn</button> <!-- Ẩn mặc định -->
-
+                    <button type="submit" class="btn btn-danger btn-sm" id="remove-selected-items" style="display: none;">
+                        <i class="fas fa-trash"></i> Xóa Sản Phẩm Đã Chọn
+                    </button>
                 </div>
             </form>
+
             <div class="cart-summary">
                 <ul>
-                    <li style="font-size: 16px">
-                        <strong><span>Phí vận chuyển: </span><span id="shipping">0</span></strong>
+                    <li>
+                        <span>Phí vận chuyển:</span>
+                        <span id="shipping">0 đ</span>
                     </li>
-                    <li style="font-size: 20px">
-                        <strong><span>Tổng tiền cần thanh toán: </span><span class="text-danger"
-                                id="total-price">0</span></strong>
+                    <li>
+                        <span>Tổng tiền cần thanh toán:</span>
+                        <span class="price-tag" id="total-price">0 đ</span>
                     </li>
                 </ul>
                 <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
                     @csrf
                     <input type="hidden" name="checkout_items[]" id="selected-items">
-                    <button id="checkout-button" class="btn btn-primary ripple">Thanh toán ngay</button>
+                    <button id="checkout-button" type="submit">
+                        <i class="fas fa-shopping-cart"></i> Thanh toán ngay
+                    </button>
                 </form>
             </div>
         </div>
@@ -296,53 +407,90 @@
             const removeMultipleForm = document.getElementById('remove-multiple-form');
             const selectAllButton = document.getElementById('select-all');
 
-            // Chọn hoặc bỏ chọn tất cả checkbox
-            selectAllButton.addEventListener('click', function() {
-                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-                checkboxes.forEach(checkbox => checkbox.checked = !allChecked);
-                calculateTotal(); // Tính toán lại tổng giỏ hàng
-            });
-            // Hàm tính tổng giá trị giỏ hàng
-            function calculateTotal() {
+            // Cache for selected items to avoid frequent DOM manipulation
+            let selectedItemsCache = new Set();
+
+            // Debounce function to limit the rate at which calculateTotal runs
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            // Optimized calculate total function
+            const calculateTotal = debounce(() => {
                 let totalPrice = 0;
                 let shipping = 0;
-                const selectedItems = [];
+                selectedItemsCache.clear();
 
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const price = parseInt(checkbox.getAttribute('data-price'));
-                        selectedItems.push(checkbox.getAttribute('data-id'));
-                        shipping = 30000; // 
-                        totalPrice += price + shipping;
+                        const itemId = checkbox.getAttribute('data-id');
+                        selectedItemsCache.add(itemId);
+                        totalPrice += price;
                     }
                 });
 
+                if (selectedItemsCache.size > 0) {
+                    shipping = 30000;
+                }
+
+                totalPrice += shipping;
+
+                // Update UI
                 totalPriceEl.textContent = totalPrice.toLocaleString() + ' đ';
                 shippingEl.textContent = shipping.toLocaleString() + ' đ';
-                removeButton.style.display = selectedItems.length > 0 ? 'inline-block' :
-                    'none'; // Hiển thị/ẩn nút xóa
+                removeButton.style.display = selectedItemsCache.size > 0 ? 'inline-block' : 'none';
 
-                // Xóa các input hidden trước khi thêm mới
+                // Batch DOM updates for forms
+                updateFormInputs();
+            }, 150); // Debounce delay of 150ms
+
+            // Separate function to handle form input updates
+            function updateFormInputs() {
+                // Remove existing inputs
                 removeMultipleForm.querySelectorAll('input[name="remove_items[]"]').forEach(input => input
                     .remove());
                 checkoutForm.querySelectorAll('input[name="checkout_items[]"]').forEach(input => input.remove());
 
-                selectedItems.forEach(itemId => {
-                    let removeInput = document.createElement('input');
+                // Create document fragment for better performance
+                const removeFragment = document.createDocumentFragment();
+                const checkoutFragment = document.createDocumentFragment();
+
+                selectedItemsCache.forEach(itemId => {
+                    const removeInput = document.createElement('input');
                     removeInput.type = 'hidden';
                     removeInput.name = 'remove_items[]';
                     removeInput.value = itemId;
-                    removeMultipleForm.appendChild(removeInput);
+                    removeFragment.appendChild(removeInput);
 
-                    let checkoutInput = document.createElement('input');
+                    const checkoutInput = document.createElement('input');
                     checkoutInput.type = 'hidden';
                     checkoutInput.name = 'checkout_items[]';
                     checkoutInput.value = itemId;
-                    checkoutForm.appendChild(checkoutInput);
+                    checkoutFragment.appendChild(checkoutInput);
                 });
+
+                // Batch append
+                removeMultipleForm.appendChild(removeFragment);
+                checkoutForm.appendChild(checkoutFragment);
             }
 
-            // Kiểm tra số lượng sản phẩm không vượt quá tồn kho
+            // Select all functionality
+            selectAllButton.addEventListener('click', function() {
+                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                checkboxes.forEach(checkbox => checkbox.checked = !allChecked);
+                calculateTotal();
+            });
+
+            // Quantity update handler
             function checkMaxQuantity(itemId, inputQuantity) {
                 const itemElement = document.querySelector(`.item-checkbox[data-id="${itemId}"]`);
                 const maxQuantity = parseInt(itemElement.getAttribute('data-max-quantity'));
@@ -350,24 +498,23 @@
 
                 if (quantity > maxQuantity) {
                     toastr.error(`Số lượng tối đa cho sản phẩm này là ${maxQuantity}`);
-                    inputQuantity.value = maxQuantity; // Cập nhật giá trị lại về số lượng tối đa
+                    inputQuantity.value = maxQuantity;
                     return false;
                 }
                 return true;
             }
 
-            // Sự kiện cập nhật giỏ hàng khi người dùng bấm "Cập nhật"
+            // Update cart event handlers
             updateButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const itemId = this.getAttribute('data-id');
                     const quantityInput = document.querySelector(
                         `input.quantity-input[data-item-id="${itemId}"]`);
 
-                    // Kiểm tra số lượng hợp lệ trước khi gửi
                     if (checkMaxQuantity(itemId, quantityInput)) {
                         const data = {
-                            quantity: quantityInput.value, // Chỉ gửi số lượng
-                            _token: '{{ csrf_token() }}' // CSRF token để bảo mật
+                            quantity: quantityInput.value,
+                            _token: document.querySelector('meta[name="csrf-token"]').content
                         };
 
                         fetch(`/cart/update/${itemId}`, {
@@ -382,10 +529,10 @@
                             .then(data => {
                                 if (data.success) {
                                     toastr.success('Cập nhật thành công');
-                                    calculateTotal(); // Tính toán lại tổng giỏ hàng
-                                    location.reload(); // Làm mới trang để cập nhật thông tin
+                                    calculateTotal();
+                                    location.reload();
                                 } else {
-                                    toastr.error(data.message); // Hiển thị thông báo lỗi nếu có
+                                    toastr.error(data.message);
                                 }
                             })
                             .catch(error => {
@@ -396,12 +543,13 @@
                 });
             });
 
-            // Sự kiện thay đổi khi chọn các checkbox
+            // Checkbox change events
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', calculateTotal);
             });
 
-            calculateTotal(); // Tính toán giá trị ban đầu của giỏ hàng
+            // Initial calculation
+            calculateTotal();
         });
     </script>
 

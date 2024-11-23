@@ -99,260 +99,548 @@
     <!-- breadcrumb-section end -->
     <!-- product tab start -->
     <section class="whish-list-section theme1 pt-80 pb-80">
-        <div class="container">
+        <div class="container py-5">
             <form action="{{ route('order.add') }}" class="personal-information" method="POST">
                 @csrf
-                <div class="page_header">
-                    <h1 style="text-align: center;font-weight: 600;">THÔNG TIN ĐƠN HÀNG</h1>
+                <div class="page_header mb-4">
+                    <h1 class="text-center fw-bold text-primary">THÔNG TIN ĐƠN HÀNG</h1>
                 </div>
-                <table class="table table-hover cart-list">
-                    <thead class="table-light custom-thead">
-                        <tr>
-                            <th class="text-center" style="width: 15%; font-size:18px">Ảnh sản phẩm</th>
-                            <th class="text-center" style="width: 30%; font-size:18px">Tên sản phẩm</th>
-                            <th class="text-center" style="width: 15%; font-size:18px">Giá</th>
-                            <th class="text-center" style="width: 20%; font-size:18px">Phân loại</th>
-                            <th class="text-center" style="width: 20%; font-size:18px">Giá phân loại</th>
-                            <th class="text-center" style="width: 10%; font-size:18px">Số lượng</th>
-                            <th class="text-center" style="width: 15%; font-size:18px">Thành tiền</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($cart->cartItems as $item)
-                            <tr>
-                                <td class="text-center" style="font-size:16px;">
-                                    <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}" alt="Ảnh sản phẩm"
-                                        class="img-fluid" style="max-width: 80px; max-height: 80px;">
-                                </td>
-                                <td class="text-center" style="font-size:16px;">{{ $item->san_pham->ten_san_pham }}</td>
-                                <td class="text-center" style="font-size:16px;">
-                                    {{ number_format($item->san_pham->gia_km ?? $item->san_pham->gia_ban) }}
-                                    đ</td>
-                                <td class="text-center" style="font-size:16px;">
-                                    @if ($item->size && $item->color)
-                                        <span>Size: {{ $item->size->ten_size }}</span>
-                                        <br>
-                                        <span>Color: {{ $item->color->ten_color }}</span>
-                                    @else
-                                        <span class="text-muted">Không có thông tin kích thước hoặc màu sắc</span>
-                                    @endif
-                                </td>
-                                <td class="text-center" style="font-size:16px;">
-                                    @php
-                                        // Tìm biến thể dựa trên size và color của item
-                                        $variant = $item->san_pham->bien_the_san_phams->firstWhere(function (
-                                            $variant,
-                                        ) use ($item) {
-                                            return $variant->size_san_pham_id == $item->size_san_pham_id &&
-                                                $variant->color_san_pham_id == $item->color_san_pham_id;
-                                        });
-                                    @endphp
-                                    @if ($variant)
-                                        {{ number_format($variant->gia, 0, ',', '.') }} đ
-                                    @else
-                                        <span>Chưa có giá biến thể</span>
-                                    @endif
-                                </td>
-                                <td class="text-center" style="font-size:16px;">{{ $item->quantity }}</td>
-                                <td class="text-center" style="font-size:16px;">
-                                    <span>{{ number_format($item->price, 0, ',', '.') }}₫</span>
-                                </td>
-                                {{--  --}}
-                                <input type="hidden" name="cart_items[{{ $item->id }}][san_pham_id]"
-                                    value="{{ $item->san_pham->id }}">
-                                <input type="hidden" name="cart_items[{{ $item->id }}][variant_id]"
-                                    value="{{ $item->variant_id }}">
-                                <input type="hidden" name="cart_items[{{ $item->id }}][size_id]"
-                                    value="{{ $item->size_san_pham_id }}">
-                                <input type="hidden" name="cart_items[{{ $item->id }}][color_id]"
-                                    value="{{ $item->color_san_pham_id }}">
-                                <input type="hidden" name="cart_items[{{ $item->id }}][quantity]"
-                                    value="{{ $item->quantity }}">
-                                <input type="hidden" name="cart_items[{{ $item->id }}][price]"
-                                    value="{{ $item->price }}">
-                                <input type="hidden" name="cart_items[{{ $item->id }}][gia_tien]"
-                                    value="{{ $item->san_pham->gia_km ?? $item->san_pham->gia_ban }}">
 
+                <!-- Cart Table -->
+                <div class="card shadow-sm mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover cart-list mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="text-center py-3" style="width: 15%">Ảnh sản phẩm</th>
+                                    <th class="text-center py-3" style="width: 30%">Tên sản phẩm</th>
+                                    <th class="text-center py-3" style="width: 15%">Giá</th>
+                                    <th class="text-center py-3" style="width: 20%">Phân loại</th>
+                                    <th class="text-center py-3" style="width: 20%">Giá phân loại</th>
+                                    <th class="text-center py-3" style="width: 10%">Số lượng</th>
+                                    <th class="text-center py-3" style="width: 15%">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($cart->cartItems as $item)
+                                    <tr>
+                                        <td class="text-center align-middle">
+                                            <img src="{{ asset('/storage/' . $item->san_pham->anh_san_pham) }}"
+                                                alt="Ảnh sản phẩm" class="img-thumbnail" style="max-width: 80px;">
+                                        </td>
+                                        <td class="text-center align-middle">{{ $item->san_pham->ten_san_pham }}</td>
+                                        <td class="text-center align-middle">
+                                            {{ number_format($item->san_pham->gia_km ?? $item->san_pham->gia_ban) }} đ
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @if ($item->size && $item->color)
+                                                <span class="d-block">Size: {{ $item->size->ten_size }}</span>
+                                                <span class="d-block mt-1">Màu: {{ $item->color->ten_color }}</span>
+                                            @else
+                                                <span class="text-muted">Không có thông tin kích thước hoặc màu sắc</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @php
+                                                $variant = $item->san_pham->bien_the_san_phams->firstWhere(function (
+                                                    $variant,
+                                                ) use ($item) {
+                                                    return $variant->size_san_pham_id == $item->size_san_pham_id &&
+                                                        $variant->color_san_pham_id == $item->color_san_pham_id;
+                                                });
+                                            @endphp
+                                            @if ($variant)
+                                                {{ number_format($variant->gia, 0, ',', '.') }} đ
+                                            @else
+                                                <span class="text-muted">Chưa có giá biến thể</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center align-middle">{{ $item->quantity }}</td>
+                                        <td class="text-center align-middle fw-bold">
+                                            {{ number_format($item->price, 0, ',', '.') }}₫
+                                        </td>
 
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                        <input type="hidden" name="cart_items[{{ $item->id }}][san_pham_id]"
+                                            value="{{ $item->san_pham->id }}">
+                                        <input type="hidden" name="cart_items[{{ $item->id }}][variant_id]"
+                                            value="{{ $item->variant_id }}">
+                                        <input type="hidden" name="cart_items[{{ $item->id }}][size_id]"
+                                            value="{{ $item->size_san_pham_id }}">
+                                        <input type="hidden" name="cart_items[{{ $item->id }}][color_id]"
+                                            value="{{ $item->color_san_pham_id }}">
+                                        <input type="hidden" name="cart_items[{{ $item->id }}][quantity]"
+                                            value="{{ $item->quantity }}">
+                                        <input type="hidden" name="cart_items[{{ $item->id }}][price]"
+                                            value="{{ $item->price }}">
+                                        <input type="hidden" name="cart_items[{{ $item->id }}][gia_tien]"
+                                            value="{{ $item->san_pham->gia_km ?? $item->san_pham->gia_ban }}">
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <!-- /page_header -->
-                <div class="row">
+                <!-- Order Information -->
+                <div class="row g-4">
+                    <!-- Customer Information -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="step first">
-                            <h3 style="font-size:18px">1. Thông tin nhận hàng</h3>
-
-                            <div class="tab-content checkout">
-                                <div class="tab-pane fade show active" id="tab_1" role="tabpanel"
-                                    aria-labelledby="tab_1">
-                                    <label>Tên</label>
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="h5 mb-0">1. Thông tin nhận hàng</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Họ và tên</label>
                                     <input type="text" name="ho_ten" class="form-control" required
-                                        value="{{ old('ho_ten', Auth::user()->ho_ten ?? '') }}" />
+                                        value="{{ old('ho_ten', Auth::user()->ho_ten ?? '') }}">
                                     @error('ho_ten')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
-                                    <label>Số điện thoại</label>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Số điện thoại</label>
                                     <input type="text" name="so_dien_thoai" class="form-control" required
-                                        value="{{ old('so_dien_thoai', Auth::user()->so_dien_thoai ?? '') }}" />
+                                        value="{{ old('so_dien_thoai', Auth::user()->so_dien_thoai ?? '') }}">
                                     @error('so_dien_thoai')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
-                                    <label>Email</label>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
                                     <input type="email" name="email" class="form-control" required
-                                        value="{{ old('email', Auth::user()->email ?? '') }}" />
+                                        value="{{ old('email', Auth::user()->email ?? '') }}">
                                     @error('email')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
-                                    <label>Địa chỉ</label>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Địa chỉ</label>
                                     <input type="text" name="dia_chi" class="form-control" required
-                                        value="{{ old('dia_chi', Auth::user()->dia_chi ?? '') }}" />
+                                        value="{{ old('dia_chi', Auth::user()->dia_chi ?? '') }}">
                                     @error('dia_chi')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-                        <!-- /step -->
                     </div>
+
+                    <!-- Payment Methods -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="step middle payments">
-                            <h3 style="font-size:18px">2. Thông tin thanh toán</h3>
-                            <ul>
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="h5 mb-0">2. Phương thức thanh toán</h3>
+                            </div>
+                            <div class="card-body">
                                 @if ($phuongThucThanhToans->isEmpty())
-                                    <p>Không có phương thức thanh toán nào!</p>
+                                    <p class="text-muted">Không có phương thức thanh toán nào!</p>
                                 @else
-                                    @foreach ($phuongThucThanhToans as $phuongThucThanhToan)
-                                        <li>
-                                            <label
-                                                class="container_radio d-flex align-items-center justify-content-between">
-                                                <!-- Kiểu thanh toán và icon -->
-                                                <div class="d-flex align-items-center">
-                                                    <!-- Kiểu thanh toán -->
-                                                    <span
-                                                        class="payment-text me-3">{{ $phuongThucThanhToan->kieu_thanh_toan }}</span>
+                                    <div class="payment-methods">
+                                        @foreach ($phuongThucThanhToans as $phuongThucThanhToan)
+                                            <div class="payment-method mb-3">
+                                                <label class="d-flex align-items-center p-3 border rounded cursor-pointer">
+                                                    <input type="radio" name="phuong_thuc_thanh_toan"
+                                                        class="form-check-input me-3"
+                                                        value="{{ $phuongThucThanhToan->id }}"
+                                                        {{ old('phuong_thuc_thanh_toan') == $phuongThucThanhToan->id ? 'checked' : '' }}
+                                                        onchange="toggleOrderButton('{{ $phuongThucThanhToan->kieu_thanh_toan }}')">
 
-                                                    <!-- Icon hoặc hình ảnh -->
-                                                    @if ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Vnpay')
-                                                        <div class="payment-method d-flex align-items-center">
-                                                            <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
-                                                                alt="VNPay Logo" class="icon-image me-2">
+                                                    <div class="flex-grow-1">
+                                                        <div class="d-flex align-items-center">
+                                                            @if ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Vnpay')
+                                                                <img src="/assets/client/img/logo/logo-vector-vi-vnpay-mien-phi.png"
+                                                                    alt="VNPay Logo" class="me-2"
+                                                                    style="height: 30px;">
+                                                            @elseif ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Ví')
+                                                                <i class="fas fa-wallet text-success me-2 fs-4"></i>
+                                                            @endif
+                                                            <span>{{ $phuongThucThanhToan->kieu_thanh_toan }}</span>
                                                         </div>
-                                                    @elseif ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Ví')
-                                                        <div class="payment-method d-flex align-items-center">
-                                                            <i class="fas fa-wallet text-success icon-size me-2"></i>
-                                                            <div>
-                                                                <p class="mb-0 wallet-balance">Số dư:
-                                                                    {{ number_format($tongTienVi->tong_tien, 0, ',', '.') }}
-                                                                    VNĐ</p>
+
+                                                        @if ($phuongThucThanhToan->kieu_thanh_toan == 'Thanh toán bằng Ví')
+                                                            <div class="text-success mt-2">
+                                                                Số dư:
+                                                                {{ number_format($tongTienVi->tong_tien, 0, ',', '.') }}
+                                                                VNĐ
                                                             </div>
-                                                        </div>
-                                                    @endif
-                                                </div>
-
-                                                <!-- Input Radio -->
-                                                <input type="radio" id="payment-{{ $phuongThucThanhToan->id }}"
-                                                    name="phuong_thuc_thanh_toan" class="form-check-input"
-                                                    value="{{ $phuongThucThanhToan->id }}"
-                                                    {{ old('phuong_thuc_thanh_toan') == $phuongThucThanhToan->id ? 'checked' : '' }}
-                                                    onchange="toggleOrderButton('{{ $phuongThucThanhToan->kieu_thanh_toan }}')">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
-                                    @endforeach
-                                @endif
-                            </ul>
-                        </div>
-                        <!-- /step -->
-
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="step last">
-                            <h3 style="font-size:18px">3. Thanh toán</h3>
-                            <div class="box_general summary">
-                                <ul>
-                                    <li class="clearfix"><em><strong>Tiền sản phẩm</strong></em>
-                                        <span>{{ number_format($total, 0, ',', '.') }}₫</span>
-                                    </li>
-                                    <input type="hidden" name="total" id="hidden_total" value="{{ $total }}">
-                                </ul>
-
-                                <ul>
-                                    <li>
-                                        <div class="row">
-                                            <div class="input-group">
-                                                <input type="text" id="coupon-code" name="khuyen_mai"
-                                                    class="form-control" placeholder="Nhập mã giảm giá">
-                                                <button class="btn btn-outline-success" id="apply-coupon"
-                                                    type="button">Áp
-                                                    dụng</button>
+                                                        @endif
+                                                    </div>
+                                                </label>
                                             </div>
-                                        </div>
-                                    </li>
-                                    {{-- <li class="clearfix"><em><strong>Số tiền được giảm</strong></em> <span> 0</span> --}}
-                                </ul>
-                                <ul style="border-bottom: 1px solid #ededed !important;">
-                                    <li class="clearfix"><em><strong>Tiền vận chuyển</strong></em> <span> 30.000 đ</span>
-                                    </li>
-                                    <li class="clearfix"><em><strong>Tiền giảm giá khuyến mại</strong></em> <span
-                                            id="discount-amount">0₫</span></li>
-                                </ul>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
 
-                                <div class="total clearfix">Tổng cộng <span id="total_amount"
-                                        data-total="{{ $totall }}">{{ number_format($totall) }}₫</span>
+                    <!-- Order Summary -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="h5 mb-0">3. Tổng quan đơn hàng</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Tiền sản phẩm</span>
+                                        <span class="fw-bold">{{ number_format($total, 0, ',', '.') }}₫</span>
+                                    </div>
+                                    <input type="hidden" name="total" id="hidden_total" value="{{ $total }}">
+
+                                    <!-- Coupon Input -->
+                                    <div class="input-group mb-3">
+                                        <input type="text" id="coupon-code" name="khuyen_mai" class="form-control"
+                                            placeholder="Mã giảm giá">
+                                        <button class="btn btn-outline-primary" id="apply-coupon" type="button">Áp
+                                            dụng</button>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Phí vận chuyển</span>
+                                        <span>30.000₫</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Giảm giá</span>
+                                        <span id="discount-amount">0₫</span>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <span class="fw-bold">Tổng cộng</span>
+                                        <span class="fw-bold fs-5 text-primary" id="total_amount">
+                                            {{ number_format($totall) }}₫
+                                        </span>
+                                    </div>
                                     <input type="hidden" name="totall" id="hidden_totall"
                                         value="{{ $totall }}">
 
-                                </div>
+                                    <!-- Payment Buttons -->
+                                    <div id="place-order-cod" style="display: none;">
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            Đặt hàng
+                                        </button>
+                                    </div>
 
-                                <!-- Nút Đặt hàng cho phương thức "Thanh toán khi nhận hàng" -->
-                                <div class="place-order mt-10" id="place-order-cod" style="display: none;">
-                                    <button type="submit" class="btn_1 full-width btn-block btn-primary">Đặt
-                                        Hàng</button>
-                                </div>
+                                    <div id="place-order-online" style="display: none;">
+                                        <button type="submit" name="redirect" class="btn btn-danger w-100">
+                                            Thanh toán VNPAY
+                                        </button>
+                                    </div>
 
-                                <!-- Nút Thanh toán ngay cho phương thức "Thanh toán bằng Vnpay" -->
-                                <div class="place-order mt-10" id="place-order-online" style="display: none;">
-                                    <button type="submit" class="btn_1 full-width btn-block btn-danger"
-                                        name="redirect">Thanh toán ngay</button>
-                                </div>
-
-                                <!-- Nút Thanh toán ngay cho phương thức "Thanh toán bằng Ví" -->
-                                <div class="place-order mt-10" id="place-order-wallet" style="display: none;">
-                                    <button type="submit" class="btn_1 full-width btn-block btn-success"
-                                        name="wallet-redirect">Thanh toán ngay với Ví</button>
+                                    <div id="place-order-wallet" style="display: none;">
+                                        <button type="submit" name="wallet-redirect" class="btn btn-success w-100">
+                                            Thanh toán bằng Ví
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- /box_general -->
                         </div>
-                        <!-- /step -->
                     </div>
                 </div>
-                <!-- /row -->
             </form>
         </div>
         <style>
-            .payment-method {
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
+            .card {
+                border: none;
+                transition: transform 0.2s ease-in-out;
             }
 
-            .icon-image {
-                width: 60px;
+            .card:hover {
+                transform: translateY(-5px);
+            }
+
+            .payment-method label {
+                transition: all 0.2s ease-in-out;
+            }
+
+            .payment-method label:hover {
+                background-color: #f8f9fa;
+            }
+
+            .payment-method input[type="radio"]:checked+div {
+                font-weight: bold;
+            }
+
+            .table th {
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.875rem;
+            }
+
+            .table td {
+                font-size: 0.875rem;
+            }
+
+            .img-thumbnail {
+                padding: 0.5rem;
+                background-color: #fff;
+                border: 1px solid #dee2e6;
+                border-radius: 0.25rem;
+                max-width: 100%;
                 height: auto;
             }
 
-            .payment-label {
-                font-weight: bold;
-                font-size: 16px;
+            .form-control:focus {
+                border-color: #80bdff;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
             }
 
-            .wallet-balance {
-                font-size: 14px;
-                color: #6c757d;
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                transition: all 0.3s ease;
+            }
+
+            .btn-primary {
+                background-color: #0d6efd;
+                border: none;
+            }
+
+            .btn-primary:hover {
+                background-color: #0b5ed7;
+                transform: translateY(-1px);
+            }
+
+            .btn-danger {
+                background-color: #dc3545;
+                border: none;
+            }
+
+            .btn-danger:hover {
+                background-color: #bb2d3b;
+                transform: translateY(-1px);
+            }
+
+            .btn-success {
+                background-color: #198754;
+                border: none;
+            }
+
+            .btn-success:hover {
+                background-color: #157347;
+                transform: translateY(-1px);
+            }
+
+            .card-header {
+                border-bottom: none;
+                padding: 1.25rem;
+            }
+
+            .card-body {
+                padding: 1.5rem;
+            }
+
+            .form-label {
+                font-weight: 500;
+                color: #495057;
+                margin-bottom: 0.5rem;
+            }
+
+            .form-control {
+                padding: 0.75rem 1rem;
+                border-radius: 0.375rem;
+                border: 1px solid #ced4da;
+            }
+
+            .input-group {
+                position: relative;
+            }
+
+            .input-group .btn {
+                padding: 0.75rem 1.5rem;
+            }
+
+            .text-danger {
+                font-size: 0.875rem;
+                margin-top: 0.25rem;
+            }
+
+            .page_header h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+                color: #0d6efd;
+                position: relative;
+                padding-bottom: 1rem;
+            }
+
+            .page_header h1::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100px;
+                height: 3px;
+                background-color: #0d6efd;
+            }
+
+            /* Cart table styles */
+            .table-responsive {
+                border-radius: 0.5rem;
+                overflow: hidden;
+            }
+
+            .cart-list thead th {
+                background-color: #f8f9fa;
+                border-bottom: 2px solid #dee2e6;
+            }
+
+            .cart-list tbody tr {
+                transition: background-color 0.2s ease;
+            }
+
+            .cart-list tbody tr:hover {
+                background-color: #f8f9fa;
+            }
+
+            /* Payment method styles */
+            .payment-methods {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .payment-method label {
+                margin: 0;
+                cursor: pointer;
+                border: 1px solid #dee2e6;
+                border-radius: 0.5rem;
+            }
+
+            .payment-method input[type="radio"]:checked+div {
+                color: #0d6efd;
+            }
+
+            .payment-method input[type="radio"]:checked+label {
+                border-color: #0d6efd;
+                background-color: #f8f9fa;
+            }
+
+            /* Summary card styles */
+            #total_amount {
+                font-size: 1.25rem;
+                color: #0d6efd;
+            }
+
+            .discount-badge {
+                background-color: #28a745;
+                color: white;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                font-size: 0.875rem;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .card {
+                    margin-bottom: 1.5rem;
+                }
+
+                .page_header h1 {
+                    font-size: 1.5rem;
+                }
+
+                .cart-list {
+                    font-size: 0.875rem;
+                }
+
+                .btn {
+                    padding: 0.625rem 1.25rem;
+                }
+            }
+
+            /* Animation for success messages */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .alert {
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            /* Custom scrollbar */
+            ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 4px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 4px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
+            /* Loading spinner for coupon verification */
+            .spinner-border-sm {
+                width: 1rem;
+                height: 1rem;
+                border-width: 0.2em;
+            }
+
+            /* Enhanced focus states for accessibility */
+            .form-control:focus,
+            .btn:focus,
+            input[type="radio"]:focus+label {
+                outline: none;
+                box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+            }
+
+            /* Tooltip styles */
+            .tooltip {
+                position: absolute;
+                background-color: #000;
+                color: #fff;
+                padding: 0.5rem;
+                border-radius: 0.25rem;
+                font-size: 0.875rem;
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .tooltip.show {
+                opacity: 1;
+            }
+
+            /* Print styles */
+            @media print {
+                .no-print {
+                    display: none !important;
+                }
+
+                .card {
+                    box-shadow: none !important;
+                    border: 1px solid #dee2e6 !important;
+                }
+
+                .page_header h1::after {
+                    display: none;
+                }
             }
         </style>
         <script>
@@ -416,6 +704,24 @@
                 const selectedPaymentType = document.querySelector('input[name="phuong_thuc_thanh_toan"]:checked');
                 if (selectedPaymentType) {
                     toggleOrderButton(selectedPaymentType.value);
+                }
+            });
+            document.querySelector('form').addEventListener('submit', function(e) {
+                const requiredFields = this.querySelectorAll('[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('is-invalid');
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('Vui lòng điền đầy đủ thông tin bắt buộc');
                 }
             });
         </script>

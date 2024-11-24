@@ -1,6 +1,6 @@
 @extends('auth.layout')
 @section('content')
-    <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/banner_0.jpg" alt="">
+    <img style="filter: blur(2.5px);" class="decoration-back" src="{{asset('assets/client/images/banner/Banner2.jpg')}}" alt="">
 
     <div id="snow-container"></div>
 
@@ -8,7 +8,7 @@
 
         <div class="overlay">
 
-            <img class="decoration" src="http://127.0.0.1:8000/assets/client/images/logo/logo_art.png" alt="Logo Art">
+            <img class="decoration" src="{{asset('assets/client/images/logo/logo_art.png')}}" alt="Logo Art">
 
 
             <div class="titre-register" style="margin-top: 30px">

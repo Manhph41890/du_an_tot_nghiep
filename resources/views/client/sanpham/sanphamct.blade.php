@@ -460,7 +460,7 @@
                     <div class="product-slider-init theme1 slick-nav">
                         @foreach ($sanLienQuan as $sanphamlq)
                             <div class="slider-item">
-                                <div class="card product-card">
+                                <div class="card product-card" >
                                     <div class="card-body p-0">
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">

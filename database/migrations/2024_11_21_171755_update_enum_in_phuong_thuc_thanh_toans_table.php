@@ -14,7 +14,7 @@ return new class extends Migration
         DB::statement("ALTER TABLE `phuong_thuc_thanh_toans` MODIFY COLUMN `kieu_thanh_toan` ENUM(
             'Thanh toán khi nhận hàng',
             'Thanh toán bằng Vnpay',
-            'Thanh toán bằng Ví' -- Giá trị mới
+            'Thanh toán bằng Ví' 
         ) NOT NULL");
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
         // Hoàn tác thay đổi giá trị ENUM
         DB::statement("ALTER TABLE `phuong_thuc_thanh_toans` MODIFY COLUMN `kieu_thanh_toan` ENUM(
             'Thanh toán khi nhận hàng',
-            'Thanh toán online' -- Giá trị cũ
+            'Thanh toán online' 
         ) NOT NULL");
     }
 };

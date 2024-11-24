@@ -185,4 +185,8 @@ class HomeController extends Controller
     {
         return view('client.gioithieu');
     }
+    public function hdmuahang()
+    {
+        return view('client.hdmuahang');
+    }
 }

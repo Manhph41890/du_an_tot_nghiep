@@ -452,7 +452,7 @@
                                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
-                                                <div class="media flex-column">
+                                                <div class="media flex-column" style="margin: auto; align-items:center !important">
                                                     <div class="product-thumbnail position-relative">
                                                         <span class="badge badge-danger top-right blinking-text">Mới</span>
                                                         <a href="{{ route('san-phams.incrementViews', $item->id) }}">

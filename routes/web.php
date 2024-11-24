@@ -80,6 +80,7 @@ Route::prefix('client')->group(function () {
     Route::view('/giohang', 'client.giohang');
     Route::get('/gioithieu', [HomeController::class, 'gioithieu'])->name('client.gioithieu');
     Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
+    Route::get('/huongdanmuahang', [HomeController::class, 'hdmuahang'])->name('client.hdmuahang');
 });
 
 // Route đăng nhập

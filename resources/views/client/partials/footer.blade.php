@@ -60,7 +60,7 @@
                         </div>
                         <!-- footer-menu start -->
                         <ul class="footer-menu">
-                            <li><a href="#">Hướng dẫn mua hàng</a></li>
+                            <li><a href="{{route('client.hdmuahang')}}">Hướng dẫn mua hàng</a></li>
                             <li><a href="#">Phương thức vận chuyển</a></li>
                             <li><a href="login.html">Phương thức thanh toán</a></li>
                         </ul>

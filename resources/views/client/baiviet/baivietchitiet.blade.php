@@ -70,9 +70,9 @@
                                     @foreach ($docThem as $item)
                                         <div class="col-md-4 mb-4 mb-md-0">
                                             <div class="blog-post-media">
-                                                <div class="blog-image single-blog">
+                                                <div class="blog-image single-blog" >
                                                     <a href="{{ url('client/baivietchitiet', $item->id) }}"> <img
-                                                            src="{{ asset('/storage/' . $item->anh_bai_viet) }}"></a>
+                                                            src="{{ asset('/storage/' . $item->anh_bai_viet) }}" style="height:226px"></a>
                                                 </div>
                                             </div>
                                             <div class="blog-post-content">

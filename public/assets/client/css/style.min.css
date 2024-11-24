@@ -44,7 +44,7 @@ button {
 
 .product-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px #5a5ac999 !important;
 }
 .min_h {
     display: -webkit-box;

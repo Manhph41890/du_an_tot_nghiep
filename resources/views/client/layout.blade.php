@@ -39,7 +39,7 @@
         }
 
         .bg-img2 {
-            background-image: url('./assets/client/images/banner/Banner2.png');
+            background-image: url('./assets/client/images/banner/Banner2.jpg');
         }
 
         .bg-img3 {

@@ -65,7 +65,7 @@ class HomeController extends Controller
             ->where('so_luong_ma', '>', 0) // Thêm điều kiện so_luong_ma > 0
             ->whereNull('user_id') // Thêm điều kiện user_id = null
             ->orderBy('created_at', 'desc') // Sắp xếp theo ngày tạo mới nhất
-            ->take(4) // Lấy 4 mã giảm giá
+            ->take(3)
             ->get();
 
 
@@ -80,7 +80,7 @@ class HomeController extends Controller
     {
         // Lấy danh mục theo ID
         $danhMuc = danh_muc::find($danhMucId);
-
+        $anhDMuc = danh_muc::query()->where('is_active', '1')->get();
         // Kiểm tra nếu không tìm thấy danh mục
         if (!$danhMuc) {
             return redirect()->route('client.cuahang')->with('error', 'Danh mục không tồn tại.');
@@ -90,7 +90,7 @@ class HomeController extends Controller
         $sanPhams = san_pham::where('danh_muc_id', $danhMucId)->get();
 
         // Trả về view sản phẩm của danh mục
-        return view('client.danhmuc_sanpham', compact('danhMuc', 'sanPhams'));
+        return view('client.danhmuc_sanpham', compact('danhMuc', 'sanPhams', 'anhDMuc'));
     }
 
 

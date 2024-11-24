@@ -195,7 +195,7 @@ class AuthController extends Controller
 
 
     public function login(Request $request)
-    {   
+    {
         $credentials = $request->validate(
             [
                 'email' => 'required|string|email|max:255',
@@ -217,10 +217,14 @@ class AuthController extends Controller
             return $this->redirectToDashboardBasedOnRole($user)->with('notification', 'Đăng nhập thành công !');
         }
 
-        // Thất bại đăng nhập
-        return redirect()->back()->withErrors([
-            'login_error' => 'Email hoặc mật khẩu không đúng',
-        ]);
+        // Truyền thông báo lỗi vào session
+        if (!User::where('email', $request->email)->exists()) {
+            $errorMessage = 'Email không tồn tại!';
+        } else {
+            $errorMessage = 'Mật khẩu không chính xác!';
+        }
+
+        return redirect()->back()->with('login_error', $errorMessage);
     }
 
 

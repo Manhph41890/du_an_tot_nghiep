@@ -51,6 +51,7 @@
         }
 
         .product-thumbnail {
+            width: 100%;
             height: 250px;
             /* Thiết lập chiều cao cố định cho phần hình ảnh sản phẩm */
             overflow: hidden;
@@ -425,7 +426,7 @@
     <!-- common banner  end -->
 
     <!-- product tab start -->
-    <section class="product-tab bg-white pt-50 pb-80">
+    <section class="product-tab bg-white pb-80">
         <div class="container">
 
             <div class="product-tab-nav mb-50">
@@ -664,7 +665,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>z
     </section>
     <!-- blog-section end -->
 

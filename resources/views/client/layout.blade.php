@@ -8,7 +8,6 @@
     <meta name="description" content="{{ $description ?? 'Default description' }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     <title>ArtiCraft</title>
 
     <!-- Favicon -->
@@ -242,54 +241,70 @@
             color: #5a5ac9;
         }
 
-        .discounts-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin: 2rem 0;
+        .product-tab {
+            background-color: #ffffff;
+            padding-top: 80px;
+            padding-bottom: 50px;
         }
 
         .discount-item {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             background-color: #f9f9f9;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: 48%;
-            /* Điều chỉnh chiều rộng để phù hợp với 4 item trong grid */
-            max-width: 300px;
-            /* Giới hạn chiều dài */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .discount-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .discount-icon img {
-            width: 80px;
-            height: 40px;
-            margin-right: 1rem;
+            width: 60px;
+            height: 39px;
+            object-fit: cover;
+            margin-top: -30px;
         }
 
         .discount-content {
             flex-grow: 1;
+            padding-left: 0px;
+            margin-left: -5px;
+
+            line-height: 1;
         }
 
+        .zigzag {
+
+            text-align: center;
+            line-height: 1;
+        }
+
+
         .discount-code {
-            font-size: 0.9em;
-            font-weight: bold;
-            color: #333;
-            white-space: nowrap;
-            /* Không xuống dòng */
-            overflow: hidden;
-            /* Cắt chữ nếu quá dài */
-            text-overflow: ellipsis;
+            font-size: 1.25em;
+            font-weight: 700;
+            color: #5c5bca;
+            margin-bottom: 10px;
         }
 
         .discount-description {
-            font-size: 0.85em;
-            color: #666;
-            /* margin-top: 0.5rem; */
-            line-height: 1.2;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .discount-description p {
+            margin: 0;
         }
 
         .text-danger {
@@ -297,19 +312,34 @@
             font-weight: bold;
         }
 
-
-
         .copy-btn {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #1e98f6;
+            color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
+            width: 80px;
+            height: 40px;
+            padding: 0;
+            font-size: 15px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-            align-self: flex-end;
-            margin-left: 2px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #4a4db3;
+            transform: scale(1.05);
+        }
+
+        .copy-btn:focus {
+            outline: none;
+        }
+
+        /* Styling for the container */
+        .discounts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
         }
 
         .copy-btn:hover {

@@ -12,7 +12,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">CHI TIẾT BÀI VIẾT</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">CHI TIẾT BÀI VIẾT
+                        </h2>
                     </div>
                 </div>
                 <div class="col-12">
@@ -54,7 +55,7 @@
                                 </div>
                                 <!-- single blog post -->
                             </div>
-                            
+
                             <div class="blog-related-post">
                                 <div class="row">
                                     <div class="col-md-12 text-center">
@@ -77,7 +78,8 @@
                                             <div class="blog-post-content">
 
                                                 <h3 class="title mb-15">
-                                                    <a href="single-blog.html">{{ $item->tieu_de_bai_viet }}</a>
+                                                    <a
+                                                        href="{{ url('client/baivietchitiet', $item->id) }}">{{ $item->tieu_de_bai_viet }}</a>
                                                 </h3>
                                                 <p class="sub-title">
                                                     Tác giả:

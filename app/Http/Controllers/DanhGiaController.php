@@ -88,8 +88,8 @@ class DanhGiaController extends Controller
      */
     public function show($id)
     {
-        $danhgia = danh_gia::findOrFail($id);  
-       
+        $danhgia = danh_gia::findOrFail($id);
+
         return view('admin.danhgia.show', compact('danhgia'));
     }
 

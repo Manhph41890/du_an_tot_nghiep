@@ -35,99 +35,54 @@
             color: #000;
         }
     </style>
-    <div class="container">
-        <section class="bg-light">
-            <div class="main-slider dots-style theme1">
-                <div class="slider-item bg-img bg-img1">
-                    <div class="container">
-                        <div class="row align-items-center slider-height">
-                            <div class="col-12">
-                                <div class="slider-content">
-                                    <p class="text animated text-slider" data-animation-in="fadeInDown" data-delay-in=".300">
-                                        ArtiCraft
-                                    <p class="text animated" data-animation-in="fadeInDown" data-delay-in=".300"
-                                        style="color: #5C5BCA">
-                                    </p>
-                                    <h2 class="title animated">
-                                        <span class="animated d-block" data-animation-in="fadeInLeft" data-delay-in=".800"
-                                            style="color: #5C5BCA">Khơi
-                                            nguồn đam mê nghệ thuật</span>
-                                        <span class="animated font-weight-bold" data-animation-in="fadeInRight"
-                                            data-delay-in="1.5" style="color: #5C5BCA" style="color: #5C5BCA">Ưu đãi
-                                            20%</span>
-                                    </h2>
-                                    <a href="{{ route('client.cuahang') }}"
-                                        class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                        data-animation-in="fadeInLeft" data-delay-in="1.9">Xem thêm</a>
-                                </div>
-                            </div>
-                        </div>
+    <nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">DANH MỤC</h2>
                     </div>
                 </div>
-                <!-- slider-item end -->
-                <div class="slider-item bg-img bg-img2">
-                    <div class="container">
-                        <div class="row align-items-center slider-height">
-                            <div class="col-12">
-                                <div class="slider-content">
-                                    <p class="text animated text-slider" data-animation-in="fadeInLeft"
-                                        data-delay-in=".300">
-                                        ArtiCraft
-                                    <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
-                                        style="color: #5C5BCA">
-                                        Nghệ thuật cho mọi người
-                                    </p>
-
-                                    <h2 class="title">
-                                        <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800"
-                                            style="color: #5C5BCA">
-                                            Sáng tạo không giới hạn</span>
-                                        <span class="animated font-weight-bold" data-animation-in="fadeInUp"
-                                            data-delay-in="1.5" style="color: #5C5BCA">Giảm giá 40%</span>
-                                    </h2>
-                                    <Nga href="shop-grid-4-column.html"
-                                        class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25 button_primary" <a
-                                        href="{{ route('client.cuahang') }}"
-                                        class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                        data-animation-in="fadeInLeft" data-delay-in="1.9">Mua Ngay</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-12">
+                    <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
+                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Danh mục</li>
+                    </ol>
                 </div>
-                <!-- slider-item end -->
-                <div class="slider-item bg-img bg-img3">
-                    <div class="container">
-                        <div class="row align-items-center slider-height">
-                            <div class="col-12">
-                                <div class="slider-content">
-                                    <p class="text animated text-slider" data-animation-in="fadeInLeft"
-                                        data-delay-in=".300">
-                                        ArtiCraft
-                                    <p class="text animated" data-animation-in="fadeInLeft" data-delay-in=".300"
-                                        style="color: #5C5BCA">
-                                        Sản phẩm mới - Cảm hứng bất tận
-                                    </p>
-                                    <h2 class="title">
-                                        <span class="animated d-block" data-animation-in="fadeInRight" data-delay-in=".800"
-                                            style="color: #5C5BCA">Vẽ
-                                            sáng tạo - Tô hạnh phúc</span>
-                                        <span class="animated font-weight-bold text_sale" data-animation-in="fadeInUp"
-                                            data-delay-in="1.5">Sale 30% Off</span>
-                                        <span class="animated font-weight-bold" data-animation-in="fadeInUp"
-                                            data-delay-in="1.5" style="color: #5C5BCA">Sản phẩm mới</span>
-                                    </h2>
-
-                                    <a href="{{ route('client.cuahang') }}"
-                                        class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                                        data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- slider-item end -->
             </div>
+        </div>
+    </nav>
+    <div class="container">
+        <section class="mb-5 mt-3">
+            <div class="brand-slider-section theme1 bg-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="brand-init border-top py-35 slick-nav-brand">
+                                @foreach ($anhDMuc as $anhdm)
+                                    <div class="slider-item">
+                                        <div class="single-brand">
+                                            <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
+                                            <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
+                                                <!-- Hiển thị ảnh hình tròn -->
+                                                <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
+                                                    class="brand-image" />
+                                            </a>
+                                            <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="mb-50 d-flex justify-content-center">
+                <h3><strong>Danh mục: {{ $danhMuc->ten_danh_muc }}</strong></h3>
+            </div>
+
         </section>
         @if ($sanPhams->isEmpty())
             <!-- Kiểm tra nếu danh sách sản phẩm trống -->
@@ -135,19 +90,66 @@
         @else
             <div class="row">
                 @foreach ($sanPhams as $sanPham)
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="product-card">
                             <a href="{{ route('san-phams.incrementViews', $sanPham->id) }}">
                                 <img src="{{ asset('storage/' . $sanPham->anh_san_pham) }}"
                                     alt="{{ $sanPham->ten_san_pham }}" class="product-image">
-                                <h5>{{ $sanPham->ten_san_pham }}</h5>
+                                <h5 class="min_h">{{ $sanPham->ten_san_pham }}</h5>
                                 <p>{{ $sanPham->mo_ta }}</p>
-                                <p>{{ number_format($sanPham->gia) }} VND</p>
+                                <p>{{ number_format($sanPham->gia_goc) }} VND</p>
                             </a>
                         </div>
                     </div>
                 @endforeach
             </div>
         @endif
+        <style>
+            .min_h {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                /* Số dòng muốn hiển thị */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                min-height: 4em;
+                /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+            }
+
+            .single-brand {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .brand-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .brand-image {
+                width: 120px;
+                /* Thay đổi kích thước ảnh theo ý muốn */
+                height: 120px;
+                border-radius: 50%;
+                /* Để ảnh hình tròn */
+                object-fit: cover;
+                /* Cắt ảnh để vừa với khung */
+                margin-bottom: 10px;
+                /* Khoảng cách giữa ảnh và tên danh mục */
+            }
+
+            .brand-name {
+                font-size: 14px;
+                font-weight: bold;
+                color: #333;
+                text-transform: uppercase;
+                margin-top: 5px;
+                /* Khoảng cách giữa tên và các phần tử khác */
+            }
+        </style>
     </div>
 @endsection

@@ -1,14 +1,14 @@
 <!-- Left Sidebar Start -->
 <style>
     .notification-dot {
-        width: 20px;
+        width: 18px;
         /* Điều chỉnh kích thước chấm đỏ */
-        height: 20px;
+        height: 18px;
         /* Điều chỉnh kích thước chấm đỏ */
         background-color: red;
         border-radius: 50%;
         position: absolute;
-        top: -15px;
+        top: -11px;
         /* Điều chỉnh vị trí chấm đỏ */
         left: -8px;
         /* Điều chỉnh vị trí chấm đỏ */
@@ -46,6 +46,21 @@
         position: absolute;
         top: -5px;
         left: 0px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+    }
+
+    .notification-dot3 {
+        width: 14px;
+        height: 14px;
+        background-color: red;
+        border-radius: 50%;
+        position: absolute;
+        top: -35px;
+        left: 160px;
         color: white;
         display: flex;
         align-items: center;
@@ -194,6 +209,11 @@
                     <a href="#user" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="user"></i>
                         <span> User </span>
+                        @if (isset($viewMoney) && $viewMoney > 1)
+                            <span class="ms-2 position-relative">
+                                <span class="notification-dot">{{ $viewMoney }}</span>
+                            </span>
+                        @endif
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="user">
@@ -201,12 +221,19 @@
                             <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
                             @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                                 <li><a class="tp-link" href="{{ route('user.create') }}">Thêm nhân viên</a></li>
+
                                 <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền</a></li>
+                                @if (isset($viewMoney) && $viewMoney > 1)
+                                    <span class="ms-2 position-relative">
+                                        <span class="notification-dot3">{{ $viewMoney }}</span>
+                                    </span>
+                                @endif
                             @endif
 
                         </ul>
                     </div>
                 </li>
+                {{-- Đánh giá --}}
 
                 <li>
                     <a href="#danhgia" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
@@ -216,13 +243,15 @@
                     </a>
                     <div class="collapse" id="danhgia">
                         <ul class="nav-second-level">
-                            <li><a class="tp-link" href="{{ route('danhgia.index') }}">Danh sách</a></li>
+                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin' || auth()->user()->chuc_vu->ten_chuc_vu === 'nhan_vien')
+                                <li><a class="tp-link" href="{{ route('danhgia.index') }}">Danh sách</a></li>
+                            @endif
                         </ul>
                     </div>
                 </li>
 
 
-
+                {{-- Bài viết --}}
                 <li>
                     <a href="#baiviet" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="book-open"></i>
@@ -238,64 +267,6 @@
                         </ul>
                     </div>
                 </li>
-
-                {{-- <!-- Chức vụ -->
-                <li>
-                    <a href="#chucvu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="award"></i>
-                        <span> Chức vụ </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="chucvu">
-                        <ul class="nav-second-level">
-                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
-                                <li><a class="tp-link" href="{{ route('chucvus.create') }}">Thêm</a></li>
-                            @endif
-                            <li><a class="tp-link" href="{{ route('chucvus.index') }}">Danh sách</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- Phương thức thanh toán -->
-                <li>
-                    <a href="#phuongthucthanhtoan" data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-parent="#side-menu">
-                        <i data-feather="credit-card"></i>
-                        <span> PT thanh toán </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="phuongthucthanhtoan">
-                        <ul class="nav-second-level">
-                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
-                                <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.create') }}">Thêm</a>
-                                </li>
-                            @endif
-                            <li><a class="tp-link" href="{{ route('phuongthucthanhtoans.index') }}">Danh sách</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Phương thức vận chuyển -->
-                <li>
-                    <a href="#phuongthucvanchuyen" data-bs-toggle="collapse" aria-expanded="false"
-                        data-bs-parent="#side-menu">
-                        <i data-feather="truck"></i>
-                        <span> PT vận chuyển </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="phuongthucvanchuyen">
-                        <ul class="nav-second-level">
-                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
-                                <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.create') }}">Thêm</a>
-                                </li>
-                            @endif
-                            <li><a class="tp-link" href="{{ route('phuongthucvanchuyens.index') }}">Danh sách</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> --}}
-
-
             </ul>
         </div>
         <!-- End Sidebar -->

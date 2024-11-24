@@ -5,7 +5,7 @@
         /* Căn chỉnh các nút đánh giá ngang đều */
         .filter-rating {
             display: flex;
-            justify-content: center;
+            justify-content: start;
             gap: 10px;
             /* Khoảng cách giữa các nút */
             /* flex-wrap: wrap; */
@@ -14,9 +14,9 @@
 
         /* Style cho các nút */
         .filter-btn {
-            background-color: #5a5a9c;
-            color: #fff;
-            border: 1px solid #ddd;
+            background-color: #ffffff;
+            color: #4460b5;
+            border: 1px solid #9d89ba;
             border-radius: 5px;
             padding: 5px 10px;
             /* Giảm kích thước padding */
@@ -30,15 +30,19 @@
 
         .filter-btn:hover {
             background-color: #fff;
-            color: #5a5a9c;  /* số */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Tăng độ bóng khi hover */
-            transform: translateY(-2px); /* Nâng nút lên */
+            color: #5a5a9c;
+            /* số */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            /* Tăng độ bóng khi hover */
+            transform: translateY(-2px);
+            /* Nâng nút lên */
         }
 
         .filter-btn:active {
             /* background-color: #0056b3; */
-            box-shadow: 0 2px 4px #7148ee(0, 0, 0, 0.1); 
-            transform: translateY(1px); /* Nhấn nút xuống */
+            box-shadow: 0 2px 4px #7148ee(0, 0, 0, 0.1);
+            transform: translateY(1px);
+            /* Nhấn nút xuống */
         }
 
         #no-reviews-message {
@@ -131,7 +135,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize">
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">
                             Chi tiết sản phẩm
                         </h2>
                     </div>
@@ -372,11 +376,11 @@
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
-                                <h2>Đánh giá sản phẩm: {{ $sanPhamCT->ten_san_pham }}</h2>
+                                <h4>Đánh giá của khách hàng:</h4>
                                 <br>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="filter-rating text-center mb-4">
+                                        <div class="filter-rating mb-4">
                                             <button class="filter-btn" data-star="5">5 <i
                                                     class="mdi mdi-star text-warning"
                                                     style="font-size: 1.3rem;"></i></button>
@@ -414,7 +418,6 @@
                                                                         {{ $danhgia->users->ho_ten }}</h5>
                                                                 </div>
                                                                 <div class="rating-product">
-                                                                    <!-- Logic hiển thị sao với mdi -->
                                                                     @for ($i = 1; $i <= 5; $i++)
                                                                         @if ($i <= $danhgia->diem_so)
                                                                             <i class="mdi mdi-star text-warning"
@@ -464,7 +467,8 @@
                                     <div class="card-body p-0">
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
-                                                <span class="badge badge-danger top-right">New</span>
+                                                <span class="badge badge-danger top-right"
+                                                    style="background-color: red">Mới</span>
                                                 <a href="{{ route('san-phams.incrementViews', $sanphamlq->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('storage/' . $sanphamlq->anh_san_pham) }}"
@@ -473,7 +477,7 @@
                                             </div>
                                             <div class="media-body">
                                                 <div class="product-desc">
-                                                    <h3 class="title">
+                                                    <h3 class="title min_h">
                                                         <a
                                                             href="{{ route('san-phams.incrementViews', $sanphamlq->id) }}">{{ $sanphamlq->ten_san_pham }}</a>
                                                     </h3>
@@ -504,6 +508,18 @@
                     </div>
                 </div>
             </div>
+            <style>
+                .min_h {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    /* Số dòng muốn hiển thị */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    min-height: 3em;
+                    /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+                }
+            </style>
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -586,8 +602,10 @@
 
                     colorContainer.appendChild(colorDiv);
                 });
+
             }
         });
+
 
         // Hàm hỗ trợ định dạng số có dấu phân cách ngàn
         function numberWithCommas(x) {

@@ -23,10 +23,13 @@
                                 </div>
                                 <div class="mb-3">
                                     <p><strong>Ảnh đại diện:</strong></p>
-                                    @if(!empty($post->anh_dai_dien))
-                                        <img src="{{ asset('storage/' . $post->anh_dai_dien) }}" alt="Ảnh đại diện" width="100" height="100">
-                                    
-                                </div>                                                                                                                         
+                                    @if (!empty($post->anh_dai_dien))
+                                        <img src="{{ asset('storage/' . $post->anh_dai_dien) }}" alt="Ảnh đại diện"
+                                            width="100" height="100">
+                                    @else
+                                        <p>Chưa có ảnh đại diện.</p>
+                                    @endif
+                                </div>
                                 <div class="mb-3">
                                     <p><strong>Email:</strong> {{ $post->email }}</p>
                                 </div>

@@ -964,7 +964,7 @@
                             </h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Laravel's robust 1library 1of f11irst-party tools and libraries, such as <a
+                                Laravel's robust 1library 1of f11irst-paols and libraries, such as <a
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Forge</a>,
                                 <a href="https://nova.laravel.com"
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Nova</a>,

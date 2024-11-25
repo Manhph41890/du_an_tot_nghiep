@@ -30,38 +30,44 @@
     <section class="blog-section py-80 bg-light">
         <div class="container">
             <div class="row">
-                @foreach ($baiviets as $baiviet)
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-30">
-                        <div class="single-blog overflow-hidden position-relative">
-                            <!-- Image -->
-                            <a class="blog-thumb mb-20 zoom-in d-block"
-                                href="{{ url('client/baivietchitiet', $baiviet->id) }}">
-                                <img src="{{ asset('/storage/' . $baiviet->anh_bai_viet) }}" class="img-fluid"
-                                    alt="{{ $baiviet->tieu_de_bai_viet }}">
-                            </a>
-                            <!-- Blog Content -->
-                            <div class="blog-post-content p-4">
-                                <div class="d-flex justify-content-between text-muted mb-2">
-                                    <p>Tác giả: <a
-                                            href="{{ url('client/baivietchitiet', $baiviet->id) }}">{{ $baiviet->user->ho_ten }}</a>
-                                    </p>
-                                    <p>Xuất bản: {{ $baiviet->ngay_dang }}</p>
+                <div class="col-12">
+                    <div class="blog-init slick-nav">
+                        @foreach ($baiviets as $baiviet)
+                            <div class="slider-item">
+                                <div class="single-blog">
+                                    <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden height-200"
+                                        href="{{ url('client/baivietchitiet', $baiviet->id) }}">
+                                        <img src="{{ asset('/storage/' . $baiviet->anh_bai_viet) }}"
+                                            alt="blog-thumb-naile" />
+                                    </a>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="">
+                                            Tác giả:
+                                            {{ $baiviet->user?->ho_ten }}
+                                        </p>
+                                        <p class="sub-title">
+                                            Ngày đăng:
+                                            {{ date('d/m/Y', strtotime($baiviet->ngay_dang)) }}
+                                        </p>
+                                    </div>
+                                    <div class="blog-post-content">
+                                        <h3 class="title mb-15">
+                                            <a class="" href="{{ url('client/baivietchitiet', $baiviet->id) }}">
+                                                {{ Str::limit($baiviet->tieu_de_bai_viet, 50, '...') }}
+                                            </a>
+                                        </h3>
+                                        <p class="text-muted mb-3  min_h">
+                                            {{ Str::limit($baiviet->noi_dung, 80, '...') }}
+                                        </p>
+                                        <a class="read-more text-primary"
+                                            href="{{ url('client/baivietchitiet', $baiviet->id) }}">Đọc thêm</a>
+                                    </div>
                                 </div>
-                                <h3 class="title mb-15 mt-10">
-                                    <a href="{{ url('client/baivietchitiet', $baiviet->id) }}"
-                                        class="text-primary">{{ $baiviet->tieu_de_bai_viet }}</a>
-                                </h3>
-                                <p class="text-muted mb-3">
-                                    {{ Str::limit($baiviet->noi_dung, 120, '...') }}
-                                </p>
-                                <a class="read-more text-primary"
-                                    href="{{ url('client/baivietchitiet', $baiviet->id) }}">Đọc thêm</a>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
             </div>
-
             <!-- Pagination -->
             <div class="row">
                 <div class="col-12">
@@ -79,6 +85,17 @@
 
 @section('styles')
     <style>
+        .min_h {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Số dòng muốn hiển thị */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 3em;
+            /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+        }
+
         /* Cải thiện giao diện của phần Breadcrumb */
         .breadcrumb-section {
             background: #0056b3;

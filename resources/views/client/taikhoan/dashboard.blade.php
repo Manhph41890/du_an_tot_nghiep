@@ -138,8 +138,6 @@
                                                     onclick="toggleAvatarForm(event)">
                                                     Thay đổi ảnh đại diện
                                                 </a>
-                                                <!-- Avatar Form (Initially hidden) -->
-
                                                 <div id="change-avatar-form" style="display: none;">
                                                     <div class="form-group">
                                                         <label for="anh_dai_dien">Hình đại diện</label>

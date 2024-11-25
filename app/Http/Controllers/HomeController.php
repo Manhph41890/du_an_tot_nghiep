@@ -70,7 +70,7 @@ class HomeController extends Controller
 
 
         $title = "Trang chủ";
-        $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
+        $baiVietMoi = bai_viet::with('user')->where('is_active', '!=', 0)->orderBy('ngay_dang', 'desc')->paginate(6);
         $anhDMuc = danh_muc::query()->where('is_active', '1')->get();
 
         return view('client.home', compact('sanPhamMois',  'discounts', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
@@ -146,8 +146,8 @@ class HomeController extends Controller
     // In Data Bai viet
     public function listBaiViet()
     {
-        $baiviets = bai_viet::with('user')->latest('id')->paginate(4);
-        $baiVietMoi = bai_viet::with('user')->orderBy('ngay_dang', 'desc')->paginate(6);
+        $baiviets = bai_viet::with('user')->where('is_active', '!=', 0)->latest('id')->paginate(4);
+        $baiVietMoi = bai_viet::with('user')->where('is_active', '!=', 0)->orderBy('ngay_dang', 'desc')->paginate(6);
         $title = "";
         return view('client.baiviet.baiviet', compact('baiviets', 'baiVietMoi', 'title'));
     }

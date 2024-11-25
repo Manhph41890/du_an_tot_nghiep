@@ -15,8 +15,8 @@
           <ol
             class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center"
           >
-            <li class="breadcrumb-item"><a href="index.html">Hoome</a></li>
-            <li class="breadcrumb-item active" aria-current="page">check out</li>
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Check out</li>
           </ol>
         </div>
       </div>
@@ -30,7 +30,7 @@
       <div class="row">
         <div class="col-lg-7">
           <div class="billing-info-wrap">
-            <h3 class="title">Billing Details</h3>
+            <h3 class="title">Bill Details</h3>
             <form class="personal-information" action="https://htmldemo.net/looki/looki/assets/php/contact.php">
               <div class="row">
                 <div class="col-lg-6 col-md-6">

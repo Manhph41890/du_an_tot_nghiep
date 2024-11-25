@@ -57,7 +57,7 @@
                     <input  style="font-family: Arial;" type="submit" value="ĐĂNG NHẬP">
                 </div>
                 <div class="row">
-                    <small> <a style="font-family: Arial;" href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
+                    <small> <a style="font-family: Arial;" class="forgot-pw" href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
                 </div>
                 <div class="input-group d-flex mb-3 ">
                     <a href="{{ route('auth.google') }}"style=" margin-right: 40px; font-family: Arial; text-decoration: none;">
@@ -132,7 +132,15 @@
 
     </div>
 
-
+<style>
+    .forgot-pw{
+        color: #5a5a9c;
+        text-decoration: none;
+    }
+    .forgot-pw:hover{
+        color:#3535e2;
+    }
+</style>
     <script>
         const registerBtn = document.querySelector(".btn-register");
         const loginBtn = document.querySelector(".btn-login");

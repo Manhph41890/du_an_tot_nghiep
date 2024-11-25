@@ -47,7 +47,7 @@
                 <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
-                        <div class="card-header justify-content-between">
+                        {{-- <div class="card-header justify-content-between">
 
                            
 
@@ -60,7 +60,7 @@
                                 </div>
                             @endif
 
-                        </div><!-- end card header -->
+                        </div><!-- end card header --> --}}
 
                         <div class="row">
                             <div class="card-body">
@@ -84,7 +84,7 @@
                                             @foreach ($list as $item)
                                                 <tr>
                                                     <td>{{ $item->id }}</td>
-                                                    <td>{{ $item->chuc_vu?->ten_chuc_vu }}</td>
+                                                    <td>{{ $item->chuc_vu?->mo_ta_chuc_vu }}</td>
                                                     <td>{{ $item->ho_ten }}</td>
                                                     <td>{{ $item->email }}</td>
                                                     <td>{{ $item->so_dien_thoai }}</td>

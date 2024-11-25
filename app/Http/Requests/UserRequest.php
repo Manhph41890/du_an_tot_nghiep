@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
             'ho_ten' => 'required|string|max:255',
             'anh_dai_dien' => 'required|file|max:2048',  // Có thể không bắt buộc và chỉ cần là đường dẫn ngắn
             'email' => 'required|email|max:255|unique:users,email',  // Đảm bảo email hợp lệ và duy nhất
-            'so_dien_thoai' => 'required|string|max:15',  // Giới hạn độ dài của số điện thoại
+            'so_dien_thoai' => 'required|string|max:10',  // Giới hạn độ dài của số điện thoại
             'ngay_sinh' => 'required|date|before_or_equal:' . now()->subYears(18)->toDateString(),  // Người dùng phải trên 18 tuổi
             'dia_chi' => 'required|string|max:255',
             'gioi_tinh' => 'required|in:nam,nu,Nam,Nữ,khac',  // Giới hạn các giá trị cho giới tính
@@ -52,7 +52,7 @@ class UserRequest extends FormRequest
             'email.unique' => 'Email này đã tồn tại trong hệ thống.',
 
             'so_dien_thoai.required' => 'Vui lòng nhập số điện thoại.',
-            'so_dien_thoai.max' => 'Số điện thoại không được vượt quá 15 ký tự.',
+            'so_dien_thoai.max' => 'Số điện thoại không được vượt quá 10 ký tự.',
 
             'ngay_sinh.required' => 'Vui lòng nhập ngày sinh.',
             'ngay_sinh.date' => 'Ngày sinh không hợp lệ.',

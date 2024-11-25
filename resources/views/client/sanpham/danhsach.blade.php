@@ -4,7 +4,7 @@
     {{-- mã giảm giá 'voucher' --}}
     <div class="product-tab bg-white pt-80 pb-50">
         <div class="container">
-           
+
             <div class="discounts-container">
                 @foreach ($discounts as $item)
                     <div class="discount-item">
@@ -13,9 +13,13 @@
                                 alt="Discount Icon">
                         </div>
                         <div class="discount-content">
+
                             <div class="discount-code zigzag">
-                                <span class="code">{{ $item->ma_khuyen_mai }}</span>
+
+                                <span class="code">{{ $item->ten_khuyen_mai }}</span>
                             </div>
+
+                  
                             <div class="discount-description">
                                 <p>
                                     Giảm <span
@@ -87,7 +91,7 @@
                             <div class="row grid-view theme1">
                                 @foreach ($list_sanphams as $item)
                                     <div class="col-6 col-sm-4 col-lg-3 mb-30">
-                                        <div class="card product-card">
+                                        <div class="box-sha card product-card " style="">
                                             <div class="card-body">
                                                 <div class="product-thumbnail position-relative">
                                                     <span class="badge badge-danger top-right">-
@@ -319,6 +323,14 @@
             text-overflow: ellipsis;
             min-height: 3em;
             /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+        }
+        .box-sha{
+            box-shadow: 0 0 11.83px 1.17px #5a5ac92e !important
+            
+        }
+        .box-sha:hover{
+            box-shadow: 0 8px 16px #5a5ac999 !important;
+            
         }
     </style>
     <script>

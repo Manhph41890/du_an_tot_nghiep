@@ -453,8 +453,8 @@
                                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
-                                                <div class="media flex-column">
-                                                    <div class="product-thumbnail position-relative" style="">
+                                                <div class="media flex-column" style="margin: auto; align-items:center !important">
+                                                    <div class="product-thumbnail position-relative">
                                                         <span class="badge badge-danger top-right blinking-text">Mới</span>
                                                         <a href="{{ route('san-phams.incrementViews', $item->id) }}">
                                                             <img class="first-img"
@@ -512,7 +512,7 @@
                                                         <span
                                                             class="bg-danger badge badge-danger top-right p-2">-{{ $sanPhamGg->phan_tram_giam_gia }}%</span>
                                                         <a href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
-                                                            <img class="first-img"
+                                                            <img  class="first-img"
                                                                 src="{{ asset('storage/' . $sanPhamGg->anh_san_pham) }}"
                                                                 alt="thumbnail" />
                                                         </a>
@@ -644,8 +644,7 @@
                                 <div class="single-blog">
                                     <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden height-200"
                                         href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">
-                                        <img src="{{ asset('/storage/' . $baivietmoi->anh_bai_viet) }}"
-                                            alt="blog-thumb-naile" />
+                                        <img src="{{ asset('storage/' . $baivietmoi->anh_bai_viet) }}" alt="blog-thumb-naile">
                                     </a>
                                     <div class="blog-post-content">
                                         <a class="blog-link theme-color d-inline-block mb-10"

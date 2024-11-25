@@ -16,13 +16,19 @@
                         <div class="card-body">
                             <form>
                                 <div class="mb-3">
-                                    <p><strong>Chức vụ:</strong> {{ $post->chuc_vu?->ten_chuc_vu }}</p>
+                                    <p><strong>Chức vụ:</strong> {{ $post->chuc_vu?->mo_ta_chuc_vu }}</p>
                                 </div>
                                 <div class="mb-3">
                                     <p><strong>Họ và tên:</strong> {{ $post->ho_ten }}</p>
                                 </div>
                                 <div class="mb-3">
-                                    <p><strong>Ảnh đại diện:</strong> {{ $post->anh_dai_dien }}</p>
+                                    <p><strong>Ảnh đại diện:</strong></p>
+                                    @if (!empty($post->anh_dai_dien))
+                                        <img src="{{ asset('storage/' . $post->anh_dai_dien) }}" alt="Ảnh đại diện"
+                                            width="100" height="100">
+                                    @else
+                                        <p>Chưa có ảnh đại diện.</p>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <p><strong>Email:</strong> {{ $post->email }}</p>

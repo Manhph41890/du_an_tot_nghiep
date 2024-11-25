@@ -58,7 +58,7 @@
                     <div class="row align-items-center">
                         <div
                             class="header-text mb-4 text-center d-flex flex-column justify-content-center align-items-center">
-                            <h2>Đăng Kí</h2>
+                            <!-- <h2>ĐĂNG KÝ</h2> -->
                         </div>
 
                         <div class="input-group mb-3">
@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <button class="btn btn-lg btn-primary w-100 fs-6">Đăng Kí</button>
+                            <button class="btn btn-lg btn-primary w-100 fs-6">ĐĂNG KÝ</button>
                         </div>
                         <link rel="stylesheet"
                             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -134,7 +134,7 @@
                         </div>
 
                         <div class="row">
-                            <small>Bạn đã có tài khoản? <a href="{{ route('auth.login') }}"> Đăng Nhập </a></small>
+                            <small>Bạn đã có tài khoản? <a href="{{ route('auth.login') }}"> ĐĂNG NHẬP </a></small>
                         </div>
                     </div>
                 </div>

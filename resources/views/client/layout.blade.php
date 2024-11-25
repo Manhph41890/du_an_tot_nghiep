@@ -8,7 +8,6 @@
     <meta name="description" content="{{ $description ?? 'Default description' }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     <title>ArtiCraft</title>
 
     <!-- Favicon -->
@@ -40,7 +39,7 @@
         }
 
         .bg-img2 {
-            background-image: url('./assets/client/images/banner/Banner2.png');
+            background-image: url('./assets/client/images/banner/Banner2.jpg');
         }
 
         .bg-img3 {
@@ -242,7 +241,7 @@
             color: #5a5ac9;
         }
 
-   .product-tab {
+        .product-tab {
             background-color: #ffffff;
             padding-top: 80px;
             padding-bottom: 50px;

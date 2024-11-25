@@ -175,5 +175,10 @@
             background: #0056b3;
             color: #fff;
         }
+
+        .thumbnail {
+            height: 191px !important;
+            width: 261px;
+        }
     </style>
 @endsection

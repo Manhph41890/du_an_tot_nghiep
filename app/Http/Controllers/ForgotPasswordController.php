@@ -79,7 +79,6 @@ class ForgotPasswordController extends Controller
             'message' => 'Mã xác thực hợp lệ. Bạn có thể đặt lại mật khẩu.',
 
         ]);
-       
     }
 
 

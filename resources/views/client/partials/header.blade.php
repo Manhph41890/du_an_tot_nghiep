@@ -29,6 +29,12 @@
         animation: pulse 1s infinite;
     }
 
+    .dropdown-toggle::after {
+        display: none !important;
+        /* Ẩn mũi tên */
+    }
+    
+
     @keyframes pulse {
 
         0%,
@@ -57,7 +63,6 @@
         background: #fff !important;
         color: #5a5a9c !important;
     }
-
 </style>
 
 <!-- header start -->
@@ -116,8 +121,11 @@
                                             </div>
                                             <div id="searchInput" class="search-input d-none position-relative">
                                                 <div class="input-group">
-                                                    <input type="text" name="search" id="inputsearch" class="form-control" placeholder="Tìm kiếm..." aria-label="Search">
-                                                    <div id="product-search" class="product-grouped product-count style" style="position: absolute; width: 100%; top: 100%; background: white; z-index: 100; display: none;">                                                   
+                                                    <input type="text" name="search" id="inputsearch"
+                                                        class="form-control" placeholder="Tìm kiếm..."
+                                                        aria-label="Search">
+                                                    <div id="product-search" class="product-grouped product-count style"
+                                                        style="position: absolute; width: 100%; top: 100%; background: white; z-index: 100; display: none;">
 
                                                     </div>
                                                 </div>
@@ -166,7 +174,7 @@
                                                 $isUrl = filter_var($avatar, FILTER_VALIDATE_URL) !== false;
                                             @endphp
                                             <img src="{{ $isUrl ? $avatar : asset('storage/' . $avatar) }}"
-                                                alt="Ảnh đại diện" width="32" height="32" class="rounded-circle">
+                                                alt="Ảnh đại diện" width="50" height="50" class="rounded-circle">
                                             @php
                                                 $tongDonHang = DB::table('don_hangs')
                                                     ->where('trang_thai_don_hang', 'Chờ xác nhận')

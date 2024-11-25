@@ -84,7 +84,7 @@
                                             @foreach ($list as $item)
                                                 <tr>
                                                     <td>{{ $item->id }}</td>
-                                                    <td>{{ $item->chuc_vu?->ten_chuc_vu }}</td>
+                                                    <td>{{ $item->chuc_vu?->mo_ta_chuc_vu }}</td>
                                                     <td>{{ $item->ho_ten }}</td>
                                                     <td>{{ $item->email }}</td>
                                                     <td>{{ $item->so_dien_thoai }}</td>

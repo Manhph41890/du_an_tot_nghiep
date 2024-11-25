@@ -75,7 +75,7 @@
 
                                     <div class="form-group mb-3">
                                         <label for="so_dien_thoai">Số điện thoại</label>
-                                        <input type="number" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
+                                        <input type="text" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
                                             class="form-control @error('so_dien_thoai') is-invalid @enderror">
                                         @error('so_dien_thoai')
                                             <div class="invalid-feedback">

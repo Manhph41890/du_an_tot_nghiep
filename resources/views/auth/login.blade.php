@@ -1,6 +1,6 @@
 @extends('auth.layout')
 @section('content')
-    <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/banner_0.jpg" alt="">
+    <img style="filter: blur(2.5px);" class="decoration-back" src="{{asset('assets/client/images/banner/Banner2.jpg')}}" alt="">
 
     <div id="snow-container"></div>
 
@@ -8,19 +8,19 @@
 
         <div class="overlay">
 
-            <img class="decoration" src="http://127.0.0.1:8000/assets/client/images/logo/logo_art.png" alt="Logo Art">
+            <img class="decoration" src="{{asset('assets/client/images/logo/logo_art.png')}}" alt="Logo Art">
 
 
             <div class="titre-register" style="margin-top: 30px">
-                <h2>Đăng Ký</h2>
-                <p>Chào mừng bạn đến với Articaft</p>
-                <button class="btn-login">Đăng Nhập</button>
+                <!-- <h2>Đăng Ký</h2> -->
+                <p style="font-family: Arial;">Chào mừng bạn đến với Articaft</p>
+                <button  style="font-family: Arial;" class="btn-login">ĐĂNG NHẬP</button>
             </div>
 
             <div class="titre-login" style="margin-top: 50px">
 
-                <p>Chào mừng bạn đến với Articaft. Hãy Đăng Nhập ngay !</p>
-                <button class="btn-register">Đăng Ký</button>
+                <p  style="font-family: Arial;">Chào mừng bạn đến với Articaft.</p>
+                <button  style="font-family: Arial;" class="btn-register">ĐĂNG KÝ</button>
             </div>
 
         </div>
@@ -28,7 +28,7 @@
         <div class="form-list">
             <form class="login" action="{{ route('auth.login') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <h2>Đăng Nhập</h2>
+                <!-- <h2>ĐĂNG NHẬP</h2> -->
                 @if (session('login_error'))
                     <script>
                         Swal.fire({
@@ -40,13 +40,13 @@
                     </script>
                 @endif
                 <div class="input-group mb-3">
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                    <input style="font-family: Arial;" type="email" id="email" name="email" value="{{ old('email') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
                         placeholder="Email">
 
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" id="password" name="password" value="{{ old('password') }}" required
+                    <input style="font-family: Arial;" type="password" id="password" name="password" value="{{ old('password') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
                         placeholder="Mật khẩu">
                     <i class="bi bi-eye" id="togglePasswordIcon"></i>
@@ -54,17 +54,17 @@
                 </div>
 
                 <div class="nut-button">
-                    <input type="submit" value="Đăng Nhập">
+                    <input  style="font-family: Arial;" type="submit" value="ĐĂNG NHẬP">
                 </div>
                 <div class="row">
-                    <small> <a href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
+                    <small> <a style="font-family: Arial;" href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
                 </div>
                 <div class="input-group d-flex mb-3 ">
-                    <a href="{{ route('auth.google') }}" style=" margin-right: 40px;  text-decoration: none;">
+                    <a href="{{ route('auth.google') }}"style=" margin-right: 40px; font-family: Arial; text-decoration: none;">
                         <img src="{{ asset('assets/client/images/icon/icons8-google-48.png') }}" class="social-icon">
                     </a>
 
-                    <a href="" style=" margin-left: 0px;  text-decoration: none;">
+                    <a href="" style=" margin-left: 0px; font-family: Arial;  text-decoration: none;">
                         <img src="{{ asset('assets/client/images/icon/icons8-facebook-48.png') }}" class="social-icon">
                     </a>
                 </div>
@@ -76,7 +76,7 @@
             <form class="register" action="{{ route('auth.register') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" id="ho_ten" name="ho_ten" value="{{ old('ho_ten') }}" required
+                    <input  style="font-family: Arial;" type="text" id="ho_ten" name="ho_ten" value="{{ old('ho_ten') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('ho_ten') is-invalid @enderror"
                         placeholder="Họ Tên">
                     @error('ho_ten')
@@ -84,45 +84,46 @@
                     @enderror
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                    <input style="font-family: Arial;" type="email" id="email" name="email" value="{{ old('email') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
                         placeholder="Email">
                     @error('email')
-                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                        <span  style="font-family: Arial;" class="invalid-feedback d-block mt-1">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
+                    <input  style="font-family: Arial;" type="text" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
                         required
                         class="form-control form-control-lg bg-light  fs-6 @error('so_dien_thoai') is-invalid @enderror"
                         placeholder="Số điện thoại">
 
                 </div>
                 @error('so_dien_thoai')
-                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    <span  style="font-family: Arial;" class="invalid-feedback d-block mt-1">{{ $message }}</span>
                 @enderror
 
                 <div class="input-group mb-3">
-                    <input type="password" id="password" name="password" required
+                    <input  style="font-family: Arial;" type="password" id="password" name="password" required
                         class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
                         placeholder="Mật Khẩu">
 
                 </div>
                 @error('password')
-                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    <span  style="font-family: Arial;" class="invalid-feedback d-block mt-1">{{ $message }}</span>
                 @enderror
                 <div class="input-group mb-3">
-                    <input type="password" id="password_confirmation" name="password_confirmation" required
+                    <input  style="font-family: Arial;" type="password" id="password_confirmation" name="password_confirmation" required
                         class="form-control form-control-lg bg-light fs-6 @error('password_confirmation') is-invalid @enderror"
                         placeholder="Xác nhận mật khẩu">
                 </div>
                 @error('password_confirmation')
-                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    <span  style="font-family: Arial;" class="invalid-feedback d-block mt-1">{{ $message }}</span>
                 @enderror
                 <div class="nut-button">
-                    <input type="submit" value="Đăng Ký">
+                    <input  style="font-family: Arial;" type="submit" value="ĐĂNG KÝ">
                 </div>
+            </form>
         </div>
 
         </form>

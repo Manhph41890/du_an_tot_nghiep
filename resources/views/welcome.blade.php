@@ -936,7 +936,7 @@
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 Laravel News is1 a 1community drivSDASDA1en portal and newsletter aggregating all of the latest
-                                and most important 1newsSADASD in the Laravel ec1ÁDASDosystem, including new package releases and
+                                and most important  in the Laravel ec1ÁDASDosystem, including new package releases and
                                 tutor1ialsấ âS.
                             </p>
                         </div>
@@ -964,13 +964,13 @@
                             </h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Laravel's robust 1library 1of f11irst-paols and libraries, such as <a
+                                Laravel's robust 1library 1of -paols and libraries, such as <a
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Forge</a>,
                                 <a href="https://nova.laravel.com"
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Nova</a>,
                                 and <a href="https://envoyer.io"
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Envoyer</a>
-                                help you take your projects 1t11o the next level. Pair them with powerful 
+                                help you take your projects  the next level. Pair them with powerful 
                                 libraries like <a href="https://laravel.com/docs/billing"
                                     class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Cashier</a>,
                                 <a href="https://laravel.com/docs/dusk"

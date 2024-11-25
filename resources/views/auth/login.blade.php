@@ -12,15 +12,15 @@
 
 
             <div class="titre-register" style="margin-top: 30px">
-                <h2>Đăng Ký</h2>
+                <!-- <h2>Đăng Ký</h2> -->
                 <p>Chào mừng bạn đến với Articaft</p>
-                <button class="btn-login">Đăng Nhập</button>
+                <button class="btn-login">ĐĂNG NHẬP</button>
             </div>
 
             <div class="titre-login" style="margin-top: 50px">
 
-                <p>Chào mừng bạn đến với Articaft. Hãy Đăng Nhập ngay !</p>
-                <button class="btn-register">Đăng Ký</button>
+                <p>Chào mừng bạn đến với Articaft.</p>
+                <button class="btn-register">ĐĂNG KÝ</button>
             </div>
 
         </div>
@@ -28,7 +28,7 @@
         <div class="form-list">
             <form class="login" action="{{ route('auth.login') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <h2>Đăng Nhập</h2>
+                <!-- <h2>ĐĂNG NHẬP</h2> -->
                 @if (session('login_error'))
                     <script>
                         Swal.fire({
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="nut-button">
-                    <input type="submit" value="Đăng Nhập">
+                    <input type="submit" value="ĐĂNG NHẬP">
                 </div>
                 <div class="row">
                     <small> <a href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
@@ -121,8 +121,9 @@
                     <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
                 @enderror
                 <div class="nut-button">
-                    <input type="submit" value="Đăng Ký">
+                    <input type="submit" value="ĐĂNG KÝ">
                 </div>
+            </form>
         </div>
 
         </form>

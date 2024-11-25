@@ -18,8 +18,8 @@
         <div class="overlay">
             <img class="decoration" src="{{asset('assets/client/images/logo/logo_art.png')}}" alt="Logo Art">
             <div class="forgot-password">
-                <h2>Quên mật khẩu</h2>
-                <p>Vui lòng nhập đúng địa chỉ email !</p>
+                <h2  style="font-family: Arial;">Quên mật khẩu</h2>
+                <p  style="font-family: Arial;">Vui lòng nhập đúng địa chỉ email !</p>
             </div>
         </div>
         <div class="form-list"></div>

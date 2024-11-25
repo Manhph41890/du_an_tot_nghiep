@@ -42,7 +42,7 @@ class AuthServiceProvider extends ServiceProvider
         phuong_thuc_thanh_toan::class => PhuongThucThanhToanPolicy::class,
         phuong_thuc_van_chuyen::class => PhuongThucVanChuyenPolicy::class,
         User::class => UserPolicy::class,
-       
+
         bai_viet::class => BaiVietPolicy::class,
 
 

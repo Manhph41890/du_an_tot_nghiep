@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <form>
                                 <div class="mb-3">
-                                    <p><strong>Chức vụ:</strong> {{ $post->chuc_vu?->ten_chuc_vu }}</p>
+                                    <p><strong>Chức vụ:</strong> {{ $post->chuc_vu?->mo_ta_chuc_vu }}</p>
                                 </div>
                                 <div class="mb-3">
                                     <p><strong>Họ và tên:</strong> {{ $post->ho_ten }}</p>

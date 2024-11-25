@@ -127,12 +127,9 @@
                                     @csrf
                                     <div class="align-items-center">
                                         <div class="d-flex align-items-center">
-                                            <!-- User Avatar -->
                                             <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}?t={{ time() }}"
                                                 class="rounded-circle img-thumbnail float-start" alt="Profile Image"
                                                 style="width: 100px; height: 100px; object-fit: cover;">
-
-                                            <!-- User Info Section -->
                                             <div class="overflow-hidden ms-4">
                                                 <h4 class="m-0 text-dark fs-20">{{ Auth::user()->name }}</h4>
 
@@ -141,8 +138,6 @@
                                                     onclick="toggleAvatarForm(event)">
                                                     Thay đổi ảnh đại diện
                                                 </a>
-                                                <!-- Avatar Form (Initially hidden) -->
-
                                                 <div id="change-avatar-form" style="display: none;">
                                                     <div class="form-group">
                                                         <label for="anh_dai_dien">Hình đại diện</label>

@@ -27,7 +27,7 @@
         <div class="form-list">
             <form class="login" action="{{ route('auth.login') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <h2>Đăng Nhập</h2>
+                <!-- <h2>ĐĂNG NHẬP</h2> -->
                 @if (session('login_error'))
                     <script>
                         Swal.fire({
@@ -63,7 +63,7 @@
                         <img src="{{ asset('assets/client/images/icon/icons8-google-48.png') }}" class="social-icon">
                     </a>
 
-                    <a href="" style=" margin-left: 0px;  text-decoration: none;">
+                    <a href="" style=" margin-left: 0px; font-family: Arial;  text-decoration: none;">
                         <img src="{{ asset('assets/client/images/icon/icons8-facebook-48.png') }}" class="social-icon">
                     </a>
                 </div>
@@ -122,6 +122,7 @@
                 <div class="nut-button">
                     <input type="submit" value="Đăng Ký">
                 </div>
+            </form>
         </div>
 
         </form>

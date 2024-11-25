@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-12">
           <div class="section-title text-center">
-            <h2 class="title pb-4 text-dark text-capitalize">check out</h2>
+            <h2 class="title pb-4 text-dark text-capitalize">Check out</h2>
           </div>
         </div>
         <div class="col-12">
@@ -16,7 +16,7 @@
             class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center"
           >
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">check out</li>
+            <li class="breadcrumb-item active" aria-current="page">Check out</li>
           </ol>
         </div>
       </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-lg-12">
                   <div class="billing-info mb-20px">
-                    <label>Company Name</label>
+                    <label>Company name</label>
                     <input type="text" />
                   </div>
                 </div>
@@ -55,7 +55,7 @@
                   <div class="billing-select mb-20px">
                     <label for="inputState" class="form-label">Country</label>
                     <select id="inputState" class="form-select mb-3">
-                      <option>Select a country</option>
+                      <option>Select a countri</option>
                       <option>Azerbaijan</option>
                       <option>Bahamas</option>
                       <option>Bahrain</option>

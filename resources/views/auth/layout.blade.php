@@ -15,7 +15,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
+        font-family: "Item", cursive;
     }
 
     ::after,
@@ -78,7 +78,9 @@
     .form-list form input::placeholder {
         padding: 8px;
     }
-
+    .form-list form input:focus{
+        border: none !important;
+    }
     .overlay {
         width: 50%;
         height: 100%;
@@ -118,26 +120,34 @@
     }
 
     .btn-register {
-        color: #000;
+        color: #fff;
         padding: 10px 20px;
         border: none;
         margin-right: 10px;
         display: none;
-        background: #cccccc;
+        background: #1da8ff;
         box-shadow: 0px 4px 4px rgba(97, 178, 228, 0.44);
         border-radius: 37px;
-        font-size: 20px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .btn-register:hover{
+        background: #1281c7;
     }
 
     .btn-login {
-        color: black;
+        color: #fff;
         padding: 10px 20px;
         border: none;
         margin-left: 10px;
-        background: #cccccc;
+        background: #1da8ff;
         box-shadow: 0px 4px 4px rgba(97, 178, 228, 0.44);
         border-radius: 37px;
-        font-size: 20px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .btn-login:hover{
+        background: #1281c7;
     }
 
     .decoration {
@@ -221,7 +231,10 @@
         width: 100%;
         /* Ensure the container stretches to full width */
     }
-
+    .nut-button input {
+        font-size: 18px;
+        font-weight: 600;
+    }
     /* Style the submit button */
     .nut-button button {
         padding: 12px 25px;
@@ -241,6 +254,7 @@
         /* Optional: limit the width */
         transition: background-color 0.3s ease, transform 0.3s ease;
         /* Smooth transitions */
+        
     }
 
     /* Hover effect for the button */
@@ -252,7 +266,7 @@
     }
 
     /* Focus effect for better accessibility */
-    ..nut-button button:active {
+    .nut-button button:active {
         outline: none;
         /* Remove default outline */
         box-shadow: 0 0 5px rgba(15, 47, 255, 0.5);
@@ -296,7 +310,7 @@
         border: none;
         border-radius: 30px;
         /* Rounded corners */
-        font-size: 16px;
+        font-size: 18px;
         /* Set font size for button text */
         cursor: pointer;
         width: 100%;

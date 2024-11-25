@@ -47,7 +47,7 @@
                 <!-- Striped Rows -->
                 <div class="col-xl-12">
                     <div class="card">
-                        <div class="card-header justify-content-between">
+                        {{-- <div class="card-header justify-content-between">
 
                            
 
@@ -60,7 +60,7 @@
                                 </div>
                             @endif
 
-                        </div><!-- end card header -->
+                        </div><!-- end card header --> --}}
 
                         <div class="row">
                             <div class="card-body">

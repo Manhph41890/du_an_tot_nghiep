@@ -79,6 +79,7 @@ class UserController extends Controller
             $params['anh_dai_dien'] = $path;
         }
         User::create($params);
+        session()->flash('success', 'Thêm mới nhân viên thành công!');
         return redirect()->route('user.index');
     }
 

@@ -11,17 +11,6 @@
     <div class="content-page">
 
         <div class="content">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-
             <!-- Start Content-->
             <div class="container-xxl">
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
@@ -177,5 +166,11 @@
 @endsection
 
 @section('js')
-
+    <!-- Thêm thông báo Toastr vào cuối trang -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        @if (session('success'))
+            toastr.success('{{ session('success') }}');
+        @endif
+    </script>
 @endsection

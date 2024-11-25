@@ -1,26 +1,25 @@
 @extends('auth.layout')
 @section('content')
-    <img style="filter: blur(2.5px);" class="decoration-back" src="{{asset('assets/client/images/banner/Banner2.jpg')}}" alt="">
+    <img class="decoration-back" src="http://127.0.0.1:8000/assets/client/images/banner/bannerLogin1.jpg" alt="">
 
     <div id="snow-container"></div>
 
     <div class="form-contain">
 
         <div class="overlay">
-
-            <img class="decoration" src="{{asset('assets/client/images/logo/logo_art.png')}}" alt="Logo Art">
+            <img class="decoration" src="http://127.0.0.1:8000/assets/client/images/logo/logo_art.png" alt="Logo Art">
 
 
             <div class="titre-register" style="margin-top: 30px">
-                <!-- <h2>Đăng Ký</h2> -->
-                <p style="font-family: Arial;">Chào mừng bạn đến với Articaft</p>
-                <button  style="font-family: Arial;" class="btn-login">ĐĂNG NHẬP</button>
+                <h2>Đăng Ký</h2>
+                <p>Chào mừng bạn đến với Articaft</p>
+                <button class="btn-login">Đăng Nhập</button>
             </div>
 
             <div class="titre-login" style="margin-top: 50px">
 
-                <p  style="font-family: Arial;">Chào mừng bạn đến với Articaft.</p>
-                <button  style="font-family: Arial;" class="btn-register">ĐĂNG KÝ</button>
+                <p>Chào mừng bạn đến với Articaft. Hãy Đăng Nhập ngay !</p>
+                <button class="btn-register">Đăng Ký</button>
             </div>
 
         </div>
@@ -40,13 +39,13 @@
                     </script>
                 @endif
                 <div class="input-group mb-3">
-                    <input style="font-family: Arial;" type="email" id="email" name="email" value="{{ old('email') }}" required
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
                         placeholder="Email">
 
                 </div>
                 <div class="input-group mb-3">
-                    <input style="font-family: Arial;" type="password" id="password" name="password" value="{{ old('password') }}" required
+                    <input type="password" id="password" name="password" value="{{ old('password') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
                         placeholder="Mật khẩu">
                     <i class="bi bi-eye" id="togglePasswordIcon"></i>
@@ -54,13 +53,13 @@
                 </div>
 
                 <div class="nut-button">
-                    <input  style="font-family: Arial;" type="submit" value="ĐĂNG NHẬP">
+                    <input type="submit" value="Đăng Nhập">
                 </div>
                 <div class="row">
-                    <small> <a style="font-family: Arial;" class="forgot-pw" href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
+                    <small> <a href="{{ route('auth.forgot_password') }}"> Quên mật khẩu </a></small>
                 </div>
                 <div class="input-group d-flex mb-3 ">
-                    <a href="{{ route('auth.google') }}"style=" margin-right: 40px; font-family: Arial; text-decoration: none;">
+                    <a href="{{ route('auth.google') }}" style=" margin-right: 40px;  text-decoration: none;">
                         <img src="{{ asset('assets/client/images/icon/icons8-google-48.png') }}" class="social-icon">
                     </a>
 
@@ -76,7 +75,7 @@
             <form class="register" action="{{ route('auth.register') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group mb-3">
-                    <input  style="font-family: Arial;" type="text" id="ho_ten" name="ho_ten" value="{{ old('ho_ten') }}" required
+                    <input type="text" id="ho_ten" name="ho_ten" value="{{ old('ho_ten') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('ho_ten') is-invalid @enderror"
                         placeholder="Họ Tên">
                     @error('ho_ten')
@@ -84,44 +83,44 @@
                     @enderror
                 </div>
                 <div class="input-group mb-3">
-                    <input style="font-family: Arial;" type="email" id="email" name="email" value="{{ old('email') }}" required
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
                         class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
                         placeholder="Email">
                     @error('email')
-                        <span  style="font-family: Arial;" class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                        <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="input-group mb-3">
-                    <input  style="font-family: Arial;" type="text" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
+                    <input type="text" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
                         required
                         class="form-control form-control-lg bg-light  fs-6 @error('so_dien_thoai') is-invalid @enderror"
                         placeholder="Số điện thoại">
 
                 </div>
                 @error('so_dien_thoai')
-                    <span  style="font-family: Arial;" class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
                 @enderror
 
                 <div class="input-group mb-3">
-                    <input  style="font-family: Arial;" type="password" id="password" name="password" required
+                    <input type="password" id="password" name="password" required
                         class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
                         placeholder="Mật Khẩu">
 
                 </div>
                 @error('password')
-                    <span  style="font-family: Arial;" class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
                 @enderror
                 <div class="input-group mb-3">
-                    <input  style="font-family: Arial;" type="password" id="password_confirmation" name="password_confirmation" required
+                    <input type="password" id="password_confirmation" name="password_confirmation" required
                         class="form-control form-control-lg bg-light fs-6 @error('password_confirmation') is-invalid @enderror"
                         placeholder="Xác nhận mật khẩu">
                 </div>
                 @error('password_confirmation')
-                    <span  style="font-family: Arial;" class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                    <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
                 @enderror
                 <div class="nut-button">
-                    <input  style="font-family: Arial;" type="submit" value="ĐĂNG KÝ">
+                    <input type="submit" value="Đăng Ký">
                 </div>
             </form>
         </div>
@@ -132,15 +131,7 @@
 
     </div>
 
-<style>
-    .forgot-pw{
-        color: #5a5a9c;
-        text-decoration: none;
-    }
-    .forgot-pw:hover{
-        color:#3535e2;
-    }
-</style>
+
     <script>
         const registerBtn = document.querySelector(".btn-register");
         const loginBtn = document.querySelector(".btn-login");

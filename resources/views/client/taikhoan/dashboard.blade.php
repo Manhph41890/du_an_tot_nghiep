@@ -127,7 +127,7 @@
                                     @csrf
                                     <div class="align-items-center">
                                         <div class="d-flex align-items-center">
-                                            <!-- User Avatar -->
+                                           
                                             <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}?t={{ time() }}"
                                                 class="rounded-circle img-thumbnail float-start" alt="Profile Image"
                                                 style="width: 100px; height: 100px; object-fit: cover;">

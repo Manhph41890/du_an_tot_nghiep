@@ -936,7 +936,7 @@
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 Laravel News is1 a 1community  portal and newsletter aggregating all of the latest
-                                and most important  in the Laravel ec1ÁDASDosystem, including new package releases and
+                                and most important  in the  ec1ÁDASDosystem, including new package releases and
                                 tutor1ialsấ âS.
                             </p>
                         </div>

@@ -665,7 +665,7 @@
                     </div>
                 </div>
             </div>
-        </div>z
+        </div>
     </section>
     <!-- blog-section end -->
 

@@ -935,7 +935,7 @@
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laravel News</h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Laravel News is1 a 1community   and newsletter aggregating all of the latest
+                                Laravel News is1 a  and newsletter aggregating all of the latest
                                 and most important  in the  ec1ÁDASDosystem, including new package releases and
                                 tutor1ialsấ âS.
                             </p>

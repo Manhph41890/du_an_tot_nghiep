@@ -232,7 +232,7 @@
                         <div class="product-body mb-40">
                             <div class="d-flex align-items-center mb-30">
                                 <div class="product-price me-2">
-                                    <del class="del">{{ number_format($sanPhamCT->gia_goc) }}</del>
+                                    <del class="del" id="old-price"> {{ number_format($sanPhamCT->gia_goc) }}</del>
                                     <span id="new-price" class="onsale">{{ number_format($sanPhamCT->gia_km) }}</span>
                                     <!-- Giá cập nhật sẽ được hiển thị ở đây -->
                                 </div>
@@ -463,7 +463,7 @@
                     <div class="product-slider-init theme1 slick-nav">
                         @foreach ($sanLienQuan as $sanphamlq)
                             <div class="slider-item">
-                                <div class="card product-card" >
+                                <div class="card product-card">
                                     <div class="card-body p-0">
                                         <div class="media flex-column">
                                             <div class="product-thumbnail position-relative">
@@ -530,6 +530,7 @@
             var colorOptions = @json($colorsBySize); // Mảng các màu sắc cho từng size
             var colorsBySize = @json($colorsBySize); // Mảng các biến thể theo size và màu
             var newPriceElement = document.getElementById('new-price'); // Phần tử giá mới
+            var oldPriceElement = document.getElementById('old-price');
 
             // Làm trống các lựa chọn màu cũ
             var colorContainer = document.getElementById('color-options');
@@ -579,6 +580,11 @@
                                 selectedVariant.gia);
                             newPriceElement.textContent = numberWithCommas(
                                 newPrice); // Cập nhật giá mới
+
+                            var oldPrice = parseFloat({{ $sanPhamCT->gia_goc }}) + parseFloat(
+                                selectedVariant.gia);
+                            oldPriceElement.textContent = numberWithCommas(
+                                oldPrice); // Cập nhật giá mới
 
                             // Cập nhật số lượng tồn kho
                             var quantityInput = document.getElementById('quantity-input');

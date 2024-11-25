@@ -30,7 +30,7 @@
       <div class="row">
         <div class="col-lg-7">
           <div class="billing-info-wrap">
-            <h3 class="title">Bill Details</h3>
+            <h3 class="title">Billing Details</h3>
             <form class="personal-information" action="https://htmldemo.net/looki/looki/assets/php/contact.php">
               <div class="row">
                 <div class="col-lg-6 col-md-6">
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-lg-12">
                   <div class="billing-info mb-20px">
-                    <label>Company Name</label>
+                    <label>Company name</label>
                     <input type="text" />
                   </div>
                 </div>
@@ -55,7 +55,7 @@
                   <div class="billing-select mb-20px">
                     <label for="inputState" class="form-label">Country</label>
                     <select id="inputState" class="form-select mb-3">
-                      <option>Select a country</option>
+                      <option>Select a countri</option>
                       <option>Azerbaijan</option>
                       <option>Bahamas</option>
                       <option>Bahrain</option>

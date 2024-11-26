@@ -14,7 +14,7 @@ class ChucVuPolicy
     public function viewAny(User $user): bool
     {
         //
-z    }
+    }
 
     /**
      * Determine whether the user can view the model.
@@ -40,7 +40,7 @@ z    }
     public function update(User $user, chuc_vu $chucVu): bool
     {
         //
-        return $user->chuc_vu->ten_chuc_vu === 'admin' ;
+        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 
     /**
@@ -49,7 +49,6 @@ z    }
     public function delete(User $user, chuc_vu $chucVu): bool
     {
         //
-        return $user->chuc_vu->ten_chuc_vu === 'admin' ;
+        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
-
 }

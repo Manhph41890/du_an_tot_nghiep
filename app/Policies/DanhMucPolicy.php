@@ -12,7 +12,7 @@ class DanhMucPolicy
      */
     public function viewAny(User $user)
     {
-z    }
+    }
 
     /**
      * Determine whether the user can view the danh muc.

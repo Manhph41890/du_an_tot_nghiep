@@ -130,4 +130,12 @@ class ShipperController extends Controller
 
         return redirect()->back()->with('success', 'Đánh giá đã được gửi!');
     }
+
+    public function policy()
+    {
+        $title = "Chính sách vận chuyển";
+
+
+        return view('shipper.policy', compact('title'));
+    }
 }

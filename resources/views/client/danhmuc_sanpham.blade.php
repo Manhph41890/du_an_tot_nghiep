@@ -40,13 +40,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">DANH MỤC</h2>
+                        <h2 class="title pb-4 text-dark text-capitalize" style=" color: #fff !important">{{ $danhMuc->ten_danh_muc }}</h2>
                     </div>
                 </div>
                 <div class="col-12">
                     <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
                         <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Danh mục</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $danhMuc->ten_danh_muc }}</li>
                     </ol>
                 </div>
             </div>
@@ -58,30 +58,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="brand-init border-top py-35 slick-nav-brand">
-                                @foreach ($anhDMuc as $anhdm)
-                                    <div class="slider-item">
-                                        <div class="single-brand">
-                                            <!-- Cập nhật link dẫn đến sản phẩm của danh mục -->
-                                            <a href="{{ route('client.showByCategory', $anhdm->id) }}" class="brand-thumb">
-                                                <!-- Hiển thị ảnh hình tròn -->
-                                                <img src="{{ asset('storage/' . $anhdm->anh_danh_muc) }}" alt="Brand Image"
-                                                    class="brand-image" />
-                                            </a>
-                                            <div class="brand-name">{{ $anhdm->ten_danh_muc }}</div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
+                           
                     </div>
                 </div>
             </div>
         </section>
         <section>
-            <div class="mb-50 d-flex justify-content-center">
+            <!-- <div class="mb-50 d-flex justify-content-center">
                 <h3><strong>Danh mục: {{ $danhMuc->ten_danh_muc }}</strong></h3>
-            </div>
+            </div> -->
 
         </section>
         @if ($sanPhams->isEmpty())
@@ -97,7 +82,7 @@
                                     alt="{{ $sanPham->ten_san_pham }}" class="product-image">
                                 <h5 class="min_h">{{ $sanPham->ten_san_pham }}</h5>
                                 <p>{{ $sanPham->mo_ta }}</p>
-                                <p>{{ number_format($sanPham->gia_goc) }} VND</p>
+                                <p> Giá: <small>{{ number_format($sanPham->gia_goc) }} VND</small></p>
                             </a>
                         </div>
                     </div>
@@ -105,6 +90,11 @@
             </div>
         @endif
         <style>
+            small{
+                color: red;
+                font-size: 16px;
+                font-weight: 600;
+            }
             .min_h {
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
@@ -113,6 +103,7 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 min-height: 4em;
+                font-weight: 600;
                 /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
             }
 

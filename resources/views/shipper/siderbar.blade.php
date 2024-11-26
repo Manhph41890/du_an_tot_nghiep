@@ -154,6 +154,36 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="#policy-menu" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu"
+                        class="d-flex align-items-center">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <span> Chính sách vận chuyển </span>
+                        {{-- @if (isset($notifications) && $notifications['totalNotifications'] > 0)
+                            <span class="ms-2 position-relative">
+                                <span class="notification-dot">{{ $notifications['totalNotifications'] }}</span>
+                            </span>
+                        @endif --}}
+                        <span class="menu-arrow ms-auto"></span>
+                    </a>
+
+                    <div class="collapse" id="policy-menu">
+                        <ul class="nav-second-level">
+                            <!-- Menu con: Danh sách -->
+                            <li>
+                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.policy') }}">
+                                    Chính sách
+                                    {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
+                                        <span class="ms-2 position-relative">
+                                            <span class="notification-dot2"></span>
+                                        </span>
+                                    @endif --}}
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
         <!-- End Sidebar -->

@@ -12,7 +12,6 @@ class DanhMucPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**

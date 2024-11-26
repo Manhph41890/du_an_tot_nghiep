@@ -7,7 +7,7 @@
             <form action="{{ route('order.add') }}" class="personal-information" method="POST">
                 @csrf
                 <div class="page_header mb-4">
-                    <h1 class="text-center fw-bold text-primary">THÔNG TIN ĐƠN HÀNG</h1>
+                    <h1 class="text-center fw-bold text-success">THÔNG TIN ĐƠN HÀNG</h1>
                 </div>
 
                 <!-- Cart Table -->
@@ -90,8 +90,8 @@
                     <!-- Customer Information -->
                     <div class="col-lg-4 col-md-6">
                         <div class="card shadow-sm h-100">
-                            <div class="card-header bg-primary text-white">
-                                <h3 class="h5 mb-0">1. Thông tin nhận hàng</h3>
+                            <div class="card-header bg-success">
+                                <h3 class="h5 mb-0" style="color: #fff">1. Thông tin nhận hàng</h3>
                             </div>
                             <div class="card-body">
                                 <div class="mb-3">
@@ -136,8 +136,8 @@
                     <!-- Payment Methods -->
                     <div class="col-lg-4 col-md-6">
                         <div class="card shadow-sm h-100">
-                            <div class="card-header bg-primary text-white">
-                                <h3 class="h5 mb-0">2. Phương thức thanh toán</h3>
+                            <div class="card-header bg-success">
+                                <h3 class="h5 mb-0" style="color: #fff">2. Phương thức thanh toán</h3>
                             </div>
                             <div class="card-body">
                                 @if ($phuongThucThanhToans->isEmpty())
@@ -185,8 +185,8 @@
                     <!-- Order Summary -->
                     <div class="col-lg-4 col-md-6">
                         <div class="card shadow-sm h-100">
-                            <div class="card-header bg-primary text-white">
-                                <h3 class="h5 mb-0">3. Tổng quan đơn hàng</h3>
+                            <div class="card-header bg-success">
+                                <h3 class="h5 mb-0" style="color: #fff">3. Tổng quan đơn hàng</h3>
                             </div>
                             <div class="card-body">
                                 <div class="mb-4">
@@ -293,7 +293,7 @@
 
             .form-control:focus {
                 border-color: #80bdff;
-                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+                box-shadow: 0 0 0 0.2rem 198754(0, 123, 255, .25);
             }
 
             .btn {
@@ -325,12 +325,12 @@
             }
 
             .btn-success {
-                background-color: #198754;
+                background-color: #22c55e;
                 border: none;
             }
 
             .btn-success:hover {
-                background-color: #157347;
+                background-color: #129642;
                 transform: translateY(-1px);
             }
 
@@ -371,7 +371,7 @@
             .page_header h1 {
                 font-size: 2rem;
                 margin-bottom: 2rem;
-                color: #0d6efd;
+                color: #16a34a;
                 position: relative;
                 padding-bottom: 1rem;
             }
@@ -384,7 +384,7 @@
                 transform: translateX(-50%);
                 width: 100px;
                 height: 3px;
-                background-color: #0d6efd;
+                background-color: #198754;
             }
 
             /* Cart table styles */
@@ -421,18 +421,18 @@
             }
 
             .payment-method input[type="radio"]:checked+div {
-                color: #0d6efd;
+                color: #198754;
             }
 
             .payment-method input[type="radio"]:checked+label {
-                border-color: #0d6efd;
+                border-color: #198754;
                 background-color: #f8f9fa;
             }
 
             /* Summary card styles */
             #total_amount {
                 font-size: 1.25rem;
-                color: #0d6efd;
+                color: #198754;
             }
 
             .discount-badge {

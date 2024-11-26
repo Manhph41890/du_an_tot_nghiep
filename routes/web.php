@@ -197,6 +197,7 @@ Route::middleware(['auth', 'role:shipper'])->group(function () {
     Route::get('shipper/show', [ShipperController::class, 'show'])->name('shipper.show');
     Route::post('shipper/update-status/{id}', [ShipperController::class, 'updateStatus'])->name('shipper.update-status');
     Route::get('/shipper/profits', [ShipperController::class, 'showProfits'])->name('shipper.profits');
+    Route::get('/shipper/policy', [ShipperController::class, 'policy'])->name('shipper.policy');
     Route::post('/danhgia/shipper/{shipperId}', [ShipperController::class, 'storeShipperReview'])->name('danhgia.shipper.store');
 });
 

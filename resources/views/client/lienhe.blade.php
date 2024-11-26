@@ -28,38 +28,52 @@
                         <h3 class="contact-page-title">Tư Vấn Thêm</h3>
                         <div class="contact-form">
                             <form id="contact-form" action="" method="POST">
+                                @csrf <!-- Đảm bảo có CSRF token để bảo mật -->
+
                                 <div class="form-group">
                                     <label for="name">Họ và Tên <span class="required text-danger">*</span></label>
                                     <input type="text" name="name" id="name" class="form-control"
-                                        placeholder="Nhập họ và tên" required />
+                                        placeholder="Nhập họ và tên"
+                                        value="{{ auth()->check() ? auth()->user()->ho_ten : old('name') }}" required />
                                 </div>
+
                                 <div class="form-group">
                                     <label for="email">Email <span class="required text-danger">*</span></label>
                                     <input type="email" name="email" id="email" class="form-control"
-                                        placeholder="Nhập địa chỉ email" required />
+                                        placeholder="Nhập địa chỉ email"
+                                        value="{{ auth()->check() ? auth()->user()->email : old('email') }}" required />
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="email">Số điện thoại <span class="required text-danger">*</span></label>
-                                    <input type="email" name="email" id="email" class="form-control"
-                                        placeholder="Nhập số điện thoại" required />
+                                    <label for="phone">Số điện thoại <span class="required text-danger">*</span></label>
+                                    <input type="text" name="phone" id="phone" class="form-control"
+                                        placeholder="Nhập số điện thoại"
+                                        value="{{ auth()->check() ? auth()->user()->so_dien_thoai : old('phone') }}"
+                                        required />
                                 </div>
-                             
+
                                 <div class="form-group ">
                                     <label for="subject" class="form-label">Tiêu Đề</label>
                                     <select id="subject" class="form-select" name="subject">
-                                        <option value="support">Hỗ trợ sản phẩm</option>
-                                        <option value="order">Thắc mắc đơn hàng</option>
-                                        <option value="feedback">Góp ý</option>
-                                        <option value="complaint">Khiếu nại</option>
-                                        <option value="other">Khác</option>
+                                        <option value="support" {{ old('subject') == 'support' ? 'selected' : '' }}>Hỗ trợ
+                                            sản phẩm</option>
+                                        <option value="order" {{ old('subject') == 'order' ? 'selected' : '' }}>Thắc mắc
+                                            đơn hàng</option>
+                                        <option value="feedback" {{ old('subject') == 'feedback' ? 'selected' : '' }}>Góp ý
+                                        </option>
+                                        <option value="complaint" {{ old('subject') == 'complaint' ? 'selected' : '' }}>
+                                            Khiếu nại</option>
+                                        <option value="other" {{ old('subject') == 'other' ? 'selected' : '' }}>Khác
+                                        </option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="contactMessage">Nội Dung Tin Nhắn</label>
                                     <textarea name="contactMessage" id="contactMessage" class="form-control" rows="5"
-                                        placeholder="Nhập nội dung tin nhắn"></textarea>
+                                        placeholder="Nhập nội dung tin nhắn">{{ old('contactMessage') }}</textarea>
                                 </div>
+
                                 <div class="form-group mb-0 mt-3">
                                     <button type="submit" value="submit" id="submit" class="btn btn-primary btn-lg"
                                         name="submit">
@@ -68,6 +82,7 @@
                                 </div>
                             </form>
                         </div>
+
                         <p class="form-message mt-10"></p>
                     </div>
                     <!-- End of contact -->

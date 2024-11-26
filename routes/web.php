@@ -160,7 +160,7 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
 });
 
 // Route cho người dùng (khách hàng)
-Route::middleware(['auth', 'role:khach_hang, admin, nhan_vien'])->group(function () {
+Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function () {
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::get('/sanpham/search', [SanPhamController::class, 'search'])->name('sanpham.search');
     // Route giỏ hàng

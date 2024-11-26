@@ -39,10 +39,22 @@
                                         placeholder="Nhập địa chỉ email" required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="subject">Tiêu Đề</label>
-                                    <input type="text" name="subject" id="subject" class="form-control"
-                                        placeholder="Nhập tiêu đề" />
+                                    <label for="email">Số điện thoại <span class="required text-danger">*</span></label>
+                                    <input type="email" name="email" id="email" class="form-control"
+                                        placeholder="Nhập số điện thoại" required />
                                 </div>
+                             
+                                <div class="form-group ">
+                                    <label for="subject" class="form-label">Tiêu Đề</label>
+                                    <select id="subject" class="form-select" name="subject">
+                                        <option value="support">Hỗ trợ sản phẩm</option>
+                                        <option value="order">Thắc mắc đơn hàng</option>
+                                        <option value="feedback">Góp ý</option>
+                                        <option value="complaint">Khiếu nại</option>
+                                        <option value="other">Khác</option>
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="contactMessage">Nội Dung Tin Nhắn</label>
                                     <textarea name="contactMessage" id="contactMessage" class="form-control" rows="5"

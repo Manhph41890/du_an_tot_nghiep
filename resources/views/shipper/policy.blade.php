@@ -85,7 +85,102 @@
 </div>
 
 <style>
-    
+    .profit-card {
+        background: linear-gradient(135deg, #28a745, #4caf50);
+        /* Gradient xanh lá */
+        color: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .profit-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Reset cơ bản */
+body, h1, h2, p, ul, li, table, th, td, a {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+}
+
+.header {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.policy {
+    margin-bottom: 30px;
+}
+
+.policy h2 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.policy p, .policy ul {
+    margin-bottom: 15px;
+}
+
+.policy ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.shipping-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.shipping-table th, .shipping-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.shipping-table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.shipping-table td {
+    background-color: #f9f9f9;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
 
 </style>
 @endsection

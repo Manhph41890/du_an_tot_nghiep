@@ -54,7 +54,32 @@
                     </table>
                 </section>
                 <!-- Quy định đóng gói -->
-                
+                <section class="policy">
+                    <h2>4. Quy định đóng gói</h2>
+                    <p>Hàng hóa sẽ được đóng gói cẩn thận để đảm bảo an toàn trong quá trình vận chuyển. Các mặt hàng dễ vỡ sẽ được bọc thêm lớp chống sốc để tránh hư hại.</p>
+                    <p>Trong trường hợp khách hàng nhận được kiện hàng bị móp méo hoặc hư hỏng, vui lòng chụp ảnh và liên hệ với chúng tôi trong vòng 24 giờ kể từ khi nhận hàng.</p>
+                </section>
+                <!-- Chính sách đổi trả -->
+                <section class="policy">
+                    <h2>5. Chính sách đổi trả hàng hóa</h2>
+                    <p>Chúng tôi chấp nhận đổi trả hàng trong các trường hợp sau:</p>
+                    <ul>
+                        <li>Hàng hóa bị lỗi sản xuất.</li>
+                        <li>Hàng hóa bị hư hỏng trong quá trình vận chuyển.</li>
+                        <li>Hàng hóa không đúng với đơn đặt hàng.</li>
+                    </ul>
+                    <p>Khách hàng cần liên hệ bộ phận chăm sóc khách hàng trong vòng 7 ngày kể từ khi nhận hàng để được hỗ trợ đổi trả.</p>
+                </section>
+                <!-- Liên hệ hỗ trợ -->
+                <section class="policy">
+                    <h2>6. Liên hệ hỗ trợ</h2>
+                    <p>Để được hỗ trợ thêm thông tin hoặc giải đáp thắc mắc, vui lòng liên hệ:</p>
+                    <ul>
+                        <li>Hotline: 1900-1234</li>
+                        <li>Email: support@company.com</li>
+                        <li>Thời gian hỗ trợ: 8:00 - 18:00 (Thứ 2 đến Thứ 7)</li>
+                    </ul>
+                </section>
         </div>
     </div>
 </div>

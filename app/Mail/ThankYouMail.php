@@ -17,30 +17,32 @@ class ThankYouMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($name)
     {
         //
+        $this->name = $name;
+
     }
 
     /**
-     * Get the message envelope.
+     * Get the message envelope.a
      */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Thank You Mail',
+            subject: ' Cảm ơn bạn đã liên hệ với ArtCraft ',
         );
     }
 
     /**
      * Get the message content definition.
      */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
+    // public function content(): Content
+    // {
+    //     return new Content(
+    //         view: 'view.name',
+    //     );
+    // }
 
     /**
      * Get the attachments for the message.

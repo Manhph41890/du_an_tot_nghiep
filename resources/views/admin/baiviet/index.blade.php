@@ -94,38 +94,43 @@
                                                     <td>{{ $baiviet->ngay_dang }}</td>
                                                     <td>{{ $baiviet->user?->ho_ten }}</td>
                                                     <td
-                                                        class="{{ $baiviet->is_active == 1 ? 'text-success' : 'text-danger' }}">
-                                                        {{ $baiviet->is_active == 0 ? 'Hiển Thị' : 'Ẩn' }}
+                                                        class="{{ $baiviet->is_active == 0 ? 'text-danger' : 'text-success' }}">
+                                                        {{ $baiviet->is_active == 1 ? 'Hiển Thị' : 'Ẩn' }}
                                                     </td>
                                                     <td>
-                                                        <div>
-                                                            <a href="{{ route('baiviets.show', $baiviet->id) }}"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#myModal{{ $baiviet->id }}">
-                                                                <i
-                                                                    class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
-                                                            </a>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div>
+                                                                <a href="{{ route('baiviets.show', $baiviet->id) }}"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#myModal{{ $baiviet->id }}">
+                                                                    <i
+                                                                        class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                                                </a>
 
-                                                            <!-- The Modal -->
-                                                            <div class="modal" id="myModal{{ $baiviet->id }}">
-                                                                @include('admin.baiviet.show', [
-                                                                    'post' => $baiviet,
-                                                                ])
+                                                                <!-- The Modal -->
+                                                                <div class="modal" id="myModal{{ $baiviet->id }}">
+                                                                    @include('admin.baiviet.show', [
+                                                                        'post' => $baiviet,
+                                                                    ])
+                                                                </div>
+
                                                             </div>
+
+                                                            <a href="{{ route('baiviets.edit', $baiviet->id) }}"><i
+                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            <form action="{{ route('baiviets.destroy', $baiviet->id) }}"
+                                                                method="POST" style="display:inline;"
+                                                                onsubmit="return confirm ('Bạn có muốn xóa danh mục sản phẩm này không ?') ">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    style="border: none; background: none;">
+                                                                    <i
+                                                                        class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
+                                                                </button>
+                                                            </form>
                                                         </div>
 
-                                                        <a href="{{ route('baiviets.edit', $baiviet->id) }}"><i
-                                                                class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
-                                                        <form action="{{ route('baiviets.destroy', $baiviet->id) }}"
-                                                            method="POST" style="display:inline;"
-                                                            onsubmit="return confirm ('Bạn có muốn xóa danh mục sản phẩm này không ?') ">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" style="border: none; background: none;">
-                                                                <i
-                                                                    class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
-                                                            </button>
-                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach

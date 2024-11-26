@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LienHeRequest;
+use App\Mail\ThankYouMail;
 use App\Models\lien_he;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LienHeController extends Controller
 {
@@ -27,6 +29,9 @@ class LienHeController extends Controller
         $lienHe->trang_thai = 'Chưa xử lý';
         $lienHe->save();
 
+
+        // Gửi email cảm ơn
+        Mail::to($request->email)->send(new ThankYouMail($request->name));
         // Thông báo thành công và chuyển hướng
         return redirect()->back()->with('success', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất.');
     }

@@ -100,7 +100,7 @@
                         <ul class="nav-second-level">
                             <!-- Menu con: Danh sách -->
                             <li>
-                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.index') }}">
+                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.danhSach') }}">
                                     Danh sách
                                     {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
                                         <span class="ms-2 position-relative">

@@ -116,6 +116,7 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
     });
+
     Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke');
     // Profile
     Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile');
@@ -161,6 +162,11 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::get('/xacnhanhuys', [HuyDonHangController::class, 'index'])->name('xacnhanhuy.index');
     // đánh giá
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    // Shipper
+    Route::get('/shipper', [ShipperController::class, 'index'])->name('shipper.index');
+    Route::get('shippers/create', [ShipperController::class, 'create'])->name('shipper.create');
+    Route::post('shippers/store', [ShipperController::class, 'store'])->name('shipper.store');
+
 });
 
 // Route cho người dùng (khách hàng)
@@ -192,7 +198,7 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
 });
 // Shipper
 Route::middleware(['auth', 'role:shipper'])->group(function () {
-    Route::get('/shipper', [ShipperController::class, 'index'])->name('shipper.index');
+    Route::get('/shipper/danhSach', [ShipperController::class, 'danhSach'])->name('shipper.danhSach');
     Route::post('shipper/xac-nhan-lay-don/{donHang}', [ShipperController::class, 'xacNhanLayDon'])->name('shipper.xac-nhan-lay-don');
     Route::get('shipper/show', [ShipperController::class, 'show'])->name('shipper.show');
     Route::post('shipper/update-status/{id}', [ShipperController::class, 'updateStatus'])->name('shipper.update-status');

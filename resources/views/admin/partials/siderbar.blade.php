@@ -267,6 +267,22 @@
                         </ul>
                     </div>
                 </li>
+                {{-- Quản lý nhân viên vận chuyển --}}
+                <li>
+                    <a href="#shipper" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i class="fa-solid fa-person-running"></i>
+                        <span>Nhân viên vận chuyển </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="shipper">
+                        <ul class="nav-second-level">
+                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
+                                <li><a class="tp-link" href="{{ route('shipper.create')}}">Thêm</a></li>
+                            @endif
+                            <li><a class="tp-link" href="{{ route('shipper.index') }}">Danh sách</a></li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
         <!-- End Sidebar -->

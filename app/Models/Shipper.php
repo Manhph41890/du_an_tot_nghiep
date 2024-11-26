@@ -10,7 +10,7 @@ class Shipper extends Model
     use HasFactory;
 
     // Các cột được phép gán giá trị hàng loạt
-    protected $fillable = ['name', 'phone', 'status', 'don_hang_id', 'chuc_vu_id', 'ly_do_huy'];
+    protected $fillable = ['status', 'don_hang_id', 'chuc_vu_id', 'ly_do_huy'];
 
     /**
      * Quan hệ với bảng don_hang.

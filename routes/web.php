@@ -26,7 +26,8 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\RutTienController;
-
+use App\Http\Controllers\Shipper\Controller\ShipperController;
+use App\Models\ShipperProfit;
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
@@ -71,6 +72,9 @@ Route::prefix('client')->group(function () {
 
     Route::post('/withdraw', [RutTienController::class, 'withdraw'])->name('withdraw');
     Route::get('/rut-tien', [RutTienController::class, 'rut'])->name('taikhoan.rut-tien');
+
+    Route::post('/loaded', [RutTienController::class, 'loaded'])->name('loaded');
+    Route::get('/nap-tien', [RutTienController::class, 'nap'])->name('taikhoan.nap-tien');
 
     //danh mục
     Route::get('/danh-muc/{danhMucId}', [HomeController::class, 'showByCategory'])->name('client.showByCategory');
@@ -185,6 +189,15 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     Route::get('/api/products/{categoryId}', [SanPhamController::class, 'getProductsByCategory']);
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
+});
+// Shipper
+Route::middleware(['auth', 'role:shipper'])->group(function () {
+    Route::get('/shipper', [ShipperController::class, 'index'])->name('shipper.index');
+    Route::post('shipper/xac-nhan-lay-don/{donHang}', [ShipperController::class, 'xacNhanLayDon'])->name('shipper.xac-nhan-lay-don');
+    Route::get('shipper/show', [ShipperController::class, 'show'])->name('shipper.show');
+    Route::post('shipper/update-status/{id}', [ShipperController::class, 'updateStatus'])->name('shipper.update-status');
+    Route::get('/shipper/profits', [ShipperController::class, 'showProfits'])->name('shipper.profits');
+    Route::post('/danhgia/shipper/{shipperId}', [ShipperController::class, 'storeShipperReview'])->name('danhgia.shipper.store');
 });
 
 // Route chi tiết đơn hàng

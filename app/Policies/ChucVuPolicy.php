@@ -14,7 +14,6 @@ class ChucVuPolicy
     public function viewAny(User $user): bool
     {
         //
-        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
@@ -41,7 +40,7 @@ class ChucVuPolicy
     public function update(User $user, chuc_vu $chucVu): bool
     {
         //
-        return $user->chuc_vu->ten_chuc_vu === 'admin' ;
+        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 
     /**
@@ -50,7 +49,6 @@ class ChucVuPolicy
     public function delete(User $user, chuc_vu $chucVu): bool
     {
         //
-        return $user->chuc_vu->ten_chuc_vu === 'admin' ;
+        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
-
 }

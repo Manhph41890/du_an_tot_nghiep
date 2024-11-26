@@ -79,8 +79,8 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                                                                                                            </div> -->
+                                                                                                                                                                        <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                                                                                    </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
@@ -369,10 +369,12 @@
                                         </div>
                                     </div>
 
-                                    <!-- Thao tác bổ sung -->
-                                    <div class="d-grid">
+                                    <div class="d-grid gap-2">
                                         <a href="{{ route('taikhoan.rut-tien') }}" class="btn btn-success btn-lg">
-                                            <i class="fas fa-plus-circle me-2"></i>Rút tiền
+                                            <i class="fas fa-minus-circle me-2"></i>Rút tiền
+                                        </a>
+                                        <a href="{{ route('taikhoan.nap-tien') }}" class="btn btn-primary btn-lg">
+                                            <i class="fas fa-plus-circle me-2"></i>Nạp tiền
                                         </a>
                                     </div>
                                 </div>
@@ -413,6 +415,13 @@
                                                     Tiền rút
                                                 </button>
                                             </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="nap-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#nap" type="button" role="tab"
+                                                    aria-controls="nap" aria-selected="false">
+                                                    Tiền nạp
+                                                </button>
+                                            </li>
                                         </ul>
 
                                         <div class="tab-content" id="transactionTabsContent">
@@ -445,6 +454,24 @@
                                                         <div class="transaction-amount negative">
                                                             {{ number_format($item->tien_thanh_toan, 0, ',', '.') }} VNĐ
                                                         </div>
+                                                    </div>
+                                                    <hr class="custom-hr">
+                                                @endforeach
+                                            </div>
+
+                                            <!-- Tab 3: Tiền nạp -->
+                                            <div class="tab-pane fade" id="nap" role="tabpanel"
+                                                aria-labelledby="nap-tab">
+                                                @foreach ($lsNapVi as $item)
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-start">
+                                                            {{ $item->bank?->name }}
+                                                        </div>
+                                                        <p class="">{{ $item->thoi_gian_nap }}</p>
+                                                        <div class="transaction-amount negative">
+                                                            + {{ number_format($item->tien_nap, 0, ',', '.') }} VNĐ
+                                                        </div>
+                                                        <p>{{ $item->trang_thai }}</p>
                                                     </div>
                                                     <hr class="custom-hr">
                                                 @endforeach

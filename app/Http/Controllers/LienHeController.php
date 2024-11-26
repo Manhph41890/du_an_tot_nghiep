@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class LienHeController extends Controller
 {
     // đường dẫn vào form liên hệ
-    public function showForm(){
+    public function create(){
         return view('client.lien_he');
     }
     

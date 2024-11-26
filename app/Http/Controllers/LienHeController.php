@@ -19,18 +19,25 @@ class LienHeController extends Controller
     public function store(LienHeRequest $request)
     {
 
+        // Kiểm tra nếu người dùng đã đăng nhập
+        $user = auth()->user(); // Lấy thông tin người dùng đã đăng nhập (nếu có)
+
+        // Nếu người dùng đã đăng nhập, không cần nhập lại name, email, phone
+        $name = $user ? $user->ho_ten : $request->name;
+        $email = $user ? $user->email : $request->email;
+        $phone = $user ? $user->so_dien_thoai : $request->phone;
+
         // Lưu thông tin liên hệ vào cơ sở dữ liệu
-        $lienHe = new lien_he();
-        $lienHe->name = $request->name;
-        $lienHe->email = $request->email;
-        $lienHe->phone = $request->phone;
-        $lienHe->subject = $request->subject;
-        $lienHe->contact_message = $request->contact_message;
-        $lienHe->trang_thai = 'Chưa xử lý';
-        $lienHe->save();
-
-
+        lien_he::create([
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'subject' => $request->subject,
+            'contact_message' => $request->contact_message,
+            'trang_thai' => 'Chưa xử lý', // Mặc định là chưa xử lý
+        ]);
         // Gửi email cảm ơn
+        // gửi vào email khách hàng nhập ở form 
         Mail::to($request->email)->send(new ThankYouMail($request->name));
         // Thông báo thành công và chuyển hướng
         return redirect()->back()->with('success', 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất.');

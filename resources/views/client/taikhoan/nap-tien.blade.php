@@ -2,11 +2,12 @@
 
 @section('content')
     <div class="container my-5">
-        <h2 class="text-center mb-4">Rút tiền</h2>
-        <form action="{{ route('withdraw') }}" method="POST" class="card shadow-lg p-4">
+        <h2 class="text-center mb-4">Nạp tiền</h2>
+
+        <form action="{{ route('loaded') }}" method="POST" class="card shadow-lg p-4">
             @csrf
             <div class="text-start mb-4">
-                <a href="#payment-method" class="btn btn-outline-secondary w-10 py-2">
+                <a href="{{ route('taikhoan.dashboard') }}#payment-method" class="btn btn-outline-secondary w-10 py-2">
                     <i class="fas fa-arrow-left me-2"></i>Quay lại
                 </a>
             </div>
@@ -35,7 +36,7 @@
             <div class="mb-4">
                 <label for="amount" class="form-label">Số tiền:</label>
                 <input type="number" class="form-control" style="background-color: #99999e" name="amount" id="amount"
-                    placeholder="Nhập số tiền cần rút" required>
+                    placeholder="Nhập số tiền cần nạp" required>
 
                 <!-- Gợi ý số tiền -->
                 <div class="mt-2">
@@ -61,7 +62,7 @@
 
             <!-- Nút gửi -->
             <div class="text-center">
-                <button type="submit" class="btn btn-primary w-100 py-2">Rút tiền</button>
+                <button type="submit" class="btn btn-primary w-100 py-2">Nạp tiền</button>
             </div>
         </form>
         <script>

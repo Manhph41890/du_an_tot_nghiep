@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\chi_tiet_vi;
 use App\Models\don_hang;
 use App\Models\lich_su_thanh_toan;
+use App\Models\ls_nap_vi;
 use App\Models\ls_rut_vi;
 use App\Models\ls_thanh_toan_vi;
 use App\Models\vi_nguoi_dung;
@@ -33,6 +34,10 @@ class TaiKhoanController extends Controller
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
+        $lsNapVi = ls_nap_vi::with('bank', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
 
 
         $lsRutVi_choduyet = ls_rut_vi::with('vi_nguoi_dung', 'bank')
@@ -51,7 +56,7 @@ class TaiKhoanController extends Controller
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
 
-        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsRutVi_choduyet', 'lsRutVi_thanhcong', 'lsRutVi_thatbai'));
+        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsNapVi', 'lsRutVi_choduyet', 'lsRutVi_thanhcong', 'lsRutVi_thatbai'));
     }
 
 

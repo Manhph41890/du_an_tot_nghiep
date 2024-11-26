@@ -72,6 +72,9 @@ Route::prefix('client')->group(function () {
     Route::post('/withdraw', [RutTienController::class, 'withdraw'])->name('withdraw');
     Route::get('/rut-tien', [RutTienController::class, 'rut'])->name('taikhoan.rut-tien');
 
+    Route::post('/loaded', [RutTienController::class, 'loaded'])->name('loaded');
+    Route::get('/nap-tien', [RutTienController::class, 'nap'])->name('taikhoan.nap-tien');
+
     //danh mục
     Route::get('/danh-muc/{danhMucId}', [HomeController::class, 'showByCategory'])->name('client.showByCategory');
 

@@ -67,11 +67,38 @@
         justify-content: center;
         font-size: 12px;
     }
+
+    .h-sidebar {
+        position: relative;
+        height: 100vh;
+    }
+
+    .footer-sibar {
+        flex-shrink: 0;
+        /* Không thu nhỏ footer */
+        padding: 10px;
+        background-color: #f8f9fa;
+        text-align: center;
+        border-top: 1px solid #ddd;
+        bottom: 11%;
+        position: absolute;
+        width: 100%;
+        /* Đường viền trên */
+    }
+
+    .app-sidebar-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .hidden {
+        display: none;
+    }
 </style>
 <div class="app-sidebar-menu">
-    <div class="h-100" data-simplebar>
+    <div class="h-sidebar" data-simplebar>
 
-        <!--- Sidemenu -->
         <div id="sidebar-menu">
             <div class="logo-box">
                 <img src="{{ asset('assets/client/img/logo/logo_art.png') }}" alt="" width="200px">
@@ -89,9 +116,9 @@
                         <i data-feather="shopping-cart"></i>
                         <span> Đơn hàng mới </span>
                         {{-- @if (isset($notifications) && $notifications['totalNotifications'] > 0)
-                            <span class="ms-2 position-relative">
-                                <span class="notification-dot">{{ $notifications['totalNotifications'] }}</span>
-                            </span>
+                        <span class="ms-2 position-relative">
+                            <span class="notification-dot">{{ $notifications['totalNotifications'] }}</span>
+                        </span>
                         @endif --}}
                         <span class="menu-arrow ms-auto"></span>
                     </a>
@@ -103,10 +130,10 @@
                                 <a class="tp-link d-flex align-items-center" href="{{ route('shipper.index') }}">
                                     Danh sách
                                     {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
-                                        <span class="ms-2 position-relative">
-                                            <span class="notification-dot2"></span>
-                                        </span>
-                                    @endif --}}
+                                    <span class="ms-2 position-relative">
+                                        <span class="notification-dot2"></span>
+                                    </span>
+                                @endif --}}
                                 </a>
                             </li>
                             <!-- Menu con: Thành công -->
@@ -114,10 +141,10 @@
                                 <a class="tp-link d-flex align-items-center" href="{{ route('shipper.show') }}">
                                     Vận chuyển
                                     {{-- @if (isset($notifications) && $notifications['cancelRequestsCount'] > 0)
-                                        <span class="ms-2 position-relative">
-                                            <span class="notification-dot2"></span>
-                                        </span>
-                                    @endif --}}
+                                    <span class="ms-2 position-relative">
+                                        <span class="notification-dot2"></span>
+                                    </span>
+                                @endif --}}
                                 </a>
                             </li>
                         </ul>
@@ -130,9 +157,9 @@
                         <i class="fa-solid fa-money-bill"></i>
                         <span> Hoa hồng </span>
                         {{-- @if (isset($notifications) && $notifications['totalNotifications'] > 0)
-                            <span class="ms-2 position-relative">
-                                <span class="notification-dot">{{ $notifications['totalNotifications'] }}</span>
-                            </span>
+                        <span class="ms-2 position-relative">
+                            <span class="notification-dot">{{ $notifications['totalNotifications'] }}</span>
+                        </span>
                         @endif --}}
                         <span class="menu-arrow ms-auto"></span>
                     </a>
@@ -144,10 +171,10 @@
                                 <a class="tp-link d-flex align-items-center" href="{{ route('shipper.profits') }}">
                                     Lợi nhuận
                                     {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
-                                        <span class="ms-2 position-relative">
-                                            <span class="notification-dot2"></span>
-                                        </span>
-                                    @endif --}}
+                                    <span class="ms-2 position-relative">
+                                        <span class="notification-dot2"></span>
+                                    </span>
+                                @endif --}}
                                 </a>
                             </li>
 
@@ -160,9 +187,9 @@
                         <i class="fa-solid fa-book-open-reader"></i>
                         <span> Chính sách vận chuyển </span>
                         {{-- @if (isset($notifications) && $notifications['totalNotifications'] > 0)
-                            <span class="ms-2 position-relative">
-                                <span class="notification-dot">{{ $notifications['totalNotifications'] }}</span>
-                            </span>
+                        <span class="ms-2 position-relative">
+                            <span class="notification-dot">{{ $notifications['totalNotifications'] }}</span>
+                        </span>
                         @endif --}}
                         <span class="menu-arrow ms-auto"></span>
                     </a>
@@ -174,10 +201,10 @@
                                 <a class="tp-link d-flex align-items-center" href="{{ route('shipper.policy') }}">
                                     Chính sách
                                     {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
-                                        <span class="ms-2 position-relative">
-                                            <span class="notification-dot2"></span>
-                                        </span>
-                                    @endif --}}
+                                    <span class="ms-2 position-relative">
+                                        <span class="notification-dot2"></span>
+                                    </span>
+                                @endif --}}
                                 </a>
                             </li>
 
@@ -188,8 +215,9 @@
         </div>
         <!-- End Sidebar -->
 
-        <div class="clearfix"></div>
-        <div class="row" style="margin-top: 180px">
+
+        <!--- Sidemenu -->
+        <div class="footer-sibar">
             <div class="col fs-13 text-muted text-center">
                 &copy;
                 <script>

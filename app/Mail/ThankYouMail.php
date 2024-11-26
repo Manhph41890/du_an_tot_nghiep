@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class ThankYouMail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $name;
 
     /**
      * Create a new message instance.

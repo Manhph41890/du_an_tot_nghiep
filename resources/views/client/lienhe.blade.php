@@ -28,8 +28,9 @@
                         <h3 class="contact-page-title">Tư Vấn Thêm</h3>
                         <div class="contact-form">
                             <form id="contact-form" action="" method="POST">
-                                @csrf <!-- Đảm bảo có CSRF token để bảo mật -->
-
+                                @csrf
+                                               {{-- check xem khách hàng đã đăng nhập chưa  --}}
+                                               {{-- nếu login r thì lấy thông tin user --}}
                                 <div class="form-group">
                                     <label for="name">Họ và Tên <span class="required text-danger">*</span></label>
                                     <input type="text" name="name" id="name" class="form-control"
@@ -69,9 +70,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="contactMessage">Nội Dung Tin Nhắn</label>
-                                    <textarea name="contactMessage" id="contactMessage" class="form-control" rows="5"
-                                        placeholder="Nhập nội dung tin nhắn">{{ old('contactMessage') }}</textarea>
+                                    <label for="contact_message">Nội Dung Tin Nhắn</label>
+                                    <textarea name="contact_message" id="contact_message" class="form-control" rows="5"
+                                        placeholder="Nhập nội dung tin nhắn">{{ old('contact_message') }}</textarea>
                                 </div>
 
                                 <div class="form-group mb-0 mt-3">

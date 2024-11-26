@@ -15,4 +15,8 @@ class Bank extends Model
     {
         return $this->hasMany(ls_rut_vi::class);
     }
+    public function ls_nap_vi()
+    {
+        return $this->hasMany(ls_nap_vi::class);
+    }
 }

@@ -161,11 +161,7 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     //
     Route::get('/xacnhanhuys', [HuyDonHangController::class, 'index'])->name('xacnhanhuy.index');
     // đánh giá
-    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
-    // Shipper
-    Route::get('/shipper', [ShipperController::class, 'index'])->name('shipper.index');
-    Route::get('shippers/create', [ShipperController::class, 'create'])->name('shipper.create');
-    Route::post('shippers/store', [ShipperController::class, 'store'])->name('shipper.store');
+    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index'); 
 
 });
 
@@ -195,15 +191,6 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     Route::get('/api/products/{categoryId}', [SanPhamController::class, 'getProductsByCategory']);
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
-});
-// Shipper
-Route::middleware(['auth', 'role:shipper'])->group(function () {
-    Route::get('/shipper/danhSach', [ShipperController::class, 'danhSach'])->name('shipper.danhSach');
-    Route::post('shipper/xac-nhan-lay-don/{donHang}', [ShipperController::class, 'xacNhanLayDon'])->name('shipper.xac-nhan-lay-don');
-    Route::get('shipper/show', [ShipperController::class, 'show'])->name('shipper.show');
-    Route::post('shipper/update-status/{id}', [ShipperController::class, 'updateStatus'])->name('shipper.update-status');
-    Route::get('/shipper/profits', [ShipperController::class, 'showProfits'])->name('shipper.profits');
-    Route::post('/danhgia/shipper/{shipperId}', [ShipperController::class, 'storeShipperReview'])->name('danhgia.shipper.store');
 });
 
 // Route chi tiết đơn hàng

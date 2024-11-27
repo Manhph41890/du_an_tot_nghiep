@@ -15,9 +15,7 @@ class DanhMucController extends Controller
     public function index(Request $request)
     {
 
-        $this->authorize('viewAny', danh_muc::class);
         $query = danh_muc::query();
-
         // lọc trạng thái
         if ($request->has('search_dm')) {
             $is_active = $request->input('search_dm');
@@ -43,7 +41,6 @@ class DanhMucController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', danh_muc::class);
         $title = "Thêm mới danh mục";
         return view('admin.danhmuc.create', compact('title'));
     }
@@ -81,7 +78,6 @@ class DanhMucController extends Controller
     {
         $title = "Cập nhật danh mục";
         $danhmuc = danh_muc::query()->findOrFail($id);
-        $this->authorize('update', $danh_muc);
         return view('admin.danhmuc.edit', compact('danhmuc', 'title'));
     }
 

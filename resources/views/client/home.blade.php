@@ -377,11 +377,12 @@
                                         data-delay-in="1.5">Sale 30% Off</span>
                                     <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
                                         style="color: #5C5BCA">Sản phẩm mới</span>
-                                </h2>
+                                </h2> --}}
 
                                 <a href="{{ route('client.cuahang') }}"
-                            class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                            data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a> --}}
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    style="background-color: #ff5846; border: none !important; color: white"
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>
                             </div>
                         </div>
                     </div>
@@ -416,7 +417,7 @@
         </div>
     </div>
     {{-- mã giảm --}}
-    <div class="section-title text-center">
+    {{-- <div class="section-title text-center">
         <h2 class="title pb-3 mb-3">Mã giảm giá</h2>
     </div>
     <div class="discounts-container">
@@ -451,7 +452,7 @@
         <div class="modal-content">
             <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
         </div>
-    </div>
+    </div> --}}
     <!-- staic media end -->
     <!-- common banner  start -->
     <div class="common-banner bg-white">
@@ -793,6 +794,7 @@
 
         // Tạo bông tuyết mới mỗi 500ms
         setInterval(createSnowflake, 500);
+
         function copyCode(code) {
             var tempInput = document.createElement("input");
             tempInput.value = code;

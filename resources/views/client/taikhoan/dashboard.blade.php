@@ -108,8 +108,6 @@
 
                         <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Ví người dùng </a>
 
-                        <a href="{{ route('auth.logout') }}" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Đăng
-                            xuất</a>
 
                     </div>
                 </div>

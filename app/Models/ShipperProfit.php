@@ -9,7 +9,7 @@ class ShipperProfit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['shipper_id', 'total_profit'];
+    protected $fillable = ['shipper_id','total_profit' ];
 
     public function shipper()
     {

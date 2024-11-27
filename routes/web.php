@@ -116,6 +116,7 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
     });
+
     Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke');
     // Profile
     Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile');
@@ -160,7 +161,8 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     //
     Route::get('/xacnhanhuys', [HuyDonHangController::class, 'index'])->name('xacnhanhuy.index');
     // đánh giá
-    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index'); 
+
 });
 
 // Route cho người dùng (khách hàng)

@@ -89,11 +89,11 @@
                     <label for="anhDaiDien" class="form-label">Ảnh đại diện</label>
                     <input type="file" class="form-control" id="anhDaiDien" name="anh_dai_dien">
                     @if (Auth::user()->anh_dai_dien)
-                        <div class="mt-2">
-                            <label>Ảnh hiện tại:</label>
-                            <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}" alt="Ảnh hiện tại"
-                                class="rounded-circle" style="width: 100px; height: 100px;">
-                        </div>
+                    <div class="mt-2">
+                        <label>Ảnh hiện tại:</label>
+                        <img src="{{ asset('storage/' . Auth::user()->anh_dai_dien) }}" alt="Ảnh hiện tại"
+                            class="rounded-circle" style="width: 100px; height: 100px;">
+                    </div>
                     @endif
                 </div>
                 <div class="mb-3">
@@ -208,5 +208,12 @@
                 }
             });
         });
+        $(document).ready(function () {
+        // Lắng nghe sự kiện click trên nút toggle
+        $('.toggle-footer-btn').on('click', function () {
+            // Thêm hoặc xóa class 'hidden' vào phần tử cùng cấp với '.footer-sibar'
+            $('.footer-sibar').siblings('.hidden').toggleClass('hidden');
+        });
+    });
     });
 </script>

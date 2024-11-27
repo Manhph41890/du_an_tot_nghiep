@@ -97,7 +97,7 @@
                                                             <td>
                                                                 @if (
                                                                     $donhang->trang_thai_don_hang == 'Thành công' &&
-                                                                        (!$chi_tiet->san_pham->danh_gias()->where('user_id', auth()->user()->id)->exists()))
+                                                                        !$chi_tiet->san_pham->danh_gias()->where('user_id', auth()->user()->id)->exists())
                                                                     <div class="col-lg-12">
                                                                         <!-- Nút Viết Đánh Giá -->
                                                                         <a class="btn danhgia"
@@ -173,9 +173,8 @@
                                                                         @endif
 
                                                                         {{-- <!-- Form Đánh Giá Shipper -->
-                                                                        @if (
-                                                                            $donhang->shipper &&
-                                                                                !$donhang->shipper->danh_gia_shippers()->where('user_id', auth()->user()->id)->exists())
+                                                                        @if ($donhang->shipper &&
+    !$donhang->shipper->danh_gia_shippers()->where('user_id', auth()->user()->id)->exists())
                                                                             <div class="ratting-form-wrapper"
                                                                                 id="reviewFormShipper{{ $donhang->shipper->id }}">
                                                                                 <span class="close-btn"

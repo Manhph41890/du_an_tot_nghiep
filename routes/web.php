@@ -198,6 +198,9 @@ Route::middleware(['auth', 'role:shipper'])->group(function () {
     Route::post('shipper/update-status/{id}', [ShipperController::class, 'updateStatus'])->name('shipper.update-status');
     Route::get('/shipper/profits', [ShipperController::class, 'showProfits'])->name('shipper.profits');
     Route::post('/danhgia/shipper/{shipperId}', [ShipperController::class, 'storeShipperReview'])->name('danhgia.shipper.store');
+    //Rut-tien ben shipper 
+    Route::post('/withdraw-shipper', [RutTienController::class, 'withdrawShipper'])->name('withdraw-shipper');
+    Route::get('/rut-tien-shipper', [RutTienController::class, 'rutShipper'])->name('taikhoan.rut-tien-shipper');
 });
 
 // Route chi tiết đơn hàng

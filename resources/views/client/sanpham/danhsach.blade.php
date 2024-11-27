@@ -7,7 +7,8 @@
 
             <div class="discounts-container">
                 @foreach ($discounts as $item)
-                    <div class="discount-item">
+                    <div class="discount-item"
+                        style="background: repeating-linear-gradient(#ffffff, #ffffff 5px, transparent 0, transparent 9px, #ffffff 0, #ffffff 10px) 0 / 1px 100% no-repeat, radial-gradient(circle at 0 7px, transparent, transparent 2px, #ffffffee 0, #ffffff 3px, #f6f6f6 0) 1px 0 / 100% 10px repeat-y">
                         <div class="discount-icon">
                             <img src="https://bizweb.dktcdn.net/thumb/medium/100/210/055/themes/941368/assets/coupon_1_img.png?1726708982386"
                                 alt="Discount Icon">
@@ -19,7 +20,7 @@
                                 <span class="code">{{ $item->ten_khuyen_mai }}</span>
                             </div>
 
-                  
+
                             <div class="discount-description">
                                 <p>
                                     Giảm <span
@@ -324,13 +325,14 @@
             min-height: 3em;
             /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
         }
-        .box-sha{
+
+        .box-sha {
             box-shadow: 0 0 11.83px 1.17px #5a5ac92e !important
-            
         }
-        .box-sha:hover{
+
+        .box-sha:hover {
             box-shadow: 0 8px 16px #5a5ac999 !important;
-            
+
         }
     </style>
     <script>

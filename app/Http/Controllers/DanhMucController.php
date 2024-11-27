@@ -14,8 +14,6 @@ class DanhMucController extends Controller
 
     public function index(Request $request)
     {
-
-        $this->authorize('viewAny', danh_muc::class);
         $query = danh_muc::query();
 
         // lọc trạng thái
@@ -31,7 +29,7 @@ class DanhMucController extends Controller
             $search_ten_danh_muc = $request->input('search_ten_danh_muc');
             $query->where('ten_danh_muc', 'like', '%' . $search_ten_danh_muc . '%');
         }
-        
+
         $danhmucs = $query->latest('id')->paginate(5);
         $title = "Danh sách danh mục";
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
@@ -43,7 +41,6 @@ class DanhMucController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', danh_muc::class);
         $title = "Thêm mới danh mục";
         return view('admin.danhmuc.create', compact('title'));
     }
@@ -81,7 +78,6 @@ class DanhMucController extends Controller
     {
         $title = "Cập nhật danh mục";
         $danhmuc = danh_muc::query()->findOrFail($id);
-        $this->authorize('update', $danh_muc);
         return view('admin.danhmuc.edit', compact('danhmuc', 'title'));
     }
 
@@ -104,7 +100,7 @@ class DanhMucController extends Controller
             $param['anh_danh_muc'] = $filepath;
             $param['is_active'] = $request->input('is_active', $danhMuc->is_active);
             $request->validate([
-                'ten_danh_muc' =>Rule::unique('danh_mucs', 'ten_danh_muc')->ignore($id)
+                'ten_danh_muc' => Rule::unique('danh_mucs', 'ten_danh_muc')->ignore($id)
             ], [
                 'ten_danh_muc.unique' => 'Tên danh mục đã tồn tại.',
             ]);

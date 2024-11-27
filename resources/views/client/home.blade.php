@@ -420,6 +420,47 @@
     <!-- common banner  start -->
     <div class="common-banner bg-white">
         <div class="container">
+            {{-- Tạo banner ba ảnh ở đây --}}
+            <div class="banner-section py-4">
+                <div class="row g-3">
+                    <!-- Banner 1 -->
+                    <div class="col-md-4">
+                        <div class="banner-item position-relative">
+                            <img src="{{ asset('assets/client/images/banner/banner_coll_1_1.jpg') }}" alt="Banner 1"
+                                class="w-100">
+                            <div
+                                class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                                <h3 class="fw-bold">CỌ LÔNG</h3>
+                                <p>SALE UP TO 30% - MUA NGAY</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Banner 2 -->
+                    <div class="col-md-4">
+                        <div class="banner-item position-relative">
+                            <img src="{{ asset('assets/client/images/banner/banner_coll_1_2.jpg') }}" alt="Banner 2"
+                                class="w-100">
+                            <div
+                                class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                                <h3 class="fw-bold">CỌ NƯỚC</h3>
+                                <p>SALE UP TO 30% - MUA NGAY</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Banner 3 -->
+                    <div class="col-md-4">
+                        <div class="banner-item position-relative">
+                            <img src="{{ asset('assets/client/images/banner/banner_coll_1_3.jpg') }}" alt="Banner 3"
+                                class="w-100">
+                            <div
+                                class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                                <h3 class="fw-bold">BẢNG PHA MÀU</h3>
+                                <p>SALE UP TO 30% - MUA NGAY</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -453,7 +494,8 @@
                                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                                         <div class="card product-card">
                                             <div class="card-body p-0">
-                                                <div class="media flex-column" style="margin: auto; align-items:center !important">
+                                                <div class="media flex-column"
+                                                    style="margin: auto; align-items:center !important">
                                                     <div class="product-thumbnail position-relative">
                                                         <span class="badge badge-danger top-right blinking-text">Mới</span>
                                                         <a href="{{ route('san-phams.incrementViews', $item->id) }}">
@@ -512,7 +554,7 @@
                                                         <span
                                                             class="bg-danger badge badge-danger top-right p-2">-{{ $sanPhamGg->phan_tram_giam_gia }}%</span>
                                                         <a href="{{ route('san-phams.incrementViews', $sanPhamGg->id) }}">
-                                                            <img  class="first-img"
+                                                            <img class="first-img"
                                                                 src="{{ asset('storage/' . $sanPhamGg->anh_san_pham) }}"
                                                                 alt="thumbnail" />
                                                         </a>
@@ -558,6 +600,14 @@
     </section>
 
     <!-- product tab end -->
+    <!-- Banner giữa hai mục -->
+    <section class="middle-banner">
+        <div class="banner-content text-center">
+            <h2 class="text-white">Khám Phá Bộ Sưu Tập Mới</h2>
+            <p class="text-white">Cập nhật những sản phẩm hot nhất ngay hôm nay!</p>
+            <a href="#explore" class="btn btn-primary">Khám Phá Ngay</a>
+        </div>
+    </section>
 
     <!-- product tab repetation start -->
     <section class="bg-white theme1 pb-80">
@@ -644,7 +694,8 @@
                                 <div class="single-blog">
                                     <a class="blog-thumb mb-20 zoom-in d-block overflow-hidden height-200"
                                         href="{{ url('client/baivietchitiet', $baivietmoi->id) }}">
-                                        <img src="{{ asset('storage/' . $baivietmoi->anh_bai_viet) }}" alt="blog-thumb-naile">
+                                        <img src="{{ asset('storage/' . $baivietmoi->anh_bai_viet) }}"
+                                            alt="blog-thumb-naile">
                                     </a>
                                     <div class="blog-post-content">
                                         <a class="blog-link theme-color d-inline-block mb-10"

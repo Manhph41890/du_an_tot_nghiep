@@ -232,7 +232,7 @@ class AuthController extends Controller
     {
         switch ($user->chuc_vu->ten_chuc_vu) {
             case 'shipper':
-                return redirect()->route('shipper.index');
+                return redirect()->route('shipper.danhSach');
             case 'admin':
             case 'nhan_vien':
                 return redirect('/dashboard')->with('success', 'Đăng nhập thành công');

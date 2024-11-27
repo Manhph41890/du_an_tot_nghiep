@@ -81,7 +81,7 @@
                                             @foreach ($baiviets as $key => $baiviet)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $baiviet->tieu_de_bai_viet }}</td>
+                                                    <td> {{ Str::limit($baiviet->tieu_de_bai_viet, 50, '...') }}</td>
                                                     <td>
                                                         @if ($baiviet->anh_bai_viet)
                                                             <img src="{{ asset('storage/' . $baiviet->anh_bai_viet) }}"

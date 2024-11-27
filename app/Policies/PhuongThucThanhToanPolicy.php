@@ -23,7 +23,6 @@ class PhuongThucThanhToanPolicy
     public function view(User $user, phuong_thuc_thanh_toan $phuongThucThanhToan): bool
     {
         //
-        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
@@ -32,7 +31,6 @@ class PhuongThucThanhToanPolicy
     public function create(User $user): bool
     {
         //
-        return $user->chuc_vu->ten_chuc_vu === 'admin' ;
     }
 
     /**

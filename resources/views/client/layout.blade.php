@@ -34,16 +34,16 @@
         }
 
         .bg-img1 {
-            background-image: url('./assets/client/images/banner/banner.png');
+            background-image: url('./assets/client/images/banner/banner.jpeg');
             width: 50%;
         }
 
         .bg-img2 {
-            background-image: url('./assets/client/images/banner/Banner2.jpg');
+            background-image: url('./assets/client/images/banner/home_slider_image_2.jpg');
         }
 
         .bg-img3 {
-            background-image: url('./assets/client/images/banner/Banner3.png');
+            background-image: url('./assets/client/images/banner/home_slider_image_1.jpg');
         }
 
         .breadcrumb-section {
@@ -53,9 +53,97 @@
             background-repeat: no-repeat;
         }
 
+        .middle-banner {
+            background-image: url('./assets/client/images/banner/collection_main_banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: auto;
+            /* Chiều cao banner */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 50px 0;
+            /* Khoảng cách trên và dưới */
+        }
+
+        .banner-section {
+            margin-top: 20px;
+        }
+
+        .banner-item {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #f1f1f1;
+        }
+
+        .banner-item img {
+            transition: transform 0.3s ease;
+            border-radius: inherit;
+        }
+
+        .banner-item:hover img {
+            transform: scale(1.1);
+            /* Hiệu ứng zoom khi hover */
+        }
+
+        .banner-content {
+            color: white;
+            font-size: 1.2rem;
+            background: rgba(184, 181, 181, 0.5);
+            padding: 10px 20px;
+        }
+
+        .banner-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .banner-content p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            /* Đảm bảo nội dung nằm trên ảnh */
+            color: white;
+            text-align: center;
+            background: rgba(173, 173, 173, 0.5);
+            /* Mờ nền giúp chữ dễ đọc hơn */
+            padding: 20px;
+        }
+
+        .banner-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .banner-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .banner-content .btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            /* Bootstrap blue */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .banner-content .btn:hover {
+            background-color: #0056b3;
+        }
+
         .discount-codes {
             padding: 50px 0;
-            background-color: #f9f9f9;
         }
 
         .discount-codes .container {
@@ -79,9 +167,7 @@
         }
 
         .discount-item {
-            background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 20px;
             width: 250px;
             text-align: center;
@@ -101,7 +187,6 @@
 
         .discount-description {
             font-size: 1.3em;
-            color: #777;
             margin-bottom: 15px;
         }
 

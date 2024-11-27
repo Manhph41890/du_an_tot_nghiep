@@ -23,16 +23,21 @@ use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\HuyDonHangController;
 use App\Http\Controllers\ClientSanPhamController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\LienHeController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\RutTienController;
 use App\Http\Controllers\Shipper\Controller\ShipperController;
+use App\Http\Requests\LienHeRequest;
 use App\Models\ShipperProfit;
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
 // tìm kiếm toàn trang 
 Route::get('/timkiem', [SearchController::class, 'search'])->name('global.search');
+//bình luận
+Route::get('/lien-he', [LienHeController::class, 'create'])->name('client.lienhe');
+Route::post('/lien-he', [LienHeController::class, 'store'])->name('lien_he.store');
 
 
 // Route cho client
@@ -81,7 +86,7 @@ Route::prefix('client')->group(function () {
 
     Route::view('/giohang', 'client.giohang');
     Route::get('/gioithieu', [HomeController::class, 'gioithieu'])->name('client.gioithieu');
-    Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
+    // Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
     Route::get('/huongdanmuahang', [HomeController::class, 'hdmuahang'])->name('client.hdmuahang');
 });
 

@@ -79,14 +79,14 @@
         <div class="container">
             <div class="row">
                 <!-- <div class="col-12">
-                                                                                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
-                                                                                                                                                                            </div> -->
+                                                                                                                                                                                            <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                                                                                                        </div> -->
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
                         <a href="#account-info" class="active" data-bs-toggle="tab"><i class="fa fa-user"></i> Chi tiết tài
                             khoản</a>
-                        @if ($user->chuc_vu_id === 1 || $user->chuc_vu_id === 3)
+                        @if ($user->chuc_vu->ten_chuc_vu === 'nhan_vien' || $user->chuc_vu->ten_chuc_vu === 'admin')
                             <a href="#admin-dashboad-qt" data-bs-toggle="tab"><i class="fas fa-tachometer-alt"></i> Vào
                                 trang
                                 quản
@@ -208,9 +208,6 @@
                                     </div>
                                 </form>
                             </div>
-
-
-
                         </div>
                         {{-- aa --}}
                         <div class="tab-pane fade" id="admin-dashboad-qt" role="tabpanel">

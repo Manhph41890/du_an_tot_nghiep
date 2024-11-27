@@ -20,25 +20,20 @@
                                                 <div class="icon-wrapper mb-3">
                                                     <i class="fas fa-wallet"></i>
                                                 </div>
+                                                {{-- @php
+                                                    dd($profitHistory);
+                                                @endphp --}}
                                                 <h5 class="card-title text-uppercase">Tổng Lợi Nhuận</h5>
                                                 <p class="card-text profit-amount">
                                                     {{ number_format($totalProfit, 0, ',', '.') }} VND
                                                 </p>
                                             </div>
                                         </div>
+                                        <div class="text-center">
+                                            <a class="btn btn-primary" href="">Rút Tiền</a>
+                                        </div>
                                     </div>
 
-
-                                    <div class="col-md-8">
-                                        <form action="" method="POST" class="mb-3">
-                                            @csrf
-                                            <div class="input-group">
-                                                <input type="number" name="amount" class="form-control"
-                                                    placeholder="Nhập số tiền rút" required>
-                                                <button class="btn btn-primary" type="submit">Rút Tiền</button>
-                                            </div>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>

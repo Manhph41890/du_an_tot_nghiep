@@ -140,11 +140,11 @@
         /* Bông tuyết xung quanh chữ "HOT" */
         /* .hot-tag::before,
         .hot-tag::after {
-            content: "❄️";
-            position: absolute;
-            color: #ffffff;
-            font-size: 1.2em;
-            animation: snowflake-blink 1.5s infinite alternate;
+        content: "❄️";
+        position: absolute;
+        color: #ffffff;
+        font-size: 1.2em;
+        animation: snowflake-blink 1.5s infinite alternate;
         } */
 
         /* Vị trí bông tuyết bên trái */
@@ -286,6 +286,29 @@
 
             text-align: center;
             line-height: 1;
+        }
+
+        .style_primary {
+            color: #5a5ac9 !important;
+        }
+
+        .form-group {
+            height: auto !important;
+            margin-bottom: 0px !important;
+        }
+
+        .button_submit {
+            color: #5a5ac9 !important;
+            background: #fff !important;
+            border-color: #5a5ac9 !important;
+            border-radius: 4px !important;
+            padding: 12px 28px !important;
+        }
+
+        .button_submit:hover {
+            color: #fff !important;
+            background: #5a5ac9 !important;
+
         }
 
 

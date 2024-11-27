@@ -21,7 +21,6 @@ class ThankYouMail extends Mailable
     {
         //
         $this->name = $name;
-
     }
 
     /**
@@ -37,12 +36,12 @@ class ThankYouMail extends Mailable
     /**
      * Get the message content definition.
      */
-    // public function content(): Content
-    // {
-    //     return new Content(
-    //         view: 'view.name',
-    //     );
-    // }
+    public function content(): Content
+    {
+        return new Content(
+            view: 'client.email.thankyou',
+        );
+    }
 
     /**
      * Get the attachments for the message.

@@ -172,6 +172,73 @@
                                                                                 </div>
                                                                             </div>
                                                                         @endif
+
+                                                                        {{-- <!-- Form Đánh Giá Shipper -->
+                                                                        @if ($donhang->shipper &&
+    !$donhang->shipper->danh_gia_shippers()->where('user_id', auth()->user()->id)->exists())
+                                                                            <div class="ratting-form-wrapper"
+                                                                                id="reviewFormShipper{{ $donhang->shipper->id }}">
+                                                                                <span class="close-btn"
+                                                                                    id="closeReviewFormShipper{{ $donhang->shipper->id }}">&times;</span>
+                                                                                <h3>Thêm đánh giá cho Shipper</h3>
+                                                                                <div class="ratting-form">
+                                                                                    <form
+                                                                                        action="{{ route('danhgia.shipper.store', ['shipperId' => $donhang->shipper->id]) }}"
+                                                                                        method="post">
+                                                                                        @csrf
+                                                                                        <div class="star-box">
+                                                                                            <span>Đánh giá của
+                                                                                                bạn:</span>
+                                                                                            <input type="hidden"
+                                                                                                id="shipper_id"
+                                                                                                name="shipper_id"
+                                                                                                value="{{ $donhang->shipper->id }}">
+                                                                                            <select name="diem_so"
+                                                                                                id="diem_soShipper{{ $donhang->shipper->id }}"
+                                                                                                style="display: none;">
+                                                                                                <option value="1">1
+                                                                                                </option>
+                                                                                                <option value="2">2
+                                                                                                </option>
+                                                                                                <option value="3">3
+                                                                                                </option>
+                                                                                                <option value="4">4
+                                                                                                </option>
+                                                                                                <option value="5">5
+                                                                                                </option>
+                                                                                            </select>
+                                                                                            <div class="rating-product">
+                                                                                                <i class="ion-android-star"
+                                                                                                    data-value="1"></i>
+                                                                                                <i class="ion-android-star"
+                                                                                                    data-value="2"></i>
+                                                                                                <i class="ion-android-star"
+                                                                                                    data-value="3"></i>
+                                                                                                <i class="ion-android-star"
+                                                                                                    data-value="4"></i>
+                                                                                                <i class="ion-android-star"
+                                                                                                    data-value="5"></i>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-12">
+                                                                                                <div
+                                                                                                    class="rating-form-style form-submit">
+                                                                                                    <textarea id="reviewShipper{{ $donhang->shipper->id }}" name="binh_luan" placeholder="Viết đánh giá"
+                                                                                                        maxlength="100"></textarea>
+                                                                                                    <p
+                                                                                                        id="charCountShipper{{ $donhang->shipper->id }}">
+                                                                                                        0/100</p>
+                                                                                                    <input
+                                                                                                        type="submit"
+                                                                                                        value="Gửi" />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif --}}
                                                                     </div>
                                                                 @endif
 

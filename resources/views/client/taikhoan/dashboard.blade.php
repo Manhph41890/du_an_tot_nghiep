@@ -78,6 +78,10 @@
     <div class="my-account pt-80 pb-50">
         <div class="container">
             <div class="row">
+                <!-- <div class="col-12">
+                                                                                                                                                                                <h3 class="title text-capitalize mb-30 pb-25">Thông tin tài khoản</h3>
+                                                                                                                                                                            </div> -->
+                <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
                         <a href="#account-info" class="active" data-bs-toggle="tab"><i class="fa fa-user"></i> Chi tiết tài
@@ -320,7 +324,6 @@
                                         {{ $myOrders->links() }}
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 

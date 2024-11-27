@@ -14,7 +14,10 @@ class DanhMucController extends Controller
 
     public function index(Request $request)
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ffb9b94dae4eb93e35459e2eda43162c38f45161
         $query = danh_muc::query();
         // lọc trạng thái
         if ($request->has('search_dm')) {
@@ -29,7 +32,7 @@ class DanhMucController extends Controller
             $search_ten_danh_muc = $request->input('search_ten_danh_muc');
             $query->where('ten_danh_muc', 'like', '%' . $search_ten_danh_muc . '%');
         }
-        
+
         $danhmucs = $query->latest('id')->paginate(5);
         $title = "Danh sách danh mục";
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
@@ -100,7 +103,7 @@ class DanhMucController extends Controller
             $param['anh_danh_muc'] = $filepath;
             $param['is_active'] = $request->input('is_active', $danhMuc->is_active);
             $request->validate([
-                'ten_danh_muc' =>Rule::unique('danh_mucs', 'ten_danh_muc')->ignore($id)
+                'ten_danh_muc' => Rule::unique('danh_mucs', 'ten_danh_muc')->ignore($id)
             ], [
                 'ten_danh_muc.unique' => 'Tên danh mục đã tồn tại.',
             ]);

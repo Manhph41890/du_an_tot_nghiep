@@ -34,7 +34,7 @@
         }
 
         .bg-img1 {
-            background-image: url('./assets/client/images/banner/banner.jpeg');
+            background-image: url('./assets/client/images/banner/banner1.jpg');
             width: 50%;
         }
 

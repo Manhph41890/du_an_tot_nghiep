@@ -40,21 +40,21 @@ class KhuyenMaiController extends Controller
 
         // Tự động cập nhật trạng thái dự trên ngày 
         $query->each(function ($promotion) {
-            $currentDate = now(); 
+            $currentDate = now();
             if ($currentDate->greaterThan($promotion->ngay_ket_thuc)) {
                 // Nếu ngày hiện tại đã qua ngày kết thúc của khuyến mãi
                 $promotion->is_active = 0; // 0 là hết hạn 
             } elseif ($currentDate->between($promotion->ngay_bat_dau, $promotion->ngay_ket_thuc)) {
                 // Nếu ngày hiện tại nằm giữa ngày bắt đầu và ngày kết thúc của khuyến mãi
-                $promotion->is_active = 1;// 1 là đang hoạt động
+                $promotion->is_active = 1; // 1 là đang hoạt động
             } else {
                 $promotion->is_active = 0;
             }
-            $promotion->save(); 
+            $promotion->save();
         });
 
 
-        $khuyenMais = $query->latest('id')->paginate(5);
+        $khuyenMais = khuyen_mai::orderBy('created_at', 'desc')->paginate(5);
         // dd($khuyenMais);
 
         $title = 'Danh sách khuyến mãi';
@@ -97,7 +97,7 @@ class KhuyenMaiController extends Controller
      */
     public function store(Storekhuyen_maiRequest $request)
     {
-
+       
         // admin tạo mã khuyến mãi
         $khuyen_mai =  khuyen_mai::create([
             'ten_khuyen_mai' => $request->input('ten_khuyen_mai'),
@@ -110,7 +110,7 @@ class KhuyenMaiController extends Controller
             'is_active' => $request->input('is_active'),
 
         ]);
-        event(new KhuyenMaiMoiEvent($khuyen_mai));
+        event(new KhuyenMaiMoiEvent($khuyen_mai ));
         //check trong post man 
         $this->sendNotification("Bạn đã tạo thành công khuyến mãi mới: {$khuyen_mai->ten_khuyen_mai}");
         return redirect()->route('khuyenmais.index')->with('success', 'Tạo mã khuyến mãi thành công');
@@ -142,8 +142,9 @@ class KhuyenMaiController extends Controller
      */
     public function update(Updatekhuyen_maiRequest $request, khuyen_mai $khuyen_mai, string $id)
     {
-       
+
         $khuyen_mai = khuyen_mai::findOrFail($id);
+
         $khuyen_mai->update($request->all());
 
         event(new KhuyenMaiMoiEvent($khuyen_mai));
@@ -159,7 +160,7 @@ class KhuyenMaiController extends Controller
     {
         //
 
-    
+
 
         $khuyen_mai = khuyen_mai::findOrFail($id);
         $khuyen_mai->delete();

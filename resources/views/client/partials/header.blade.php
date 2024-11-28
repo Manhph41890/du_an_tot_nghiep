@@ -1,5 +1,4 @@
 <style>
-    
     /* Biến đổi input khi active */
     .search-input {
         transition: all 0.4s ease;
@@ -344,7 +343,7 @@
                                         <div
                                             class="dropdown-menu dropdown-menu-end profile-dropdown profile-dropdown__info">
                                             <a class="notify-item notify-item__form"
-                                                href="{{ route('taikhoan.dashboard') }}">
+                                                href="{{ route('taikhoan.thongtin') }}">
                                                 <i class="far fa-user"></i> <span>Thông tin tài khoản</span>
                                             </a>
                                             <form id="logout-form" class="notify-item notify-item__form"

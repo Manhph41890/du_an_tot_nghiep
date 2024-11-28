@@ -393,13 +393,10 @@
                                 @endif
 
                                 {{-- @php
-                                        dd($donhang->phuong_thuc_thanh_toan);
-                                    @endphp --}}
+                                    dd($donhang->trang_thai_thanh_toan);
+                                @endphp --}}
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if (
-                                    $donhang->phuong_thuc_thanh_toan !== null &&
-                                        ($donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán bằng Vnpay' ||
-                                            $donhang->phuong_thuc_thanh_toan->kieu_thanh_toan == 'Thanh toán bằng Ví'))
+                                @if ($donhang->trang_thai_thanh_toan == 'Đã thanh toán')
                                     @if ($donhang->lich_su_thanh_toans->isNotEmpty())
                                         <div class="card">
                                             <div class="card-body">

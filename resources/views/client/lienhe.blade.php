@@ -66,7 +66,7 @@
                                 </div>
                             @endif
 
-                            <form  action="{{ route('lien_he.store') }}" method="POST">
+                            <form action="{{ route('lien_he.store') }}" method="POST">
                                 @csrf
                                 {{-- check xem khách hàng đã đăng nhập chưa  --}}
                                 {{-- nếu login r thì lấy thông tin user --}}

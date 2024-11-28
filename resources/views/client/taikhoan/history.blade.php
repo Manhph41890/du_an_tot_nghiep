@@ -82,7 +82,7 @@
             <span class="value">{{ $history->trang_thai }}</span>
         </div>
         <div class="center">
-            <a href="{{ route('taikhoan.dashboard') }}" class="btn btn-secondary mb-3">
+            <a href="{{ route('taikhoan.donhang') }}" class="btn btn-secondary mb-3">
                 <i class="fas fa-arrow-left"></i> Quay lại
             </a>
         </div>

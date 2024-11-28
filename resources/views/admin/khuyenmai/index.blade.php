@@ -16,10 +16,11 @@
                         @csrf
                         @method('GET')
                         <input type="text" name="search_km" class="form-control me-2" placeholder="Tìm mã khuyến mãi .."
-                        value="{{ request('search_km') }}">
+                            value="{{ request('search_km') }}">
                         <select name="is_active" class="form-select me-2">
                             <option value="">Tất cả trạng thái</option>
-                            <option value="1" {{ request('is_active') == '0' ? 'selected' : '' }}>Đang hoạt động</option>
+                            <option value="1" {{ request('is_active') == '0' ? 'selected' : '' }}>Đang hoạt động
+                            </option>
                             <option value="0" {{ request('is_active') == '1' ? 'selected' : '' }}>Kết thúc</option>
                             </option>
                         </select>
@@ -39,40 +40,7 @@
                                         </a>
                                     </div>
                                 @endif
-                                {{-- khong dung duoc  --}}
-                                {{-- <div class="col-10">
-                                    <form action="{{ route('khuyenmais.index') }}" method="POST" id="filter-form-km">
-                                        @csrf
-                                        @method('GET')
-                                        <div class="form-group d-flex align-items-end gap-3">
-                                            <div>
-                                                <input class="form-control" value="{{ request()->search_km }}"
-                                                    type="text" name="search_km" id="search_km"
-                                                    placeholder="Tìm kiếm theo mã">
-                                            </div>
-                                            <div>
-                                                <input class="form-control" type="date" name="start_date" id="start_date"
-                                                    value="{{ request()->start_date }}">
-                                            </div>
-                                            <div>
-                                                <input class="form-control" type="date" name="end_date" id="end_date"
-                                                    value="{{ request()->end_date }}">
-                                            </div>
-                                            <div>
-                                                <select class="form-select" id="trang_thai" name="trang_thai">
-                                                    <option value="">Tất cả</option>
-                                                    <option value="0"
-                                                        {{ request('trang_thai') == '0' ? 'selected' : '' }}>Đang hoạt động
-                                                    </option>
-                                                    <option value="1"
-                                                        {{ request('trang_thai') == '1' ? 'selected' : '' }}>Hết hạn
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <button class="btn btn-success">Lọc</button>
-                                        </div>
-                                    </form>
-                                </div> --}}
+
 
                             </div>
                         </div>
@@ -161,24 +129,23 @@
     </div>
 
 @section('js')
-  
-     <!-- Include Pusher JS library -->
-     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-     <script>
-         // Enable pusher logging - don't include this in production
-         Pusher.logToConsole = true;
- 
-         var pusher = new Pusher('ceead74684be5e1955f8', {
-             cluster: 'ap1',
-             encrypted: true
-         });
- 
-         var channel = pusher.subscribe('my-channel');
-         channel.bind('my-event', function(data) {
-             // Reload the page or update the table with new data
-             alert('New promotion code added or updated: ' + data.message);
-             location.reload(); // Optional: reload the page
-         });
-     </script>
+    <!-- Include Pusher JS library -->
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('ceead74684be5e1955f8', {
+            cluster: 'ap1',
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            // Reload the page or update the table with new data
+            alert('New promotion code added or updated: ' + data.message);
+            location.reload(); // Optional: reload the page
+        });
+    </script>
 @endsection
 @endsection

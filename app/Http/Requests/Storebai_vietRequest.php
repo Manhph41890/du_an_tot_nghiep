@@ -25,7 +25,7 @@ class Storebai_vietRequest extends FormRequest
         return [
             'tieu_de_bai_viet' => 'required|max:255',
             'noi_dung' => 'required|string|max:5000',
-            'anh_bai_viet' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'anh_bai_viet' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active' => [Rule::in([0, 1])],
         ];
     }
@@ -38,6 +38,7 @@ class Storebai_vietRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'anh_bai_viet' => 'Ảnh bài viết là trường bắt buộc',
             'anh_bai_viet.mimes' => 'Hình ảnh phải là định dạng jpeg, png, jpg hoặc gif.',
             'anh_bai_viet.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
 

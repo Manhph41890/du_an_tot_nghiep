@@ -19,7 +19,7 @@ class BaiVietController extends Controller
     public function index(request $request)
     {
 
-        $this->authorize('viewAny', bai_viet::class);
+
         $user = User::query()->get();
         $query = bai_viet::query();
         $startDate = $request->input('start_date');
@@ -42,7 +42,7 @@ class BaiVietController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', bai_viet::class);
+
         $user = User::query()->pluck('ho_ten', 'id')->all();
         $title = "Thêm mới bài viết";
         return view('admin.baiviet.create', compact('user', 'title'));
@@ -94,7 +94,7 @@ class BaiVietController extends Controller
      */
     public function show(bai_viet $bai_viet, $id)
     {
-        $this->authorize('view', bai_viet::class);
+
         $post = bai_viet::findOrFail($id);
         $user = User::query()->pluck('ho_ten', 'id')->all();
         $title = "Chi tiết bài viết";
@@ -114,22 +114,21 @@ class BaiVietController extends Controller
     //     return view('admin.baiviet.edit', compact('post', 'user', 'title'));
     // }
     public function edit(bai_viet $baiViet, $id)
-{  
-    // Xác thực quyền chỉnh sửa bài viết
-    $this->authorize('update', $baiViet);
+    {
+        // Xác thực quyền chỉnh sửa bài viết
 
-    // Tìm bài viết theo ID
-    $post = bai_viet::findOrFail($id);
+        // Tìm bài viết theo ID
+        $post = bai_viet::findOrFail($id);
 
-    // Lấy danh sách người dùng (id và họ tên)
-    $users = User::pluck('ho_ten', 'id');
+        // Lấy danh sách người dùng (id và họ tên)
+        $users = User::pluck('ho_ten', 'id');
 
-    // Tiêu đề trang
-    $title = "Sửa bài viết";
+        // Tiêu đề trang
+        $title = "Sửa bài viết";
 
-    // Trả về view với dữ liệu
-    return view('admin.baiviet.edit', compact('post', 'users', 'title'));
-}
+        // Trả về view với dữ liệu
+        return view('admin.baiviet.edit', compact('post', 'users', 'title'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -169,9 +168,9 @@ class BaiVietController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id,bai_viet $baiViet)
+    public function destroy($id, bai_viet $baiViet)
     {
-        $this->authorize('delete', $baiViet);
+
         try {
             DB::beginTransaction();
 

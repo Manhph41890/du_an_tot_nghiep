@@ -20,7 +20,7 @@ class KhuyenMaiController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('viewAny', khuyen_mai::class);
+        // $this->authorize('viewAny', khuyen_mai::class);
 
         $query = khuyen_mai::query();
 
@@ -40,17 +40,17 @@ class KhuyenMaiController extends Controller
 
         // Tự động cập nhật trạng thái dự trên ngày 
         $query->each(function ($promotion) {
-            $currentDate = now(); 
+            $currentDate = now();
             if ($currentDate->greaterThan($promotion->ngay_ket_thuc)) {
                 // Nếu ngày hiện tại đã qua ngày kết thúc của khuyến mãi
                 $promotion->is_active = 0; // 0 là hết hạn 
             } elseif ($currentDate->between($promotion->ngay_bat_dau, $promotion->ngay_ket_thuc)) {
                 // Nếu ngày hiện tại nằm giữa ngày bắt đầu và ngày kết thúc của khuyến mãi
-                $promotion->is_active = 1;// 1 là đang hoạt động
+                $promotion->is_active = 1; // 1 là đang hoạt động
             } else {
                 $promotion->is_active = 0;
             }
-            $promotion->save(); 
+            $promotion->save();
         });
 
 
@@ -85,7 +85,7 @@ class KhuyenMaiController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', khuyen_mai::class);
+        // $this->authorize('create', khuyen_mai::class);
         //
         $title = 'Tạo khuyến mãi';
 
@@ -127,11 +127,11 @@ class KhuyenMaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(khuyen_mai $khuyen_mai, string $id)
+    public function edit(string $id)
     {
-        //
+        // dd($khuyen_mai);
         $khuyenmais = khuyen_mai::findorfail($id);
-        $this->authorize('update', $khuyen_mai);
+        // $this->authorize('update', $khuyen_mai);
         $title = 'Cập nhật khuyến mãi';
 
         return view('admin.khuyenmai.edit', compact('khuyenmais', 'title'));
@@ -140,9 +140,9 @@ class KhuyenMaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatekhuyen_maiRequest $request, khuyen_mai $khuyen_mai, string $id)
+    public function update(Updatekhuyen_maiRequest $request, string $id)
     {
-       
+
         $khuyen_mai = khuyen_mai::findOrFail($id);
         $khuyen_mai->update($request->all());
 
@@ -157,10 +157,7 @@ class KhuyenMaiController extends Controller
      */
     public function destroy(khuyen_mai $khuyen_mai, string $id)
     {
-        //
-
-    
-
+        // 
         $khuyen_mai = khuyen_mai::findOrFail($id);
         $khuyen_mai->delete();
 

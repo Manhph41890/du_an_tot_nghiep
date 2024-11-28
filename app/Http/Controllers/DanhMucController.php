@@ -14,10 +14,6 @@ class DanhMucController extends Controller
 
     public function index(Request $request)
     {
-<<<<<<< HEAD
-
-=======
->>>>>>> ffb9b94dae4eb93e35459e2eda43162c38f45161
         $query = danh_muc::query();
         // lọc trạng thái
         if ($request->has('search_dm')) {

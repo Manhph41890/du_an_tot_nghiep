@@ -14,6 +14,7 @@ class KhuyenMaiPolicy
     public function viewAny(User $user): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
@@ -22,6 +23,7 @@ class KhuyenMaiPolicy
     public function view(User $user, khuyen_mai $khuyenMai): bool
     {
         //
+        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**

@@ -16,10 +16,15 @@ class KhuyenMaiMoiEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $khuyen_mai;
+    
 
-    public function __construct(khuyen_mai $khuyen_mai)
+
+    public function __construct(khuyen_mai $khuyen_mai )
     {
         $this->khuyen_mai = $khuyen_mai;
+        
+    
+
     }
 
     public function broadcastOn()
@@ -36,6 +41,7 @@ class KhuyenMaiMoiEvent implements ShouldBroadcast
             'gia_tri_khuyen_mai' => $this->khuyen_mai->gia_tri_khuyen_mai,
             'ngay_bat_dau' => $this->khuyen_mai->ngay_bat_dau,
             'ngay_ket_thuc' => $this->khuyen_mai->ngay_ket_thuc,
+            
         ];
     }
 }

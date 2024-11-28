@@ -150,15 +150,22 @@
 
 
 
+        /* .snowflake {
+                position: absolute;
+                top: -10px;
+                font-size: 1em;
+                color: #ffffff;
+                opacity: 0.9;
+                user-select: none;
+                pointer-events: none;
+                animation: fall 10s linear infinite;
+            } */
         .snowflake {
             position: absolute;
-            top: -10px;
-            font-size: 1em;
-            color: #ffffff;
-            opacity: 0.9;
-            user-select: none;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
             pointer-events: none;
-            animation: fall 10s linear infinite;
         }
 
         @keyframes fall {
@@ -434,7 +441,7 @@
                         <span class="code">{{ $item->ten_khuyen_mai }}</span>
                     </div>
 
-          
+
                     <div class="discount-description">
                         <p>
                             Giảm <span
@@ -824,5 +831,42 @@
                 modal.classList.remove("show");
             }, 3000);
         }
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+
+            const size = Math.random() * 5 + 2;
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+
+            snowflake.style.left = `${Math.random() * window.innerWidth}px`;
+            snowflake.style.top = '-10px';
+
+            document.body.appendChild(snowflake);
+
+            const animationDuration = Math.random() * 10 + 5;
+            snowflake.animate([{
+                    transform: 'translateY(0px)'
+                },
+                {
+                    transform: `translateY(${window.innerHeight + 10}px) translateX(${Math.random() * 100 - 50}px)`
+                }
+            ], {
+                duration: animationDuration * 1000,
+                easing: 'linear',
+                fill: 'forwards'
+            });
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, animationDuration * 1000);
+        }
+
+        function startSnowing() {
+            setInterval(createSnowflake, 100);
+        }
+
+        window.addEventListener('load', startSnowing);
     </script>
 @endsection

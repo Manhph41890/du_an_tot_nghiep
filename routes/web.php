@@ -201,19 +201,6 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
 });
-// Shipper
-Route::middleware(['auth', 'role:shipper'])->group(function () {
-    Route::get('/shipper', [ShipperController::class, 'index'])->name('shipper.index');
-    Route::post('shipper/xac-nhan-lay-don/{donHang}', [ShipperController::class, 'xacNhanLayDon'])->name('shipper.xac-nhan-lay-don');
-    Route::get('shipper/show', [ShipperController::class, 'show'])->name('shipper.show');
-    Route::post('shipper/update-status/{id}', [ShipperController::class, 'updateStatus'])->name('shipper.update-status');
-    Route::get('/shipper/profits', [ShipperController::class, 'showProfits'])->name('shipper.profits');
-    Route::get('/shipper/policy', [ShipperController::class, 'policy'])->name('shipper.policy');
-    Route::post('/danhgia/shipper/{shipperId}', [ShipperController::class, 'storeShipperReview'])->name('danhgia.shipper.store');
-    //Rut-tien ben shipper 
-    Route::post('/withdraw-shipper', [RutTienController::class, 'withdrawShipper'])->name('withdraw-shipper');
-    Route::get('/rut-tien-shipper', [RutTienController::class, 'rutShipper'])->name('taikhoan.rut-tien-shipper');
-});
 
 // Route chi tiết đơn hàng
 Route::get('/ctdonhang', [DonHangController::class, 'store'])->name('donhang.store');

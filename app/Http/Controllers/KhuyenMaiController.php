@@ -54,7 +54,7 @@ class KhuyenMaiController extends Controller
         });
 
 
-        $khuyenMais = $query->latest('id')->paginate(5);
+        $khuyenMais = khuyen_mai::orderBy('created_at', 'desc')->paginate(5);
         // dd($khuyenMais);
 
         $title = 'Danh sách khuyến mãi';
@@ -144,6 +144,7 @@ class KhuyenMaiController extends Controller
     {
 
         $khuyen_mai = khuyen_mai::findOrFail($id);
+
         $khuyen_mai->update($request->all());
 
         event(new KhuyenMaiMoiEvent($khuyen_mai));
@@ -157,7 +158,10 @@ class KhuyenMaiController extends Controller
      */
     public function destroy(khuyen_mai $khuyen_mai, string $id)
     {
-        // 
+        //
+
+
+
         $khuyen_mai = khuyen_mai::findOrFail($id);
         $khuyen_mai->delete();
 

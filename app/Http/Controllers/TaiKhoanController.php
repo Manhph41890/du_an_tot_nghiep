@@ -114,7 +114,8 @@ class TaiKhoanController extends Controller
 
     public function quanTri()
     {
-        return view('client.taikhoan.quan-tri');
+        $user = Auth::user();
+        return view('client.taikhoan.quan-tri', compact('user'));
     }
 
 

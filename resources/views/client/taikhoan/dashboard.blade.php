@@ -82,28 +82,42 @@
                 <!-- My Account Tab Menu Start -->
                 <div class="col-lg-3 col-12 mb-30">
                     <div class="myaccount-tab-menu nav" role="tablist">
-                        <a href="{{ route('taikhoan.thongtin') }}" class=""><i class="fa fa-user"></i> Chi tiết tài
-                            khoản</a>
+                        <a href="{{ route('taikhoan.thongtin') }}"
+                            class="{{ Request::routeIs('taikhoan.thongtin') ? 'active' : '' }}">
+                            <i class="fa fa-user"></i> Chi tiết tài khoản
+                        </a>
+
                         @if ($user->chuc_vu->ten_chuc_vu === 'nhan_vien' || $user->chuc_vu->ten_chuc_vu === 'admin')
-                            <a href="{{ route('taikhoan.quantri') }}"><i class="fas fa-tachometer-alt"></i> Vào trang quản
-                                trị</a>
+                            <a href="{{ route('taikhoan.quantri') }}"
+                                class="{{ Request::routeIs('taikhoan.quantri') ? 'active' : '' }}">
+                                <i class="fas fa-tachometer-alt"></i> Vào trang quản trị
+                            </a>
                         @endif
-                        <a href="{{ route('taikhoan.donhang') }}"><i class="fa fa-cart-arrow-down"></i>
-                            Đơn hàng của bạn</a>
+
+                        <a href="{{ route('taikhoan.donhang') }}"
+                            class="{{ Request::routeIs('taikhoan.donhang') ? 'active' : '' }}">
+                            <i class="fa fa-cart-arrow-down"></i> Đơn hàng của bạn
+                        </a>
+
                         @php
                             $tongDonHang = DB::table('don_hangs')
                                 ->where('trang_thai_don_hang', 'Chờ xác nhận')
                                 ->where('user_id', Auth::id())
                                 ->count();
                         @endphp
+
                         @if ($tongDonHang > 0)
                             <span class="ms-2 position-relative">
                                 <span class="notification-dot">{{ $tongDonHang }}</span>
                             </span>
                         @endif
-                        <span class="menu-arrow ms-auto"></span>
-                        <a href="{{ route('taikhoan.vitien') }}"><i class="fa fa-credit-card"></i> Ví người dùng</a>
+
+                        <a href="{{ route('taikhoan.vitien') }}"
+                            class="{{ Request::routeIs('taikhoan.vitien') ? 'active' : '' }}">
+                            <i class="fa fa-credit-card"></i> Ví người dùng
+                        </a>
                     </div>
+
                 </div>
                 <!-- My Account Tab Menu End -->
 

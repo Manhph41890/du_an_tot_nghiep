@@ -462,39 +462,45 @@
                 <div class="row g-3">
                     <!-- Banner 1 -->
                     <div class="col-md-4">
-                        <div class="banner-item position-relative">
-                            <img src="{{ asset('assets/client/images/banner/banner_coll_1_1.jpg') }}" alt="Banner 1"
-                                class="w-100">
-                            <div
-                                class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
-                                <h3 class="fw-bold">CỌ LÔNG</h3>
-                                <p>SALE UP TO 30% - MUA NGAY</p>
+                        <a href="{{ route('client.showByCategory', 41) }}">
+                            <div class="banner-item position-relative">
+                                <img src="{{ asset('assets/client/images/banner/banner_coll_1_1.jpg') }}" alt="Banner 1"
+                                    class="w-100">
+                                <div
+                                    class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                                    <h3 class="fw-bold">CỌ LÔNG</h3>
+                                    <p>SALE UP TO 30% - MUA NGAY</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <!-- Banner 2 -->
                     <div class="col-md-4">
-                        <div class="banner-item position-relative">
-                            <img src="{{ asset('assets/client/images/banner/banner_coll_1_2.jpg') }}" alt="Banner 2"
-                                class="w-100">
-                            <div
-                                class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
-                                <h3 class="fw-bold">CỌ NƯỚC</h3>
-                                <p>SALE UP TO 30% - MUA NGAY</p>
+                        <a href="{{ route('client.showByCategory', 41) }}">
+                            <div class="banner-item position-relative">
+                                <img src="{{ asset('assets/client/images/banner/banner_coll_1_2.jpg') }}" alt="Banner 2"
+                                    class="w-100">
+                                <div
+                                    class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                                    <h3 class="fw-bold">CỌ NƯỚC</h3>
+                                    <p>SALE UP TO 30% - MUA NGAY</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <!-- Banner 3 -->
                     <div class="col-md-4">
-                        <div class="banner-item position-relative">
-                            <img src="{{ asset('assets/client/images/banner/banner_coll_1_3.jpg') }}" alt="Banner 3"
-                                class="w-100">
-                            <div
-                                class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
-                                <h3 class="fw-bold">BẢNG PHA MÀU</h3>
-                                <p>SALE UP TO 30% - MUA NGAY</p>
+                        <a href="{{ route('client.showByCategory', 41) }}">
+                            <div class="banner-item position-relative">
+                                <img src="{{ asset('assets/client/images/banner/banner_coll_1_3.jpg') }}" alt="Banner 3"
+                                    class="w-100">
+                                <div
+                                    class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                                    <h3 class="fw-bold">BẢNG PHA MÀU</h3>
+                                    <p>SALE UP TO 30% - MUA NGAY</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -642,7 +648,7 @@
         <div class="banner-content text-center">
             <h2 class="text-white">Khám Phá Bộ Sưu Tập Mới</h2>
             <p class="text-white">Cập nhật những sản phẩm hot nhất ngay hôm nay!</p>
-            <a href="#explore" class="btn btn-primary">Khám Phá Ngay</a>
+            <a href="{{ route('client.cuahang') }}" class="btn btn-primary">Khám Phá Ngay</a>
         </div>
     </section>
 

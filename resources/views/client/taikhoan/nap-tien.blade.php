@@ -7,7 +7,7 @@
         <form action="{{ route('loaded') }}" method="POST" class="card shadow-lg p-4">
             @csrf
             <div class="text-start mb-4">
-                <a href="{{ route('taikhoan.dashboard') }}#payment-method" class="btn btn-outline-secondary w-10 py-2">
+                <a href="{{ route('taikhoan.vitien') }}" class="btn btn-outline-secondary w-10 py-2">
                     <i class="fas fa-arrow-left me-2"></i>Quay lại
                 </a>
             </div>

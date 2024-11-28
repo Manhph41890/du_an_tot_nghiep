@@ -61,6 +61,11 @@ Route::prefix('client')->group(function () {
     Route::get('/taikhoan/myorder/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.myorder');
     Route::get('/taikhoan/vinguoidung', [TaiKhoanController::class, 'viNguoiDung'])->name('taikhoan.vinguoidung');
 
+    Route::get('/thong-tin', [TaiKhoanController::class, 'showAccountDetails'])->name('taikhoan.thongtin');
+    Route::get('/don-hang', [TaiKhoanController::class, 'donHang'])->name('taikhoan.donhang');
+    Route::get('/vi-tien', [TaiKhoanController::class, 'viTien'])->name('taikhoan.vitien');
+    Route::get('/quan-tri', [TaiKhoanController::class, 'quanTri'])->name('taikhoan.quantri'); // Bảo vệ route quản trị
+
     //Hủy đặt hàng
     Route::post('/taikhoan/cancel/{id}', [TaiKhoanController::class, 'cancel'])->name('taikhoan.cancel');
     Route::post('/huy-don-hang', [HuyDonHangController::class, 'store'])->name('huydonhang.store');
@@ -166,8 +171,7 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     //
     Route::get('/xacnhanhuys', [HuyDonHangController::class, 'index'])->name('xacnhanhuy.index');
     // đánh giá
-    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index'); 
-
+    Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
 });
 
 // Route cho người dùng (khách hàng)

@@ -127,7 +127,7 @@
                         <ul class="nav-second-level">
                             <!-- Menu con: Danh sách -->
                             <li>
-                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.danhSach') }}">
+                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.index') }}">
                                     Danh sách
                                     {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
                                     <span class="ms-2 position-relative">
@@ -168,7 +168,7 @@
                         <ul class="nav-second-level">
                             <!-- Menu con: Danh sách -->
                             <li>
-                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.profits') }}">
+                                <a class="tp-link d-flex align-items-center">
                                     Lợi nhuận
                                     {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
                                     <span class="ms-2 position-relative">
@@ -198,7 +198,7 @@
                         <ul class="nav-second-level">
                             <!-- Menu con: Danh sách -->
                             <li>
-                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.policy') }}">
+                                <a class="tp-link d-flex align-items-center">
                                     Chính sách
                                     {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
                                     <span class="ms-2 position-relative">

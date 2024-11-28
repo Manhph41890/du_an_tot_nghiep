@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    
+
     protected $fillable = [
         'chuc_vu_id',
         'ho_ten',
@@ -54,6 +54,11 @@ class User extends Authenticatable
     public function vi_nguoi_dungs()
     {
         return $this->hasOne(vi_nguoi_dung::class, 'user_id', 'id');
+    }
+
+    public function shippers()
+    {
+        return $this->hasMany(Shipper::class, 'shipper_id');
     }
 
     /**

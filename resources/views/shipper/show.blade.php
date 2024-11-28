@@ -52,7 +52,7 @@
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="tab-da-huy" data-bs-toggle="tab" href="#da-huy" role="tab">
-                        <i class="fas fa-times-circle me-2"></i>Đã Hủy
+                        <i class="fas fa-times-circle me-2"></i>Thất bại
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -92,8 +92,9 @@
                                                 <option value="Đã lấy hàng"
                                                     {{ $shipper->status == 'Đã lấy hàng' ? 'selected' : '' }}>Đã lấy hàng
                                                 </option>
-                                                <option value="Đang giao"
-                                                    {{ $shipper->status == 'Đang giao' ? 'selected' : '' }}>Đang giao
+                                                <option value="Đang vận chuyển"
+                                                    {{ $shipper->status == 'Đang vận chuyển' ? 'selected' : '' }}>Đang vận
+                                                    chuyển
                                                 </option>
                                             </select>
                                         </td>
@@ -119,7 +120,7 @@
                         </thead>
                         <tbody>
                             @foreach ($shippers as $shipper)
-                                @if ($shipper->status == 'Đang giao')
+                                @if ($shipper->status == 'Đang vận chuyển')
                                     <tr> <!-- Bổ sung thẻ <tr> -->
                                         <td>{{ $shipper->donHang->ma_don_hang }}</td>
                                         <td>{{ $shipper->donHang->user->ho_ten }}</td>
@@ -128,14 +129,16 @@
                                         <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }} VND</td>
                                         <td>
                                             <select class="form-select status-select" data-id="{{ $shipper->id }}">
-                                                <option value="Đang giao"
-                                                    {{ $shipper->status == 'Đang giao' ? 'selected' : '' }}>Đang giao
+                                                <option value="Đang vận chuyển"
+                                                    {{ $shipper->status == 'Đang vận chuyển' ? 'selected' : '' }}>Đang vận
+                                                    chuyển
                                                 </option>
-                                                <option value="Đã thành công"
-                                                    {{ $shipper->status == 'Đã thành công' ? 'selected' : '' }}>Đã thành
-                                                    công</option>
-                                                <option value="Đã hủy"
-                                                    {{ $shipper->status == 'Đã hủy' ? 'selected' : '' }}>Đã hủy</option>
+                                                <option value="Thành công"
+                                                    {{ $shipper->status == 'Thành công' ? 'selected' : '' }}>Thành công
+                                                </option>
+                                                <option value="Thất bại"
+                                                    {{ $shipper->status == 'Thất bại' ? 'selected' : '' }}>Thất bại
+                                                </option>
                                                 <option value="Giao lại"
                                                     {{ $shipper->status == 'Giao lại' ? 'selected' : '' }}>Giao lại
                                                 </option>
@@ -184,9 +187,9 @@
                     </table>
                 </div>
 
-                <!-- Đã hủy -->
+                <!-- Thất bại -->
                 <div class="tab-pane fade" id="da-huy" role="tabpanel" aria-labelledby="tab-da-huy">
-                    <h4>Đơn hàng đã hủy</h4>
+                    <h4>Đơn hàng Thất bại</h4>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -198,13 +201,13 @@
                         </thead>
                         <tbody>
                             @foreach ($shippers as $shipper)
-                                @if ($shipper->status == 'Đã hủy')
+                                @if ($shipper->status == 'Thất bại')
                                     <tr>
                                         <td>{{ $shipper->donHang->ma_don_hang }}</td>
                                         <td>{{ optional($shipper->donHang->created_at)->format('d/m/Y H:i:s') }}</td>
                                         <td class="text-danger">{{ $shipper->status }}</td>
                                         <td class="ly-do-huy">
-                                            @if ($shipper->status == 'Đã hủy')
+                                            @if ($shipper->status == 'Thất bại')
                                                 {{ $shipper->ly_do_huy ?? 'Không có lý do' }}
                                             @endif
                                         </td>
@@ -240,8 +243,9 @@
                                                 <option value="Đã thành công"
                                                     {{ $shipper->status == 'Đã thành công' ? 'selected' : '' }}>Đã thành
                                                     công</option>
-                                                <option value="Đã hủy"
-                                                    {{ $shipper->status == 'Đã hủy' ? 'selected' : '' }}>Đã hủy</option>
+                                                <option value="Thất bại"
+                                                    {{ $shipper->status == 'Thất bại' ? 'selected' : '' }}>Thất bại
+                                                </option>
                                             </select>
                                         </td>
                                     </tr>
@@ -260,7 +264,7 @@
                 const newStatus = $(this).val();
                 let cancelReason = null;
 
-                if (newStatus === 'Đã hủy') {
+                if (newStatus === 'Thất bại') {
                     cancelReason = prompt("Vui lòng nhập lý do hủy đơn:");
                     if (!cancelReason) {
                         alert("Bạn phải nhập lý do khi hủy đơn!");
@@ -280,9 +284,7 @@
                     success: function(response) {
                         toastr.success('Cập nhật trạng thái thành công!');
                         const row = $(`#order-${shipperId}`);
-                        if (newStatus === 'Đã hủy') {
-                            row.find('.ly-do-huy').text(cancelReason);
-                        }
+
                         row.find('.status-select').val(newStatus);
                         window.location.reload();
                     },

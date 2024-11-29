@@ -150,15 +150,22 @@
 
 
 
+        /* .snowflake {
+                position: absolute;
+                top: -10px;
+                font-size: 1em;
+                color: #ffffff;
+                opacity: 0.9;
+                user-select: none;
+                pointer-events: none;
+                animation: fall 10s linear infinite;
+            } */
         .snowflake {
             position: absolute;
-            top: -10px;
-            font-size: 1em;
-            color: #ffffff;
-            opacity: 0.9;
-            user-select: none;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
             pointer-events: none;
-            animation: fall 10s linear infinite;
         }
 
         @keyframes fall {
@@ -377,11 +384,12 @@
                                         data-delay-in="1.5">Sale 30% Off</span>
                                     <span class="animated font-weight-bold" data-animation-in="fadeInUp" data-delay-in="1.5"
                                         style="color: #5C5BCA">Sản phẩm mới</span>
-                                </h2>
+                                </h2> --}}
 
                                 <a href="{{ route('client.cuahang') }}"
-                            class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
-                            data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a> --}}
+                                    class="btn btn-outline-primary btn--lg animated mt-45 mt-sm-25"
+                                    style="background-color: #ff5846; border: none !important; color: white"
+                                    data-animation-in="fadeInLeft" data-delay-in="1.9">Khám phá ngay</a>
                             </div>
                         </div>
                     </div>
@@ -415,7 +423,43 @@
             </div>
         </div>
     </div>
+    {{-- mã giảm --}}
+    {{-- <div class="section-title text-center">
+        <h2 class="title pb-3 mb-3">Mã giảm giá</h2>
+    </div>
+    <div class="discounts-container">
+        @foreach ($discounts as $item)
+            <div class="discount-item">
+                <div class="discount-icon">
+                    <img src="https://bizweb.dktcdn.net/thumb/medium/100/210/055/themes/941368/assets/coupon_1_img.png?1726708982386"
+                        alt="Discount Icon">
+                </div>
+                <div class="discount-content">
 
+                    <div class="discount-code zigzag">
+
+                        <span class="code">{{ $item->ten_khuyen_mai }}</span>
+                    </div>
+
+
+                    <div class="discount-description">
+                        <p>
+                            Giảm <span
+                                class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
+                            VNĐ cho tất cả các sản phẩm.
+                        </p>
+                    </div>
+                </div>
+                <button class="copy-btn" onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao chép </button>
+            </div>
+        @endforeach
+    </div>
+    <!-- Modal -->
+    <div id="copyModal" class="copy-modal">
+        <div class="modal-content">
+            <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
+        </div>
+    </div> --}}
     <!-- staic media end -->
     <!-- common banner  start -->
     <div class="common-banner bg-white">
@@ -425,39 +469,45 @@
                 <div class="row g-3">
                     <!-- Banner 1 -->
                     <div class="col-md-4">
-                        <div class="banner-item position-relative">
-                            <img src="{{ asset('assets/client/images/banner/banner_coll_1_1.jpg') }}" alt="Banner 1"
-                                class="w-100">
-                            <div
-                                class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
-                                <h3 class="fw-bold">CỌ LÔNG</h3>
-                                <p>SALE UP TO 30% - MUA NGAY</p>
+                        <a href="{{ route('client.showByCategory', 41) }}">
+                            <div class="banner-item position-relative">
+                                <img src="{{ asset('assets/client/images/banner/banner_coll_1_1.jpg') }}" alt="Banner 1"
+                                    class="w-100">
+                                <div
+                                    class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                                    <h3 class="fw-bold">CỌ LÔNG</h3>
+                                    <p>SALE UP TO 30% - MUA NGAY</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <!-- Banner 2 -->
                     <div class="col-md-4">
-                        <div class="banner-item position-relative">
-                            <img src="{{ asset('assets/client/images/banner/banner_coll_1_2.jpg') }}" alt="Banner 2"
-                                class="w-100">
-                            <div
-                                class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
-                                <h3 class="fw-bold">CỌ NƯỚC</h3>
-                                <p>SALE UP TO 30% - MUA NGAY</p>
+                        <a href="{{ route('client.showByCategory', 41) }}">
+                            <div class="banner-item position-relative">
+                                <img src="{{ asset('assets/client/images/banner/banner_coll_1_2.jpg') }}" alt="Banner 2"
+                                    class="w-100">
+                                <div
+                                    class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                                    <h3 class="fw-bold">CỌ NƯỚC</h3>
+                                    <p>SALE UP TO 30% - MUA NGAY</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <!-- Banner 3 -->
                     <div class="col-md-4">
-                        <div class="banner-item position-relative">
-                            <img src="{{ asset('assets/client/images/banner/banner_coll_1_3.jpg') }}" alt="Banner 3"
-                                class="w-100">
-                            <div
-                                class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
-                                <h3 class="fw-bold">BẢNG PHA MÀU</h3>
-                                <p>SALE UP TO 30% - MUA NGAY</p>
+                        <a href="{{ route('client.showByCategory', 41) }}">
+                            <div class="banner-item position-relative">
+                                <img src="{{ asset('assets/client/images/banner/banner_coll_1_3.jpg') }}" alt="Banner 3"
+                                    class="w-100">
+                                <div
+                                    class="banner-content position-absolute top-50 start-50 translate-middle text-center text-white">
+                                    <h3 class="fw-bold">BẢNG PHA MÀU</h3>
+                                    <p>SALE UP TO 30% - MUA NGAY</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -605,7 +655,7 @@
         <div class="banner-content text-center">
             <h2 class="text-white">Khám Phá Bộ Sưu Tập Mới</h2>
             <p class="text-white">Cập nhật những sản phẩm hot nhất ngay hôm nay!</p>
-            <a href="#explore" class="btn btn-primary">Khám Phá Ngay</a>
+            <a href="{{ route('client.cuahang') }}" class="btn btn-primary">Khám Phá Ngay</a>
         </div>
     </section>
 
@@ -757,5 +807,66 @@
 
         // Tạo bông tuyết mới mỗi 500ms
         setInterval(createSnowflake, 500);
+
+        function copyCode(code) {
+            var tempInput = document.createElement("input");
+            tempInput.value = code;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showCopyModal("Mã giảm giá đã được sao chép: " + code);
+
+        }
+
+        function showCopyModal(message) {
+            var modal = document.getElementById("copyModal");
+            var modalMessage = document.getElementById("copyMessage");
+
+            modalMessage.textContent = message;
+
+            modal.classList.add("show");
+
+            setTimeout(function() {
+                modal.classList.remove("show");
+            }, 3000);
+        }
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+
+            const size = Math.random() * 5 + 2;
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+
+            snowflake.style.left = `${Math.random() * window.innerWidth}px`;
+            snowflake.style.top = '-10px';
+
+            document.body.appendChild(snowflake);
+
+            const animationDuration = Math.random() * 10 + 5;
+            snowflake.animate([{
+                    transform: 'translateY(0px)'
+                },
+                {
+                    transform: `translateY(${window.innerHeight + 10}px) translateX(${Math.random() * 100 - 50}px)`
+                }
+            ], {
+                duration: animationDuration * 1000,
+                easing: 'linear',
+                fill: 'forwards'
+            });
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, animationDuration * 1000);
+        }
+
+        function startSnowing() {
+            setInterval(createSnowflake, 100);
+        }
+
+        window.addEventListener('load', startSnowing);
     </script>
 @endsection

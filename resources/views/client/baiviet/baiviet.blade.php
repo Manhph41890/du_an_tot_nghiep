@@ -29,6 +29,9 @@
     <!-- Blog Section Start -->
     <section class="blog-section py-80 bg-light">
         <div class="container">
+            <div class="section-title">
+                <h2 class="title pb-3 mb-3">Bài viết</h2>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="blog-init slick-nav">

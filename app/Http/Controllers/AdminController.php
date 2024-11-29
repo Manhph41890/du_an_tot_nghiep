@@ -9,6 +9,7 @@ use App\Models\san_pham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Shipper;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -493,6 +494,23 @@ class AdminController extends Controller
 
 
         return view('admin.thongke.tongquan', compact('loi_nhuan_theo_thang', 'labels_phantram', 'phantramdonhang', 'labels', 'tongTienThang', 'sanphams_saphet', 'views_product', 'title', 'donhangs', 'tong_tien', 'isAdmin', 'soluong_donhangs', 'soluong_donhangs_new', 'tongtien_donhangs_moi', 'donhangs_daxacnhan', 'donhangs_dangchuanbihang', 'donhangs_dangvanchuyen', 'donhangs_dagiao', 'donhangs_thanhcong', 'donhangs_dahuy'));
+    }
+    public function quan_ly_van_chuyen(Request $request){
+        $query = Shipper::query();
+
+        // Các bộ lọc
+        if ($request->filled('search')) {
+            $query->where('ho_ten', 'LIKE', "%{$request->search}%")
+                  ->orWhere('so_dien_thoai', 'LIKE', "%{$request->search}%");
+        }
+
+        if ($request->filled('trang_thai')) {
+            $query->where('trang_thai', $request->trang_thai);
+        }
+
+        $shippers = $query->paginate(10);
+
+        return view('admin.nhanvienvanchuyen.index', compact('shippers'));
     }
 
     //

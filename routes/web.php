@@ -23,16 +23,21 @@ use App\Http\Controllers\KhuyenMaiController;
 use App\Http\Controllers\HuyDonHangController;
 use App\Http\Controllers\ClientSanPhamController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\LienHeController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\RutTienController;
 use App\Http\Controllers\Shipper\Controller\ShipperController;
+use App\Http\Requests\LienHeRequest;
 use App\Models\ShipperProfit;
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
 // tìm kiếm toàn trang 
 Route::get('/timkiem', [SearchController::class, 'search'])->name('global.search');
+//bình luận
+Route::get('/lien-he', [LienHeController::class, 'create'])->name('client.lienhe');
+Route::post('/lien-he', [LienHeController::class, 'store'])->name('lien_he.store');
 
 
 // Route cho client
@@ -55,6 +60,11 @@ Route::prefix('client')->group(function () {
 
     Route::get('/taikhoan/myorder/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.myorder');
     Route::get('/taikhoan/vinguoidung', [TaiKhoanController::class, 'viNguoiDung'])->name('taikhoan.vinguoidung');
+
+    Route::get('/thong-tin', [TaiKhoanController::class, 'showAccountDetails'])->name('taikhoan.thongtin');
+    Route::get('/don-hang', [TaiKhoanController::class, 'donHang'])->name('taikhoan.donhang');
+    Route::get('/vi-tien', [TaiKhoanController::class, 'viTien'])->name('taikhoan.vitien');
+    Route::get('/quan-tri', [TaiKhoanController::class, 'quanTri'])->name('taikhoan.quantri'); // Bảo vệ route quản trị
 
     //Hủy đặt hàng
     Route::post('/taikhoan/cancel/{id}', [TaiKhoanController::class, 'cancel'])->name('taikhoan.cancel');
@@ -81,7 +91,7 @@ Route::prefix('client')->group(function () {
 
     Route::view('/giohang', 'client.giohang');
     Route::get('/gioithieu', [HomeController::class, 'gioithieu'])->name('client.gioithieu');
-    Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
+    // Route::get('/lienhe', [HomeController::class, 'lienhe'])->name('client.lienhe');
     Route::get('/huongdanmuahang', [HomeController::class, 'hdmuahang'])->name('client.hdmuahang');
 });
 
@@ -116,6 +126,7 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
     });
+
     Route::get('/staff', [StaffController::class, 'index'])->name('thong_ke');
     // Profile
     Route::get('/profile', [AuthController::class, 'profile'])->name('auth.profile');
@@ -189,19 +200,6 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     Route::get('/api/products/{categoryId}', [SanPhamController::class, 'getProductsByCategory']);
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
-});
-// Shipper
-Route::middleware(['auth', 'role:shipper'])->group(function () {
-    Route::get('/shipper', [ShipperController::class, 'index'])->name('shipper.index');
-    Route::post('shipper/xac-nhan-lay-don/{donHang}', [ShipperController::class, 'xacNhanLayDon'])->name('shipper.xac-nhan-lay-don');
-    Route::get('shipper/show', [ShipperController::class, 'show'])->name('shipper.show');
-    Route::post('shipper/update-status/{id}', [ShipperController::class, 'updateStatus'])->name('shipper.update-status');
-    Route::get('/shipper/profits', [ShipperController::class, 'showProfits'])->name('shipper.profits');
-    Route::get('/shipper/policy', [ShipperController::class, 'policy'])->name('shipper.policy');
-    Route::post('/danhgia/shipper/{shipperId}', [ShipperController::class, 'storeShipperReview'])->name('danhgia.shipper.store');
-    //Rut-tien ben shipper 
-    Route::post('/withdraw-shipper', [RutTienController::class, 'withdrawShipper'])->name('withdraw-shipper');
-    Route::get('/rut-tien-shipper', [RutTienController::class, 'rutShipper'])->name('taikhoan.rut-tien-shipper');
 });
 
 // Route chi tiết đơn hàng

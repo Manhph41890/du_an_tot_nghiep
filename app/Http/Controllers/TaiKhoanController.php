@@ -25,38 +25,97 @@ class TaiKhoanController extends Controller
 
         $myOrders = don_hang::where('user_id', $user->id)->latest()->paginate(4);
         $viNguoiDung = vi_nguoi_dung::where('user_id', $user->id)->first();
+
         // Lấy lịch sử giao dịch (chi tiết ví)
         $chiTietVi = chi_tiet_vi::with('don_hang', 'vi_nguoi_dung')
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
+
         $lsThanhToanVi = ls_thanh_toan_vi::with('don_hang', 'vi_nguoi_dung')
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
+
         $lsNapVi = ls_nap_vi::with('bank', 'vi_nguoi_dung')
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
-
 
         $lsRutVi_choduyet = ls_rut_vi::with('vi_nguoi_dung', 'bank')
             ->where('trang_thai', 'Chờ duyệt')
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
+
         $lsRutVi_thanhcong = ls_rut_vi::with('vi_nguoi_dung', 'bank')
             ->where('trang_thai', 'Thành công')
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
+
         $lsRutVi_thatbai = ls_rut_vi::with('vi_nguoi_dung', 'bank')
             ->where('trang_thai', 'Thất bại')
             ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
             ->latest('id') // Lấy giao dịch mới nhất trước
             ->get();
 
-        return view('client.taikhoan.dashboard', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsNapVi', 'lsRutVi_choduyet', 'lsRutVi_thanhcong', 'lsRutVi_thatbai'));
+        return view('client.taikhoan.thong-tin', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsNapVi', 'lsRutVi_choduyet', 'lsRutVi_thanhcong', 'lsRutVi_thatbai'));
+    }
+
+    public function donHang()
+    {
+        $user = Auth::user();
+        $myOrders = don_hang::where('user_id', $user->id)->latest()->paginate(4);
+        return view('client.taikhoan.don-hang', compact('myOrders', 'user'));
+    }
+
+    public function viTien()
+    {
+        $user = Auth::user(); // Lấy thông tin người dùng hiện tại
+        $viNguoiDung = vi_nguoi_dung::where('user_id', $user->id)->first();
+
+        // Lấy lịch sử giao dịch (chi tiết ví)
+        $chiTietVi = chi_tiet_vi::with('don_hang', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+
+        $lsThanhToanVi = ls_thanh_toan_vi::with('don_hang', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+
+        $lsNapVi = ls_nap_vi::with('bank', 'vi_nguoi_dung')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+
+        $lsRutVi_choduyet = ls_rut_vi::with('vi_nguoi_dung', 'bank')
+            ->where('trang_thai', 'Chờ duyệt')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+
+        $lsRutVi_thanhcong = ls_rut_vi::with('vi_nguoi_dung', 'bank')
+            ->where('trang_thai', 'Thành công')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+
+        $lsRutVi_thatbai = ls_rut_vi::with('vi_nguoi_dung', 'bank')
+            ->where('trang_thai', 'Thất bại')
+            ->where('vi_nguoi_dung_id', $viNguoiDung->id) // Lọc theo ID ví người dùng
+            ->latest('id') // Lấy giao dịch mới nhất trước
+            ->get();
+
+        return view('client.taikhoan.vi-tien', compact('viNguoiDung', 'user', 'chiTietVi', 'lsThanhToanVi', 'lsNapVi', 'lsRutVi_choduyet', 'lsRutVi_thanhcong', 'lsRutVi_thatbai')); // Truyền các biến cần thiết
+    }
+
+    public function quanTri()
+    {
+        $user = Auth::user();
+        return view('client.taikhoan.quan-tri', compact('user'));
     }
 
 
@@ -90,7 +149,7 @@ class TaiKhoanController extends Controller
         $donhang->save();
 
         // Redirect về dashboard với thông báo thành công
-        return redirect()->route('taikhoan.dashboard')->with('success', 'Đơn hàng đã được xác nhận thành công.');
+        return redirect()->route('taikhoan.donhang')->with('success', 'Đơn hàng đã được xác nhận thành công.');
     }
 
 
@@ -103,7 +162,7 @@ class TaiKhoanController extends Controller
         $donhang->trang_thai_don_hang = 'Đã hủy';
         $donhang->save();
 
-        return redirect()->route('taikhoan.dashboard')->with('success', 'Đơn hàng đã được hủy.');
+        return redirect()->route('taikhoan.donhang')->with('success', 'Đơn hàng đã được hủy.');
     }
 
     public function history($id)

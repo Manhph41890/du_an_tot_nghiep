@@ -17,7 +17,6 @@ class DanhMucPolicy
      */
     public function view(User $user, danh_muc $danh_muc)
     {
-        return $user->chuc_vu->ten_chuc_vu === 'admin' || $user->chuc_vu->ten_chuc_vu === 'nhan_vien';
     }
 
     /**
@@ -25,7 +24,6 @@ class DanhMucPolicy
      */
     public function create(User $user)
     {
-        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 
     /**
@@ -33,7 +31,6 @@ class DanhMucPolicy
      */
     public function update(User $user, danh_muc $danh_muc)
     {
-        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 
     /**
@@ -41,6 +38,5 @@ class DanhMucPolicy
      */
     public function delete(User $user, danh_muc $danh_muc)
     {
-        return $user->chuc_vu->ten_chuc_vu === 'admin';
     }
 }

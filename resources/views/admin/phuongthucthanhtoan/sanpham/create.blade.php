@@ -256,7 +256,7 @@
 
 
                             <div class="text-end">
-                                <button type="submit" class="btn btn-primary">Lưu sản phẩm</button>
+                                <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
                             </div>
                         </form>
                     </div>

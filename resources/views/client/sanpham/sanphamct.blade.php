@@ -225,15 +225,14 @@
                                 <a href="#" id="write-comment"><span class="ms-2"><i
                                             class="far fa-comment-dots"></i></span>
                                     Xem đánh giá <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span
-                                            class="edite"><i class="far fa-edit"></i></span>Viết đánh giá</a>
+                                    
                             </div>
                         </div>
                         <div class="product-body mb-40">
                             <div class="d-flex align-items-center mb-30">
                                 <div class="product-price me-2">
                                     <del class="del" id="old-price"> {{ number_format($sanPhamCT->gia_goc) }}</del>
-                                    <span id="new-price" class="onsale">{{ number_format($sanPhamCT->gia_km) }}</span>
+                                    <span style="color: red; font-size:18px" id="new-price" class="onsale">{{ number_format($sanPhamCT->gia_km) }}</span>
                                     <!-- Giá cập nhật sẽ được hiển thị ở đây -->
                                 </div>
                                 <span class="badge position-static bg-dark rounded-0">Giảm
@@ -376,7 +375,7 @@
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab">
                             <div class="single-product-desc">
-                                <h4>Đánh giá của khách hàng:</h4>
+                                <h4 style="font-size: 18px;font-weight: 600;">ĐÁNH GIÁ CỦA KHÁCH HÀNG:</h4>
                                 <br>
                                 <div class="row">
                                     <div class="col-12">

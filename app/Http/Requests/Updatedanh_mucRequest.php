@@ -38,7 +38,7 @@ class Updatedanh_mucRequest extends FormRequest
     {
         return [
             //
-            'ten_danh_muc.required' => 'Tên danh mục là bắt buộc ',
+            'ten_danh_muc.required' => 'Vui lòng nhập tên danh mục ',
             'ten_danh_muc.max' => 'Tên danh mục không được vượt quá 255 ký tự ',
 
             'anh_danh_muc.image' => 'Hình ảnh không hợp lệ',

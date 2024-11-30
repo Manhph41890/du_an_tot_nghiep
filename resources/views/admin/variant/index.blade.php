@@ -185,12 +185,6 @@
                                                                 value="{{ $size->ten_size }}" required>
 
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="gia">Giá</label>
-                                                            <input type="number" name="gia" class="form-control"
-                                                                value="{{ $size->gia }}" required>
-
-                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
 
@@ -219,19 +213,7 @@
         </div>
     </div>
     <script>
-        @if (session('success'))
-            toastr.success("{{ session('success') }}");
-        @endif
-
-        @if (session('error'))
-            toastr.error("{{ session('error') }}");
-        @endif
-
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                toastr.error("{{ $error }}");
-            @endforeach
-        @endif
+        
 
         // Lấy danh sách màu sắc và kích thước từ server
         var existingColors = @json($colors->map(fn($color) => strtolower($color)));

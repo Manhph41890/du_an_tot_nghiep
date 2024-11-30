@@ -208,8 +208,10 @@ Route::middleware(['auth', 'role:shipper'])->group(function () {
     Route::post('shipper/xac-nhan-lay-don/{donHang}', [ShipperController::class, 'xacNhanLayDon'])->name('shipper.xac-nhan-lay-don');
     Route::get('shipper/show', [ShipperController::class, 'show'])->name('shipper.show');
     Route::post('shipper/update-status/{id}', [ShipperController::class, 'updateStatus'])->name('shipper.update-status');
-    // Route::get('/shipper/profits', [ShipperController::class, 'showProfits'])->name('shipper.profits');
-    // Route::post('/danhgia/shipper/{shipperId}', [ShipperController::class, 'storeShipperReview'])->name('danhgia.shipper.store');
+    Route::get('/shipper/profits', [ShipperController::class, 'showProfits'])->name('shipper.profits');
+    Route::get('/shipper/policy', [ShipperController::class, 'policy'])->name('shipper.policy');
+    Route::post('/shipper/withdraw', [ShipperController::class, 'withdraw'])->name('shipper.withdraw');
+    Route::get('/shipper/rut-tien', [ShipperController::class, 'rut'])->name('shipper.rut-tien');
 });
 
 // Route chi tiết đơn hàng

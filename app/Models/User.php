@@ -55,6 +55,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(vi_nguoi_dung::class, 'user_id', 'id');
     }
+    public function vi_shipper()
+    {
+        return $this->hasOne(Vishipper::class);
+    }
 
     public function shippers()
     {

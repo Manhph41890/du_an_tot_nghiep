@@ -14,8 +14,10 @@ class Vishipper extends Model
         'tong_tien',
     ];
 
+    protected $table = 'vi_shippers';
+
     public function shipper()
     {
-        return $this->belongsTo(Shipper::class, 'shipper_id');
+        return $this->belongsTo(User::class, 'shipper_id');
     }
 }

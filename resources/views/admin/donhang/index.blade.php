@@ -41,7 +41,7 @@
                                     <a class="nav-link {{ !request('status') ? 'active' : '' }}"
                                         href="{{ route('donhangs.index') }}">Tất cả</a>
                                 </li>
-                                @foreach (['Chờ xác nhận', 'Đã xác nhận', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công', 'Đã hủy'] as $status)
+                                @foreach (['Chờ xác nhận', 'Đã xác nhận', 'Đang chuẩn bị hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công', 'Đã hủy', 'Thất bại'] as $status)
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link {{ request('status') == $status ? 'active' : '' }}"
                                             href="{{ route('donhangs.index', ['status' => $status]) }}">{{ $status }}</a>

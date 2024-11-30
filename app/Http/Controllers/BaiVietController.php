@@ -31,7 +31,6 @@ class BaiVietController extends Controller
             $baiviets = bai_viet::paginate(5);
         }
 
-
         $title = "Danh sách bài viết";
 
         return view('admin.baiviet.index', compact('user', 'baiviets', 'title', 'isAdmin'));

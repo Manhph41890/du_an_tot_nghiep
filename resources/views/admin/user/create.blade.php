@@ -32,13 +32,15 @@
 
                                     <div class="mb-3">
                                         <label for="chuc_vu_id" class="form-label">Chức vụ</label>
-                                        <select class="form-select @error('chuc_vu_id') is-invalid @enderror" name="chuc_vu_id" id="chuc_vu_id">
-                                            <option value="3" selected>Nhân viên</option>
+                                        <select class="form-select @error('chuc_vu_id') is-invalid @enderror"
+                                            name="chuc_vu_id" id="chuc_vu_id">
+                                            <option value="3" selected>Nhân viên quản lý</option>
+                                            <option value="5" selected>Nhân viên vận chuyển</option>
                                         </select>
                                         @error('chuc_vu_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
-                                    </div>                                    
+                                    </div>
 
                                     <div class="form-group mb-3">
                                         <label for="ho_ten">Họ và tên</label>
@@ -142,8 +144,7 @@
                                                 <input class="form-check-input" type="radio" name="is_active"
                                                     value="0" id="trang_thai_hide"
                                                     {{ old('is_active') == 0 ? 'checked' : '' }}>
-                                                <label class="form-check-label text-danger"
-                                                    for="trang_thai_hide">Ẩn</label>
+                                                <label class="form-check-label text-danger" for="trang_thai_hide">Ẩn</label>
                                             </div>
                                             @error('is_active')
                                                 <div class="invalid-feedback">

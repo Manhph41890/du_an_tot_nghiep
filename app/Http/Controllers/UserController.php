@@ -16,7 +16,7 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {   
+    {
         $this->authorize('viewAny', User::class);
         $title = "Quản lý User";
         $query = User::with('chuc_vu'); // Nạp dữ liệu chức vụ cùng với người dùng
@@ -52,14 +52,14 @@ class UserController extends Controller
         $params['title'] = $title;
         $params['list'] = $query->get(); // Lấy danh sách người dùng
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
-        return view('admin.user.index', $params, compact('title','isAdmin'));
+        return view('admin.user.index', $params, compact('title', 'isAdmin'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {  
+    {
         $this->authorize('create', User::class);
         $title = "Thêm mới nhân viên";
         $chuc_vus = chuc_vu::query()->pluck('ten_chuc_vu', 'id')->all();
@@ -107,7 +107,7 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-    {    
+    {
         $this->authorize('update', User::class);
         // Validate dữ liệu từ form
         $request->validate([
@@ -147,8 +147,8 @@ class UserController extends Controller
         return response()->json(['success' => 'Cập nhật thành công']);
     }
     public function updatechucvu(Request $request, $userId)
-    {  
-       
+    {
+
         $request->validate([
             'chuc_vu_id' => 'required|string|max:255'
         ]);

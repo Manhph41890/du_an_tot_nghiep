@@ -13,7 +13,7 @@
                                 </h3>
                             </div>
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row d-flex justify-content-between">
                                     <div class="col-md-4">
                                         <div class="card profit-card shadow-lg">
                                             <div class="card-body text-center">
@@ -23,14 +23,54 @@
                                                 {{-- @php
                                                     dd($profitHistory);
                                                 @endphp --}}
+                                                {{-- @php
+                                                    dd($viShipper);
+                                                @endphp --}}
                                                 <h5 class="card-title text-uppercase">Tổng Lợi Nhuận</h5>
                                                 <p class="card-text profit-amount">
-                                                    {{ number_format($totalProfit, 0, ',', '.') }} VND
+                                                    {{ number_format($viShipper->tong_tien, 0, ',', '.') }} VND
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="text-center">
-                                            <a class="btn btn-primary" href="">Rút Tiền</a>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card profit-card shadow-lg">
+                                            <div class="text-center pt-2">
+                                                <h5>Lịch sử hoa hồng</h5>
+                                            </div>
+                                            <div class="card-body" style="background-color: white !important">
+                                                <table class="table table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Mã đơn hàng</th>
+                                                            <th>Người nhận</th>
+                                                            <th>Địa Chỉ</th>
+                                                            <th>Số điện thoại</th>
+                                                            <th>Tổng tiền</th>
+                                                            <th>Lợi nhuận</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($shippers as $shipper)
+                                                            <tr>
+                                                                <td>{{ $shipper->donHang->ma_don_hang }}</td>
+                                                                <td>{{ $shipper->donHang->ho_ten }}</td>
+                                                                <td>{{ $shipper->donHang->dia_chi }}</td>
+                                                                <td>{{ $shipper->donHang->so_dien_thoai }}</td>
+                                                                <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }}
+                                                                    VND</td>
+                                                                <td>
+                                                                    {{ number_format($shipper->donHang->tong_tien * 0.04, 0, ',', '.') }}
+                                                                    VND
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                    <div>
+                                                        {{ $shippers->links() }}
+                                                    </div>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
 

@@ -550,9 +550,10 @@
         <script>
             $(document).ready(function() {
                 $('#apply-coupon').on('click', function() {
-                    var couponCode = $('#coupon-code').val(); // Lấy mã khuyến mãi
-                    var totalAmount = parseFloat($('#total_amount').data(
-                        'total')); // Lấy tổng tiền trước khi áp dụng mã khuyến mãi
+                    var couponCode = $('#coupon-code').val();
+                    // Thay đổi cách lấy tổng tiền
+                    var totalAmount = parseFloat($('#hidden_totall').val().replace(/\./g,
+                        '')); // Lấy tổng tiền trước khi áp dụng mã khuyến mãi
 
                     $.ajax({
                         url: "{{ route('apply.coupon') }}", // Route xử lý mã giảm giá

@@ -169,12 +169,12 @@
                         </thead>
                         <tbody>
                             @foreach ($shippers as $shipper)
-                                @if ($shipper->status == 'Đã thành công')
+                                @if ($shipper->status == 'Thành công')
                                     <tr>
                                         <td>{{ $shipper->donHang->ma_don_hang }}</td>
-                                        <td>{{ $shipper->donHang->user->ho_ten }}</td>
-                                        <td>{{ $shipper->donHang->user->dia_chi }}</td>
-                                        <td>{{ $shipper->donHang->user->so_dien_thoai }}</td>
+                                        <td>{{ $shipper->donHang->ho_ten }}</td>
+                                        <td>{{ $shipper->donHang->dia_chi }}</td>
+                                        <td>{{ $shipper->donHang->so_dien_thoai }}</td>
                                         <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }} VND</td>
                                         <td>
                                             {{ number_format($shipper->donHang->tong_tien * 0.04, 0, ',', '.') }} VND
@@ -210,6 +210,7 @@
                                             @if ($shipper->status == 'Thất bại')
                                                 {{ $shipper->ly_do_huy ?? 'Không có lý do' }}
                                             @endif
+                                            {{-- {{ $shipper->ly_do_huy }} --}}
                                         </td>
                                     </tr>
                                 @endif

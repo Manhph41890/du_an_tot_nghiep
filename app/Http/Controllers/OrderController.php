@@ -67,7 +67,7 @@ class OrderController extends Controller
                     return redirect()->back()->with('error', 'Bạn đã sử dụng mã giảm giá này trước đó.');
                 }
                 $discount = $coupon->gia_tri_khuyen_mai;
-                $total -= $discount;
+                $totall -= $discount;
                 // Áp dụng giảm giá
             } else {
                 return redirect()->back()->with('error', 'Mã khuyến mãi không hợp lệ hoặc đã hết hạn.');

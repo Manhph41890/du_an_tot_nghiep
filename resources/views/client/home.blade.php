@@ -676,7 +676,7 @@
                                             <div class="product-thumbnail position-relative">
                                                 <span class="badge badge-danger top-right">{{ $sanphamview->views }} lượt
                                                     xem</span>
-                                                <a href="{{ route('sanpham.chitiet', $item->id) }}">
+                                                <a href="{{ route('san-phams.incrementViews', $sanphamview->id) }}">
                                                     <img class="first-img"
                                                         src="{{ asset('/storage/' . $sanphamview->anh_san_pham) }}"
                                                         alt="anh san pham" />

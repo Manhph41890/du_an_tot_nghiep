@@ -151,15 +151,15 @@
 
 
         /* .snowflake {
-                position: absolute;
-                top: -10px;
-                font-size: 1em;
-                color: #ffffff;
-                opacity: 0.9;
-                user-select: none;
-                pointer-events: none;
-                animation: fall 10s linear infinite;
-            } */
+                                                                    position: absolute;
+                                                                    top: -10px;
+                                                                    font-size: 1em;
+                                                                    color: #ffffff;
+                                                                    opacity: 0.9;
+                                                                    user-select: none;
+                                                                    pointer-events: none;
+                                                                    animation: fall 10s linear infinite;
+                                                                } */
         .snowflake {
             position: absolute;
             background-color: white;
@@ -768,11 +768,29 @@
             </div>
         </div>
     </section>
-    <!-- blog-section end -->
+    <!-- Thêm logo chat --> <img src="{{ asset('assets/client/img/logo/chatbot.jpg') }}" alt="Chat with us"
+        class="chat-logo" id="chat-logo">
 
     {{-- end --}}
 
     <style>
+        /* Ẩn biểu tượng chat mặc định của Tawk.to */
+        #tawkto-chat {
+            display: none;
+        }
+
+        /* Tùy chỉnh logo chat */
+        .chat-logo {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 1000;
+            /* Đảm bảo logo nằm trên các phần tử khác */
+        }
+
         .min_h {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -866,7 +884,25 @@
         function startSnowing() {
             setInterval(createSnowflake, 100);
         }
-
-        window.addEventListener('load', startSnowing);
+    </script>
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/674df26e4304e3196aeb77ba/1ie47m0gm';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })
+        (); // Sự kiện nhấp vào logo để mở cửa sổ chat 
+        document.addEventListener('DOMContentLoaded', function() {
+            var chatLogo = document.getElementById('chat-logo');
+            chatLogo.addEventListener('click', function() {
+                Tawk_API.maximize(); // Mở cửa sổ chat Tawk.to 
+            });
+        });
     </script>
 @endsection

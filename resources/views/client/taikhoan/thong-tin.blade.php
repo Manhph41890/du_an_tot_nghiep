@@ -66,8 +66,12 @@
 
                         <div class="col-12 mb-30">
                             <label for="dia_chi" class="mb-2">Địa chỉ</label>
-                            <input id="dia_chi" name="dia_chi" type="text" value="{{ $user->dia_chi }}" disabled />
+                            <input id="dia_chi" name="dia_chi" type="text" value="{{ $user->dia_chi }}"
+                                class="form-control" disabled>
                         </div>
+
+
+
                     </div>
 
                     <!-- Action Buttons -->
@@ -84,4 +88,43 @@
             </form>
         </div>
     </div>
+    <script>
+        function initAutocomplete() {
+            var addressInput = document.getElementById('dia_chi');
+            if (!addressInput) {
+                console.error('Element with id "dia_chi" not found.');
+                return;
+            }
+
+            var autocomplete = new goongjs.places.Autocomplete(addressInput, {
+                apiKey: 'q3lUTTMQSOttVWIzTz6aPzTq1uBFQUDXVJbDeQtm', // Thay thế YOUR_API_KEY bằng API key của bạn
+                types: ['geocode']
+            });
+
+            autocomplete.on('select', function(event) {
+                var place = event.features[0];
+                if (place && place.place_name) {
+                    addressInput.value = place.place_name;
+
+                    // Optional: Extract additional address components
+                    var addressComponents = place.context;
+                    if (addressComponents) {
+                        // Example of extracting specific components
+                        var streetNumber = addressComponents.find(component =>
+                            component.id.includes('address')
+                        );
+                        var route = addressComponents.find(component =>
+                            component.id.includes('street')
+                        );
+
+                        // You can store or process these components as needed
+                        console.log('Street Number:', streetNumber ? streetNumber.text : 'N/A');
+                        console.log('Route:', route ? route.text : 'N/A');
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initAutocomplete);
+    </script>
 @endsection

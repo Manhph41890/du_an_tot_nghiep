@@ -103,6 +103,7 @@
         {{-- @include('admin.partials.footer') --}}
     </div>
     <!-- END wrapper -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 
     <!-- Vendor Scripts -->
     <script src="{{ asset('assets/admin/libs/simplebar/simplebar.min.js') }}"></script>
@@ -124,6 +125,7 @@
     <!-- App js-->
     <script src="{{ asset('assets/admin/js/app.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/quill/quill.min.js') }}"></script>
+
 </body>
 
 </html>

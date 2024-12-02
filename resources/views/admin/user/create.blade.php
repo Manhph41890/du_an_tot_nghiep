@@ -31,7 +31,7 @@
                                     @csrf
 
                                     <div class="mb-3">
-                                        <label for="chuc_vu_id" class="form-label">Chức vụ</label>
+                                        <label for="chuc_vu_id" class="form-label">Chọn chức vụ</label>
                                         <select class="form-select @error('chuc_vu_id') is-invalid @enderror"
                                             name="chuc_vu_id" id="chuc_vu_id">
                                             <option value="3" selected>Nhân viên quản lý</option>
@@ -42,7 +42,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-3 btn-p">
                                         <label for="ho_ten">Họ và tên</label>
                                         <input type="text" name="ho_ten" value="{{ old('ho_ten') }}"
                                             class="form-control @error('ho_ten') is-invalid @enderror">

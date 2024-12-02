@@ -65,6 +65,7 @@
             <!-- Tab content -->
             <div class="tab-content mt-3" id="shipperTabContent">
                 <!-- Đã lấy hàng -->
+
                 <div class="tab-pane fade show active" id="da-lay-hang" role="tabpanel" aria-labelledby="tab-da-lay-hang">
                     <h4>Đơn hàng đã lấy</h4>
                     <table class="table table-bordered">
@@ -241,8 +242,8 @@
                                                 <option value="Giao lại"
                                                     {{ $shipper->status == 'Giao lại' ? 'selected' : '' }}>Giao lại
                                                 </option>
-                                                <option value="Đã thành công"
-                                                    {{ $shipper->status == 'Đã thành công' ? 'selected' : '' }}>Đã thành
+                                                <option value="Thành công"
+                                                    {{ $shipper->status == 'Thành công' ? 'selected' : '' }}>Đã thành
                                                     công</option>
                                                 <option value="Thất bại"
                                                     {{ $shipper->status == 'Thất bại' ? 'selected' : '' }}>Thất bại

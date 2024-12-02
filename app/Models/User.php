@@ -33,10 +33,10 @@ class User extends Authenticatable
         'is_active'
     ];
 
-    public function chuc_vus()
-    {
-        return $this->belongsTo(chuc_vu::class, 'id');
-    }
+    // public function chuc_vus()
+    // {
+    //     return $this->belongsTo(chuc_vu::class, 'id');
+    // }
 
     public function donhangs()
     {

@@ -45,22 +45,24 @@ class ShipperController extends Controller
     public function show()
     {
         $title = "Đơn hàng đã lấy hàng";
+        $shipper_id = Auth::id();
+
         // Lấy các shipper với trạng thái "Đã lấy hàng"
-        $shippers = Shipper::with('donHang') // Quan hệ với bảng DonHang
+        $shippers = Shipper::with('donHang')->where('shipper_id', $shipper_id) // Quan hệ với bảng DonHang
             ->get();
-        return view('shipper.show', compact('shippers', 'title'));
+        return view('shipper.show', compact('shippers', 'title', 'shipper_id'));
     }
     public function updateStatus(Request $request, $shipperId)
     {
         $shipper = Shipper::findOrFail($shipperId);
         $status = $request->input('status');
         $lyDoHuy = $request->input('ly_do_huy');
-        $currentShipperId = Auth::id();
 
         if ($status === 'Thành công') {
             $donHang = $shipper->donHang;
             $profit = $donHang->tong_tien * 0.04;
             $shipper_id = Auth::id();
+            // dd($shipper_id);
             $vishipper = Vishipper::where('shipper_id', $shipper_id)->first();
             $vishipper->tong_tien += $profit;
             $vishipper->save();

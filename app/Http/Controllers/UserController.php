@@ -17,43 +17,38 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('viewAny', User::class);
-        $title = "Quản lý User";
-        $query = User::with('chuc_vu'); // Nạp dữ liệu chức vụ cùng với người dùng
-        $params['chucVus'] = chuc_vu::all();
-        // Lọc trạng thái nếu có
-        if ($request->has('search_dm')) {
-            $is_active = $request->input('search_dm');
-            if ($is_active == '1' || $is_active == '0') {
-                $query->where('is_active', $is_active);
-            }
-        }
-
-        // Lọc theo tên sản phẩm
-        if ($request->has('search_product_name') && !empty($request->input('search_product_name'))) {
-            $search_product_name = $request->input('search_product_name');
-            $query->whereHas('chuc_vu', function ($q) use ($search_product_name) {
-                $q->where('ten_chuc_vu', 'like', '%' . $search_product_name . '%');
-            });
-            $query->orWhere(function ($q) use ($search_product_name) {
-                $q->where('ho_ten', 'like', '%' . $search_product_name . '%');
-            });
-            $query->orWhere(function ($q) use ($search_product_name) {
-                $q->where('email', 'like', '%' . $search_product_name . '%');
-            });
-            $query->orWhere(function ($q) use ($search_product_name) {
-                $q->where('so_dien_thoai', 'like', '%' . $search_product_name . '%');
-            });
-        }
-
         $title = "Người Dùng";
-        // $params = [];
+        $query = User::with('chuc_vu'); // Nạp dữ liệu chức vụ
 
+        $params['chucVus'] = chuc_vu::all();
+
+        // Lọc trạng thái
+        $query->when($request->filled('search_dm'), function ($q) use ($request) {
+            $q->where('is_active', $request->input('search_dm'));
+        });
+
+        // Lọc theo tên, email, hoặc chức vụ
+        $query->when($request->filled('search_product_name'), function ($q) use ($request) {
+            $search = $request->input('search_product_name');
+            $q->where(function ($subQuery) use ($search) {
+                $subQuery->where('ho_ten', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('so_dien_thoai', 'like', "%{$search}%")
+                    ->orWhereHas('chuc_vu', function ($cvQuery) use ($search) {
+                        $cvQuery->where('ten_chuc_vu', 'like', "%{$search}%");
+                    });
+            });
+        });
+
+        // Truy vấn danh sách người dùng
         $params['title'] = $title;
-        $params['list'] = $query->get(); // Lấy danh sách người dùng
+        $params['list'] = $query->orderByDesc('id')->paginate(8);
+
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
+
         return view('admin.user.index', $params, compact('title', 'isAdmin'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -100,7 +95,18 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $title = "Cập nhật";
+        $user = User::query()->findOrFail($id);
+        $chuc_vus = chuc_vu::query()->pluck('ten_chuc_vu', 'id')->all();
+        return view('admin.user.edit', compact('user', 'title', 'chuc_vus'));
+    }
+
+    public function updateIs_active(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        $user->is_active = $request->is_active;
+        $user->save();
+        return redirect()->back()->with('success', 'Cập nhật thành công');
     }
 
     /**

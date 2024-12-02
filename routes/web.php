@@ -60,6 +60,7 @@ Route::prefix('client')->group(function () {
 
     Route::get('/taikhoan/myorder/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.myorder');
     Route::get('/taikhoan/vinguoidung', [TaiKhoanController::class, 'viNguoiDung'])->name('taikhoan.vinguoidung');
+    Route::get('/taikhoan/ttvc', [TaiKhoanController::class, 'ttvc']);
 
     Route::get('/thong-tin', [TaiKhoanController::class, 'showAccountDetails'])->name('taikhoan.thongtin');
     Route::get('/don-hang', [TaiKhoanController::class, 'donHang'])->name('taikhoan.donhang');
@@ -162,6 +163,8 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
     Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
+    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/update-is-active', [UserController::class, 'updateIs_active'])->name('user.updateIs_active');
 
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);

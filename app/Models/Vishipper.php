@@ -18,6 +18,6 @@ class Vishipper extends Model
 
     public function shipper()
     {
-        return $this->belongsTo(User::class, 'shipper_id');
+        return $this->belongsTo(User::class);
     }
 }

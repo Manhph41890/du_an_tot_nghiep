@@ -20,11 +20,9 @@ class CartController extends Controller
     public function index()
     {
         // Lấy giỏ hàng của người dùng hiện tại cùng với cart items và quan hệ màu sắc và kích thước
-        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')
-            ->where('user_id', Auth::id())
-            ->first();
+        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')->where('user_id', Auth::id())->first();
 
-        // 
+        //
         if (!$cart) {
             return view('client.cart.index', ['cartItems' => [], 'message' => 'Giỏ hàng của bạn đang trống.']);
         }
@@ -37,9 +35,7 @@ class CartController extends Controller
     public function backup()
     {
         // Lấy giỏ hàng của người dùng hiện tại cùng với cart items và quan hệ màu sắc và kích thước
-        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')
-            ->where('user_id', Auth::id())
-            ->first();
+        $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')->where('user_id', Auth::id())->first();
 
         // Nếu không có cart, bạn có thể xử lý như sau
         if (!$cart) {
@@ -52,25 +48,25 @@ class CartController extends Controller
         return view('client.cart.backup', compact('cartItems'));
     }
 
-
-
     // Thêm sản phẩm vào giỏ hàng
     public function add(Request $request)
     {
-
         // Xác thực dữ liệu đầu vào
-        $validatedData = $request->validate([
-            'san_pham_id' => 'required|exists:san_phams,id',
-            'size_san_pham_id' => 'required|exists:size_san_phams,id',
-            'color' => 'required|exists:color_san_phams,id',
-            'quantity' => 'required|integer|min:1|',
-        ], [
-            'san_pham_id.required' => 'Sản phẩm không hợp lệ.',
-            'size_san_pham_id.required' => 'Vui lòng chọn size sản phẩm.',
-            'color.required' => 'Vui lòng chọn màu sản phẩm.',
-            'quantity.required' => 'Vui lòng nhập số lượng.',
-            'quantity.integer' => 'Số lượng phải là số nguyên.',
-        ]);
+        $validatedData = $request->validate(
+            [
+                'san_pham_id' => 'required|exists:san_phams,id',
+                'size_san_pham_id' => 'required|exists:size_san_phams,id',
+                'color' => 'required|exists:color_san_phams,id',
+                'quantity' => 'required|integer|min:1|',
+            ],
+            [
+                'san_pham_id.required' => 'Sản phẩm không hợp lệ.',
+                'size_san_pham_id.required' => 'Vui lòng chọn size sản phẩm.',
+                'color.required' => 'Vui lòng chọn màu sản phẩm.',
+                'quantity.required' => 'Vui lòng nhập số lượng.',
+                'quantity.integer' => 'Số lượng phải là số nguyên.',
+            ],
+        );
 
         // Lấy thông tin sản phẩm
         $sanPham = san_pham::findOrFail($validatedData['san_pham_id']);
@@ -85,7 +81,6 @@ class CartController extends Controller
         if ($variant && $variant->so_luong < $validatedData['quantity']) {
             return response()->json(['success' => false, 'message' => 'Số lượng yêu cầu vượt quá tồn kho.']);
         }
-
 
         // Lấy user_id của người dùng hiện tại
         $userId = auth()->id();
@@ -114,14 +109,12 @@ class CartController extends Controller
         }
 
         // Tính giá cho sản phẩm khi thêm vào giỏ hàng
-        $discountedPrice = $sanPham->gia_km;  // Lấy giá khuyến mãi của sản phẩm
-        $variantPrice = $variant->gia;  // Lấy giá của biến thể sản phẩm
-
+        $discountedPrice = $sanPham->gia_km; // Lấy giá khuyến mãi của sản phẩm
+        $variantPrice = $variant->gia; // Lấy giá của biến thể sản phẩm
 
         // Tính tổng giá cho sản phẩm (giá khuyến mãi + giá biến thể) * số lượng
         $totalPrice = ($discountedPrice + $variantPrice) * $cartItem->quantity;
         $cartItem->price = $totalPrice;
-
 
         // Lưu CartItem vào database
         $cartItem->save();
@@ -140,14 +133,14 @@ class CartController extends Controller
 
         // Lấy thông tin sản phẩm trong giỏ hàng
         $cartItem = CartItem::findOrFail($id);
-        $oldQuantity = $cartItem->quantity;  // Số lượng cũ
+        $oldQuantity = $cartItem->quantity; // Số lượng cũ
 
         // Cập nhật số lượng
         $cartItem->quantity = $request->quantity;
 
         // Lấy biến thể sản phẩm tương ứng
         $variant = bien_the_san_pham::where('san_pham_id', $cartItem->san_pham_id)
-            ->where('size_san_pham_id', $cartItem->size_san_pham_id)  // Giữ nguyên kích thước cũ
+            ->where('size_san_pham_id', $cartItem->size_san_pham_id) // Giữ nguyên kích thước cũ
             ->where('color_san_pham_id', $cartItem->color_san_pham_id) // Giữ nguyên màu sắc cũ
             ->first();
 
@@ -159,7 +152,7 @@ class CartController extends Controller
             if ($newQuantity > $availableQuantity) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Số lượng không được vượt quá ' . $availableQuantity . ' sản phẩm còn lại.'
+                    'message' => 'Số lượng không được vượt quá ' . $availableQuantity . ' sản phẩm còn lại.',
                 ]);
             }
 
@@ -170,7 +163,7 @@ class CartController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Biến thể sản phẩm không tồn tại.'
+                'message' => 'Biến thể sản phẩm không tồn tại.',
             ]);
         }
 
@@ -180,15 +173,9 @@ class CartController extends Controller
         // Trả về phản hồi JSON thành công
         return response()->json([
             'success' => true,
-            'message' => 'Cập nhật thành công'
+            'message' => 'Cập nhật thành công',
         ]);
     }
-
-
-
-
-
-
 
     // Xóa sản phẩm khỏi giỏ hàng
     // public function removeFromCart($id)
@@ -234,7 +221,6 @@ class CartController extends Controller
     //     return redirect()->route('cart.index')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng');
     // }
 
-
     public function showCart()
     {
         // Lấy user_id của người dùng hiện tại
@@ -253,43 +239,32 @@ class CartController extends Controller
                 ->where('cart_id', $cart->id)
                 ->get();
 
-            // Nhóm các sản phẩm theo `san_pham_id`
-            $groupedByProduct = $cartItems->groupBy('san_pham_id');
+            // Đếm tổng số sản phẩm bao gồm các biến thể
+            $cartItemsCount = $cartItems
+                ->unique(function ($item) {
+                    return $item->san_pham_id . '-' . $item->color_san_pham_id . '-' . $item->size_san_pham_id;
+                })
+                ->count();
 
-            $cartItemsCount = 0; // Đếm tổng số sản phẩm (bao gồm biến thể)
+            // Sản phẩm không đủ hàng
+            $insufficientStockItems = [];
 
-            $insufficientStockItems = []; // Sản phẩm không đủ hàng
-
-            foreach ($groupedByProduct as $sanPhamId => $items) {
-                if ($items->count() === 1) {
-                    // Nếu chỉ có 1 biến thể cho sản phẩm, tăng số lượng
-                    $cartItemsCount++;
-                } else {
-                    // Nếu có nhiều biến thể, đếm từng biến thể
-                    $uniqueVariants = $items->unique(function ($item) {
-                        return $item->color_san_pham_id . '-' . $item->size_san_pham_id;
-                    });
-
-                    $cartItemsCount += $uniqueVariants->count();
-                }
-
+            foreach ($cartItems as $item) {
                 // Kiểm tra tồn kho của từng biến thể
-                foreach ($items as $item) {
-                    $variant = bien_the_san_pham::where('san_pham_id', $item->san_pham_id)
-                        ->where('color_san_pham_id', $item->color_san_pham_id)
-                        ->where('size_san_pham_id', $item->size_san_pham_id)
-                        ->first();
+                $variant = bien_the_san_pham::where('san_pham_id', $item->san_pham_id)
+                    ->where('color_san_pham_id', $item->color_san_pham_id)
+                    ->where('size_san_pham_id', $item->size_san_pham_id)
+                    ->first();
 
-                    if ($variant && $variant->so_luong < $item->quantity) {
-                        $insufficientStockItems[] = [
-                            'id' => $item->id,
-                            'name' => $item->san_pham->ten_san_pham,
-                            'size' => $item->size->ten_size ?? 'N/A',
-                            'color' => $item->color->ten_color ?? 'N/A',
-                            'available_quantity' => $variant->so_luong,
-                            'requested_quantity' => $item->quantity,
-                        ];
-                    }
+                if ($variant && $variant->so_luong < $item->quantity) {
+                    $insufficientStockItems[] = [
+                        'id' => $item->id,
+                        'name' => $item->san_pham->ten_san_pham,
+                        'size' => $item->size->ten_size ?? 'N/A',
+                        'color' => $item->color->ten_color ?? 'N/A',
+                        'available_quantity' => $variant->so_luong,
+                        'requested_quantity' => $item->quantity,
+                    ];
                 }
             }
         }
@@ -297,8 +272,6 @@ class CartController extends Controller
         // Trả về view với dữ liệu đã xử lý
         return view('client.partials.header', compact('cartItemsCount', 'insufficientStockItems'));
     }
-
-
 
     // Quá trình thanh toán
     public function checkout(Request $request)
@@ -317,9 +290,13 @@ class CartController extends Controller
         $phuongThucVanChuyens = phuong_thuc_van_chuyen::all();
 
         // Lấy giỏ hàng của người dùng và chỉ lấy các sản phẩm được chọn
-        $cart = Cart::with(['cartItems' => function ($query) use ($request) {
-            $query->whereIn('id', $request->checkout_items);
-        }, 'cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color'])
+        $cart = Cart::with([
+            'cartItems' => function ($query) use ($request) {
+                $query->whereIn('id', $request->checkout_items);
+            },
+            'cartItems.san_pham.bien_the_san_phams.size',
+            'cartItems.san_pham.bien_the_san_phams.color',
+        ])
             ->where('user_id', Auth::id())
             ->first();
 
@@ -332,8 +309,7 @@ class CartController extends Controller
 
         // Kiểm tra số lượng hàng còn lại trước khi thanh toán
         foreach ($cartItems as $item) {
-            $availableStock = optional($item->san_pham->bien_the_san_phams->firstWhere('size_san_pham_id', $item->size_san_pham_id)
-                ->firstWhere('color_san_pham_id', $item->color_san_pham_id))->so_luong;
+            $availableStock = optional($item->san_pham->bien_the_san_phams->firstWhere('size_san_pham_id', $item->size_san_pham_id)->firstWhere('color_san_pham_id', $item->color_san_pham_id))->so_luong;
             if ($item->quantity > $availableStock) {
                 return redirect()->route('cart.index')->with('error', 'Một hoặc nhiều sản phẩm trong giỏ hàng có số lượng không đủ.');
             }
@@ -347,10 +323,8 @@ class CartController extends Controller
         $selectedProductIds = $request->input('checkout_items');
 
         // Chuyển hướng về trang xác nhận đơn hàng và truyền biến vào view
-        return view('client.order.index', compact('user', 'cartItems', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens', 'selectedProductIds', 'tongTienVi'))
-            ->with('success', 'Vui lòng xác nhận thông tin đặt hàng!');
+        return view('client.order.index', compact('user', 'cartItems', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens', 'selectedProductIds', 'tongTienVi'))->with('success', 'Vui lòng xác nhận thông tin đặt hàng!');
     }
-
 
     public function updateMultiple(Request $request)
     {

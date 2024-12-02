@@ -7,6 +7,7 @@ use App\Models\san_pham;
 use App\Models\danh_muc;
 use App\Models\khuyen_mai;
 use App\Models\size_san_pham;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ClientSanPhamController extends Controller
@@ -117,10 +118,11 @@ class ClientSanPhamController extends Controller
         }
         // Lấy khuyến mãi
         $discounts = khuyen_mai::where('is_active', 1)
-            ->where('so_luong_ma', '>', 0) // Thêm điều kiện so_luong_ma > 0
-            ->whereNull('user_id') // Thêm điều kiện user_id = null
+            ->where('so_luong_ma', '>', 0) // Điều kiện so_luong_ma > 0
+            ->whereNull('user_id') // Điều kiện user_id = null
+            ->where('ngay_ket_thuc', '>', Carbon::now()) // Thêm điều kiện ngày kết thúc <= hiện tại
             ->orderBy('created_at', 'desc') // Sắp xếp theo ngày tạo mới nhất
-            ->take(4) // Lấy 4 mã giảm giá
+            ->take(3) // Lấy 3 bản ghi
             ->get();
 
         return view('client.sanpham.danhsach', compact('list_sanphams', 'discounts', 'title', 'danhmucs', 'soluongsanpham', 'size_sidebar', 'color_sidebar', 'request'));

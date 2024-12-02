@@ -552,36 +552,37 @@
                 $('#apply-coupon').on('click', function() {
                     var couponCode = $('#coupon-code').val();
                     // Thay đổi cách lấy tổng tiền
-                    var totalAmount = parseFloat($('#hidden_totall').val().replace(/\./g,
-                        '')); // Lấy tổng tiền trước khi áp dụng mã khuyến mãi
+                    var totalAmount = parseFloat($('#hidden_totall').val().replace(/\./g, ''));
+
+                    console.log("Coupon Code:", couponCode);
+                    console.log("Total Amount:", totalAmount);
 
                     $.ajax({
-                        url: "{{ route('apply.coupon') }}", // Route xử lý mã giảm giá
+                        url: "{{ route('apply.coupon') }}",
                         type: "POST",
                         data: {
                             coupon_code: couponCode,
                             totall: totalAmount,
-                            _token: "{{ csrf_token() }}" // CSRF token cho bảo mật
+                            _token: "{{ csrf_token() }}"
                         },
-
                         success: function(response) {
+                            console.log(response);
                             if (response.success) {
-
-                                // Cập nhật giá trị tổng tiền sau khi áp dụng mã khuyến mãi
-                                $('#total_amount').text(response.newTotal + '₫');
+                                $('#total_amount').text(response.newTotal.replace(/\₫/g, '') + '₫');
                                 $('#discount-amount').text(response.discountAmount + '₫');
-                                toastr.success('Mã giảm giá đã được áp dụng thành công!');
+                                toastr.success(response.message);
                             } else {
-                                toastr.error(response
-                                    .message); // Hiển thị thông báo nếu mã khuyến mãi không hợp lệ
+                                toastr.error(response.message);
                             }
                         },
-                        error: function() {
+                        error: function(xhr, status, error) {
+                            console.error("Error:", xhr.responseText);
                             toastr.error('Đã xảy ra lỗi. Vui lòng thử lại sau.');
                         }
                     });
                 });
             });
+
 
             function toggleOrderButton(paymentType) {
                 const codButton = document.getElementById('place-order-cod');

@@ -112,12 +112,14 @@
                                     </div>
 
                                 </div>
+                                @php
+                                    $tongGiaSp = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
+                                @endphp
 
                                 <div class="card">
                                     <div class="card-body">
                                         <p><strong class="pe-1">Tổng tiền sản phẩm</strong>
-                                            {{ number_format($donhang->chi_tiet_don_hangs->sum('thanh_tien'), 0, ',', '.') }}
-                                            VND
+                                            {{ number_format($tongGiaSp, 0, ',', '.') }} VND
                                         </p>
                                         <p><strong class="pe-1">Giảm
                                                 giá:</strong>

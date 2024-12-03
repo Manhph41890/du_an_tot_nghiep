@@ -63,6 +63,11 @@ class TaiKhoanController extends Controller
         return view('client.taikhoan.thong-tin', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsNapVi', 'lsRutVi_choduyet', 'lsRutVi_thanhcong', 'lsRutVi_thatbai'));
     }
 
+    public function ttvc()
+    {
+        return view('client.taikhoan.ttvc');
+    }
+
     public function donHang()
     {
         $user = Auth::user();
@@ -133,9 +138,10 @@ class TaiKhoanController extends Controller
             'huy_don_hang',
         ])->findOrFail($id);
         $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
+        $currentStatus = $donhang->shipper ? $donhang->shipper->status : null;
 
         // Trả về view cùng với dữ liệu đơn hàng
-        return view('client.taikhoan.showmyorder', compact('donhang'));
+        return view('client.taikhoan.showmyorder', compact('donhang', 'currentStatus'));
     }
 
     public function successOrder($id)

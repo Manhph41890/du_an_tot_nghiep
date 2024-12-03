@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('phuong_thuc_van_chuyens', function (Blueprint $table) {
-            //
-            $table->integer('gia_ship')->default(0); // Thêm cột giá ship
+        Schema::table('vi_shippers', function (Blueprint $table) {
+            $table->unsignedBigInteger('shipper_id')->after('id');
+            // Tạo khóa ngoại liên kết với bảng users
+            $table->foreign('shipper_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -22,9 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('phuong_thuc_van_chuyens', function (Blueprint $table) {
-            $table->dropColumn('gia_ship'); // Xóa cột giá ship
-
+        Schema::table('vi_shippers', function (Blueprint $table) {
+            //
         });
     }
 };

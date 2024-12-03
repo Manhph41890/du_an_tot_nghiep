@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('phuong_thuc_van_chuyens', function (Blueprint $table) {
-            //
-            $table->integer('gia_ship')->default(0); // Thêm cột giá ship
+        Schema::table('vi_shippers', function (Blueprint $table) {
+            $table->decimal('tong_tien', 15, 2);
         });
     }
 
@@ -22,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('phuong_thuc_van_chuyens', function (Blueprint $table) {
-            $table->dropColumn('gia_ship'); // Xóa cột giá ship
-
+        Schema::table('vi_shippers', function (Blueprint $table) {
+            $table->dropColumn('tong_tien');
         });
     }
 };

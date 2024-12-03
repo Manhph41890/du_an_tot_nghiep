@@ -9,6 +9,8 @@ use App\Models\Shipper;
 use App\Models\Vishipper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ShipperController extends Controller
 {
@@ -57,24 +59,41 @@ class ShipperController extends Controller
         $shipper = Shipper::findOrFail($shipperId);
         $status = $request->input('status');
         $lyDoHuy = $request->input('ly_do_huy');
+        $currentShipperId = Auth::id();
 
         if ($status === 'Thành công') {
             $donHang = $shipper->donHang;
-            $profit = $donHang->tong_tien * 0.04;
-            $shipper_id = Auth::id();
-            // dd($shipper_id);
-            $vishipper = Vishipper::where('shipper_id', $shipper_id)->first();
-            $vishipper->tong_tien += $profit;
-            $vishipper->save();
-            $donHang->update(['trang_thai_don_hang' => 'Đã giao']);
+
+            if ($donHang) {
+                $profit = $donHang->tong_tien * 0.04;
+
+                // Sử dụng updateOrCreate để cập nhật hoặc tạo mới bản ghi Vishipper
+                $vishipper = Vishipper::updateOrCreate(
+                    ['shipper_id' => $currentShipperId],
+                    ['tong_tien' => DB::raw('tong_tien + ' . $profit)]
+                );
+
+                $donHang->update(['trang_thai_don_hang' => 'Đã giao']);
+            } else {
+                Log::error('DonHang not found for shipper', ['shipper_id' => $currentShipperId]);
+            }
         } elseif ($status === 'Thất bại') {
             $donHang = $shipper->donHang;
-            $donHang->update(['trang_thai_don_hang' => 'Thất bại']);
-            $shipper->ly_do_huy = $lyDoHuy;
+
+            if ($donHang) {
+                $donHang->update(['trang_thai_don_hang' => 'Thất bại']);
+                $shipper->ly_do_huy = $lyDoHuy;
+            } else {
+                Log::error('DonHang not found for shipper', ['shipper_id' => $currentShipperId]);
+            }
         }
+
         $shipper->update(['status' => $status]);
+
         return response()->json(['success' => true]);
     }
+
+
 
     public function showProfits()
     {

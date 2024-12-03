@@ -566,7 +566,7 @@
                             _token: "{{ csrf_token() }}"
                         },
                         success: function(response) {
-                            console.log(response); 
+                            console.log(response);
                             if (response.success) {
                                 $('#total_amount').text(response.newTotal.replace(/\₫/g, '') + '₫');
                                 $('#discount-amount').text(response.discountAmount + '₫');

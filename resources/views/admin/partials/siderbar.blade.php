@@ -143,7 +143,23 @@
                     </div>
                 </li>
 
-
+                {{-- Vận chuyển --}}
+                <li>
+                    <a href="#vanchuyen" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="truck"></i>
+                        <span> Vận chuyển </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="vanchuyen">
+                        <ul class="nav-second-level">
+                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
+                                <li><a class="tp-link" href="{{ route('baiviets.create') }}">Thông tin vận chuyển</a>
+                                </li>
+                            @endif
+                            <li><a class="tp-link" href="{{ route('baiviets.index') }}">Duyệt đơn thất bại</a></li>
+                        </ul>
+                    </div>
+                </li>
 
 
 
@@ -222,7 +238,8 @@
                             @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                                 <li><a class="tp-link" href="{{ route('user.create') }}">Thêm nhân viên</a></li>
 
-                                <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền</a></li>
+                                <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền</a>
+                                </li>
                                 @if (isset($viewMoney) && $viewMoney > 1)
                                     <span class="ms-2 position-relative">
                                         <span class="notification-dot3">{{ $viewMoney }}</span>
@@ -233,6 +250,7 @@
                         </ul>
                     </div>
                 </li>
+
                 {{-- Đánh giá --}}
 
                 <li>

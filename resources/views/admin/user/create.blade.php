@@ -41,7 +41,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-3 btn-p">
                                         <label for="ho_ten">Họ và tên</label>
                                         <input type="text" name="ho_ten" value="{{ old('ho_ten') }}"
                                             class="form-control @error('ho_ten') is-invalid @enderror">

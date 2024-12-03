@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    
+
     protected $fillable = [
         'chuc_vu_id',
         'ho_ten',
@@ -33,10 +33,10 @@ class User extends Authenticatable
         'is_active'
     ];
 
-    public function chuc_vus()
-    {
-        return $this->belongsTo(chuc_vu::class, 'id');
-    }
+    // public function chuc_vus()
+    // {
+    //     return $this->belongsTo(chuc_vu::class, 'id');
+    // }
 
     public function donhangs()
     {
@@ -54,6 +54,15 @@ class User extends Authenticatable
     public function vi_nguoi_dungs()
     {
         return $this->hasOne(vi_nguoi_dung::class, 'user_id', 'id');
+    }
+    public function vi_shipper()
+    {
+        return $this->hasOne(Vishipper::class);
+    }
+
+    public function shippers()
+    {
+        return $this->hasMany(Shipper::class, 'shipper_id');
     }
 
     /**

@@ -27,7 +27,7 @@ use App\Http\Controllers\LienHeController;
 use App\Http\Controllers\PhuongThucThanhToanController;
 use App\Http\Controllers\PhuongThucVanChuyenController;
 use App\Http\Controllers\RutTienController;
-use App\Http\Controllers\Shipper\Controller\ShipperController;
+use App\Http\Controllers\Shipper\ShipperController;
 use App\Http\Requests\LienHeRequest;
 use App\Models\ShipperProfit;
 
@@ -60,6 +60,7 @@ Route::prefix('client')->group(function () {
 
     Route::get('/taikhoan/myorder/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.myorder');
     Route::get('/taikhoan/vinguoidung', [TaiKhoanController::class, 'viNguoiDung'])->name('taikhoan.vinguoidung');
+    Route::get('/taikhoan/ttvc', [TaiKhoanController::class, 'ttvc']);
 
     Route::get('/thong-tin', [TaiKhoanController::class, 'showAccountDetails'])->name('taikhoan.thongtin');
     Route::get('/don-hang', [TaiKhoanController::class, 'donHang'])->name('taikhoan.donhang');
@@ -162,6 +163,8 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::get('/user{id}', [UserController::class, 'show'])->name('user.show');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
     Route::put('/user/{userId}/updatechucvu', [UserController::class, 'updatechucvu'])->name('user.updatechucvu');
+    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/update-is-active', [UserController::class, 'updateIs_active'])->name('user.updateIs_active');
 
     Route::resource('/baiviets', BaiVietController::class);
     Route::resource('/phuongthucthanhtoans', PhuongThucThanhToanController::class);
@@ -200,6 +203,18 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     Route::get('/api/products/{categoryId}', [SanPhamController::class, 'getProductsByCategory']);
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
+});
+
+// Shipper
+Route::middleware(['auth', 'role:shipper'])->group(function () {
+    Route::get('/shipper', [ShipperController::class, 'index'])->name('shipper.index');
+    Route::post('shipper/xac-nhan-lay-don/{donHang}', [ShipperController::class, 'xacNhanLayDon'])->name('shipper.xac-nhan-lay-don');
+    Route::get('shipper/show', [ShipperController::class, 'show'])->name('shipper.show');
+    Route::post('shipper/update-status/{id}', [ShipperController::class, 'updateStatus'])->name('shipper.update-status');
+    Route::get('/shipper/profits', [ShipperController::class, 'showProfits'])->name('shipper.profits');
+    Route::get('/shipper/policy', [ShipperController::class, 'policy'])->name('shipper.policy');
+    Route::post('/shipper/withdraw', [ShipperController::class, 'withdraw'])->name('shipper.withdraw');
+    Route::get('/shipper/rut-tien', [ShipperController::class, 'rut'])->name('shipper.rut-tien');
 });
 
 // Route chi tiết đơn hàng

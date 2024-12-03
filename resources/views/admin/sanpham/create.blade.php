@@ -117,11 +117,11 @@
                                             <div class="mb-3">
                                                 <label for="ma_ta_san_pham" class="form-label">Mô tả sản phẩm</label>
                                                 <!-- <input type="text" id="ma_ta_san_pham" name="ma_ta_san_pham"
-                                                    class="form-control @error('ma_ta_san_pham') is-invalid @enderror"
-                                                    value="{{ old('ma_ta_san_pham') }}"> -->
-                                               
-                                                <textarea rows="5" id="ma_ta_san_pham" name="ma_ta_san_pham" class="form-control @error('ma_ta_san_pham') is-invalid @enderror"
-                                                value="{{ old('ma_ta_san_pham') }}">
+                                                                    class="form-control @error('ma_ta_san_pham') is-invalid @enderror"
+                                                                    value="{{ old('ma_ta_san_pham') }}"> -->
+
+                                                <textarea rows="5" id="ma_ta_san_pham" name="ma_ta_san_pham"
+                                                    class="form-control @error('ma_ta_san_pham') is-invalid @enderror" value="{{ old('ma_ta_san_pham') }}">
                                                 </textarea>
                                                 @error('ma_ta_san_pham')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -133,22 +133,25 @@
                                             <label class="form-label">Trạng thái</label>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input @error('is_active') is-invalid @enderror"
-                                                    type="radio" name="is_active" id="trang_thai_show" value="1"
-                                                    {{ old('is_active') == 1 ? 'checked' : '' }}>
-                                                <label class="form-check-label text-success" for="trang_thai_show">Hiển
-                                                    thị</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input @error('is_active') is-invalid @enderror"
                                                     type="radio" name="is_active" id="trang_thai_hide" value="0"
-                                                    {{ old('is_active') == 0 ? 'checked' : '' }}>
+                                                    {{ old('is_active', 0) == 0 ? 'checked' : '' }}>
                                                 <label class="form-check-label text-danger"
                                                     for="trang_thai_hide">Ẩn</label>
                                             </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input @error('is_active') is-invalid @enderror"
+                                                    type="radio" name="is_active" id="trang_thai_show" value="1"
+                                                    {{ old('is_active', 1) == 1 ? 'checked' : '' }}>
+                                                <label class="form-check-label text-success" for="trang_thai_show">Hiển
+                                                    thị</label>
+                                            </div>
+
                                             @error('is_active')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +179,8 @@
                                                 <div class="col-lg-2">
                                                     <label for="size_san_pham_{{ $index }}"
                                                         class="form-label">Size</label>
-                                                    <select name="product_variants[size_san_pham][]" class="form-control"
+                                                    <select
+                                                        name="product_variants[size_san_pham][]"class="form-control @error('product_variants.*.size_san_pham') is-invalid @enderror"
                                                         id="sizeSelect_{{ $index }}">
                                                         <option value="">Chọn kích thước</option>
                                                         @foreach ($sizes as $sizeOption)
@@ -186,9 +190,12 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('product_variants.*.size_san_pham.' . $index)
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                    @if ($errors->has('product_variants.*.size_san_pham'))
+                                                        <div class="invalid-feedback">
+                                                            {{ $errors->first('product_variants.*.size_san_pham') }}
+                                                        </div>
+                                                    @endif
+
                                                 </div>
 
                                                 <div class="col-lg-2">

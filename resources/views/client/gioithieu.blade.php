@@ -3,7 +3,7 @@
 
 @section('content')
 <!-- breadcrumb-section start -->
-<nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110 " style="height: 325.5px;">
+<nav class="breadcrumb-section theme1 bg-lighten2 pt-110 pb-110 " >
   <div class="container">
     <div class="row">
       <div class="col-12">

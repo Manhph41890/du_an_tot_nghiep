@@ -94,19 +94,16 @@
                     </div>
                     <div class="step" data-step="2">
                         <div class="icon"><i class="fas fa-check"></i></div>
-                        <div class="text">Đã Xác Nhận Thông Tin Thanh Toán</div>
+                        <div class="text">Đã Giao Cho ĐVVC</div>
                     </div>
+
                     <div class="step" data-step="3">
                         <div class="icon"><i class="fas fa-truck"></i></div>
-                        <div class="text">Đã Giao Cho ĐVVC</div>
+                        <div class="text">Đang giao</div>
                     </div>
                     <div class="step" data-step="4">
                         <div class="icon"><i class="fas fa-box"></i></div>
-                        <div class="text">Đã Nhận Được Hàng</div>
-                    </div>
-                    <div class="step" data-step="5">
-                        <div class="icon"><i class="fas fa-star"></i></div>
-                        <div class="text"></div>
+                        <div class="text">Đã Giao hàng</div>
                     </div>
 
                 </div>

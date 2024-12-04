@@ -63,9 +63,11 @@ class TaiKhoanController extends Controller
         return view('client.taikhoan.thong-tin', compact('user', 'avatar', 'title', 'showForm', 'myOrders', 'viNguoiDung', 'chiTietVi', 'lsThanhToanVi', 'lsNapVi', 'lsRutVi_choduyet', 'lsRutVi_thanhcong', 'lsRutVi_thatbai'));
     }
 
-    public function ttvc()
+    public function vanchuyen($id)
     {
-        return view('client.taikhoan.ttvc');
+        $donhang = don_hang::with('shipper')->findOrFail($id);
+        $status = $donhang->shipper->status;
+        return view('client.taikhoan.vanchuyen', compact('donhang', 'status'));
     }
 
     public function donHang()

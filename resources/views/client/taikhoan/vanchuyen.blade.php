@@ -8,11 +8,6 @@
         <div class="modal-body align-content-center">
 
             <div class="row">
-                {{-- @php
-                    $status = $donhang->shipper->status;
-                    dd($status);
-                @endphp --}}
-
                 <div class="col-12">
                     <div class="container mt-2">
                         <style>
@@ -96,48 +91,50 @@
                                 }
                             }
                         </style>
-
                         <div class="content-page">
                             <div class="content">
-                                <div class="container">
-
-                                    <div class="progress-bar" style="flex-direction: row">
-                                        <div class="step active" data-step="1">
-                                            <div class="icon"><i class="fas fa-file-alt"></i></div>
-                                            <div class="text">Đã lấy hàng</div>
-                                        </div>
-                                        <div class="step" data-step="2">
-                                            <div class="icon"><i class="fas fa-check"></i></div>
-                                            <div class="text">Đã Giao Cho ĐVVC</div>
-                                        </div>
-
-                                        <div class="step" data-step="3">
-                                            <div class="icon"><i class="fas fa-truck"></i></div>
-                                            <div class="text">Đang giao</div>
-                                        </div>
-                                        <div class="step" data-step="4">
-                                            <div class="icon"><i class="fas fa-box"></i></div>
-                                            <div class="text">Đã Giao hàng</div>
-                                        </div>
-
+                                @if (!$status)
+                                    <div class="alert alert-warning text-center w-100">
+                                        Đơn hàng đang được xử lý vận đơn
                                     </div>
-                                </div>
+                                @elseif ($status == 'Thất bại')
+                                    <div class="alert alert-danger text-center w-100">
+                                        Đơn hàng đã giao thất bại. <br>
+                                        Lý do: {{ $lyDoHuy }}
+                                    </div>
+                                @elseif ($status == 'Đang giao')
+                                    <div class="alert alert-info text-center w-100">
+                                        Đơn hàng đang được giao lại.
+                                    </div>
+                                @else
+                                    <div class="container">
+                                        <div class="progress-bar" style="flex-direction: row">
+                                            <div class="step {{ in_array($status, ['Đã lấy hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công']) ? 'active' : '' }}"
+                                                data-step="1">
+                                                <div class="icon"><i class="fas fa-file-alt"></i></div>
+                                                <div class="text">Đã lấy hàng</div>
+                                            </div>
+                                            <div class="step {{ in_array($status, ['Đang vận chuyển', 'Đã giao', 'Thành công']) ? 'active' : '' }}"
+                                                data-step="2">
+                                                <div class="icon"><i class="fas fa-check"></i></div>
+                                                <div class="text">Đã Giao Cho ĐVVC</div>
+                                            </div>
+                                            <div class="step {{ in_array($status, ['Đã giao', 'Thành công']) ? 'active' : '' }}"
+                                                data-step="3">
+                                                <div class="icon"><i class="fas fa-truck"></i></div>
+                                                <div class="text">Đang giao</div>
+                                            </div>
+                                            <div class="step {{ $status == 'Thành công' ? 'active' : '' }}"
+                                                data-step="4">
+                                                <div class="icon"><i class="fas fa-box"></i></div>
+                                                <div class="text">Đã Giao hàng</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                        <script>
-                            const steps = document.querySelectorAll('.step');
-                            steps.forEach((step, index) => {
-                                step.addEventListener('click', () => {
-                                    steps.forEach((s, i) => {
-                                        if (i <= index) {
-                                            s.classList.add('active');
-                                        } else {
-                                            s.classList.remove('active');
-                                        }
-                                    });
-                                });
-                            });
-                        </script>
+
                     </div>
                 </div>
                 <div class="mt-3">

@@ -65,48 +65,48 @@
                             <input type="text" id="ho_ten" name="ho_ten" value="{{ old('ho_ten') }}" required
                                 class="form-control form-control-lg bg-light fs-6 @error('ho_ten') is-invalid @enderror"
                                 placeholder="Họ Tên">
-                            @error('ho_ten')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
 
+                        </div>
+                        @error('ho_ten')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         <div class="input-group mb-3">
                             <input type="email" id="email" name="email" value="{{ old('email') }}" required
                                 class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror"
                                 placeholder="Email">
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
 
+                        </div>
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         <div class="input-group mb-3">
                             <input type="number" id="so_dien_thoai" name="so_dien_thoai" value="{{ old('so_dien_thoai') }}"
                                 required
                                 class="form-control form-control-lg bg-light  fs-6 @error('so_dien_thoai') is-invalid @enderror"
                                 placeholder="Số điện thoại">
-                            @error('so_dien_thoai')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
 
+                        </div>
+                        @error('so_dien_thoai')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         <div class="input-group mb-3">
                             <input type="password" id="password" name="password" required
                                 class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror"
                                 placeholder="Mật Khẩu">
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
 
+                        </div>
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         <div class="input-group mb-3">
                             <input type="password" id="password_confirmation" name="password_confirmation" required
                                 class="form-control form-control-lg bg-light fs-6 @error('password_confirmation') is-invalid @enderror"
                                 placeholder="Xác nhận mật khẩu">
-                            @error('password_confirmation')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
 
+                        </div>
+                        @error('password_confirmation')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         <div class="input-group mb-3 d-flex justify-content-between">
                             <div class="form-check">
                                 <input type="checkbox" name="remember" class="form-check-input" id="formCheck">

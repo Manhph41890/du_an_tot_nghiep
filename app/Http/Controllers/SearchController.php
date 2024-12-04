@@ -21,7 +21,9 @@ class SearchController extends Controller
         // Thêm URL vào sản phẩm
         $products->transform(function ($product) {
             // Chỉnh sửa để sử dụng đúng trường ảnh
-            $product->image_url = Storage::url($product->anh_san_pham); // Đường dẫn đến ảnh
+            // $product->image_url = Storage::url($product->anh_san_pham); // Đường dẫn đến ảnh
+            
+            $product->image_url = 'http://127.0.0.1:8000/storage/' . $product->anh_san_pham;
             return $product;
         });
     

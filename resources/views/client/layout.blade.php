@@ -24,6 +24,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha384-dyB8oeAf6iLs/n8TYqyeK1zwy6/iDVB+P5vDXR1RylsNcsSD5T3U7Kbk4WV0bv+W" crossorigin="anonymous">
 
+    <script src="https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css" rel="stylesheet" />
+
+
+
 
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
@@ -607,6 +612,8 @@
 
     @include('client.partials.footer')
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=q3lUTTMQSOttVWIzTz6aPzTq1uBFQUDXVJbDeQtm&libraries=places">
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('assets/client/js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

@@ -127,7 +127,7 @@
                         <ul class="nav-second-level">
                             <!-- Menu con: Danh sách -->
                             <li>
-                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.danhSach') }}">
+                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.index') }}">
                                     Danh sách
                                     {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
                                     <span class="ms-2 position-relative">
@@ -177,7 +177,16 @@
                                 @endif --}}
                                 </a>
                             </li>
-
+                            <li>
+                                <a class="tp-link d-flex align-items-center" href="{{ route('shipper.rut-tien') }}">
+                                    Rút tiền
+                                    {{-- @if (isset($notifications) && $notifications['newOrdersCount'] > 0)
+                                    <span class="ms-2 position-relative">
+                                        <span class="notification-dot2"></span>
+                                    </span>
+                                @endif --}}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

@@ -42,7 +42,11 @@
                                     style="display: inline-block;">
                                     @csrf
                                     @method('PUT')
-                                    @if ($donhang->trang_thai_don_hang == 'Đã giao' || $donhang->trang_thai_don_hang == 'Thành công')
+                                    @if (
+                                        $donhang->trang_thai_don_hang == 'Đã giao' ||
+                                            $donhang->trang_thai_don_hang == 'Thành công' ||
+                                            $donhang->trang_thai_don_hang == 'Đang vận chuyển' ||
+                                            $donhang->trang_thai_don_hang == 'Đang chuẩn bị hàng')
                                         <p>Không thể chuyển trạng thái thêm nữa.</p>
                                     @else
                                         <input type="hidden" name="trang_thai_don_hang" value="{{ $nextStatus }}">

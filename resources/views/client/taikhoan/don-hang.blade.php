@@ -93,9 +93,9 @@
                                                     <a href="{{ route('taikhoan.myorder', $myOrder->id) }}"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#allmyModalforordervc{{ $myOrder->id }}">
-                                                        <i class="fa fa-truck"></i>
+                                                        <i class="fa fa-truck faa-truck"></i>
                                                         <style>
-                                                            .fa-truck {
+                                                            .faa-truck {
                                                                 background-color: rgb(254, 254, 254);
                                                                 padding: 3px;
                                                                 border: 1px solid rgb(114, 114, 114);

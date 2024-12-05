@@ -155,9 +155,12 @@
                 <tbody>
                     @foreach ($order->chi_tiet_don_hangs as $chiTiet)
                         <tr>
-                            <td><img src="{{ asset('storage/' . $chiTiet->san_pham->anh_san_pham) }}"
-                                    alt="{{ $chiTiet->san_pham->ten_san_pham }}" style="width: 100px; height: auto;">
+                            <td>
+                                <img src="{{ url('storage/' . $chiTiet->san_pham->anh_san_pham) }}" 
+                                     alt="{{ $chiTiet->san_pham->ten_san_pham }}" 
+                                     style="width: 100px; height: auto;">
                             </td>
+                            
                             <td>{{ $chiTiet->san_pham->ten_san_pham }}</td>
                             <td>{{ $chiTiet->color_san_pham->ten_color }}</td>
                             <td>{{ $chiTiet->size_san_pham->ten_size }}</td>

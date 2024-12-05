@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-10 mb-30">
+                <div class="col-lg-10 mb-30" style="position: static;    margin-left: auto;">
                     <div class="grid-nav-wraper bg-lighten2 mb-30">
                         <div class="row align-items-center">
                             <div class="col-12 col-md-5 mb-3 mb-md-0">
@@ -210,7 +210,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 mb-30 order-lg-first bg-lighten2">
+                <div class="col-lg-2 mb-30 order-lg-first bg-lighten2 " style="width: 210px;position: fixed;overflow-y: auto;">
                     <aside class="left-sidebar theme1">
                         <div class="search-filter">
                             <form action="{{ route('client.cuahang') }}" method="post">

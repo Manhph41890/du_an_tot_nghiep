@@ -48,26 +48,46 @@ class ShipperController extends Controller
 
     public function xacNhanLayDon(don_hang $donHang)
     {
-        // Kiểm tra nếu trạng thái là "Đang chuẩn bị hàng" thì thay đổi trạng thái thành "Đã lấy hàng"
+        $user = Auth::user(); // Lấy shipper hiện tại
+
+        // Kiểm tra nếu shipper đã có đơn hàng 'Đang vận chuyển'
+        $existingOrder = Shipper::where('shipper_id', $user->id)
+            ->where('status', 'Đang vận chuyển')
+            ->first();
+
+        if ($existingOrder) {
+            return response()->json([
+                'message' => 'Bạn đã xác nhận một đơn hàng khác.',
+                'status' => 'error',
+            ]);
+        }
+
+        // Kiểm tra nếu trạng thái đơn hàng là "Đang chuẩn bị hàng"
         if ($donHang->trang_thai_don_hang == 'Đang chuẩn bị hàng') {
             $donHang->update([
                 'trang_thai_don_hang' => 'Đang vận chuyển',
             ]);
-            $user = Auth::user(); // Lấy người dùng hiện tại
+
             // Insert vào bảng shippers
             Shipper::create([
-                'status' => 'Đã lấy hàng',
+                'status' => 'Đang vận chuyển',
                 'ly_do_huy' => '',
                 'shipper_id' => $user->id,
                 'don_hang_id' => $donHang->id, // Quan hệ với bảng don_hang
             ]);
+
+            return response()->json([
+                'message' => 'Trạng thái đơn hàng đã được cập nhật và shipper đã được thêm.',
+                'status' => 'success',
+            ]);
         }
-        // Trả về phản hồi
+
         return response()->json([
-            'message' => 'Trạng thái đơn hàng đã được cập nhật và shipper đã được thêm.',
-            'status' => 'success',
+            'message' => 'Không thể xác nhận đơn hàng này.',
+            'status' => 'error',
         ]);
     }
+
     public function show()
     {
         $title = 'Đơn hàng đã lấy hàng';

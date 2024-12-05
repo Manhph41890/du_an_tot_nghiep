@@ -29,44 +29,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link href="{{ asset('assets/admin/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/admin/libs/quill/quill.bubble.css') }}" rel="stylesheet" type="text/css" />
-    {{-- biểu đồ  --}}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-    {{-- <style>
-        h4 {
-            color: white;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        body {
-            position: relative;
-            font-family: "Itim", cursive;
-
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-image: url('assets/admin/images/bg.png');
-            background-size: cover;
-            background-position: center;
-            filter: blur(3px);
-            /* Adjust the blur level as needed */
-            z-index: -1;
-            /* Keep the blurred background behind other content */
-        }
-    </style> --}}
 </head>
 
 <body data-menu-color="light" data-sidebar="default">
-
+    {{-- biểu đồ  --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>

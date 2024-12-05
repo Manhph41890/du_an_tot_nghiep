@@ -136,7 +136,7 @@
                                             </span>
                                         </div>
                                         <div class="row flex-warp">
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <p class="fs-10 mt-3 mb-1">Đã xác nhận</p>
                                                 <div class="d-flex align-items-baseline">
                                                     <div class="fs-17 mb-0 me-2 fw-semibold">
@@ -144,7 +144,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <p class="fs-10 mt-3 mb-1">Đang chuẩn bị hàng</p>
                                                 <div class="d-flex align-items-baseline">
                                                     <div class="fs-17 mb-0 me-2 fw-semibold ">
@@ -152,7 +152,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <p class="fs-10 mt-3 mb-1">Đang vận chuyển</p>
                                                 <div class="d-flex align-items-baseline">
                                                     <div class="fs-17 mb-0 me-2 fw-semibold">
@@ -160,7 +160,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <p class="fs-10 mt-3 mb-1">Đã giao</p>
                                                 <div class="d-flex align-items-baseline">
                                                     <div class="fs-17 mb-0 me-2 fw-semibold ">
@@ -168,7 +168,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <p class="fs-10 mt-3 mb-1">Thành công</p>
                                                 <div class="d-flex align-items-baseline">
                                                     <div class="fs-17 mb-0 me-2 fw-semibold">
@@ -176,11 +176,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <p class="fs-10 mt-3 mb-1">Đã hủy</p>
                                                 <div class="d-flex align-items-baseline">
                                                     <div class="fs-17 mb-0 me-2 fw-semibold ">
                                                         {{ $donhangs_dahuy }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <p class="fs-10 mt-3 mb-1">Thất bại</p>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="fs-17 mb-0 me-2 fw-semibold ">
+                                                        {{ $donhangs_thatbai }}
                                                     </div>
                                                 </div>
                                             </div>

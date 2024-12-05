@@ -17,12 +17,35 @@ class ShipperController extends Controller
 {
     public function index()
     {
-        //
         $title = 'Vận chuyển đơn hàng';
+
+        // Lấy thông tin shipper đang đăng nhập
+        $shipper = Auth::user();
+
+        //
+        $shipper_address = $shipper->dia_chi;
+        // dd($shipper_address);
+        $shipper_address_parts = array_map('trim', explode(',', $shipper_address));
+
+        $shipper_ward = isset($shipper_address_parts[2]) ? $shipper_address_parts[2] : '';
+        $shipper_district = isset($shipper_address_parts[3]) ? $shipper_address_parts[3] : '';
+        $shipper_city = isset($shipper_address_parts[4]) ? $shipper_address_parts[4] : '';
         // Lấy tất cả đơn hàng có trạng thái 'Đang chuẩn bị hàng'
         $donHangs = don_hang::where('trang_thai_don_hang', 'Đang chuẩn bị hàng')->get();
-        return view('shipper.index', compact('donHangs', 'title'));
+
+        // Lọc đơn hàng theo địa chỉ của shipper
+        $filteredOrders = $donHangs->filter(function ($order) use ($shipper_district, $shipper_ward, $shipper_city) {
+            $addressParts = array_map('trim', explode(',', $order->dia_chi));
+
+            $order_ward = isset($addressParts[2]) ? $addressParts[2] : '';
+            $order_district = isset($addressParts[3]) ? $addressParts[3] : '';
+            $order_city = isset($addressParts[4]) ? $addressParts[4] : '';
+            return $order_district == $shipper_district && ($order_ward == $shipper_ward && $order_city == $shipper_city);
+        });
+
+        return view('shipper.index', ['donHangs' => $filteredOrders, 'title' => $title]);
     }
+
     public function xacNhanLayDon(don_hang $donHang)
     {
         // Kiểm tra nếu trạng thái là "Đang chuẩn bị hàng" thì thay đổi trạng thái thành "Đã lấy hàng"
@@ -67,7 +90,7 @@ class ShipperController extends Controller
             $donHang = $shipper->donHang;
 
             if ($donHang) {
-                $profit = 30000 * 0.2; // 
+                $profit = 30000 * 0.2; //
                 // Sử dụng updateOrCreate để cập nhật hoặc tạo mới bản ghi Vishipper
                 $vishipper = Vishipper::updateOrCreate(['shipper_id' => $currentShipperId], ['tong_tien' => DB::raw('tong_tien + ' . $profit)]);
 

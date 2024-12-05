@@ -9,12 +9,12 @@
                     </button>
                 </li>
                 <li class="d-none d-lg-block">
-                    <div class="position-relative topbar-search">
+                    {{-- <div class="position-relative topbar-search">
                         <input type="text" class="form-control bg-light bg-opacity-75 border-light ps-4"
                             placeholder="Search...">
                         <i
                             class="mdi mdi-magnify fs-16 position-absolute text-muted top-50 translate-middle-y ms-2"></i>
-                    </div>
+                    </div> --}}
                 </li>
             </ul>
 

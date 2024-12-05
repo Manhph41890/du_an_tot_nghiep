@@ -166,40 +166,40 @@
             </div>
         </div>
     </div> <!-- container-fluid -->
-@endsection
-<script>
-    // api maps
-    $(document).ready(function() {
-        $('#dia_chi').on('input', function() {
-            const input = $(this).val();
-            if (input.length > 2) {
-                $.ajax({
-                    url: 'https://rsapi.goong.io/place/autocomplete',
-                    data: {
-                        input: input,
-                        location: '10.700920276971795,106.73296613898738',
-                        limit: 10,
-                        radius: 10,
-                        api_key: '22Wn63woi41PWQdNMN9kaVUsgC9VFKEp1ZzjmQm5' // Ensure the API key is correctly supplied here
-                    },
-                    success: function(data) {
-                        const suggestions = data.predictions.map(prediction =>
-                            `<div>${prediction.description}</div>`).join('');
-                        $('#suggestions').html(suggestions);
-                    },
-                    error: function(error) {
-                        console.error('Error fetching autocomplete results:', error);
-                    }
-                });
-            } else {
-                $('#suggestions').empty();
-            }
-        });
+    <script>
+        // api maps
+        $(document).ready(function() {
+            $('#dia_chi').on('input', function() {
+                const input = $(this).val();
+                if (input.length > 2) {
+                    $.ajax({
+                        url: 'https://rsapi.goong.io/place/autocomplete',
+                        data: {
+                            input: input,
+                            location: '10.700920276971795,106.73296613898738',
+                            limit: 10,
+                            radius: 10,
+                            api_key: '22Wn63woi41PWQdNMN9kaVUsgC9VFKEp1ZzjmQm5' // Ensure the API key is correctly supplied here
+                        },
+                        success: function(data) {
+                            const suggestions = data.predictions.map(prediction =>
+                                `<div>${prediction.description}</div>`).join('');
+                            $('#suggestions').html(suggestions);
+                        },
+                        error: function(error) {
+                            console.error('Error fetching autocomplete results:', error);
+                        }
+                    });
+                } else {
+                    $('#suggestions').empty();
+                }
+            });
 
-        // Click on suggestion to fill input
-        $('#suggestions').on('click', 'div', function() {
-            $('#dia_chi').val($(this).text());
-            $('#suggestions').empty();
+            // Click on suggestion to fill input
+            $('#suggestions').on('click', 'div', function() {
+                $('#dia_chi').val($(this).text());
+                $('#suggestions').empty();
+            });
         });
-    });
-</script>
+    </script>
+@endsection

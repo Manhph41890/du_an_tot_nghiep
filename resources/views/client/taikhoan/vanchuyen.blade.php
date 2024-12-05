@@ -2,12 +2,17 @@
     <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header w-100">
-            <h3 class="modal-title">Thông tin vận chuyển</h3>
+            <h4 class="modal-title">Thông tin vận chuyển</h4>
         </div>
         <!-- Modal Body -->
         <div class="modal-body align-content-center">
 
             <div class="row">
+                {{-- @php
+                    $status = $donhang->shipper->status;
+                    dd($status);
+                @endphp --}}
+
                 <div class="col-12">
                     <div class="container mt-2">
                         <style>
@@ -91,47 +96,65 @@
                                 }
                             }
                         </style>
+
                         <div class="content-page">
                             <div class="content">
-                                @if (!$status)
-                                    <div class="alert alert-warning text-center w-100">
-                                        Đơn hàng đang được xử lý vận đơn
-                                    </div>
-                                @elseif ($status == 'Thất bại')
-                                    <div class="alert alert-danger text-center w-100">
-                                        Đơn hàng đã giao thất bại. <br>
-                                        Lý do: {{ $lyDoHuy }}
-                                    </div>
-                                @elseif ($status == 'Đang giao')
-                                    <div class="alert alert-info text-center w-100">
-                                        Đơn hàng đang được giao lại.
-                                    </div>
-                                @else
-                                    <div class="container">
+                                <div class="container">
+                                    @if (!$donhang->shipper)
+                                        <p class="mb-0" style="text-align: center">
+                                            <strong>Đơn hàng đang ở trạng thái:</strong>
+                                            {{ $donhang->trang_thai_don_hang }}
+                                        </p>
+                                    @elseif($donhang->shipper->status == 'Thất bại')
+                                        <p class="mb-0" style="text-align: center">
+                                            <strong>Trạng thái:</strong> Giao hàng thất bại
+                                        </p>
+                                        <br>
+                                        <p class="text-danger">
+                                            <strong>Lý do:</strong> {{ $donhang->shipper->ly_do_huy }}
+                                        </p>
+                                    @else
                                         <div class="progress-bar" style="flex-direction: row">
-                                            <div class="step {{ in_array($status, ['Đã lấy hàng', 'Đang vận chuyển', 'Đã giao', 'Thành công']) ? 'active' : '' }}"
-                                                data-step="1">
-                                                <div class="icon"><i class="fas fa-file-alt"></i></div>
-                                                <div class="text">Đã lấy hàng</div>
-                                            </div>
-                                            <div class="step {{ in_array($status, ['Đang vận chuyển', 'Đã giao', 'Thành công']) ? 'active' : '' }}"
-                                                data-step="2">
-                                                <div class="icon"><i class="fas fa-check"></i></div>
-                                                <div class="text">Đã Giao Cho ĐVVC</div>
-                                            </div>
-                                            <div class="step {{ in_array($status, ['Đã giao', 'Thành công']) ? 'active' : '' }}"
-                                                data-step="3">
-                                                <div class="icon"><i class="fas fa-truck"></i></div>
-                                                <div class="text">Đang giao</div>
-                                            </div>
-                                            <div class="step {{ $status == 'Thành công' ? 'active' : '' }}"
-                                                data-step="4">
-                                                <div class="icon"><i class="fas fa-box"></i></div>
-                                                <div class="text">Đã Giao hàng</div>
-                                            </div>
+                                            @php
+                                                $steps = [
+                                                    [
+                                                        'icon' => 'fas fa-file-alt',
+                                                        'text' => 'Đã lấy hàng',
+                                                        'status' => 'Đã lấy hàng',
+                                                    ],
+                                                    [
+                                                        'icon' => 'fas fa-check',
+                                                        'text' => 'Đã Giao Cho ĐVVC',
+                                                        'status' => 'Đang vận chuyển',
+                                                    ],
+                                                    [
+                                                        'icon' => 'fas fa-truck',
+                                                        'text' => 'Đang giao',
+                                                        'status' => 'Đã giao',
+                                                    ],
+                                                    [
+                                                        'icon' => 'fas fa-box',
+                                                        'text' => 'Đã Giao hàng',
+                                                        'status' => 'Thành công',
+                                                    ],
+                                                ];
+
+                                                // Tìm chỉ số của trạng thái hiện tại trong danh sách
+                                                $currentIndex = array_search($status, array_column($steps, 'status'));
+                                            @endphp
+
+                                            @foreach ($steps as $key => $step)
+                                                <div class="step {{ $currentIndex !== false && $key <= $currentIndex ? 'active' : '' }}"
+                                                    data-step="{{ $key + 1 }}">
+                                                    <div class="icon"><i class="{{ $step['icon'] }}"></i></div>
+                                                    <div class="text">{{ $step['text'] }}</div>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                    </div>
-                                @endif
+
+
+                                    @endif
+                                </div>
                             </div>
                         </div>
 

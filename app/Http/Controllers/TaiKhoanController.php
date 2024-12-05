@@ -66,8 +66,11 @@ class TaiKhoanController extends Controller
     public function vanchuyen($id)
     {
         $donhang = don_hang::with('shipper')->findOrFail($id);
-        $status = $donhang->shipper->status;
-        return view('client.taikhoan.vanchuyen', compact('donhang', 'status'));
+        if (!$donhang->shipper) {
+            $status = '';
+        } else {
+            $status = $donhang->shipper->status;
+        }
     }
 
     public function donHang()

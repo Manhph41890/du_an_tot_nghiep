@@ -8,27 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Shipper extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'shipper_id',
+        'don_hang_id',
+        'status',
+    ];
 
-    // Các cột được phép gán giá trị hàng loạt
-    protected $fillable = ['status', 'don_hang_id', 'chuc_vu_id', 'ly_do_huy'];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'shipper_id');
+    }
 
-    /**
-     * Quan hệ với bảng don_hang.
-     */
     public function donHang()
     {
         return $this->belongsTo(don_hang::class, 'don_hang_id');
     }
-
-    /**
-     * Quan hệ với bảng chuc_vus.
-     */
-    public function chucVu()
+    public function vi_shipper()
     {
-        return $this->belongsTo(chuc_vu::class, 'chuc_vu_id');
-    }
-    public function profit()
-    {
-        return $this->hasOne(ShipperProfit::class);
+        return $this->hasOne(Vishipper::class, 'shipper_id');
     }
 }

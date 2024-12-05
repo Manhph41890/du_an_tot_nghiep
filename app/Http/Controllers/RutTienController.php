@@ -14,54 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class RutTienController extends Controller
 {
 
-    public function rutShipper()
-    {
-        $banks = Bank::all();
-        return view('client.taikhoan.nap-tien', compact('viNguoiDung', 'banks'));
-    }
 
-    public function withdrawShipper(Request $request)
-    {
-        $request->validate([
-            'bank_id' => 'required|exists:banks,id',
-            'amount' => 'required|numeric|min:1',
-            'pin' => 'required',
-        ]);
-
-        $user = Auth::user();
-        $shipperProfits = ShipperProfit::with('shipper');
-
-        // dd($viNguoiDung->tong_tien);
-
-        if (!$shipperProfits || $shipperProfits->total_profit < $request->amount) {
-            return redirect()->route('taikhoan.rut-tien')->with('error', 'Số dư không đủ.');
-        }
-
-        // Lấy ngân hàng
-        $bank = Bank::findOrFail($request->bank_id);
-
-        // Kiểm tra mã PIN
-        if ($bank->pin !== $request->pin) {
-            return  redirect()->route('taikhoan.rut-tien')->with('error', 'Mã PIN không chính xác.');
-        }
-
-        // Cập nhật số dư
-        $shipperProfits->total_profit -= $request->amount;
-        $shipperProfits->save();
-
-        $bank->balance += $request->amount;
-        $bank->save();
-
-        DB::table('ls_rut_vis')->insert([
-            'vi_nguoi_dung_id' => $user->vi_nguoi_dungs->id,
-            'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
-            'tien_rut' => $request->amount,
-            'trang_thai' => 'Chờ duyệt',
-            'bank_id' => $request->bank_id,
-        ]);
-
-        return  redirect()->route('taikhoan.rut-tien')->with('success', 'Yêu cầu rút đã được gửi');
-    }
 
     public function nap()
     {

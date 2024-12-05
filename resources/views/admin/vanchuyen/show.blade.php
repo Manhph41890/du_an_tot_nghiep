@@ -20,6 +20,7 @@
                                         <div class="">
                                             <h5>Mã Đơn Hàng: {{ $donhang->ma_don_hang }}</h5>
                                             <p>Ngày tạo: {{ $donhang->ngay_tao }}</p>
+                                            <h5 style="color: red">Lý do hủy: {{ $donhang->shipper->ly_do_huy }}</h5>
                                         </div>
                                         <div class="">
                                             <div class="d-flex align-items-center">

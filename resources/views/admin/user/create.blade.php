@@ -31,17 +31,18 @@
                                     @csrf
 
                                     <div class="mb-3">
-                                        <label for="chuc_vu_id" class="form-label">Chức vụ</label>
+                                        <label for="chuc_vu_id" class="form-label">Chọn chức vụ</label>
                                         <select class="form-select @error('chuc_vu_id') is-invalid @enderror"
                                             name="chuc_vu_id" id="chuc_vu_id">
-                                            <option value="3" selected>Nhân viên</option>
+                                            <option value="3" selected>Nhân viên quản lý</option>
+                                            <option value="5" selected>Nhân viên vận chuyển</option>
                                         </select>
                                         @error('chuc_vu_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
 
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-3 btn-p">
                                         <label for="ho_ten">Họ và tên</label>
                                         <input type="text" name="ho_ten" value="{{ old('ho_ten') }}"
                                             class="form-control @error('ho_ten') is-invalid @enderror">
@@ -98,7 +99,7 @@
 
                                     <div class="form-group mb-3">
                                         <label for="dia_chi">Địa chỉ</label>
-                                        <input type="text" id="autocomplete" name="dia_chi" value="{{ old('dia_chi') }}"
+                                        <input type="text" name="dia_chi" value="{{ old('dia_chi') }}"
                                             class="form-control @error('dia_chi') is-invalid @enderror">
                                         @error('dia_chi')
                                             <div class="invalid-feedback">
@@ -165,30 +166,12 @@
     </div> <!-- container-fluid -->
 @endsection
 
-<!-- Thêm thông báo Toastr vào cuối trang -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script>
-    @if (session('success'))
-        toastr.success('{{ session('success') }}');
-    @endif
-</script>
-
-<script>
-    function initAutocomplete() {
-        // Khởi tạo Autocomplete với trường địa chỉ
-        var autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('autocomplete'), {
-                types: ['geocode']
-            }
-        );
-
-        // Chặn biểu mẫu tự động submit khi chọn địa chỉ
-        autocomplete.addListener('place_changed', function() {
-            var place = autocomplete.getPlace();
-            document.getElementById('autocomplete').value = place.formatted_address;
-        });
-    }
-
-    // Gọi hàm khởi tạo khi tải trang
-    google.maps.event.addDomListener(window, 'load', initAutocomplete);
-</script>
+@section('js')
+    <!-- Thêm thông báo Toastr vào cuối trang -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        @if (session('success'))
+            toastr.success('{{ session('success') }}');
+        @endif
+    </script>
+@endsection

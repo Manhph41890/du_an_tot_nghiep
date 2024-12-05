@@ -308,15 +308,28 @@ class CartController extends Controller
         $cartItems = $cart->cartItems;
 
         // Kiểm tra số lượng hàng còn lại trước khi thanh toán
+        $insufficientStockProducts = [];
         foreach ($cartItems as $item) {
-            $availableStock = optional($item->san_pham->bien_the_san_phams->firstWhere('size_san_pham_id', $item->size_san_pham_id)->firstWhere('color_san_pham_id', $item->color_san_pham_id))->so_luong;
-            if ($item->quantity > $availableStock) {
-                return redirect()->route('cart.index')->with('error', 'Một hoặc nhiều sản phẩm trong giỏ hàng có số lượng không đủ.');
+            $bienTheSanPham = $item->san_pham->bien_the_san_phams
+                ->where('size_san_pham_id', $item->size_san_pham_id)
+                ->where('color_san_pham_id', $item->color_san_pham_id)
+                ->first();
+
+            if (!$bienTheSanPham || $item->quantity > $bienTheSanPham->so_luong) {
+                $insufficientStockProducts[] = $item->san_pham->ten_san_pham;
             }
         }
 
+        // Nếu có sản phẩm không đủ số lượng, hiển thị thông báo
+        if (!empty($insufficientStockProducts)) {
+            $productList = implode(', ', $insufficientStockProducts);
+            return redirect()
+                ->route('cart.index')
+                ->with('error', 'Sản phẩm sau không đủ số lượng: ' . $productList);
+        }
+
         // Tính tổng tiền của các sản phẩm đã chọn
-        $total = $cartItems->sum(fn($item) => $item->price);
+        $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
         $shippingCost = 30000; // 30,000 VND
         $totall = $total + $shippingCost;
 

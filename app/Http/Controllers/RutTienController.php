@@ -180,4 +180,5 @@ class RutTienController extends Controller
         $lsRutVi->save();
         return redirect()->back()->with('success', 'Xác nhận từ chối rút tiền thành công.');
     }
+    
 }

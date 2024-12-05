@@ -138,7 +138,6 @@
             </div>
         </div>
     </div>
-
     {{-- ssssss --}}
     <script>
         document.getElementById('change-avatar-form').addEventListener('submit', function(e) {

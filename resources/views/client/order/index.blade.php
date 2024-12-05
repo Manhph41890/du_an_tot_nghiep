@@ -123,12 +123,14 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Địa chỉ</label>
-                                    <input type="text" name="dia_chi" class="form-control" required
+                                    <input type="text" id="dia_chi" name="dia_chi" class="form-control" required
                                         value="{{ old('dia_chi', Auth::user()->dia_chi ?? '') }}">
                                     @error('dia_chi')
                                         <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
+                                    <div id="suggestions"></div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -547,7 +549,41 @@
                 }
             }
         </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script>
+            // api maps
+            $(document).ready(function() {
+                $('#dia_chi').on('input', function() {
+                    const input = $(this).val();
+                    if (input.length > 2) {
+                        $.ajax({
+                            url: 'https://rsapi.goong.io/place/autocomplete',
+                            data: {
+                                input: input,
+                                location: '10.700920276971795,106.73296613898738',
+                                limit: 10,
+                                radius: 10,
+                                api_key: '22Wn63woi41PWQdNMN9kaVUsgC9VFKEp1ZzjmQm5'
+                            },
+                            success: function(data) {
+                                const suggestions = data.predictions.map(prediction =>
+                                    `<div>${prediction.description}</div>`).join('');
+                                $('#suggestions').html(suggestions);
+                            },
+                            error: function(error) {
+                                console.error('Error fetching autocomplete results:', error);
+                            }
+                        });
+                    } else {
+                        $('#suggestions').empty();
+                    }
+                }); // Click on suggestion to fill input 
+                $('#suggestions').on('click', 'div', function() {
+                    $('#dia_chi').val($(this).text());
+                    $('#suggestions').empty();
+                });
+            });
             $(document).ready(function() {
                 $('#apply-coupon').on('click', function() {
                     var couponCode = $('#coupon-code').val();

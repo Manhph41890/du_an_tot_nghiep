@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shipper;
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use App\Models\don_hang;
+use App\Models\san_pham;
 use App\Models\Shipper;
 use App\Models\Vishipper;
 use Illuminate\Http\Request;
@@ -85,6 +86,27 @@ class ShipperController extends Controller
                 $shipper->ly_do_huy = $lyDoHuy;
             } else {
                 Log::error('DonHang not found for shipper', ['shipper_id' => $currentShipperId]);
+            }
+
+            // Khôi phục số lượng sản phẩm trong kho và biến thể sản phẩm
+            foreach ($donHang->chi_tiet_don_hangs as $item) {
+                $variant = $item->san_pham->bien_the_san_phams()
+                    ->where('color_san_pham_id', $item->color_san_pham_id)
+                    ->where('size_san_pham_id', $item->size_san_pham_id)
+                    ->first();
+
+                if ($variant) {
+                    // Tăng lại số lượng của biến thể sản phẩm
+                    $variant->so_luong += $item->so_luong;
+                    $variant->save();
+                }
+
+                $product = san_pham::find($item->san_pham_id);
+                if ($product) {
+                    // Tăng lại số lượng sản phẩm trong kho
+                    $product->so_luong += $item->so_luong;
+                    $product->save();
+                }
             }
         }
 

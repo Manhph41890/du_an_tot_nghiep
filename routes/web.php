@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShiperrController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
@@ -175,6 +176,8 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::get('/xacnhanhuys', [HuyDonHangController::class, 'index'])->name('xacnhanhuy.index');
     // đánh giá
     Route::get('danhgia', [DanhGiaController::class, 'index'])->name('danhgia.index');
+    Route::get('vanchuyens/index', [ShiperrController::class, 'index'])->name('vanchuyen.index');
+    Route::get('vanchuyens/show/{id}', [ShiperrController::class, 'show'])->name('vanchuyen.show');
 });
 
 // Route cho người dùng (khách hàng)

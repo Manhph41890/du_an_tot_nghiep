@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderConfirmationMail;
+use App\Mail\SuccessOrderMail;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\chi_tiet_don_hang;
@@ -248,39 +249,8 @@ class OrderController extends Controller
                 'tong_tien' => $user->vi_nguoi_dungs->tong_tien - $totall,
             ]);
 
-            // Lưu thông tin lịch sử thanh toán vào bảng ls_thanh_toan_vi
-            DB::table('ls_thanh_toan_vis')->insert([
-                'don_hang_id' => $order->id,
-                'vi_nguoi_dung_id' => $user->vi_nguoi_dungs->id,
-                'thoi_gian_thanh_toan' => now()->timezone('Asia/Ho_Chi_Minh'),
-                'tien_thanh_toan' => $totall,
-                'trang_thai' => 'Thành công',
-            ]);
+            Mail::to($order->email)->send(new SuccessOrderMail($order, $user->ho_ten));
 
-            // Gửi email với mã xác thực
-            Mail::send(
-                'auth.success_order',
-                [
-                    'ho_ten' => $user->ho_ten,
-                    'order' => $order,
-                ],
-                function ($message) use ($order) {
-                    $message->to($order->email)->subject('Đặt hàng thành công');
-                },
-            );
-
-            Mail::send(
-                'auth.success_order',
-                [
-                    'ho_ten' => $user->ho_ten,
-                    'order' => $order,
-                ],
-                function ($message) use ($order) {
-                    $message->to($order->email)->subject('Đặt hàng thành công');
-                },
-            );
-
-            // Xóa giỏ hàng sau khi đặt hàng thành công
             // Xóa giỏ hàng sau khi đặt hàng thành công
             foreach ($cartItemsToDelete as $item) {
                 CartItem::where('san_pham_id', $item['san_pham_id'])
@@ -356,16 +326,7 @@ class OrderController extends Controller
                 }
             }
 
-            Mail::send(
-                'auth.success_order',
-                [
-                    'ho_ten' => $user->ho_ten,
-                    'order' => $order,
-                ],
-                function ($message) use ($order) {
-                    $message->to($order->email)->subject('Đặt hàng thành công');
-                },
-            );
+            Mail::to($order->email)->send(new SuccessOrderMail($order, $user->ho_ten));
 
             // Xóa giỏ hàng sau khi đặt hàng thành công
             // Xóa giỏ hàng sau khi đặt hàng thành công
@@ -503,16 +464,7 @@ class OrderController extends Controller
                 'trang_thai' => 'Thanh toán thành công',
             ]);
 
-            Mail::send(
-                'auth.success_order',
-                [
-                    'ho_ten' => $user->ho_ten,
-                    'order' => $order,
-                ],
-                function ($message) use ($order) {
-                    $message->to($order->email)->subject('Đặt hàng thành công');
-                },
-            );
+            Mail::to($order->email)->send(new SuccessOrderMail($order, $user->ho_ten));
 
             return redirect()->route('order.success_nhanhang')->with('success', 'Thanh toán thành công! Đơn hàng của bạn đã được tạo.');
         }

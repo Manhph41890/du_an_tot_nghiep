@@ -113,6 +113,10 @@
                                         <p class="text-danger">
                                             <strong>Lý do:</strong> {{ $donhang->shipper->ly_do_huy }}
                                         </p>
+                                    @elseif($donhang->shipper->status == 'Giao lại')
+                                        <p class="mb-0" style="text-align: center">
+                                            <strong>Trạng thái:</strong>Đơn hàng đang được giao lại
+                                        </p>
                                     @else
                                         <div class="progress-bar" style="flex-direction: row">
                                             @php

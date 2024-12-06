@@ -70,7 +70,7 @@ class ShipperController extends Controller
 
             // Insert vào bảng shippers
             Shipper::create([
-                'status' => 'Đang vận chuyển',
+                'status' => 'Đã lấy hàng',
                 'ly_do_huy' => '',
                 'shipper_id' => $user->id,
                 'don_hang_id' => $donHang->id, // Quan hệ với bảng don_hang

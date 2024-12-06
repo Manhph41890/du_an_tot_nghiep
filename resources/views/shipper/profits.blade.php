@@ -60,7 +60,7 @@
                                                                 <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }}
                                                                     VND</td>
                                                                 <td>
-                                                                    {{ number_format($shipper->donHang->tong_tien * 0.04, 0, ',', '.') }}
+                                                                    {{ number_format(30000 * 0.2, 0, ',', '.') }}
                                                                     VND
                                                                 </td>
                                                             </tr>

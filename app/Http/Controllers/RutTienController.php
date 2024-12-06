@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\vi_nguoi_dung;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\Rule;
 
 class RutTienController extends Controller
 {
@@ -67,56 +69,76 @@ class RutTienController extends Controller
         return  redirect()->route('taikhoan.nap-tien')->with('success', 'Nạp tiền thành công');
     }
 
+
+
+
     public function rut()
     {
+        $response = Http::get(env('VIETQR_BANKS_LIST'));
+
+        if ($response->successful()) {
+            $banks = $response->json()['data']; // Lấy dữ liệu từ API
+        } else {
+            $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
+        }
         $viNguoiDung = vi_nguoi_dung::where('user_id', Auth::id());
-        $banks = Bank::all();
+        // $banks = Bank::all();
         return view('client.taikhoan.rut-tien', compact('viNguoiDung', 'banks'));
     }
 
 
     public function withdraw(Request $request)
     {
+        // Gọi API để lấy danh sách ngân hàng
+        $response = Http::get(env('VIETQR_BANKS_LIST'));
+
+        if ($response->successful()) {
+            $banks = collect($response->json()['data']); // Sử dụng collect để thao tác dễ hơn
+        } else {
+            return redirect()->route('taikhoan.rut-tien')->with('error', 'Không thể tải danh sách ngân hàng.');
+        }
+
+        // Validate dữ liệu đầu vào
         $request->validate([
-            'bank_id' => 'required|exists:banks,id',
+            'bank_id' => ['required', Rule::in($banks->pluck('code')->toArray())], // Kiểm tra mã ngân hàng từ API
             'amount' => 'required|numeric|min:1',
             'pin' => 'required',
         ]);
 
         $user = Auth::user();
 
-        // Lấy ví của người dùng
+        // Lấy ví người dùng
         $viNguoiDung = $user->vi_nguoi_dungs;
-        // dd($viNguoiDung->tong_tien);
 
         if (!$viNguoiDung || $viNguoiDung->tong_tien < $request->amount) {
             return redirect()->route('taikhoan.rut-tien')->with('error', 'Số dư không đủ.');
         }
 
-        // Lấy ngân hàng
-        $bank = Bank::findOrFail($request->bank_id);
-
-        // Kiểm tra mã PIN
-        if ($bank->pin !== $request->pin) {
-            return  redirect()->route('taikhoan.rut-tien')->with('error', 'Mã PIN không chính xác.');
+        // Tìm ngân hàng từ API
+        $bank = $banks->firstWhere('code', $request->bank_id);
+        if (!$bank) {
+            return redirect()->route('taikhoan.rut-tien')->with('error', 'Ngân hàng không hợp lệ.');
         }
 
-        // Cập nhật số dư
+        // Kiểm tra mã PIN (giả sử mã PIN là cố định hoặc lưu ở đâu đó)
+        if ($request->pin !== '123456') { // Thay '123456' bằng logic kiểm tra thực tế
+            return redirect()->route('taikhoan.rut-tien')->with('error', 'Mã PIN không chính xác.');
+        }
+
+        // Cập nhật số dư trong ví người dùng
         $viNguoiDung->tong_tien -= $request->amount;
         $viNguoiDung->save();
 
-        $bank->balance += $request->amount;
-        $bank->save();
-
+        // Ghi lại lịch sử rút tiền
         DB::table('ls_rut_vis')->insert([
-            'vi_nguoi_dung_id' => $user->vi_nguoi_dungs->id,
+            'vi_nguoi_dung_id' => $viNguoiDung->id,
             'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
             'tien_rut' => $request->amount,
             'trang_thai' => 'Chờ duyệt',
             'bank_id' => $request->bank_id,
         ]);
 
-        return  redirect()->route('taikhoan.rut-tien')->with('success', 'Yêu cầu rút đã được gửi');
+        return redirect()->route('taikhoan.rut-tien')->with('success', 'Yêu cầu rút đã được gửi.');
     }
 
 
@@ -180,5 +202,4 @@ class RutTienController extends Controller
         $lsRutVi->save();
         return redirect()->back()->with('success', 'Xác nhận từ chối rút tiền thành công.');
     }
-    
 }

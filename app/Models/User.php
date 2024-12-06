@@ -64,6 +64,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Shipper::class, 'shipper_id');
     }
+    public function bank()
+    {
+        return $this->hasMany(Bank::class);
+    }
 
     /**
      * Các trường cần ẩn khi trả về JSON.

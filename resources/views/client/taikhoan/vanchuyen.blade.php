@@ -124,14 +124,10 @@
                                             ],
                                             [
                                                 'icon' => 'fas fa-check',
-                                                'text' => 'Đã Giao Cho ĐVVC',
+                                                'text' => 'Đang vận chuyển',
                                                 'status' => 'Đang vận chuyển',
                                             ],
-                                            [
-                                                'icon' => 'fas fa-truck',
-                                                'text' => 'Đang giao',
-                                                'status' => 'Đã giao',
-                                            ],
+                                        
                                             [
                                                 'icon' => 'fas fa-box',
                                                 'text' => 'Đã Giao hàng',

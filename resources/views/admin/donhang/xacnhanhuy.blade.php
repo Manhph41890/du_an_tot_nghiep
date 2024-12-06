@@ -11,18 +11,22 @@
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4>
                     </div>
-                    {{-- <form method="post" action="{{ route('danhmucs.index') }}" class="d-flex">
+                    <form method="post" action="{{ route('xacnhanhuy.index') }}" class="d-flex">
                         @csrf
                         @method('GET')
-                        <input type="text" name="search_ten_danh_muc" class="form-control me-2"
-                            placeholder="Tìm danh mục..." value="{{ request('search_ten_danh_muc') }}">
-                        <select name="search_dm" class="form-select me-2">
-                            <option value="">Hiển thị tất cả</option>
-                            <option value="0" {{ request('search_dm') == '0' ? 'selected' : '' }}>Hiển thị</option>
-                            <option value="1" {{ request('search_dm') == '1' ? 'selected' : '' }}>Ẩn</option>
+                        <input type="search" name="search_taikhoan" class="form-control me-2"
+                        placeholder="Tìm tài khoản..." value="{{ request('search_taikhoan') }}">
+                        <input type="text" name="search_don_hang" class="form-control me-2"
+                            placeholder="Tìm đơn hàng..." value="{{ request('search_don_hang') }}">
+                        <select name="search_duyethuy" class="form-select me-2">
+                            <option value="">Chọn</option>
+                            <option value="Xác nhận hủy" {{ request('search_duyethuy') == 'Xác nhận hủy' ? 'selected' : '' }}>Xác nhận hủy</option>
+                            <option value="Từ chối hủy" {{ request('search_duyethuy') == 'Từ chối hủy' ? 'selected' : '' }}>
+                               Từ chối hủy</option>
+                            <option value="Chờ xác nhận hủy" {{ request('search_duyethuy') == 'Chờ xác nhận hủy' ? 'selected' : '' }}>Chờ xác nhận hủy</option>
                         </select>
                         <button type="submit" class="btn btn-primary">Tìm</button>
-                    </form> --}}
+                    </form>
                 </div>
                 <div class="col-xl-12">
                     <div class="card">
@@ -53,7 +57,7 @@
                                             @foreach ($huyDons as $index => $huyDon)
                                                 <tr>
                                                     <th scope="row">{{ $huyDon->id }}</th>
-                                                    <td>{{ $huyDon->don_hang_id }}</td>
+                                                    <td>{{ $huyDon->don_hang->ma_don_hang }}</td>
                                                     <td>{{ $huyDon->don_hang->user->ho_ten ?? 'Không xác định' }}</td>
                                                     <td>{{ $huyDon->thoi_gian_huy }}</td>
                                                     <td>{{ $huyDon->trang_thai }}</td>
@@ -69,15 +73,15 @@
                                                             <!-- Nếu đã xác nhận hoặc từ chối hủy -->
                                                             <a href="#" data-bs-toggle="modal"
                                                                 data-bs-target="#allmyModalXacNhanhuy{{ $huyDon->id }}"
-                                                                class="btn btn-info btn-sm"">Đã duyệt</a>
+                                                                class="btn btn-info btn-sm">Đã duyệt</a>
                                                         @else
                                                             <p>Trạng thái không hợp lệ</p>
                                                         @endif
 
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="allmyModalXacNhanhuy{{ $huyDon->id }}"
-                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                            aria-hidden="true">
+                                                        <div class="modal fade"
+                                                            id="allmyModalXacNhanhuy{{ $huyDon->id }}" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-xl">
                                                                 <!-- Add modal-lg class here -->
                                                                 <div class="modal-content">

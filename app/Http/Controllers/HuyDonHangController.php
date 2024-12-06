@@ -14,10 +14,35 @@ use Illuminate\Validation\Rule;
 
 class HuyDonHangController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = huy_don_hang::query()->with(['don_hang.user']);
+
+        // lọc trạng thái
+        if ($request->has('search_duyethuy')) {
+            $is_active = $request->input('search_duyethuy');
+            if ($is_active == 'Xác nhận hủy' || $is_active == 'Từ chối hủy' || $is_active == 'Chờ xác nhận hủy') {
+                $query->where('trang_thai', $is_active);
+            }
+        }
+
+        // tim theo đơn hàng
+        if ($request->has('search_don_hang') && !empty($request->input('search_don_hang'))) {
+            $search_don_hang = $request->input('search_don_hang');
+            $query->whereHas('don_hang', function ($q) use ($search_don_hang) {
+                $q->where('id', 'like', '%' . $search_don_hang . '%');
+            });
+        }
+         // tim theo tên người dùng
+         if ($request->has('search_taikhoan') && !empty($request->input('search_taikhoan'))) {
+            $search_taikhoan = $request->input('search_taikhoan');
+            $query->whereHas('don_hang.user', function ($q) use ($search_taikhoan) {
+                $q->where('ho_ten', 'like', '%' . $search_taikhoan . '%');
+            });
+        }
+
         // Lấy tất cả các đơn hàng đã hủy
-        $huyDons = huy_don_hang::with('don_hang.user')->latest('id')->paginate(6);
+        $huyDons = $query->latest('id')->paginate(6);
         $title = "Danh sách đơn hàng cần xác nhận hủy";
         return view('admin.donhang.xacnhanhuy', compact('huyDons', 'title'));
     }

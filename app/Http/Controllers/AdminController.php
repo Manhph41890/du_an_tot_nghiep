@@ -16,8 +16,8 @@ class AdminController extends Controller
 {
 
     public function thong_ke_chung(Request $request)
-    {   
-        
+    {
+
         $this->authorize('viewAny', User::class);
         $title = "Tổng quan chung";
 
@@ -97,6 +97,13 @@ class AdminController extends Controller
                 ])
                 ->where('trang_thai_don_hang', 'Đã hủy')
                 ->count();
+            $donhangs_thatbai = don_hang::query()
+                ->whereBetween('ngay_tao', [
+                    $request->input('ngay_bat_dau'),
+                    $request->input('ngay_ket_thuc')
+                ])
+                ->where('trang_thai_don_hang', 'Thất bại')
+                ->count();
 
             // Số lượng đơn hàng mới
             $soluong_donhangs_new = don_hang::query()
@@ -143,6 +150,9 @@ class AdminController extends Controller
                     $donhangs_dahuy = don_hang::whereDate('ngay_tao', Carbon::today())
                         ->where('trang_thai_don_hang', 'Đã hủy')
                         ->count();
+                    $donhangs_thatbai = don_hang::whereDate('ngay_tao', Carbon::today())
+                        ->where('trang_thai_don_hang', 'Thất bại')
+                        ->count();
 
                     // Số lượng đơn hàng mới
                     $soluong_donhangs_new = don_hang::whereDate('ngay_tao', Carbon::today())
@@ -179,6 +189,9 @@ class AdminController extends Controller
                         ->count();
                     $donhangs_dahuy = don_hang::where('ngay_tao', '>=', Carbon::today()->subDays(6))
                         ->where('trang_thai_don_hang', 'Đã hủy')
+                        ->count();
+                    $donhangs_thatbai = don_hang::where('ngay_tao', '>=', Carbon::today()->subDays(6))
+                        ->where('trang_thai_don_hang', 'Thất bại')
                         ->count();
 
                     // Số lượng đơn hàng mới
@@ -218,6 +231,9 @@ class AdminController extends Controller
                     $donhangs_dahuy = don_hang::whereMonth('ngay_tao', Carbon::now()->month)
                         ->where('trang_thai_don_hang', 'Đã hủy')
                         ->count();
+                    $donhangs_thatbai = don_hang::whereMonth('ngay_tao', Carbon::now()->month)
+                        ->where('trang_thai_don_hang', 'Thất bại')
+                        ->count();
 
                     // Số lượng đơn hàng mới
                     $soluong_donhangs_new = don_hang::whereMonth('ngay_tao', Carbon::now()->month)
@@ -255,6 +271,9 @@ class AdminController extends Controller
                     $donhangs_dahuy = don_hang::whereYear('ngay_tao', Carbon::now()->year)
                         ->where('trang_thai_don_hang', 'Đã hủy')
                         ->count();
+                    $donhangs_thatbai = don_hang::whereYear('ngay_tao', Carbon::now()->year)
+                        ->where('trang_thai_don_hang', 'Thất bại')
+                        ->count();
 
                     // Số lượng đơn hàng mới
                     $soluong_donhangs_new = don_hang::whereYear('ngay_tao', Carbon::now()->year)
@@ -280,6 +299,7 @@ class AdminController extends Controller
             $donhangs_dagiao = don_hang::query()->where('trang_thai_don_hang', 'Đã giao')->count();
             $donhangs_thanhcong = don_hang::query()->where('trang_thai_don_hang', 'Thành công')->count();
             $donhangs_dahuy = don_hang::query()->where('trang_thai_don_hang', 'Đã hủy')->count();
+            $donhangs_thatbai = don_hang::query()->where('trang_thai_don_hang', 'Thất bại')->count();
 
             // Số lượng đơn hàng mới
             $soluong_donhangs_new = don_hang::query()->where('trang_thai_don_hang', 'Chờ xác nhận')->count();
@@ -493,15 +513,16 @@ class AdminController extends Controller
         $isAdmin = auth()->user()->chuc_vu->ten_chuc_vu === 'admin';
 
 
-        return view('admin.thongke.tongquan', compact('loi_nhuan_theo_thang', 'labels_phantram', 'phantramdonhang', 'labels', 'tongTienThang', 'sanphams_saphet', 'views_product', 'title', 'donhangs', 'tong_tien', 'isAdmin', 'soluong_donhangs', 'soluong_donhangs_new', 'tongtien_donhangs_moi', 'donhangs_daxacnhan', 'donhangs_dangchuanbihang', 'donhangs_dangvanchuyen', 'donhangs_dagiao', 'donhangs_thanhcong', 'donhangs_dahuy'));
+        return view('admin.thongke.tongquan', compact('loi_nhuan_theo_thang', 'labels_phantram', 'phantramdonhang', 'labels', 'tongTienThang', 'sanphams_saphet', 'views_product', 'title', 'donhangs', 'tong_tien', 'isAdmin', 'soluong_donhangs', 'soluong_donhangs_new', 'tongtien_donhangs_moi', 'donhangs_daxacnhan', 'donhangs_dangchuanbihang', 'donhangs_dangvanchuyen', 'donhangs_dagiao', 'donhangs_thanhcong', 'donhangs_dahuy', 'donhangs_thatbai'));
     }
-    public function quan_ly_van_chuyen(Request $request){
+    public function quan_ly_van_chuyen(Request $request)
+    {
         $query = Shipper::query();
 
         // Các bộ lọc
         if ($request->filled('search')) {
             $query->where('ho_ten', 'LIKE', "%{$request->search}%")
-                  ->orWhere('so_dien_thoai', 'LIKE', "%{$request->search}%");
+                ->orWhere('so_dien_thoai', 'LIKE', "%{$request->search}%");
         }
 
         if ($request->filled('trang_thai')) {

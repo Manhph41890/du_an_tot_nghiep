@@ -8,10 +8,10 @@
         <div class="modal-body">
 
             <div class="row">
-                @php
+                {{-- @php
                     $status = $donhang->shipper->status;
                     dd($status);
-                @endphp
+                @endphp --}}
 
                 <div class="col-12">
                     <div class="container mt-2">

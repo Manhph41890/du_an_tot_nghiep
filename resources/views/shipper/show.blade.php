@@ -84,9 +84,9 @@
                                 @if ($shipper->status == 'Đã lấy hàng')
                                     <tr>
                                         <td>{{ $shipper->donHang->ma_don_hang }}</td>
-                                        <td>{{ $shipper->donHang->user->ho_ten }}</td>
-                                        <td>{{ $shipper->donHang->user->dia_chi }}</td>
-                                        <td>{{ $shipper->donHang->user->so_dien_thoai }}</td>
+                                        <td>{{ $shipper->donHang->ho_ten }}</td>
+                                        <td>{{ $shipper->donHang->dia_chi }}</td>
+                                        <td>{{ $shipper->donHang->so_dien_thoai }}</td>
                                         <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }} VND</td>
                                         <td>
                                             <select class="form-select status-select" data-id="{{ $shipper->id }}">
@@ -124,9 +124,9 @@
                                 @if ($shipper->status == 'Đang vận chuyển')
                                     <tr> <!-- Bổ sung thẻ <tr> -->
                                         <td>{{ $shipper->donHang->ma_don_hang }}</td>
-                                        <td>{{ $shipper->donHang->user->ho_ten }}</td>
-                                        <td>{{ $shipper->donHang->user->dia_chi }}</td>
-                                        <td>{{ $shipper->donHang->user->so_dien_thoai }}</td>
+                                        <td>{{ $shipper->donHang->ho_ten }}</td>
+                                        <td>{{ $shipper->donHang->dia_chi }}</td>
+                                        <td>{{ $shipper->donHang->so_dien_thoai }}</td>
                                         <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }} VND</td>
                                         <td>
                                             <select class="form-select status-select" data-id="{{ $shipper->id }}">
@@ -178,7 +178,7 @@
                                         <td>{{ $shipper->donHang->so_dien_thoai }}</td>
                                         <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }} VND</td>
                                         <td>
-                                            {{ number_format($shipper->donHang->tong_tien * 0.04, 0, ',', '.') }} VND
+                                            {{ number_format(30000 * 0.2, 0, ',', '.') }} VND
                                         </td>
                                         <td class="text-success">{{ $shipper->status }}</td>
                                     </tr>
@@ -258,6 +258,28 @@
                 </div>
             </div>
         </div>
+        {{-- ảnh chứng minh --}}
+        <div class="modal fade" id="imageUploadModal{{ $shipper->id }}" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tải ảnh minh chứng</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <form class="upload-image-form" data-shipper-id="{{ $shipper->id }}">
+                        <div class="modal-body">
+                            <input type="file" name="image_path" accept="image/*" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Tải lên</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
         $(document).ready(function() {
@@ -270,32 +292,64 @@
                     cancelReason = prompt("Vui lòng nhập lý do hủy đơn:");
                     if (!cancelReason) {
                         alert("Bạn phải nhập lý do khi hủy đơn!");
-                        $(this).val($(this).data('current-status')); // Khôi phục trạng thái ban đầu
+                        $(this).val($(this).data('current-status'));
                         return;
                     }
                 }
 
-                $.ajax({
-                    url: `/shipper/update-status/${shipperId}`,
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        status: newStatus,
-                        ly_do_huy: cancelReason
-                    },
-                    success: function(response) {
-                        toastr.success('Cập nhật trạng thái thành công!');
-                        const row = $(`#order-${shipperId}`);
+                if (newStatus === 'Thành công') {
+                    // Trigger file input for image upload
+                    $('#imageUploadModal' + shipperId).modal('show');
+                    return;
+                }
 
-                        row.find('.status-select').val(newStatus);
-                        window.location.reload();
-                    },
+                submitStatusUpdate(shipperId, newStatus, cancelReason);
+            });
 
-                    error: function() {
-                        alert('Có lỗi xảy ra. Vui lòng thử lại!');
-                    }
-                });
+            // Handle file upload form submission
+            $('.upload-image-form').submit(function(e) {
+                e.preventDefault();
+                const shipperId = $(this).data('shipper-id');
+                const imageFile = $(this).find('input[type="file"]')[0].files[0];
+
+                if (!imageFile) {
+                    alert('Vui lòng chọn ảnh minh chứng');
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('_token', '{{ csrf_token() }}');
+                formData.append('status', 'Thành công');
+                formData.append('image_path', imageFile);
+
+                submitStatusUpdate(shipperId, 'Thành công', null, formData);
             });
         });
+
+        function submitStatusUpdate(shipperId, newStatus, cancelReason, formData = null) {
+            if (!formData) {
+                formData = new FormData();
+                formData.append('_token', '{{ csrf_token() }}');
+                formData.append('status', newStatus);
+                formData.append('ly_do_huy', cancelReason);
+            }
+
+            $.ajax({
+                url: `/shipper/update-status/${shipperId}`,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    toastr.success('Cập nhật trạng thái thành công!');
+                    const row = $(`#order-${shipperId}`);
+                    row.find('.status-select').val(newStatus);
+                    window.location.reload();
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra. Vui lòng thử lại!');
+                }
+            });
+        }
     </script>
 @endsection

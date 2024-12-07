@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('vi_shippers', function (Blueprint $table) {
-            $table->decimal('tong_tien', 15, 2);
+        Schema::table('banks', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -21,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('vi_shippers', function (Blueprint $table) {
-            $table->dropColumn('tong_tien');
+        Schema::table('banks', function (Blueprint $table) {
+            //
         });
     }
 };

@@ -89,6 +89,27 @@
                                                         <i
                                                             class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                     </a>
+
+                                                    <a href="{{ route('taikhoan.myorder', $myOrder->id) }}"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#allmyModalforordervc{{ $myOrder->id }}">
+                                                        <i class="fa fa-truck faa-truck"></i>
+                                                        <style>
+                                                            .faa-truck {
+                                                                background-color: rgb(254, 254, 254);
+                                                                padding: 3px;
+                                                                border: 1px solid rgb(114, 114, 114);
+                                                                opacity: 0.5;
+                                                                border-radius: 20%;
+                                                            }
+
+                                                            .fa :hover {
+                                                                background-color: #5f5f5f;
+                                                                !important
+                                                            }
+                                                        </style>
+                                                    </a>
+
                                                     <style>
                                                         .tichs_dg {
                                                             position: relative;
@@ -115,6 +136,11 @@
                                                     <!-- Modal -->
                                                     <div class="modal" id="allmyModalfororder{{ $myOrder->id }}">
                                                         @include('client.taikhoan.showmyorder', [
+                                                            'donhang' => $myOrder,
+                                                        ])
+                                                    </div>
+                                                    <div class="modal" id="allmyModalforordervc{{ $myOrder->id }}">
+                                                        @include('client.taikhoan.vanchuyen', [
                                                             'donhang' => $myOrder,
                                                         ])
                                                     </div>

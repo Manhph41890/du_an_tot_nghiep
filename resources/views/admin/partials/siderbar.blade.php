@@ -153,10 +153,10 @@
                     <div class="collapse" id="vanchuyen">
                         <ul class="nav-second-level">
                             @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
-                                <li><a class="tp-link" href="{{ route('baiviets.create') }}">Thông tin vận chuyển</a>
+                                <li><a class="tp-link" href="{{ route('vanchuyen.index') }}">Thông tin vận chuyển</a>
                                 </li>
                             @endif
-                            <li><a class="tp-link" href="{{ route('baiviets.index') }}">Duyệt đơn thất bại</a></li>
+
                         </ul>
                     </div>
                 </li>

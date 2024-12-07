@@ -406,9 +406,15 @@
                                                 <div class="single-review mb-4 p-3 shadow-sm rounded-lg bg-light">
                                                     <div class="d-flex align-items-center" style="width: 100%">
                                                         <div class="review-img me-3">
-                                                            <img src="{{ $danhgia->users->anh_dai_dien ? asset('storage/' . $danhgia->users->anh_dai_dien) : '/assets/img/default-avatar.png' }}"
-                                                                alt="{{ $danhgia->users->ho_ten }}"
-                                                                class="rounded-circle" />
+                                                            @if ($danhgia->users->anh_dai_dien)
+                                                                <img src="{{ asset('storage/' . $danhgia->users->anh_dai_dien) }}"
+                                                                    alt="{{ $danhgia->users->ho_ten }}"
+                                                                    class="rounded-circle" />
+                                                                    @else
+                                                                    <img src="#"
+                                                                    alt="{{ $danhgia->users->ho_ten }}"
+                                                                    class="rounded-circle" />
+                                                            @endif
                                                         </div>
                                                         <div class="review-content">
                                                             <div class="review-top-wrap d-flex justify-content-between">

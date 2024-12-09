@@ -33,8 +33,9 @@ class HuyDonHangController extends Controller
                 $q->where('id', 'like', '%' . $search_don_hang . '%');
             });
         }
-         // tim theo tên người dùng
-         if ($request->has('search_taikhoan') && !empty($request->input('search_taikhoan'))) {
+
+        // tim theo tên người dùng
+        if ($request->has('search_taikhoan') && !empty($request->input('search_taikhoan'))) {
             $search_taikhoan = $request->input('search_taikhoan');
             $query->whereHas('don_hang.user', function ($q) use ($search_taikhoan) {
                 $q->where('ho_ten', 'like', '%' . $search_taikhoan . '%');
@@ -71,9 +72,7 @@ class HuyDonHangController extends Controller
 
         // Kiểm tra trạng thái đơn hàng
         if ($donHang->trang_thai_don_hang !== 'Chờ xác nhận') {
-            return redirect()->back()->withErrors([
-                'error' => 'Đơn hàng không thể hủy do trạng thái không hợp lệ.',
-            ]);
+            return response()->json(['error' => 'Đơn hàng không thể hủy do trạng thái không hợp lệ.'], 400);
         }
 
         // Tạo bản ghi trong bảng hủy đơn hàng
@@ -85,9 +84,8 @@ class HuyDonHangController extends Controller
         ]);
 
         // Trả về thông báo thành công
-        return redirect()->back()->with('success', 'Yêu cầu hủy đơn hàng đã được gửi.');
+        return response()->json(['success' => 'Yêu cầu hủy đơn hàng đã được gửi.']);
     }
-
     public function showhuy($id)
     {
         // $donhang = don_hang::with([

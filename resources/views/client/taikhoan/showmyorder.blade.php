@@ -72,12 +72,12 @@
                                                         <th>Hình ảnh</th>
                                                         <th>Sản phẩm</th>
                                                         <th>Số Lượng</th>
-                                                        <th>Giá</th>
                                                         <th>Thành Tiền</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+
                                                     @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
                                                         <tr>
                                                             <td>
@@ -96,8 +96,7 @@
 
                                                             </td>
                                                             <td>{{ $chi_tiet->so_luong }}</td>
-                                                            <td>{{ number_format($chi_tiet->gia_tien, 0, ',', '.') }}
-                                                                VND</td>
+
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
                                                                 VND</td>
                                                             <td>

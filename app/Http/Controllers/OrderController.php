@@ -48,7 +48,7 @@ class OrderController extends Controller
 
         $totall = $request->totall;
         $total = $request->total;
-
+        // dd($total);
         $discount = 0;
         if ($validatedData['khuyen_mai']) {
             $coupon = khuyen_mai::where('ma_khuyen_mai', $validatedData['khuyen_mai'])
@@ -282,6 +282,7 @@ class OrderController extends Controller
 
             // Lưu chi tiết đơn hàng từ giỏ hàng
             foreach ($validatedData['cart_items'] as $item) {
+
                 chi_tiet_don_hang::create([
                     'don_hang_id' => $order->id,
                     'san_pham_id' => $item['san_pham_id'],
@@ -289,7 +290,8 @@ class OrderController extends Controller
                     'color_san_pham_id' => $item['color_id'] ?? null,
                     'so_luong' => $item['quantity'],
                     'gia_tien' => $item['price'],
-                    'thanh_tien' => $total,
+                    'thanh_tien' => $item['price'],
+                    // dd($thanhTien)
                 ]);
                 if ($coupon) {
                     DB::table('coupon_usages')->insert([

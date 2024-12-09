@@ -334,7 +334,7 @@ class CartController extends Controller
             return redirect()->route('cart.index')->with('error', 'Hiện tại không có shipper nào phục vụ khu vực của bạn. Vui lòng thử lại sau hoặc chọn phương thức vận chuyển khác.');
         }
 
-        $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
+        $total = $cartItems->sum(fn($item) => $item->price);
         $shippingCost = 30000; // 30,000 VND
         $totall = $total + $shippingCost;
 

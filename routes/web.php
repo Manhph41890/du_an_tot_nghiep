@@ -31,15 +31,15 @@ use App\Http\Controllers\RutTienController;
 use App\Http\Controllers\Shipper\ShipperController;
 use App\Http\Requests\LienHeRequest;
 use App\Models\ShipperProfit;
+use Illuminate\Http\Request;
 
 // Route trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
-// tìm kiếm toàn trang 
+// tìm kiếm toàn trang
 Route::get('/timkiem', [SearchController::class, 'search'])->name('global.search');
 //bình luận
 Route::get('/lien-he', [LienHeController::class, 'create'])->name('client.lienhe');
 Route::post('/lien-he', [LienHeController::class, 'store'])->name('lien_he.store');
-
 
 // Route cho client
 Route::prefix('client')->group(function () {
@@ -53,7 +53,7 @@ Route::prefix('client')->group(function () {
 
     Route::get('/baiviet', [HomeController::class, 'listBaiViet']);
     Route::get('/baivietchitiet/{id}', [HomeController::class, 'chiTietBaiViet']);
-    //tam thoi 
+    //tam thoi
     Route::get('/taikhoan', [TaiKhoanController::class, 'showAccountDetails'])->name('taikhoan.dashboard');
 
     Route::post('/taikhoan/update-thong-tin', [TaiKhoanController::class, 'updateThongtin'])->name('update_thongtin');
@@ -121,10 +121,8 @@ Route::post('verify-code', [ForgotPasswordController::class, 'verifyCode'])->nam
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('auth.reset_password');
 Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('auth.update_password');
 
-
 // Route cho các chức năng quản lý (admin)
 Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
-
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class, 'thong_ke_chung'])->name('thong_ke_chung');
     });
@@ -137,7 +135,6 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::get('/ruttien', [RutTienController::class, 'duyetruttienAdmin'])->name('duyetruttienAdmin');
     Route::put('/duyetrut/{id}', [RutTienController::class, 'duyetRutAdmin'])->name('duyetRutAdmin');
     Route::put('/huyrut/{id}', [RutTienController::class, 'HuyRutAdmin'])->name('HuyRutAdmin');
-
 
     // Resource routes cho quản lý
     Route::resource('/danhmucs', DanhMucController::class);
@@ -156,7 +153,7 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::get('variants/sizes/{id}/edit', [VariantController::class, 'editSize'])->name('variants.sizes.edit');
     Route::put('variants/sizes/{id}', [VariantController::class, 'updateSize'])->name('variants.sizes.update');
     Route::delete('variants/sizes/{id}', [VariantController::class, 'destroySize'])->name('variants.sizes.destroy');
-    // quản lý người dùng 
+    // quản lý người dùng
     // Route cho quản lý người dùng
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
@@ -194,6 +191,12 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     Route::post('/cart/update-price', [CartController::class, 'updatePrice'])->name('cart.updatePrice');
     Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::post('/check-shipper-availability', function (Request $request) {
+        $address = $request->input('address');
+        $shipperAvailable = (new CartController())->checkShipperAvailability($address);
+
+        return response()->json(['available' => $shipperAvailable]);
+    });
 
     Route::post('/order/add', [OrderController::class, 'add'])->name('order.add');
     Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
@@ -202,7 +205,7 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     Route::get('/cart/variant-price/{id}', [CartController::class, 'getVariantPrice']);
 
     Route::post('/apply-coupon', [OrderController::class, 'applyCoupon'])->name('apply.coupon');
-    // 
+    //
     Route::get('/api/products/{categoryId}', [SanPhamController::class, 'getProductsByCategory']);
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');

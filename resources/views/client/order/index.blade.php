@@ -578,12 +578,35 @@
                     } else {
                         $('#suggestions').empty();
                     }
-                }); // Click on suggestion to fill input 
+                });
+
+                // 
                 $('#suggestions').on('click', 'div', function() {
-                    $('#dia_chi').val($(this).text());
+                    const selectedAddress = $(this).text();
+                    $('#dia_chi').val(selectedAddress);
                     $('#suggestions').empty();
+
+                    // Kiểm tra khả năng phục vụ của shipper
+                    $.ajax({
+                        url: '/check-shipper-availability',
+                        type: 'POST',
+                        data: {
+                            address: selectedAddress,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (!response.available) {
+                                alert(
+                                    'Hiện tại không có shipper nào phục vụ khu vực của bạn. Vui lòng thử lại sau hoặc chọn phương thức vận chuyển khác.');
+                            }
+                        },
+                        error: function(error) {
+                            console.error('Error checking shipper availability:', error);
+                        }
+                    });
                 });
             });
+
             $(document).ready(function() {
                 $('#apply-coupon').on('click', function() {
                     var couponCode = $('#coupon-code').val();

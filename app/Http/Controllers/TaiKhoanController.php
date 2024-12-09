@@ -19,11 +19,13 @@ class TaiKhoanController extends Controller
     public function showAccountDetails(Request $request)
     {
         $user = Auth::user(); // Lấy thông tin người dùng hiện tại
-        $title = " THÔNG TIN TÀI KHOẢN ";
+        $title = ' THÔNG TIN TÀI KHOẢN ';
         $avatar = $user->anh_dai_dien ? Storage::url($user->anh_dai_dien) : asset('assets/client/images/avatar.png');
         $showForm = $request->query('showForm') === 'true';
 
-        $myOrders = don_hang::where('user_id', $user->id)->latest()->paginate(4);
+        $myOrders = don_hang::where('user_id', $user->id)
+            ->latest()
+            ->paginate(4);
         $viNguoiDung = vi_nguoi_dung::where('user_id', $user->id)->first();
 
         // Lấy lịch sử giao dịch (chi tiết ví)
@@ -76,7 +78,9 @@ class TaiKhoanController extends Controller
     public function donHang()
     {
         $user = Auth::user();
-        $myOrders = don_hang::where('user_id', $user->id)->latest()->paginate(4);
+        $myOrders = don_hang::where('user_id', $user->id)
+            ->latest()
+            ->paginate(4);
         return view('client.taikhoan.don-hang', compact('myOrders', 'user'));
     }
 
@@ -128,20 +132,9 @@ class TaiKhoanController extends Controller
         return view('client.taikhoan.quan-tri', compact('user'));
     }
 
-
     public function showMyOrder(don_hang $don_hang, $id)
     {
-        $donhang = don_hang::with([
-            'user',
-            'khuyen_mai',
-            'phuong_thuc_thanh_toan',
-            'phuong_thuc_van_chuyen',
-            'chi_tiet_don_hangs.san_pham',
-            'chi_tiet_don_hangs.color_san_pham',
-            'chi_tiet_don_hangs.size_san_pham',
-            'lich_su_thanh_toans',
-            'huy_don_hang',
-        ])->findOrFail($id);
+        $donhang = don_hang::with(['user', 'khuyen_mai', 'phuong_thuc_thanh_toan', 'phuong_thuc_van_chuyen', 'chi_tiet_don_hangs.san_pham', 'chi_tiet_don_hangs.color_san_pham', 'chi_tiet_don_hangs.size_san_pham', 'lich_su_thanh_toans', 'huy_don_hang'])->findOrFail($id);
         $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
         $currentStatus = $donhang->shipper ? $donhang->shipper->status : null;
 
@@ -163,8 +156,6 @@ class TaiKhoanController extends Controller
         return redirect()->route('taikhoan.donhang')->with('success', 'Đơn hàng đã được xác nhận thành công.');
     }
 
-
-
     public function cancel($id)
     {
         $donhang = don_hang::findOrFail($id);
@@ -181,10 +172,9 @@ class TaiKhoanController extends Controller
         $user = Auth::user();
         $history = lich_su_thanh_toan::findOrFail($id);
         $donhang = $history->don_hang;
-        $title = "Lịch sử đơn hàng ";
+        $title = 'Lịch sử đơn hàng ';
         return view('client.taikhoan.history', compact('user', 'title', 'history', 'donhang'));
     }
-
 
     public function updateAvatar(Request $request)
     {
@@ -215,7 +205,9 @@ class TaiKhoanController extends Controller
 
                 return redirect()->route('taikhoan.dashboard')->with('success', 'Cập nhật hình đại diện thành công');
             } catch (\Exception $e) {
-                return redirect()->back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+                return redirect()
+                    ->back()
+                    ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
             }
         }
     }
@@ -260,7 +252,9 @@ class TaiKhoanController extends Controller
 
             return redirect()->route('taikhoan.dashboard')->with('success', 'Thông tin tài khoản đã được cập nhật thành công.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+            return redirect()
+                ->back()
+                ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
         }
     }
 }

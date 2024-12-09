@@ -15,6 +15,20 @@ use Illuminate\Support\Facades\Log;
 
 class ShipperController extends Controller
 {
+    public function parseAddress($address)
+    {
+        $parts = array_map('trim', explode(',', $address));
+        $numParts = count($parts);
+
+        return [
+            'detail' => $numParts > 4 ? $parts[$numParts - 5] : '',
+            'ward' => $numParts > 3 ? $parts[$numParts - 4] : '',
+            'district' => $numParts > 2 ? $parts[$numParts - 3] : '',
+            'city' => $numParts > 1 ? $parts[$numParts - 2] : '',
+            'province' => $numParts > 0 ? $parts[$numParts - 1] : '',
+        ];
+    }
+
     public function index()
     {
         $title = 'Vận chuyển đơn hàng';
@@ -22,25 +36,18 @@ class ShipperController extends Controller
         // Lấy thông tin shipper đang đăng nhập
         $shipper = Auth::user();
 
-        //
-        $shipper_address = $shipper->dia_chi;
-        // dd($shipper_address);
-        $shipper_address_parts = array_map('trim', explode(',', $shipper_address));
+        // Parse shipper address
+        $parsed_shipper_address = $this->parseAddress($shipper->dia_chi);
 
-        $shipper_ward = isset($shipper_address_parts[2]) ? $shipper_address_parts[2] : '';
-        $shipper_district = isset($shipper_address_parts[3]) ? $shipper_address_parts[3] : '';
-        $shipper_city = isset($shipper_address_parts[4]) ? $shipper_address_parts[4] : '';
         // Lấy tất cả đơn hàng có trạng thái 'Đang chuẩn bị hàng'
         $donHangs = don_hang::where('trang_thai_don_hang', 'Đang chuẩn bị hàng')->get();
 
         // Lọc đơn hàng theo địa chỉ của shipper
-        $filteredOrders = $donHangs->filter(function ($order) use ($shipper_district, $shipper_ward, $shipper_city) {
-            $addressParts = array_map('trim', explode(',', $order->dia_chi));
+        $filteredOrders = $donHangs->filter(function ($order) use ($parsed_shipper_address) {
+            $parsed_order_address = $this->parseAddress($order->dia_chi);
 
-            $order_ward = isset($addressParts[2]) ? $addressParts[2] : '';
-            $order_district = isset($addressParts[3]) ? $addressParts[3] : '';
-            $order_city = isset($addressParts[4]) ? $addressParts[4] : '';
-            return $order_district == $shipper_district && ($order_ward == $shipper_ward && $order_city == $shipper_city);
+            // Compare parsed addresses
+            return $parsed_order_address['province'] === $parsed_shipper_address['province'] && $parsed_order_address['city'] === $parsed_shipper_address['city'] && $parsed_order_address['district'] === $parsed_shipper_address['district'] && $parsed_order_address['ward'] === $parsed_shipper_address['ward'];
         });
 
         return view('shipper.index', ['donHangs' => $filteredOrders, 'title' => $title]);

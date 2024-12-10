@@ -79,6 +79,17 @@
                                                 <tbody>
 
                                                     @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
+                                                        @php
+                                                            $san_pham = $chi_tiet->san_pham;
+                                                            $bien_the = $san_pham->bien_the_san_phams
+                                                                ->where(
+                                                                    'color_san_pham_id',
+                                                                    $chi_tiet->color_san_pham_id,
+                                                                )
+                                                                ->where('size_san_pham_id', $chi_tiet->size_san_pham_id)
+                                                                ->first();
+                                                            // dd($bien_the->gia);
+                                                        @endphp
                                                         <tr>
                                                             <td>
                                                                 <img src="{{ asset('/storage/' . optional($chi_tiet->san_pham)->anh_san_pham) }}"
@@ -96,9 +107,12 @@
 
                                                             </td>
                                                             <td>{{ $chi_tiet->so_luong }}</td>
-
+                                                            <td> {{ number_format($bien_the->gia + ($chi_tiet->san_pham->gia_km ?? $chi_tiet->san_pham->gia_goc), 0, ',', '.') }}
+                                                                VND </td>
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
                                                                 VND</td>
+
+
                                                             <td>
 
                                                                 @if (
@@ -274,8 +288,7 @@
                                             <div class="ratting-form-wrapper" id="reviewForm{{ $donhang->id }}">
                                                 <h3>Lý do hủy đơn hàng</h3>
                                                 <div class="ratting-form">
-                                                    <form id="huyDonHangForm{{ $donhang->id }}"
-                                                        action="{{ route('huydonhang.store') }}" method="POST">
+                                                    <form action="{{ route('huydonhang.store') }}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="don_hang_id"
                                                             value="{{ $donhang->id }}">
@@ -283,7 +296,8 @@
                                                             <div class="col-md-12">
                                                                 <div class="rating-form-style form-submit">
                                                                     <select name="ly_do_huy" class="form-select">
-                                                                        <option value="" disabled selected>Chọn
+                                                                        <option value="" disabled selected>
+                                                                            Chọn
                                                                             lý do hủy</option>
                                                                         <option
                                                                             value="Tôi muốn cập nhật địa chỉ/sđt nhận hàng">
@@ -291,17 +305,23 @@
                                                                         </option>
                                                                         <option
                                                                             value="Tôi muốn thêm/thay đổi Mã giảm giá">
-                                                                            Tôi muốn thêm/thay đổi Mã giảm giá</option>
+                                                                            Tôi muốn thêm/thay đổi Mã giảm giá
+                                                                        </option>
                                                                         <option
                                                                             value="Tôi muốn thay đổi sản phẩm (kích thước, màu sắc, số lượng…)">
-                                                                            Tôi muốn thay đổi sản phẩm (kích thước, màu
-                                                                            sắc, số lượng…)</option>
-                                                                        <option value="Thủ tục thanh toán rắc rối">Thủ
+                                                                            Tôi muốn thay đổi sản phẩm (kích thước,
+                                                                            màu
+                                                                            sắc, số lượng…)
+                                                                        </option>
+                                                                        <option value="Thủ tục thanh toán rắc rối">
+                                                                            Thủ
                                                                             tục thanh toán rắc rối</option>
                                                                         <option
                                                                             value="Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ hơn, uy tín hơn, giao nhanh hơn…)">
-                                                                            Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ hơn,
-                                                                            uy tín hơn, giao nhanh hơn…)</option>
+                                                                            Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ
+                                                                            hơn,
+                                                                            uy tín hơn, giao nhanh hơn…)
+                                                                        </option>
                                                                         <option value="Tôi không có nhu cầu mua nữa">
                                                                             Tôi không có nhu cầu mua nữa</option>
                                                                         <option
@@ -312,13 +332,12 @@
                                                                     @error('ly_do_huy')
                                                                         <p class="text-danger">{{ $message }}</p>
                                                                     @enderror
-                                                                    <button type="submit"
-                                                                        class="btn btn-dark mt-3">Gửi</button>
+                                                                    <button class="btn btn-dark mt-3"
+                                                                        type="submit">Gửi</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </form>
-
                                                 </div>
                                             </div>
                                         @endif
@@ -511,32 +530,5 @@
                 });
             })();
         @endforeach
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#huyDonHangForm{{ $donhang->id }}').submit(function(e) {
-            e.preventDefault(); // Ngừng hành động mặc định của form
-
-            let form = $(this);
-            let url = form.attr('action');
-            let data = form.serialize();
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: data,
-                success: function(response) {
-                    // Nếu yêu cầu thành công
-                    alert(response.success);
-                    location.reload(); // Reload lại trang để cập nhật trạng thái đơn hàng
-                },
-                error: function(xhr) {
-                    // Nếu có lỗi (trạng thái không hợp lệ)
-                    let errorMessage = xhr.responseJSON.error || "Đã có lỗi xảy ra.";
-                    alert(errorMessage);
-                }
-            });
-        });
     });
 </script>

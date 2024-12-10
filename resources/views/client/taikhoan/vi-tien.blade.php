@@ -24,7 +24,13 @@
                         </button>
                     </div>
                 </div>
-
+                <!-- Liên kết ngân hàng -->
+                <div class="text-center mb-4">
+                    <div class="text-muted">Liên kết ngân hàng</div>
+                    <a class="btn btn-outline-primary" href="{{ route('banks.create') }}">
+                        <i class="fas fa-university me-2"></i>Thêm ngân hàng
+                    </a>
+                </div>
                 <!-- Tổng tiền trong ví -->
                 <div class="text-center mb-4">
                     <div class="text-muted">Tổng tiền trong ví</div>
@@ -262,4 +268,5 @@
             </div>
         </div>
     </div>
+    <!-- Modal Thêm Ngân Hàng -->
 @endsection

@@ -179,102 +179,6 @@ class CartController extends Controller
         ]);
     }
 
-    // Xóa sản phẩm khỏi giỏ hàng
-    // public function removeFromCart($id)
-    // {
-    //     // Tìm mục trong giỏ hàng theo ID
-    //     $cartItem = CartItem::find($id);
-
-    //     // Kiểm tra xem có tìm thấy mục không
-    //     if (!$cartItem) {
-    //         return redirect()->route('cart.index')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng');
-    //     }
-
-    //     // Kiểm tra xem mục này có thuộc về giỏ hàng của người dùng hiện tại không
-    //     $cart = Cart::where('user_id', Auth::id())->first();
-
-    //     if ($cart && $cart->id === $cartItem->cart_id) {
-    //         // Lấy thông tin biến thể sản phẩm
-    //         $variant = bien_the_san_pham::where('san_pham_id', $cartItem->san_pham_id)
-    //             ->where('size_san_pham_id', $cartItem->size_san_pham_id)
-    //             ->where('color_san_pham_id', $cartItem->color_san_pham_id)
-    //             ->first();
-
-    //         // Nếu biến thể sản phẩm tồn tại, cập nhật lại số lượng sản phẩm trong kho
-    //         if ($variant) {
-    //             // Cộng lại số lượng vào bảng `bien_the_san_pham`
-    //             $variant->so_luong += $cartItem->quantity;
-    //             $variant->save();
-    //         }
-
-    //         // Cập nhật lại số lượng trong bảng `san_pham` (nếu cần)
-    //         $product = san_pham::find($cartItem->san_pham_id);
-    //         if ($product) {
-    //             $product->so_luong += $cartItem->quantity;  // Cộng lại số lượng trong bảng `san_pham`
-    //             $product->save();
-    //         }
-
-    //         // Xóa sản phẩm khỏi giỏ hàng
-    //         $cartItem->delete();
-
-    //         return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng');
-    //     }
-
-    //     return redirect()->route('cart.index')->with('error', 'Không tìm thấy sản phẩm trong giỏ hàng');
-    // }
-
-    public function showCart()
-    {
-        // Lấy user_id của người dùng hiện tại
-        $userId = auth()->id();
-
-        // Lấy giỏ hàng của người dùng
-        $cart = Cart::where('user_id', $userId)->first();
-
-        if (!$cart) {
-            // Nếu giỏ hàng trống
-            // $cartItemsCount = 0;
-            $insufficientStockItems = [];
-        } else {
-            // Lấy tất cả sản phẩm trong giỏ hàng
-            $cartItems = CartItem::with(['san_pham', 'size', 'color'])
-                ->where('cart_id', $cart->id)
-                ->get();
-
-            // Đếm tổng số sản phẩm bao gồm các biến thể
-            // $cartItemsCount = $cartItems
-            //     ->unique(function ($item) {
-            //         return $item->san_pham_id . '-' . $item->color_san_pham_id . '-' . $item->size_san_pham_id;
-            //     })
-            //     ->count();
-
-            // Sản phẩm không đủ hàng
-            $insufficientStockItems = [];
-
-            foreach ($cartItems as $item) {
-                // Kiểm tra tồn kho của từng biến thể
-                $variant = bien_the_san_pham::where('san_pham_id', $item->san_pham_id)
-                    ->where('color_san_pham_id', $item->color_san_pham_id)
-                    ->where('size_san_pham_id', $item->size_san_pham_id)
-                    ->first();
-
-                if ($variant && $variant->so_luong < $item->quantity) {
-                    $insufficientStockItems[] = [
-                        'id' => $item->id,
-                        'name' => $item->san_pham->ten_san_pham,
-                        'size' => $item->size->ten_size ?? 'N/A',
-                        'color' => $item->color->ten_color ?? 'N/A',
-                        'available_quantity' => $variant->so_luong,
-                        'requested_quantity' => $item->quantity,
-                    ];
-                }
-            }
-        }
-
-        // Trả về view với dữ liệu đã xử lý
-        return view('client.partials.header', compact('cartItemsCount', 'insufficientStockItems'));
-    }
-
     // Quá trình thanh toán
     public function checkout(Request $request)
     {
@@ -325,7 +229,7 @@ class CartController extends Controller
         $address = $user->dia_chi;
         $parsed_customer_address = $this->parseAddress($address);
 
-        // 
+        //
         Log::info('Parsed Customer Address in Checkout: ', $parsed_customer_address);
 
         $shipperAvailable = $this->checkShipperAvailability($address);
@@ -398,7 +302,7 @@ class CartController extends Controller
 
     public function checkShipperAvailability($address)
     {
-        // 
+        //
         $parsed_customer_address = $this->parseAddress($address);
 
         //
@@ -411,7 +315,7 @@ class CartController extends Controller
         foreach ($shippers as $shipper) {
             $parsed_shipper_address = $this->parseAddress($shipper->dia_chi);
 
-            // 
+            //
             Log::info('Parsed Shipper Address: ', $parsed_shipper_address);
 
             if (($parsed_shipper_address['province'] === $parsed_customer_address['province'] && $parsed_shipper_address['city'] === $parsed_customer_address['city'] && $parsed_shipper_address['district'] === $parsed_customer_address['district']) || $parsed_shipper_address['ward'] === $parsed_customer_address['ward']) {

@@ -1,4 +1,4 @@
-@extends('client.taikhoan.dashboard');
+@extends('client.taikhoan.dashboard')
 
 @section('conten-taikhoan')
     <!-- Single Tab Content Start -->

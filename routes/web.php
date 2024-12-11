@@ -65,7 +65,10 @@ Route::prefix('client')->group(function () {
 
     Route::get('/thong-tin', [TaiKhoanController::class, 'showAccountDetails'])->name('taikhoan.thongtin');
     Route::get('/don-hang', [TaiKhoanController::class, 'donHang'])->name('taikhoan.donhang');
+    Route::get('/don-hang/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.showMyOrder');
     Route::get('/vi-tien', [TaiKhoanController::class, 'viTien'])->name('taikhoan.vitien');
+    Route::get('/banks/create', [TaiKhoanController::class, 'createBank'])->name('banks.create');
+    Route::post('/banks/store', [TaiKhoanController::class, 'storeBank'])->name('banks.store');
     Route::get('/quan-tri', [TaiKhoanController::class, 'quanTri'])->name('taikhoan.quantri'); // Bảo vệ route quản trị
 
     //Hủy đặt hàng

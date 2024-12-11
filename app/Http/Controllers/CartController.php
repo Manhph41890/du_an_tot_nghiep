@@ -233,7 +233,7 @@ class CartController extends Controller
 
         if (!$cart) {
             // Nếu giỏ hàng trống
-            $cartItemsCount = 0;
+            // $cartItemsCount = 0;
             $insufficientStockItems = [];
         } else {
             // Lấy tất cả sản phẩm trong giỏ hàng
@@ -242,11 +242,11 @@ class CartController extends Controller
                 ->get();
 
             // Đếm tổng số sản phẩm bao gồm các biến thể
-            $cartItemsCount = $cartItems
-                ->unique(function ($item) {
-                    return $item->san_pham_id . '-' . $item->color_san_pham_id . '-' . $item->size_san_pham_id;
-                })
-                ->count();
+            // $cartItemsCount = $cartItems
+            //     ->unique(function ($item) {
+            //         return $item->san_pham_id . '-' . $item->color_san_pham_id . '-' . $item->size_san_pham_id;
+            //     })
+            //     ->count();
 
             // Sản phẩm không đủ hàng
             $insufficientStockItems = [];

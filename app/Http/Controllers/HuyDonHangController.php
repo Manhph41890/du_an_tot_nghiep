@@ -72,7 +72,7 @@ class HuyDonHangController extends Controller
 
         // Kiểm tra trạng thái đơn hàng
         if ($donHang->trang_thai_don_hang !== 'Chờ xác nhận') {
-            return response()->json(['error' => 'Đơn hàng không thể hủy do trạng thái không hợp lệ.'], 400);
+            return response()->json(['error' => 'Đơn hàng đã được xác nhận không thể hủy đơn'], 400);
         }
 
         // Tạo bản ghi trong bảng hủy đơn hàng

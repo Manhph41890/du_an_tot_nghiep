@@ -19,13 +19,12 @@
                     <div class="form-group">
                         <label for="bank_id" class="form-label">Chọn ngân hàng</label>
                         <select name="bank_id" id="bank_id" class="form-select">
-                            <option value="" disabled selected>-- Chọn ngân hàng --</option>
+                            <option value="" disabled selected>-- Chọn ngân hàng liên kết--</option>
                             @foreach ($banks as $bank)
-                                <option value="{{ $bank['code'] }}">
-                                    {{ $bank['shortName'] }} - {{ $bank['name'] }}
+                                <option value="{{ $bank['id'] }}">
+                                    {{ $bank['name'] }}
                                 </option>
                             @endforeach
-
                         </select>
                     </div>
                 </div>

@@ -69,32 +69,49 @@
                                                     <tr>
                                                         <th>Hình ảnh</th>
                                                         <th>Sản phẩm</th>
-                                                        <th>Giá</th>
+                                                        <th>Giá sản phẩm</th>
+                                                        <th>Giá phân loại</th>
                                                         <th>Số Lượng</th>
-
                                                         <th>Thành Tiền</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
+                                                        @php
+                                                            $san_pham = $chi_tiet->san_pham;
+                                                            $bien_the = $san_pham->bien_the_san_phams
+                                                                ->where(
+                                                                    'color_san_pham_id',
+                                                                    $chi_tiet->color_san_pham_id,
+                                                                )
+                                                                ->where('size_san_pham_id', $chi_tiet->size_san_pham_id)
+                                                                ->first();
+                                                            // dd($bien_the->gia);
+                                                        @endphp
                                                         <tr>
                                                             <td>
                                                                 <img src="{{ asset('/storage/' . optional($chi_tiet->san_pham)->anh_san_pham) }}"
                                                                     width="50px" alt="Product Image">
                                                             </td>
                                                             <td>
-                                                                {{ optional($chi_tiet->san_pham)->ten_san_pham ?? 'N/A' }}<br>
-                                                                Màu:
-                                                                {{ optional($chi_tiet->color_san_pham)->ten_color ?? 'N/A' }}<br>
-                                                                Size:
-                                                                {{ optional($chi_tiet->size_san_pham)->ten_size ?? 'N/A' }}
-                                                            </td>
-                                                            <td>{{ number_format($chi_tiet->gia_tien, 0, ',', '.') }}
-                                                                VND</td>
-                                                            <td>{{ $chi_tiet->so_luong }}</td>
+                                                                <a class="ct-sanpham hover-effect"
+                                                                    href="{{ route('sanpham.chitiet', $chi_tiet->san_pham?->id) }}">
+                                                                    {{ optional($chi_tiet->san_pham)->ten_san_pham ?? 'N/A' }}<br>
+                                                                    Màu:
+                                                                    {{ optional($chi_tiet->color_san_pham)->ten_color ?? 'N/A' }}<br>
+                                                                    Size:
+                                                                    {{ optional($chi_tiet->size_san_pham)->ten_size ?? 'N/A' }}
+                                                                </a>
 
+                                                            </td>
+                                                            <td> {{ number_format($chi_tiet->san_pham->gia_km ?? $chi_tiet->san_pham->gia_goc, 0, ',', '.') }}
+                                                                VND </td>
+                                                            <td> {{ number_format($bien_the->gia, 0, ',', '.') }}
+                                                                VND </td>
+                                                            <td>{{ $chi_tiet->so_luong }}</td>
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
                                                                 VND</td>
+
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

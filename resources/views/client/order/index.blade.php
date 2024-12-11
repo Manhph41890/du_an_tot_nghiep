@@ -596,8 +596,10 @@
                         },
                         success: function(response) {
                             if (!response.available) {
-                                alert(
-                                    'Hiện tại không có shipper nào phục vụ khu vực của bạn. Vui lòng thử lại sau hoặc chọn phương thức vận chuyển khác.');
+                                toastr.error(
+                                    'Hiện tại không có shipper nào phục vụ khu vực của bạn. Vui lòng thử lại sau hoặc chọn phương thức vận chuyển khác.'
+                                );
+                                $("button").prop('disabled', true);
                             }
                         },
                         error: function(error) {

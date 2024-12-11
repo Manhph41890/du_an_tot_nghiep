@@ -304,7 +304,6 @@
                                             </button>
                                             <span style="font-size: 17px">Còn {{ $sanPhamCT->so_luong }} sản phẩm trong
                                                 kho</span>
-
                                         @endauth
                                         @guest
                                             <button type="button" class="btn btn-dark btn--xl mt-5 mt-sm-0"
@@ -411,9 +410,8 @@
                                                                 <img src="{{ asset('storage/' . $danhgia->users->anh_dai_dien) }}"
                                                                     alt="{{ $danhgia->users->ho_ten }}"
                                                                     class="rounded-circle" />
-                                                                    @else
-                                                                    <img src="#"
-                                                                    alt="{{ $danhgia->users->ho_ten }}"
+                                                            @else
+                                                                <img src="#" alt="{{ $danhgia->users->ho_ten }}"
                                                                     class="rounded-circle" />
                                                             @endif
                                                         </div>

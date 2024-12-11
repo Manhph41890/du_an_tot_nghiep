@@ -224,6 +224,8 @@ Route::middleware(['auth', 'role:shipper'])->group(function () {
     Route::get('/shipper/policy', [ShipperController::class, 'policy'])->name('shipper.policy');
     Route::post('/shipper/withdraw', [ShipperController::class, 'withdraw'])->name('shipper.withdraw');
     Route::get('/shipper/rut-tien', [ShipperController::class, 'rut'])->name('shipper.rut-tien');
+    Route::get('/shipper/createbanks', [ShipperController::class, 'createbank'])->name('shipper.createbank');
+    Route::post('/shipper/storebank', [ShipperController::class, 'storebank'])->name('shipper.storebank');
 });
 
 // Route chi tiết đơn hàng

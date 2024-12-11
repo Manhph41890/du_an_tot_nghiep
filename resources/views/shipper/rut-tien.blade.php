@@ -22,7 +22,7 @@
                                         class="form-check-input d-none">
                                     <img src="{{ $bank->img }}" alt="{{ $bank->name }}" class="img-fluid mb-2"
                                         style="height: 50px;">
-                                    <span class="fw-bold">{{ $bank->name }}</span>
+                                    <span class="fw-bold min_h">{{ $bank->name }}</span>
                                     <small class="text-muted">{{ $bank->account_number }}</small>
                                 </label>
                             </div>
@@ -75,6 +75,17 @@
         });
     </script>
     <style>
+        .min_h {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Số dòng muốn hiển thị */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 3em;
+            /* Tùy chỉnh chiều cao tối thiểu dựa trên chiều cao dòng */
+        }
+
         .bank-card {
             transition: all 0.3s ease-in-out;
         }

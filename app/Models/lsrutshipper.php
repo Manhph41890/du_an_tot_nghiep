@@ -9,6 +9,8 @@ class lsrutshipper extends Model
 {
     use HasFactory;
 
+    protected $table = 'ls_rut_shippers';
+
     protected $fillable = [
         'vishipper_id',
         'bank_id',

@@ -8,6 +8,7 @@ use App\Models\Bank;
 use App\Models\don_hang;
 use App\Models\san_pham;
 use App\Models\Shipper;
+use App\Models\User;
 use App\Models\Vishipper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -203,7 +204,6 @@ class ShipperController extends Controller
 
     public function withdraw(Request $request)
     {
-        $user = Auth::user();
         $request->validate([
             'bank_id' => 'required|exists:banks,id',
             'amount' => 'required|numeric|min:1',
@@ -227,10 +227,11 @@ class ShipperController extends Controller
             return redirect()->route('shipper.rut-tien')->with('error', 'Mã PIN không chính xác.');
         }
 
-        DB::table('lsrutshipper')->insert([
-            'vishipper_id' => $user->vi_shipper->id,
+        DB::table('ls_rut_shippers')->insert([
+            'vishipper_id' =>  $viShipper->id,
             'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
             'tien_rut' => $request->amount,
+            'noi_dung_tu_choi' => 'null',
             'trang_thai' => 'Chờ xử lý',
             'bank_id' => $request->bank_id,
         ]);
@@ -242,7 +243,7 @@ class ShipperController extends Controller
         // $bank->balance += $request->amount;
         // $bank->save();
 
-        return redirect()->back()->with('success', 'Rút thành công');
+        return redirect()->back()->with('success', 'Yêu cầu rút đã được gửi');
     }
 
     public function createbank()

@@ -16,8 +16,6 @@ use Illuminate\Validation\Rule;
 class RutTienController extends Controller
 {
 
-
-
     public function nap()
     {
         $userId =  Auth::id();
@@ -69,8 +67,6 @@ class RutTienController extends Controller
 
         return  redirect()->route('taikhoan.nap-tien')->with('success', 'Nạp tiền thành công');
     }
-
-
 
 
     public function rut()
@@ -131,7 +127,6 @@ class RutTienController extends Controller
     public function duyetruttienAdmin(Request $request)
     {
         $title = "Duyệt rút tiền khách hàng";
-
         $query = ls_rut_vi::query()->with(['vi_nguoi_dung.user', 'bank']);
 
         // lọc trạng thái
@@ -151,6 +146,7 @@ class RutTienController extends Controller
         }
 
         $duyetruttien = $query->orderBy('id', 'DESC')->get();
+
 
         // dd($duyetruttien);
         return view('admin.lichsuduyetrut', compact('title', 'duyetruttien'));

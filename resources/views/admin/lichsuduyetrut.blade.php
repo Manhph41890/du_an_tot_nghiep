@@ -54,19 +54,11 @@
                                                         {{ $item->vi_nguoi_dung?->user?->ho_ten ?? 'Không có thông tin' }}
                                                     </td>
                                                     <td>
-                                                        <div class="col">
-                                                            <label
-                                                                class="card bank-card p-3 shadow-sm border d-flex flex-column align-items-center text-center"
-                                                                style="cursor: pointer;">
-                                                                <img src="{{ $item->bank?->img }}"
-                                                                    alt="{{ $item->bank?->name }}" class="img-fluid mb-2"
-                                                                    style="height: 50px;">
-                                                                <span class="fw-bold">{{ $item->bank?->name }}</span>
-                                                                <small
-                                                                    class="text-muted">{{ $item->bank?->account_number }}</small>
-                                                                <h4>{{ $item->bank?->account_holder }}</h4>
-                                                            </label>
-                                                        </div>
+                                                        {{-- <a class="btn btn-success" data-bs-dismiss="modal">Xem chi tiết </a> --}}
+                                                        <button type="button" class="btn btn-success"
+                                                            data-bs-toggle="modal" data-bs-target="#listBankModal">
+                                                            Xem chi tiết
+                                                        </button>
                                                     </td>
                                                     <td>{{ date('d-m-Y H:i:s', strtotime($item->thoi_gian_rut)) }}
                                                     <td>{{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ</td>
@@ -87,7 +79,6 @@
                                                                     disabled>Từ chối rút tiền</button>
                                                             @endif
                                                         </form>
-
 
                                                         <form action="{{ route('HuyRutAdmin', $item->id) }}"
                                                             method="post">
@@ -116,12 +107,13 @@
 
                                                                         <!-- Modal Body -->
                                                                         <div class="modal-body">
-                                                                            <textarea class="form-control  @error('noi_dung_tu_choi') is-invalid @enderror" rows="5" name="noi_dung_tu_choi"  value="{{ old('noi_dung_tu_choi') }}"" placeholder="Nội dung..."></textarea>
+                                                                            <textarea class="form-control  @error('noi_dung_tu_choi') is-invalid @enderror" rows="5" name="noi_dung_tu_choi"
+                                                                                value="{{ old('noi_dung_tu_choi') }}"" placeholder="Nội dung..."></textarea>
                                                                             @error('noi_dung_tu_choi')
-                                                                            <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
-                                                                        @enderror
+                                                                                <div class="invalid-feedback">
+                                                                                    {{ $message }}
+                                                                                </div>
+                                                                            @enderror
                                                                         </div>
 
                                                                         <!-- Modal Footer -->
@@ -137,8 +129,6 @@
                                                                 </div>
                                                             </div>
                                                         </form>
-
-
 
                                                     </td>
                                                 </tr>
@@ -156,6 +146,55 @@
                     </div>
                 </div>
             </div> <!-- container-fluid -->
+            <div class="modal fade" id="listBankModal" tabindex="-1" aria-labelledby="listBankModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="listBankModalLabel">Thông Tin Ngân Hàng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        {{-- <th>Hình ảnh</th> --}}
+                                        <th>Tên ngân hàng</th>
+                                        <th>Số tài khoản</th>
+                                        <th>Chủ tài khoản</th>
+                                        <th>Số dư</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($duyetruttien as $transaction)
+                                        @if ($transaction->bank)
+                                            <!-- Kiểm tra ngân hàng có tồn tại -->
+                                            <tr>
+                                                {{-- <td>
+                                                    <img src="{{ $transaction->bank->img }}"
+                                                        alt="{{ $transaction->bank->name }}"
+                                                        style="width: 50px; height: auto;">
+                                                </td> --}}
+                                                <td> <img src="{{ $transaction->bank->img }}"
+                                                        alt="{{ $transaction->bank->name }}"
+                                                        style="width: 50px; height: auto;">
+                                                    {{ $transaction->bank->name }}</td>
+                                                <td>{{ $transaction->bank->account_number }}</td>
+                                                <td>{{ $transaction->bank->account_holder }}</td>
+                                                <td>{{ number_format($transaction->bank->balance) }} VND</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

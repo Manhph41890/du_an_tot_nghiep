@@ -79,6 +79,17 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
+                                                        @php
+                                                            $san_pham = $chi_tiet->san_pham;
+                                                            $bien_the = $san_pham->bien_the_san_phams
+                                                                ->where(
+                                                                    'color_san_pham_id',
+                                                                    $chi_tiet->color_san_pham_id,
+                                                                )
+                                                                ->where('size_san_pham_id', $chi_tiet->size_san_pham_id)
+                                                                ->first();
+                                                            // dd($bien_the->gia);
+                                                        @endphp
                                                         <tr>
                                                             <td>
                                                                 <img src="{{ asset('/storage/' . optional($chi_tiet->san_pham)->anh_san_pham) }}"
@@ -96,10 +107,12 @@
 
                                                             </td>
                                                             <td>{{ $chi_tiet->so_luong }}</td>
-                                                            <td>{{ number_format($chi_tiet->gia_tien, 0, ',', '.') }}
-                                                                VND</td>
+                                                            <td> {{ number_format($bien_the->gia + ($chi_tiet->san_pham->gia_km ?? $chi_tiet->san_pham->gia_goc), 0, ',', '.') }}
+                                                                VND </td>
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
                                                                 VND</td>
+
+
                                                             <td>
 
                                                                 @if (

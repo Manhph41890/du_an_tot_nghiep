@@ -20,4 +20,9 @@ class Vishipper extends Model
     {
         return $this->belongsTo(User::class, 'shipper_id');
     }
+
+    public function ls_rut_shipper()
+    {
+        return $this->hasMany(lsrutshipper::class);
+    }
 }

@@ -203,6 +203,7 @@ class ShipperController extends Controller
 
     public function withdraw(Request $request)
     {
+        $user = Auth::user();
         $request->validate([
             'bank_id' => 'required|exists:banks,id',
             'amount' => 'required|numeric|min:1',
@@ -226,12 +227,20 @@ class ShipperController extends Controller
             return redirect()->route('shipper.rut-tien')->with('error', 'Mã PIN không chính xác.');
         }
 
-        // Cập nhật số dư
-        $viShipper->tong_tien -= $request->amount;
-        $viShipper->save();
+        DB::table('lsrutshipper')->insert([
+            'vishipper_id' => $user->vi_shipper->id,
+            'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
+            'tien_rut' => $request->amount,
+            'trang_thai' => 'Chờ xử lý',
+            'bank_id' => $request->bank_id,
+        ]);
 
-        $bank->balance += $request->amount;
-        $bank->save();
+        // // Cập nhật số dư
+        // $viShipper->tong_tien -= $request->amount;
+        // $viShipper->save();
+
+        // $bank->balance += $request->amount;
+        // $bank->save();
 
         return redirect()->back()->with('success', 'Rút thành công');
     }

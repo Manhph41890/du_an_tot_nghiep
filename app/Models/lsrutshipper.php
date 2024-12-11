@@ -12,7 +12,7 @@ class lsrutshipper extends Model
     protected $table = 'ls_rut_shippers';
 
     protected $fillable = [
-        'vishipper_id',
+        'vi_shipper_id',
         'bank_id',
         'thoi_gian_rut',
         'tien_rut',
@@ -22,10 +22,11 @@ class lsrutshipper extends Model
 
     public function vishipper()
     {
-        return $this->belongsTo(vishipper::class, 'vishipper_id');
+        return $this->belongsTo(vishipper::class, 'vi_shipper_id');
     }
     public function banks()
     {
         return $this->belongsTo(Bank::class, 'bank_id');
     }
+
 }

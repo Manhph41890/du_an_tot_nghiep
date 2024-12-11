@@ -90,43 +90,24 @@ class CartController extends Controller
         // Kiểm tra xem giỏ hàng của người dùng hiện tại đã tồn tại chưa
         $cart = Cart::firstOrCreate(['user_id' => $userId]);
 
-        // Kiểm tra xem có CartItem nào có cùng san_pham_id nhưng khác size hoặc color không
-        $existingCartItem = CartItem::where('cart_id', $cart->id)
+        // Tạo hoặc cập nhật thông tin giỏ hàng
+        $cartItem = CartItem::where('cart_id', $cart->id)
             ->where('san_pham_id', $sanPham->id)
-            ->where(function ($query) use ($validatedData) {
-                $query->where('size_san_pham_id', '!=', $validatedData['size_san_pham_id'])->orWhere('color_san_pham_id', '!=', $validatedData['color']);
-            })
+            ->where('size_san_pham_id', $validatedData['size_san_pham_id'])
+            ->where('color_san_pham_id', $validatedData['color'])
             ->first();
 
-        if ($existingCartItem) {
-            // Nếu có sản phẩm với cùng san_pham_id nhưng khác size hoặc color,
-            // tạo một CartItem mới
+        if ($cartItem) {
+            // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+            $cartItem->quantity += $validatedData['quantity'];
+        } else {
+            // Nếu sản phẩm chưa tồn tại, tạo mới
             $cartItem = new CartItem();
             $cartItem->cart_id = $cart->id;
             $cartItem->san_pham_id = $sanPham->id;
             $cartItem->size_san_pham_id = $validatedData['size_san_pham_id'];
             $cartItem->color_san_pham_id = $validatedData['color'];
             $cartItem->quantity = $validatedData['quantity'];
-        } else {
-            // Kiểm tra xem sản phẩm có cùng size và color đã tồn tại chưa
-            $cartItem = CartItem::where('cart_id', $cart->id)
-                ->where('san_pham_id', $sanPham->id)
-                ->where('size_san_pham_id', $validatedData['size_san_pham_id'])
-                ->where('color_san_pham_id', $validatedData['color'])
-                ->first();
-
-            if ($cartItem) {
-                // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
-                $cartItem->quantity += $validatedData['quantity'];
-            } else {
-                // Nếu sản phẩm chưa tồn tại, tạo mới
-                $cartItem = new CartItem();
-                $cartItem->cart_id = $cart->id;
-                $cartItem->san_pham_id = $sanPham->id;
-                $cartItem->size_san_pham_id = $validatedData['size_san_pham_id'];
-                $cartItem->color_san_pham_id = $validatedData['color'];
-                $cartItem->quantity = $validatedData['quantity'];
-            }
         }
 
         // Tính giá cho sản phẩm khi thêm vào giỏ hàng
@@ -197,6 +178,7 @@ class CartController extends Controller
             'message' => 'Cập nhật thành công',
         ]);
     }
+
     // Quá trình thanh toán
     public function checkout(Request $request)
     {

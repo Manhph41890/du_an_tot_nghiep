@@ -184,4 +184,36 @@ class RutTienController extends Controller
         $lsRutVi->save();
         return redirect()->back()->with('success', 'Xác nhận từ chối rút tiền thành công.');
     }
+
+
+
+
+    public function duyetruttienShipper(Request $request)
+    {
+        $title = "Duyệt rút tiền shipper";
+        $query = ls_rut_vi::query()->with(['vi_nguoi_dung.user', 'bank']);
+
+        // lọc trạng thái
+        if ($request->has('search_duyetrut')) {
+            $is_active = $request->input('search_duyetrut');
+            if ($is_active == 'Chờ duyệt' || $is_active == 'Thành công' || $is_active == 'Thất bại') {
+                $query->where('trang_thai', $is_active);
+            }
+        }
+
+        // tim theo tên người dùng
+        if ($request->has('search_ten_nguoi_dung') && !empty($request->input('search_ten_nguoi_dung'))) {
+            $search_ten_nguoi_dung = $request->input('search_ten_nguoi_dung');
+            $query->whereHas('vi_nguoi_dung.user', function ($q) use ($search_ten_nguoi_dung) {
+                $q->where('ho_ten', 'like', '%' . $search_ten_nguoi_dung . '%');
+            });
+        }
+
+        $duyetruttien = $query->orderBy('id', 'DESC')->get();
+
+
+        // dd($duyetruttien
+        return view('admin.duyetrutshiper', compact('title', 'duyetruttien'));
+    }
+
 }

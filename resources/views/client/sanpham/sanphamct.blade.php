@@ -232,13 +232,19 @@
                         <div class="product-body mb-40">
                             <div class="d-flex align-items-center mb-30">
                                 <div class="product-price me-2">
-                                    <del class="del" id="old-price"> {{ number_format($sanPhamCT->gia_goc) }}</del>
-                                    <span id="new-price" class="onsale">{{ number_format($sanPhamCT->gia_km) }}</span>
+                                    <del class="del" id="old-price" style="font-size: 24px">
+                                        {{ number_format($sanPhamCT->gia_goc) }}</del>
+                                    <span id="new-price" class="onsale"
+                                        style="font-size: 28px; color: red">{{ number_format($sanPhamCT->gia_km) }}</span>
                                     <!-- Giá cập nhật sẽ được hiển thị ở đây -->
+
                                 </div>
+
                                 <span class="badge position-static bg-dark rounded-0">Giảm
                                     {{ $sanPhamCT->phan_tram_giam_gia }}%</span>
                             </div>
+                            <span style="font-size: 17px">Còn {{ $sanPhamCT->so_luong }} sản phẩm trong
+                                kho</span>
                             <p class="product-summary">
                                 {{ $sanPhamCT->mo_ta_ngan }}
                             </p>
@@ -302,8 +308,7 @@
                                             <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
                                                 <span class="me-2"></span> Thêm vào giỏ hàng
                                             </button>
-                                            <span style="font-size: 17px">Còn {{ $sanPhamCT->so_luong }} sản phẩm trong
-                                                kho</span>
+
                                         @endauth
                                         @guest
                                             <button type="button" class="btn btn-dark btn--xl mt-5 mt-sm-0"

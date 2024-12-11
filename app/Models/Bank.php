@@ -23,4 +23,9 @@ class Bank extends Model
     {
         return $this->hasMany(ls_nap_vi::class);
     }
+
+    public function ls_rut_shipper()
+    {
+        return $this->hasMany(lsrutshipper::class);
+    }
 }

@@ -15,7 +15,7 @@
                 {{-- @php
                     dd($banks);
                 @endphp --}}
-                <div class="row row-cols-2 row-cols-md-4 g-3">
+                <div class="">
                     <div class="form-group">
                         <label for="bank_id" class="form-label">Chọn ngân hàng</label>
                         <select name="bank_id" id="bank_id" class="form-select">

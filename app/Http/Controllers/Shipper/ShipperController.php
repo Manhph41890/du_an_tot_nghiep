@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Shipper;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBankRequest;
 use App\Models\Bank;
 use App\Models\don_hang;
 use App\Models\san_pham;
 use App\Models\Shipper;
+use App\Models\User;
 use App\Models\Vishipper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class ShipperController extends Controller
@@ -193,7 +196,8 @@ class ShipperController extends Controller
 
     public function rut()
     {
-        $banks = Bank::all();
+        $user = Auth::id();
+        $banks = Bank::where('user_id', $user)->get();
         $title = 'Rút tiền';
         return view('shipper.rut-tien', compact('banks', 'title'));
     }
@@ -223,13 +227,66 @@ class ShipperController extends Controller
             return redirect()->route('shipper.rut-tien')->with('error', 'Mã PIN không chính xác.');
         }
 
-        // Cập nhật số dư
-        $viShipper->tong_tien -= $request->amount;
-        $viShipper->save();
+        DB::table('ls_rut_shippers')->insert([
+            'vishipper_id' =>  $viShipper->id,
+            'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
+            'tien_rut' => $request->amount,
+            'noi_dung_tu_choi' => 'null',
+            'trang_thai' => 'Chờ xử lý',
+            'bank_id' => $request->bank_id,
+        ]);
 
-        $bank->balance += $request->amount;
-        $bank->save();
+        // // Cập nhật số dư
+        // $viShipper->tong_tien -= $request->amount;
+        // $viShipper->save();
 
-        return redirect()->back()->with('success', 'Rút thành công');
+        // $bank->balance += $request->amount;
+        // $bank->save();
+
+        return redirect()->back()->with('success', 'Yêu cầu rút đã được gửi');
+    }
+
+    public function createbank()
+    {
+        $title = 'Tạo ngân hàng';
+        $user = Auth::user();
+        $userId = Auth::id();
+        $response = Http::get(env('VIETQR_BANKS_LIST'));
+        if ($response->successful()) {
+            $banks = $response->json()['data']; // Lấy dữ liệu từ API
+        } else {
+            $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
+        }
+        $listBank = Bank::where('user_id', $userId)->latest('id')->get();
+        return view('shipper.lkbank',  compact('title', 'user', 'banks', 'userId', 'listBank'));
+    }
+
+    public function storebank(StoreBankRequest $request)
+    {
+        // Get authenticated user
+        $user = Auth::user();
+
+        $response = Http::get(env('VIETQR_BANKS_LIST'));
+        if ($response->successful()) {
+            $banks = $response->json()['data']; // Lấy dữ liệu từ API
+        } else {
+            $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
+        }
+        $selectedBank = collect($banks)->firstWhere('name', $request->bank_id);
+        $bankLogo = $selectedBank ? $selectedBank['logo'] : null;
+        // dd($bankLogo);
+        // Create bank record
+        Bank::create([
+            'name' => $request->bank_id,
+            'img' => $bankLogo,
+            'account_number' => $request->account_number,
+            'account_holder' => $request->account_holder,
+            'pin' => $request->pin,
+            'balance' => rand(100, 10000) * 1000, // Random balance
+            'user_id' => $user->id,
+        ]);
+
+        // Redirect or return success response
+        return redirect()->back()->with('success', 'Liên kết ngân hàng thành công!');
     }
 }

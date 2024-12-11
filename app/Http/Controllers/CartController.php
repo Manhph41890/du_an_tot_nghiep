@@ -325,7 +325,7 @@ class CartController extends Controller
         $address = $user->dia_chi;
         $parsed_customer_address = $this->parseAddress($address);
 
-        // 
+        //
         Log::info('Parsed Customer Address in Checkout: ', $parsed_customer_address);
 
         $shipperAvailable = $this->checkShipperAvailability($address);
@@ -398,7 +398,7 @@ class CartController extends Controller
 
     public function checkShipperAvailability($address)
     {
-        // 
+        //
         $parsed_customer_address = $this->parseAddress($address);
 
         //
@@ -411,7 +411,7 @@ class CartController extends Controller
         foreach ($shippers as $shipper) {
             $parsed_shipper_address = $this->parseAddress($shipper->dia_chi);
 
-            // 
+            //
             Log::info('Parsed Shipper Address: ', $parsed_shipper_address);
 
             if (($parsed_shipper_address['province'] === $parsed_customer_address['province'] && $parsed_shipper_address['city'] === $parsed_customer_address['city'] && $parsed_shipper_address['district'] === $parsed_customer_address['district']) || $parsed_shipper_address['ward'] === $parsed_customer_address['ward']) {

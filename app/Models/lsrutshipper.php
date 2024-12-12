@@ -28,5 +28,4 @@ class lsrutshipper extends Model
     {
         return $this->belongsTo(Bank::class, 'bank_id');
     }
-
 }

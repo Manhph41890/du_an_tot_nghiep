@@ -9,21 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        //
-        Schema::create('ls_rut_shippers', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('shipper_id');
+        Schema::table('ls_rut_shippers', function (Blueprint $table) {
+            $table->unsignedBigInteger('shipper_id')->nullable()->after('id');
             $table->foreign('shipper_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        //
+        Schema::table('ls_rut_shippers', function (Blueprint $table) {
+            $table->dropForeign(['shipper_id']);
+            $table->dropColumn('shipper_id');
+        });
     }
 };

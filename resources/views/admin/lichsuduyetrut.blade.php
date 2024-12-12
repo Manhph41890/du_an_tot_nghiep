@@ -39,7 +39,7 @@
                                             <tr>
                                                 <th scope="col">#ID</th>
                                                 <th scope="col">Người rút</th>
-                                                <th scope="col">Thông tin ngân hàng</th>
+                                                <th scope="col">Thông giao dịch</th>
                                                 <th scope="col">Thời gian rút tiền</th>
                                                 <th scope="col">Số tiền rút</th>
                                                 <th scope="col">Hành động</th>
@@ -55,10 +55,10 @@
                                                     </td>
                                                     <td>
                                                         {{-- <a class="btn btn-success" data-bs-dismiss="modal">Xem chi tiết </a> --}}
-                                                        <button type="button" class="btn btn-success"
-                                                            data-bs-toggle="modal" data-bs-target="#listBankModal">
+                                                        <a type="button" class="btn btn-success"
+                                                            href="{{ route('thongTinRut', $item->id) }}">
                                                             Xem chi tiết
-                                                        </button>
+                                                        </a>
                                                     </td>
                                                     <td>{{ date('d-m-Y H:i:s', strtotime($item->thoi_gian_rut)) }}
                                                     <td>{{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ</td>
@@ -75,11 +75,38 @@
                                                                 <button type="button" class="btn btn-success btn-sm"
                                                                     disabled>Đã duyệt</button>
                                                             @elseif ($item->trang_thai === 'Thất bại')
-                                                                <button type="button" class="btn btn-danger btn-sm"
-                                                                    disabled>Từ chối rút tiền</button>
+                                                                <button title="Click vào để xem" type="button"
+                                                                    class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                                    data-bs-target="#rejectReasonModal">
+                                                                    Xem lý do hủy
+                                                                </button>
                                                             @endif
                                                         </form>
-
+                                                        <div class="modal fade" id="rejectReasonModal" tabindex="-1"
+                                                            aria-labelledby="rejectReasonModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header bg-danger text-white">
+                                                                        <h5 class="modal-title" id="rejectReasonModalLabel">
+                                                                            Lý do từ chối rút tiền</h5>
+                                                                        <button type="button"
+                                                                            class="btn-close btn-close-white"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="alert alert-warning" role="alert">
+                                                                            <strong>Lý do:</strong>
+                                                                            <p>{{ $item->noi_dung_tu_choi }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Đóng</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <form action="{{ route('HuyRutAdmin', $item->id) }}"
                                                             method="post">
                                                             @csrf
@@ -146,54 +173,7 @@
                     </div>
                 </div>
             </div> <!-- container-fluid -->
-            <div class="modal fade" id="listBankModal" tabindex="-1" aria-labelledby="listBankModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="listBankModalLabel">Thông Tin Ngân Hàng</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        {{-- <th>Hình ảnh</th> --}}
-                                        <th>Tên ngân hàng</th>
-                                        <th>Số tài khoản</th>
-                                        <th>Chủ tài khoản</th>
-                                        <th>Số dư</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($duyetruttien as $transaction)
-                                        @if ($transaction->bank)
-                                            <!-- Kiểm tra ngân hàng có tồn tại -->
-                                            <tr>
-                                                {{-- <td>
-                                                    <img src="{{ $transaction->bank->img }}"
-                                                        alt="{{ $transaction->bank->name }}"
-                                                        style="width: 50px; height: auto;">
-                                                </td> --}}
-                                                <td> <img src="{{ $transaction->bank->img }}"
-                                                        alt="{{ $transaction->bank->name }}"
-                                                        style="width: 50px; height: auto;">
-                                                    {{ $transaction->bank->name }}</td>
-                                                <td>{{ $transaction->bank->account_number }}</td>
-                                                <td>{{ $transaction->bank->account_holder }}</td>
-                                                <td>{{ number_format($transaction->bank->balance) }} VND</td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
         </div>
     </div>

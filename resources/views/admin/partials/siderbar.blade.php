@@ -285,6 +285,13 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="{{ route('duyetruttienShipper') }}">
+                        <i data-feather="book-open"></i>
+                        <span> Duyệt rút shipper </span>
+                    </a>
+                
+                </li>
             </ul>
         </div>
         <!-- End Sidebar -->

@@ -57,7 +57,7 @@ class User extends Authenticatable
     }
     public function vi_shipper()
     {
-        return $this->hasOne(Vishipper::class, 'user_id',);
+        return $this->hasOne(Vishipper::class, 'shipper_id',);
     }
 
     public function shippers()
@@ -68,7 +68,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bank::class);
     }
-
     /**
      * Các trường cần ẩn khi trả về JSON.
      *

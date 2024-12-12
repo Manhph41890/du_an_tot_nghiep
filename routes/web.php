@@ -139,6 +139,13 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::put('/duyetrut/{id}', [RutTienController::class, 'duyetRutAdmin'])->name('duyetRutAdmin');
     Route::put('/huyrut/{id}', [RutTienController::class, 'HuyRutAdmin'])->name('HuyRutAdmin');
 
+     // Duyệt rút tiền admin
+    Route::get('/ruttienshipper', [RutTienController::class, 'duyetruttienShipper'])->name('duyetruttienShipper');
+    Route::put('/duyetRutshipper/{id}', [RutTienController::class, 'duyetRutshipper'])->name('duyetRutshipper');
+    Route::put('/huyrutshipper/{id}', [RutTienController::class, 'HuyRutshipper'])->name('HuyRutshipper');
+
+
+
     // Resource routes cho quản lý
     Route::resource('/danhmucs', DanhMucController::class);
     Route::resource('/chucvus', ChucVuController::class);

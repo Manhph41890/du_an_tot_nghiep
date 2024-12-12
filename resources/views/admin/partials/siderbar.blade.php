@@ -129,16 +129,6 @@
                                 </a>
                             </li>
                             <!-- Menu con: Yêu cầu hủy -->
-                            <li>
-                                <a class="tp-link d-flex align-items-center" href="{{ route('xacnhanhuy.index') }}">
-                                    Yêu cầu hủy đặt hàng
-                                    @if (isset($notifications) && $notifications['cancelRequestsCount'] > 0)
-                                        <span class="ms-2 position-relative">
-                                            <span class="notification-dot2"></span>
-                                        </span>
-                                    @endif
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </li>
@@ -161,7 +151,33 @@
                     </div>
                 </li>
 
-
+                <li>
+                    <a href="#duyetyeucau" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                        <i data-feather="check-square"></i>
+                        <span> Duyệt yêu cầu </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="duyetyeucau">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a class="tp-link d-flex align-items-center" href="{{ route('xacnhanhuy.index') }}">
+                                    Yêu cầu hủy đặt hàng
+                                    @if (isset($notifications) && $notifications['cancelRequestsCount'] > 0)
+                                        <span class="ms-2 position-relative">
+                                            <span class="notification-dot2"></span>
+                                        </span>
+                                    @endif
+                                </a>
+                            </li>
+                            <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền người dùng</a>
+                            <li>
+                                <a class="tp-link" href="{{ route('duyetruttienShipper') }}">
+                                    Duyệt rút shipper
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <!-- Danh mục -->
                 <li>
@@ -218,8 +234,6 @@
                 </li>
 
 
-
-
                 <!-- User -->
                 <li>
                     <a href="#user" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
@@ -237,76 +251,67 @@
                             <li><a class="tp-link" href="{{ route('user.index') }}">Danh sách</a></li>
                             @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
                                 <li><a class="tp-link" href="{{ route('user.create') }}">Thêm nhân viên</a></li>
-
-                                <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền</a>
-                                </li>
-                                @if (isset($viewMoney) && $viewMoney > 1)
-                                    <span class="ms-2 position-relative">
-                                        <span class="notification-dot3">{{ $viewMoney }}</span>
-                                    </span>
-                                @endif
-                            @endif
-
-                        </ul>
-                    </div>
                 </li>
+                @if (isset($viewMoney) && $viewMoney > 1)
+                    <span class="ms-2 position-relative">
+                        <span class="notification-dot3">{{ $viewMoney }}</span>
+                    </span>
+                @endif
+                @endif
 
-                {{-- Đánh giá --}}
-
-                <li>
-                    <a href="#danhgia" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="star"></i>
-                        <span> Đánh giá </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="danhgia">
-                        <ul class="nav-second-level">
-                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin' || auth()->user()->chuc_vu->ten_chuc_vu === 'nhan_vien')
-                                <li><a class="tp-link" href="{{ route('danhgia.index') }}">Danh sách</a></li>
-                            @endif
-                        </ul>
-                    </div>
-                </li>
-
-
-                {{-- Bài viết --}}
-                <li>
-                    <a href="#baiviet" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="book-open"></i>
-                        <span> Bài viết </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="baiviet">
-                        <ul class="nav-second-level">
-                            @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
-                                <li><a class="tp-link" href="{{ route('baiviets.create') }}">Thêm</a></li>
-                            @endif
-                            <li><a class="tp-link" href="{{ route('baiviets.index') }}">Danh sách</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="{{ route('duyetruttienShipper') }}">
-                        <i data-feather="book-open"></i>
-                        <span> Duyệt rút shipper </span>
-                    </a>
-
-                </li>
             </ul>
         </div>
-        <!-- End Sidebar -->
+        </li>
 
-        <div class="clearfix"></div>
-        <div class="row" style="margin-top: 180px">
-            <div class="col fs-13 text-muted text-center">
-                &copy;
-                <script>
-                    document.write(new Date().getFullYear())
-                </script> - Made with <span class="mdi mdi-heart text-danger"></span> by <a
-                    href="#!" class="text-reset fw-semibold"><img src="assets/client/img/logo/logo_art.png"
-                        alt="" height="40" style="margin-bottom: 5px"></a>
+        {{-- Đánh giá --}}
+
+        <li>
+            <a href="#danhgia" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                <i data-feather="star"></i>
+                <span> Đánh giá </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="danhgia">
+                <ul class="nav-second-level">
+                    @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin' || auth()->user()->chuc_vu->ten_chuc_vu === 'nhan_vien')
+                        <li><a class="tp-link" href="{{ route('danhgia.index') }}">Danh sách</a></li>
+                    @endif
+                </ul>
             </div>
+        </li>
+
+
+        {{-- Bài viết --}}
+        <li>
+            <a href="#baiviet" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                <i data-feather="book-open"></i>
+                <span> Bài viết </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="baiviet">
+                <ul class="nav-second-level">
+                    @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
+                        <li><a class="tp-link" href="{{ route('baiviets.create') }}">Thêm</a></li>
+                    @endif
+                    <li><a class="tp-link" href="{{ route('baiviets.index') }}">Danh sách</a></li>
+                </ul>
+            </div>
+        </li>
+        </ul>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="clearfix"></div>
+    <div class="row" style="margin-top: 180px">
+        <div class="col fs-13 text-muted text-center">
+            &copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script> - Made with <span class="mdi mdi-heart text-danger"></span> by <a href="#!"
+                class="text-reset fw-semibold"><img src="assets/client/img/logo/logo_art.png" alt=""
+                    height="40" style="margin-bottom: 5px"></a>
         </div>
     </div>
+</div>
 </div>
 <!-- Left Sidebar End -->

@@ -155,6 +155,11 @@
                     <a href="#duyetyeucau" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
                         <i data-feather="check-square"></i>
                         <span> Duyệt yêu cầu </span>
+                        @if (isset($notifications) && $notifications['duyet_rut_shipper_user'] > 0)
+                            <span class="ms-2 position-relative">
+                                <span class="notification-dot">{{ $notifications['duyet_rut_shipper_user'] }}</span>
+                            </span>
+                        @endif
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="duyetyeucau">
@@ -169,10 +174,23 @@
                                     @endif
                                 </a>
                             </li>
-                            <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền người dùng</a>
+                            <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền người dùng
+                                    @if (isset($notifications) && $notifications['duyet_rut_user'] > 0)
+                                        <span class="ms-2 position-relative">
+                                            <span
+                                                class="notification-dot">{{ $notifications['duyet_rut_user'] }}</span>
+                                        </span>
+                                    @endif
+                                </a>
                             <li>
                                 <a class="tp-link" href="{{ route('duyetruttienShipper') }}">
                                     Duyệt rút shipper
+                                    @if (isset($notifications) && $notifications['duyet_rut_shipper'] > 0)
+                                        <span class="ms-2 position-relative">
+                                            <span
+                                                class="notification-dot">{{ $notifications['duyet_rut_shipper'] }}</span>
+                                        </span>
+                                    @endif
                                 </a>
                             </li>
                         </ul>

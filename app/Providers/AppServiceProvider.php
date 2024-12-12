@@ -93,5 +93,6 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('cartItemsCount', $cartItemsCount);
         });
+        
     }
 }

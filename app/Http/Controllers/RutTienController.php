@@ -153,6 +153,18 @@ class RutTienController extends Controller
         return view('admin.lichsuduyetrut', compact('title', 'duyetruttien'));
     }
 
+    public function thongTinRut($id)
+    {
+        $lsRutVi = ls_rut_vi::with('vi_nguoi_dung', 'bank')->find($id);
+        $viNguoiDung = $lsRutVi->vi_nguoi_dung;
+        $bank = $lsRutVi->bank;
+        $title = "Thông tin rút tiền";
+        if (!$lsRutVi) {
+            return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
+        }
+        return view('admin.thongtinrut', compact('lsRutVi', 'title', 'viNguoiDung', 'bank'));
+    }
+
     public function duyetRutAdmin($id)
     {
         $lsRutVi = ls_rut_vi::find($id);
@@ -178,6 +190,11 @@ class RutTienController extends Controller
         $lsRutVi->update([
             'trang_thai' => 'Thất bại',
         ]);
+        $viNguoiDung = $lsRutVi->vi_nguoi_dung;
+        if ($viNguoiDung) {
+            $viNguoiDung->tong_tien += $lsRutVi->tien_rut;
+            $viNguoiDung->save();
+        }
         $lsRutVi->updated_at = Carbon::now()->setTimezone('Asia/Ho_Chi_Minh');
         $lsRutVi->noi_dung_tu_choi = $request->input('noi_dung_tu_choi');
         $lsRutVi->save();
@@ -214,7 +231,18 @@ class RutTienController extends Controller
         // dd($duyetruttien
         return view('admin.duyetrutshiper', compact('title', 'duyetruttien'));
     }
-
+    public function thongTinRutShip($id)
+    {
+        $lsRutVi = lsrutshipper::with('vishipper', 'banks')->find($id);
+        $viShipper = $lsRutVi->vishipper;
+        $bank = $lsRutVi->banks;
+        $title = "Thông tin rút tiền";
+        // dd($viShipper);
+        if (!$lsRutVi) {
+            return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
+        }
+        return view('admin.thongtinrutship', compact('lsRutVi', 'viShipper', 'bank', 'title'));
+    }
     public function duyetRutshipper($id)
     {
         $lsrutshipper = lsrutshipper::find($id);
@@ -239,6 +267,11 @@ class RutTienController extends Controller
         $lsRutVi->update([
             'trang_thai' => 'Thất bại',
         ]);
+        $viShipper = $lsRutVi->vishipper;
+        if ($viShipper) {
+            $viShipper->tong_tien += $lsRutVi->tien_rut;
+            $viShipper->save();
+        }
         $lsRutVi->updated_at = Carbon::now()->setTimezone('Asia/Ho_Chi_Minh');
         $lsRutVi->noi_dung_tu_choi = $request->input('noi_dung_tu_choi');
         $lsRutVi->save();

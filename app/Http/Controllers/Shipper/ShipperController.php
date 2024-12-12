@@ -228,7 +228,7 @@ class ShipperController extends Controller
         }
 
         DB::table('ls_rut_shippers')->insert([
-            'vishipper_id' =>  $viShipper->id,
+            'vi_shipper_id' =>  $viShipper->id,
             'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
             'tien_rut' => $request->amount,
             'noi_dung_tu_choi' => 'null',

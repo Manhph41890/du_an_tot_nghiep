@@ -29,4 +29,8 @@ class vi_nguoi_dung extends Model
     {
         return $this->hasMany(chi_tiet_vi::class, 'vi_nguoi_dung_id');
     }
+    public function ls_rut_vis()
+    {
+        return $this->hasMany(ls_rut_vi::class);
+    }
 }

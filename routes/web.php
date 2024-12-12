@@ -136,11 +136,15 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
 
     // Duyệt rút tiền admin
     Route::get('/ruttien', [RutTienController::class, 'duyetruttienAdmin'])->name('duyetruttienAdmin');
+    Route::get('/thongtinrut/{id}', [RutTienController::class, 'thongTinRut'])->name('thongTinRut');
+    Route::get('/thongtinrut/{id}', [RutTienController::class, 'thongTinRut'])->name('thongTinRut');
     Route::put('/duyetrut/{id}', [RutTienController::class, 'duyetRutAdmin'])->name('duyetRutAdmin');
     Route::put('/huyrut/{id}', [RutTienController::class, 'HuyRutAdmin'])->name('HuyRutAdmin');
 
-     // Duyệt rút tiền admin
+
+    // Duyệt rút tiền admin
     Route::get('/ruttienshipper', [RutTienController::class, 'duyetruttienShipper'])->name('duyetruttienShipper');
+    Route::get('/thongtinrutship/{id}', [RutTienController::class, 'thongTinRutShip'])->name('thongTinRutShip');
     Route::put('/duyetRutshipper/{id}', [RutTienController::class, 'duyetRutshipper'])->name('duyetRutshipper');
     Route::put('/huyrutshipper/{id}', [RutTienController::class, 'HuyRutshipper'])->name('HuyRutshipper');
 

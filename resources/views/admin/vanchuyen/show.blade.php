@@ -160,12 +160,13 @@
                                     <div class="card-body">
                                         <h5>Thông tin khách hàng</h5>
                                         <br>
-                                        <h6>Khách hàng:</h6> {{ $donhang->user?->ho_ten }}
+                                        <h6>Khách hàng: {{ $donhang->user?->ho_ten }}</h6> 
                                         <br>
                                         <p><strong>Tên người nhận:</strong> {{ $donhang->ho_ten }}</p>
                                         <p><strong>Email:</strong> {{ $donhang->email }}</p>
                                         <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
-                                        <p><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
+                                        <p class="shipping-address"><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
+
                                     </div>
                                 </div>
 
@@ -273,6 +274,9 @@
         border-radius: 5px;
         padding: 5px 10px;
     }
+    .shipping-address {
+    word-wrap: break-word !important;
+}
 
     .order-summary {
         font-weight: bold;

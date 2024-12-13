@@ -33,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
         // / Lấy số lượng đơn hàng mới và yêu cầu hủy
         $newOrdersCount = DB::table('don_hangs')->where('trang_thai_don_hang', 'Chờ xác nhận')->count();
         $cancelRequestsCount = DB::table('huy_don_hangs')->where('trang_thai', 'Chờ xác nhận hủy')->count();
+        $duyet_rut_user = DB::table('ls_rut_vis')->where('trang_thai', 'Chờ duyệt')->count();
+        $duyet_rut_shipper = DB::table('ls_rut_shippers')->where('trang_thai', 'Chờ xử lý')->count();
         $tongDonHang = DB::table('don_hangs')
             ->where('trang_thai_don_hang', 'Chờ xác nhận')
             ->where('user_id', Auth::id()) // Lọc theo ID người dùng hiện tại
@@ -43,6 +45,9 @@ class AppServiceProvider extends ServiceProvider
             'newOrdersCount' => $newOrdersCount,
             'cancelRequestsCount' => $cancelRequestsCount,
             'totalNotifications' => $newOrdersCount + $cancelRequestsCount,
+            'duyet_rut_user' => $duyet_rut_user,
+            'duyet_rut_shipper' => $duyet_rut_shipper,
+            'duyet_rut_shipper_user' => $duyet_rut_shipper +  $duyet_rut_user
         ];
 
         // Chia sẻ biến notifications đến tất cả các view
@@ -88,5 +93,6 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('cartItemsCount', $cartItemsCount);
         });
+        
     }
 }

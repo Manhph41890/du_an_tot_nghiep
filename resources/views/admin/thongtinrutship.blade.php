@@ -72,7 +72,7 @@
                                     </div>
                                     <!-- Nút Quay lại -->
                                     <div class="text-end">
-                                        <a href="{{ route('duyetruttienAdmin') }}" class="btn btn-secondary">
+                                        <a href="{{ route('duyetruttienShipper') }}" class="btn btn-secondary">
                                             <i class="bi bi-arrow-left"></i> Quay lại
                                         </a>
                                     </div>

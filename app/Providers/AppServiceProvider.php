@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
             'totalNotifications' => $newOrdersCount + $cancelRequestsCount,
             'duyet_rut_user' => $duyet_rut_user,
             'duyet_rut_shipper' => $duyet_rut_shipper,
-            'duyet_rut_shipper_user' => $duyet_rut_shipper +  $duyet_rut_user
+            'duyet_rut_shipper_user' => $duyet_rut_shipper + $duyet_rut_user,
         ];
 
         // Chia sẻ biến notifications đến tất cả các view
@@ -93,6 +93,5 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('cartItemsCount', $cartItemsCount);
         });
-        
     }
 }

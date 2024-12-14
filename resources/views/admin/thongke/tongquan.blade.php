@@ -563,9 +563,12 @@
                                             <th>#ID</th>
                                             <th>Ảnh</th>
                                             <th>Tên sản phẩm</th>
+                                           
                                             <th>Giá gốc</th>
                                             <th>Giá khuyến mãi</th>
+                                            <th>Lượt xem</th>
                                             <th>Trạng thái</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -585,8 +588,8 @@
                                                 <td>{{ $item->ten_san_pham }}</td>
                                                 <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
                                                 <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
-                                               
-
+                                                <td> {{$item->views ?? 0 }}</td>
+ 
                                                 <td>
                                                     {!! $item->is_active
                                                         ? '<span class="badge bg-primary">Hiển Thị</span>'

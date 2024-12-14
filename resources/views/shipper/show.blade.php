@@ -84,9 +84,9 @@
                                 @if ($shipper->status == 'Đã lấy hàng')
                                     <tr>
                                         <td>{{ $shipper->donHang->ma_don_hang }}</td>
-                                        <td>{{ $shipper->donHang->user->ho_ten }}</td>
-                                        <td>{{ $shipper->donHang->user->dia_chi }}</td>
-                                        <td>{{ $shipper->donHang->user->so_dien_thoai }}</td>
+                                        <td>{{ $shipper->donHang->ho_ten }}</td>
+                                        <td>{{ $shipper->donHang->dia_chi }}</td>
+                                        <td>{{ $shipper->donHang->so_dien_thoai }}</td>
                                         <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }} VND</td>
                                         <td>
                                             <select class="form-select status-select" data-id="{{ $shipper->id }}">
@@ -124,9 +124,9 @@
                                 @if ($shipper->status == 'Đang vận chuyển')
                                     <tr> <!-- Bổ sung thẻ <tr> -->
                                         <td>{{ $shipper->donHang->ma_don_hang }}</td>
-                                        <td>{{ $shipper->donHang->user->ho_ten }}</td>
-                                        <td>{{ $shipper->donHang->user->dia_chi }}</td>
-                                        <td>{{ $shipper->donHang->user->so_dien_thoai }}</td>
+                                        <td>{{ $shipper->donHang->ho_ten }}</td>
+                                        <td>{{ $shipper->donHang->dia_chi }}</td>
+                                        <td>{{ $shipper->donHang->so_dien_thoai }}</td>
                                         <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }} VND</td>
                                         <td>
                                             <select class="form-select status-select" data-id="{{ $shipper->id }}">

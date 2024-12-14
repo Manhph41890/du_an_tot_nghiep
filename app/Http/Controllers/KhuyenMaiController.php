@@ -52,9 +52,10 @@ class KhuyenMaiController extends Controller
             }
             $promotion->save();
         });
-
+ 
 
         $khuyenMais = khuyen_mai::orderBy('created_at', 'desc')->paginate(5);
+        
         // dd($khuyenMais);
 
         $title = 'Danh sách khuyến mãi';

@@ -6,6 +6,7 @@
 
 @section('css')
 @endsection
+<h1></h1>
 
 @section('content')
     <div class="content-page">
@@ -13,7 +14,7 @@
         <div class="content">
             {{-- @if ($errors->any())
                 <div class="alert alert-danger">
-                    <ul>
+                    <ul>2
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach

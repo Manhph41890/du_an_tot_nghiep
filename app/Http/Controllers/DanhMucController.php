@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Storedanh_mucRequest;
 use App\Http\Requests\Updatedanh_mucRequest;
+use Illuminate\Support\Facades\Auth;
 
 class DanhMucController extends Controller
 {
@@ -40,6 +41,10 @@ class DanhMucController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
+        if ($user->chuc_vu_id != 1) {
+            return back()->with('error', 'Bạn không có quyền truy cập vào trang này');
+        }
         $title = "Thêm mới danh mục";
         return view('admin.danhmuc.create', compact('title'));
     }
@@ -75,6 +80,10 @@ class DanhMucController extends Controller
      */
     public function edit(danh_muc $danh_muc, string $id)
     {
+        $user = Auth::user();
+        if ($user->chuc_vu_id != 1) {
+            return back()->with('error', 'Bạn không có quyền truy cập vào trang này');
+        }
         $title = "Cập nhật danh mục";
         $danhmuc = danh_muc::query()->findOrFail($id);
         return view('admin.danhmuc.edit', compact('danhmuc', 'title'));
@@ -115,6 +124,10 @@ class DanhMucController extends Controller
     public function destroy(danh_muc $danh_muc, string $id)
     {
         //
+        $user = Auth::user();
+        if ($user->chuc_vu_id != 1) {
+            return back()->with('error', 'Bạn không có quyền truy cập vào trang này');
+        }
         $danhMuc = danh_muc::findOrFail($id);
         if ($danhMuc->san_phams()->count() > 0) {
             return redirect()->back()->with('error', 'Không xóa danh mục vì có sản phẩm thuộc danh mục này.');

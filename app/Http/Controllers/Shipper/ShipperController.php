@@ -251,6 +251,7 @@ class ShipperController extends Controller
         $title = 'Tạo ngân hàng';
         $user = Auth::user();
         $userId = Auth::id();
+        $linkedBanksCount = Bank::where('user_id', $user->id)->count();
         $response = Http::get(env('VIETQR_BANKS_LIST'));
         if ($response->successful()) {
             $banks = $response->json()['data']; // Lấy dữ liệu từ API
@@ -258,13 +259,18 @@ class ShipperController extends Controller
             $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
         }
         $listBank = Bank::where('user_id', $userId)->latest('id')->get();
-        return view('shipper.lkbank',  compact('title', 'user', 'banks', 'userId', 'listBank'));
+        return view('shipper.lkbank',  compact('title', 'user', 'banks', 'userId', 'listBank', 'linkedBanksCount'));
     }
 
     public function storebank(StoreBankRequest $request)
     {
         // Get authenticated user
         $user = Auth::user();
+        // Kiểm tra số lượng ngân hàng đã liên kết
+        $linkedBanksCount = Bank::where('user_id', $user->id)->count();
+        if ($linkedBanksCount >= 3) {
+            return redirect()->back()->with('error', 'Bạn chỉ được liên kết tối đa 3 ngân hàng.');
+        }
 
         $response = Http::get(env('VIETQR_BANKS_LIST'));
         if ($response->successful()) {

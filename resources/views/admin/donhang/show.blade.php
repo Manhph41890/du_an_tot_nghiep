@@ -106,7 +106,7 @@
                                                             </td>
                                                             <td> {{ number_format($chi_tiet->san_pham->gia_km ?? $chi_tiet->san_pham->gia_goc, 0, ',', '.') }}
                                                                 VND </td>
-                                                            <td> {{ number_format($bien_the->gia, 0, ',', '.') }}
+                                                            <td> {{ number_format($bien_the->gia ?? null, 0, ',', '.') }}
                                                                 VND </td>
                                                             <td>{{ $chi_tiet->so_luong }}</td>
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}

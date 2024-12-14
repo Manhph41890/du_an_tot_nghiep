@@ -198,8 +198,14 @@ class ShipperController extends Controller
     {
         $user = Auth::id();
         $banks = Bank::where('user_id', $user)->get();
+
+        $viShipperId = DB::table('vi_shippers')->where('shipper_id', $user)->value('id');
+
+        $pendingWithdrawal = DB::table('ls_rut_shippers')->where('vi_shipper_id', $viShipperId)->where('trang_thai', 'Chờ xử lý')->exists();
         $title = 'Rút tiền';
-        return view('shipper.rut-tien', compact('banks', 'title'));
+
+        // Truyền biến pendingWithdrawal vào view
+        return view('shipper.rut-tien', compact('banks', 'title', 'pendingWithdrawal'));
     }
 
     public function withdraw(Request $request)
@@ -228,7 +234,7 @@ class ShipperController extends Controller
         }
 
         DB::table('ls_rut_shippers')->insert([
-            'vi_shipper_id' =>  $viShipper->id,
+            'vi_shipper_id' => $viShipper->id,
             'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
             'tien_rut' => $request->amount,
             'noi_dung_tu_choi' => 'null',
@@ -237,11 +243,11 @@ class ShipperController extends Controller
         ]);
 
         // // Cập nhật số dư
-        // $viShipper->tong_tien -= $request->amount;
-        // $viShipper->save();
+        $viShipper->tong_tien -= $request->amount;
+        $viShipper->save();
 
-        // $bank->balance += $request->amount;
-        // $bank->save();
+        $bank->balance += $request->amount;
+        $bank->save();
 
         return redirect()->back()->with('success', 'Yêu cầu rút đã được gửi');
     }
@@ -258,7 +264,7 @@ class ShipperController extends Controller
             $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
         }
         $listBank = Bank::where('user_id', $userId)->latest('id')->get();
-        return view('shipper.lkbank',  compact('title', 'user', 'banks', 'userId', 'listBank'));
+        return view('shipper.lkbank', compact('title', 'user', 'banks', 'userId', 'listBank'));
     }
 
     public function storebank(StoreBankRequest $request)

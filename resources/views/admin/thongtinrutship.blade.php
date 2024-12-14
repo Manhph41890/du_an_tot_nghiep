@@ -30,7 +30,9 @@
                                                 <tr>
                                                     <th>Ảnh</th>
                                                     <th>Họ tên</th>
-                                                    <th>Số dư</th>
+                                                    <th>Số dư ban đầu</th>
+                                                    <th>Số tiền rút</th>
+                                                    <th>Số dư mới</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -41,6 +43,8 @@
                                                             style="width: 50px; height: auto;">
                                                     </td>
                                                     <td>{{ $viShipper->shipper->ho_ten }}</td>
+                                                    <td>{{ number_format($so_du_ban_dau) }} VND</td>
+                                                    <td>{{ number_format($lsRutVi->tien_rut) }} VND</td>
                                                     <td>{{ number_format($viShipper->tong_tien) }} VND</td>
                                                 </tr>
                                             </tbody>

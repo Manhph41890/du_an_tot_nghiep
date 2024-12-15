@@ -210,7 +210,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-3 text-start">
                                             <p><strong>Mã khuyến mãi</strong>:
                                                 {{ $donhang->khuyen_mai?->ten_khuyen_mai }}
                                                 {{ $donhang->khuyen_mai?->ma_khuyen_mai }}</p>
@@ -224,7 +224,7 @@
                                 </div>
 
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-body text-start">
                                         <p><strong class="pe-1">Tổng tiền sản phẩm</strong>
                                             {{ number_format($donhang->chi_tiet_don_hangs->sum('thanh_tien'), 0, ',', '.') }}
                                             VND
@@ -258,7 +258,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                <div class="card mb-3">
+                                <div class="card mb-3 text-start">
                                     <div class="card-body">
                                         <h5>Thông tin khách hàng</h5>
                                         <br>
@@ -267,7 +267,7 @@
                                         <p><strong>Tên người nhận:</strong> {{ $donhang->ho_ten }}</p>
                                         <p><strong>Email:</strong> {{ $donhang->email }}</p>
                                         <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
-                                        <p><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
+                                        <p style="text-wrap: auto"><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
                                     </div>
                                 </div>
 
@@ -412,7 +412,10 @@
         text-decoration: none;
         border-radius: 5px;
     }
-
+    .danhgia:hover {
+        background-color: #ff5722; 
+        color: white;
+    }
     /* CSS cho nút đóng */
     .close-btn {
         position: absolute;

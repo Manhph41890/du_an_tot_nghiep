@@ -210,7 +210,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 mb-30 order-lg-first bg-lighten2 " style="width: 210px;position: fixed;overflow-y: auto;">
+                <div class="col-lg-2 mb-30 order-lg-first bg-lighten2 " style="width: 210px;">
                     <aside class="left-sidebar theme1">
                         <div class="search-filter">
                             <form action="{{ route('client.cuahang') }}" method="post">

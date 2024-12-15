@@ -713,7 +713,7 @@
         function incrementQuantity() {
             const quantityInput = document.querySelector('input[name="quantity"]');
             let quantity = parseInt(quantityInput.value);
-            if (quantity < 10) {
+            if (quantity < 1) {
                 quantityInput.value = quantity + 1;
             }
         } // Hàm giảm số lượng function decrementQuantity() { const

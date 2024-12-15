@@ -100,10 +100,17 @@ class ClientSanPhamController extends Controller
 
 
 
-        $soluongsanpham = $query->where('is_active', '1')->count();
+        $soluongsanpham = $query->where('is_active', '1')->whereHas('danh_muc', function ($query) {
+            $query->where('is_active', '1');
+        })->count();
+        
         $list_sanphams = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color', 'danh_gias'])
             ->where('is_active', '1')
+            ->whereHas('danh_muc', function ($query) {
+                $query->where('is_active', '1'); 
+            })
             ->paginate(16);
+
 
         foreach ($list_sanphams as $sanpham) {
             // tính % giảm giá

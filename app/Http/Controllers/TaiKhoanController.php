@@ -158,6 +158,7 @@ class TaiKhoanController extends Controller
     {
         $user = Auth::user();
         $userId = Auth::id();
+        $linkedBanksCount = Bank::where('user_id', $user->id)->count();
         $response = Http::get(env('VIETQR_BANKS_LIST'));
         if ($response->successful()) {
             $banks = $response->json()['data']; // Lấy dữ liệu từ API
@@ -165,7 +166,7 @@ class TaiKhoanController extends Controller
             $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
         }
         $listBank = Bank::where('user_id', $userId)->latest('id')->get();
-        return view('client.taikhoan.lien-ket-bank', compact('user', 'banks', 'userId', 'listBank'));
+        return view('client.taikhoan.lien-ket-bank', compact('user', 'banks', 'userId', 'listBank', 'linkedBanksCount'));
     }
     public function storeBank(StoreBankRequest $request)
     {
@@ -228,6 +229,24 @@ class TaiKhoanController extends Controller
         $donhang = $history->don_hang;
         $title = 'Lịch sử đơn hàng ';
         return view('client.taikhoan.history', compact('user', 'title', 'history', 'donhang'));
+    }
+
+    public function deleteBank(Request $request, Bank $bank)
+    {
+        // Kiểm tra người dùng có quyền xóa
+        if ($bank->user_id !== Auth::id()) {
+            return redirect()->back()->with('error', 'Bạn không có quyền xóa ngân hàng này.');
+        }
+
+        // Kiểm tra mã PIN
+        if ($request->pin !== $bank->pin) {
+            return redirect()->back()->with('error', 'Mã PIN không chính xác.');
+        }
+
+        // Xóa ngân hàng
+        $bank->delete();
+
+        return redirect()->back()->with('success', 'Hủy liên kết ngân hàng thành công.');
     }
 
     public function updateAvatar(Request $request)

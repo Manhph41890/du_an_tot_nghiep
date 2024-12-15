@@ -139,7 +139,8 @@
                                                                                 <div class="ratting-form">
                                                                                     <form
                                                                                         action="{{ route('danhgia.store', ['sanPhamid' => $chi_tiet->san_pham->id]) }}"
-                                                                                        method="post">
+                                                                                        method="post"
+                                                                                        enctype="multipart/form-data">
                                                                                         @csrf
                                                                                         <div class="star-box">
                                                                                             <span>Đánh giá của
@@ -179,6 +180,12 @@
                                                                                             <div class="col-md-12">
                                                                                                 <div
                                                                                                     class="rating-form-style form-submit">
+                                                                                                    <div class="m-2">
+                                                                                                        <input
+                                                                                                            type="file"
+                                                                                                            name="img"
+                                                                                                            title="Thêm ảnh đánh giá">
+                                                                                                    </div>
                                                                                                     <textarea id="review{{ $chi_tiet->san_pham->id }}" name="binh_luan" placeholder="Viết đánh giá" maxlength="100"></textarea>
                                                                                                     <p
                                                                                                         id="charCount{{ $chi_tiet->san_pham->id }}">

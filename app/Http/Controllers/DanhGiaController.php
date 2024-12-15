@@ -40,7 +40,7 @@ class DanhGiaController extends Controller
 
         // Lấy danh sách đã lọc
         $params = [];
-        $params['list'] = $query->get();
+        $params['list'] = $query->orderByDesc('id')->get();
         $params['title'] = "Danh sách";
         return view('admin.danhgia.index', $params);
         // $params['list'] = danh_gia::all();
@@ -63,6 +63,7 @@ class DanhGiaController extends Controller
 
         $request->validate([
             'diem_so' => 'required|integer|min:1|max:5',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'binh_luan' => 'required|string|max:100',
         ]);
         // Kiểm tra xem người dùng đã đánh giá sản phẩm này chưa
@@ -75,6 +76,10 @@ class DanhGiaController extends Controller
         $danhGia = new danh_gia();
         $danhGia->san_pham_id = $request->san_pham_id;
         $danhGia->user_id = auth()->user()->id;
+        if ($request->hasFile('img')) {
+            $filePath = $request->file('img')->store('uploads/danhgias'); // Lưu file vào thư mục storage/app/public/uploads
+            $danhGia->img = basename($filePath); // Lưu tên file vào DB
+        }
         $danhGia->ngay_danh_gia = now();
         $danhGia->diem_so = $request->diem_so;
         $danhGia->binh_luan = $request->binh_luan;
@@ -88,7 +93,7 @@ class DanhGiaController extends Controller
      */
     public function show($id)
     {
-        $danhgia = danh_gia::findOrFail($id);
+        $danhgia = danh_gia::with('san_phams')->findOrFail($id);
 
         return view('admin.danhgia.show', compact('danhgia'));
     }

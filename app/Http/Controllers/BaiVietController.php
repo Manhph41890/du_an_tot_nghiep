@@ -7,6 +7,7 @@ use App\Http\Requests\Storebai_vietRequest;
 use App\Http\Requests\Updatebai_vietRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -41,7 +42,10 @@ class BaiVietController extends Controller
      */
     public function create()
     {
-
+        $user = Auth::user();
+        if ($user->chuc_vu_id != 1) {
+            return back()->with('error', 'Bạn không có quyền truy cập vào trang này');
+        }
         $user = User::query()->pluck('ho_ten', 'id')->all();
         $title = "Thêm mới bài viết";
         return view('admin.baiviet.create', compact('user', 'title'));
@@ -115,7 +119,10 @@ class BaiVietController extends Controller
     public function edit(bai_viet $baiViet, $id)
     {
         // Xác thực quyền chỉnh sửa bài viết
-
+        $user = Auth::user();
+        if ($user->chuc_vu_id != 1) {
+            return back()->with('error', 'Bạn không có quyền truy cập vào trang này');
+        }
         // Tìm bài viết theo ID
         $post = bai_viet::findOrFail($id);
 

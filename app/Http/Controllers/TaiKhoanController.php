@@ -148,7 +148,6 @@ class TaiKhoanController extends Controller
         $donhang = don_hang::with(['user', 'khuyen_mai', 'phuong_thuc_thanh_toan', 'phuong_thuc_van_chuyen', 'chi_tiet_don_hangs.san_pham', 'chi_tiet_don_hangs.color_san_pham', 'chi_tiet_don_hangs.size_san_pham', 'lich_su_thanh_toans', 'huy_don_hang'])->findOrFail($id);
         $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
         // $bienThe = $donhang->chi_tiet_don_hangs->san_pham->bien_the_san_phams;
-        $currentStatus = $donhang->shipper ? $donhang->shipper->status : null;
 
         // Trả về view cùng với dữ liệu đơn hàng
         return view('client.taikhoan.showmyorder', compact('donhang', 'currentStatus'));

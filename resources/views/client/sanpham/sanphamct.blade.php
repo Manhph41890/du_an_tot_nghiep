@@ -225,8 +225,9 @@
                                 <a href="#" id="write-comment"><span class="ms-2"><i
                                             class="far fa-comment-dots"></i></span>
                                     Xem đánh giá <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span
-                                            class="edite"><i class="far fa-edit"></i></span>Viết đánh giá</a>
+                                </a>
+                                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span
+                                            class="edite"><i class="far fa-edit"></i></span>Viết đánh giá</a> --}}
                             </div>
                         </div>
                         <div class="product-body mb-40">
@@ -712,7 +713,7 @@
         function incrementQuantity() {
             const quantityInput = document.querySelector('input[name="quantity"]');
             let quantity = parseInt(quantityInput.value);
-            if (quantity < 10) {
+            if (quantity < 1) {
                 quantityInput.value = quantity + 1;
             }
         } // Hàm giảm số lượng function decrementQuantity() { const

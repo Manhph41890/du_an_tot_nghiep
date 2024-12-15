@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('banks', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::table('danh_gias', function (Blueprint $table) {
+            $table->string('img')->nullable()->after('user_id'); // Thêm cột img sau cột name
         });
     }
 
@@ -22,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('banks', function (Blueprint $table) {
+        Schema::table('danh_gias', function (Blueprint $table) {
             //
         });
     }

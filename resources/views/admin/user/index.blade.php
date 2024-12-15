@@ -93,8 +93,8 @@
                                                     <td>{{ $item->email }}</td>
                                                     <td>{{ $item->so_dien_thoai }}</td>
                                                     <td>{!! $item->is_active
-                                                        ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                        : '<span class="badge bg-danger">Ẩn</span>' !!}</td>
+                                                        ? '<span class="badge bg-success">Hoạt động</span>'
+                                                        : '<span class="badge bg-danger">Ngưng hoạt động</span>' !!}</td>
                                                     <td>
                                                         <a href="{{ route('user.show', $item->id) }}"
                                                             data-bs-toggle="modal"
@@ -188,8 +188,8 @@
                                                         <td>{{ $item->email }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{!! $item->is_active
-                                                            ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                            : '<span class="badge bg-danger">Ẩn</span>' !!}</td>
+                                                            ? '<span class="badge bg-success">Hoạt động</span>'
+                                                            : '<span class="badge bg-danger">Ngưng hoạt động</span>' !!}</td>
                                                         <td>
                                                             <a href="{{ route('user.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
@@ -285,8 +285,8 @@
                                                         <td>{{ $item->email }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{!! $item->is_active
-                                                            ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                            : '<span class="badge bg-danger">Ẩn</span>' !!}</td>
+                                                            ? '<span class="badge bg-success">Hoạt động</span>'
+                                                            : '<span class="badge bg-danger">Ngưng hoạt động</span>' !!}</td>
                                                         <td>
                                                             <a href="{{ route('user.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
@@ -323,22 +323,23 @@
                                                                 <i
                                                                     class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
-    
+
                                                             <!-- Đảm bảo mỗi modal có ID riêng -->
-                                                            <div class="modal fade" id="myModalnhanEditD{{ $item->id }}"
-                                                                tabindex="-1"
+                                                            <div class="modal fade"
+                                                                id="myModalnhanEditD{{ $item->id }}" tabindex="-1"
                                                                 aria-labelledby="exampleModalLabel{{ $item->id }}"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
-    
+
                                                                         <div class="modal-body">
                                                                             @include('admin.user.edit', [
                                                                                 'post' => $item,
                                                                             ])
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary"
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
                                                                                 data-bs-dismiss="modal">Đóng</button>
                                                                         </div>
                                                                     </div>
@@ -381,8 +382,8 @@
                                                         <td>{{ $item->email }}</td>
                                                         <td>{{ $item->so_dien_thoai }}</td>
                                                         <td>{!! $item->is_active
-                                                            ? '<span class="badge bg-primary">Hiển Thị</span>'
-                                                            : '<span class="badge bg-danger">Ẩn</span>' !!}</td>
+                                                            ? '<span class="badge bg-success">Hoạt động</span>'
+                                                            : '<span class="badge bg-danger">Ngưng hoạt động</span>' !!}</td>
                                                         <td>
                                                             <a href="{{ route('user.show', $item->id) }}"
                                                                 data-bs-toggle="modal"
@@ -419,22 +420,23 @@
                                                                 <i
                                                                     class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
-    
+
                                                             <!-- Đảm bảo mỗi modal có ID riêng -->
-                                                            <div class="modal fade" id="myModalnhanEditL{{ $item->id }}"
-                                                                tabindex="-1"
+                                                            <div class="modal fade"
+                                                                id="myModalnhanEditL{{ $item->id }}" tabindex="-1"
                                                                 aria-labelledby="exampleModalLabel{{ $item->id }}"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
-    
+
                                                                         <div class="modal-body">
                                                                             @include('admin.user.edit', [
                                                                                 'post' => $item,
                                                                             ])
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary"
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
                                                                                 data-bs-dismiss="modal">Đóng</button>
                                                                         </div>
                                                                     </div>

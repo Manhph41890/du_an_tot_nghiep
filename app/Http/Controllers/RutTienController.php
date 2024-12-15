@@ -16,10 +16,9 @@ use Illuminate\Validation\Rule;
 
 class RutTienController extends Controller
 {
-
     public function nap()
     {
-        $userId =  Auth::id();
+        $userId = Auth::id();
         $banks = Bank::where('user_id', $userId)->get();
         $viNguoiDung = vi_nguoi_dung::where('user_id', Auth::id());
         return view('client.taikhoan.nap-tien', compact('userId', 'viNguoiDung', 'banks'));
@@ -45,10 +44,9 @@ class RutTienController extends Controller
             return redirect()->route('taikhoan.nap-tien')->with('error', 'Số dư ngân hàng không đủ.');
         }
 
-
         // Kiểm tra mã PIN
         if ($bank->pin !== $request->pin) {
-            return  redirect()->route('taikhoan.nap-tien')->with('error', 'Mã PIN không chính xác.');
+            return redirect()->route('taikhoan.nap-tien')->with('error', 'Mã PIN không chính xác.');
         }
 
         // Cập nhật số dư
@@ -66,19 +64,17 @@ class RutTienController extends Controller
             'bank_id' => $request->bank_id,
         ]);
 
-        return  redirect()->route('taikhoan.nap-tien')->with('success', 'Nạp tiền thành công');
+        return redirect()->route('taikhoan.nap-tien')->with('success', 'Nạp tiền thành công');
     }
-
 
     public function rut()
     {
-        $userId =  Auth::id();
+        $userId = Auth::id();
         $banks = Bank::where('user_id', $userId)->get();
         $viNguoiDung = vi_nguoi_dung::where('user_id', Auth::id());
         // $banks = Bank::all();
         return view('client.taikhoan.rut-tien', compact('viNguoiDung', 'banks', 'userId'));
     }
-
 
     public function withdraw(Request $request)
     {
@@ -103,7 +99,7 @@ class RutTienController extends Controller
 
         // Kiểm tra mã PIN
         if ($bank->pin !== $request->pin) {
-            return  redirect()->route('taikhoan.rut-tien')->with('error', 'Mã PIN không chính xác.');
+            return redirect()->route('taikhoan.rut-tien')->with('error', 'Mã PIN không chính xác.');
         }
 
         // Cập nhật số dư
@@ -121,13 +117,12 @@ class RutTienController extends Controller
             'bank_id' => $request->bank_id,
         ]);
 
-        return  redirect()->route('taikhoan.rut-tien')->with('success', 'Yêu cầu rút đã được gửi');
+        return redirect()->route('taikhoan.rut-tien')->with('success', 'Yêu cầu rút đã được gửi');
     }
-
 
     public function duyetruttienAdmin(Request $request)
     {
-        $title = "Duyệt rút tiền khách hàng";
+        $title = 'Duyệt rút tiền khách hàng';
         $query = ls_rut_vi::query()->with(['vi_nguoi_dung.user', 'bank']);
 
         // lọc trạng thái
@@ -148,7 +143,6 @@ class RutTienController extends Controller
 
         $duyetruttien = $query->orderBy('id', 'DESC')->get();
 
-
         // dd($duyetruttien);
         return view('admin.lichsuduyetrut', compact('title', 'duyetruttien'));
     }
@@ -158,7 +152,7 @@ class RutTienController extends Controller
         $lsRutVi = ls_rut_vi::with('vi_nguoi_dung', 'bank')->find($id);
         $viNguoiDung = $lsRutVi->vi_nguoi_dung;
         $bank = $lsRutVi->bank;
-        $title = "Thông tin rút tiền";
+        $title = 'Thông tin rút tiền';
         if (!$lsRutVi) {
             return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
         }
@@ -177,15 +171,17 @@ class RutTienController extends Controller
         return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được duyệt.');
     }
 
-
     public function HuyRutAdmin($id, Request $request)
     {
-        $request->validate([
-            'noi_dung_tu_choi' => 'required|string',
-        ], [
-            'noi_dung_tu_choi.required' => "Nội dung không được để trống",
-            'noi_dung_tu_choi.string' => "Nội dung phải là chữ",
-        ]);
+        $request->validate(
+            [
+                'noi_dung_tu_choi' => 'required|string',
+            ],
+            [
+                'noi_dung_tu_choi.required' => 'Nội dung không được để trống',
+                'noi_dung_tu_choi.string' => 'Nội dung phải là chữ',
+            ],
+        );
         $lsRutVi = ls_rut_vi::findOrFail($id);
         $lsRutVi->update([
             'trang_thai' => 'Thất bại',
@@ -201,12 +197,9 @@ class RutTienController extends Controller
         return redirect()->back()->with('success', 'Xác nhận từ chối rút tiền thành công.');
     }
 
-
-
-
     public function duyetruttienShipper(Request $request)
     {
-        $title = "Duyệt rút tiền shipper";
+        $title = 'Duyệt rút tiền shipper';
         $query = lsrutshipper::query()->with(['vishipper.shipper', 'banks']);
 
         // lọc trạng thái
@@ -235,13 +228,15 @@ class RutTienController extends Controller
     {
         $lsRutVi = lsrutshipper::with('vishipper', 'banks')->find($id);
         $viShipper = $lsRutVi->vishipper;
+        $so_du_ban_dau = $lsRutVi->tien_rut + $viShipper->tong_tien;
         $bank = $lsRutVi->banks;
-        $title = "Thông tin rút tiền";
+        $title = 'Thông tin rút tiền';
+        $trangThai = $lsRutVi->trang_thai; // Lấy trường trạng thái
         // dd($viShipper);
         if (!$lsRutVi) {
             return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
         }
-        return view('admin.thongtinrutship', compact('lsRutVi', 'viShipper', 'bank', 'title'));
+        return view('admin.thongtinrutship', compact('lsRutVi','trangThai', 'so_du_ban_dau', 'viShipper', 'bank', 'title'));
     }
     public function duyetRutshipper($id)
     {
@@ -257,12 +252,15 @@ class RutTienController extends Controller
     }
     public function HuyRutshipper($id, Request $request)
     {
-        $request->validate([
-            'noi_dung_tu_choi' => 'required|string',
-        ], [
-            'noi_dung_tu_choi.required' => "Nội dung không được để trống",
-            'noi_dung_tu_choi.string' => "Nội dung phải là chữ",
-        ]);
+        $request->validate(
+            [
+                'noi_dung_tu_choi' => 'required|string',
+            ],
+            [
+                'noi_dung_tu_choi.required' => 'Nội dung không được để trống',
+                'noi_dung_tu_choi.string' => 'Nội dung phải là chữ',
+            ],
+        );
         $lsRutVi = lsrutshipper::findOrFail($id);
         $lsRutVi->update([
             'trang_thai' => 'Thất bại',

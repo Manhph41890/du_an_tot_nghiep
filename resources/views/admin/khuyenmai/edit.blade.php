@@ -45,12 +45,12 @@
                                     </div>
                                     <div class="form-group  mb-3">
                                         <label for="ngay_bat_dau">Ngày bắt đầu</label>
-                                        <input type="date" name="ngay_bat_dau" class="form-control"
+                                        <input type="datetime" name="ngay_bat_dau" class="form-control"
                                             value="{{ old('ngay_bat_dau', $khuyenmais->ngay_bat_dau) }}" required>
                                     </div>
                                     <div class="form-group  mb-3">
                                      <label for="ngay_ket_thuc">Ngày kết thúc:</label>
-                                        <input type="date" name="ngay_ket_thuc" class="form-control"
+                                        <input type="datetime" name="ngay_ket_thuc" class="form-control"
                                             value="{{ old('ngay_ket_thuc', $khuyenmais->ngay_ket_thuc) }}" required>
                                     </div>
                                     <div class="mb-3">

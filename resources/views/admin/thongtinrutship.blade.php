@@ -30,7 +30,13 @@
                                                 <tr>
                                                     <th>Ảnh</th>
                                                     <th>Họ tên</th>
-                                                    <th>Số dư</th>
+                                                    <th>Số dư ban đầu</th>
+                                                    <th>Số tiền rút</th>
+                                                    @if ($trangThai == 'Thất bại')
+                                                        <th>Trạng thái</th>
+                                                    @else
+                                                        <th>Số dư mới</th>
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -41,7 +47,23 @@
                                                             style="width: 50px; height: auto;">
                                                     </td>
                                                     <td>{{ $viShipper->shipper->ho_ten }}</td>
-                                                    <td>{{ number_format($viShipper->tong_tien) }} VND</td>
+                                                    <td>
+                                                        @if ($trangThai == 'Thất bại')
+                                                            {{ number_format(intval($so_du_ban_dau) - intval($lsRutVi->tien_rut)) }}
+                                                            VND
+                                                        @else
+                                                            {{ number_format($so_du_ban_dau) }} VND
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ number_format($lsRutVi->tien_rut) }} VND</td>
+                                                    <td>
+                                                        @if ($trangThai == 'Thất bại')
+                                                            <Strong class="text-danger">Thất Bại</Strong>
+                                                        @else
+                                                            {{ number_format(intval($viShipper->tong_tien)) }} VND
+                                                        @endif
+                                                    </td>
+
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -53,8 +75,7 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th>Ngân hàng</th>
-                                                    <th>Số tài khoản</th>
-                                                    <th>Họ tên</th>
+                                                    <th>Chủ tài khoản</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -62,9 +83,9 @@
                                                     <td>
                                                         <img src="{{ $bank->img }}" alt="{{ $bank->name }}"
                                                             class="img-thumbnail" style="width: 50px; height: auto;">
-                                                        <span class="ms-2">{{ $bank->name }}</span>
+                                                        <span class="ms-2">{{ $bank->name }}</span> -
+                                                        <span>{{ $bank->account_number }}</span>
                                                     </td>
-                                                    <td>{{ $bank->account_number }}</td>
                                                     <td>{{ $bank->account_holder }}</td>
                                                 </tr>
                                             </tbody>

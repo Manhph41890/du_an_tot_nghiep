@@ -53,8 +53,7 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th>Ngân hàng</th>
-                                                    <th>Số tài khoản</th>
-                                                    <th>Họ tên</th>
+                                                    <th>Chủ tài khoản</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -62,9 +61,9 @@
                                                     <td>
                                                         <img src="{{ $bank->img }}" alt="{{ $bank->name }}"
                                                             class="img-thumbnail" style="width: 50px; height: auto;">
-                                                        <span class="ms-2">{{ $bank->name }}</span>
+                                                        <span class="ms-2">{{ $bank->name }}</span> -
+                                                        <span>{{ $bank->account_number }}</span>
                                                     </td>
-                                                    <td>{{ $bank->account_number }}</td>
                                                     <td>{{ $bank->account_holder }}</td>
                                                 </tr>
                                             </tbody>

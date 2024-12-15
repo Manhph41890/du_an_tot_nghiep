@@ -55,7 +55,7 @@
                                     <div class="row">
                                         <div class="form-group  mb-3 col-6">
                                             <label for="ngay_bat_dau">Ngày bắt đầu</label>
-                                            <input type="date" name="ngay_bat_dau" value="{{ old('ngay_bat_dau') }}"
+                                            <input type="datetime-local" name="ngay_bat_dau" value="{{ old('ngay_bat_dau') }}"
                                                 class="form-control @error('ngay_bat_dau') is-invalid @enderror">
                                             @error('ngay_bat_dau')
                                                 <div class="invalid-feedback">
@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="form-group  mb-3 col-6">
                                             <label for="ngay_ket_thuc">Ngày kết thúc:</label>
-                                            <input type="date" name="ngay_ket_thuc" value="{{ old('ngay_ket_thuc') }}"
+                                            <input type="datetime-local" name="ngay_ket_thuc" value="{{ old('ngay_ket_thuc') }}"
                                                 class="form-control  @error('ngay_ket_thuc') is-invalid @enderror">
                                             @error('ngay_ket_thuc')
                                                 <div class="invalid-feedback">

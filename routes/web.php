@@ -69,6 +69,7 @@ Route::prefix('client')->group(function () {
     Route::get('/vi-tien', [TaiKhoanController::class, 'viTien'])->name('taikhoan.vitien');
     Route::get('/banks/create', [TaiKhoanController::class, 'createBank'])->name('banks.create');
     Route::post('/banks/store', [TaiKhoanController::class, 'storeBank'])->name('banks.store');
+    Route::delete('/banks/{bank}', [TaiKhoanController::class, 'deleteBank'])->name('banks.delete');
     Route::get('/quan-tri', [TaiKhoanController::class, 'quanTri'])->name('taikhoan.quantri'); // Bảo vệ route quản trị
 
     //Hủy đặt hàng
@@ -222,6 +223,7 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     //
     Route::get('/api/products/{categoryId}', [SanPhamController::class, 'getProductsByCategory']);
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
+    
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
 });
 

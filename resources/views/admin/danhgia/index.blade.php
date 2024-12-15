@@ -102,7 +102,7 @@
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-body">
-                                                                        @include('admin.danhgia.show', ['post' => $item])
+                                                                        @include('admin.danhgia.show', ['danhgia' => $item])
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>

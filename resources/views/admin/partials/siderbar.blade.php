@@ -151,52 +151,56 @@
                     </div>
                 </li>
 
-                <li>
-                    <a href="#duyetyeucau" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
-                        <i data-feather="check-square"></i>
-                        <span> Duyệt yêu cầu </span>
-                        @if (isset($notifications) && $notifications['duyet_rut_shipper_user'] > 0)
-                            <span class="ms-2 position-relative">
-                                <span class="notification-dot">{{ $notifications['duyet_rut_shipper_user'] }}</span>
-                            </span>
-                        @endif
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="duyetyeucau">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a class="tp-link d-flex align-items-center" href="{{ route('xacnhanhuy.index') }}">
-                                    Yêu cầu hủy đặt hàng
-                                    @if (isset($notifications) && $notifications['cancelRequestsCount'] > 0)
-                                        <span class="ms-2 position-relative">
-                                            <span class="notification-dot2"></span>
-                                        </span>
-                                    @endif
-                                </a>
-                            </li>
-                            <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền người dùng
-                                    @if (isset($notifications) && $notifications['duyet_rut_user'] > 0)
-                                        <span class="ms-2 position-relative">
-                                            <span
-                                                class="notification-dot">{{ $notifications['duyet_rut_user'] }}</span>
-                                        </span>
-                                    @endif
-                                </a>
-                            <li>
-                                <a class="tp-link" href="{{ route('duyetruttienShipper') }}">
-                                    Duyệt rút shipper
-                                    @if (isset($notifications) && $notifications['duyet_rut_shipper'] > 0)
-                                        <span class="ms-2 position-relative">
-                                            <span
-                                                class="notification-dot">{{ $notifications['duyet_rut_shipper'] }}</span>
-                                        </span>
-                                    @endif
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
 
+
+                @if (auth()->user()->chuc_vu->ten_chuc_vu === 'admin')
+                    <li>
+                        <a href="#duyetyeucau" data-bs-toggle="collapse" aria-expanded="false"
+                            data-bs-parent="#side-menu">
+                            <i data-feather="check-square"></i>
+                            <span> Duyệt yêu cầu </span>
+                            @if (isset($notifications) && $notifications['duyet_rut_shipper_user'] > 0)
+                                <span class="ms-2 position-relative">
+                                    <span class="notification-dot">{{ $notifications['duyet_rut_shipper_user'] }}</span>
+                                </span>
+                            @endif
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="duyetyeucau">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a class="tp-link d-flex align-items-center" href="{{ route('xacnhanhuy.index') }}">
+                                        Yêu cầu hủy đặt hàng
+                                        @if (isset($notifications) && $notifications['cancelRequestsCount'] > 0)
+                                            <span class="ms-2 position-relative">
+                                                <span class="notification-dot2"></span>
+                                            </span>
+                                        @endif
+                                    </a>
+                                </li>
+                                <li><a class="tp-link" href="{{ route('duyetruttienAdmin') }}">Duyệt rút tiền người dùng
+                                        @if (isset($notifications) && $notifications['duyet_rut_user'] > 0)
+                                            <span class="ms-2 position-relative">
+                                                <span
+                                                    class="notification-dot">{{ $notifications['duyet_rut_user'] }}</span>
+                                            </span>
+                                        @endif
+                                    </a>
+                                <li>
+                                    <a class="tp-link" href="{{ route('duyetruttienShipper') }}">
+                                        Duyệt rút shipper
+                                        @if (isset($notifications) && $notifications['duyet_rut_shipper'] > 0)
+                                            <span class="ms-2 position-relative">
+                                                <span
+                                                    class="notification-dot">{{ $notifications['duyet_rut_shipper'] }}</span>
+                                            </span>
+                                        @endif
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
                 <!-- Danh mục -->
                 <li>
                     <a href="#danhmuc" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
@@ -235,7 +239,8 @@
 
                 {{-- Khuyến mãi --}}
                 <li>
-                    <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false" data-bs-parent="#side-menu">
+                    <a href="#khuyenmai" data-bs-toggle="collapse" aria-expanded="false"
+                        data-bs-parent="#side-menu">
                         <i data-feather="tag"></i>
                         <span> Khuyến mãi </span>
                         <span class="menu-arrow"></span>

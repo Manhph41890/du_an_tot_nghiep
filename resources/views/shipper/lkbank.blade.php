@@ -27,76 +27,107 @@
                                                 <div class="">
                                                     <form action="{{ route('banks.store') }}" method="POST">
                                                         @csrf
-                                                        <div class="modal-body">
-                                                            <div class="">
-                                                                <div class="form-group">
-                                                                    <label for="bank_id" class="form-label">Chọn ngân hàng
-                                                                        để liên kết</label>
-                                                                    <select name="bank_id" id="bank_id"
-                                                                        class="form-select">
-                                                                        <option value="" disabled selected>-- Chọn
-                                                                            ngân hàng để liên kết --</option>
-                                                                        @foreach ($banks as $bank)
-                                                                            <option value="{{ $bank['name'] }}">
-                                                                                {{ $bank['shortName'] }} -
-                                                                                {{ $bank['name'] }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
+                                                        @if ($linkedBanksCount >= 3)
+                                                            <div class="alert alert-danger" role="alert">
+                                                                Bạn đã đăng ký liên kết 3 ngân hàng
+                                                                trước đó.
+                                                            </div>
+                                                            <div
+                                                                class="modal-footer d-flex justify-content-around align-content-around">
+                                                                <div>
+                                                                    <a href="{{ route('shipper.profits') }}"
+                                                                        class="btn btn-outline-secondary w-10 py-2">
+                                                                        <i class="fas fa-arrow-left me-2"></i>Quay lại
+                                                                    </a>
+                                                                </div>
+                                                                <div class="">
+                                                                    <button type="button" class="btn btn-success"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#listBankModal">
+                                                                        Xem danh sách Ngân hàng
+                                                                    </button>
                                                                 </div>
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <label for="account_number" class="form-label">Số tài
-                                                                    khoản</label>
-                                                                <input type="text"
-                                                                    class="form-control @error('account_number') is-invalid @enderror"
-                                                                    id="account_number" name="account_number">
-                                                                @error('account_number')
-                                                                    <div class="invalid-feedback">
-                                                                        {{ $message }}
+                                                        @else
+                                                            <div class="modal-body">
+                                                                <div class="">
+                                                                    <div class="form-group">
+                                                                        <label for="bank_id" class="form-label">Chọn ngân
+                                                                            hàng
+                                                                            để liên kết</label>
+                                                                        <select name="bank_id" id="bank_id"
+                                                                            class="form-select">
+                                                                            <option value="" disabled selected>-- Chọn
+                                                                                ngân hàng để liên kết --</option>
+                                                                            @foreach ($banks as $bank)
+                                                                                <option value="{{ $bank['name'] }}">
+                                                                                    {{ $bank['shortName'] }} -
+                                                                                    {{ $bank['name'] }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
                                                                     </div>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="account_holder" class="form-label">Chủ tài
-                                                                    khoản</label>
-                                                                <input type="text"
-                                                                    class="form-control @error('account_holder') is-invalid @enderror"
-                                                                    id="account_holder" name="account_holder">
-                                                                @error('account_holder')
-                                                                    <div class="invalid-feedback">
-                                                                        {{ $message }}
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="account_number" class="form-label">Số tài
+                                                                        khoản</label>
+                                                                    <input type="text"
+                                                                        class="form-control @error('account_number') is-invalid @enderror"
+                                                                        id="account_number" name="account_number">
+                                                                    @error('account_number')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                    <div class="invalid-feedback" id="account_number_error">
                                                                     </div>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="pin" class="form-label">Mã Pin</label>
-                                                                <input type="text"
-                                                                    class="form-control @error('pin') is-invalid @enderror"
-                                                                    id="pin" name="pin">
-                                                                @error('pin')
-                                                                    <div class="invalid-feedback">
-                                                                        {{ $message }}
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="account_holder" class="form-label">Chủ tài
+                                                                        khoản</label>
+                                                                    <input type="text"
+                                                                        class="form-control @error('account_holder') is-invalid @enderror"
+                                                                        id="account_holder" name="account_holder">
+                                                                    @error('account_holder')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                    <div class="invalid-feedback" id="account_holder_error">
                                                                     </div>
-                                                                @enderror
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="pin" class="form-label">Mã Pin</label>
+                                                                    <input type="text"
+                                                                        class="form-control @error('pin') is-invalid @enderror"
+                                                                        id="pin" name="pin">
+                                                                    @error('pin')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                    <div class="invalid-feedback" id="account_pin_error">
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div
-                                                            class="modal-footer d-flex justify-content-around align-content-around">
-                                                            <div>
-                                                                <a href="{{ route('taikhoan.vitien') }}"
-                                                                    class="btn btn-outline-secondary w-10 py-2">
-                                                                    <i class="fas fa-arrow-left me-2"></i>Quay lại
-                                                                </a>
+                                                            <div
+                                                                class="modal-footer d-flex justify-content-around align-content-around">
+                                                                <div>
+                                                                    <a href="{{ route('shipper.profits') }}"
+                                                                        class="btn btn-outline-secondary w-10 py-2">
+                                                                        <i class="fas fa-arrow-left me-2"></i>Quay lại
+                                                                    </a>
+                                                                </div>
+                                                                <div class="">
+                                                                    <button type="button" class="btn btn-success"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#listBankModal">
+                                                                        Xem danh sách Ngân hàng
+                                                                    </button>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">Lưu</button>
                                                             </div>
-                                                            <div class="">
-                                                                <button type="button" class="btn btn-success"
-                                                                    data-bs-toggle="modal" data-bs-target="#listBankModal">
-                                                                    Xem danh sách Ngân hàng
-                                                                </button>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary">Lưu</button>
-                                                        </div>
+                                                        @endif
                                                     </form>
                                                 </div>
 
@@ -167,7 +198,75 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const accountHolderInput = document.getElementById('account_holder');
+            const accountNumberInput = document.getElementById('account_number');
+            const pinInput = document.getElementById('pin');
 
+            accountHolderInput.addEventListener('input', function() {
+                let value = accountHolderInput.value;
+
+                value = value
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .toUpperCase()
+                    .replace(/[^A-Z0-9\s]/g, "");
+
+                accountHolderInput.value = value;
+
+                // Kiểm tra nếu có lỗi không hợp lệ
+                if (!/^[A-Z0-9\s]+$/.test(value)) {
+                    accountHolderInput.classList.add('is-invalid');
+                    document.getElementById('account_holder_error').innerText =
+                        'Chỉ cho phép chữ cái in hoa, số và khoảng trắng.';
+                } else {
+                    accountHolderInput.classList.remove('is-invalid');
+                    document.getElementById('account_holder_error').innerText = '';
+                }
+            });
+            accountNumberInput.addEventListener('input', function() {
+                let value = accountNumberInput.value;
+
+                value = value
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/[^0-9]/g, "");
+
+                accountNumberInput.value = value;
+
+                // Kiểm tra nếu có lỗi không hợp lệ
+                if (!/^[A-Z0-9\s]+$/.test(value)) {
+                    accountNumberInput.classList.add('is-invalid');
+                    document.getElementById('account_number_error').innerText =
+                        'Chỉ cho phép số.';
+                } else {
+                    accountNumberInput.classList.remove('is-invalid');
+                    document.getElementById('account_number_error').innerText = '';
+                }
+            });
+            pinInput.addEventListener('input', function() {
+                let value = pinInput.value;
+
+                value = value
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/[^0-9]/g, "");
+
+                pinInput.value = value;
+
+                // Kiểm tra nếu có lỗi không hợp lệ
+                if (!/^[A-Z0-9\s]+$/.test(value)) {
+                    pinInput.classList.add('is-invalid');
+                    document.getElementById('account_pin_error').innerText =
+                        'Chỉ cho phép số.';
+                } else {
+                    pinInput.classList.remove('is-invalid');
+                    document.getElementById('account_pin_error').innerText = '';
+                }
+            });
+        });
+    </script>
     <style>
         .profit-card {
             background: linear-gradient(135deg, #28a745, #4caf50);

@@ -88,8 +88,22 @@
                                                     <td>{{ $khuyenMai->ngay_bat_dau }}</td>
                                                     <td>{{ $khuyenMai->ngay_ket_thuc }}</td>
                                                     <td
-                                                        class="{{ $khuyenMai->is_active == 0 ? 'text-danger' : 'text-success' }}">
-                                                        {{ $khuyenMai->is_active == 1 ? 'Đang Hoạt Động ' : 'Hết Hạn' }}
+                                                        class="{{ $khuyenMai->ngay_bat_dau > now('Asia/Ho_Chi_Minh')
+                                                            ? 'text-warning'
+                                                            : ($khuyenMai->is_active == 0
+                                                                ? 'text-danger'
+                                                                : ($khuyenMai->is_active == 1
+                                                                    ? 'text-success'
+                                                                    : 'text-warning')) }}">
+                                                        @if ($khuyenMai->ngay_bat_dau > now('Asia/Ho_Chi_Minh'))
+                                                            Chưa Hoạt Động
+                                                        @elseif ($khuyenMai->is_active == 1)
+                                                            Đang Hoạt Động
+                                                        @elseif ($khuyenMai->is_active == 0)
+                                                            Hết Hạn
+                                                        @else
+                                                            Chưa Hoạt Động
+                                                        @endif
                                                     </td>
                                                     <td
                                                         class="d-flex justify-content-end align-content-ejustify-content-end">

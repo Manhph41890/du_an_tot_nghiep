@@ -14,6 +14,9 @@ class SearchController extends Controller
 
         // Lấy sản phẩm theo truy vấn
         $products = san_pham::where('ten_san_pham', 'like', "%{$query}%")
+            ->whereHas('danh_muc', function ($query) {
+                $query->where('is_active', '1');
+            })
             ->take(5)
             ->where('is_active', '1')
             ->get();

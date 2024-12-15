@@ -99,13 +99,14 @@
 
                                     <div class="form-group mb-3">
                                         <label for="dia_chi">Địa chỉ</label>
-                                        <input type="text" name="dia_chi" value="{{ old('dia_chi') }}"
+                                        <input type="text" id="dia_chi" name="dia_chi" value="{{ old('dia_chi') }}"
                                             class="form-control @error('dia_chi') is-invalid @enderror">
                                         @error('dia_chi')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
+                                        <div id="suggestions"></div>
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -144,7 +145,8 @@
                                                 <input class="form-check-input" type="radio" name="is_active"
                                                     value="0" id="trang_thai_hide"
                                                     {{ old('is_active') == 0 ? 'checked' : '' }}>
-                                                <label class="form-check-label text-danger" for="trang_thai_hide">Ẩn</label>
+                                                <label class="form-check-label text-danger"
+                                                    for="trang_thai_hide">Ẩn</label>
                                             </div>
                                             @error('is_active')
                                                 <div class="invalid-feedback">
@@ -164,14 +166,40 @@
             </div>
         </div>
     </div> <!-- container-fluid -->
-@endsection
-
-@section('js')
-    <!-- Thêm thông báo Toastr vào cuối trang -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
-        @if (session('success'))
-            toastr.success('{{ session('success') }}');
-        @endif
+        // api maps
+        $(document).ready(function() {
+            $('#dia_chi').on('input', function() {
+                const input = $(this).val();
+                if (input.length > 2) {
+                    $.ajax({
+                        url: 'https://rsapi.goong.io/place/autocomplete',
+                        data: {
+                            input: input,
+                            location: '10.700920276971795,106.73296613898738',
+                            limit: 10,
+                            radius: 10,
+                            api_key: '22Wn63woi41PWQdNMN9kaVUsgC9VFKEp1ZzjmQm5' // Ensure the API key is correctly supplied here
+                        },
+                        success: function(data) {
+                            const suggestions = data.predictions.map(prediction =>
+                                `<div>${prediction.description}</div>`).join('');
+                            $('#suggestions').html(suggestions);
+                        },
+                        error: function(error) {
+                            console.error('Error fetching autocomplete results:', error);
+                        }
+                    });
+                } else {
+                    $('#suggestions').empty();
+                }
+            });
+
+            // Click on suggestion to fill input
+            $('#suggestions').on('click', 'div', function() {
+                $('#dia_chi').val($(this).text());
+                $('#suggestions').empty();
+            });
+        });
     </script>
 @endsection

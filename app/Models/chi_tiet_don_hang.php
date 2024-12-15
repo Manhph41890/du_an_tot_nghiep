@@ -27,6 +27,10 @@ class chi_tiet_don_hang extends Model
     {
         return $this->belongsTo(san_pham::class, 'san_pham_id');
     }
+    public function bien_the_san_pham()
+    {
+        return $this->belongsTo(bien_the_san_pham::class,);
+    }
 
     // Quan hệ với bảng color_san_pham
     public function color_san_pham()

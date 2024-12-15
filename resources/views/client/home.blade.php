@@ -151,15 +151,15 @@
 
 
         /* .snowflake {
-                                                                    position: absolute;
-                                                                    top: -10px;
-                                                                    font-size: 1em;
-                                                                    color: #ffffff;
-                                                                    opacity: 0.9;
-                                                                    user-select: none;
-                                                                    pointer-events: none;
-                                                                    animation: fall 10s linear infinite;
-                                                                } */
+                                                                                    position: absolute;
+                                                                                    top: -10px;
+                                                                                    font-size: 1em;
+                                                                                    color: #ffffff;
+                                                                                    opacity: 0.9;
+                                                                                    user-select: none;
+                                                                                    pointer-events: none;
+                                                                                    animation: fall 10s linear infinite;
+                                                                                } */
         .snowflake {
             position: absolute;
             background-color: white;

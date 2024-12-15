@@ -1,4 +1,4 @@
-@extends('client.taikhoan.dashboard');
+@extends('client.taikhoan.dashboard')
 
 @section('conten-taikhoan')
     <div class="">
@@ -64,13 +64,10 @@
                             </select>
                         </div>
 
-                        <div class="col-12 mb-30">
-                            <label for="dia_chi" class="mb-2">Địa chỉ</label>
-                            <input id="dia_chi" name="dia_chi" type="text" value="{{ $user->dia_chi }}"
-                                class="form-control" disabled>
-                        </div>
-
-
+                        <div class="col-12 mb-30"> <label for="dia_chi" class="mb-2">Địa chỉ</label> <input
+                                id="dia_chi" name="dia_chi" type="text" value="{{ $user->dia_chi }}"
+                                class="form-control" disabled> </div>
+                        <div id="suggestions"></div>
 
                     </div>
 
@@ -88,43 +85,38 @@
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function initAutocomplete() {
-            var addressInput = document.getElementById('dia_chi');
-            if (!addressInput) {
-                console.error('Element with id "dia_chi" not found.');
-                return;
-            }
-
-            var autocomplete = new goongjs.places.Autocomplete(addressInput, {
-                apiKey: 'q3lUTTMQSOttVWIzTz6aPzTq1uBFQUDXVJbDeQtm', // Thay thế YOUR_API_KEY bằng API key của bạn
-                types: ['geocode']
-            });
-
-            autocomplete.on('select', function(event) {
-                var place = event.features[0];
-                if (place && place.place_name) {
-                    addressInput.value = place.place_name;
-
-                    // Optional: Extract additional address components
-                    var addressComponents = place.context;
-                    if (addressComponents) {
-                        // Example of extracting specific components
-                        var streetNumber = addressComponents.find(component =>
-                            component.id.includes('address')
-                        );
-                        var route = addressComponents.find(component =>
-                            component.id.includes('street')
-                        );
-
-                        // You can store or process these components as needed
-                        console.log('Street Number:', streetNumber ? streetNumber.text : 'N/A');
-                        console.log('Route:', route ? route.text : 'N/A');
-                    }
+        $(document).ready(function() {
+            $('#dia_chi').on('input', function() {
+                const input = $(this).val();
+                if (input.length > 2) {
+                    $.ajax({
+                        url: 'https://rsapi.goong.io/place/autocomplete',
+                        data: {
+                            input: input,
+                            location: '10.700920276971795,106.73296613898738',
+                            limit: 10,
+                            radius: 10,
+                            api_key: '22Wn63woi41PWQdNMN9kaVUsgC9VFKEp1ZzjmQm5'
+                        },
+                        success: function(data) {
+                            const suggestions = data.predictions.map(prediction =>
+                                `<div>${prediction.description}</div>`).join('');
+                            $('#suggestions').html(suggestions);
+                        },
+                        error: function(error) {
+                            console.error('Error fetching autocomplete results:', error);
+                        }
+                    });
+                } else {
+                    $('#suggestions').empty();
                 }
+            }); // Click on suggestion to fill input 
+            $('#suggestions').on('click', 'div', function() {
+                $('#dia_chi').val($(this).text());
+                $('#suggestions').empty();
             });
-        }
-
-        document.addEventListener('DOMContentLoaded', initAutocomplete);
+        });
     </script>
 @endsection

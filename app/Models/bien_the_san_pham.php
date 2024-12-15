@@ -20,7 +20,12 @@ class bien_the_san_pham extends Model
 
     public function san_pham()
     {
-        return $this->belongsTo(san_pham::class);
+        return $this->belongsTo(san_pham::class, "san_pham_id");
+    }
+
+    public function chi_tiet_don_hangs()
+    {
+        return $this->hasMany(chi_tiet_don_hang::class,);
     }
 
     public function size()

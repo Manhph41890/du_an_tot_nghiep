@@ -20,7 +20,10 @@
                                         <div class="">
                                             <h5>Mã Đơn Hàng: {{ $donhang->ma_don_hang }}</h5>
                                             <p>Ngày tạo: {{ $donhang->ngay_tao }}</p>
-                                            <h5 style="color: red">Lý do hủy: {{ $donhang->shipper->ly_do_huy }}</h5>
+                                            @if ($donhang->shipper->status == 'Thất bại')
+                                                <h5 style="color: red">Lý do hủy: {{ $donhang->shipper->ly_do_huy }}
+                                                </h5>
+                                            @endif
                                         </div>
                                         <div class="">
                                             <div class="d-flex align-items-center">
@@ -163,6 +166,26 @@
                                         <p><strong>Email:</strong> {{ $donhang->email }}</p>
                                         <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
                                         <p><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5>Ảnh xác thực giao</h5>
+                                        <br>
+                                        {{-- @php
+                                            dd($donhang->shipper->image_path);
+                                        @endphp --}}
+                                        {{-- <img src="{{ asset('/storage/' . $donhang->shipper->image_path) }}"
+                                            width="50px"> --}}
+
+                                        @if (isset($donhang->shipper) && $donhang->shipper->image_path)
+                                            <img src="{{ asset('storage/' . $donhang->shipper->image_path) }}"
+                                                alt="Hình ảnh sản phẩm" width="100px">
+                                        @else
+                                            <img src="{{ asset('images/placeholder.png') }}" alt="Không có ảnh"
+                                                width="100px">
+                                        @endif
                                     </div>
                                 </div>
 

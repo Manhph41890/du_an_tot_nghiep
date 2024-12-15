@@ -9,8 +9,12 @@ class Bank extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'account_number', 'account_holder', 'pin', 'balance'];
+    protected $fillable = ['name', 'img', 'user_id', 'account_number', 'account_holder', 'pin', 'balance'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public function ls_rut_vi()
     {
         return $this->hasMany(ls_rut_vi::class);
@@ -18,5 +22,10 @@ class Bank extends Model
     public function ls_nap_vi()
     {
         return $this->hasMany(ls_nap_vi::class);
+    }
+
+    public function ls_rut_shipper()
+    {
+        return $this->hasMany(lsrutshipper::class);
     }
 }

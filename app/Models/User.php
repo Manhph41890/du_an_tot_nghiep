@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function donhangs()
     {
-        return $this->hasMany(don_hang::class, "user_id");
+        return $this->hasMany(don_hang::class, "shipper_id");
     }
 
     public function chuc_vu()
@@ -57,14 +57,17 @@ class User extends Authenticatable
     }
     public function vi_shipper()
     {
-        return $this->hasOne(Vishipper::class);
+        return $this->hasOne(Vishipper::class, 'shipper_id',);
     }
 
     public function shippers()
     {
         return $this->hasMany(Shipper::class, 'shipper_id');
     }
-
+    public function bank()
+    {
+        return $this->hasMany(Bank::class);
+    }
     /**
      * Các trường cần ẩn khi trả về JSON.
      *

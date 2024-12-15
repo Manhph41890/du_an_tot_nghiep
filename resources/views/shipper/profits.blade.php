@@ -32,6 +32,11 @@
                                                 </p>
                                             </div>
                                         </div>
+                                        <div class="text-center mb-4">
+                                            <a class="btn btn-outline-primary" href="{{ route('shipper.createbank') }}">
+                                                <i class="fas fa-university me-2"></i>Thêm ngân hàng
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card profit-card shadow-lg">
@@ -60,7 +65,7 @@
                                                                 <td>{{ number_format($shipper->donHang->tong_tien, 0, ',', '.') }}
                                                                     VND</td>
                                                                 <td>
-                                                                    {{ number_format($shipper->donHang->tong_tien * 0.04, 0, ',', '.') }}
+                                                                    {{ number_format(30000 * 0.2, 0, ',', '.') }}
                                                                     VND
                                                                 </td>
                                                             </tr>

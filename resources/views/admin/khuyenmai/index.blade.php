@@ -91,10 +91,14 @@
                                                         class="{{ $khuyenMai->is_active == 0 ? 'text-danger' : 'text-success' }}">
                                                         {{ $khuyenMai->is_active == 1 ? 'Đang Hoạt Động ' : 'Hết Hạn' }}
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        class="d-flex justify-content-end align-content-ejustify-content-end">
                                                         @if ($isAdmin)
-                                                            <a href="{{ route('khuyenmais.edit', $khuyenMai->id) }}"><i
-                                                                    class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            @if ($khuyenMai->is_active == 1)
+                                                                <a href="{{ route('khuyenmais.edit', $khuyenMai->id) }}"><i
+                                                                        class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                            @endif
+
                                                             <form
                                                                 action="{{ route('khuyenmais.destroy', $khuyenMai->id) }}"
                                                                 method="POST" style="display:inline;"

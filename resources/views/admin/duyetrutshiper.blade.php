@@ -12,14 +12,14 @@
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0">{{ $title }}</h4>
                     </div>
-                    <form method="post" action="{{ route('duyetruttienAdmin') }}" class="d-flex">
+                    <form method="post" action="{{ route('duyetruttienShipper') }}" class="d-flex">
                         @csrf
                         @method('GET')
                         <input type="text" name="search_ten_nguoi_dung" class="form-control me-2"
                             placeholder="Tìm tài khoản..." value="{{ request('search_ten_nguoi_dung') }}">
                         <select name="search_duyetrut" class="form-select me-2">
                             <option value="">Chọn</option>
-                            <option value="Chờ duyệt" {{ request('search_duyetrut') == 'Chờ duyệt' ? 'selected' : '' }}>Chờ
+                            <option value="Chờ xử lý" {{ request('search_duyetrut') == 'Chờ xử lý' ? 'selected' : '' }}>Chờ
                                 duyệt</option>
                             <option value="Thành công" {{ request('search_duyetrut') == 'Thành công' ? 'selected' : '' }}>
                                 Thành công</option>
@@ -50,13 +50,12 @@
                                             @foreach ($duyetruttien as $item)
                                                 <tr>
                                                     <td>{{ $item->id }}</td>
-                                                    <td>
-                                                        {{ $item->vi_nguoi_dung?->user?->ho_ten ?? 'Không có thông tin' }}
+                                                    <td>{{ $item->vishipper?->shipper?->ho_ten ?? 'Không có thông tin' }}
                                                     </td>
                                                     <td>
                                                         {{-- <a class="btn btn-success" data-bs-dismiss="modal">Xem chi tiết </a> --}}
                                                         <a type="button" class="btn btn-success"
-                                                            href="{{ route('thongTinRut', $item->id) }}">
+                                                            href="{{ route('thongTinRutShip', $item->id) }}">
                                                             Xem chi tiết
                                                         </a>
                                                     </td>
@@ -64,13 +63,13 @@
                                                     <td>{{ number_format($item->tien_rut, 0, ',', '.') }} VNĐ</td>
                                                     <td>
 
-                                                        <form action="{{ route('duyetRutAdmin', $item->id) }}"
+                                                        <form action="{{ route('duyetRutshipper', $item->id) }}"
                                                             class="mb-2" method="post">
                                                             @csrf
                                                             @method('PUT')
-                                                            @if ($item->trang_thai === 'Chờ duyệt')
+                                                            @if ($item->trang_thai === 'Chờ xử lý' && $item->vishipper?->tong_tien > $item->tien_rut)
                                                                 <button type="submit"
-                                                                    class="btn btn-info btn-sm">Duyệt</button>
+                                                                    class="btn btn-info btn-sm ">Duyệt</button>
                                                             @elseif ($item->trang_thai === 'Thành công')
                                                                 <button type="button" class="btn btn-success btn-sm"
                                                                     disabled>Đã duyệt</button>
@@ -107,12 +106,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <form action="{{ route('HuyRutAdmin', $item->id) }}"
+                                                        <form action="{{ route('HuyRutshipper', $item->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('PUT')
 
-                                                            @if ($item->trang_thai === 'Chờ duyệt')
+                                                            @if ($item->trang_thai === 'Chờ xử lý')
                                                                 <button type="button" class="btn btn-danger btn-sm"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#myModal{{ $item->id }}">
@@ -135,7 +134,7 @@
                                                                         <!-- Modal Body -->
                                                                         <div class="modal-body">
                                                                             <textarea class="form-control  @error('noi_dung_tu_choi') is-invalid @enderror" rows="5" name="noi_dung_tu_choi"
-                                                                                value="{{ old('noi_dung_tu_choi') }}"" placeholder="Nội dung..."></textarea>
+                                                                                value="{{ old('noi_dung_tu_choi') }}" placeholder="Nội dung..."></textarea>
                                                                             @error('noi_dung_tu_choi')
                                                                                 <div class="invalid-feedback">
                                                                                     {{ $message }}
@@ -173,7 +172,6 @@
                     </div>
                 </div>
             </div> <!-- container-fluid -->
-
 
         </div>
     </div>

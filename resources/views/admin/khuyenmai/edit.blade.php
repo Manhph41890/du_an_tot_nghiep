@@ -28,33 +28,33 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group  mb-3">
-                                       <label for="ten_khuyen_mai">Tên khuyến mãi</label>
+                                        <label for="ten_khuyen_mai">Tên khuyến mãi</label>
                                         <input type="text" name="ten_khuyen_mai" class="form-control"
                                             value="{{ old('ten_khuyen_mai', $khuyenmais->ten_khuyen_mai) }}" required>
                                     </div>
                                     <div class="form-group  mb-3">
-                                     <label for="gia_tri_khuyen_mai">Giá trị khuyến mãi:</label>
+                                        <label for="gia_tri_khuyen_mai">Giá trị khuyến mãi:</label>
                                         <input type="number" name="gia_tri_khuyen_mai" class="form-control"
                                             value="{{ old('gia_tri_khuyen_mai', $khuyenmais->gia_tri_khuyen_mai) }}"
                                             required>
                                     </div>
                                     <div class="form-group  mb-3">
-                                       <label for="so_luong_ma">Số lần sử dụng:</label>
+                                        <label for="so_luong_ma">Số lần sử dụng:</label>
                                         <input type="number" name="so_luong_ma" class="form-control"
                                             value="{{ old('so_luong_ma', $khuyenmais->so_luong_ma) }}" required>
                                     </div>
                                     <div class="form-group  mb-3">
                                         <label for="ngay_bat_dau">Ngày bắt đầu</label>
-                                        <input type="datetime" name="ngay_bat_dau" class="form-control"
+                                        <input type="datetime-local" name="ngay_bat_dau" class="form-control"
                                             value="{{ old('ngay_bat_dau', $khuyenmais->ngay_bat_dau) }}" required>
                                     </div>
                                     <div class="form-group  mb-3">
-                                     <label for="ngay_ket_thuc">Ngày kết thúc:</label>
-                                        <input type="datetime" name="ngay_ket_thuc" class="form-control"
+                                        <label for="ngay_ket_thuc">Ngày kết thúc:</label>
+                                        <input type="datetime-local" name="ngay_ket_thuc" class="form-control"
                                             value="{{ old('ngay_ket_thuc', $khuyenmais->ngay_ket_thuc) }}" required>
                                     </div>
                                     <div class="mb-3">
-                                      <label for="is_active" class="form-label ">Trạng thái</label>
+                                        <label for="is_active" class="form-label ">Trạng thái</label>
                                         <div class="col-sm-10 mb-3 d-flex gap-2">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="is_active"

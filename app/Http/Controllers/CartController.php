@@ -226,17 +226,17 @@ class CartController extends Controller
                 ->with('error', 'Sản phẩm sau không đủ số lượng: ' . $productList);
         }
 
-        $address = $user->dia_chi;
-        $parsed_customer_address = $this->parseAddress($address);
+        // $address = $user->dia_chi;
+        // $parsed_customer_address = $this->parseAddress($address);
 
-        //
-        Log::info('Parsed Customer Address in Checkout: ', $parsed_customer_address);
+        // //
+        // Log::info('Parsed Customer Address in Checkout: ', $parsed_customer_address);
 
-        $shipperAvailable = $this->checkShipperAvailability($address);
+        // $shipperAvailable = $this->checkShipperAvailability($address);
 
-        if (!$shipperAvailable) {
-            return redirect()->route('cart.index')->with('error', 'Hiện tại không có shipper nào phục vụ khu vực của bạn. Vui lòng thử lại sau hoặc chọn phương thức vận chuyển khác.');
-        }
+        // if (!$shipperAvailable) {
+        //     return redirect()->route('cart.index')->with('error', 'Hiện tại không có shipper nào phục vụ khu vực của bạn. Vui lòng thử lại sau hoặc chọn phương thức vận chuyển khác.');
+        // }
 
         $total = $cartItems->sum(fn($item) => $item->price);
         $shippingCost = 30000; // 30,000 VND

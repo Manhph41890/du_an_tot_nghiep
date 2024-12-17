@@ -19,6 +19,9 @@ class HomeController extends Controller
     {
         // Lấy sản phẩm mới
         $sanPhamMois = san_pham::where('is_active', 1) // Thêm điều kiện lọc
+            ->whereHas('danh_muc', function ($query) {
+                $query->where('is_active', '1');
+            })
             ->orderByDesc('id')
             ->latest('id')
             ->paginate(8);
@@ -37,6 +40,9 @@ class HomeController extends Controller
         $sanPhamGiamGias = san_pham::with('danh_gias')
             ->whereNotNull('gia_km')
             ->where('is_active', 1) // Thêm điều kiện lọc
+            ->whereHas('danh_muc', function ($query) {
+                $query->where('is_active', '1');
+            })
             ->orderByDesc('id')
             ->paginate(4);
 
@@ -59,6 +65,9 @@ class HomeController extends Controller
 
         // Lấy sản phẩm xem nhiều
         $sanPhamView = san_pham::where('is_active', 1) // Thêm điều kiện lọc
+            ->whereHas('danh_muc', function ($query) {
+                $query->where('is_active', '1');
+            })
             ->orderByDesc('views', 'desc')
             ->paginate(6);
         // Lấy khuyến mãi
@@ -88,8 +97,13 @@ class HomeController extends Controller
             return redirect()->route('client.cuahang')->with('error', 'Danh mục không tồn tại.');
         }
 
-        // Lấy sản phẩm thuộc danh mục
-        $sanPhams = san_pham::where('danh_muc_id', $danhMucId)->get();
+        // Lấy sản phẩm thuộc danh mục và kiểm tra danh mục có trạng thái is_active = 1
+        $sanPhams = san_pham::where('danh_muc_id', $danhMucId)
+            ->whereHas('danh_muc', function ($query) {
+                $query->where('is_active', '1');
+            })
+            ->get();
+
 
         // Trả về view sản phẩm của danh mục
         return view('client.danhmuc_sanpham', compact('danhMuc', 'sanPhams', 'anhDMuc'));
@@ -135,7 +149,12 @@ class HomeController extends Controller
         $colors = $sanPhamCT->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
 
         // Lấy các sản phẩm liên quan
-        $sanLienQuan = san_pham::with('danh_muc')->where('id', '!=', $id)->orderByDesc('id')->get();
+        $sanLienQuan = san_pham::with('danh_muc')->where('id', '!=', $id)
+            ->where('is_active', 1)
+            ->whereHas('danh_muc', function ($query) {
+                $query->where('is_active', '1');
+            })
+            ->orderByDesc('id')->get();
 
 
         // Tiêu đề trang

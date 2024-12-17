@@ -9,7 +9,7 @@ class Bank extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'user_id', 'account_number', 'account_holder', 'pin', 'balance'];
+    protected $fillable = ['name', 'img', 'user_id', 'account_number', 'account_holder', 'pin', 'balance'];
 
     public function user()
     {
@@ -22,5 +22,10 @@ class Bank extends Model
     public function ls_nap_vi()
     {
         return $this->hasMany(ls_nap_vi::class);
+    }
+
+    public function ls_rut_shipper()
+    {
+        return $this->hasMany(lsrutshipper::class);
     }
 }

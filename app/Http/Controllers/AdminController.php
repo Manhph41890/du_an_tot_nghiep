@@ -490,7 +490,9 @@ class AdminController extends Controller
         }
 
         // Sản phẩm sắp hết hàng
-        $sanphams_saphet = san_pham::query()->where('so_luong', '<', '10')->paginate(4);
+        $sanphams_saphet = san_pham::query()->where('so_luong', '<', '10') ->whereHas('danh_muc', function ($query) {
+            $query->where('is_active', '1'); 
+        })->paginate(4);
         // Lấy 5 sản phẩm có lượt xem nhiều nhất
         $query = san_pham::query();
         $views_product = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color'])->orderBy('views', 'desc')->paginate(4);

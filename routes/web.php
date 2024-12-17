@@ -65,7 +65,11 @@ Route::prefix('client')->group(function () {
 
     Route::get('/thong-tin', [TaiKhoanController::class, 'showAccountDetails'])->name('taikhoan.thongtin');
     Route::get('/don-hang', [TaiKhoanController::class, 'donHang'])->name('taikhoan.donhang');
+    Route::get('/don-hang/{id}', [TaiKhoanController::class, 'showMyOrder'])->name('taikhoan.showMyOrder');
     Route::get('/vi-tien', [TaiKhoanController::class, 'viTien'])->name('taikhoan.vitien');
+    Route::get('/banks/create', [TaiKhoanController::class, 'createBank'])->name('banks.create');
+    Route::post('/banks/store', [TaiKhoanController::class, 'storeBank'])->name('banks.store');
+    Route::delete('/banks/{bank}', [TaiKhoanController::class, 'deleteBank'])->name('banks.delete');
     Route::get('/quan-tri', [TaiKhoanController::class, 'quanTri'])->name('taikhoan.quantri'); // Bảo vệ route quản trị
 
     //Hủy đặt hàng
@@ -133,8 +137,19 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
 
     // Duyệt rút tiền admin
     Route::get('/ruttien', [RutTienController::class, 'duyetruttienAdmin'])->name('duyetruttienAdmin');
+    Route::get('/thongtinrut/{id}', [RutTienController::class, 'thongTinRut'])->name('thongTinRut');
+    Route::get('/thongtinrut/{id}', [RutTienController::class, 'thongTinRut'])->name('thongTinRut');
     Route::put('/duyetrut/{id}', [RutTienController::class, 'duyetRutAdmin'])->name('duyetRutAdmin');
     Route::put('/huyrut/{id}', [RutTienController::class, 'HuyRutAdmin'])->name('HuyRutAdmin');
+
+
+    // Duyệt rút tiền admin
+    Route::get('/ruttienshipper', [RutTienController::class, 'duyetruttienShipper'])->name('duyetruttienShipper');
+    Route::get('/thongtinrutship/{id}', [RutTienController::class, 'thongTinRutShip'])->name('thongTinRutShip');
+    Route::put('/duyetRutshipper/{id}', [RutTienController::class, 'duyetRutshipper'])->name('duyetRutshipper');
+    Route::put('/huyrutshipper/{id}', [RutTienController::class, 'HuyRutshipper'])->name('HuyRutshipper');
+
+
 
     // Resource routes cho quản lý
     Route::resource('/danhmucs', DanhMucController::class);
@@ -208,6 +223,7 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     //
     Route::get('/api/products/{categoryId}', [SanPhamController::class, 'getProductsByCategory']);
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
+    
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
 });
 
@@ -221,6 +237,8 @@ Route::middleware(['auth', 'role:shipper'])->group(function () {
     Route::get('/shipper/policy', [ShipperController::class, 'policy'])->name('shipper.policy');
     Route::post('/shipper/withdraw', [ShipperController::class, 'withdraw'])->name('shipper.withdraw');
     Route::get('/shipper/rut-tien', [ShipperController::class, 'rut'])->name('shipper.rut-tien');
+    Route::get('/shipper/createbanks', [ShipperController::class, 'createbank'])->name('shipper.createbank');
+    Route::post('/shipper/storebank', [ShipperController::class, 'storebank'])->name('shipper.storebank');
 });
 
 // Route chi tiết đơn hàng

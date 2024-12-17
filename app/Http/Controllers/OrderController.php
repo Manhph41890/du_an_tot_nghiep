@@ -49,6 +49,7 @@ class OrderController extends Controller
         $totall = $request->totall;
         $total = $request->total;
         // dd($total);
+        // die();
         $discount = 0;
         if ($validatedData['khuyen_mai']) {
             $coupon = khuyen_mai::where('ma_khuyen_mai', $validatedData['khuyen_mai'])
@@ -291,7 +292,7 @@ class OrderController extends Controller
                     'so_luong' => $item['quantity'],
                     'gia_tien' => $item['price'],
                     'thanh_tien' => $item['price'],
-                    // dd($thanhTien)
+
                 ]);
                 if ($coupon) {
                     DB::table('coupon_usages')->insert([

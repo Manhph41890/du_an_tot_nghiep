@@ -24,7 +24,7 @@
                                     class="form-check-input d-none">
                                 <img src="{{ $bank->img }}" alt="{{ $bank->name }}" class="img-fluid mb-2"
                                     style="height: 50px;">
-                                <span class="fw-bold">{{ $bank->name }}</span>
+                                <span class="fw-bold min_h">{{ $bank->name }}</span>
                                 <small class="text-muted">{{ $bank->account_number }}</small>
                             </label>
                         </div>

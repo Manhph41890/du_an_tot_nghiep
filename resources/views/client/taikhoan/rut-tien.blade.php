@@ -12,22 +12,22 @@
             </div>
             <!-- Phần chọn ngân hàng -->
             <div class="mb-4">
-                {{-- @php
-                    dd($banks);
-                @endphp --}}
+                <label for="bank_id" class="form-label">Chọn ngân hàng:</label>
                 <div class="row row-cols-2 row-cols-md-4 g-3">
-                    <div class="form-group">
-                        <label for="bank_id" class="form-label">Chọn ngân hàng</label>
-                        <select name="bank_id" id="bank_id" class="form-select">
-                            <option value="" disabled selected>-- Chọn ngân hàng --</option>
-                            @foreach ($banks as $bank)
-                                <option value="{{ $bank['code'] }}">
-                                    {{ $bank['shortName'] }} - {{ $bank['name'] }}
-                                </option>
-                            @endforeach
-
-                        </select>
-                    </div>
+                    @foreach ($banks as $bank)
+                        <div class="col">
+                            <label
+                                class="card bank-card p-3 shadow-sm border d-flex flex-column align-items-center text-center"
+                                style="cursor: pointer;">
+                                <input type="radio" name="bank_id" value="{{ $bank->id }}"
+                                    class="form-check-input d-none">
+                                <img src="{{ $bank->img }}" alt="{{ $bank->name }}" class="img-fluid mb-2"
+                                    style="height: 50px;">
+                                <span class="fw-bold min_h">{{ $bank->name }}</span>
+                                <small class="text-muted">{{ $bank->account_number }}</small>
+                            </label>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 

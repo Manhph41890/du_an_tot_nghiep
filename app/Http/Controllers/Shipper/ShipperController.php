@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Shipper;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBankRequest;
 use App\Models\Bank;
 use App\Models\don_hang;
 use App\Models\san_pham;
 use App\Models\Shipper;
+use App\Models\User;
 use App\Models\Vishipper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class ShipperController extends Controller
@@ -193,9 +196,16 @@ class ShipperController extends Controller
 
     public function rut()
     {
-        $banks = Bank::all();
+        $user = Auth::id();
+        $banks = Bank::where('user_id', $user)->get();
+
+        $viShipperId = DB::table('vi_shippers')->where('shipper_id', $user)->value('id');
+
+        $pendingWithdrawal = DB::table('ls_rut_shippers')->where('vi_shipper_id', $viShipperId)->where('trang_thai', 'Chờ xử lý')->exists();
         $title = 'Rút tiền';
-        return view('shipper.rut-tien', compact('banks', 'title'));
+
+        // Truyền biến pendingWithdrawal vào view
+        return view('shipper.rut-tien', compact('banks', 'title', 'pendingWithdrawal'));
     }
 
     public function withdraw(Request $request)
@@ -223,13 +233,72 @@ class ShipperController extends Controller
             return redirect()->route('shipper.rut-tien')->with('error', 'Mã PIN không chính xác.');
         }
 
-        // Cập nhật số dư
+        DB::table('ls_rut_shippers')->insert([
+            'vi_shipper_id' => $viShipper->id,
+            'thoi_gian_rut' => now()->timezone('Asia/Ho_Chi_Minh'),
+            'tien_rut' => $request->amount,
+            'noi_dung_tu_choi' => 'null',
+            'trang_thai' => 'Chờ xử lý',
+            'bank_id' => $request->bank_id,
+        ]);
+
+        // // Cập nhật số dư
         $viShipper->tong_tien -= $request->amount;
         $viShipper->save();
 
         $bank->balance += $request->amount;
         $bank->save();
 
-        return redirect()->back()->with('success', 'Rút thành công');
+        return redirect()->back()->with('success', 'Yêu cầu rút đã được gửi');
+    }
+
+    public function createbank()
+    {
+        $title = 'Tạo ngân hàng';
+        $user = Auth::user();
+        $userId = Auth::id();
+        $linkedBanksCount = Bank::where('user_id', $user->id)->count();
+        $response = Http::get(env('VIETQR_BANKS_LIST'));
+        if ($response->successful()) {
+            $banks = $response->json()['data']; // Lấy dữ liệu từ API
+        } else {
+            $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
+        }
+        $listBank = Bank::where('user_id', $userId)->latest('id')->get();
+        return view('shipper.lkbank',  compact('title', 'user', 'banks', 'userId', 'listBank', 'linkedBanksCount'));
+    }
+
+    public function storebank(StoreBankRequest $request)
+    {
+        // Get authenticated user
+        $user = Auth::user();
+        // Kiểm tra số lượng ngân hàng đã liên kết
+        $linkedBanksCount = Bank::where('user_id', $user->id)->count();
+        if ($linkedBanksCount >= 3) {
+            return redirect()->back()->with('error', 'Bạn chỉ được liên kết tối đa 3 ngân hàng.');
+        }
+
+        $response = Http::get(env('VIETQR_BANKS_LIST'));
+        if ($response->successful()) {
+            $banks = $response->json()['data']; // Lấy dữ liệu từ API
+        } else {
+            $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
+        }
+        $selectedBank = collect($banks)->firstWhere('name', $request->bank_id);
+        $bankLogo = $selectedBank ? $selectedBank['logo'] : null;
+        // dd($bankLogo);
+        // Create bank record
+        Bank::create([
+            'name' => $request->bank_id,
+            'img' => $bankLogo,
+            'account_number' => $request->account_number,
+            'account_holder' => $request->account_holder,
+            'pin' => $request->pin,
+            'balance' => rand(100, 10000) * 1000, // Random balance
+            'user_id' => $user->id,
+        ]);
+
+        // Redirect or return success response
+        return redirect()->back()->with('success', 'Liên kết ngân hàng thành công!');
     }
 }

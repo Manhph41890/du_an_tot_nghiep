@@ -225,19 +225,27 @@
                                 <a href="#" id="write-comment"><span class="ms-2"><i
                                             class="far fa-comment-dots"></i></span>
                                     Xem đánh giá <span>( {{ $sanPhamCT->danh_gias->count() }} )</span>
-                                    
+                                </a>
+                                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span
+                                            class="edite"><i class="far fa-edit"></i></span>Viết đánh giá</a> --}}
                             </div>
                         </div>
                         <div class="product-body mb-40">
                             <div class="d-flex align-items-center mb-30">
                                 <div class="product-price me-2">
-                                    <del class="del" id="old-price"> {{ number_format($sanPhamCT->gia_goc) }}</del>
-                                    <span style="color: red; font-size:18px" id="new-price" class="onsale">{{ number_format($sanPhamCT->gia_km) }}</span>
+                                    <del class="del" id="old-price" style="font-size: 24px">
+                                        {{ number_format($sanPhamCT->gia_goc) }}</del>
+                                    <span id="new-price" class="onsale"
+                                        style="font-size: 28px; color: red">{{ number_format($sanPhamCT->gia_km) }}</span>
                                     <!-- Giá cập nhật sẽ được hiển thị ở đây -->
+
                                 </div>
+
                                 <span class="badge position-static bg-dark rounded-0">Giảm
                                     {{ $sanPhamCT->phan_tram_giam_gia }}%</span>
                             </div>
+                            <span style="font-size: 17px">Còn {{ $sanPhamCT->so_luong }} sản phẩm trong
+                                kho</span>
                             <p class="product-summary">
                                 {{ $sanPhamCT->mo_ta_ngan }}
                             </p>
@@ -301,8 +309,6 @@
                                             <button type="submit" class="btn btn-dark btn--xl mt-5 mt-sm-0">
                                                 <span class="me-2"></span> Thêm vào giỏ hàng
                                             </button>
-                                            <span style="font-size: 17px">Còn {{ $sanPhamCT->so_luong }} sản phẩm trong
-                                                kho</span>
 
                                         @endauth
                                         @guest
@@ -410,9 +416,8 @@
                                                                 <img src="{{ asset('storage/' . $danhgia->users->anh_dai_dien) }}"
                                                                     alt="{{ $danhgia->users->ho_ten }}"
                                                                     class="rounded-circle" />
-                                                                    @else
-                                                                    <img src="#"
-                                                                    alt="{{ $danhgia->users->ho_ten }}"
+                                                            @else
+                                                                <img src="#" alt="{{ $danhgia->users->ho_ten }}"
                                                                     class="rounded-circle" />
                                                             @endif
                                                         </div>
@@ -708,7 +713,7 @@
         function incrementQuantity() {
             const quantityInput = document.querySelector('input[name="quantity"]');
             let quantity = parseInt(quantityInput.value);
-            if (quantity < 10) {
+            if (quantity < 1) {
                 quantityInput.value = quantity + 1;
             }
         } // Hàm giảm số lượng function decrementQuantity() { const

@@ -593,7 +593,7 @@
                                                 <td>{{ $item->ten_san_pham }}</td>
                                                 <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
                                                 <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
-                                               
+
 
                                                 <td>
                                                     {!! $item->is_active
@@ -653,7 +653,67 @@
                                                 <td>{{ $item->ten_san_pham }}</td>
                                                 <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
                                                 <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
-                                             
+
+
+                                                <td>
+                                                    {!! $item->is_active
+                                                        ? '<span class="badge bg-primary">Hiển Thị</span>'
+                                                        : '<span class="badge bg-danger">Ẩn</span>' !!}
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            {{ $sanphams_saphet->links() }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                        <div class="card">
+
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="border border-dark rounded-2 me-2 widget-icons-sections">
+                                        <i data-feather="bar-chart" class="widgets-icons"></i>
+                                    </div>
+                                    <h5 class="card-title mb-0">Quản lý xuất và nhập sản phẩm</h5>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <table class="table table-traffic mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#ID</th>
+                                            <th>Ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá nhập</th>
+                                            <th>Số lượng nhập</th>
+                                            <th>Số lượng xuất</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($sanphams_saphet as $index => $item)
+                                            <tr>
+                                                <th scope="row">{{ $index + 1 }}</th>
+                                                <td>
+                                                    @if ($item->anh_san_pham)
+                                                        <img src="{{ asset('storage/' . $item->anh_san_pham) }}"
+                                                            alt="Hình ảnh sản phẩm" width="50px">
+                                                    @else
+                                                        <img src="{{ asset('images/placeholder.png') }}"
+                                                            alt="Không có ảnh" width="50px">
+                                                    @endif
+                                                </td>
+                                                {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
+                                                <td>{{ $item->ten_san_pham }}</td>
+                                                <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
+                                                <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                                <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
 
                                                 <td>
                                                     {!! $item->is_active

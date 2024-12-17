@@ -45,7 +45,23 @@ class OrderController extends Controller
             'totall' => 'required|numeric|min:0',
             'total' => 'required|numeric|min:0',
         ]);
-
+        // Check số lượng sản phẩm
+        $cartItems = $validatedData['cart_items'];
+        // Kiểm tra xem sản phẩm có đủ hàng hay không
+        foreach ($cartItems as $item) {
+            $sanPham = san_pham::find($item['san_pham_id']);
+            if (!$sanPham || $sanPham->so_luong < $item['quantity']) {
+                return redirect()->back()->with('error', 'Sản phẩm không đủ hàng.');
+            }
+            $variant = $sanPham
+                ->bien_the_san_phams()
+                ->where('color_san_pham_id', $item['color_id'] ?? null)
+                ->where('size_san_pham_id', $item['size_id'] ?? null)
+                ->first();
+            if ($variant && $variant->so_luong < $item['quantity']) {
+                return redirect()->back()->with('error', 'Sản phẩm không đủ hàng.');
+            }
+        }
         $totall = $request->totall;
         $total = $request->total;
         // dd($total);
@@ -63,7 +79,6 @@ class OrderController extends Controller
                     ->where('user_id', $user->id)
                     ->where('coupon_id', $coupon->id)
                     ->exists();
-
                 if ($alreadyUsed) {
                     return redirect()->back()->with('error', 'Bạn đã sử dụng mã giảm giá này trước đó.');
                 }
@@ -204,12 +219,21 @@ class OrderController extends Controller
                     'thanh_tien' => $total,
                 ]);
                 if ($coupon) {
-                    DB::table('coupon_usages')->insert([
-                        'user_id' => $user->id,
-                        'coupon_id' => $coupon->id,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
+                    // Kiểm tra xem bản ghi đã tồn tại hay chưa
+                    $existingUsage = DB::table('coupon_usages')
+                        ->where('user_id', $user->id)
+                        ->where('coupon_id', $coupon->id)
+                        ->first();
+
+                    if (!$existingUsage) {
+                        // Chèn bản ghi mới nếu chưa tồn tại
+                        DB::table('coupon_usages')->insert([
+                            'user_id' => $user->id,
+                            'coupon_id' => $coupon->id,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    }
                 }
 
                 // Giảm số lượng mã khuyến mãi
@@ -283,7 +307,6 @@ class OrderController extends Controller
 
             // Lưu chi tiết đơn hàng từ giỏ hàng
             foreach ($validatedData['cart_items'] as $item) {
-
                 chi_tiet_don_hang::create([
                     'don_hang_id' => $order->id,
                     'san_pham_id' => $item['san_pham_id'],
@@ -292,15 +315,23 @@ class OrderController extends Controller
                     'so_luong' => $item['quantity'],
                     'gia_tien' => $item['price'],
                     'thanh_tien' => $item['price'],
-
                 ]);
                 if ($coupon) {
-                    DB::table('coupon_usages')->insert([
-                        'user_id' => $user->id,
-                        'coupon_id' => $coupon->id,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
+                    // Kiểm tra xem bản ghi đã tồn tại hay chưa
+                    $existingUsage = DB::table('coupon_usages')
+                        ->where('user_id', $user->id)
+                        ->where('coupon_id', $coupon->id)
+                        ->first();
+
+                    if (!$existingUsage) {
+                        // Chèn bản ghi mới nếu chưa tồn tại
+                        DB::table('coupon_usages')->insert([
+                            'user_id' => $user->id,
+                            'coupon_id' => $coupon->id,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    }
                 }
 
                 // Giảm số lượng mã khuyến mãi
@@ -385,12 +416,21 @@ class OrderController extends Controller
                     $discount = $coupon->gia_tri_khuyen_mai;
                     $total -= $discount;
                     if ($coupon) {
-                        DB::table('coupon_usages')->insert([
-                            'user_id' => $user->id,
-                            'coupon_id' => $coupon->id,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ]);
+                        // Kiểm tra xem bản ghi đã tồn tại hay chưa
+                        $existingUsage = DB::table('coupon_usages')
+                            ->where('user_id', $user->id)
+                            ->where('coupon_id', $coupon->id)
+                            ->first();
+
+                        if (!$existingUsage) {
+                            // Chèn bản ghi mới nếu chưa tồn tại
+                            DB::table('coupon_usages')->insert([
+                                'user_id' => $user->id,
+                                'coupon_id' => $coupon->id,
+                                'created_at' => now(),
+                                'updated_at' => now(),
+                            ]);
+                        }
                     }
 
                     if ($coupon) {
@@ -529,5 +569,27 @@ class OrderController extends Controller
             'discountAmount' => number_format($discountAmount, 2), // Số tiền giảm giá
             'message' => 'Áp dụng mã giảm giá thành công!',
         ]);
+    }
+    public function checkStock(Request $request)
+    {
+        $cartItems = $request->input('cart_items');
+
+        foreach ($cartItems as $item) {
+            $sanPham = san_pham::find($item['san_pham_id']);
+            if (!$sanPham || $sanPham->so_luong < $item['quantity']) {
+                return response()->json(['success' => false]);
+            }
+            $variant = $sanPham
+                ->bien_the_san_phams()
+                ->where('color_san_pham_id', $item['color_id'] ?? null)
+                ->where('size_san_pham_id', $item['size_id'] ?? null)
+                ->first();
+
+            if ($variant && $variant->so_luong < $item['quantity']) {
+                return response()->json(['success' => false]);
+            }
+        }
+
+        return response()->json(['success' => true]);
     }
 }

@@ -4,7 +4,7 @@
     <!-- product tab start -->
     <section class="whish-list-section theme1  pb-80">
         <div class="container py-5">
-            <form action="{{ route('order.add') }}" class="personal-information" method="POST">
+            <form id="checkout-form" action="{{ route('order.add') }}" class="personal-information" method="POST">
                 @csrf
                 <div class="page_header mb-4">
                     <h1 class="text-center fw-bold text-success">THÔNG TIN ĐƠN HÀNG</h1>
@@ -552,6 +552,38 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script>
+            document.getElementById('checkout-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+                // Lấy dữ liệu từ form
+                const formData = new FormData(this);
+
+                // Gửi yêu cầu AJAX để kiểm tra tồn kho
+                fetch('/check-stock', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content'),
+                            'Accept': 'application/json',
+                        },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Nếu tồn kho đủ, gửi form để hoàn tất giao dịch
+                            this.submit();
+                        } else {
+                            // Hiển thị thông báo lỗi với Toastr
+                            toastr.error('Sản phẩm không đủ hàng.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        toastr.error('Đã xảy ra lỗi khi kiểm tra tồn kho.');
+                    });
+            });
+
             // api maps
             $(document).ready(function() {
                 $('#dia_chi').on('input', function() {

@@ -24,7 +24,7 @@ class Storedanh_mucRequest extends FormRequest
         return [
             //
             'ten_danh_muc' => 'required|max:255|unique:danh_mucs,ten_danh_muc',
-            'anh_danh_muc' => 'required|image|mimes:jpg,png,jpeg,gif,webp',
+            'anh_danh_muc' => 'required|image|mimes:jpg,png,jpeg,gif,webp|mimetypes:image/jpeg,image/png,image/gif,image/jpg,image/webp',
             'is_active' => 'boolean|required',
         ];
     }
@@ -45,6 +45,7 @@ class Storedanh_mucRequest extends FormRequest
             'anh_danh_muc.required' => 'Hình ảnh không được để trống',
             'anh_danh_muc.image' => 'Hình ảnh không hợp lệ',
             'anh_danh_muc.mimes' => 'Hình ảnh phải là một trong các định dạng: jpg, png, jpeg, gif,webp',
+            'anh_danh_muc.mimetypes' => 'File không đúng loại hình ảnh hợp lệ.',
         ];
     }
 }

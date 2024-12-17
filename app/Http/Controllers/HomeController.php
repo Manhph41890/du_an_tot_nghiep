@@ -13,12 +13,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
     //Sản phẩm Home
     public function index(Request $request)
     {
         // Lấy sản phẩm mới
-        $sanPhamMois = san_pham::where('is_active', 1) // Thêm điều kiện lọc
+        $sanPhamMois = san_pham::where('is_active', 1)
+            ->where('so_luong', '>', 0) // Thêm điều kiện lọc
             ->whereHas('danh_muc', function ($query) {
                 $query->where('is_active', '1');
             })
@@ -39,7 +39,8 @@ class HomeController extends Controller
         // Lấy sản phẩm giảm giá
         $sanPhamGiamGias = san_pham::with('danh_gias')
             ->whereNotNull('gia_km')
-            ->where('is_active', 1) // Thêm điều kiện lọc
+            ->where('is_active', 1)
+            ->where('so_luong', '>', 0) // Thêm điều kiện lọc
             ->whereHas('danh_muc', function ($query) {
                 $query->where('is_active', '1');
             })
@@ -49,7 +50,7 @@ class HomeController extends Controller
         // Tính phần trăm giảm giá cho sản phẩm giảm giá
         $sanPhamGiamGias->getCollection()->transform(function ($sanPham) {
             if ($sanPham->gia_goc > 0 && $sanPham->gia_km > 0) {
-                $sanPham->phan_tram_giam_gia = round((1 - ($sanPham->gia_km / $sanPham->gia_goc)) * 100);
+                $sanPham->phan_tram_giam_gia = round((1 - $sanPham->gia_km / $sanPham->gia_goc) * 100);
             } else {
                 $sanPham->phan_tram_giam_gia = 0;
             }
@@ -64,7 +65,8 @@ class HomeController extends Controller
         });
 
         // Lấy sản phẩm xem nhiều
-        $sanPhamView = san_pham::where('is_active', 1) // Thêm điều kiện lọc
+        $sanPhamView = san_pham::where('is_active', 1)
+            ->where('so_luong', '>', 0) // Thêm điều kiện lọc
             ->whereHas('danh_muc', function ($query) {
                 $query->where('is_active', '1');
             })
@@ -79,12 +81,11 @@ class HomeController extends Controller
             ->take(3) // Lấy 3 bản ghi
             ->get();
 
-
-        $title = "Trang chủ";
+        $title = 'Trang chủ';
         $baiVietMoi = bai_viet::with('user')->where('is_active', '!=', 0)->orderBy('ngay_dang', 'desc')->paginate(6);
         $anhDMuc = danh_muc::query()->where('is_active', '1')->get();
 
-        return view('client.home', compact('sanPhamMois',  'discounts', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
+        return view('client.home', compact('sanPhamMois', 'discounts', 'sanPhamGiamGias', 'sanPhamView', 'title', 'baiVietMoi', 'anhDMuc'));
     }
 
     public function showByCategory($danhMucId)
@@ -104,11 +105,9 @@ class HomeController extends Controller
             })
             ->get();
 
-
         // Trả về view sản phẩm của danh mục
         return view('client.danhmuc_sanpham', compact('danhMuc', 'sanPhams', 'anhDMuc'));
     }
-
 
     // Sản phẩm chi tiet
     public function chiTietSanPham($id)
@@ -118,7 +117,7 @@ class HomeController extends Controller
 
         // Tính phần trăm giảm giá
         if ($sanPhamCT->gia_goc > 0 && $sanPhamCT->gia_km > 0) {
-            $sanPhamCT->phan_tram_giam_gia = round((1 - ($sanPhamCT->gia_km / $sanPhamCT->gia_goc)) * 100);
+            $sanPhamCT->phan_tram_giam_gia = round((1 - $sanPhamCT->gia_km / $sanPhamCT->gia_goc) * 100);
         } else {
             $sanPhamCT->phan_tram_giam_gia = 0;
         }
@@ -130,8 +129,6 @@ class HomeController extends Controller
         } else {
             $sanPhamCT->diem_trung_binh = 0;
         }
-
-
 
         // Truyền thông tin màu sắc theo size vào view
         $colorsBySize = [];
@@ -149,13 +146,14 @@ class HomeController extends Controller
         $colors = $sanPhamCT->bien_the_san_phams->pluck('color')->unique('id'); // Lấy màu sắc duy nhất
 
         // Lấy các sản phẩm liên quan
-        $sanLienQuan = san_pham::with('danh_muc')->where('id', '!=', $id)
+        $sanLienQuan = san_pham::with('danh_muc')
+            ->where('id', '!=', $id)
             ->where('is_active', 1)
             ->whereHas('danh_muc', function ($query) {
                 $query->where('is_active', '1');
             })
-            ->orderByDesc('id')->get();
-
+            ->orderByDesc('id')
+            ->get();
 
         // Tiêu đề trang
         $title = $sanPhamCT->ten_san_pham;
@@ -163,13 +161,12 @@ class HomeController extends Controller
         return view('client.sanpham.sanphamct', compact('sanPhamCT', 'sizes', 'colors', 'title', 'colorsBySize', 'sanLienQuan'));
     }
 
-
     // In Data Bai viet
     public function listBaiViet()
     {
         $baiviets = bai_viet::with('user')->where('is_active', '!=', 0)->latest('id')->paginate(4);
         $baiVietMoi = bai_viet::with('user')->where('is_active', '!=', 0)->orderBy('ngay_dang', 'desc')->paginate(6);
-        $title = "";
+        $title = '';
         return view('client.baiviet.baiviet', compact('baiviets', 'baiVietMoi', 'title'));
     }
     // In chi tiet bai viet
@@ -177,7 +174,7 @@ class HomeController extends Controller
     {
         $baiViet = bai_viet::with('user')->findOrFail($id);
         $docThem = bai_viet::with('user')->where('id', '!=', $id)->orderBy('id', 'desc')->limit(3)->get();
-        $title = "";
+        $title = '';
         return view('client.baiviet.baivietchitiet', compact('baiViet', 'docThem', 'title'));
     }
     // app/Http/Controllers/HomeController.php
@@ -192,11 +189,9 @@ class HomeController extends Controller
             $sanPham->increment('views'); // Tăng lượt xem
         }
 
-
         // Chuyển hướng đến trang chi tiết sản phẩm
         return redirect()->route('sanpham.chitiet', $id);
     }
-
 
     public function lienhe()
     {

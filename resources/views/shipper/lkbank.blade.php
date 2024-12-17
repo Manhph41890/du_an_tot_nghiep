@@ -162,6 +162,7 @@
                                                                     <th>Tên ngân hàng</th>
                                                                     <th>Số tài khoản</th>
                                                                     <th>Chủ tài khoản</th>
+                                                                    <th>Active</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -175,6 +176,14 @@
                                                                         <td>{{ $bank['name'] }}</td>
                                                                         <td>{{ $bank['account_number'] }}</td>
                                                                         <td>{{ $bank['account_holder'] }}</td>
+                                                                        <td>
+                                                                            <button type="button"
+                                                                                class="btn btn-danger btn-sm"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#deleteBankModall{{ $bank->id }}">
+                                                                                Hủy liên kết
+                                                                            </button>
+                                                                        </td>
                                                                     </tr>
                                                                 @endforeach
                                                             </tbody>
@@ -189,6 +198,48 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @foreach ($listBank as $bank)
+                                            <div class="modal fade" id="deleteBankModall{{ $bank->id }}"
+                                                tabindex="-1" aria-labelledby="deleteBankModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="deleteBankModalLabel">Xác
+                                                                nhận hủy
+                                                                liên kết</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="{{ route('banks.delete', $bank->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <div class="modal-body">
+                                                                <p>Bạn có chắc chắn muốn hủy
+                                                                    liên kết ngân hàng
+                                                                    <strong>{{ $bank->name }}</strong>?
+                                                                </p>
+                                                                <div class="mb-3">
+                                                                    <label for="pin" class="form-label">Nhập
+                                                                        mã
+                                                                        PIN</label>
+                                                                    <input type="password" name="pin" id="pin"
+                                                                        class="form-control @error('pin') is-invalid @enderror">
+                                                                    <div class="invalid-feedback" id="account_pin_error">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Hủy</button>
+                                                                <button type="submit" class="btn btn-danger">Xác
+                                                                    nhận</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +262,7 @@
                     .normalize("NFD")
                     .replace(/[\u0300-\u036f]/g, "")
                     .toUpperCase()
-                    .replace(/[^A-Z0-9\s]/g, "");
+                    .replace(/[^A-Z\s]/g, "");
 
                 accountHolderInput.value = value;
 

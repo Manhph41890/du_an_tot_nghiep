@@ -553,8 +553,7 @@
 
         <script>
             document.getElementById('checkout-form').addEventListener('submit', function(event) {
-                event.preventDefault(); // Ngăn chặn hành động mặc định của form
-
+                event.preventDefault(); // 
                 // Lấy dữ liệu từ form
                 const formData = new FormData(this);
 
@@ -571,10 +570,8 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            // Nếu tồn kho đủ, gửi form để hoàn tất giao dịch
                             this.submit();
                         } else {
-                            // Hiển thị thông báo lỗi với Toastr
                             toastr.error('Sản phẩm không đủ hàng.');
                         }
                     })

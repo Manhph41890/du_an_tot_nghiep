@@ -48,9 +48,9 @@
                     <a href="{{ route('taikhoan.rut-tien') }}" class="btn btn-success btn-lg">
                         <i class="fas fa-minus-circle me-2"></i>Rút tiền
                     </a>
-                    <a href="{{ route('taikhoan.nap-tien') }}" class="btn btn-primary btn-lg">
+                    {{-- <a href="{{ route('taikhoan.nap-tien') }}" class="btn btn-primary btn-lg">
                         <i class="fas fa-plus-circle me-2"></i>Nạp tiền
-                    </a>
+                    </a> --}}
                 </div>
             </div>
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

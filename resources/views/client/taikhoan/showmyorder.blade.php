@@ -268,6 +268,8 @@
                                         <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
                                         <p style="text-wrap: auto"><strong>Địa chỉ giao hàng:</strong>
                                             {{ $donhang->dia_chi }}</p>
+                                        <p style="text-wrap: auto"><strong>Địa chỉ giao hàng:</strong>
+                                            {{ $donhang->dia_chi }}</p>
                                     </div>
                                 </div>
 
@@ -422,10 +424,13 @@
         border-radius: 5px;
     }
 
+
     .danhgia:hover {
+        background-color: #ff5722;
         background-color: #ff5722;
         color: white;
     }
+
 
     /* CSS cho nút đóng */
     .close-btn {
@@ -545,6 +550,11 @@
     });
 </script>
 <script>
+    function toggleReviewForm(donHangId) {
+        const reviewForm = document.getElementById(`reviewForm${donHangId}`);
+        reviewForm.style.display = reviewForm.style.display === 'none' ? 'block' : 'none';
+    }
+
     function submitHuyDonHang(donHangId) {
         const form = document.querySelector(`#huyDonHangForm${donHangId}`);
         const formData = new FormData(form);
@@ -559,16 +569,15 @@
             .then((response) => response.json())
             .then((data) => {
                 if (data.error) {
-                    toastr.error(data.error) // Hiển thị thông báo lỗi
-                    location.reload(); // Reload lại trang
+                    toastr.error(data.error); // Hiển thị thông báo lỗi
                 } else {
-                    toastr(data.success); // Hiển thị thông báo thành công
-                    location.reload(); // Reload lại trang
+                    toastr.success(data.success); // Hiển thị thông báo thành công
                 }
+                location.reload(); // Reload lại trang
             })
             .catch((error) => {
                 console.error("Error:", error);
-                alert("Đã xảy ra lỗi, vui lòng thử lại.");
+                toastr.error("Đã xảy ra lỗi, vui lòng thử lại.");
             });
     }
 </script>

@@ -1,6 +1,14 @@
 @extends('client.taikhoan.dashboard')
 
 @section('conten-taikhoan')
+    <style>
+        .border-rounded {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            display: inline-block;
+        }
+    </style>
     <div class="">
         <div class="myaccount-content" id="orders-content">
             <h3>Đơn hàng của bạn</h3>
@@ -41,7 +49,7 @@
                                             $class = $statusClasses[$myOrder->trang_thai_don_hang] ?? 'bg-secondary';
                                         @endphp
 
-                                        <span class="badge {{ $class }}">
+                                        <span class=" {{ $class }} border-rounded">
                                             {{ $myOrder->trang_thai_don_hang }}
                                             @if ($myOrder->trang_thai_don_hang == 'Chờ xác nhận')
                                                 <span class="ms-2 position-relative">

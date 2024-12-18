@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCancelledMail;
 use App\Models\chi_tiet_vi;
 use App\Models\don_hang;
 use App\Models\huy_don_hang;
@@ -44,48 +45,47 @@ class HuyDonHangController extends Controller
 
         // Lấy tất cả các đơn hàng đã hủy
         $huyDons = $query->latest('id')->paginate(6);
-        $title = "Danh sách đơn hàng cần xác nhận hủy";
+        $title = 'Danh sách đơn hàng cần xác nhận hủy';
         return view('admin.donhang.xacnhanhuy', compact('huyDons', 'title'));
     }
 
     public function store(Request $request)
     {
         // Danh sách lý do hợp lệ
-        $validReasons = [
-            'Tôi muốn cập nhật địa chỉ/sđt nhận hàng',
-            'Tôi muốn thêm/thay đổi Mã giảm giá',
-            'Tôi muốn thay đổi sản phẩm (kích thước, màu sắc, số lượng…)',
-            'Thủ tục thanh toán rắc rối',
-            'Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ hơn, uy tín hơn, giao nhanh hơn…)',
-            'Tôi không có nhu cầu mua nữa',
-            'Tôi không tìm thấy lý do hủy phù hợp',
-        ];
+        $validReasons = ['Tôi muốn cập nhật địa chỉ/sđt nhận hàng', 'Tôi muốn thêm/thay đổi Mã giảm giá', 'Tôi muốn thay đổi sản phẩm (kích thước, màu sắc, số lượng…)', 'Thủ tục thanh toán rắc rối', 'Tôi tìm thấy chỗ mua khác tốt hơn (Rẻ hơn, uy tín hơn, giao nhanh hơn…)', 'Tôi không có nhu cầu mua nữa', 'Tôi không tìm thấy lý do hủy phù hợp'];
 
         // Validate input
-        $request->validate([
+        $validatedData = $request->validate([
             'ly_do_huy' => ['required', 'string', Rule::in($validReasons)],
             'don_hang_id' => 'required|exists:don_hangs,id',
         ]);
 
-        // Lấy thông tin đơn hàng
-        $donHang = don_hang::find($request->don_hang_id);
+        try {
+            // Lấy thông tin đơn hàng
+            $donHang = don_hang::findOrFail($request->don_hang_id);
 
-        // Kiểm tra trạng thái đơn hàng
-        if ($donHang->trang_thai_don_hang !== 'Chờ xác nhận') {
-            return response()->json(['error' => 'Đơn hàng đã được xác nhận không thể hủy đơn'], 400);
+            // Kiểm tra trạng thái đơn hàng
+            if ($donHang->trang_thai_don_hang !== 'Chờ xác nhận') {
+                return response()->json(['error' => 'Đơn hàng đã được xác nhận không thể hủy đơn'], 400);
+            }
+
+            // Tạo bản ghi trong bảng hủy đơn hàng
+            huy_don_hang::create([
+                'don_hang_id' => $donHang->id,
+                'ly_do_huy' => $request->ly_do_huy,
+                'thoi_gian_huy' => now()->setTimezone('Asia/Ho_Chi_Minh'),
+                'trang_thai' => 'Chờ xác nhận hủy',
+            ]);
+            Mail::to($donHang->email)->send(new OrderCancelledMail($donHang));
+
+            // Trả về thông báo thành công
+            return response()->json(['success' => 'Yêu cầu hủy đơn hàng đã được gửi.']);
+        } catch (\Exception $e) {
+            // Ghi log hoặc xử lý lỗi nếu cần
+            return response()->json(['error' => 'Đã xảy ra lỗi, vui lòng thử lại.'], 500);
         }
-
-        // Tạo bản ghi trong bảng hủy đơn hàng
-        huy_don_hang::create([
-            'don_hang_id' => $donHang->id,
-            'ly_do_huy' => $request->ly_do_huy,
-            'thoi_gian_huy' => now()->setTimezone('Asia/Ho_Chi_Minh'),
-            'trang_thai' => 'Chờ xác nhận hủy',
-        ]);
-
-        // Trả về thông báo thành công
-        return response()->json(['success' => 'Yêu cầu hủy đơn hàng đã được gửi.']);
     }
+
     public function showhuy($id)
     {
         // $donhang = don_hang::with([
@@ -97,15 +97,7 @@ class HuyDonHangController extends Controller
         //     'chi_tiet_don_hangs.color_san_pham',
         //     'chi_tiet_don_hangs.size_san_pham'
         // ])->findOrFail($id);
-        $huyDat = huy_don_hang::with(
-            'don_hang.user',
-            'don_hang.khuyen_mai',
-            'don_hang.phuong_thuc_thanh_toan',
-            'don_hang.phuong_thuc_van_chuyen',
-            'don_hang.chi_tiet_don_hangs.san_pham',
-            'don_hang.chi_tiet_don_hangs.color_san_pham',
-            'don_hang.chi_tiet_don_hangs.size_san_pham'
-        )->findOrFail($id);;
+        $huyDat = huy_don_hang::with('don_hang.user', 'don_hang.khuyen_mai', 'don_hang.phuong_thuc_thanh_toan', 'don_hang.phuong_thuc_van_chuyen', 'don_hang.chi_tiet_don_hangs.san_pham', 'don_hang.chi_tiet_don_hangs.color_san_pham', 'don_hang.chi_tiet_don_hangs.size_san_pham')->findOrFail($id);
         $huyDat->donhang->tong_tien = $huyDat->donhang->chi_tiet_don_hangs->sum('thanh_tien');
         // Trả về view cùng với dữ liệu đơn hàng
         return view('admin.donhang.showhuy', compact('huyDat'));
@@ -123,9 +115,11 @@ class HuyDonHangController extends Controller
 
         // Kiểm tra trạng thái của đơn hàng có hợp lệ cho việc xác nhận hủy
         if ($donHang->trang_thai_don_hang !== 'Chờ xác nhận') {
-            return redirect()->back()->withErrors([
-                'error' => 'Đơn hàng không thể hủy vì trạng thái không hợp lệ.',
-            ]);
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'error' => 'Đơn hàng không thể hủy vì trạng thái không hợp lệ.',
+                ]);
         }
 
         // Cập nhật trạng thái yêu cầu hủy thành "Xác nhận hủy"
@@ -137,10 +131,10 @@ class HuyDonHangController extends Controller
             'trang_thai_don_hang' => 'Đã hủy',
         ]);
 
-
         // Khôi phục số lượng sản phẩm trong kho và biến thể sản phẩm
         foreach ($donHang->chi_tiet_don_hangs as $item) {
-            $variant = $item->san_pham->bien_the_san_phams()
+            $variant = $item->san_pham
+                ->bien_the_san_phams()
                 ->where('color_san_pham_id', $item->color_san_pham_id)
                 ->where('size_san_pham_id', $item->size_san_pham_id)
                 ->first();
@@ -159,13 +153,16 @@ class HuyDonHangController extends Controller
             }
         }
 
-        Mail::send('auth.xacnhan_huy', [
-            'user' => $huyDon->user, // Người dùng liên quan
-            'order' => $donHang      // Đơn hàng bị hủy
-        ], function ($message) use ($user) {
-            $message->to($user->email)
-                ->subject('Xác nhận hủy đặt hàng thành công');
-        });
+        Mail::send(
+            'auth.xacnhan_huy',
+            [
+                'user' => $huyDon->user, // Người dùng liên quan
+                'order' => $donHang, // Đơn hàng bị hủy
+            ],
+            function ($message) use ($user) {
+                $message->to($user->email)->subject('Xác nhận hủy đặt hàng thành công');
+            },
+        );
 
         // Kiểm tra trạng thái thanh toán của đơn hàng
         if ($donHang->trang_thai_thanh_toan === 'Đã thanh toán') {
@@ -206,9 +203,11 @@ class HuyDonHangController extends Controller
 
         // Kiểm tra trạng thái của đơn hàng có hợp lệ cho việc từ chối hủy
         if ($donHang->trang_thai_don_hang !== 'Chờ xác nhận') {
-            return redirect()->back()->withErrors([
-                'error' => 'Đơn hàng không thể từ chối hủy vì trạng thái không hợp lệ.',
-            ]);
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'error' => 'Đơn hàng không thể từ chối hủy vì trạng thái không hợp lệ.',
+                ]);
         }
 
         // Cập nhật trạng thái yêu cầu hủy thành "Từ chối hủy"
@@ -216,13 +215,16 @@ class HuyDonHangController extends Controller
             'trang_thai' => 'Từ chối hủy',
         ]);
 
-        Mail::send('auth.tuchoi_huy', [
-            'user' => $huyDon->user, // Người dùng liên quan
-            'order' => $donHang      // Đơn hàng bị hủy
-        ], function ($message) use ($user) {
-            $message->to($user->email)
-                ->subject('Từ chối xác nhận hủy đặt hàng thành công');
-        });
+        Mail::send(
+            'auth.tuchoi_huy',
+            [
+                'user' => $huyDon->user, // Người dùng liên quan
+                'order' => $donHang, // Đơn hàng bị hủy
+            ],
+            function ($message) use ($user) {
+                $message->to($user->email)->subject('Từ chối xác nhận hủy đặt hàng thành công');
+            },
+        );
 
         // Trả về thông báo thành công
         return redirect()->back()->with('success', 'Đơn hàng đã bị từ chối hủy.');

@@ -251,6 +251,31 @@
                                             </select>
                                         </td>
                                     </tr>
+                                    {{-- ảnh chứng minh --}}
+                                    <div class="modal fade" id="imageUploadModal{{ $shipper->id }}" tabindex="-1"
+                                        role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Tải ảnh minh chứng</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                        <span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form class="upload-image-form" data-shipper-id="{{ $shipper->id }}">
+                                                    <div class="modal-body">
+                                                        <input type="file" name="image_path" accept="image/*"
+                                                            required>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Tải lên</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Hủy</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endif
                             @endforeach
                         </tbody>
@@ -258,28 +283,7 @@
                 </div>
             </div>
         </div>
-        {{-- ảnh chứng minh --}}
-        <div class="modal fade" id="imageUploadModal{{ $shipper->id }}" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Tải ảnh minh chứng</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    <form class="upload-image-form" data-shipper-id="{{ $shipper->id }}">
-                        <div class="modal-body">
-                            <input type="file" name="image_path" accept="image/*" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Tải lên</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+
     </div>
     <script>
         $(document).ready(function() {

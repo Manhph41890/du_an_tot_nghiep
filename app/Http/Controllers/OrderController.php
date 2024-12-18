@@ -45,7 +45,23 @@ class OrderController extends Controller
             'totall' => 'required|numeric|min:0',
             'total' => 'required|numeric|min:0',
         ]);
-
+        // Check số lượng sản phẩm
+        $cartItems = $validatedData['cart_items'];
+        // Kiểm tra xem sản phẩm có đủ hàng hay không
+        foreach ($cartItems as $item) {
+            $sanPham = san_pham::find($item['san_pham_id']);
+            if (!$sanPham || $sanPham->so_luong < $item['quantity']) {
+                return redirect()->back()->with('error', 'Sản phẩm không đủ hàng.');
+            }
+            $variant = $sanPham
+                ->bien_the_san_phams()
+                ->where('color_san_pham_id', $item['color_id'] ?? null)
+                ->where('size_san_pham_id', $item['size_id'] ?? null)
+                ->first();
+            if ($variant && $variant->so_luong < $item['quantity']) {
+                return redirect()->back()->with('error', 'Sản phẩm không đủ hàng.');
+            }
+        }
         $totall = $request->totall;
         $total = $request->total;
         // dd($total);
@@ -553,5 +569,27 @@ class OrderController extends Controller
             'discountAmount' => number_format($discountAmount, 2), // Số tiền giảm giá
             'message' => 'Áp dụng mã giảm giá thành công!',
         ]);
+    }
+    public function checkStock(Request $request)
+    {
+        $cartItems = $request->input('cart_items');
+
+        foreach ($cartItems as $item) {
+            $sanPham = san_pham::find($item['san_pham_id']);
+            if (!$sanPham || $sanPham->so_luong < $item['quantity']) {
+                return response()->json(['success' => false]);
+            }
+            $variant = $sanPham
+                ->bien_the_san_phams()
+                ->where('color_san_pham_id', $item['color_id'] ?? null)
+                ->where('size_san_pham_id', $item['size_id'] ?? null)
+                ->first();
+
+            if ($variant && $variant->so_luong < $item['quantity']) {
+                return response()->json(['success' => false]);
+            }
+        }
+
+        return response()->json(['success' => true]);
     }
 }

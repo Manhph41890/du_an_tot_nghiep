@@ -135,16 +135,15 @@
                                                                                 id="reviewForm{{ $chi_tiet->san_pham->id }}">
                                                                                 <span class="close-btn"
                                                                                     id="closeReviewForm{{ $chi_tiet->san_pham->id }}">&times;</span>
-                                                                                <h3>Thêm đánh giá cho Sản phẩm</h3>
+                                                                                <h3>Viết đánh giá</h3>
                                                                                 <div class="ratting-form">
                                                                                     <form
                                                                                         action="{{ route('danhgia.store', ['sanPhamid' => $chi_tiet->san_pham->id]) }}"
                                                                                         method="post"
                                                                                         enctype="multipart/form-data">
                                                                                         @csrf
-                                                                                        <div class="star-box">
-                                                                                            <span>Đánh giá của
-                                                                                                bạn:</span>
+                                                                                        <div class="star-box dg m-0">
+                                                                                            <span>Đánh giá </span>
                                                                                             <input type="hidden"
                                                                                                 id="san_pham_id"
                                                                                                 name="san_pham_id"
@@ -180,10 +179,11 @@
                                                                                             <div class="col-md-12">
                                                                                                 <div
                                                                                                     class="rating-form-style form-submit">
-                                                                                                    <div class="m-2">
+                                                                                                    <div>
                                                                                                         <input
                                                                                                             type="file"
                                                                                                             name="img"
+                                                                                                            class="imgdh"
                                                                                                             title="Thêm ảnh đánh giá">
                                                                                                     </div>
                                                                                                     <textarea id="review{{ $chi_tiet->san_pham->id }}" name="binh_luan" placeholder="Viết đánh giá" maxlength="100"></textarea>
@@ -286,6 +286,7 @@
                                             <div class="card mb-3">
                                                 <div class="card-body">
                                                     <h5>Hủy nhận đơn hàng này</h5> <button type="button"
+                                                        id="openReviewFormdh{{ $donhang->id }}"
                                                         class="btn btn-secondary mt-2"
                                                         onclick="toggleReviewForm({{ $donhang->id }})"> Hủy nhận hàng
                                                     </button>
@@ -293,7 +294,9 @@
                                             </div>
 
                                             <!-- Form Hủy Đơn Hàng -->
-                                            <div class="ratting-form-wrapper" id="reviewForm{{ $donhang->id }}">
+                                            <div class="ratting-form-wrapper" id="reviewFormdh{{ $donhang->id }}">
+                                                <span class="close-btn"
+                                                id="closeReviewFormdh{{ $donhang->id }}">&times;</span>
                                                 <h3>Lý do hủy đơn hàng</h3>
                                                 <div class="ratting-form">
                                                     <form id="huyDonHangForm{{ $donhang->id }}" method="POST">
@@ -386,6 +389,10 @@
         color: #ccc;
     }
 
+    .dg {
+        align-items: center;
+    }
+
     .rating-product i.active {
         color: gold;
     }
@@ -393,6 +400,7 @@
     .ratting-form-wrapper {
         display: none;
         position: fixed;
+        z-index: 100;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -437,6 +445,10 @@
         cursor: pointer;
     }
 
+    .imgdh {
+        height: auto !important;
+    }
+
     .complete-button:hover {
         background-color: #218838;
     }
@@ -452,25 +464,18 @@
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var openReviewBtn = document.getElementById('openReviewForm{{ $donhang->id }}');
-        var reviewForm = document.getElementById('reviewForm{{ $donhang->id }}');
+        var openReviewBtn = document.getElementById('openReviewFormdh{{ $donhang->id }}');
+        var reviewFormdh = document.getElementById('reviewFormdh{{ $donhang->id }}');
+        const closeReviewFormdh = document.getElementById("closeReviewFormdh{{ $donhang->id }}");
 
         openReviewBtn.addEventListener('click', function() {
             // Kiểm tra nếu form đang ẩn thì hiển thị, nếu đang hiển thị thì ẩn đi
-            if (reviewForm.style.display === 'none') {
-                reviewForm.style.display = 'block';
-            } else {
-                reviewForm.style.display = 'none';
-            }
+            reviewFormdh.style.display = 'block';
+
         });
-
-        // Cập nhật số lượng ký tự nhập vào textarea
-        var textarea = document.getElementById('review{{ $donhang->id }}');
-        var charCount = document.getElementById('charCount{{ $donhang->id }}');
-
-        textarea.addEventListener('input', function() {
-            var currentLength = textarea.value.length;
-            charCount.textContent = currentLength + '/100';
+        // clcik button clóe đóng form
+        closeReviewFormdh.addEventListener("click", function() {
+            reviewFormdh.style.display = "none";
         });
     });
 </script>

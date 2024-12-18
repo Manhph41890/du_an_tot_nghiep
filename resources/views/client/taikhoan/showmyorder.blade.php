@@ -297,7 +297,7 @@
                                             <div class="ratting-form-wrapper" id="reviewForm{{ $donhang->id }}">
                                                 <h3>Lý do hủy đơn hàng</h3>
                                                 <div class="ratting-form">
-                                                    <form id="huyDonHangForm{{ $donhang->id }}" method="POST">
+                                                    <form id="huyDonHangForm{{ $donhang->id }}" method="POST" ac>
                                                         @csrf
                                                         <input type="hidden" name="don_hang_id"
                                                             value="{{ $donhang->id }}">
@@ -332,7 +332,7 @@
                                                                             Tôi không tìm thấy lý do hủy phù hợp
                                                                         </option>
                                                                     </select>
-                                                                    <button type="button" class="btn btn-dark mt-3"
+                                                                    <button type="submit" class="btn btn-dark mt-3"
                                                                         onclick="submitHuyDonHang({{ $donhang->id }})">Gửi</button>
                                                                 </div>
                                                             </div>

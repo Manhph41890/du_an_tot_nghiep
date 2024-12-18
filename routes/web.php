@@ -225,8 +225,6 @@ Route::middleware(['auth', 'role:khach_hang,admin,nhan_vien'])->group(function (
     Route::get('/danhgia/{id}', [DanhGiaController::class, 'show'])->name('danhgia.show');
     
     Route::post('/danhgia/{sanPhamid}/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
-    Route::post('/check-stock', [OrderController::class, 'checkStock'])->name('check.stock');
-
 });
 
 // Shipper

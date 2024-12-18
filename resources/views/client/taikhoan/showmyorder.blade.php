@@ -267,7 +267,8 @@
                                         <p><strong>Tên người nhận:</strong> {{ $donhang->ho_ten }}</p>
                                         <p><strong>Email:</strong> {{ $donhang->email }}</p>
                                         <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
-                                        <p style="text-wrap: auto"><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
+                                        <p style="text-wrap: auto"><strong>Địa chỉ giao hàng:</strong>
+                                            {{ $donhang->dia_chi }}</p>
                                     </div>
                                 </div>
 
@@ -284,12 +285,10 @@
                                             <!-- Nút Hủy Nhận Hàng -->
                                             <div class="card mb-3">
                                                 <div class="card-body">
-                                                    <h5>Hủy nhận đơn hàng này</h5>
-                                                    <a id="openReviewForm{{ $donhang->id }}">
-                                                        <button type="submit" class="btn btn-secondary mt-2">Hủy
-                                                            nhận
-                                                            hàng</button>
-                                                    </a>
+                                                    <h5>Hủy nhận đơn hàng này</h5> <button type="button"
+                                                        class="btn btn-secondary mt-2"
+                                                        onclick="toggleReviewForm({{ $donhang->id }})"> Hủy nhận hàng
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -412,10 +411,12 @@
         text-decoration: none;
         border-radius: 5px;
     }
+
     .danhgia:hover {
-        background-color: #ff5722; 
+        background-color: #ff5722;
         color: white;
     }
+
     /* CSS cho nút đóng */
     .close-btn {
         position: absolute;
@@ -536,6 +537,11 @@
     });
 </script>
 <script>
+    function toggleReviewForm(donHangId) {
+        const reviewForm = document.getElementById(`reviewForm${donHangId}`);
+        reviewForm.style.display = reviewForm.style.display === 'none' ? 'block' : 'none';
+    }
+
     function submitHuyDonHang(donHangId) {
         const form = document.querySelector(`#huyDonHangForm${donHangId}`);
         const formData = new FormData(form);
@@ -550,16 +556,15 @@
             .then((response) => response.json())
             .then((data) => {
                 if (data.error) {
-                    toastr.error(data.error) // Hiển thị thông báo lỗi
-                    location.reload(); // Reload lại trang
+                    toastr.error(data.error); // Hiển thị thông báo lỗi
                 } else {
-                    toastr(data.success); // Hiển thị thông báo thành công
-                    location.reload(); // Reload lại trang
+                    toastr.success(data.success); // Hiển thị thông báo thành công
                 }
+                location.reload(); // Reload lại trang
             })
             .catch((error) => {
                 console.error("Error:", error);
-                alert("Đã xảy ra lỗi, vui lòng thử lại.");
+                toastr.error("Đã xảy ra lỗi, vui lòng thử lại.");
             });
     }
 </script>

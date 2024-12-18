@@ -633,6 +633,7 @@
                                             <th>Tên sản phẩm</th>
                                             <th>Giá gốc</th>
                                             <th>Giá khuyến mãi</th>
+                                            <th>Số lượng</th>
                                             <th>Trạng thái</th>
                                         </tr>
                                     </thead>
@@ -653,6 +654,7 @@
                                                 <td>{{ $item->ten_san_pham }}</td>
                                                 <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
                                                 <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
+                                                <td>{{ $item->so_luong }} </td>
 
 
                                                 <td>
@@ -670,7 +672,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-12 col-xl-12">
                         <div class="card">
 
@@ -709,7 +711,6 @@
                                                             alt="Không có ảnh" width="50px">
                                                     @endif
                                                 </td>
-                                                {{-- <td>{{ $item->danh_muc?->ten_danh_muc }}</td> --}}
                                                 <td>{{ $item->ten_san_pham }}</td>
                                                 <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
                                                 <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
@@ -729,7 +730,7 @@
                             {{ $sanphams_saphet->links() }}
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div> <!-- content -->
         </div>
     </div>

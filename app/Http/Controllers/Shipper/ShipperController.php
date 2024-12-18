@@ -105,7 +105,8 @@ class ShipperController extends Controller
 
         // Lấy các shipper với trạng thái "Đã lấy hàng"
         $shippers = Shipper::with('donHang')
-            ->where('shipper_id', $shipper_id) // Quan hệ với bảng DonHang
+            ->where('shipper_id', $shipper_id)
+            ->orderByDesc('id') // Quan hệ với bảng DonHang
             ->get();
         return view('shipper.show', compact('shippers', 'title', 'shipper_id'));
     }
@@ -265,7 +266,7 @@ class ShipperController extends Controller
             $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
         }
         $listBank = Bank::where('user_id', $userId)->latest('id')->get();
-        return view('shipper.lkbank',  compact('title', 'user', 'banks', 'userId', 'listBank', 'linkedBanksCount'));
+        return view('shipper.lkbank', compact('title', 'user', 'banks', 'userId', 'listBank', 'linkedBanksCount'));
     }
 
     public function storebank(StoreBankRequest $request)

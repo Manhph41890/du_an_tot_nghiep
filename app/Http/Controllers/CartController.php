@@ -6,13 +6,16 @@ use App\Models\bien_the_san_pham;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\color_san_pham;
+use App\Models\coupon_usage;
 use App\Models\don_hang;
+use App\Models\khuyen_mai;
 use App\Models\phuong_thuc_thanh_toan;
 use App\Models\phuong_thuc_van_chuyen;
 use App\Models\san_pham;
 use App\Models\size_san_pham;
 use App\Models\User;
 use App\Models\vi_nguoi_dung;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -21,6 +24,7 @@ class CartController extends Controller
 {
     public function index()
     {
+        $userId = Auth::id();
         // Lấy giỏ hàng của người dùng hiện tại cùng với cart items và quan hệ màu sắc và kích thước
         $cart = Cart::with('cartItems.san_pham.bien_the_san_phams.size', 'cartItems.san_pham.bien_the_san_phams.color')->where('user_id', Auth::id())->first();
 
@@ -31,8 +35,12 @@ class CartController extends Controller
 
         // Lấy cart items dựa trên cart_id
         $cartItems = $cart->cartItems;
+        $usedCouponIds = coupon_usage::where('user_id', $userId)->pluck('coupon_id');
+        $maKhuyenMai = khuyen_mai::where('is_active', '1')->whereNotIn('id', $usedCouponIds)->limit(5)->get();
 
-        return view('client.cart.index', compact('cartItems'));
+
+
+        return view('client.cart.index', compact('cartItems', 'maKhuyenMai'));
     }
     public function backup()
     {
@@ -183,6 +191,7 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $user = Auth::user();
+        $userId = $user->id;
         $tongTienVi = $user->vi_nguoi_dungs;
         if (!$request->has('checkout_items') || empty($request->checkout_items)) {
             return redirect()->route('cart.index')->with('error', 'Không có sản phẩm nào được chọn để thanh toán.');
@@ -243,6 +252,8 @@ class CartController extends Controller
         $totall = $total + $shippingCost;
 
         $selectedProductIds = $request->input('checkout_items');
+        // dd($maKhuyenMai);
+
 
         return view('client.order.index', compact('user', 'cartItems', 'cart', 'total', 'totall', 'phuongThucThanhToans', 'phuongThucVanChuyens', 'selectedProductIds', 'tongTienVi'))->with('success', 'Vui lòng xác nhận thông tin đặt hàng!');
     }

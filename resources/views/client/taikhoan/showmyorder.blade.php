@@ -237,6 +237,7 @@
                                                 chuyển:</strong>
                                             {{ number_format($donhang->phuong_thuc_van_chuyen?->gia_ship ?? 0, 0, ',', '.') }}VND
                                         </p>
+
                                         <p class="order-summary pe-1">Tổng giá trị đơn hàng:
                                             {{ number_format($donhang->tong_tien, 0, ',', '.') }} VND</p>
                                     </div>
@@ -298,7 +299,7 @@
                                             <!-- Form Hủy Đơn Hàng -->
                                             <div class="ratting-form-wrapper" id="reviewFormdh{{ $donhang->id }}">
                                                 <span class="close-btn"
-                                                id="closeReviewFormdh{{ $donhang->id }}">&times;</span>
+                                                    id="closeReviewFormdh{{ $donhang->id }}">&times;</span>
                                                 <h3>Lý do hủy đơn hàng</h3>
                                                 <span class="close-btn"
                                                     id="closeReviewFormdh{{ $donhang->id }}">&times;</span>

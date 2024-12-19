@@ -363,6 +363,71 @@
                             <span id="shipping">0 đ</span>
                         </li>
                         <li>
+                            <!-- Button to Open the Modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                                Danh sách mã
+                            </button>
+
+                            <!-- The Modal -->
+                            <div class="modal" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Danh sách mã</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <div class="discounts-container">
+                                                @foreach ($maKhuyenMai as $item)
+                                                    <div class="discount-item"
+                                                        style="background: repeating-linear-gradient(#ffffff, #ffffff 5px, transparent 0, transparent 9px, #ffffff 0, #ffffff 10px) 0 / 1px 100% no-repeat, radial-gradient(circle at 0 7px, transparent, transparent 2px, #ffffffee 0, #ffffff 3px, #f6f6f6 0) 1px 0 / 100% 10px repeat-y">
+                                                        <div class="discount-icon">
+                                                            <img src="https://bizweb.dktcdn.net/thumb/medium/100/210/055/themes/941368/assets/coupon_1_img.png?1726708982386"
+                                                                alt="Discount Icon">
+                                                        </div>
+                                                        <div class="discount-content">
+
+                                                            <div class="discount-code zigzag">
+
+                                                                <span class="code">{{ $item->ten_khuyen_mai }}</span>
+                                                            </div>
+
+
+                                                            <div class="discount-description">
+                                                                <p>
+                                                                    Giảm <span
+                                                                        class="text-danger">{{ number_format($item->gia_tri_khuyen_mai, 0, ',', '.') }}</span>
+                                                                    VNĐ cho tất cả các sản phẩm.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <button class="copy-btn"
+                                                            onclick="copyCode('{{ $item->ma_khuyen_mai }}')">Sao chép </button>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <!-- Modal -->
+                                            <div id="copyModal" class="copy-modal">
+                                                <div class="modal-content">
+                                                    <p id="copyMessage">Mã giảm giá đã được sao chép!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
                             <span>Tổng tiền cần thanh toán:</span>
                             <span class="price-tag" id="total-price">0 đ</span>
                         </li>
@@ -386,6 +451,31 @@
 
     </div>
 
+    <script>
+        function copyCode(code) {
+            var tempInput = document.createElement("input");
+            tempInput.value = code;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showCopyModal("Mã giảm giá đã được sao chép: " + code);
+
+        }
+
+        function showCopyModal(message) {
+            var modal = document.getElementById("copyModal");
+            var modalMessage = document.getElementById("copyMessage");
+
+            modalMessage.textContent = message;
+
+            modal.classList.add("show");
+
+            setTimeout(function() {
+                modal.classList.remove("show");
+            }, 3000);
+        }
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const updateButtons = document.querySelectorAll('.update-cart-btn');

@@ -20,7 +20,7 @@ class khuyen_mai extends Model
         'ngay_ket_thuc',
         'user_id',
         'is_active',
-        
+
     ];
 
     public function don_hangs()
@@ -42,5 +42,10 @@ class khuyen_mai extends Model
     {
         return $query->where('ngay_bat_dau', '<=', now())
             ->where('ngay_ket_thuc', '>=', now());
+    }
+
+    public function coupon_usage()
+    {
+        return $this->hasMany(coupon_usage::class);
     }
 }

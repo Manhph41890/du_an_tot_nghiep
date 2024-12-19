@@ -151,12 +151,16 @@ class RutTienController extends Controller
     {
         $lsRutVi = ls_rut_vi::with('vi_nguoi_dung', 'bank')->find($id);
         $viNguoiDung = $lsRutVi->vi_nguoi_dung;
+        $so_du_ban_dau = $lsRutVi->tien_rut + $viNguoiDung->tong_tien;
+        // dd($so_du_ban_dau);
         $bank = $lsRutVi->bank;
         $title = 'Thông tin rút tiền';
+        $trangThai = $lsRutVi->trang_thai; // Lấy trường trạng thái
         if (!$lsRutVi) {
             return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
         }
-        return view('admin.thongtinrut', compact('lsRutVi', 'title', 'viNguoiDung', 'bank'));
+
+        return view('admin.thongtinrut', compact('lsRutVi', 'title', 'viNguoiDung', 'bank', 'so_du_ban_dau', 'trangThai'));
     }
 
     public function duyetRutAdmin($id)
@@ -236,7 +240,7 @@ class RutTienController extends Controller
         if (!$lsRutVi) {
             return redirect()->back()->with('error', 'Không tìm thấy yêu cầu rút tiền.');
         }
-        return view('admin.thongtinrutship', compact('lsRutVi','trangThai', 'so_du_ban_dau', 'viShipper', 'bank', 'title'));
+        return view('admin.thongtinrutship', compact('lsRutVi', 'trangThai', 'so_du_ban_dau', 'viShipper', 'bank', 'title'));
     }
     public function duyetRutshipper($id)
     {

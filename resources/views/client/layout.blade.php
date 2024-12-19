@@ -54,9 +54,15 @@
         .breadcrumb-section {
             background-image: url('/assets/client/images/banner/banner_0.png');
             background-size: cover;
+            /* Thay vì 'cover', dùng 'contain' */
             background-position: center;
             background-repeat: no-repeat;
+            height: auto;
+            /* Để chiều cao thay đổi theo kích thước ảnh */
+            min-height: 225px;
+            /* Đặt chiều cao tối thiểu để duy trì bố cục */
         }
+
 
         .middle-banner {
             background-image: url('./assets/client/images/banner/collection_main_banner.jpg');

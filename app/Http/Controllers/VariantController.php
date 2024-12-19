@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\bien_the_san_pham;
 use App\Models\color_san_pham;
 use App\Models\size_san_pham;
 use Illuminate\Http\Request;
@@ -106,4 +107,50 @@ class VariantController extends Controller
 
         return redirect()->back()->with('success', 'Xóa kích thước thành công!');
     }
+    public function updateStatus($id)
+    {
+        $color = color_san_pham::find($id);  // Tìm màu theo ID
+    
+        if ($color) {
+            // Kiểm tra xem có bất kỳ sản phẩm nào đang hoạt động với màu này không
+            $activeProductExists = bien_the_san_pham::where('color_san_pham_id', $color->id)
+                                ->whereHas('san_pham', function($query) {
+                                    $query->where('is_active', true);
+                                })
+                                ->exists();
+    
+            if ($activeProductExists) {
+                return redirect()->back()->with('error', 'Không thể ẩn màu vì có sản phẩm đang hoạt động với màu này.');
+            }
+    
+            $color->is_active = !$color->is_active;  // Nếu đang TRUE thì chuyển thành FALSE và ngược lại
+            $color->save();  // Lưu thay đổi vào cơ sở dữ liệu
+        }
+    
+        return redirect()->back()->with('success', 'Cập nhật thành công!');
+    }
+    public function updateStatus1($id)
+    {
+        $color = color_san_pham::find($id);  // Tìm màu theo ID
+    
+        if ($color) {
+            // Kiểm tra xem có bất kỳ sản phẩm nào đang hoạt động với màu này không
+            $activeProductExists = bien_the_san_pham::where('color_san_pham_id', $color->id)
+                                ->whereHas('san_pham', function($query) {
+                                    $query->where('is_active', true);
+                                })
+                                ->exists();
+    
+            if ($activeProductExists) {
+                return redirect()->back()->with('error', 'Không thể ẩn size vì có sản phẩm đang hoạt động với màu này.');
+            }
+    
+            $color->is_active = !$color->is_active;  // Nếu đang TRUE thì chuyển thành FALSE và ngược lại
+            $color->save();  // Lưu thay đổi vào cơ sở dữ liệu
+        }
+    
+        return redirect()->back()->with('success', 'Cập nhật thành công!');
+    }
+    
+
 }

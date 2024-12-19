@@ -269,6 +269,8 @@
                                         <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
                                         <p style="text-wrap: auto"><strong>Địa chỉ giao hàng:</strong>
                                             {{ $donhang->dia_chi }}</p>
+                                        <p style="text-wrap: auto"><strong>Địa chỉ giao hàng:</strong>
+                                            {{ $donhang->dia_chi }}</p>
                                     </div>
                                 </div>
 
@@ -298,6 +300,8 @@
                                                 <span class="close-btn"
                                                 id="closeReviewFormdh{{ $donhang->id }}">&times;</span>
                                                 <h3>Lý do hủy đơn hàng</h3>
+                                                <span class="close-btn"
+                                                    id="closeReviewFormdh{{ $donhang->id }}">&times;</span>
                                                 <div class="ratting-form">
                                                     <form id="huyDonHangForm{{ $donhang->id }}" method="POST">
                                                         @csrf
@@ -384,6 +388,11 @@
 
 </div>
 <style>
+    .img-dg {
+        height: auto !important;
+        padding: 10px 10px 10px 20px !important;
+    }
+
     .rating-product i {
         font-size: 30px;
         color: #ccc;
@@ -398,6 +407,7 @@
     }
 
     .ratting-form-wrapper {
+        z-index: 100;
         display: none;
         position: fixed;
         z-index: 100;
@@ -420,10 +430,13 @@
         border-radius: 5px;
     }
 
+
     .danhgia:hover {
+        background-color: #ff5722;
         background-color: #ff5722;
         color: white;
     }
+
 
     /* CSS cho nút đóng */
     .close-btn {
@@ -462,6 +475,7 @@
         background-color: #e0e0e0;
     }
 </style>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var openReviewBtn = document.getElementById('openReviewFormdh{{ $donhang->id }}');
@@ -477,10 +491,7 @@
         closeReviewFormdh.addEventListener("click", function() {
             reviewFormdh.style.display = "none";
         });
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
+
         @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
             (function() {
                 const productId = "{{ $chi_tiet->san_pham->id }}";
@@ -522,8 +533,6 @@
                             prevSibling.classList.add("active");
                             prevSibling = prevSibling.previousElementSibling;
                         }
-
-                        // console.log("Selected rating for product", productId, ":", rating);
                     });
                 });
 

@@ -41,6 +41,7 @@ class KhuyenMaiMoiEvent implements ShouldBroadcast
             'gia_tri_khuyen_mai' => $this->khuyen_mai->gia_tri_khuyen_mai,
             'ngay_bat_dau' => $this->khuyen_mai->ngay_bat_dau,
             'ngay_ket_thuc' => $this->khuyen_mai->ngay_ket_thuc,
+            'trang_thai' => $this->khuyen_mai->trang_thai,
             
         ];
     }

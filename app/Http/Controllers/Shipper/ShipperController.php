@@ -61,16 +61,16 @@ class ShipperController extends Controller
         $user = Auth::user(); // Lấy shipper hiện tại
 
         // Kiểm tra nếu shipper đã có đơn hàng 'Đang vận chuyển'
-        $existingOrder = Shipper::where('shipper_id', $user->id)
-            ->where('status', 'Đã lấy hàng')
-            ->first();
+        // $existingOrder = Shipper::where('shipper_id', $user->id)
+        //     ->where('status', 'Đã lấy hàng')
+        //     ->first();
 
-        if ($existingOrder) {
-            return response()->json([
-                'message' => 'Bạn đã xác nhận một đơn hàng khác.',
-                'status' => 'error',
-            ]);
-        }
+        // if ($existingOrder) {
+        //     return response()->json([
+        //         'message' => 'Bạn đã xác nhận một đơn hàng khác.',
+        //         'status' => 'error',
+        //     ]);
+        // }
 
         // Kiểm tra nếu trạng thái đơn hàng là "Đang chuẩn bị hàng"
         if ($donHang->trang_thai_don_hang == 'Đang chuẩn bị hàng') {

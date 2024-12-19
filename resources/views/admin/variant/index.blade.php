@@ -60,13 +60,21 @@
                                             </button>
 
                                             <!-- Nút xóa -->
-                                            <form action="{{ route('variants.colors.destroy', $color->id) }}" method="POST"
-                                                style="display:inline;">
+                                            <form action="{{ route('variants.colors.UpdateStatus', $color->id) }}" method="POST" style="display:inline;">
                                                 @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa màu này không?')">Xóa</button>
+                                                @method('PUT')
+                                            
+                                                @if($color->is_active)
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn ẩn màu này không?')">
+                                                        Ẩn
+                                                    </button>
+                                                @else
+                                                    <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hiện màu này không?')">
+                                                        Hiện
+                                                    </button>
+                                                @endif
                                             </form>
+                                            
                                         </td>
                                     </tr>
 
@@ -155,12 +163,19 @@
                                             </button>
 
                                             <!-- Nút xóa -->
-                                            <form action="{{ route('variants.sizes.destroy', $size->id) }}" method="POST"
-                                                style="display:inline;">
+                                            <form action="{{ route('variants.sizes.UpdateStatus1', $size->id) }}" method="POST" style="display:inline;">
                                                 @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa kích thước này không?')">Xóa</button>
+                                                @method('PUT')
+                                            
+                                                @if($size->is_active)
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn ẩn size này không?')">
+                                                        Ẩn
+                                                    </button>
+                                                @else
+                                                    <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hiện size này không?')">
+                                                        Hiện
+                                                    </button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

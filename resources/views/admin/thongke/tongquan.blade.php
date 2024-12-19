@@ -571,10 +571,12 @@
                                             <th>#ID</th>
                                             <th>Ảnh</th>
                                             <th>Tên sản phẩm</th>
+                                           
                                             <th>Giá gốc</th>
                                             <th>Giá khuyến mãi</th>
                                             <th>Lượt xem</th>
                                             <th>Trạng thái</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>

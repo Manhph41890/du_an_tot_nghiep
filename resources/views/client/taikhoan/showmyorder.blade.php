@@ -142,8 +142,8 @@
                                                                                         method="post"
                                                                                         enctype="multipart/form-data">
                                                                                         @csrf
-                                                                                        <div class="star-box">
-                                                                                            <span>Đánh giá: </span>
+                                                                                        <div class="star-box dg m-0">
+                                                                                            <span>Đánh giá </span>
                                                                                             <input type="hidden"
                                                                                                 id="san_pham_id"
                                                                                                 name="san_pham_id"
@@ -179,12 +179,13 @@
                                                                                             <div class="col-md-12">
                                                                                                 <div
                                                                                                     class="rating-form-style form-submit">
-
-                                                                                                    <input
-                                                                                                        type="file"
-                                                                                                        name="img"
-                                                                                                        class="form-control img-dg"
-                                                                                                        title="Thêm ảnh đánh giá">
+                                                                                                    <div>
+                                                                                                        <input
+                                                                                                            type="file"
+                                                                                                            name="img"
+                                                                                                            class="imgdh"
+                                                                                                            title="Thêm ảnh đánh giá">
+                                                                                                    </div>
                                                                                                     <textarea id="review{{ $chi_tiet->san_pham->id }}" name="binh_luan" placeholder="Viết đánh giá" maxlength="100"></textarea>
                                                                                                     <p
                                                                                                         id="charCount{{ $chi_tiet->san_pham->id }}">
@@ -286,18 +287,18 @@
                                             <!-- Nút Hủy Nhận Hàng -->
                                             <div class="card mb-3">
                                                 <div class="card-body">
-                                                    <h5>Hủy nhận đơn hàng này</h5>
-
-                                                    <button type="submit" class="btn btn-secondary mt-2"
-                                                        id="openReviewFormdh{{ $donhang->id }}">Hủy
-                                                        nhận
-                                                        hàng</button>
-
+                                                    <h5>Hủy nhận đơn hàng này</h5> <button type="button"
+                                                        id="openReviewFormdh{{ $donhang->id }}"
+                                                        class="btn btn-secondary mt-2"
+                                                        onclick="toggleReviewForm({{ $donhang->id }})"> Hủy nhận hàng
+                                                    </button>
                                                 </div>
                                             </div>
 
                                             <!-- Form Hủy Đơn Hàng -->
                                             <div class="ratting-form-wrapper" id="reviewFormdh{{ $donhang->id }}">
+                                                <span class="close-btn"
+                                                id="closeReviewFormdh{{ $donhang->id }}">&times;</span>
                                                 <h3>Lý do hủy đơn hàng</h3>
                                                 <span class="close-btn"
                                                     id="closeReviewFormdh{{ $donhang->id }}">&times;</span>
@@ -397,6 +398,10 @@
         color: #ccc;
     }
 
+    .dg {
+        align-items: center;
+    }
+
     .rating-product i.active {
         color: gold;
     }
@@ -405,6 +410,7 @@
         z-index: 100;
         display: none;
         position: fixed;
+        z-index: 100;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -452,9 +458,8 @@
         cursor: pointer;
     }
 
-    .star-box {
-        align-items: center;
-        margin: 0 !important;
+    .imgdh {
+        height: auto !important;
     }
 
     .complete-button:hover {
@@ -473,22 +478,18 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const openReviewBtn = document.getElementById('openReviewFormdh{{ $donhang->id }}');
-        const reviewFordh = document.getElementById('reviewFormdh{{ $donhang->id }}');
+        var openReviewBtn = document.getElementById('openReviewFormdh{{ $donhang->id }}');
+        var reviewFormdh = document.getElementById('reviewFormdh{{ $donhang->id }}');
         const closeReviewFormdh = document.getElementById("closeReviewFormdh{{ $donhang->id }}");
 
         openReviewBtn.addEventListener('click', function() {
-            reviewFordh.style.display = 'block';
-        });
-        // click ra ngoài đóng form
-        window.addEventListener("click", function(event) {
-            if (event.target === reviewFordh) {
-                reviewFordh.style.display = 'none';
-            }
+            // Kiểm tra nếu form đang ẩn thì hiển thị, nếu đang hiển thị thì ẩn đi
+            reviewFormdh.style.display = 'block';
+
         });
         // clcik button clóe đóng form
         closeReviewFormdh.addEventListener("click", function() {
-            reviewFordh.style.display = "none";
+            reviewFormdh.style.display = "none";
         });
 
         @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)

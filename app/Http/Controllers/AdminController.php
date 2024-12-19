@@ -495,7 +495,7 @@ class AdminController extends Controller
         })->paginate(4);
         // Lấy 5 sản phẩm có lượt xem nhiều nhất
         $query = san_pham::query();
-        $views_product = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color'])->orderBy('views', 'desc')->paginate(4);
+        $views_product = $query->with(['danh_muc', 'bien_the_san_phams.size', 'bien_the_san_phams.color'])->orderBy('views', 'desc')->take(5)->get();
 
         if (intval($tong_tien_tat_ca_don_hang) == $tong_tien_tat_ca_don_hang || intval($tongtien_donhangs_new) == $tongtien_donhangs_new) {
             // Nếu tổng tiền là số nguyên (không có phần thập phân), hiển thị dạng không có phần thập phân

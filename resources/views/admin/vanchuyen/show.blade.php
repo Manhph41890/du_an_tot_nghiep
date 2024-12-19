@@ -160,38 +160,39 @@
                                     <div class="card-body">
                                         <h5>Thông tin khách hàng</h5>
                                         <br>
-                                        <h6>Khách hàng: {{ $donhang->user?->ho_ten }}</h6> 
+                                        <h6>Khách hàng: {{ $donhang->user?->ho_ten }}</h6>
                                         <br>
                                         <p><strong>Tên người nhận:</strong> {{ $donhang->ho_ten }}</p>
                                         <p><strong>Email:</strong> {{ $donhang->email }}</p>
                                         <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
-                                        <p class="shipping-address"><strong>Địa chỉ giao hàng:</strong> {{ $donhang->dia_chi }}</p>
+                                        <p class="shipping-address"><strong>Địa chỉ giao hàng:</strong>
+                                            {{ $donhang->dia_chi }}</p>
 
                                     </div>
                                 </div>
-
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h5>Ảnh xác thực giao</h5>
-                                        <br>
-                                        {{-- @php
-                                            dd($donhang->shipper->image_path);
-                                        @endphp --}}
-                                        {{-- <img src="{{ asset('/storage/' . $donhang->shipper->image_path) }}"
-                                            width="50px"> --}}
-
-                                        @if (isset($donhang->shipper) && $donhang->shipper->image_path)
-                                            <img src="{{ asset('storage/' . $donhang->shipper->image_path) }}"
-                                                alt="Hình ảnh sản phẩm" width="100px">
-                                        @else
-                                            <img src="{{ asset('images/placeholder.png') }}" alt="Không có ảnh"
-                                                width="100px">
-                                        @endif
-                                    </div>
-                                </div>
-
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
                                 @if ($donhang->trang_thai_don_hang == 'Thành công')
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5>Ảnh xác thực giao</h5>
+                                            <br>
+                                            {{-- @php
+                                            dd($donhang->shipper->image_path);
+                                        @endphp --}}
+                                            {{-- <img src="{{ asset('/storage/' . $donhang->shipper->image_path) }}"
+                                            width="50px"> --}}
+
+                                            @if (isset($donhang->shipper) && $donhang->shipper->image_path)
+                                                <img src="{{ asset('storage/' . $donhang->shipper->image_path) }}"
+                                                    alt="Hình ảnh sản phẩm" width="100px">
+                                            @else
+                                                <img src="{{ asset('images/placeholder.png') }}" alt="Không có ảnh"
+                                                    width="100px">
+                                            @endif
+                                        </div>
+                                    </div>
+
+
                                     <div class="card">
                                         <div class="card-body">
                                             <h5>Đánh giá của khách hàng</h5>
@@ -274,9 +275,10 @@
         border-radius: 5px;
         padding: 5px 10px;
     }
+
     .shipping-address {
-    word-wrap: break-word !important;
-}
+        word-wrap: break-word !important;
+    }
 
     .order-summary {
         font-weight: bold;

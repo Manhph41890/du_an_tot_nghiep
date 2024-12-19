@@ -560,7 +560,7 @@
                                     <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                         <i data-feather="bar-chart" class="widgets-icons"></i>
                                     </div>
-                                    <h5 class="card-title mb-0">Sản phẩm được xem nhiều nhất</h5>
+                                    <h5 class="card-title mb-0">Top 5 sản phẩm được xem nhiều</h5>
                                 </div>
                             </div>
 
@@ -596,7 +596,7 @@
                                                 <td>{{ $item->ten_san_pham }}</td>
                                                 <td>{{ number_format($item->gia_goc, 0, ',', '.') }} VND</td>
                                                 <td>{{ number_format($item->gia_km, 0, ',', '.') }} VND</td>
-
+                                                <td>{{ $item->views ?? 0 }}</td>
 
                                                 <td>
                                                     {!! $item->is_active
@@ -608,7 +608,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{ $views_product->links() }}
+                                {{-- {{ $views_product->links() }} --}}
                             </div>
                         </div>
                     </div>

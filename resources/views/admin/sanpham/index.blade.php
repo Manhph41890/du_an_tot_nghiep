@@ -206,7 +206,7 @@
                                                                 <i
                                                                     class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
                                                             </a>
-                                                            <form action="{{ route('sanphams.destroy', $item->id) }}"
+                                                            {{-- <form action="{{ route('sanphams.destroy', $item->id) }}"
                                                                 method="POST" style="display:inline;"
                                                                 onsubmit="return confirm('Bạn có muốn xóa sản phẩm này không?')">
                                                                 @csrf
@@ -216,7 +216,7 @@
                                                                     <i
                                                                         class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
                                                                 </button>
-                                                            </form>
+                                                            </form> --}}
                                                         @else
                                                             <a href="{{ route('sanphams.show', $item->id) }}"
                                                                 data-bs-toggle="modal"

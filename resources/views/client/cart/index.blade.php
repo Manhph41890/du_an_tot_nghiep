@@ -356,23 +356,31 @@
             </form>
 
             <div class="cart-summary">
-                <ul>
-                    <li>
-                        <span>Phí vận chuyển:</span>
-                        <span id="shipping">0 đ</span>
-                    </li>
-                    <li>
-                        <span>Tổng tiền cần thanh toán:</span>
-                        <span class="price-tag" id="total-price">0 đ</span>
-                    </li>
-                </ul>
-                <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
-                    @csrf
-                    <input type="hidden" name="checkout_items[]" id="selected-items">
-                    <button id="checkout-button" type="submit">
-                        <i class="fas fa-shopping-cart"></i> Thanh toán ngay
-                    </button>
-                </form>
+                @auth
+                    <ul>
+                        <li>
+                            <span>Phí vận chuyển:</span>
+                            <span id="shipping">0 đ</span>
+                        </li>
+                        <li>
+                            <span>Tổng tiền cần thanh toán:</span>
+                            <span class="price-tag" id="total-price">0 đ</span>
+                        </li>
+                    </ul>
+                    <form action="{{ route('cart.checkout') }}" method="POST" id="checkout-form">
+                        @csrf
+                        <input type="hidden" name="checkout_items[]" id="selected-items">
+                        <button id="checkout-button" type="submit">
+                            <i class="fas fa-shopping-cart"></i> Thanh toán ngay
+                        </button>
+                    </form>
+                @endauth
+
+                @guest
+                    <a href="{{ route('auth.login') }}" class="btn btn-primary" id="checkout-button">
+                        <i class="fas fa-shopping-cart"></i> Đăng nhập
+                    </a>
+                @endguest
             </div>
         </div>
 

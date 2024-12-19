@@ -210,6 +210,12 @@ class AuthController extends Controller
             ]
         );
 
+        // Check if the user is active
+        $user = User::where('email', $request->email)->first();
+        if ($user && $user->is_active == 0) {
+            return redirect()->back()->with('login_error', 'Tài khoản của bạn đã bị khóa.');
+        }
+
         if (Auth::attempt($credentials, $request->has('remember'))) {
             // Eager load quan hệ chuc_vu của người dùng
             $user = User::with('chuc_vu')->find(Auth::user()->id);
@@ -218,7 +224,7 @@ class AuthController extends Controller
         }
 
         // Truyền thông báo lỗi vào session
-        if (!User::where('email', $request->email)->exists()) {
+        if (!$user) {
             $errorMessage = 'Email không tồn tại!';
         } else {
             $errorMessage = 'Mật khẩu không chính xác!';
@@ -226,6 +232,7 @@ class AuthController extends Controller
 
         return redirect()->back()->with('login_error', $errorMessage);
     }
+
 
 
     protected function redirectToDashboardBasedOnRole($user)

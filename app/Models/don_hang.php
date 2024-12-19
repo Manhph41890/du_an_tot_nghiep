@@ -72,7 +72,7 @@ class don_hang extends Model
 
     public function huy_don_hang()
     {
-        return $this->hasOne(huy_don_hang::class, 'don_hang_id', 'id');
+        return $this->hasOne(huy_don_hang::class, 'don_hang_id');
     }
     public function chi_tiet_vi()
     {

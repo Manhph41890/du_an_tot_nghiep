@@ -270,6 +270,9 @@
                                 </div>
 
                                 {{-- ------------------------------------------------------------------------------------------ --}}
+                                {{-- @php
+                                    dd($donhang);
+                                @endphp --}}
                                 @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
 
                                     <div class="col-lg-12">
@@ -278,12 +281,16 @@
                                             <div class="alert alert-warning mt-3">
                                                 Đơn hàng bị từ chối hủy.
                                             </div>
+                                        @elseif($donhang->huy_don_hang->trang_thai == 'Chờ xác nhận hủy')
+                                            <div class="alert alert-warning mt-3">
+                                                Yêu cầu đã được gửi.
+                                            </div>
                                         @else
                                             <!-- Nút Hủy Nhận Hàng -->
                                             <div class="card mb-3">
                                                 <div class="card-body">
-                                                    <h5>Hủy nhận đơn hàng này</h5>
-                                                    <button type="button" id="openReviewFormdh{{ $donhang->id }}"
+                                                    <h5>Hủy nhận đơn hàng này</h5> <button type="button"
+                                                        id="openReviewFormdh{{ $donhang->id }}"
                                                         class="btn btn-secondary mt-2"
                                                         onclick="toggleReviewForm({{ $donhang->id }})"> Hủy nhận hàng
                                                     </button>

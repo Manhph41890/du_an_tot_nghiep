@@ -173,7 +173,8 @@ class HomeController extends Controller
     public function chiTietBaiViet($id)
     {
         $baiViet = bai_viet::with('user')->findOrFail($id);
-        $docThem = bai_viet::with('user')->where('id', '!=', $id)->orderBy('id', 'desc')->limit(3)->get();
+        $baiVietIs = $baiViet->is_active;
+        $docThem = bai_viet::with('user')->where('is_active', $baiVietIs)->orderBy('id', 'desc')->limit(3)->get();
         $title = '';
         return view('client.baiviet.baivietchitiet', compact('baiViet', 'docThem', 'title'));
     }

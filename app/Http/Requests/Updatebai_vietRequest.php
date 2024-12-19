@@ -25,7 +25,7 @@ class Updatebai_vietRequest extends FormRequest
         return [
             'tieu_de_bai_viet' => 'required|string|max:255',
             'noi_dung' => 'required|string|max:5000',
-            'anh_bai_viet' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'anh_bai_viet' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active' => 'required|boolean',
         ];
     }

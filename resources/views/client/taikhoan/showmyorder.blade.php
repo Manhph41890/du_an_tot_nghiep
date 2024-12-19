@@ -282,8 +282,8 @@
                                             <!-- Nút Hủy Nhận Hàng -->
                                             <div class="card mb-3">
                                                 <div class="card-body">
-                                                    <h5>Hủy nhận đơn hàng này</h5> <button type="button"
-                                                        id="openReviewFormdh{{ $donhang->id }}"
+                                                    <h5>Hủy nhận đơn hàng này</h5>
+                                                    <button type="button" id="openReviewFormdh{{ $donhang->id }}"
                                                         class="btn btn-secondary mt-2"
                                                         onclick="toggleReviewForm({{ $donhang->id }})"> Hủy nhận hàng
                                                     </button>

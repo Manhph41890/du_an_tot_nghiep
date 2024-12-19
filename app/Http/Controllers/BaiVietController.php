@@ -20,7 +20,6 @@ class BaiVietController extends Controller
     public function index(request $request)
     {
 
-
         $user = User::query()->get();
         $query = bai_viet::query();
         $startDate = $request->input('start_date');

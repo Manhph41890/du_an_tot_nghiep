@@ -19,9 +19,9 @@
                             value="{{ request('search_km') }}">
                         <select name="is_active" class="form-select me-2">
                             <option value="">Tất cả trạng thái</option>
-                            <option value="1" {{ request('is_active') == '0' ? 'selected' : '' }}>Đang hoạt động
+                            <option value="1" {{ request('is_active') == '1' ? 'selected' : '' }}>Đang hoạt động
                             </option>
-                            <option value="0" {{ request('is_active') == '1' ? 'selected' : '' }}>Kết thúc</option>
+                            <option value="0" {{ request('is_active') == '0' ? 'selected' : '' }}>Kết thúc</option>
                             </option>
                         </select>
                         <button type="submit" class="btn btn-primary">Tìm</button>

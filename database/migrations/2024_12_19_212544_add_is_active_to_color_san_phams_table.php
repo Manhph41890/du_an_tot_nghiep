@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('vi_shippers', function (Blueprint $table) {
-            $table->unsignedBigInteger('shipper_id')->after('id');
-            // Tạo khóa ngoại liên kết với bảng users
-            $table->foreign('shipper_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::table('color_san_phams', function (Blueprint $table) {
+            $table->boolean('is_active')->default(true); // 
+
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('vi_shippers', function (Blueprint $table) {
+        Schema::table('color_san_phams', function (Blueprint $table) {
             //
         });
     }

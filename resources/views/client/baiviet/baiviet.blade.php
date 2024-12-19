@@ -3,9 +3,9 @@
 @section('content')
     <!-- header end -->
     <!-- breadcrumb-section start -->
-    <nav class="breadcrumb-section theme1 bg-primary pt-110 pb-110">
+    <nav class="breadcrumb-section theme1 bg-primary pt-50 pb-50" style="height: 225px;">
         <div class="container">
-            <div class="row">
+            <div class="row  ">
                 <div class="col-12">
                     <div class="section-title text-center">
                         <h2 class="title pb-4 text-white text-capitalize" style=" color: #fff !important">

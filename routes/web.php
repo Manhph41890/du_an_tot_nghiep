@@ -165,6 +165,9 @@ Route::middleware(['auth', 'role:admin,nhan_vien'])->group(function () {
     Route::get('variants/sizes/{id}/edit', [VariantController::class, 'editSize'])->name('variants.sizes.edit');
     Route::put('variants/sizes/{id}', [VariantController::class, 'updateSize'])->name('variants.sizes.update');
     Route::delete('variants/sizes/{id}', [VariantController::class, 'destroySize'])->name('variants.sizes.destroy');
+    Route::put('variants/colors/{id}/update-status', [VariantController::class, 'updateStatus'])->name('variants.colors.UpdateStatus');
+    Route::put('variants/sizes/{id}/update-status', [VariantController::class, 'updateStatus1'])->name('variants.sizes.UpdateStatus1');
+
     // quản lý người dùng
     // Route cho quản lý người dùng
     Route::get('/user', [UserController::class, 'index'])->name('user.index');

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBankRequest;
 use App\Models\Bank;
 use App\Models\chi_tiet_vi;
 use App\Models\don_hang;
+use App\Models\huy_don_hang;
 use App\Models\lich_su_thanh_toan;
 use App\Models\ls_nap_vi;
 use App\Models\ls_rut_vi;
@@ -148,9 +149,10 @@ class TaiKhoanController extends Controller
         $donhang = don_hang::with(['user', 'khuyen_mai', 'phuong_thuc_thanh_toan', 'phuong_thuc_van_chuyen', 'chi_tiet_don_hangs.san_pham', 'chi_tiet_don_hangs.color_san_pham', 'chi_tiet_don_hangs.size_san_pham', 'lich_su_thanh_toans', 'huy_don_hang'])->findOrFail($id);
         $donhang->tong_tien = $donhang->chi_tiet_don_hangs->sum('thanh_tien');
         // $bienThe = $donhang->chi_tiet_don_hangs->san_pham->bien_the_san_phams;
+        $huyDonHang = huy_don_hang::pluck('don_hang_id', 'id')->all();
 
         // Trả về view cùng với dữ liệu đơn hàng
-        return view('client.taikhoan.showmyorder', compact('donhang', 'currentStatus'));
+        return view('client.taikhoan.showmyorder', compact('donhang', 'currentStatus', 'huyDonHang'));
     }
 
     public function createBank()

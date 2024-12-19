@@ -270,6 +270,9 @@
                                 </div>
 
                                 {{-- ------------------------------------------------------------------------------------------ --}}
+                                {{-- @php
+                                    dd($donhang);
+                                @endphp --}}
                                 @if ($donhang->trang_thai_don_hang == 'Chờ xác nhận')
 
                                     <div class="col-lg-12">
@@ -277,6 +280,10 @@
                                         @if ($donhang->huy_don_hang && $donhang->huy_don_hang->trang_thai == 'Từ chối hủy')
                                             <div class="alert alert-warning mt-3">
                                                 Đơn hàng bị từ chối hủy.
+                                            </div>
+                                        @elseif($donhang->huy_don_hang->trang_thai == 'Chờ xác nhận hủy')
+                                            <div class="alert alert-warning mt-3">
+                                                Yêu cầu đã được gửi.
                                             </div>
                                         @else
                                             <!-- Nút Hủy Nhận Hàng -->

@@ -232,6 +232,7 @@ class TaiKhoanController extends Controller
 
     public function deleteBank(Request $request, Bank $bank)
     {
+
         // Kiểm tra người dùng có quyền xóa
         if ($bank->user_id !== Auth::id()) {
             return redirect()->back()->with('error', 'Bạn không có quyền xóa ngân hàng này.');

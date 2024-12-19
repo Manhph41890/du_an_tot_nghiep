@@ -207,8 +207,7 @@
                                                             <h5 class="modal-title" id="deleteBankModalLabel">Xác
                                                                 nhận hủy
                                                                 liên kết</h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+
                                                         </div>
                                                         <form action="{{ route('banks.delete', $bank->id) }}"
                                                             method="POST">
@@ -230,8 +229,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Hủy</button>
+                                                                <a href="{{ route('shipper.createbank') }}"
+                                                                    class="btn btn-secondary">Hủy</a>
                                                                 <button type="submit" class="btn btn-danger">Xác
                                                                     nhận</button>
                                                             </div>

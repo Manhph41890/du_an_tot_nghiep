@@ -218,11 +218,28 @@
                                         <td>{{ $bank['account_number'] }}</td>
                                         <td>{{ $bank['account_holder'] }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#deleteBankModal{{ $bank->id }}">
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                id="deleteBankBtn{{ $bank->id }}">
                                                 Hủy liên kết
                                             </button>
                                         </td>
+                                        <script>
+                                            document.addEventListener("DOMContentLoaded", function() {
+                                                // Loop through each delete button by the bank ID
+
+                                                const deleteBankBtn{{ $bank->id }} = document.getElementById(
+                                                    "deleteBankBtn{{ $bank->id }}");
+                                                const deleteBankModal{{ $bank->id }} = new bootstrap.Modal(document.getElementById(
+                                                    'deleteBankModal{{ $bank->id }}'));
+
+                                                // Add event listener to show modal when button is clicked
+                                                deleteBankBtn{{ $bank->id }}.addEventListener("click", function() {
+                                                    deleteBankModal{{ $bank->id }}.show(); // Show the modal
+                                                });
+
+                                            });
+                                        </script>
+                                        <!-- Modal -->
                                         <div class="modal fade" id="deleteBankModal{{ $bank->id }}" tabindex="-1"
                                             aria-labelledby="deleteBankModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -259,6 +276,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </tr>
                                 @endforeach
                             </tbody>

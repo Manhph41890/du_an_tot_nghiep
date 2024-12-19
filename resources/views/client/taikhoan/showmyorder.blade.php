@@ -233,6 +233,7 @@
                                                 chuyển:</strong>
                                             {{ number_format($donhang->phuong_thuc_van_chuyen?->gia_ship ?? 0, 0, ',', '.') }}VND
                                         </p>
+
                                         <p class="order-summary pe-1">Tổng giá trị đơn hàng:
                                             {{ number_format($donhang->tong_tien, 0, ',', '.') }} VND</p>
                                     </div>

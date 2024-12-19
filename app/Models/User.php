@@ -68,6 +68,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bank::class);
     }
+
+    public function coupon_usage()
+    {
+        return $this->hasMany(coupon_usage::class);
+    }
     /**
      * Các trường cần ẩn khi trả về JSON.
      *

@@ -116,92 +116,88 @@
                                                             <td>{{ number_format($chi_tiet->thanh_tien, 0, ',', '.') }}
                                                                 VND</td>
                                                             <td>
-
-                                                                @if (
-                                                                    $donhang->trang_thai_don_hang == 'Thành công' &&
-                                                                        !$chi_tiet->san_pham->danh_gias()->where('user_id', auth()->user()->id)->exists())
+                                                                @if ($donhang->trang_thai_don_hang == 'Thành công')
                                                                     <div class="col-lg-12">
                                                                         <!-- Nút Viết Đánh Giá -->
                                                                         <a class="btn danhgia"
-                                                                            id="openReviewForm{{ $chi_tiet->san_pham->id }}">
+                                                                            id="openReviewForm{{ $donhang->id }}-{{ $chi_tiet->san_pham->id }}">
                                                                             @if ($donhang->trang_thai_don_hang == 'Thành công')
                                                                                 Viết đánh giá
                                                                             @endif
                                                                         </a>
 
                                                                         <!-- Form Đánh Giá Sản Phẩm -->
-                                                                        @if (!$chi_tiet->san_pham->danh_gias()->where('user_id', auth()->user()->id)->exists())
-                                                                            <div class="ratting-form-wrapper"
-                                                                                id="reviewForm{{ $chi_tiet->san_pham->id }}">
-                                                                                <span class="close-btn"
-                                                                                    id="closeReviewForm{{ $chi_tiet->san_pham->id }}">&times;</span>
-                                                                                <h3>Viết đánh giá</h3>
-                                                                                <div class="ratting-form">
-                                                                                    <form
-                                                                                        action="{{ route('danhgia.store', ['sanPhamid' => $chi_tiet->san_pham->id]) }}"
-                                                                                        method="post"
-                                                                                        enctype="multipart/form-data">
-                                                                                        @csrf
-                                                                                        <div class="star-box dg m-0">
-                                                                                            <span>Đánh giá </span>
-                                                                                            <input type="hidden"
-                                                                                                id="san_pham_id"
-                                                                                                name="san_pham_id"
-                                                                                                value="{{ $chi_tiet->san_pham->id }}">
-                                                                                            <select name="diem_so"
-                                                                                                id="diem_so{{ $chi_tiet->san_pham->id }}"
-                                                                                                style="display: none;">
-                                                                                                <option value="1">1
-                                                                                                </option>
-                                                                                                <option value="2">2
-                                                                                                </option>
-                                                                                                <option value="3">3
-                                                                                                </option>
-                                                                                                <option value="4">4
-                                                                                                </option>
-                                                                                                <option value="5">5
-                                                                                                </option>
-                                                                                            </select>
-                                                                                            <div class="rating-product">
-                                                                                                <i class="ion-android-star"
-                                                                                                    data-value="1"></i>
-                                                                                                <i class="ion-android-star"
-                                                                                                    data-value="2"></i>
-                                                                                                <i class="ion-android-star"
-                                                                                                    data-value="3"></i>
-                                                                                                <i class="ion-android-star"
-                                                                                                    data-value="4"></i>
-                                                                                                <i class="ion-android-star"
-                                                                                                    data-value="5"></i>
-                                                                                            </div>
+                                                                        <div class="ratting-form-wrapper"
+                                                                            id="reviewForm{{ $donhang->id }}-{{ $chi_tiet->san_pham->id }}">
+                                                                            <span class="close-btn"
+                                                                                id="closeReviewForm{{ $donhang->id }}-{{ $chi_tiet->san_pham->id }}">&times;</span>
+                                                                            <h3>Viết đánh giá</h3>
+                                                                            <div class="ratting-form">
+                                                                                <form
+                                                                                    action="{{ route('danhgia.store', ['sanPhamid' => $chi_tiet->san_pham->id]) }}"
+                                                                                    method="post"
+                                                                                    enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    <div class="star-box dg m-0">
+                                                                                        <span>Đánh giá </span>
+                                                                                        <input type="hidden"
+                                                                                            id="san_pham_id"
+                                                                                            name="san_pham_id"
+                                                                                            value="{{ $chi_tiet->san_pham->id }}">
+                                                                                        <select name="diem_so"
+                                                                                            id="diem_so{{ $donhang->id }}-{{ $chi_tiet->san_pham->id }}"
+                                                                                            style="display: none;">
+                                                                                            <option value="1">1
+                                                                                            </option>
+                                                                                            <option value="2">2
+                                                                                            </option>
+                                                                                            <option value="3">3
+                                                                                            </option>
+                                                                                            <option value="4">4
+                                                                                            </option>
+                                                                                            <option value="5">5
+                                                                                            </option>
+                                                                                        </select>
+                                                                                        <div class="rating-product">
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="1"></i>
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="2"></i>
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="3"></i>
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="4"></i>
+                                                                                            <i class="ion-android-star"
+                                                                                                data-value="5"></i>
                                                                                         </div>
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-12">
-                                                                                                <div
-                                                                                                    class="rating-form-style form-submit">
-                                                                                                    <div>
-                                                                                                        <input
-                                                                                                            type="file"
-                                                                                                            name="img"
-                                                                                                            class="imgdh"
-                                                                                                            title="Thêm ảnh đánh giá">
-                                                                                                    </div>
-                                                                                                    <textarea id="review{{ $chi_tiet->san_pham->id }}" name="binh_luan" placeholder="Viết đánh giá" maxlength="100"></textarea>
-                                                                                                    <p
-                                                                                                        id="charCount{{ $chi_tiet->san_pham->id }}">
-                                                                                                        0/100</p>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-12">
+                                                                                            <div
+                                                                                                class="rating-form-style form-submit">
+                                                                                                <div>
                                                                                                     <input
-                                                                                                        type="submit"
-                                                                                                        value="Gửi" />
+                                                                                                        type="file"
+                                                                                                        name="img"
+                                                                                                        class="imgdh"
+                                                                                                        title="Thêm ảnh đánh giá">
                                                                                                 </div>
+                                                                                                <textarea id="review{{ $donhang->id }}-{{ $chi_tiet->san_pham->id }}" name="binh_luan" placeholder="Viết đánh giá"
+                                                                                                    maxlength="100"></textarea>
+                                                                                                <p
+                                                                                                    id="charCount{{ $donhang->id }}-{{ $chi_tiet->san_pham->id }}">
+                                                                                                    0/100</p>
+                                                                                                <input type="submit"
+                                                                                                    value="Gửi" />
                                                                                             </div>
                                                                                         </div>
-                                                                                    </form>
-                                                                                </div>
+                                                                                    </div>
+                                                                                </form>
                                                                             </div>
-                                                                        @endif
+                                                                        </div>
                                                                     </div>
                                                                 @endif
+
 
 
                                                             </td>
@@ -269,8 +265,6 @@
                                         <p><strong>Số điện thoại:</strong> {{ $donhang->so_dien_thoai }}</p>
                                         <p style="text-wrap: auto"><strong>Địa chỉ giao hàng:</strong>
                                             {{ $donhang->dia_chi }}</p>
-                                        <p style="text-wrap: auto"><strong>Địa chỉ giao hàng:</strong>
-                                            {{ $donhang->dia_chi }}</p>
                                     </div>
                                 </div>
 
@@ -298,10 +292,8 @@
                                             <!-- Form Hủy Đơn Hàng -->
                                             <div class="ratting-form-wrapper" id="reviewFormdh{{ $donhang->id }}">
                                                 <span class="close-btn"
-                                                id="closeReviewFormdh{{ $donhang->id }}">&times;</span>
-                                                <h3>Lý do hủy đơn hàng</h3>
-                                                <span class="close-btn"
                                                     id="closeReviewFormdh{{ $donhang->id }}">&times;</span>
+                                                <h3>Lý do hủy đơn hàng</h3>
                                                 <div class="ratting-form">
                                                     <form id="huyDonHangForm{{ $donhang->id }}" method="POST">
                                                         @csrf
@@ -388,11 +380,6 @@
 
 </div>
 <style>
-    .img-dg {
-        height: auto !important;
-        padding: 10px 10px 10px 20px !important;
-    }
-
     .rating-product i {
         font-size: 30px;
         color: #ccc;
@@ -407,7 +394,6 @@
     }
 
     .ratting-form-wrapper {
-        z-index: 100;
         display: none;
         position: fixed;
         z-index: 100;
@@ -430,13 +416,10 @@
         border-radius: 5px;
     }
 
-
     .danhgia:hover {
-        background-color: #ff5722;
         background-color: #ff5722;
         color: white;
     }
-
 
     /* CSS cho nút đóng */
     .close-btn {
@@ -475,7 +458,6 @@
         background-color: #e0e0e0;
     }
 </style>
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var openReviewBtn = document.getElementById('openReviewFormdh{{ $donhang->id }}');
@@ -491,37 +473,44 @@
         closeReviewFormdh.addEventListener("click", function() {
             reviewFormdh.style.display = "none";
         });
-
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
         @foreach ($donhang->chi_tiet_don_hangs as $chi_tiet)
             (function() {
+                const orderId = "{{ $donhang->id }}";
                 const productId = "{{ $chi_tiet->san_pham->id }}";
-                const openReviewForm = document.getElementById("openReviewForm" + productId);
-                const reviewForm = document.getElementById("reviewForm" + productId);
-                const closeReviewForm = document.getElementById("closeReviewForm" + productId);
-                const ratingStars = document.querySelectorAll(`#reviewForm${productId} .rating-product i`);
-                const ratingInput = document.getElementById("diem_so" + productId);
-                const reviewInput = document.getElementById("review" + productId);
-                const charCountDisplay = document.getElementById("charCount" + productId);
+                const openReviewForm = document.getElementById("openReviewForm" + orderId + "-" +
+                    productId);
+                const reviewForm = document.getElementById("reviewForm" + orderId + "-" + productId);
+                const closeReviewForm = document.getElementById("closeReviewForm" + orderId + "-" +
+                    productId);
+                const ratingStars = document.querySelectorAll(
+                    `#reviewForm${orderId}-${productId} .rating-product i`);
+                const ratingInput = document.getElementById("diem_so" + orderId + "-" + productId);
+                const reviewInput = document.getElementById("review" + orderId + "-" + productId);
+                const charCountDisplay = document.getElementById("charCount" + orderId + "-" + productId);
 
-                // hiển thị form khi clcik vào viết đán giá 
+                // Show review form when clicking the "Viết đánh giá" button
                 openReviewForm.addEventListener("click", function(event) {
                     event.preventDefault();
                     reviewForm.style.display = "block";
                 });
 
-                // clcik button clóe đóng form
+                // Close review form
                 closeReviewForm.addEventListener("click", function() {
                     reviewForm.style.display = "none";
                 });
 
-                // click ra ngoài đóng form
+                // Close the review form if clicked outside
                 window.addEventListener("click", function(event) {
                     if (event.target === reviewForm) {
                         reviewForm.style.display = "none";
                     }
                 });
 
-                // click ngôi sao
+                // Handle star rating click
                 ratingStars.forEach(star => {
                     star.addEventListener("click", function() {
                         const rating = this.getAttribute("data-value");
@@ -536,12 +525,12 @@
                     });
                 });
 
-                // hiển thị số lượng từ theo số lần nhập
+                // Show character count as the user types in the review
                 reviewInput.addEventListener("input", function() {
                     const currentLength = reviewInput.value.length;
                     charCountDisplay.textContent = `${currentLength}/100`;
 
-                    // giới hạn 100 từ
+                    // Limit to 100 characters
                     if (currentLength > 100) {
                         reviewInput.value = reviewInput.value.substring(0, 100);
                     }

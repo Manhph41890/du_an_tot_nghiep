@@ -228,22 +228,16 @@
                                         value="{{ $totall }}">
 
                                     <!-- Payment Buttons -->
-                                    <div id="place-order-cod" style="display: none;">
-                                        <button type="submit" class="btn btn-primary w-100">
-                                            Đặt hàng
-                                        </button>
-                                    </div>
-
-                                    <div id="place-order-online" style="display: none;">
-                                        <button type="submit" name="redirect" class="btn btn-danger w-100">
-                                            Thanh toán VNPAY
-                                        </button>
-                                    </div>
-
-                                    <div id="place-order-wallet" style="display: none;">
-                                        <button type="submit" name="wallet-redirect" class="btn btn-success w-100">
-                                            Thanh toán bằng Ví
-                                        </button>
+                                    <!-- Nút Đặt hàng -->
+                                    <div id="place-order-cod" style="display: none;"> <button type="submit"
+                                            class="btn btn-primary w-100 order-button"> Đặt hàng </button> </div>
+                                    <!-- Nút Thanh toán VNPAY -->
+                                    <div id="place-order-online" style="display: none;"> <button type="submit"
+                                            name="redirect" class="btn btn-danger w-100 order-button"> Thanh toán VNPAY
+                                        </button> </div> <!-- Nút Thanh toán bằng Ví -->
+                                    <div id="place-order-wallet" style="display: none;"> <button type="submit"
+                                            name="wallet-redirect" class="btn btn-success w-100 order-button"> Thanh toán
+                                            bằng Ví </button>
                                     </div>
                                 </div>
                             </div>
@@ -552,7 +546,22 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script>
-            document.getElementById('checkout-form').addEventListener('submit', function(event) {
+            document.addEventListener('DOMContentLoaded', function() {
+                const orderButtons = document.querySelectorAll('.order-button');
+                orderButtons.forEach(function(button) {
+                    button.addEventListener('click', function(
+                        event) {
+                        // Vô hiệu hóa nút sau khi nhấp vào
+                        button.disabled = true;
+                        // Thêm lớp để thay đổi giao diện nút (nếu cần)
+                        button.classList.add('disabled');
+                        // Gửi form 
+                        button.closest('form').submit();
+                    });
+                });
+            });
+            document.getElementById('checkout-form').addEventListener('submit', function(
+                event) {
                 event.preventDefault(); // 
                 // Lấy dữ liệu từ form
                 const formData = new FormData(this);
@@ -561,7 +570,8 @@
                 fetch('/check-stock', {
                         method: 'POST',
                         headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'X-CSRF-TOKEN': document.querySelector(
+                                'meta[name="csrf-token"]').getAttribute(
                                 'content'),
                             'Accept': 'application/json',
                         },
@@ -596,12 +606,18 @@
                                 api_key: '22Wn63woi41PWQdNMN9kaVUsgC9VFKEp1ZzjmQm5'
                             },
                             success: function(data) {
-                                const suggestions = data.predictions.map(prediction =>
-                                    `<div>${prediction.description}</div>`).join('');
-                                $('#suggestions').html(suggestions);
+                                const suggestions = data
+                                    .predictions.map(
+                                        prediction =>
+                                        `<div>${prediction.description}</div>`
+                                    ).join('');
+                                $('#suggestions').html(
+                                    suggestions);
                             },
                             error: function(error) {
-                                console.error('Error fetching autocomplete results:', error);
+                                console.error(
+                                    'Error fetching autocomplete results:',
+                                    error);
                             }
                         });
                     } else {
@@ -628,11 +644,14 @@
                                 toastr.error(
                                     'Hiện tại không có shipper nào phục vụ khu vực của bạn. Vui lòng thử lại sau hoặc chọn phương thức vận chuyển khác.'
                                 );
-                                $("button").prop('disabled', true);
+                                $("button").prop('disabled',
+                                    true);
                             }
                         },
                         error: function(error) {
-                            console.error('Error checking shipper availability:', error);
+                            console.error(
+                                'Error checking shipper availability:',
+                                error);
                         }
                     });
                 });
@@ -642,7 +661,8 @@
                 $('#apply-coupon').on('click', function() {
                     var couponCode = $('#coupon-code').val();
                     // Thay đổi cách lấy tổng tiền
-                    var totalAmount = parseFloat($('#hidden_totall').val().replace(/\./g, ''));
+                    var totalAmount = parseFloat($('#hidden_totall').val()
+                        .replace(/\./g, ''));
 
                     console.log("Coupon Code:", couponCode);
                     console.log("Total Amount:", totalAmount);
@@ -658,16 +678,24 @@
                         success: function(response) {
                             console.log(response);
                             if (response.success) {
-                                $('#total_amount').text(response.newTotal.replace(/\₫/g, '') + '₫');
-                                $('#discount-amount').text(response.discountAmount + '₫');
-                                toastr.success(response.message);
+                                $('#total_amount').text(response
+                                    .newTotal.replace(/\₫/g,
+                                        '') + '₫');
+                                $('#discount-amount').text(
+                                    response
+                                    .discountAmount + '₫');
+                                toastr.success(response
+                                    .message);
                             } else {
                                 toastr.error(response.message);
                             }
                         },
                         error: function(xhr, status, error) {
-                            console.error("Error:", xhr.responseText);
-                            toastr.error('Đã xảy ra lỗi. Vui lòng thử lại sau.');
+                            console.error("Error:", xhr
+                                .responseText);
+                            toastr.error(
+                                'Đã xảy ra lỗi. Vui lòng thử lại sau.'
+                            );
                         }
                     });
                 });
@@ -677,7 +705,8 @@
             function toggleOrderButton(paymentType) {
                 const codButton = document.getElementById('place-order-cod');
                 const onlineButton = document.getElementById('place-order-online');
-                const walletButton = document.getElementById('place-order-wallet'); // Thêm phần tử nút ví
+                const walletButton = document.getElementById(
+                    'place-order-wallet'); // Thêm phần tử nút ví
 
                 // Kiểm tra loại thanh toán để hiển thị nút tương ứng
                 if (paymentType === 'Thanh toán khi nhận hàng') {
@@ -697,7 +726,8 @@
 
             // Hiển thị nút mặc định nếu đã có lựa chọn trước đó
             document.addEventListener("DOMContentLoaded", function() {
-                const selectedPaymentType = document.querySelector('input[name="phuong_thuc_thanh_toan"]:checked');
+                const selectedPaymentType = document.querySelector(
+                    'input[name="phuong_thuc_thanh_toan"]:checked');
                 if (selectedPaymentType) {
                     toggleOrderButton(selectedPaymentType.value);
                 }

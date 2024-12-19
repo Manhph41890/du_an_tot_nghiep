@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
-
 class SanPhamController extends Controller
 {
     /**
@@ -51,10 +50,18 @@ class SanPhamController extends Controller
     public function create()
     {
         $this->authorize('create', san_pham::class);
-        $danh_mucs = danh_muc::query()->pluck('ten_danh_muc', 'id')->all();
-        $sizes = size_san_pham::all();
-        $colors = color_san_pham::all();
-        $title = "Thêm mới sản phẩm";
+
+        // Chỉ lấy các danh mục có is_active = 1
+        $danh_mucs = danh_muc::where('is_active', 1)->pluck('ten_danh_muc', 'id')->all();
+
+        // Chỉ lấy các size có is_active = 1
+        $sizes = size_san_pham::where('is_active', 1)->get();
+
+        // Chỉ lấy các color có is_active = 1
+        $colors = color_san_pham::where('is_active', 1)->get();
+
+        $title = 'Thêm mới sản phẩm';
+
         return view('admin.sanpham.create', compact('danh_mucs', 'colors', 'sizes', 'title'));
     }
 
@@ -78,7 +85,7 @@ class SanPhamController extends Controller
                     return back()->withErrors(['anh_san_pham' => 'File không hợp lệ']);
                 }
             } else {
-                $data_san_phams['anh_san_pham'] = null;  // Nếu không có ảnh sản phẩm
+                $data_san_phams['anh_san_pham'] = null; // Nếu không có ảnh sản phẩm
             }
 
             // Tạo sản phẩm chính
@@ -162,8 +169,6 @@ class SanPhamController extends Controller
         }
     }
 
-
-
     private function handleImageUpload($request, $imageField)
     {
         if ($request->hasFile($imageField)) {
@@ -188,17 +193,16 @@ class SanPhamController extends Controller
      */
     public function edit($id)
     {
-
         // Lấy sản phẩm theo ID
         $product = san_pham::with(['bien_the_san_phams.size', 'bien_the_san_phams.color'])->findOrFail($id);
         $this->authorize('update', $product);
 
         // Lấy danh sách danh mục, màu sắc và kích thước
         $danh_mucs = danh_muc::pluck('ten_danh_muc', 'id');
-        $colors = color_san_pham::all(); // 
-        $sizes = size_san_pham::all(); // 
+        $colors = color_san_pham::all(); //
+        $sizes = size_san_pham::all(); //
 
-        // 
+        //
         return view('admin.sanpham.edit', [
             'title' => 'Sửa sản phẩm',
             'product' => $product,
@@ -304,15 +308,11 @@ class SanPhamController extends Controller
         }
     }
 
-
-
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-
         try {
             DB::beginTransaction();
 
@@ -324,7 +324,7 @@ class SanPhamController extends Controller
                 Storage::disk('public')->delete($product->anh_san_pham);
             }
 
-            // Xóa tất cả biến thể 
+            // Xóa tất cả biến thể
             bien_the_san_pham::where('san_pham_id', $product->id)->delete();
 
             // Xóa sản phẩm chính
@@ -335,7 +335,7 @@ class SanPhamController extends Controller
             return redirect()->route('sanphams.index')->with('success', 'Sản phẩm đã được xóa thành công.');
         } catch (\Exception $exception) {
             DB::rollBack();
-            // 
+            //
             Log::error('Lỗi khi xóa sản phẩm: ' . $exception->getMessage() . ' - Line: ' . $exception->getLine() . ' - File: ' . $exception->getFile());
             return back()->withErrors('Đã xảy ra lỗi khi xóa sản phẩm. Vui lòng thử lại.');
         }

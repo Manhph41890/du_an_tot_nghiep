@@ -374,10 +374,13 @@
                                     <div class="modal-content">
 
                                         <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Danh sách mã</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        <div class="modal-header bg-light border-bottom-0">
+                                            <h4 class="modal-title text-dark fw-bold">Danh sách mã khuyến mãi</h4>
+                                            <button type="button" class="btn-close text-secondary"
+                                                data-bs-dismiss="modal"></button>
                                         </div>
+
+
 
                                         <!-- Modal body -->
                                         <div class="modal-body">

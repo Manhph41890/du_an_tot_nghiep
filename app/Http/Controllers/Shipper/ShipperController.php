@@ -50,7 +50,7 @@ class ShipperController extends Controller
             $parsed_order_address = $this->parseAddress($order->dia_chi);
 
             // Compare parsed addresses
-            return $parsed_order_address['province'] === $parsed_shipper_address['province'] && $parsed_order_address['city'] === $parsed_shipper_address['city'] && $parsed_order_address['district'] === $parsed_shipper_address['district'] && $parsed_order_address['ward'] === $parsed_shipper_address['ward'];
+            return $parsed_order_address['province'] === $parsed_shipper_address['province'];
         });
 
         return view('shipper.index', ['donHangs' => $filteredOrders, 'title' => $title]);
@@ -265,7 +265,7 @@ class ShipperController extends Controller
             $banks = []; // Nếu API không trả về dữ liệu, để mảng rỗng
         }
         $listBank = Bank::where('user_id', $userId)->latest('id')->get();
-        return view('shipper.lkbank',  compact('title', 'user', 'banks', 'userId', 'listBank', 'linkedBanksCount'));
+        return view('shipper.lkbank', compact('title', 'user', 'banks', 'userId', 'listBank', 'linkedBanksCount'));
     }
 
     public function storebank(StoreBankRequest $request)

@@ -183,7 +183,7 @@
                                 </div>
 
                                 <!-- Kiểm tra nếu trạng thái đơn hàng là 'Thành công' -->
-                                @if ($donhang->trang_thai_don_hang == 'Thành công')
+                                {{-- @if ($donhang->trang_thai_don_hang == 'Thành công')
                                     <div class="card">
                                         <div class="card-body">
                                             <h5>Đánh giá của khách hàng</h5>
@@ -233,7 +233,7 @@
                                             @endif
 
                                         </div>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
 

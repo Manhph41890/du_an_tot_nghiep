@@ -118,7 +118,7 @@
 
                                                             <a href="{{ route('baiviets.edit', $baiviet->id) }}"><i
                                                                     class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
-                                                            <form action="{{ route('baiviets.destroy', $baiviet->id) }}"
+                                                            {{-- <form action="{{ route('baiviets.destroy', $baiviet->id) }}"
                                                                 method="POST" style="display:inline;"
                                                                 onsubmit="return confirm ('Bạn có muốn xóa danh mục sản phẩm này không ?') ">
                                                                 @csrf
@@ -128,7 +128,7 @@
                                                                     <i
                                                                         class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
                                                                 </button>
-                                                            </form>
+                                                            </form> --}}
                                                         </div>
 
                                                     </td>

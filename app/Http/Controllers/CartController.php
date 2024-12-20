@@ -315,7 +315,6 @@ class CartController extends Controller
     {
         //
         $parsed_customer_address = $this->parseAddress($address);
-
         //
         Log::info('Parsed Customer Address: ', $parsed_customer_address);
 
@@ -329,7 +328,7 @@ class CartController extends Controller
             //
             Log::info('Parsed Shipper Address: ', $parsed_shipper_address);
 
-            if (($parsed_shipper_address['province'] === $parsed_customer_address['province'] && $parsed_shipper_address['city'] === $parsed_customer_address['city'] && $parsed_shipper_address['district'] === $parsed_customer_address['district']) || $parsed_shipper_address['ward'] === $parsed_customer_address['ward']) {
+            if ($parsed_shipper_address['province'] === $parsed_customer_address['province'] || $parsed_customer_address['province'] == "Thành phố Hà Nội"  ) {
                 return true;
             }
         }
